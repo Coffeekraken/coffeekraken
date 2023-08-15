@@ -13,7 +13,6 @@ import { SDobbyPoolStartParamsSpecs } from '../shared/specs';
 import type {
     ISDobbyError,
     ISDobbyPool,
-    ISDobbyPoolConfig,
     ISDobbyPoolMetas,
     ISDobbyPoolStartParams,
     ISDobbyTask,
@@ -40,8 +39,8 @@ import __SDobby from './exports.js';
  * @event           pool.task.add           Emitted when a new task is added
  * @event           pool.task.remove        Emitted when a task is removed
  *
- * @param           {ISDobbyPoolMetas}          poolMetas       The informations about the pool like name, uid, etc...
  * @param           {SDobby}                    dobby           The dobby instance on which this pool is attached
+ * @param           {ISDobbyPoolMetas}          poolMetas       The informations about the pool like name, uid, etc...
  * @param           {ISDobbyPoolSettings}          [settings={}]           Some settings to configure your dobby adapter instance
  *
  * @example         js
@@ -91,15 +90,15 @@ export default class SDobbyPool extends __SClass implements ISDobbyPool {
     events: __SEventEmitter = new __SEventEmitter();
 
     /**
-     * @name        config
-     * @type        ISDobbyPoolConfig
+     * @name        tasks
+     * @type        Record<string, ISDobbyTaskMetas>
      *
-     * Store the actual config
+     * Store the actual tasks in this pool
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    config: ISDobbyPoolConfig;
+    tasks: Record<string, ISDobbyTaskMetas> = {};
 
     /**
      * @name        uid
@@ -127,6 +126,11 @@ export default class SDobbyPool extends __SClass implements ISDobbyPool {
     get started(): boolean {
         return this._started;
     }
+
+    /**
+     * Store the tasks "jobs" to be able to cancel them later
+     */
+    private _tasksJobs: Record<string, any> = {};
 
     /**
      * @name        constructor
@@ -178,22 +182,15 @@ export default class SDobbyPool extends __SClass implements ISDobbyPool {
 
             // load the configs of all the pools
             // @ts-ignore
-            this.config = await this.loadConfig?.(this.uid);
+            await this.loadTasks();
 
             // ready
             this.dobby.events.emit('pool.ready', this);
 
             // loop on each tasks to schedule them
-            for (let [taskUid, taskMetas] of Object.entries(
-                this.config.tasks ?? {},
-            )) {
+            for (let [taskUid, taskMetas] of Object.entries(this.tasks ?? {})) {
                 this._initTask(taskMetas);
             }
-
-            // listen for new tasks
-            this.events.on('pool.task.add', (taskMetas: ISDobbyTaskMetas) => {
-                this._initTask(taskMetas);
-            });
 
             // resolve
             resolve();
@@ -213,16 +210,14 @@ export default class SDobbyPool extends __SClass implements ISDobbyPool {
      * Enqueue a task
      */
     _enqueueTask(taskMetas: ISDobbyTaskMetas): void {
-        __nodeSchedule.scheduleJob(taskMetas.schedule, () => {
-            // execute task
-            this.executeTask(taskMetas);
-        });
+        this._tasksJobs[taskMetas.uid] = __nodeSchedule.scheduleJob(
+            taskMetas.schedule,
+            () => {
+                // execute task
+                this.executeTask(taskMetas);
+            },
+        );
     }
-
-    /**
-     * Start the scheduler that will execute the tasks when needed
-     */
-    _startScheduler() {}
 
     /**
      * Executing a tasks
@@ -288,7 +283,7 @@ export default class SDobbyPool extends __SClass implements ISDobbyPool {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     getTasks(): Record<string, ISDobbyTaskMetas> {
-        return this.config.tasks;
+        return this.tasks;
     }
 
     /**
@@ -305,7 +300,7 @@ export default class SDobbyPool extends __SClass implements ISDobbyPool {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     getTask(uid: string): ISDobbyTaskMetas {
-        return this.config.tasks[uid];
+        return this.tasks[uid];
     }
 
     /**
@@ -324,18 +319,19 @@ export default class SDobbyPool extends __SClass implements ISDobbyPool {
     addTask(taskMetas: ISDobbyTaskMetas): Promise<void | ISDobbyError> {
         return new Promise(async (resolve, reject) => {
             // make sure the tasks not already exists
-            if (this.config.tasks?.[taskMetas.uid]) {
+            if (this.tasks?.[taskMetas.uid]) {
                 return reject(<ISDobbyError>{
                     message: `A task with the uid \`${taskMetas.uid}\` already exists`,
                 });
             }
             // add the task in the config
-            this.config.tasks[taskMetas.uid] = taskMetas;
-            // save the config
-            // @ts-ignore
-            this.saveConfig();
+            this.tasks[taskMetas.uid] = taskMetas;
+
             // enqueue the new task
             this._enqueueTask(taskMetas);
+
+            // dispatch en event
+            this.events.emit('pool.task.add', taskMetas);
         });
     }
 
@@ -353,6 +349,17 @@ export default class SDobbyPool extends __SClass implements ISDobbyPool {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     removeTask(taskUid: string): Promise<void> {
-        return new Promise(async (resolve) => {});
+        return new Promise(async (resolve) => {
+            // remove the task from the stack
+            delete this.tasks[taskUid];
+
+            // cancel job if exists
+            this._tasksJobs[taskUid]?.cancel?.();
+
+            // dispatch en event
+            this.events.emit('pool.task.remove', taskUid);
+
+            resolve();
+        });
     }
 }

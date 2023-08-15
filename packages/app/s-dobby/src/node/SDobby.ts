@@ -8,9 +8,12 @@ import __SDobbyEcoIndexTask from './tasks/SDobbyEcoIndexTask.js';
 import __SDobbyLighthouseTask from './tasks/SDobbyLighthouseTask.js';
 import __SDobbyResponseTimeTask from './tasks/SDobbyResponseTimeTask.js';
 
+import __SDobbyFeeder from './SDobbyFeeder.js';
+
 import type {
     ISDobbyClientAction,
     ISDobbyError,
+    ISDobbyFeeder,
     ISDobbyPoolEvent,
     ISDobbyPoolMetas,
     ISDobbySettings,
@@ -18,7 +21,7 @@ import type {
 } from '../shared/types';
 import { ISDobbyPool } from '../shared/types.js';
 import __SDobbyFsPool from './pools/SDobbyFsPool.js';
-import __SDobbyGunPool from './pools/SDobbyGunPool.js';
+import __SDobbyPocketbasePool from './pools/SDobbyPocketbasePool.js';
 
 import __SDobbyPocketbaseReporter from './reporters/SDobbyPocketbaseReporter.js';
 
@@ -48,6 +51,8 @@ import __SDobbyPocketbaseReporter from './reporters/SDobbyPocketbaseReporter.js'
 export default class SDobby extends __SClass {
     settings: ISDobbySettings;
 
+    private _feeder: __SDobbyFeeder;
+
     /**
      * @name        registeredPools
      * @type        Object
@@ -59,7 +64,7 @@ export default class SDobby extends __SClass {
      */
     static registeredPools = {
         fs: __SDobbyFsPool,
-        gun: __SDobbyGunPool,
+        pocketbase: __SDobbyPocketbasePool,
     };
 
     /**
@@ -122,6 +127,17 @@ export default class SDobby extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     pools: Record<string, ISDobbyPool> = {};
+
+    /**
+     * @name        feeders
+     * @type        Record<string, ISDobbyFeeder>
+     *
+     * Store the registered feeders
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    feeders: Record<string, ISDobbyFeeder> = {};
 
     /**
      * @name        constructor
@@ -260,12 +276,8 @@ export default class SDobby extends __SClass {
             deep: true,
         });
 
-        console.log('CLONED', clonedPool);
-
         // add the "poolUid" to each tasks
-        for (let [taskUid, task] of Object.entries(
-            clonedPool.config.tasks ?? {},
-        )) {
+        for (let [taskUid, task] of Object.entries(clonedPool.tasks ?? {})) {
             console.log('TA', task);
             (<ISDobbyTaskMetas>task).poolUid = clonedPool.metas.uid;
         }
@@ -275,7 +287,6 @@ export default class SDobby extends __SClass {
                 type: 'pool',
                 data: <ISDobbyPoolEvent>{
                     pool: clonedPool.metas,
-                    config: clonedPool.config,
                 },
             },
             to,

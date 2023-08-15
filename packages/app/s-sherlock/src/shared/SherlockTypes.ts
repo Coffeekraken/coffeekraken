@@ -18,8 +18,8 @@ export interface ISherlockSpace {
               settings: ISherlockFsAdapterSettings;
           }
         | {
-              type: 'gun';
-              settings: ISherlockGunAdapterSettings;
+              type: 'pocketbase';
+              settings: ISherlockPocketbaseAdapterSettings;
           }
         | {
               type: 'contentful';
@@ -30,17 +30,18 @@ export interface ISherlockSpace {
 
 export interface ISherlockPool {
     uid: string;
-    type: 'fs' | 'gun';
+    type: 'fs' | 'pocketbase';
     name: string;
-    settings: ISherlockFsPoolSettings | ISherlockGunPoolSettings;
-}
-
-export interface ISherlockGunPoolSettings {
-    gunUid: string;
+    settings: ISherlockFsPoolSettings | ISherlockPocketbasePoolSettings;
 }
 
 export interface ISherlockFsPoolSettings {
     folder: string;
+}
+
+export interface ISherlockPocketbasePoolSettings {
+    url: string;
+    collection: string;
 }
 
 export interface ISherlockFsAdapterSettings {
@@ -49,11 +50,6 @@ export interface ISherlockFsAdapterSettings {
 
 export interface ISherlockPocketbaseAdapterSettings {
     url: string;
-}
-
-export interface ISherlockGunAdapterSettings {
-    gunUid: string;
-    privateKey?: string;
 }
 
 export interface ISherlockContentfulAdapterSettings {

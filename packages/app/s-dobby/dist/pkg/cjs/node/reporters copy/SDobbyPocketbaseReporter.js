@@ -12,19 +12,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const s_specs_1 = __importDefault(require("@coffeekraken/s-specs"));
-const object_1 = require("@coffeekraken/sugar/object");
-const SDobbyPool_js_1 = __importDefault(require("../SDobbyPool.js"));
-const specs_js_1 = require("../specs.js");
+const cjs_1 = __importDefault(require("pocketbase/cjs"));
+const SDobbyReporter_js_1 = __importDefault(require("../SDobbyReporter.js"));
+global.EventSource = EventSource;
 /**
  * @name                SDobbyFsPool
  * @namespace           node
  * @type                Class
- * @extends             SDobbyPool
+ * @extends             SDobbyReporter
  * @platform            node
  * @status              beta
  *
- * This class represent the filesystem dobby adapter.
+ * This class represent the pocketbase dobby reporter.
  *
  * @param           {ISDobbyPoolMetas}          poolMetas       The informations about the pool like name, uid, etc...
  * @param           {SDobby}                    dobby           The dobby instance on which this pool is attached
@@ -33,7 +32,7 @@ const specs_js_1 = require("../specs.js");
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-class SDobbyFsPool extends SDobbyPool_js_1.default {
+class SDobbyPocketbaseReporter extends SDobbyReporter_js_1.default {
     /**
      * @name        constructor
      * @type        Function
@@ -44,12 +43,20 @@ class SDobbyFsPool extends SDobbyPool_js_1.default {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(dobby, poolMetas, settings) {
-        super(dobby, poolMetas, (0, object_1.__deepMerge)(s_specs_1.default.extractDefaults(specs_js_1.SDobbyFsPoolSettingsSpecs), settings !== null && settings !== void 0 ? settings : {}));
+    constructor(reporterMetas) {
+        super(reporterMetas);
+        this._pocketbase = new cjs_1.default(this.settings.url);
     }
-    loadTasks() {
-        return __awaiter(this, void 0, void 0, function* () { });
+    report(data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this._pocketbase.collection(this.settings.collection).create({
+                uid: data.uid,
+                taskUid: data.task.uid,
+                data,
+            });
+            return data;
+        });
     }
 }
-exports.default = SDobbyFsPool;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsb0VBQTZDO0FBQzdDLHVEQUF5RDtBQUN6RCxxRUFBNEM7QUFNNUMsMENBQXdEO0FBRXhEOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBRUgsTUFBcUIsWUFBYSxTQUFRLHVCQUFZO0lBR2xEOzs7Ozs7Ozs7T0FTRztJQUNILFlBQ0ksS0FBZSxFQUNmLFNBQTJCLEVBQzNCLFFBQWdDO1FBRWhDLEtBQUssQ0FDRCxLQUFLLEVBQ0wsU0FBUyxFQUNULElBQUEsb0JBQVcsRUFDUCxpQkFBUSxDQUFDLGVBQWUsQ0FBQyxvQ0FBeUIsQ0FBQyxFQUNuRCxRQUFRLGFBQVIsUUFBUSxjQUFSLFFBQVEsR0FBSSxFQUFFLENBQ2pCLENBQ0osQ0FBQztJQUNOLENBQUM7SUFFSyxTQUFTOzhEQUFJLENBQUM7S0FBQTtDQUN2QjtBQTdCRCwrQkE2QkMifQ==
+exports.default = SDobbyPocketbaseReporter;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEseURBQTBDO0FBRTFDLDZFQUFvRDtBQVdwRCxNQUFNLENBQUMsV0FBVyxHQUFHLFdBQVcsQ0FBQztBQUVqQzs7Ozs7Ozs7Ozs7Ozs7OztHQWdCRztBQUVILE1BQXFCLHdCQUNqQixTQUFRLDJCQUFnQjtJQU94Qjs7Ozs7Ozs7O09BU0c7SUFDSCxZQUFZLGFBQW1DO1FBQzNDLEtBQUssQ0FBQyxhQUFhLENBQUMsQ0FBQztRQUNyQixJQUFJLENBQUMsV0FBVyxHQUFHLElBQUksYUFBWSxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsR0FBRyxDQUFDLENBQUM7SUFDM0QsQ0FBQztJQUVLLE1BQU0sQ0FBQyxJQUF1Qjs7WUFDaEMsTUFBTSxJQUFJLENBQUMsV0FBVyxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLFVBQVUsQ0FBQyxDQUFDLE1BQU0sQ0FBQztnQkFDL0QsR0FBRyxFQUFFLElBQUksQ0FBQyxHQUFHO2dCQUNiLE9BQU8sRUFBRSxJQUFJLENBQUMsSUFBSSxDQUFDLEdBQUc7Z0JBQ3RCLElBQUk7YUFDUCxDQUFDLENBQUM7WUFDSCxPQUFPLElBQUksQ0FBQztRQUNoQixDQUFDO0tBQUE7Q0FDSjtBQS9CRCwyQ0ErQkMifQ==

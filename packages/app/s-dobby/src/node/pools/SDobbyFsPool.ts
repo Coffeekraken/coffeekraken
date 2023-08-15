@@ -1,17 +1,8 @@
 import __SSpecs from '@coffeekraken/s-specs';
-import { __readJsonSync, __writeJsonSync } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SDobbyPool from '../SDobbyPool.js';
 
-import { __homeDir } from '@coffeekraken/sugar/path';
-
-import __fs from 'fs';
-
-import type {
-    ISDobbyPoolConfig,
-    ISDobbyPoolMetas,
-    ISDobbySaveConfigResult,
-} from '../../shared/types';
+import type { ISDobbyPoolMetas } from '../../shared/types';
 import { ISDobbyFsPoolSettings, ISDobbyPool } from '../../shared/types.js';
 
 import __SDobby from '../exports.js';
@@ -63,59 +54,5 @@ export default class SDobbyFsPool extends __SDobbyPool implements ISDobbyPool {
         );
     }
 
-    /**
-     * @name        loadConfig
-     * @type        Function
-     * @async
-     *
-     * Load the configuration
-     *
-     * @param       {String}            uid             The current dobby process uid
-     * @return      {Promise<ISDobbyPoolConfig>}            A promise resolved once the config is loaded successfully
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    loadConfig(): Promise<ISDobbyPoolConfig> {
-        return new Promise((resolve) => {
-            const configPath = `${this.settings.folder.replace(
-                /^\~/,
-                `${__homeDir()}`,
-            )}/${this.uid}.tasks.json`;
-
-            if (!__fs.existsSync(configPath)) {
-                return resolve({
-                    tasks: {},
-                });
-            }
-
-            const config = __readJsonSync(configPath);
-
-            resolve(config);
-        });
-    }
-
-    /**
-     * @name        saveConfig
-     * @type        Function
-     * @async
-     *
-     * Save the configuration
-     *
-     * @param       {String}            uid             The current dobby process uid
-     * @return      {Promise<void>}                     A promise resolved once the config is successfully saved
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    saveConfig(): Promise<ISDobbySaveConfigResult> {
-        return new Promise((resolve) => {
-            const configPath = `${this.settings.folder.replace(
-                /^\~/,
-                `${__homeDir()}`,
-            )}/${this.uid}.tasks.json`;
-            __writeJsonSync(configPath, this.config);
-            resolve({});
-        });
-    }
+    async loadTasks() {}
 }

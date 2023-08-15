@@ -175,7 +175,7 @@ export default class SDobbyTask extends __SClass {
             geo: this._geo,
             duration: durationObj,
             task: this.metas,
-            data,
+            result: data,
         };
 
         // report if specified

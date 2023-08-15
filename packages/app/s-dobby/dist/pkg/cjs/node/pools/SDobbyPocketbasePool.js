@@ -12,26 +12,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const s_specs_1 = __importDefault(require("@coffeekraken/s-specs"));
+const cjs_1 = __importDefault(require("pocketbase/cjs"));
 const SDobbyPool_js_1 = __importDefault(require("../SDobbyPool.js"));
-const object_1 = require("@coffeekraken/sugar/object");
-const exports_js_1 = require("../exports.js");
+global.EventSource = EventSource;
 /**
- * @name                SDobbyPocketBasePool
+ * @name                SDobbyPocketbasePool
  * @namespace           node
  * @type                Class
- * @extends             SDobbyPool
+ * @extends             SDobbyFeeder
  * @platform            node
  * @status              beta
  *
- * This class represent the pocketbase dobby pool.
+ * This class represent the pocketbase dobby feeder.
  *
- * @param           {ISDobbyPocketBasePoolSettings}          [settings={}]           Some settings to configure your dobby adapter instance
+ * @param           {SDobby}                    dobby           The dobby instance on which this pool is attached
+ * @param           {ISDobbyPoolMetas}          poolMetas       The informations about the pool like name, uid, etc...
+ * @param           {ISDobbyPoolSettings}          [settings={}]           Some settings to configure your dobby adapter instance
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-class SDobbyP2pAdapter extends SDobbyPool_js_1.default {
+class SDobbyPocketbasePool extends SDobbyPool_js_1.default {
     /**
      * @name        constructor
      * @type        Function
@@ -43,51 +44,31 @@ class SDobbyP2pAdapter extends SDobbyPool_js_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(dobby, poolMetas, settings) {
-        super(dobby, poolMetas, (0, object_1.__deepMerge)(s_specs_1.default.extractDefaults(exports_js_1.SDobbyPocketbasePoolSettingsSpecs), settings !== null && settings !== void 0 ? settings : {}));
+        super(dobby, poolMetas, settings);
+        this._pocketbase = new cjs_1.default(this.settings.url);
     }
-    /**
-     * @name        loadConfig
-     * @type        Function
-     * @async
-     *
-     * Load the configuration
-     *
-     * @param       {String}            uid             The current dobby process uid
-     * @return      {Promise<ISDobbyConfig>}            A promise resolved once the config is loaded successfully
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    loadConfig() {
-        return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
-            const sampleTask = {
-                uid: 'florimont.florimont-ch.responseTime',
-                type: 'responseTime',
-                name: 'Response time',
-                schedule: null,
-            };
-        }));
-    }
-    /**
-     * @name        saveConfig
-     * @type        Function
-     * @async
-     *
-     * Save the configuration
-     *
-     * @param       {String}            uid             The current dobby process uid
-     * @return      {Promise<void>}                     A promise resolved once the config is successfully saved
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    saveConfig(uid, config) {
-        return new Promise((resolve) => {
-            // const configPath = `${this.settings.rootDir}/${uid}.config.json`;
-            // __writeJsonSync(configPath, config);
-            resolve({});
+    loadTasks() {
+        return __awaiter(this, void 0, void 0, function* () {
+            // actual tasks
+            const records = yield this._pocketbase
+                .collection(this.settings.collection)
+                .getFullList();
+            for (let [idx, record] of records.entries()) {
+                this.addTask(record);
+            }
+            // realtime
+            this._pocketbase
+                .collection(this.settings.collection)
+                .subscribe('*', function (e) {
+                if (e.action === 'delete') {
+                    this.removeTask(e.record.uid);
+                }
+                else {
+                    this.addTask(e.record);
+                }
+            });
         });
     }
 }
-exports.default = SDobbyP2pAdapter;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsb0VBQTZDO0FBQzdDLHFFQUE0QztBQUU1Qyx1REFBeUQ7QUFFekQsOENBQTRFO0FBUzVFOzs7Ozs7Ozs7Ozs7OztHQWNHO0FBRUgsTUFBcUIsZ0JBQ2pCLFNBQVEsdUJBQVk7SUFPcEI7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFDSSxLQUFlLEVBQ2YsU0FBcUMsRUFDckMsUUFBd0M7UUFFeEMsS0FBSyxDQUNELEtBQUssRUFDTCxTQUFTLEVBQ1QsSUFBQSxvQkFBVyxFQUNQLGlCQUFRLENBQUMsZUFBZSxDQUFDLDhDQUFpQyxDQUFDLEVBQzNELFFBQVEsYUFBUixRQUFRLGNBQVIsUUFBUSxHQUFJLEVBQUUsQ0FDakIsQ0FDSixDQUFDO0lBQ04sQ0FBQztJQUVEOzs7Ozs7Ozs7Ozs7T0FZRztJQUNILFVBQVU7UUFDTixPQUFPLElBQUksT0FBTyxDQUFDLENBQU8sT0FBTyxFQUFFLEVBQUU7WUFDakMsTUFBTSxVQUFVLEdBQUc7Z0JBQ2YsR0FBRyxFQUFFLHFDQUFxQztnQkFDMUMsSUFBSSxFQUFFLGNBQWM7Z0JBQ3BCLElBQUksRUFBRSxlQUFlO2dCQUNyQixRQUFRLEVBQUUsSUFBSTthQUNqQixDQUFDO1FBQ04sQ0FBQyxDQUFBLENBQUMsQ0FBQztJQUNQLENBQUM7SUFFRDs7Ozs7Ozs7Ozs7O09BWUc7SUFDSCxVQUFVLENBQ04sR0FBVyxFQUNYLE1BQXFCO1FBRXJCLE9BQU8sSUFBSSxPQUFPLENBQUMsQ0FBQyxPQUFPLEVBQUUsRUFBRTtZQUMzQixvRUFBb0U7WUFDcEUsdUNBQXVDO1lBQ3ZDLE9BQU8sQ0FBQyxFQUFFLENBQUMsQ0FBQztRQUNoQixDQUFDLENBQUMsQ0FBQztJQUNQLENBQUM7Q0FDSjtBQWhGRCxtQ0FnRkMifQ==
+exports.default = SDobbyPocketbasePool;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEseURBQTBDO0FBRTFDLHFFQUE0QztBQVU1QyxNQUFNLENBQUMsV0FBVyxHQUFHLFdBQVcsQ0FBQztBQUVqQzs7Ozs7Ozs7Ozs7Ozs7OztHQWdCRztBQUVILE1BQXFCLG9CQUNqQixTQUFRLHVCQUFZO0lBT3BCOzs7Ozs7Ozs7T0FTRztJQUNILFlBQ0ksS0FBZSxFQUNmLFNBQTJCLEVBQzNCLFFBQXdDO1FBRXhDLEtBQUssQ0FBQyxLQUFLLEVBQUUsU0FBUyxFQUFFLFFBQVEsQ0FBQyxDQUFDO1FBQ2xDLElBQUksQ0FBQyxXQUFXLEdBQUcsSUFBSSxhQUFZLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxHQUFHLENBQUMsQ0FBQztJQUMzRCxDQUFDO0lBRUssU0FBUzs7WUFDWCxlQUFlO1lBQ2YsTUFBTSxPQUFPLEdBQUcsTUFBTSxJQUFJLENBQUMsV0FBVztpQkFDakMsVUFBVSxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsVUFBVSxDQUFDO2lCQUNwQyxXQUFXLEVBQUUsQ0FBQztZQUNuQixLQUFLLElBQUksQ0FBQyxHQUFHLEVBQUUsTUFBTSxDQUFDLElBQUksT0FBTyxDQUFDLE9BQU8sRUFBRSxFQUFFO2dCQUN6QyxJQUFJLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxDQUFDO2FBQ3hCO1lBRUQsV0FBVztZQUNYLElBQUksQ0FBQyxXQUFXO2lCQUNYLFVBQVUsQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLFVBQVUsQ0FBQztpQkFDcEMsU0FBUyxDQUFDLEdBQUcsRUFBRSxVQUFVLENBQUM7Z0JBQ3ZCLElBQUksQ0FBQyxDQUFDLE1BQU0sS0FBSyxRQUFRLEVBQUU7b0JBQ3ZCLElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxHQUFHLENBQUMsQ0FBQztpQkFDakM7cUJBQU07b0JBQ0gsSUFBSSxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsTUFBTSxDQUFDLENBQUM7aUJBQzFCO1lBQ0wsQ0FBQyxDQUFDLENBQUM7UUFDWCxDQUFDO0tBQUE7Q0FDSjtBQS9DRCx1Q0ErQ0MifQ==

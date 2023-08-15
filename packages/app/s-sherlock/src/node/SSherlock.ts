@@ -244,10 +244,10 @@ export default class SSherlock {
                 type: pool.type,
                 name: pool.name,
                 settings:
-                    pool.type === 'gun'
+                    pool.type === 'pocketbase'
                         ? {
-                              gunUid: pool.settings.gunUid,
-                              privateKey: null,
+                              url: pool.settings.url,
+                              collection: pool.settings.collection,
                           }
                         : pool.type === 'fs'
                         ? {

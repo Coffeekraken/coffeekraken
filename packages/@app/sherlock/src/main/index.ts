@@ -69,6 +69,10 @@ app.whenReady().then(() => {
         return sherlock.saveUserInfo(spaceUid, userInfo);
     });
 
+    ipcMain.handle('pools:reporters:get', (e, poolUid: string) => {
+        return sherlock.getReporters(poolUid);
+    });
+
     ipcMain.handle('pools:add', (e, poolMetas: any) => {
         return sherlock.addPool(poolMetas);
     });

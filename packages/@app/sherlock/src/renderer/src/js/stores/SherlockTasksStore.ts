@@ -26,9 +26,7 @@ class SherlockTasksStore extends __SStore {
         });
         this._spaceUid = spaceUid;
 
-        // __sherlockApi.clientServicesTasks(this._spaceUid)
         __sherlockApi.tasks(this._spaceUid, (task) => {
-            console.log('TAK', task);
             this._tasks[task.uid] = task;
         });
 

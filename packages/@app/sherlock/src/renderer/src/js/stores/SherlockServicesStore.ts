@@ -36,7 +36,6 @@ class SherlockServicesStore extends __SStore {
 
     getServices(params?: IGetServicesParams): Record<string, ISherlockService> {
         const services = {};
-        console.log('PA', params);
         for (let [serviceUid, service] of Object.entries(this._services)) {
             if (params?.client && service.clientUid !== params.client) {
                 continue;

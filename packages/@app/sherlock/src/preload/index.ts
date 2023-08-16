@@ -3,6 +3,7 @@ import { contextBridge, ipcRenderer } from 'electron';
 
 // Expose some API
 contextBridge.exposeInMainWorld('sherlock', {
+    getReporters: (poolUid: string) => ipcRenderer.invoke('pools:reporters:get', poolUid),
     addPool: (poolMetas: any) => ipcRenderer.invoke('pools:add', poolMetas),
     getSpace: (spaceUid: string) => ipcRenderer.invoke('space:get', spaceUid),
     getSpaces: () => ipcRenderer.invoke('spaces:get'),

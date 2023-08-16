@@ -55,4 +55,6 @@ export default class SDobbyFsPool extends __SDobbyPool implements ISDobbyPool {
     }
 
     async loadTasks() {}
+
+    async loadReporters() {}
 }

@@ -10,7 +10,7 @@ import type { ISherlockAdapter } from './adapters/SherlockAdapter.js';
 import __SherlockContentfulAdapter from './adapters/contentful/SherlockContentfulAdapter.js';
 import __SherlockPocketbaseAdapter from './adapters/pocketbase/SherlockPocketbaseAdapter.js';
 
-import __SDobby from '@coffeekraken/s-dobby';
+import __SDobby, { ISDobbyReporterMetas } from '@coffeekraken/s-dobby';
 
 import { WebSocketServer } from 'ws';
 
@@ -237,6 +237,11 @@ export default class SSherlock {
         );
     }
 
+    getReporters(poolUid?: string): Record<string, ISDobbyReporterMetas> {
+        console.log('GET 1', poolUid);
+        return this._dobby.getReporters(poolUid);
+    }
+
     addPool(pool: ISherlockPool): Promise<void> {
         return new Promise((resolve) => {
             this._dobby.addPool({
@@ -300,9 +305,6 @@ export default class SSherlock {
 
             // add the task in db
             await this.adapters[spaceUid].addTask(task);
-
-            // add the task in the correct pool
-            this._dobby.pools[task.poolUid].addTask(task);
 
             resolve(task);
         });

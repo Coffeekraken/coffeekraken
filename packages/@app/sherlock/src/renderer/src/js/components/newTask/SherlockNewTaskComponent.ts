@@ -37,6 +37,9 @@ export class SherlockTaskSpaceComponent extends LitElement {
                 name: pool.name,
             });
         }
+
+        const reporters = __sherlockStores.space().pools.getPoolReporters('grid');
+        console.log('REPO', reporters);
     }
 
     _saveMetas(taskMetas: ISherlockTask): ISherlockTask {

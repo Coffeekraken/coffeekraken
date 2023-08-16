@@ -15,6 +15,7 @@ import type {
     ISDobbyPool,
     ISDobbyPoolMetas,
     ISDobbyPoolStartParams,
+    ISDobbyReporterMetas,
     ISDobbyTask,
 } from '../shared/types';
 
@@ -101,6 +102,17 @@ export default class SDobbyPool extends __SClass implements ISDobbyPool {
     tasks: Record<string, ISDobbyTaskMetas> = {};
 
     /**
+     * @name        reporters
+     * @type        Record<string, ISDobbyReporterMetas>
+     *
+     * Store the actual reporters in this pool
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    reporters: Record<string, ISDobbyReporterMetas> = {};
+
+    /**
      * @name        uid
      * @type        String
      *
@@ -180,9 +192,13 @@ export default class SDobbyPool extends __SClass implements ISDobbyPool {
                 await __nodeSchedule.gracefulShutdown();
             });
 
-            // load the configs of all the pools
-            // @ts-ignore
+            // load the tasks of this pool
+            // @ts-
             await this.loadTasks();
+
+            // load the reporters of this pool
+            // @ts-ignore
+            await this.loadReporters();
 
             // ready
             this.dobby.events.emit('pool.ready', this);
@@ -358,6 +374,62 @@ export default class SDobbyPool extends __SClass implements ISDobbyPool {
 
             // dispatch en event
             this.events.emit('pool.task.remove', taskUid);
+
+            resolve();
+        });
+    }
+
+    /**
+     * @name        addReporter
+     * @type        Function
+     * @async
+     *
+     * Add a new reporter in the pool
+     *
+     * @param       {ISDobbyReporterMetas}          reporter             The reporter to add
+     * @return      {Promise<void>}                         A promise resolved once the reporter is added successfully
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    addReporter(
+        reporterMetas: ISDobbyReporterMetas,
+    ): Promise<void | ISDobbyError> {
+        return new Promise(async (resolve, reject) => {
+            // make sure the tasks not already exists
+            if (this.reporters?.[reporterMetas.uid]) {
+                return reject(<ISDobbyError>{
+                    message: `A reporter with the uid \`${reporterMetas.uid}\` already exists`,
+                });
+            }
+            // add the task in the config
+            this.reporters[reporterMetas.uid] = reporterMetas;
+
+            // dispatch en event
+            this.events.emit('pool.reporter.add', reporterMetas);
+        });
+    }
+
+    /**
+     * @name        removeReporter
+     * @type        Function
+     * @async
+     *
+     * Remove an existing tasreporterk from the pool
+     *
+     * @param       {String}          reporterUid             The reporter UID to remove
+     * @return      {Promise<void>}                         A promise resolved once the reporter is removed successfully
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    removeReporter(reporterUid: string): Promise<void> {
+        return new Promise(async (resolve) => {
+            // remove the task from the stack
+            delete this.reporters[reporterUid];
+
+            // dispatch en event
+            this.events.emit('pool.reporter.remove', reporterUid);
 
             resolve();
         });

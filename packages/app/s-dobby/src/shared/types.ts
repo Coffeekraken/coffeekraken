@@ -30,6 +30,7 @@ export interface ISDobbyPool {
     dobby: __SDobby;
     events: __SEventEmitter;
     metas: ISDobbyPoolMetas;
+    reporters: Record<string, ISDobbyReporterMetas>;
     start(): Promise<void | ISDobbyError>;
     executeTask(
         taskMetasOrUid: String | ISDobbyTaskMetas,
@@ -39,6 +40,10 @@ export interface ISDobbyPool {
     getTasks(): Record<string, ISDobbyTaskMetas>;
     addTask(taskMetas: ISDobbyTaskMetas): Promise<void | ISDobbyError>;
     removeTask(taskUid: string): Promise<void | ISDobbyError>;
+    addReporter(
+        reporterMetas: ISDobbyReporterMetas,
+    ): Promise<void | ISDobbyError>;
+    removeReporter(reporterUid: string): Promise<void | ISDobbyError>;
 }
 export interface ISDobbyPoolMetas {
     uid: string;
@@ -50,7 +55,8 @@ export interface ISDobbyPocketbasePoolMetas extends ISDobbyPoolMetas {
 }
 export interface ISDobbyPocketbasePoolSettings extends ISDobbyPoolSettings {
     url: string;
-    collection: string;
+    tasksCollection: string;
+    reportersCollection: string;
 }
 export interface ISDobbyFsPoolMetas extends ISDobbyPoolMetas {
     type: 'fs';

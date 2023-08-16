@@ -8,14 +8,12 @@ import __SDobbyEcoIndexTask from './tasks/SDobbyEcoIndexTask.js';
 import __SDobbyLighthouseTask from './tasks/SDobbyLighthouseTask.js';
 import __SDobbyResponseTimeTask from './tasks/SDobbyResponseTimeTask.js';
 
-import __SDobbyFeeder from './SDobbyFeeder.js';
-
 import type {
     ISDobbyClientAction,
     ISDobbyError,
-    ISDobbyFeeder,
     ISDobbyPoolEvent,
     ISDobbyPoolMetas,
+    ISDobbyReporterMetas,
     ISDobbySettings,
     ISDobbyTaskMetas,
 } from '../shared/types';
@@ -50,8 +48,6 @@ import __SDobbyPocketbaseReporter from './reporters/SDobbyPocketbaseReporter.js'
 
 export default class SDobby extends __SClass {
     settings: ISDobbySettings;
-
-    private _feeder: __SDobbyFeeder;
 
     /**
      * @name        registeredPools
@@ -129,17 +125,6 @@ export default class SDobby extends __SClass {
     pools: Record<string, ISDobbyPool> = {};
 
     /**
-     * @name        feeders
-     * @type        Record<string, ISDobbyFeeder>
-     *
-     * Store the registered feeders
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    feeders: Record<string, ISDobbyFeeder> = {};
-
-    /**
      * @name        constructor
      * @type        Function
      * @constructor
@@ -181,6 +166,8 @@ export default class SDobby extends __SClass {
             );
         }
 
+        console.log('ADD POOL', poolMetas);
+
         // instanciate pool
         this.pools[poolMetas.uid] = new this.constructor.registeredPools[
             poolMetas.type
@@ -217,6 +204,31 @@ export default class SDobby extends __SClass {
                 this._announcePool(pool, ws);
             }
         });
+    }
+
+    /**
+     * @name           getReporters
+     * @type            Function
+     *
+     * Get the list of reporters for a specific pool of all of them
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    getReporters(poolUid?: string): Record<string, ISDobbyReporterMetas> {
+        const reporters: Record<string, ISDobbyReporterMetas> = {};
+
+        for (let [_poolUid, pool] of Object.entries(this.pools)) {
+            if (poolUid && poolUid !== _poolUid) continue;
+            const reportersInPool = pool.reporters;
+            for (let [reporterUid, reporter] of Object.entries(
+                reportersInPool,
+            )) {
+                reporters[reporterUid] = reporter;
+            }
+        }
+
+        return reporters;
     }
 
     /**

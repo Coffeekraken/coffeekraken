@@ -60,7 +60,7 @@ export default class SDobbyPocketbasePool
     async loadTasks() {
         // actual tasks
         const records = await this._pocketbase
-            .collection(this.settings.collection)
+            .collection(this.settings.tasksCollection)
             .getFullList();
         for (let [idx, record] of records.entries()) {
             this.addTask(record);
@@ -68,12 +68,37 @@ export default class SDobbyPocketbasePool
 
         // realtime
         this._pocketbase
-            .collection(this.settings.collection)
+            .collection(this.settings.tasksCollection)
             .subscribe('*', function (e) {
                 if (e.action === 'delete') {
                     this.removeTask(e.record.uid);
                 } else {
                     this.addTask(e.record);
+                }
+            });
+    }
+
+    async loadReporters() {
+        console.log('_LOA', this.settings);
+
+        // actual tasks
+        const records = await this._pocketbase
+            .collection(this.settings.reportersCollection)
+            .getFullList();
+        for (let [idx, record] of records.entries()) {
+            this.addReporter(record);
+        }
+
+        console.log('REPORRROR___R_R_R', records);
+
+        // realtime
+        this._pocketbase
+            .collection(this.settings.reportersCollection)
+            .subscribe('*', function (e) {
+                if (e.action === 'delete') {
+                    this.removeReporter(e.record.uid);
+                } else {
+                    this.addReporter(e.record);
                 }
             });
     }

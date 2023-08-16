@@ -258,10 +258,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             valuesByPath = {};
 
         for (let [path, value] of Object.entries(flat)) {
-            console.log('PA', path);
-
             const p = path.split('.').slice(0, -1).join('.');
-            console.log('_P', p);
             if (!parentPathesCounts[p]) {
                 parentPathesCounts[p] = 0;
             }

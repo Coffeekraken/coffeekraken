@@ -48,6 +48,7 @@ export class SherlockServiceComponent extends LitElement {
         // reactive
         [
             this._serviceStore,
+
             __sherlockStores.space().tasksStates,
             __sherlockStores.space().tasksResults,
         ].forEach((store) => {
@@ -196,7 +197,7 @@ export class SherlockServiceComponent extends LitElement {
                                     >
                                         <div class="s-flex:align-center">
                                             <div class="s-flex:align-center s-gap:30">
-                                                ${task.status === 'running'
+                                                ${task.state === 'running'
                                                     ? html`<i
                                                           class="s-loader:spinner s-tc:accent"
                                                       ></i>`
@@ -233,12 +234,14 @@ export class SherlockServiceComponent extends LitElement {
                                                               : html`&nbsp;--&nbsp;`}
                                                       `}
 
-                                                <h1 class="s-typo:h4">${task.name}</h1>
+                                                <h1 class="s-typo:h4">
+                                                    ${task.name} ${task.state}
+                                                </h1>
                                             </div>
                                             <div class="s-flex-item:grow"></div>
 
                                             <div class="_result-widget">
-                                                ${task.status !== 'running'
+                                                ${task.state !== 'running'
                                                     ? this.renderResultWidget(lastTaskResult)
                                                     : ''}
                                             </div>
@@ -247,7 +250,7 @@ export class SherlockServiceComponent extends LitElement {
                                                 <span class="s-font:code">${nextStr}</span>
                                                 <div class="s-tooltip">Next execution time</div>
                                             </div> -->
-                                            ${task.status !== 'running'
+                                            ${task.state !== 'running'
                                                 ? html`
                                                       ${lastTaskResult?.data?.geo
                                                           ? html`

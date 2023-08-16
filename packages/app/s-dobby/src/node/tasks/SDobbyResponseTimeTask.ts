@@ -1,11 +1,7 @@
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SDobbyTask from '../SDobbyTask';
 
-import { __ttfb } from '@coffeekraken/sugar/network';
-
 import __SSpecs from '@coffeekraken/s-specs';
-
-import __ping from 'ping';
 
 import { SDobbyResponseTimeTaskSpec } from '../../shared/specs';
 
@@ -65,37 +61,42 @@ export default class SDobbyTask extends __SDobbyTask implements ISDobbyTask {
                 this.settings ?? {},
                 SDobbyResponseTimeTaskSpec,
             );
+            console.log('SETTTT', finalSettings);
 
-            let res = await __ping.promise.probe(
-                this.settings.url.replace(/^https?\:\/\//, ''),
-                {
-                    timeout: finalSettings.timeout / 1000,
-                },
-            );
+            // let res = await __ping.promise.probe(
+            //     this.settings.url.replace(/^https?\:\/\//, ''),
+            //     {
+            //         timeout: finalSettings.timeout / 1000,
+            //     },
+            // );
 
-            const responseTime = res.alive ? parseFloat(res.avg) : -1;
-            const ttfb = await __ttfb(this.settings.url, {
-                timeout: finalSettings.timeout,
-            });
+            // const responseTime = res.alive ? parseFloat(res.avg) : -1;
+            // const ttfb = await __ttfb(this.settings.url, {
+            //     timeout: finalSettings.timeout,
+            // });
 
             let status = 'success';
-            if (responseTime === -1 || ttfb === -1) {
-                status = 'error';
-            } else {
-                if (responseTime > 100) {
-                    status = 'warning';
-                }
-                if (ttfb > 150) {
-                    status = 'warning';
-                }
-            }
+            // if (responseTime === -1 || ttfb === -1) {
+            //     status = 'error';
+            // } else {
+            //     if (responseTime > 100) {
+            //         status = 'warning';
+            //     }
+            //     if (ttfb > 150) {
+            //         status = 'warning';
+            //     }
+            // }
 
             const finalResult = await super.end({
-                alive: res.alive,
+                // alive: res.alive,
+                alive: true,
                 status,
-                responseTime,
-                ttfb: ttfb.ttfb,
-                logs: [res.output],
+                // responseTime,
+                responseTime: 1200,
+                // ttfb: ttfb.ttfb,
+                ttfb: 1200,
+                // logs: [res.output],
+                logs: [],
             });
 
             resolve(finalResult);

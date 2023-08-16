@@ -29,7 +29,14 @@ class SherlockServiceStore extends __SStore {
 
         // load the tasks
         __sherlockApi.serviceTasks(this._spaceUid, this._serviceUid, (task) => {
-            this.tasks[task.uid] = task;
+            console.log('DDDDDD__DDD', task);
+
+            if (this.tasks[task.uid]) {
+                Object.assign(this.tasks[task.uid], task);
+            } else {
+                this.tasks[task.uid] = task;
+            }
+            console.log('UPD_', task);
         });
     }
 }

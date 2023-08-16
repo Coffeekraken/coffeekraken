@@ -38,6 +38,10 @@ export interface ISDobbyPool {
     loadTasks(): void;
     getTask(uid: string): ISDobbyTaskMetas;
     getTasks(): Record<string, ISDobbyTaskMetas>;
+    updateTask(
+        taskUid: string,
+        data: Partial<ISDobbyTaskMetas>,
+    ): Promise<ISDobbyTaskMetas>;
     addTask(taskMetas: ISDobbyTaskMetas): Promise<void | ISDobbyError>;
     removeTask(taskUid: string): Promise<void | ISDobbyError>;
     addReporter(
@@ -93,12 +97,11 @@ export interface ISDobbyTaskMetas {
     uid: string;
     name: string;
     type: 'lighthouse' | 'responseTime';
-    state: 'active' | 'paused';
-    status: 'running' | 'idle' | 'error';
+    state: 'idle' | 'scheduled' | 'paused' | 'queued' | 'running' | 'error';
     schedule: string;
     poolUid: string;
+    reporterUid: string;
     distributed: boolean;
-    reporter: ISDobbyReporterMetas;
     settings: ISDobbyLighthouseTaskSettings | ISDobbyResponseTimeTaskSettings;
 }
 export interface ISDobbyTaskResult {

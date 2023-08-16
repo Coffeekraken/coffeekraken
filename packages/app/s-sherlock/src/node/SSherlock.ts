@@ -252,7 +252,9 @@ export default class SSherlock {
                     pool.type === 'pocketbase'
                         ? {
                               url: pool.settings.url,
-                              collection: pool.settings.collection,
+                              tasksCollection: pool.settings.tasksCollection,
+                              reportersCollection:
+                                  pool.settings.reportersCollection,
                           }
                         : pool.type === 'fs'
                         ? {
@@ -307,6 +309,22 @@ export default class SSherlock {
             await this.adapters[spaceUid].addTask(task);
 
             resolve(task);
+        });
+    }
+
+    startTask(spaceUid: string, taskUid: string): Promise<string> {
+        return new Promise(async (resolve, reject) => {
+            // start the task though the adapter
+            await this.adapters[spaceUid].startTask(taskUid);
+            resolve(taskUid);
+        });
+    }
+
+    pauseTask(spaceUid: string, taskUid: string): Promise<string> {
+        return new Promise(async (resolve, reject) => {
+            // start the task though the adapter
+            await this.adapters[spaceUid].pauseTask(taskUid);
+            resolve(taskUid);
         });
     }
 }

@@ -14,6 +14,8 @@ export interface ISherlockAdapter {
     clientServices(clientUid: string, cb: Function): void;
     serviceTasks(serviceUid: string, cb: Function): void;
     addTask(task: ISherlockTask): Promise<ISherlockTask>;
+    startTask(taskUid: string): Promise<string>;
+    pauseTask(taskUid: string): Promise<string>;
     taskResults(taskUid: string, cb: Function): void;
     setTaskResult(
         taskResult: ISherlockTaskResult,

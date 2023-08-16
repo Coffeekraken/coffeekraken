@@ -67,6 +67,9 @@ export class SherlockTaskSpaceComponent extends LitElement {
         // save the settings in the task
         this._task.settings = taskSettings;
 
+        // @TODO        dynamic reporter selection
+        this._task.reporterUid = 'pocketbase';
+
         // add the task in the store
         __sherlockStores.space().tasks.addTask(this._task);
 

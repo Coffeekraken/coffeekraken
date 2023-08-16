@@ -54,7 +54,6 @@ class SherlockServicesStore extends __SStore {
         const services = this.getServices({
             client: clientUid,
         });
-        console.log('SER', services);
         for (let [uid, service] of Object.entries(services)) {
             if (uid === serviceUid) return service;
         }

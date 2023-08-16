@@ -11,8 +11,6 @@ export interface ISherlockTasksStore {
     [key: string]: ISDobbyTaskMetas;
 }
 
-import __sherlockApi from '../api/SherlockApi.js';
-
 // dobby client
 // export const dobbyClient = new __SDobbyClient();
 
@@ -26,9 +24,11 @@ class SherlockTasksStore extends __SStore {
         });
         this._spaceUid = spaceUid;
 
-        __sherlockApi.tasks(this._spaceUid, (task) => {
-            this._tasks[task.uid] = task;
-        });
+        // __sherlockApi.tasks(this._spaceUid, (task) => {
+        //     console.log('TA__SK', task);
+
+        //     // this._tasks[task.uid] = task;
+        // });
 
         // dobbyClient.on('pool', (poolEvent) => {
         //     Object.assign(this._tasks, poolEvent.config.tasks);
@@ -56,45 +56,23 @@ class SherlockTasksStore extends __SStore {
         // dobbyClient.connect();
     }
 
-    getServiceStore(params?: IGetTasksParams): Record<string, ISDobbyTaskMetas> {
-        // const startWithStr = startsWith.join('.');
-        // const tasks = {};
-        // for (let [taskUid, task] of Object.entries(this._tasks)) {
-        //     if (startsWith.length && !taskUid.startsWith(startWithStr)) {
-        //         continue;
-        //     }
-        //     tasks[taskUid] = task;
-        // }
-        // return tasks;
-    }
-
     getTask(taskUid: string): ISDobbyTaskMetas {
         return this._tasks[taskUid];
     }
 
-    startTask(task: ISDobbyTaskMetas): ISDobbyTaskMetas {
-        // dobbyClient.exec({
-        //     type: 'task.start',
-        //     taskUid: task.uid,
-        //     poolUid: task.poolUid,
-        // });
+    async startTask(task: ISDobbyTaskMetas): Promise<ISDobbyTaskMetas> {
+        try {
+            await window.sherlock.startTask(this._spaceUid, task.uid);
+        } catch (e) {
+            console.log('CA?', e);
+        }
     }
 
     pauseTask(task: ISDobbyTaskMetas): ISDobbyTaskMetas {
-        // dobbyClient.exec({
-        //     type: 'task.pause',
-        //     taskUid: task.uid,
-        //     poolUid: task.poolUid,
-        // });
+        window.sherlock.pauseTask(this._spaceUid, task.uid);
     }
 
-    resumeTask(task: ISDobbyTaskMetas): ISDobbyTaskMetas {
-        // dobbyClient.exec({
-        //     type: 'task.resume',
-        //     taskUid: task.uid,
-        //     poolUid: task.poolUid,
-        // });
-    }
+    resumeTask(task: ISDobbyTaskMetas): ISDobbyTaskMetas {}
 
     addTask(task: ISDobbyTaskMetas): ISDobbyTaskMetas {
         // send the task to dobby, the ugly but much

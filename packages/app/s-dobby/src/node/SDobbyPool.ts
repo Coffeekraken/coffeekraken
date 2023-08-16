@@ -205,7 +205,7 @@ export default class SDobbyPool extends __SClass implements ISDobbyPool {
 
             // loop on each tasks to schedule them
             for (let [taskUid, taskMetas] of Object.entries(this.tasks ?? {})) {
-                this._initTask(taskMetas);
+                this.addTask(taskMetas);
             }
 
             // resolve
@@ -214,23 +214,20 @@ export default class SDobbyPool extends __SClass implements ISDobbyPool {
     }
 
     /**
-     * Init task
-     */
-    _initTask(taskMetas: ISDobbyTaskMetas): void {
-        if (taskMetas.schedule) {
-            this._enqueueTask(taskMetas);
-        }
-    }
-
-    /**
      * Enqueue a task
      */
-    _enqueueTask(taskMetas: ISDobbyTaskMetas): void {
+    _scheduleTask(taskMetas: ISDobbyTaskMetas): void {
+        // update the task state
+        this.updateTask(taskMetas.uid, {
+            state: 'schedules',
+        });
+
         this._tasksJobs[taskMetas.uid] = __nodeSchedule.scheduleJob(
             taskMetas.schedule,
             () => {
-                // execute task
-                this.executeTask(taskMetas);
+                this.updateTask(taskMetas.uid, {
+                    state: 'queued',
+                });
             },
         );
     }
@@ -249,10 +246,10 @@ export default class SDobbyPool extends __SClass implements ISDobbyPool {
             taskMetas = <ISDobbyTaskMetas>taskMetasOrUid;
         }
 
-        // check the task status to avoid running paused ones
-        if (taskMetas.schedule && taskMetas.state !== 'active') {
-            return;
-        }
+        // update task state
+        this.updateTask(taskMetasOrUid, {
+            state: 'running',
+        });
 
         const TaskClass =
             // @ts-ignore
@@ -280,6 +277,11 @@ export default class SDobbyPool extends __SClass implements ISDobbyPool {
         this.dobby.broadcast({
             type: 'task.end',
             data: taskResult,
+        });
+
+        // reset the task state
+        this.updateTask(taskMetas.uid, {
+            state: taskMetas.schedule ? 'scheduled' : 'idle',
         });
 
         return taskResult;
@@ -334,17 +336,21 @@ export default class SDobbyPool extends __SClass implements ISDobbyPool {
      */
     addTask(taskMetas: ISDobbyTaskMetas): Promise<void | ISDobbyError> {
         return new Promise(async (resolve, reject) => {
-            // make sure the tasks not already exists
-            if (this.tasks?.[taskMetas.uid]) {
-                return reject(<ISDobbyError>{
-                    message: `A task with the uid \`${taskMetas.uid}\` already exists`,
-                });
+            if (!this.tasks[taskMetas.uid]) {
+                // make sure the tasks not already exists
+                // if (this.tasks?.[taskMetas.uid]) {
+                //     return reject(<ISDobbyError>{
+                //         message: `A task with the uid \`${taskMetas.uid}\` already exists`,
+                //     });
+                // }
+                // add the task in the config
+                this.tasks[taskMetas.uid] = taskMetas;
             }
-            // add the task in the config
-            this.tasks[taskMetas.uid] = taskMetas;
 
             // enqueue the new task
-            this._enqueueTask(taskMetas);
+            if (taskMetas.schedule) {
+                this._scheduleTask(taskMetas);
+            }
 
             // dispatch en event
             this.events.emit('pool.task.add', taskMetas);

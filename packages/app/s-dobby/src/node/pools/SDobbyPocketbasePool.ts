@@ -8,6 +8,7 @@ import type {
     ISDobbyPocketbasePoolSettings,
     ISDobbyPool,
     ISDobbyPoolMetas,
+    ISDobbyTaskMetas,
 } from '../../shared/types';
 
 global.EventSource = EventSource;
@@ -54,7 +55,29 @@ export default class SDobbyPocketbasePool
         settings?: ISDobbyPocketbasePoolSettings,
     ) {
         super(dobby, poolMetas, settings);
+
+        console.log('SSSS', this.settings);
         this._pocketbase = new __pocketbase(this.settings.url);
+    }
+
+    async updateTask(
+        taskUid: string,
+        data: Partial<ISDobbyTaskMetas>,
+    ): Promise<ISDobbyTaskMetas> {
+        console.log('_UP_', data);
+
+        const pbTask = await this._pocketbase
+            .collection(this.settings.tasksCollection)
+            .getFirstListItem({
+                filter: `uid="${taskUid}"`,
+            });
+
+        if (!pbTask) throw new Error(`No task found with the uid "${taskUid}"`);
+
+        const newTask: ISDobbyTaskMetas = await this._pocketbase
+            .collection(this.settings.tasksCollection)
+            .update(pbTask.id, data);
+        return newTask;
     }
 
     async loadTasks() {
@@ -70,17 +93,22 @@ export default class SDobbyPocketbasePool
         this._pocketbase
             .collection(this.settings.tasksCollection)
             .subscribe('*', function (e) {
-                if (e.action === 'delete') {
+                console.log('UPDATE', e);
+
+                if (e.action === 'create') {
+                    this.addTask(e.record);
+                } else if (e.action === 'delete') {
                     this.removeTask(e.record.uid);
                 } else {
-                    this.addTask(e.record);
+                    if (e.record.state === 'queued') {
+                        console.log('EXEVUTE');
+                        // this.executeTask(e.record);
+                    }
                 }
             });
     }
 
     async loadReporters() {
-        console.log('_LOA', this.settings);
-
         // actual tasks
         const records = await this._pocketbase
             .collection(this.settings.reportersCollection)
@@ -88,8 +116,6 @@ export default class SDobbyPocketbasePool
         for (let [idx, record] of records.entries()) {
             this.addReporter(record);
         }
-
-        console.log('REPORRROR___R_R_R', records);
 
         // realtime
         this._pocketbase

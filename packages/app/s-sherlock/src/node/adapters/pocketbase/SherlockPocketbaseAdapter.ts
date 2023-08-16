@@ -142,42 +142,45 @@ export default class SherlockPocketbaseAdapter
 
     async serviceTasks(serviceUid: string, cb: Function): Promise<void> {
         // current records
-
-        console.log('GET', serviceUid);
-
         const records = await this._pocketbase.collection('tasks').getFullList({
             sort: '-name',
             filter: `service.uid="${serviceUid}"`,
         });
 
-        console.log('REC', records);
         for (let [idx, record] of records.entries()) {
             cb({
                 uid: record.uid,
                 name: record.name,
                 type: record.type,
                 state: record.state,
-                status: record.status,
                 schedule: record.schedule,
                 poolUid: record.poolUid,
+                serviceUid: record.service.uid,
                 settings: record.settings,
             });
         }
 
         // realtime
-        this._pocketbase.collection('tasks').subscribe('*', function (e) {
+        this._pocketbase.collection('tasks').subscribe('*', async (e) => {
+            console.log('UPDATE', e);
+
             if (e.action !== 'delete') {
+                const service = await this._pocketbase
+                    .collection('services')
+                    .getFirstListItem(`uid="${serviceUid}"`);
+                console.log('SE', service);
+
                 // filter our events that are not for the current service
-                if (e.record.service.uid !== serviceUid) return;
+                if (!service || service.uid !== serviceUid) return;
 
                 cb({
                     uid: e.record.uid,
                     name: e.record.name,
                     type: e.record.type,
                     state: e.record.state,
-                    status: e.record.status,
                     schedule: e.record.schedule,
                     poolUid: e.record.poolUid,
+                    serviceUid: e.record.service,
                     settings: e.record.settings,
                 });
             }
@@ -194,10 +197,10 @@ export default class SherlockPocketbaseAdapter
                 uid: task.uid,
                 name: task.name,
                 type: task.type,
-                state: null,
-                status: null,
+                state: task.schedule ? 'active' : 'idle',
                 schedule: task.schedule,
                 poolUid: task.poolUid,
+                reporterUid: task.reporterUid,
                 settings: task.settings,
                 service: service.id,
             });
@@ -206,7 +209,40 @@ export default class SherlockPocketbaseAdapter
         });
     }
 
-    taskResults(taskUid: string, cb: Function): void {}
+    startTask(taskUid: string): Promise<string> {
+        return new Promise(async (resolve) => {
+            const task = await this._pocketbase
+                .collection('tasks')
+                .getFirstListItem(`uid="${taskUid}"`);
+
+            console.log('RASKkksksksksks', task);
+
+            const record = await this._pocketbase
+                .collection('tasks')
+                .update(task.id, {
+                    state: 'queued',
+                });
+            console.log('Reso___', record);
+
+            resolve(taskUid);
+        });
+    }
+
+    taskResults(taskUid: string, cb: Function): Promise<string> {
+        return new Promise(async (resolve) => {
+            const task = await this._pocketbase
+                .collection('tasks')
+                .getFirstListItem(`uid="${taskUid}"`);
+
+            const record = await this._pocketbase
+                .collection('tasks')
+                .update(task.id, {
+                    state: 'paused',
+                });
+
+            resolve(taskUid);
+        });
+    }
 
     setTaskResult(
         taskResult: ISherlockTaskResult,

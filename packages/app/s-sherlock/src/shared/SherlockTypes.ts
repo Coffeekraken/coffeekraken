@@ -41,7 +41,8 @@ export interface ISherlockFsPoolSettings {
 
 export interface ISherlockPocketbasePoolSettings {
     url: string;
-    collection: string;
+    tasksCollection: string;
+    reportersCollection: string;
 }
 
 export interface ISherlockFsAdapterSettings {

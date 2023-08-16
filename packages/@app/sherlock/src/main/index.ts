@@ -3,6 +3,8 @@ import { BrowserWindow, app, ipcMain, shell } from 'electron';
 import { join } from 'path';
 import icon from '../../resources/icon.png?asset.js';
 
+import { crashReporter } from 'electron';
+
 import __SSherlock from '@coffeekraken/s-sherlock';
 
 import type { ISherlockSpace, ISherlockTask, ISherlockTaskResult } from '@coffeekraken/s-sherlock';
@@ -11,7 +13,12 @@ import { execSync } from 'child_process';
 console.log('Rebuilding "canvas" module...');
 execSync('npm rebuild canvas');
 
+app.commandLine.appendSwitch('trace-warnings');
+
 let sherlock = new __SSherlock.default();
+
+crashReporter.start({ uploadToServer: false });
+console.error('Storing dumps inside', app.getPath('crashDumps'));
 
 function createWindow(): void {
     // Create the browser window.
@@ -88,6 +95,12 @@ app.whenReady().then(() => {
     });
     ipcMain.handle('tasks:get', (e, spaceUid: string, callbackId: string) => {
         return sherlock.tasks(spaceUid, callbackId);
+    });
+    ipcMain.handle('tasks:start', (e, spaceUid: string, taskUid: string) => {
+        return sherlock.startTask(spaceUid, taskUid);
+    });
+    ipcMain.handle('tasks:pause', (e, spaceUid: string, taskUid: string) => {
+        return sherlock.pauseTask(spaceUid, taskUid);
     });
     ipcMain.handle('tasks:add', (e, spaceUid: string, task: ISherlockTask) => {
         return sherlock.addTask(spaceUid, task);

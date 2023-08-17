@@ -3,7 +3,6 @@
   "include": ["src/renderer/**/*.ts", "src/preload/*.d.ts"],
   "compilerOptions": {
     "moduleResolution": "node",
-    "sourceMap": true,
     "composite": true,
     "target": "ES5",
     "experimentalDecorators": true

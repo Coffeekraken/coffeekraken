@@ -1,6 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
 // import __SPromise from '@coffeekraken/s-promise';
 import __SSpecs from '@coffeekraken/s-specs';
+import { __wait } from '@coffeekraken/sugar/datetime';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __onProcessExit } from '@coffeekraken/sugar/process';
 
@@ -251,27 +252,29 @@ export default class SDobbyPool extends __SClass implements ISDobbyPool {
             state: 'running',
         });
 
-        const TaskClass =
-            // @ts-ignore
-            this.dobby.constructor.registeredTasks[taskMetas.type];
+        await __wait(1000);
 
-        // broadcast a start task event
-        this.dobby.broadcast({
-            type: 'task.start',
-            data: {
-                pool: this.metas,
-                task: taskMetas,
-            },
-        });
+        // const TaskClass =
+        //     // @ts-ignore
+        //     this.dobby.constructor.registeredTasks[taskMetas.type];
 
-        if (!TaskClass) {
-            throw new Error(
-                `<red>[SDobby]</red> The task <yellow>${taskMetas.name} (${taskMetas.type})</yellow> is not an available task type...`,
-            );
-        }
+        // // broadcast a start task event
+        // this.dobby.broadcast({
+        //     type: 'task.start',
+        //     data: {
+        //         pool: this.metas,
+        //         task: taskMetas,
+        //     },
+        // });
 
-        const task = new TaskClass(taskMetas);
-        const taskResult = await task.run();
+        // if (!TaskClass) {
+        //     throw new Error(
+        //         `<red>[SDobby]</red> The task <yellow>${taskMetas.name} (${taskMetas.type})</yellow> is not an available task type...`,
+        //     );
+        // }
+
+        // const task = new TaskClass(taskMetas);
+        // const taskResult = await task.run();
 
         // broadcast a start task event
         this.dobby.broadcast({

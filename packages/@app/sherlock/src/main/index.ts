@@ -1,5 +1,5 @@
 import { electronApp, is, optimizer } from '@electron-toolkit/utils';
-import { BrowserWindow, app, ipcMain, shell } from 'electron';
+import { BrowserWindow, app, ipcMain, shell, utilityProcess } from 'electron';
 import { join } from 'path';
 import icon from '../../resources/icon.png?asset.js';
 
@@ -10,10 +10,25 @@ import __SSherlock from '@coffeekraken/s-sherlock';
 import type { ISherlockSpace, ISherlockTask, ISherlockTaskResult } from '@coffeekraken/s-sherlock';
 import { execSync } from 'child_process';
 
+console.log(`${process.cwd()}/src/main/dobby.js`);
+
+const dobbyProcess = utilityProcess.fork(`${process.cwd()}/src/main/dobby.js`, [], {
+    stdio: 'pipe',
+});
+console.log('UT', dobbyProcess);
+dobbyProcess.stdout.on('data', (data) => {
+    console.log(`Received chunk ${data}`);
+});
+dobbyProcess.stderr.on('data', (data) => {
+    console.log(`Received error ${data}`);
+});
+
 console.log('Rebuilding "canvas" module...');
 execSync('npm rebuild canvas');
 
 app.commandLine.appendSwitch('trace-warnings');
+
+// utilityProcess.fork(`${process.cwd()}/`)
 
 let sherlock = new __SSherlock.default();
 

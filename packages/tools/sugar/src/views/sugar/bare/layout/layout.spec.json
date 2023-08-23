@@ -1,3 +1,196 @@
 {
-    "extends": "sugar.views.bare.layout"
+    "type": "Layout",
+    "category": "bare",
+    "title": "Layout",
+    "description": "Specify a custom layout where to put some components",
+    "default": {
+        "container": true,
+        "nodes": {
+            "1": "",
+            "2": ""
+        },
+        "gap": {
+            "id": "30",
+            "value": "30"
+        },
+        "spacing": {
+            "id": "50",
+            "value": "50"
+        },
+        "media": {
+            "desktop": {
+                "id": "12",
+                "layout": "1 2"
+            }
+        }
+    },
+    "layouts": [
+        {
+            "id": "1",
+            "layout": "1"
+        },
+        {
+            "id": "12",
+            "layout": "1 2"
+        },
+        {
+            "id": "21",
+            "layout": "2 1"
+        },
+        {
+            "id": "112",
+            "layout": "1 1 2"
+        },
+        {
+            "id": "122",
+            "layout": "1 2 2"
+        },
+        {
+            "id": "123",
+            "layout": "1 2 3"
+        },
+        {
+            "id": "211",
+            "layout": "2 1 1"
+        },
+        {
+            "id": "221",
+            "layout": "2 2 1"
+        },
+        {
+            "id": "321",
+            "layout": "3 2 1"
+        },
+        {
+            "id": "1112",
+            "layout": "1 1 1 2"
+        },
+        {
+            "id": "1222",
+            "layout": "1 2 2 2"
+        },
+        {
+            "id": "1234",
+            "layout": "1 2 3 4"
+        },
+        {
+            "id": "2221",
+            "layout": "2 2 2 1"
+        },
+        {
+            "id": "11112",
+            "layout": "1 1 1 1 2"
+        },
+        {
+            "id": "12222",
+            "layout": "1 2 2 2 2"
+        },
+        {
+            "id": "12345",
+            "layout": "1 2 3 4 5"
+        },
+        {
+            "id": "22221",
+            "layout": "2 2 2 2 1"
+        },
+        {
+            "id": "111112",
+            "layout": "1 1 1 1 1 2"
+        },
+        {
+            "id": "122222",
+            "layout": "1 2 2 2 2 2"
+        },
+        {
+            "id": "123456",
+            "layout": "1 2 3 4 5 6"
+        },
+        {
+            "id": "1_2",
+            "layout": "1 _ 2"
+        },
+        {
+            "id": "2_1",
+            "layout": "2 _ 1"
+        },
+        {
+            "id": "12_33",
+            "layout": "1 2 _ 3 3"
+        },
+        {
+            "id": "11_23",
+            "layout": "1 1 _ 2 3"
+        },
+        {
+            "id": "1_2_3",
+            "layout": "1 _ 2 _ 3"
+        },
+        {
+            "id": "32_11",
+            "layout": "3 2 _ 1 1"
+        },
+        {
+            "id": "33_21",
+            "layout": "3 3 _ 2 1"
+        },
+        {
+            "id": "12_34",
+            "layout": "1 2 _ 3 4"
+        },
+        {
+            "id": "123_444",
+            "layout": "1 2 3 _ 4 4 4"
+        },
+        {
+            "id": "111_234",
+            "layout": "1 1 1 _ 2 3 4"
+        },
+        {
+            "id": "1_2_3_4",
+            "layout": "1 _ 2 _ 3 _ 4"
+        },
+        {
+            "id": "123_455",
+            "layout": "1 2 3 _ 4 5 5"
+        },
+        {
+            "id": "122_345",
+            "layout": "1 2 2 _ 3 4 5"
+        },
+        {
+            "id": "1111_2345",
+            "layout": "1 1 1 1 _ 2 3 4 5"
+        },
+        {
+            "id": "1234_5555",
+            "layout": "1 2 3 4 _ 5 5 5 5"
+        },
+        {
+            "id": "1_2_3_4_5",
+            "layout": "1 _ 2 _ 3 _ 4 _ 5"
+        }
+    ],
+    "gap": "@sugar.views.props.space",
+    "spacing": "@sugar.views.props.spacing",
+    "spaces": "@sugar.views.props.spaces",
+    "examples": {
+        "twig": {
+            "title": "Twig",
+            "description": "Here's a twig sample of how to use the layout view",
+            "code": [
+                "{% include 'sugar.bare.layout.layout' with {",
+                "   layout: {",
+                "       desktop: '1 2 _ 3 4',",
+                "       mobile: '1 _ 2 _ 3 _ 4'",
+                "   },",
+                "   html: '",
+                "       <div>Hello world #1</div>",
+                "       <div>Hello world #2</div>",
+                "       <div>Hello world #3</div>",
+                "       <div>Hello world #4</div>",
+                "   '",
+                "} %}"
+            ]
+        }
+    }
 }

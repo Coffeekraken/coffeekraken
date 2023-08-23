@@ -1,3 +1,30 @@
 {
-    "extends": "sugar.views.bare.typo"
+    "type": "Bare",
+    "category": "bare",
+    "title": "Typo",
+    "description": "Display a typo like an H1, H2, p, etc...",
+    "props": {
+        "type": {
+            "type": "Text",
+            "description": "Specify the type of the typo you want to display",
+            "required": true
+        },
+        "html": {
+            "type": "Html",
+            "description": "Specify the html to use as the typo content",
+            "required": true
+        }
+    },
+    "examples": {
+        "twig": {
+            "title": "Twig",
+            "description": "Here's a twig sample of how to use the typo view",
+            "code": [
+                "{% include 'sugar.bare.typo.typo' with {",
+                "   type: 'h1',",
+                "   html: 'Hello world'",
+                "} %}"
+            ]
+        }
+    }
 }

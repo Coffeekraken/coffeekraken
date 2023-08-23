@@ -3,6 +3,7 @@
 @sugar.import ('../views/**/*.css');
 @sugar.import ('./generic/**/*.css');
 
+/* Load custom views css */
 @sugar.view ('sugar.sections.pushBlock');
 @sugar.view ('sugar.sections.hero');
 

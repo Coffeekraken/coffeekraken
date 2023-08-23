@@ -1,3 +1,43 @@
 {
-    "extends": "sugar.views.bare.container"
+    "type": "Bare",
+    "category": "bare",
+    "title": "Container",
+    "description": "Display a simple container that will center your content on the page with a certain max-width",
+    "props": {
+        "frontspec": {
+            "type": "Object",
+            "description": "The frontspec.json that you must have at your project root",
+            "required": true
+        },
+        "type": "@sugar.views.props.container",
+        "attributes": "@sugar.views.props.attributes",
+        "html": {
+            "type": "Html",
+            "description": "Specify the html tu put in the container",
+            "required": true
+        },
+        "spaces": "@sugar.views.props.spaces"
+    },
+    "examples": {
+        "twig": {
+            "title": "Twig",
+            "description": "Here's a twig sample of how to use the card view",
+            "code": [
+                "{% include 'sugar.bare.container.container' with {",
+                "   type: {",
+                "       default: '',",
+                "       wide: 'full'",
+                "   }",
+                "   html: '<h2>Hello world</h2>',",
+                "   margin: {",
+                "       default: {",
+                "           bottom: '50'",
+                "   },",
+                "   mobile: {",
+                "       bottom: '20'",
+                "   }",
+                "} %}"
+            ]
+        }
+    }
 }

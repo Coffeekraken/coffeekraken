@@ -1,8 +1,13 @@
-.section-heading {
+.s-section-push-block {
     position: relative;
+    padding: sugar.padding(90);
 
     @sugar.media mobile {
         padding-inline: sugar.padding(30);
+    }
+
+    ._ctas {
+        display: flex;
     }
 
     ._bkg {
@@ -10,15 +15,11 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        width: 1280px;
-        height: 900px;
-        clip-path: url(#clip);
-        transform: translate(-40%, -40%) scale(1.7) rotate(-10deg);
-        display: none;
-        /* filter: grayscale(100%);
-            opacity: 0.2; */
+        width: 100vw;
+        transform: translate(-50%, -50%);
 
         img {
+            display: none;
             object-fit: cover;
             width: 100%;
             height: 100%;
@@ -37,7 +38,6 @@
         @sugar.layout ('1 2');
         position: relative;
         z-index: 10;
-        min-height: 80vh;
         align-items: center;
 
         @sugar.media mobile {

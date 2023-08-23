@@ -22,18 +22,14 @@
             "type": "Text",
             "title": "Title",
             "description": "Heading title",
-            "default": {
-                "value": "Heading title"
-            },
+            "default": "Heading title",
             "required": true
         },
         "text": {
             "type": "Text",
             "title": "Text",
             "description": "Heading text",
-            "default": {
-                "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id euismod quam, at fringilla odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae molestie augue. Curabitur et consectetur diam. Mauris vitae dui sit amet ipsum dignissim sollicitudin at ac ante. Donec porta, libero ut auctor efficitur"
-            },
+            "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id euismod quam, at fringilla odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae molestie augue. Curabitur et consectetur diam. Mauris vitae dui sit amet ipsum dignissim sollicitudin at ac ante. Donec porta, libero ut auctor efficitur",
             "required": true
         },
         "image": {
@@ -50,10 +46,10 @@
             },
             "required": true
         },
-        "cta": {
-            "extends": "sugar.views.components.cta",
-            "title": "Heading Cta",
-            "required": true
-        }
+        "spacing": "@sugar.views.props.spacing",
+        "primaryCta": "@sugar.views.components.cta",
+        "secondaryCta": "@sugar.views.components.cta",
+        "attributes": "@sugar.views.props.attributes",
+        "spaces": "@sugar.views.props.spaces"
     }
 }

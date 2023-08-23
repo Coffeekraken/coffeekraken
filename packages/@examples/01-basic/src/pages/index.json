@@ -3,12 +3,22 @@
     "uid": "index",
     "name": "index",
     "scope": "repo",
-    "slug": ["/"],
+    "slug": [
+        "/"
+    ],
     "nodes": [
         {
             "uid": "root",
             "type": "container",
             "nodes": [
+                {
+                    "uid": "section-hero",
+                    "type": "node"
+                },
+                {
+                    "uid": "section-pushBlock",
+                    "type": "node"
+                },
                 {
                     "uid": "layout-aaa",
                     "type": "node",

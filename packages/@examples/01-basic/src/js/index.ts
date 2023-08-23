@@ -15,31 +15,31 @@ import { define as __sGoogleMapComponentDefine } from '@coffeekraken/s-google-ma
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { define as __SSliderComponentDefine } from '@coffeekraken/s-slider-component/lazy';
 
-import { define as __sCarpenterComponentDefine } from '@coffeekraken/s-carpenter';
+// import { define as __sCarpenterComponentDefine } from '@coffeekraken/s-carpenter';
 
 // Views related
 const viewsRelated = import.meta.globEager('../views/**/*.ts');
 
 // Init script
 (async () => {
-    if (document.querySelector('s-carpenter')) {
-        __sCarpenterComponentDefine({
-            autoInit: true,
-            escape: true,
-            features: {
-                page: {
-                    create: true,
-                    save: true,
-                },
-                node: {
-                    delete: true,
-                    insert: true,
-                },
-                scopes: true,
-            },
-        });
-        return;
-    }
+    // if (document.querySelector('s-carpenter')) {
+    //     __sCarpenterComponentDefine({
+    //         autoInit: true,
+    //         escape: true,
+    //         features: {
+    //             page: {
+    //                 create: true,
+    //                 save: true,
+    //             },
+    //             node: {
+    //                 delete: true,
+    //                 insert: true,
+    //             },
+    //             scopes: true,
+    //         },
+    //     });
+    //     return;
+    // }
 
     // Set some features defaults
     __SFeature.setDefaultProps('*', {});

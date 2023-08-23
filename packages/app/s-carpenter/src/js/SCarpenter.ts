@@ -1,7 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
 import __SComponentUtils from '@coffeekraken/s-component-utils';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import { define as _sCarpenterAppComponentDefine } from './SCarpenterAppComponent.js';
+import __sCarpenterAppComponentDefine from './defineApp.js';
 
 import __SFront from '@coffeekraken/s-front';
 
@@ -30,7 +30,7 @@ export default class SCarpenter extends __SClass {
         front.setLod(5);
 
         // components
-        _sCarpenterAppComponentDefine({
+        __sCarpenterAppComponentDefine({
             ...(__SComponentUtils.getDefaultProps('s-carpenter') ?? {}),
             window: window.top ?? window,
         });

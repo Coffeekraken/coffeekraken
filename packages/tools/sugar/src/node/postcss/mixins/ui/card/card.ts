@@ -92,9 +92,14 @@ export default function ({
                 
             }
 
-            .s-card_content {
+            ._content {
                 align-items: unset;
             }
+
+            ._ctas {
+                display: flex;
+            }
+
         `);
     }
 
@@ -106,11 +111,11 @@ export default function ({
                     flex-direction: row-reverse;
                     max-width: none;
 
-                    .s-card_media {
+                    ._media {
                         align-self: stretch;
                         width: 50%;
                     }
-                    .s-card_img {
+                    ._img {
                         width: 100%;
                         height: 100%;
                         object-fit: cover;
@@ -126,11 +131,11 @@ export default function ({
                     flex-direction: row;
                     max-width: none;
                     
-                    .s-card_media {
+                    ._media {
                         align-self: stretch;
                         width: 50%;
                     }
-                    .s-card_img {
+                    ._img {
                         width: 100%;
                         height: 100%;
                         object-fit: cover;
@@ -166,15 +171,15 @@ export default function ({
             @sugar.border.radius(ui.card.borderRadius);
             @sugar.depth (ui.card.depth);
 
-            .s-card_media {
+            ._media {
                 @sugar.border.radius(ui.card.borderRadius);
             }
 
-            .s-card_img {
+            ._img {
                 @sugar.border.radius(ui.card.borderRadius);
             }
 
-            .s-card_content {
+            ._content {
                 padding-block: sugar.padding(ui.card.paddingBlock);
                 padding-inline: sugar.padding(ui.card.paddingInline);
             }

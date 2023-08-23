@@ -16,6 +16,7 @@ import __path from 'path';
 
 export default function (api) {
     if (api.env.platform !== 'node') return;
+
     return {
         /**
          * @name            outDir
@@ -103,5 +104,20 @@ export default function (api) {
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         excludeCodeByTypes: [],
+
+        /**
+         * @name            viewsRootDirs
+         * @namespace       config.postcssSugarPlugin
+         * @type            String[]
+         * @default         []
+         *
+         * Specify where are stored the views to be able to import them in your css
+         *
+         * @since           2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        get viewsRootDirs() {
+            return api.config.viewRenderer.rootDirs;
+        },
     };
 }

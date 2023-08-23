@@ -11,15 +11,9 @@ export default {
         // in: 'left',
         // delay: '300-600',
     },
-    title: {
-        value: 'Supercharged!',
-    },
-    intro: {
-        value: 'Up to 18 hours of battery life.',
-    },
-    text: {
-        value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec vestibulum mi. Etiam nec arcu ante.',
-    },
+    title: 'Supercharged!',
+    intro: 'Up to 18 hours of battery life.',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec vestibulum mi. Etiam nec arcu ante.',
     cta: {
         color: {
             id: 'accent',

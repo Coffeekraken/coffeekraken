@@ -14,7 +14,7 @@ function default_1(api) {
          * @name            rootDirs
          * @namespace       config.viewRenderer
          * @type            string[]
-         * @default          ['[config.storage.src.rootDir]/views']
+         * @default         [__packageRootDir(), `${api.config.storage.src.rootDir}/views`,`${__path.resolve(__packageRootDir(__dirname()), 'src/views')}`]
          *
          * Specify the roots views directories
          *
@@ -25,10 +25,10 @@ function default_1(api) {
             return [
                 (0, packageRootDir_js_1.default)(),
                 `${api.config.storage.src.rootDir}/views`,
-                `${path_1.default.resolve((0, packageRootDir_js_1.default)((0, dirname_js_1.default)()), 'src/views/twig')}`,
+                `${path_1.default.resolve((0, packageRootDir_js_1.default)((0, dirname_js_1.default)()), 'src/views')}`,
             ];
         },
     };
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsZ0RBQTBCO0FBQzFCLHVFQUE4QztBQUM5Qyx1RkFBOEQ7QUFFOUQsbUJBQXlCLEdBQUc7SUFDeEIsSUFBSSxHQUFHLENBQUMsR0FBRyxDQUFDLFFBQVEsS0FBSyxNQUFNO1FBQUUsT0FBTztJQUV4QyxPQUFPO1FBQ0g7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksUUFBUTtZQUNSLE9BQU87Z0JBQ0gsSUFBQSwyQkFBZ0IsR0FBRTtnQkFDbEIsR0FBRyxHQUFHLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxHQUFHLENBQUMsT0FBTyxRQUFRO2dCQUN6QyxHQUFHLGNBQU0sQ0FBQyxPQUFPLENBQ2IsSUFBQSwyQkFBZ0IsRUFBQyxJQUFBLG9CQUFTLEdBQUUsQ0FBQyxFQUM3QixnQkFBZ0IsQ0FDbkIsRUFBRTthQUNOLENBQUM7UUFDTixDQUFDO0tBQ0osQ0FBQztBQUNOLENBQUM7QUExQkQsNEJBMEJDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsZ0RBQTBCO0FBQzFCLHVFQUE4QztBQUM5Qyx1RkFBOEQ7QUFFOUQsbUJBQXlCLEdBQUc7SUFDeEIsSUFBSSxHQUFHLENBQUMsR0FBRyxDQUFDLFFBQVEsS0FBSyxNQUFNO1FBQUUsT0FBTztJQUV4QyxPQUFPO1FBQ0g7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksUUFBUTtZQUNSLE9BQU87Z0JBQ0gsSUFBQSwyQkFBZ0IsR0FBRTtnQkFDbEIsR0FBRyxHQUFHLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxHQUFHLENBQUMsT0FBTyxRQUFRO2dCQUN6QyxHQUFHLGNBQU0sQ0FBQyxPQUFPLENBQUMsSUFBQSwyQkFBZ0IsRUFBQyxJQUFBLG9CQUFTLEdBQUUsQ0FBQyxFQUFFLFdBQVcsQ0FBQyxFQUFFO2FBQ2xFLENBQUM7UUFDTixDQUFDO0tBQ0osQ0FBQztBQUNOLENBQUM7QUF2QkQsNEJBdUJDIn0=

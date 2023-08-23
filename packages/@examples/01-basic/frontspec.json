@@ -17,6 +17,7 @@
         "title": "@example/01-basic",
         "homepage": "https://coffeekraken.io",
         "description": "",
+        "keywords": [],
         "themeColor": "#ffbb00",
         "author": {
             "name": "",
@@ -28,7 +29,7 @@
             "description": "",
             "type": "website",
             "url": "https://coffeekraken.io",
-            "image": "https://cdnv2.coffeekraken.io/coffeekraken-og.png"
+            "image": "https://cdnv2.coffeekraken.io/global/coffeekraken-og.png"
         },
         "backgroundColor": "#2c323a"
     },
@@ -43,12 +44,6 @@
             "type": "module",
             "defer": true,
             "src": "/dist/js/index.esm.js",
-            "env": "production"
-        },
-        "nomodule": {
-            "nomodule": true,
-            "defer": true,
-            "src": "/dist/js/index.amd.js",
             "env": "production"
         },
         "style": {
@@ -364,7 +359,7 @@
                         "color": "#5a6472",
                         "backgroundColor": "#fcfcfd",
                         "lineHeight": 1.5,
-                        "paddingInline": "1.5rem",
+                        "paddingInline": "1.25rem",
                         "paddingBlock": "0.75rem",
                         "borderRadius": "5px",
                         "depth": "0",
@@ -397,7 +392,7 @@
                     },
                     "editor": {
                         "style": {
-                            "paddingInlineStart": 1.5,
+                            "paddingInlineStart": 1.25,
                             "borderLeft": "1px solid #000"
                         }
                     },
@@ -641,7 +636,7 @@
                     "button": {},
                     "editor": {},
                     "style": {
-                        "color": "#5100ff"
+                        "color": "#7f53f9"
                     }
                 },
                 "success": {

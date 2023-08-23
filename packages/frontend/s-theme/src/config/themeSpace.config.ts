@@ -65,7 +65,7 @@ export default function (api) {
          * Specify the "20" space used for margins and paddings.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         @since           2.0.0
+         * @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         20: 0.75,
@@ -74,7 +74,7 @@ export default function (api) {
          * @name            30
          * @namespace       config.themeSpace
          * @type            String
-         * @default         1.5
+         * @default         1.4
          *
          * Specify the "30" space used for margins and paddings.
          * MUST be a scale factor relative to the "default" absolute value specified.
@@ -82,13 +82,13 @@ export default function (api) {
          @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        30: 1.5,
+        30: 1.4,
 
         /**
          * @name            40
          * @namespace       config.themeSpace
          * @type            String
-         * @default         2.25
+         * @default         2
          *
          * Specify the "40" space used for margins and paddings.
          * MUST be a scale factor relative to the "default" absolute value specified.
@@ -96,13 +96,13 @@ export default function (api) {
          @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        40: 2.25,
+        40: 2,
 
         /**
          * @name            50
          * @namespace       config.themeSpace
          * @type            String
-         * @default         3.25
+         * @default         3.5
          *
          * Specify the "50" space used for margins and paddings.
          * MUST be a scale factor relative to the "default" absolute value specified.
@@ -110,13 +110,13 @@ export default function (api) {
          @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        50: 3.25,
+        50: 3.5,
 
         /**
          * @name            60
          * @namespace       config.themeSpace
          * @type            String
-         * @default         4.25
+         * @default        5
          *
          * Specify the "60" space used for margins and paddings.
          * MUST be a scale factor relative to the "default" absolute value specified.
@@ -124,13 +124,13 @@ export default function (api) {
          @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        60: 4.25,
+        60: 5,
 
         /**
          * @name            70
          * @namespace       config.themeSpace
          * @type            String
-         * @default         5.5
+         * @default         7.5
          *
          * Specify the "70" space used for margins and paddings.
          * MUST be a scale factor relative to the "default" absolute value specified.
@@ -138,13 +138,13 @@ export default function (api) {
          @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        70: 5.5,
+        70: 7.5,
 
         /**
          * @name            80
          * @namespace       config.themeSpace
          * @type            String
-         * @default         7
+         * @default         10
          *
          * Specify the "80" space used for margins and paddings.
          * MUST be a scale factor relative to the "default" absolute value specified.
@@ -152,13 +152,13 @@ export default function (api) {
          @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        80: 7,
+        80: 10,
 
         /**
          * @name            90
          * @namespace       config.themeSpace
          * @type            String
-         * @default         9
+         * @default         15
          *
          * Specify the "90" space used for margins and paddings.
          * MUST be a scale factor relative to the "default" absolute value specified.
@@ -166,13 +166,13 @@ export default function (api) {
          @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        90: 9,
+        90: 15,
 
         /**
          * @name            100
          * @namespace       config.themeSpace
          * @type            String
-         * @default         11
+         * @default         20
          *
          * Specify the "100" space used for margins and paddings.
          * MUST be a scale factor relative to the "default" absolute value specified.
@@ -180,6 +180,6 @@ export default function (api) {
          @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        100: 11,
+        100: 20,
     };
 }

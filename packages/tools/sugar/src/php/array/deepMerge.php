@@ -14,8 +14,7 @@ namespace Sugar\ar;
  *
  * @snippet         \Sugar\ar\deepMerge($1, $2);
  *
- * @param       {Array}         $array1         The base array on which to merge the second
- * @param       {Array}         $array2         The array you want to merge in the first one
+ * @param           {Array}         ...$arrays          The arrays to merge
  * @return      {Array}                         The resulting array
  *
  * @example         php
@@ -33,7 +32,7 @@ namespace Sugar\ar;
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function deepMerge(array $array1, array $array2)
+function _deepMerge(array $array1, array $array2)
 {
     $merged = $array1;
     foreach ($array2 as $key => &$value) {
@@ -48,4 +47,19 @@ function deepMerge(array $array1, array $array2)
         }
     }
     return $merged;
+}
+
+function deepMerge()
+{
+    $args = func_get_args();
+    $finalData = [];
+    for ($i = 0; $i < count($args); $i++) {
+        if (!is_array($args[$i])) {
+            throw new \Exception(
+                'The "deepMerge" function only accept array as parameters'
+            );
+        }
+        $finalData = _deepMerge($finalData, $args[$i]);
+    }
+    return $finalData;
 }

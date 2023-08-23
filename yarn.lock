@@ -4442,6 +4442,7 @@ __metadata:
     "@coffeekraken/s-postcss-sugar-plugin": ^2.0.0-alpha.27
     "@coffeekraken/s-sugar-feature": ^2.0.0-alpha.27
     "@coffeekraken/sugar": ^2.0.0-alpha.27
+    "@faker-js/faker": ^8.0.2
     autoprefixer: ^10.4.12
     postcss: ^8.4.17
     postcss-atroot: ^0.2.3
@@ -4472,6 +4473,13 @@ __metadata:
     postcss-property-lookup: ^3.0.0
   languageName: unknown
   linkType: soft
+
+"@faker-js/faker@npm:^8.0.2":
+  version: 8.0.2
+  resolution: "@faker-js/faker@npm:8.0.2"
+  checksum: cf73daf9a50397eb0b3f04a7ef3fbb6f54acc026b167707136a7e58a517fd805a46c9e8c5f017f3022f104a4ff984765daaeee2cb98b3c34646db05c2acad441
+  languageName: node
+  linkType: hard
 
 "@firebase/analytics-compat@npm:0.2.6":
   version: 0.2.6

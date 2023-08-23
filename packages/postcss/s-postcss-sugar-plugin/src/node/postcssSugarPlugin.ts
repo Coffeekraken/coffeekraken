@@ -146,6 +146,9 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             excludeCodeByTypes: __SSugarConfig.get(
                 'postcssSugarPlugin.excludeCodeByTypes',
             ),
+            viewsRootDirs: __SSugarConfig.get(
+                'postcssSugarPlugin.viewsRootDirs',
+            ),
             classmap: __SSugarConfig.get('postcssSugarPlugin.classmap'),
             clean: __SSugarConfig.get('postcssSugarPlugin.clean'),
             lod: __STheme.get('lod'),

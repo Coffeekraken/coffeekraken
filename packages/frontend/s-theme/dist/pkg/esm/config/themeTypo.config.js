@@ -95,7 +95,7 @@ export default (api) => {
             style: {
                 display: 'block',
                 fontFamily: 'title',
-                fontSize: 70,
+                fontSize: 60,
                 lineHeight: 1.3,
                 maxWidth: '55ch',
                 mobile: {
@@ -123,7 +123,7 @@ export default (api) => {
             style: {
                 display: 'block',
                 fontFamily: 'title',
-                fontSize: 60,
+                fontSize: 50,
                 lineHeight: 1.3,
                 maxWidth: '55ch',
                 mobile: {
@@ -151,7 +151,7 @@ export default (api) => {
             style: {
                 display: 'block',
                 fontFamily: 'title',
-                fontSize: 50,
+                fontSize: 40,
                 lineHeight: 1.3,
                 maxWidth: '55ch',
                 mobile: {
@@ -179,7 +179,7 @@ export default (api) => {
             style: {
                 display: 'block',
                 fontFamily: 'title',
-                fontSize: 40,
+                fontSize: 30,
                 lineHeight: 1.3,
                 maxWidth: '55ch',
                 mobile: {
@@ -207,7 +207,7 @@ export default (api) => {
             style: {
                 display: 'block',
                 fontFamily: 'title',
-                fontSize: 30,
+                fontSize: 20,
                 lineHeight: 1.3,
                 maxWidth: '55ch',
                 mobile: {

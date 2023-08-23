@@ -72,6 +72,7 @@ export default function ({
 
         // try to get the padding with the passed
         val = __STheme.getSafe(`padding.${s}`);
+
         if (val !== undefined) {
             s = val;
         }

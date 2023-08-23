@@ -1,0 +1,54 @@
+<section {{ __id(id) }} class="s-section-push-block {{ __spacesClasses(spaces, frontspec) }}">
+    {{ __nodeDataTemplate('views.sections.heading', _context)|raw }}
+
+    <div class="_bkg">
+        <div class="s-media-container">
+            <img class="s-media" src="{{ bkg.url }}" />
+        </div>
+    </div>
+    <div class="s-container">
+        <div class="_layout">
+            <div>
+                <div s-appear in="left" delay="500" class="s-spacing:{{ spacing.value ? spacing.value : '30' }}">
+                    {% if title %}
+                        <h1 class="s-typo:h2 _title">
+                            {{ title|raw }}
+                        </h1>
+                    {% endif %}
+                    {% if intro %}
+                        <p class="s-typo:lead _intro">
+                            {{ intro|raw }}
+                        </p>
+                    {% endif %}
+                    {% if text %}
+                        <p class="s-typo:p _text">
+                            {{ text|raw }}
+                        </p>
+                    {% endif %}
+                    {% if primaryCta or secondaryCta %}
+                        <div class="_ctas">
+                            {% if primaryCta %}
+                                {% include 'sugar/components/cta/cta.twig' with primaryCta %}
+                            {% endif %}
+                            {% if secondaryCta %}
+                                {% include 'sugar/components/cta/cta.twig' with secondaryCta %}
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>                    
+            </div>
+            <div>
+                {% if image.url %}
+                    <div s-appear in="right" delay="600">
+                        <picture class="s-media-container">
+                            {% for media, image in image.media %}
+                                <source srcset="{{ image.url }}" media="{{ media }}">
+                            {% endfor %}
+                            <img class="_img s-media" src="{{ image.url }}" title="{{ image.title }}" alt="{{ image.alt }}" />
+                        </picture>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>

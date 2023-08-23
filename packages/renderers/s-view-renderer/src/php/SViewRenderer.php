@@ -137,14 +137,18 @@ class SViewRenderer
                     $tmpFilePath
                 );
                 $nodeFile = [
-                    'import __fn from "./' . basename($filePath) . '";',
+                    'import __fnOrData from "./' . basename($filePath) . '";',
                     'const sharedData = ' .
                     json_encode($this->settings->sharedData) .
                     ';',
-                    // 'import __SSugarConfig from "@coffeekraken/s-sugar-config";',
-                    'async function _exec() {',
-                    // '   await __SSugarConfig.load();',
-                    '   console.log(JSON.stringify(await __fn(sharedData)));',
+                    'function _exec() {',
+                    '   let data;',
+                    '   if (typeof __fnOrData === "function") {',
+                    '       data = __fnOrData(sharedData);',
+                    '   } else {',
+                    '       data = __fnOrData;',
+                    '   }',
+                    '   console.log(JSON.stringify(data));',
                     '   process.exit(0);',
                     '}',
                     '_exec();',
@@ -153,12 +157,13 @@ class SViewRenderer
                 file_put_contents($tmpFilePath, implode(PHP_EOL, $nodeFile));
                 $data = exec(
                     'node --experimental-json-modules --trace-warnings --trace-uncaught --no-warnings --es-module-specifier-resolution node ' .
-                        $relPath,
+                        $tmpFilePath,
                     $output,
                     $result
                 );
+
                 unlink($tmpFilePath);
-                $data = json_decode(implode('', $output));
+                $data = json_decode(implode('', $output), true);
 
                 if (isset($data->filePath)) {
                     print_r($data);
@@ -329,6 +334,7 @@ class SViewRenderer
                 if ($node->type == 'container') {
                     $renderableNode = (object) [
                         'specs' => 'sugar.views.bare.nude',
+                        'view' => 'sugar.views.bare.nude',
                         'values' => [],
                     ];
                 }
@@ -361,17 +367,22 @@ class SViewRenderer
                     $data = [];
                 }
 
+                // merging all datas
+                $finalData = \Sugar\ar\deepMerge(
+                    [
+                        'nodes' => $nodes,
+                        'uid' => $node->uid,
+                    ],
+                    $sharedData,
+                    (array) $data,
+                    isset($renderableNode->values)
+                        ? \Sugar\convert\toArray($renderableNode->values)
+                        : []
+                );
+
                 $renderResult = $viewMetas->engineInstance->render(
                     $viewMetas->path,
-                    array_merge_recursive(
-                        [
-                            'nodes' => $nodes,
-                            'uid' => $node->uid,
-                        ],
-                        $sharedData,
-                        (array) $data,
-                        \Sugar\convert\toArray($renderableNode->values)
-                    )
+                    $finalData
                 );
 
                 array_push($html, $renderResult);

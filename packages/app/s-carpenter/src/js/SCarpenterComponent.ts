@@ -289,5 +289,3 @@ export default class SCarpenterComponent extends __SLitComponent {
         `;
     }
 }
-
-export { define as define };

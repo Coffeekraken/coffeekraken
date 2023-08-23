@@ -1,0 +1,40 @@
+<div id="{{ id }}" class="s-section-hero {{ attributes.class }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}
+>
+{{ __nodeDataTemplate('views.sections.hero', _context)|raw }}
+
+    <div class="_content s-spacing:{{ spacing.value ? spacing.value : '30' }}">
+        {% if title %}
+            <h1 class="_title s-typo:h1">{{ title|raw }}</h1>
+        {% endif %}
+        {% if intro %}
+            <p class="_lead s-typo:lead">{{ intro|raw }}</p>
+        {% endif %}
+        {% if text %}
+            <p class="_text s-typo:p">{{ text|raw }}</p>
+        {% endif %}
+        <div class="_ctas">
+            {% if primaryCta %}
+                <div class="_cta _primary-cta">
+                    {% set override = {} %}
+                    {% if color.value and not primaryCta.color.value %}
+                        {% set override = {
+                            color: color
+                        } %}
+                    {% endif %}
+                    {% include 'sugar/components/cta/cta.twig' with primaryCta|merge(override) only %}
+                </div>
+            {% endif %}
+            {% if secondaryCta %}
+                <div class="_cta _secondary-cta">
+                    {% set override = {} %}
+                    {% if color.value and not secondaryCta.color.value %}
+                        {% set override = {
+                            color: color
+                        } %}
+                    {% endif %}
+                    {% include 'sugar/components/cta/cta.twig' with secondaryCta|merge(override) only %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

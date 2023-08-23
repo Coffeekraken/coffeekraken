@@ -2545,5 +2545,3 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         `;
     }
 }
-
-export { define as define };

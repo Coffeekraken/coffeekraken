@@ -1,0 +1,9 @@
+.s-section-push-block {
+    ._layout {
+        gap: sugar.margin(50);
+    }
+
+    ._ctas {
+        gap: sugar.margin(30);
+    }
+}

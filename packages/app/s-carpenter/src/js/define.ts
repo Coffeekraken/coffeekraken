@@ -14,8 +14,10 @@ export default function define(
         return;
     }
 
-    // __SLitComponent.setDefaultProps(`s-carpenter-app`, {
-    //     ...(props ?? {}),
-    // });
+    if (!document.env) {
+        document.env = {};
+    }
+    document.env.CARPENTER = true;
+
     __SCarpenterComponent.define(tagName, __SCarpenterComponent, props);
 }

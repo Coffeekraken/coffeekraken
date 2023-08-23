@@ -67,7 +67,7 @@ export default class SFrontspec extends __SClass {
     static _cachesStack = {};
     static _defaultFrontspecInstance;
 
-    _frontspec: ISFrontspec = {};
+    _frontspec: ISFrontspec;
 
     /**
      * @name        exists

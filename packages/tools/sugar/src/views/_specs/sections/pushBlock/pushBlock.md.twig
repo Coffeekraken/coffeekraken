@@ -1,0 +1,21 @@
+{% extends 'sugar/readme/layouts/doc/doc.twig' %}
+{% block body %}
+
+<!--
+/**
+ * @name            Push block
+ * @namespace       specs.views.sections.pushBlock
+ * @type            Markdown
+ * @platform        twig
+ * @status          stable
+ * @menu            Specs / Sections          /specs/sugar.views.sections.pushBlock
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+{% set specs = __readSpec('sugar.views.sections.pushBlock') %}
+{{ __specsToMarkdown(specs)|raw }}
+
+{% endblock %}

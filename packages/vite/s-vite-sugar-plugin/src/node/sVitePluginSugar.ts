@@ -42,6 +42,7 @@ export default function sVitePluginSugar(settings: any = {}) {
         // frontspec
         const frontspec = new __SFrontspec(),
             frontspecJson = frontspec.read();
+
         // classmap
         const classmap = new __SClassmap(),
             classmapJson = __SSugarConfig.get('themeClassmap.enabled')

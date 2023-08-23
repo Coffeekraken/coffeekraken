@@ -10,7 +10,7 @@ export default function (api) {
          * @name            rootDirs
          * @namespace       config.viewRenderer
          * @type            string[]
-         * @default          ['[config.storage.src.rootDir]/views']
+         * @default         [__packageRootDir(), `${api.config.storage.src.rootDir}/views`,`${__path.resolve(__packageRootDir(__dirname()), 'src/views')}`]
          *
          * Specify the roots views directories
          *
@@ -21,10 +21,7 @@ export default function (api) {
             return [
                 __packageRootDir(),
                 `${api.config.storage.src.rootDir}/views`,
-                `${__path.resolve(
-                    __packageRootDir(__dirname()),
-                    'src/views/twig',
-                )}`,
+                `${__path.resolve(__packageRootDir(__dirname()), 'src/views')}`,
             ];
         },
     };

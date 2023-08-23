@@ -3,30 +3,41 @@
 {{ __nodeDataTemplate('views.components.card', _context)|raw }}
 
     {% if image and image.url %}
-        <div class="s-card_media s-media-container">
-            <img class="s-card_img s-media" src="{{ image.url }}" alt="{{ image.alt }}" title="{{ image.title }}" />
+        <div class="_media s-media-container">
+            <img class="_img s-media" src="{{ image.url }}" alt="{{ image.alt }}" title="{{ image.title }}" />
         </div>
     {% endif %}
 
-    <div class="s-card_content s-spacing:{{ spacing.value ? spacing.value : '30' }}">
+    <div class="_content s-spacing:{{ spacing.value ? spacing.value : '30' }}">
         {% if title %}
-            <h1 class="s-card_title s-typo:h3">{{ title|raw }}</h1>
+            <h1 class="_title s-typo:h2">{{ title|raw }}</h1>
         {% endif %}
         {% if intro %}
-            <p class="s-card_lead s-typo:lead s-tc:{{ color.value ? color.value : 'accent' }}">{{ intro|raw }}</p>
+            <p class="_lead s-typo:lead s-tc:{{ color.value ? color.value : 'accent' }}">{{ intro|raw }}</p>
         {% endif %}
         {% if text %}
-            <p class="s-card_text s-typo:p">{{ text|raw }}</p>
+            <p class="_text s-typo:p">{{ text|raw }}</p>
         {% endif %}
-        {% if cta %}
-            <div class="s-card_cta">
-                {% set override = {} %}
-                {% if color.value and not cta.color.value %}
-                    {% set override = {
-                        color: color
-                    } %}
+        {% if primaryCta or secondaryCta %}
+            <div class="_ctas">
+                {% if primaryCta %}
+                    {% set override = {} %}
+                    {% if color.value and not primaryCta.color.value %}
+                        {% set override = {
+                            color: color
+                        } %}
+                    {% endif %}
+                    {% include 'sugar/components/cta/cta.twig' with primaryCta|merge(override) only %}
                 {% endif %}
-                {% include 'sugar/components/cta/cta.twig' with cta|merge(override) only %}
+                {% if secondaryCta %}
+                    {% set override = {} %}
+                    {% if color.value and not secondaryCta.color.value %}
+                        {% set override = {
+                            color: color
+                        } %}
+                    {% endif %}
+                    {% include 'sugar/components/cta/cta.twig' with secondaryCta|merge(override) only %}
+                {% endif %}
             </div>
         {% endif %}
     </div>

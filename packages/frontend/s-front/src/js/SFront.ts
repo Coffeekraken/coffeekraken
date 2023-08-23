@@ -489,7 +489,9 @@ export default class SFront extends __SClass {
         level: string | number,
         settings?: Partial<ISThemeSetLodSettings>,
     ): void {
-        if (!this.frontspec.get('lod.enabled')) {
+        const lodSettings = this.frontspec.get('lod');
+
+        if (!lodSettings?.enabled) {
             return;
         }
 
@@ -502,8 +504,6 @@ export default class SFront extends __SClass {
             `<yellow>[lod]</yellow> Set lod (level of details) to <cyan>${level}</cyan>`,
         );
 
-        const cssSettings = __STheme.cssSettings;
-
         // @ts-ignore
         level = parseInt(`${level}`);
 
@@ -514,16 +514,15 @@ export default class SFront extends __SClass {
         let lodStylesheets = [],
             $stylesheet;
 
-        if (cssSettings.lod?.method === 'file') {
+        if (lodSettings?.method === 'file') {
             lodStylesheets = Array.from(
                 document.querySelectorAll('link[s-lod]'),
             );
 
-            const lod = this.frontspec.get('lod') ?? {};
-            if (lod.stylesheet instanceof HTMLLinkElement) {
-                $stylesheet = lod.stylesheet;
-            } else if (typeof lod.stylesheet === 'string') {
-                $stylesheet = document.querySelector(lod.stylesheet);
+            if (lodSettings.stylesheet instanceof HTMLLinkElement) {
+                $stylesheet = lodSettings.stylesheet;
+            } else if (typeof lodSettings.stylesheet === 'string') {
+                $stylesheet = document.querySelector(lodSettings.stylesheet);
             }
 
             // remove all none used stylesheets
@@ -546,7 +545,7 @@ export default class SFront extends __SClass {
         for (let i = 0; i <= level; i++) {
             finalSettings.$context.classList.add('s-lod', `s-lod--${i}`);
 
-            if (cssSettings.lod?.method === 'file' && $stylesheet) {
+            if (lodSettings?.method === 'file' && $stylesheet) {
                 if (
                     i > 0 &&
                     !lodStylesheets.filter(($link) => {

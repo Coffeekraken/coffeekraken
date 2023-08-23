@@ -24,7 +24,7 @@ export default function (api) {
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        default: '15px',
+        default: '16px',
         /**
          * @name          0
          * @namespace     config.themeSize
@@ -120,7 +120,7 @@ export default function (api) {
          * @name          40
          * @namespace     config.themeSize
          * @type          String
-         * @default       1.25
+         * @default       1.35
          *
          * Declare the size "40".
          * MUST be a scale factor relative to the "default" absolute value specified.
@@ -128,12 +128,12 @@ export default function (api) {
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        40: 1.25,
+        40: 1.35,
         /**
          * @name          50
          * @namespace     config.themeSize
          * @type          String
-         * @default       1.50
+         * @default       1.8
          *
          * Declare the size "50".
          * MUST be a scale factor relative to the "default" absolute value specified.
@@ -141,12 +141,12 @@ export default function (api) {
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        50: 1.5,
+        50: 1.8,
         /**
          * @name          60
          * @namespace     config.themeSize
          * @type          String
-         * @default       2
+         * @default       2.5
          *
          * Declare the size "60".
          * MUST be a scale factor relative to the "default" absolute value specified.
@@ -154,12 +154,12 @@ export default function (api) {
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        60: 2,
+        60: 2.5,
         /**
          * @name          70
          * @namespace     config.themeSize
          * @type          String
-         * @default       2.5
+         * @default       3.2
          *
          * Declare the size "70".
          * MUST be a scale factor relative to the "default" absolute value specified.
@@ -167,12 +167,12 @@ export default function (api) {
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        70: 2.5,
+        70: 3.2,
         /**
          * @name          80
          * @namespace     config.themeSize
          * @type          String
-         * @default       3
+         * @default       4.5
          *
          * Declare the size "80".
          * MUST be a scale factor relative to the "default" absolute value specified.
@@ -180,12 +180,12 @@ export default function (api) {
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        80: 3,
+        80: 4.5,
         /**
          * @name          90
          * @namespace     config.themeSize
          * @type          String
-         * @default       4
+         * @default       7
          *
          * Declare the size "90".
          * MUST be a scale factor relative to the "default" absolute value specified.
@@ -193,12 +193,12 @@ export default function (api) {
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        90: 4,
+        90: 7,
         /**
          * @name          100
          * @namespace     config.themeSize
          * @type          String
-         * @default       5
+         * @default       9
          *
          * Declare the size "100".
          * MUST be a scale factor relative to the "default" absolute value specified.
@@ -206,7 +206,7 @@ export default function (api) {
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        100: 5,
+        100: 20,
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7R0FZRztBQUVILE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixPQUFPO1FBQ0g7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRSxNQUFNO1FBRWY7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxDQUFDLEVBQUUsSUFBSTtRQUVQOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsQ0FBQyxFQUFFLEtBQUs7UUFFUjs7Ozs7Ozs7Ozs7V0FXRztRQUNILEVBQUUsRUFBRSxJQUFJO1FBRVI7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxFQUFFLEVBQUUsR0FBRztRQUVQOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsRUFBRSxFQUFFLElBQUk7UUFFUjs7Ozs7Ozs7Ozs7V0FXRztRQUNILEVBQUUsRUFBRSxJQUFJO1FBRVI7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxFQUFFLEVBQUUsR0FBRztRQUVQOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsRUFBRSxFQUFFLElBQUk7UUFFUjs7Ozs7Ozs7Ozs7V0FXRztRQUNILEVBQUUsRUFBRSxHQUFHO1FBRVA7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxFQUFFLEVBQUUsQ0FBQztRQUVMOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsRUFBRSxFQUFFLEdBQUc7UUFFUDs7Ozs7Ozs7Ozs7V0FXRztRQUNILEVBQUUsRUFBRSxDQUFDO1FBRUw7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxFQUFFLEVBQUUsQ0FBQztRQUVMOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsR0FBRyxFQUFFLENBQUM7S0FDVCxDQUFDO0FBQ04sQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7R0FZRztBQUVILE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixPQUFPO1FBQ0g7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRSxNQUFNO1FBRWY7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxDQUFDLEVBQUUsSUFBSTtRQUVQOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsQ0FBQyxFQUFFLEtBQUs7UUFFUjs7Ozs7Ozs7Ozs7V0FXRztRQUNILEVBQUUsRUFBRSxJQUFJO1FBRVI7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxFQUFFLEVBQUUsR0FBRztRQUVQOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsRUFBRSxFQUFFLElBQUk7UUFFUjs7Ozs7Ozs7Ozs7V0FXRztRQUNILEVBQUUsRUFBRSxJQUFJO1FBRVI7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxFQUFFLEVBQUUsR0FBRztRQUVQOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsRUFBRSxFQUFFLElBQUk7UUFFUjs7Ozs7Ozs7Ozs7V0FXRztRQUNILEVBQUUsRUFBRSxHQUFHO1FBRVA7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxFQUFFLEVBQUUsR0FBRztRQUVQOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsRUFBRSxFQUFFLEdBQUc7UUFFUDs7Ozs7Ozs7Ozs7V0FXRztRQUNILEVBQUUsRUFBRSxHQUFHO1FBRVA7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxFQUFFLEVBQUUsQ0FBQztRQUVMOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsR0FBRyxFQUFFLEVBQUU7S0FDVixDQUFDO0FBQ04sQ0FBQyJ9

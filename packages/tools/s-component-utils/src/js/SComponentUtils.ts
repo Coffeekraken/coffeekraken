@@ -508,7 +508,7 @@ export default class SComponentUtils extends __SClass {
             if (!this.constructor._isResponsivePropsWarningLogged) {
                 this.constructor._isResponsivePropsWarningLogged = true;
                 console.warn(
-                    `<red>[SComponentUtils]</red> To use responsive props on components and features, you MUST call the SFront.init() method in your main entry file...`,
+                    `<red>[SComponentUtils]</red> To use responsive props on components and features, you MUST call the SFront.init() method in your main entry file as well as make sure you have a proper frontspec.json file with the "media.queries" specs...`,
                 );
             }
             return;
@@ -678,10 +678,7 @@ export default class SComponentUtils extends __SClass {
 
             // make sure to not init components that are in
             if (this.node.tagName.toLowerCase() !== 's-carpenter') {
-                const $carpenter =
-                    this.constructor._$carpenter ??
-                    document.querySelector('s-carpenter');
-                if ($carpenter && !__isInIframe()) {
+                if (document.env?.CARPENTER && !__isInIframe()) {
                     return;
                 }
             }

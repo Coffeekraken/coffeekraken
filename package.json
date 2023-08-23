@@ -4,7 +4,7 @@
     "description": "We are a young collectve of front-end creative developers with one goal in mind. Build tools to make every team working day life better",
     "type": "module",
     "scripts": {
-        "dev": "sugar mono.dev",
+        "dev": "node ./src/node/tsup/start.js",
         "deploy.cdn": "rsync -avzh --delete --progress --stats ./src/cdn/v2/ fe0mt_coffeekraken@fe0mt.ftp.infomaniak.com:~/sites/cdnv2.coffeekraken.io/global",
         "container": "docker exec --workdir /workspaces/coffeekraken -it coffeekraken /bin/bash"
     },

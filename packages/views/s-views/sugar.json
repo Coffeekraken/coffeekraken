@@ -1,0 +1,18 @@
+{
+    "config": {
+        "folders": [
+            {
+                "path": "./dist/pkg/%moduleSystem/config"
+            }
+        ]
+    },
+    "postcss": {
+        "folders": {
+            "mixins": [
+                {
+                    "path": "./dist/pkg/%moduleSystem/node/postcss/mixins"
+                }
+            ]
+        }
+    }
+}

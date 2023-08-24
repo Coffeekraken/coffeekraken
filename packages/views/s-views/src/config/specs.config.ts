@@ -1,3 +1,6 @@
+import { __dirname } from '@coffeekraken/sugar/fs';
+import __path from 'path';
+
 export default function (api) {
     if (api.env.platform !== 'node') return;
 
@@ -5,7 +8,7 @@ export default function (api) {
         namespaces: {
             'sugar.views': [
                 ...(api.config.specs.namespaces?.['sugar.views'] ?? []),
-                `./node_modules/@coffeekraken/sugar/src/views`,
+                __path.resolve(`${__dirname()}/../../../../src/views`),
             ],
         },
     };

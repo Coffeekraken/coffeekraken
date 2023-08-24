@@ -81,7 +81,7 @@ function expandPleasantCssClassnames($html)
 
         foreach ($classNames as $className) {
             if (substr($className, 0, 1) == '@') {
-                $currentMedia = str_replace('@', '___', $className);
+                $currentMedia = str_replace('@', '_', $className);
                 continue;
             }
 
@@ -104,7 +104,7 @@ function expandPleasantCssClassnames($html)
 
                 foreach ($parts as $index => $part) {
                     if ($index > 0) {
-                        $name = $firstClass . '--' . $part;
+                        $name = $firstClass . '-' . $part;
                         if ($currentMedia !== '') {
                             $name = $name . $currentMedia;
                         }

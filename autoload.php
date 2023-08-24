@@ -8,4 +8,5 @@ require_once __DIR__ .
 require_once __DIR__ . '/packages/tools/s-media/src/php/autoload.php';
 require_once __DIR__ . '/packages/tools/s-classmap/src/php/autoload.php';
 require_once __DIR__ . '/packages/tools/s-specs/src/php/autoload.php';
+require_once __DIR__ . '/packages/views/s-views/src/php/autoload.php';
 require_once __DIR__ . '/packages/tools/sugar/src/php/autoload.php';

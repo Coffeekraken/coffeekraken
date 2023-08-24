@@ -1,6 +1,6 @@
 <?php
 
-namespace Sugar\twig;
+namespace SViews\twig;
 
 /**
  * @name        registerFilter

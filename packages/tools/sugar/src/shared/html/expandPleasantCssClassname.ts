@@ -7,7 +7,7 @@
  * @status          beta
  *
  * This function allows you to convert "colon" classnames like "s-something:cool @desktop something"
- * to comprehensive classnames for css like "s-something s-something--cool something___desktop", etc...
+ * to comprehensive classnames for css like "s-something s-something-cool something_desktop", etc...
  *
  * @param     {String}          classesStr          The classes string to convert like "s-typo:h1 s-font:40", etc...
  * @return    {String}                      The processed string with converted classnames
@@ -34,7 +34,7 @@ export default function __expandPleasantCssClassname(
 
     classNames.forEach((className) => {
         if (className.slice(0, 1) == '@') {
-            currentMedia = className.replace('@', '___');
+            currentMedia = className.replace('@', '_');
             return;
         }
 
@@ -52,7 +52,7 @@ export default function __expandPleasantCssClassname(
 
             parts.forEach((part, i) => {
                 if (i > 0) {
-                    name = firstClass + '--' + part;
+                    name = firstClass + '-' + part;
                     if (currentMedia !== '') name = name + currentMedia;
                     classesArray.push(name);
                 }

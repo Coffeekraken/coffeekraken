@@ -1,0 +1,433 @@
+{
+    "name": "@coffeekraken/s-views",
+    "description": "A nice, clean and easy to use views library and toolbox for the Coffeekraken ecosystem",
+    "version": "2.0.0-alpha.27",
+    "type": "module",
+    "types": "./dist/pkg/esm/shared/types/_exports.d.ts",
+    "homepage": "https://coffeekraken.io",
+    "author": "Coffeekraken <hello@coffeekraken.io> (https://coffeekraken.io)",
+    "contributors": [
+        {
+            "name": "Olivier Bossel",
+            "email": "olivier.bossel@gmail.com",
+            "url": "http://olivierbossel.com"
+        }
+    ],
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/s-duration": "^2.0.0-alpha.27",
+        "@coffeekraken/s-env": "^2.0.0-alpha.27",
+        "@coffeekraken/s-event-emitter": "^2.0.0-alpha.27",
+        "@coffeekraken/s-file": "^2.0.0-alpha.27",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.27",
+        "@coffeekraken/s-log": "^2.0.0-alpha.27",
+        "@coffeekraken/s-process": "^2.0.0-alpha.27",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.27",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.27",
+        "@coffeekraken/s-sugar-element": "^2.0.0-alpha.27",
+        "@coffeekraken/s-theme": "^2.0.0-alpha.27",
+        "@coffeekraken/sugar": "^2.0.0-alpha.27",
+        "@floating-ui/dom": "^0.5.4",
+        "@specim3n/types": "^1.0.0-alpha.1",
+        "@types/blessed": "^0.1.19",
+        "abstract-syntax-tree": "^2.20.6",
+        "acorn-loose": "^8.3.0",
+        "aggregation": "^1.2.7",
+        "astring": "^1.8.3",
+        "atob": "^2.1.2",
+        "bezier-easing": "^2.1.0",
+        "blueimp-md5": "^2.19.0",
+        "btoa": "^1.2.1",
+        "buffer": "^6.0.3",
+        "callsites": "^4.0.0",
+        "chalk": "^4.1.2",
+        "chokidar": "^3.5.3",
+        "cli-highlight": "^2.1.11",
+        "clipboard-copy": "^4.0.1",
+        "clipboardy": "^2.3.0",
+        "clone-class": "^0.6.20",
+        "copy-paste": "^1.3.0",
+        "cross-blob": "^3.0.2",
+        "crypto-js": "^4.1.1",
+        "css": "^3.0.0",
+        "custom-event": "^1.0.1",
+        "depcheck": "^1.4.3",
+        "esm": "^3.2.25",
+        "faker": "^5.5.3",
+        "fast-folder-size": "^2.1.0",
+        "fast-safe-stringify": "^2.1.1",
+        "fast-xml-parser": "^4.0.9",
+        "fastdom": "^1.0.11",
+        "fecha": "^4.2.3",
+        "filesize": "^6.4.0",
+        "find-package-json": "^1.2.0",
+        "fkill": "^7.2.1",
+        "fs-extra": "^9.1.0",
+        "func-to-classes": "^1.0.0",
+        "get-folder-size": "^4.0.0",
+        "glob": "^7.2.3",
+        "glob-all": "^3.3.0",
+        "glob-parent": "^5.1.2",
+        "hash-obj": "^4.0.0",
+        "hash-sum": "^2.0.0",
+        "hotkeys-js": "^3.9.4",
+        "hyperid": "^3.0.1",
+        "inline-style-prefixer": "^6.0.1",
+        "ip": "^1.1.8",
+        "is-class": "^0.0.9",
+        "is-equal": "^1.6.4",
+        "is-glob": "^4.0.3",
+        "is-valid-path": "^0.1.1",
+        "isbot": "^3.6.5",
+        "jest-useragent-mock": "^0.1.1",
+        "js-ago": "^2.0.2",
+        "json-cyclic": "^1.0.2",
+        "keypress": "^0.2.1",
+        "lodash.clone": "^4.5.0",
+        "lodash.clonedeep": "^4.5.0",
+        "memoizee": "^0.4.15",
+        "micromatch": "^4.0.5",
+        "minimatch": "^3.1.2",
+        "node-ipc": "^11.1.0",
+        "object-encode": "^1.0.2",
+        "open-graph-scraper": "^4.11.1",
+        "param-case": "^3.0.4",
+        "parse-es6-imports": "^1.0.1",
+        "pretty-format": "^26.6.2",
+        "ps-list": "^7.2.0",
+        "public-ip": "^6.0.1",
+        "rematrix": "^0.7.2",
+        "resolve": "^1.22.1",
+        "resolve-package-path": "^4.0.3",
+        "semver": "^7.3.7",
+        "sprintf-js": "^1.1.2",
+        "strip-ansi": "^6.0.1",
+        "strip-css-comments": "^4.1.0",
+        "striptags": "^3.2.0",
+        "tcp-port-used": "^1.0.2",
+        "temp-dir": "^2.0.0",
+        "term-size": "^3.0.2",
+        "terminal-kit": "^1.49.4",
+        "to-regex": "^3.0.2",
+        "tunnel": "^0.0.6",
+        "unescape": "^1.0.1",
+        "unzipper": "^0.10.11",
+        "url-parse": "^1.5.10",
+        "url-slug": "^3.0.4",
+        "userdir": "^1.0.0",
+        "yaml": "^1.10.2"
+    },
+    "globalDependencies": {},
+    "autoExports": false,
+    "exports": {
+        "./package.json": "./package.json",
+        "./array": {
+            "require": "./dist/pkg/cjs/shared/array/_exports.js",
+            "import": "./dist/pkg/esm/shared/array/_exports.js"
+        },
+        "./ascii": {
+            "require": "./dist/pkg/cjs/shared/ascii/_exports.js",
+            "import": "./dist/pkg/esm/shared/ascii/_exports.js"
+        },
+        "./class": {
+            "require": "./dist/pkg/cjs/shared/class/_exports.js",
+            "import": "./dist/pkg/esm/shared/class/_exports.js"
+        },
+        "./cli": {
+            "require": "./dist/pkg/cjs/shared/cli/_exports.js",
+            "import": "./dist/pkg/esm/shared/cli/_exports.js"
+        },
+        "./clipboard": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/clipboard/_exports.js",
+                "import": "./dist/pkg/esm/node/clipboard/_exports.js"
+            },
+            "browser": {
+                "require": "./dist/pkg/cjs/js/clipboard/_exports.js",
+                "import": "./dist/pkg/esm/js/clipboard/_exports.js"
+            }
+        },
+        "./coffeekraken": {
+            "require": "./dist/pkg/cjs/node/coffeekraken/_exports.js",
+            "import": "./dist/pkg/esm/node/coffeekraken/_exports.js"
+        },
+        "./color": {
+            "require": "./dist/pkg/cjs/shared/color/_exports.js",
+            "import": "./dist/pkg/esm/shared/color/_exports.js"
+        },
+        "./console": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/console/_exports.js",
+                "import": "./dist/pkg/esm/node/console/_exports.js"
+            },
+            "browser": {
+                "require": "./dist/pkg/cjs/js/console/_exports.js",
+                "import": "./dist/pkg/esm/js/console/_exports.js"
+            }
+        },
+        "./convert": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/convert/_exports.js",
+                "import": "./dist/pkg/esm/node/convert/_exports.js"
+            },
+            "browser": {
+                "require": "./dist/pkg/cjs/js/convert/_exports.js",
+                "import": "./dist/pkg/esm/js/convert/_exports.js"
+            }
+        },
+        "./cookie": {
+            "require": "./dist/pkg/cjs/js/cookie/_exports.js",
+            "import": "./dist/pkg/esm/js/cookie/_exports.js"
+        },
+        "./crypto": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/crypto/_exports.js",
+                "import": "./dist/pkg/esm/node/crypto/_exports.js"
+            },
+            "browser": {
+                "require": "./dist/pkg/cjs/js/crypto/_exports.js",
+                "import": "./dist/pkg/esm/js/crypto/_exports.js"
+            }
+        },
+        "./dom": {
+            "require": "./dist/pkg/cjs/js/dom/_exports.js",
+            "import": "./dist/pkg/esm/js/dom/_exports.js"
+        },
+        "./composer": {
+            "require": "./dist/pkg/cjs/node/composer/_exports.js",
+            "import": "./dist/pkg/esm/node/composer/_exports.js"
+        },
+        "./css": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/css/_exports.js",
+                "import": "./dist/pkg/esm/node/css/_exports.js"
+            },
+            "browser": {
+                "require": "./dist/pkg/cjs/js/css/_exports.js",
+                "import": "./dist/pkg/esm/js/css/_exports.js"
+            }
+        },
+        "./datetime": {
+            "require": "./dist/pkg/cjs/shared/datetime/_exports.js",
+            "import": "./dist/pkg/esm/shared/datetime/_exports.js"
+        },
+        "./dev": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/dev/_exports.js",
+                "import": "./dist/pkg/esm/node/dev/_exports.js"
+            },
+            "browser": {
+                "require": "./dist/pkg/cjs/js/dev/_exports.js",
+                "import": "./dist/pkg/esm/js/dev/_exports.js"
+            }
+        },
+        "./easing": {
+            "require": "./dist/pkg/cjs/shared/easing/_exports.js",
+            "import": "./dist/pkg/esm/shared/easing/_exports.js"
+        },
+        "./es6": {
+            "require": "./dist/pkg/cjs/shared/es6/_exports.js",
+            "import": "./dist/pkg/esm/shared/es6/_exports.js"
+        },
+        "./extension": {
+            "require": "./dist/pkg/cjs/shared/extension/_exports.js",
+            "import": "./dist/pkg/esm/shared/extension/_exports.js"
+        },
+        "./format": {
+            "require": "./dist/pkg/cjs/shared/format/_exports.js",
+            "import": "./dist/pkg/esm/shared/format/_exports.js"
+        },
+        "./function": {
+            "require": "./dist/pkg/cjs/shared/function/_exports.js",
+            "import": "./dist/pkg/esm/shared/function/_exports.js"
+        },
+        "./error": {
+            "require": "./dist/pkg/cjs/node/error/_exports.js",
+            "import": "./dist/pkg/esm/node/error/_exports.js"
+        },
+        "./exec": {
+            "require": "./dist/pkg/cjs/node/exec/_exports.js",
+            "import": "./dist/pkg/esm/node/exec/_exports.js"
+        },
+        "./feature": {
+            "require": "./dist/pkg/cjs/js/feature/_exports.js",
+            "import": "./dist/pkg/esm/js/feature/_exports.js"
+        },
+        "./filter": {
+            "require": "./dist/pkg/cjs/js/filter/_exports.js",
+            "import": "./dist/pkg/esm/js/filter/_exports.js"
+        },
+        "./fs": {
+            "require": "./dist/pkg/cjs/node/fs/_exports.js",
+            "import": "./dist/pkg/esm/node/fs/_exports.js"
+        },
+        "./github": {
+            "require": "./dist/pkg/cjs/node/github/_exports.js",
+            "import": "./dist/pkg/esm/node/github/_exports.js"
+        },
+        "./glob": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/glob/_exports.js",
+                "import": "./dist/pkg/esm/node/glob/_exports.js"
+            },
+            "browser": {
+                "require": "./dist/pkg/cjs/js/glob/_exports.js",
+                "import": "./dist/pkg/esm/js/glob/_exports.js"
+            }
+        },
+        "./hash": {
+            "require": "./dist/pkg/cjs/node/hash/_exports.js",
+            "import": "./dist/pkg/esm/node/hash/_exports.js"
+        },
+        "./html": {
+            "require": "./dist/pkg/cjs/shared/html/_exports.js",
+            "import": "./dist/pkg/esm/shared/html/_exports.js"
+        },
+        "./is": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/is/_exports.js",
+                "import": "./dist/pkg/esm/node/is/_exports.js"
+            },
+            "browser": {
+                "require": "./dist/pkg/cjs/js/is/_exports.js",
+                "import": "./dist/pkg/esm/js/is/_exports.js"
+            }
+        },
+        "./iterable": {
+            "require": "./dist/pkg/cjs/shared/iterable/_exports.js",
+            "import": "./dist/pkg/esm/shared/iterable/_exports.js"
+        },
+        "./json": {
+            "require": "./dist/pkg/cjs/shared/json/_exports.js",
+            "import": "./dist/pkg/esm/shared/json/_exports.js"
+        },
+        "./keyboard": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/keyboard/_exports.js",
+                "import": "./dist/pkg/esm/node/keyboard/_exports.js"
+            },
+            "browser": {
+                "require": "./dist/pkg/cjs/js/keyboard/_exports.js",
+                "import": "./dist/pkg/esm/js/keyboard/_exports.js"
+            }
+        },
+        "./load": {
+            "require": "./dist/pkg/cjs/node/load/_exports.js",
+            "import": "./dist/pkg/esm/node/load/_exports.js"
+        },
+        "./math": {
+            "require": "./dist/pkg/cjs/shared/math/_exports.js",
+            "import": "./dist/pkg/esm/shared/math/_exports.js"
+        },
+        "./module": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/module/_exports.js",
+                "import": "./dist/pkg/esm/node/module/_exports.js"
+            },
+            "browser": {
+                "require": "./dist/pkg/cjs/js/module/_exports.js",
+                "import": "./dist/pkg/esm/js/module/_exports.js"
+            }
+        },
+        "./monorepo": {
+            "require": "./dist/pkg/cjs/node/monorepo/_exports.js",
+            "import": "./dist/pkg/esm/node/monorepo/_exports.js"
+        },
+        "./npm": {
+            "require": "./dist/pkg/cjs/node/npm/_exports.js",
+            "import": "./dist/pkg/esm/node/npm/_exports.js"
+        },
+        "./network": {
+            "require": "./dist/pkg/cjs/node/network/_exports.js",
+            "import": "./dist/pkg/esm/node/network/_exports.js"
+        },
+        "./number": {
+            "require": "./dist/pkg/cjs/shared/number/_exports.js",
+            "import": "./dist/pkg/esm/shared/number/_exports.js"
+        },
+        "./object": {
+            "require": "./dist/pkg/cjs/shared/object/_exports.js",
+            "import": "./dist/pkg/esm/shared/object/_exports.js"
+        },
+        "./og": {
+            "require": "./dist/pkg/cjs/node/og/_exports.js",
+            "import": "./dist/pkg/esm/node/og/_exports.js"
+        },
+        "./package": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/package/_exports.js",
+                "import": "./dist/pkg/esm/node/package/_exports.js"
+            },
+            "browser": {
+                "require": "./dist/pkg/cjs/js/package/_exports.js",
+                "import": "./dist/pkg/esm/js/package/_exports.js"
+            }
+        },
+        "./path": {
+            "require": "./dist/pkg/cjs/node/path/_exports.js",
+            "import": "./dist/pkg/esm/node/path/_exports.js"
+        },
+        "./perf": {
+            "require": "./dist/pkg/cjs/shared/perf/_exports.js",
+            "import": "./dist/pkg/esm/shared/perf/_exports.js"
+        },
+        "./php": {
+            "require": "./dist/pkg/cjs/node/php/_exports.js",
+            "import": "./dist/pkg/esm/node/php/_exports.js"
+        },
+        "./process": {
+            "require": "./dist/pkg/cjs/node/process/_exports.js",
+            "import": "./dist/pkg/esm/node/process/_exports.js"
+        },
+        "./project": {
+            "require": "./dist/pkg/cjs/node/project/_exports.js",
+            "import": "./dist/pkg/esm/node/project/_exports.js"
+        },
+        "./storage": {
+            "require": "./dist/pkg/cjs/js/storage/_exports.js",
+            "import": "./dist/pkg/esm/js/storage/_exports.js"
+        },
+        "./string": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/string/_exports.js",
+                "import": "./dist/pkg/esm/node/string/_exports.js"
+            },
+            "browser": {
+                "require": "./dist/pkg/cjs/js/string/_exports.js",
+                "import": "./dist/pkg/esm/js/string/_exports.js"
+            }
+        },
+        "./terminal": {
+            "require": "./dist/pkg/cjs/node/terminal/_exports.js",
+            "import": "./dist/pkg/esm/node/terminal/_exports.js"
+        },
+        "./token": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/token/_exports.js",
+                "import": "./dist/pkg/esm/node/token/_exports.js"
+            },
+            "browser": {
+                "require": "./dist/pkg/cjs/js/token/_exports.js",
+                "import": "./dist/pkg/esm/js/token/_exports.js"
+            }
+        },
+        "./type": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/type/_exports.js",
+                "import": "./dist/pkg/esm/node/type/_exports.js"
+            },
+            "browser": {
+                "require": "./dist/pkg/cjs/js/type/_exports.js",
+                "import": "./dist/pkg/esm/js/type/_exports.js"
+            }
+        },
+        "./url": {
+            "require": "./dist/pkg/cjs/shared/url/_exports.js",
+            "import": "./dist/pkg/esm/shared/url/_exports.js"
+        },
+        "./version": {
+            "require": "./dist/pkg/cjs/shared/version/_exports.js",
+            "import": "./dist/pkg/esm/shared/version/_exports.js"
+        }
+    }
+}

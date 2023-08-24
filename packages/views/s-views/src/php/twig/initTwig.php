@@ -1,6 +1,6 @@
 <?php
 
-namespace Sugar\twig;
+namespace SViews\twig;
 
 /**
  * @name        initTwig
@@ -16,10 +16,10 @@ namespace Sugar\twig;
  * @param       {TwigLoader}            $loader         Your twig loader to be able to register default layout directories, etc...
  * @return      {Twig}                              The inited twig
  *
- * @snippet             \Sugar\twig\initTwig($1);
+ * @snippet             \SViews\twig\initTwig($1);
  *
  * @example       twig
- * $twig = \Sugar\twig\initTwig($twig);
+ * $twig = \SViews\twig\initTwig($twig);
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -29,13 +29,13 @@ function initTwig($twig, $loader = null)
     // register functions and filters
     require_once __DIR__ . '/filters/registerFilters.php';
     require_once __DIR__ . '/functions/registerFunctions.php';
-    $twig = \Sugar\twig\registerFilters($twig);
-    $twig = \Sugar\twig\registerFunctions($twig);
+    $twig = \SViews\twig\registerFilters($twig);
+    $twig = \SViews\twig\registerFunctions($twig);
 
     // if loader is passed and is an filesystem one,
     // register the @coffeekraken namespaces
     if ($loader and method_exists($loader, 'addPath')) {
-        $defaultViewDirs = \Sugar\twig\getDefaultViewDirs();
+        $defaultViewDirs = \SViews\twig\getDefaultViewDirs();
         foreach ($defaultViewDirs as $path) {
             $loader->addPath($path);
         }

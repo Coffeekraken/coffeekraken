@@ -47,7 +47,7 @@ $twig = new \Twig\Environment($loader, [
 $twig->addExtension(new \Twig\Extension\DebugExtension());
 
 // init twig with Sugar power
-$twig = \Sugar\twig\initTwig($twig, $loader);
+$twig = \SViews\twig\initTwig($twig, $loader);
 
 // ensure we send an array to the renderer
 $data = \Sugar\convert\toArray($data);

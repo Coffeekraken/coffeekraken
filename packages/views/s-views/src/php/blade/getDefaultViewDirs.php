@@ -1,6 +1,6 @@
 <?php
 
-namespace Sugar\blade;
+namespace SViews\blade;
 
 /**
  * @name        getDefaultViewDirs

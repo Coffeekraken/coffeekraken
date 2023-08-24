@@ -20,7 +20,7 @@ class SViewRendererEngineTwig
         $this->_twig->addExtension(new \Twig\Extension\DebugExtension());
 
         // init sugar on twig
-        \Sugar\twig\initTwig($this->_twig);
+        \SViews\twig\initTwig($this->_twig);
     }
 
     public function render($viewPath, $data = [])

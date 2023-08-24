@@ -175,8 +175,8 @@ class SViewRendererSettings
         $this->rootDirs = array_merge(
             $this->rootDirs,
             [$this->rootDir . '/src/views'],
-            \Sugar\twig\getDefaultViewDirs(),
-            \Sugar\blade\getDefaultViewDirs()
+            \SViews\twig\getDefaultViewDirs(),
+            \SViews\blade\getDefaultViewDirs()
         );
     }
 }

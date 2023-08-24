@@ -88,8 +88,8 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * 
         * @example        html
         * <span class="s-group">
-        *   <a class="s-btn--block">I'm a cool block button</a>
-        *   <a class="s-btn--block">+</a>
+        *   <a class="s-btn-block">I'm a cool block button</a>
+        *   <a class="s-btn-block">+</a>
         * </span>
         * 
         * @since    2.0.0

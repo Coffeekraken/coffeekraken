@@ -76,7 +76,7 @@ export default function ({
     `,
         ).code(
             `
-      .${cls.replace(':', '--')} {
+      .${cls.replace(':', '-')} {
                 @sugar.container(${containerName});
         }`,
             { type: 'CssClass' },

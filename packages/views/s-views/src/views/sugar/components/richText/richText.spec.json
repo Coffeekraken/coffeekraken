@@ -1,0 +1,28 @@
+{
+    "type": "Component",
+    "category": "components",
+    "title": "Rich text",
+    "description": "Display some rich text content like titles, paragraphs, lists, etc...",
+    "props": {
+        "content": {
+            "type": "Textarea",
+            "title": "Content",
+            "description": "Rich text content",
+            "required": true
+        },
+        "spacing": "@sugar.views.props.spacing",
+        "attributes": "@sugar.views.props.attributes",
+        "spaces": "@sugar.views.props.spaces"
+    },
+    "examples": {
+        "twig": {
+            "title": "Twig",
+            "description": "Here's a twig sample of how to use the rich text view",
+            "code": [
+                "{% include('sugar.components.richText.richText') with {",
+                "   content: '...',",
+                "} %}"
+            ]
+        }
+    }
+}

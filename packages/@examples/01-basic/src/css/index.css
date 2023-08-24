@@ -4,7 +4,9 @@
 @sugar.import ('./generic/**/*.css');
 
 /* Load custom views css */
+@sugar.view ('sugar.components.cards');
 @sugar.view ('sugar.sections.pushBlock');
+@sugar.view ('sugar.sections.testimonials');
 @sugar.view ('sugar.sections.hero');
 
 body {

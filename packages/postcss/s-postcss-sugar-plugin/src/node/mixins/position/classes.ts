@@ -145,7 +145,7 @@ export default function ({
     `,
     ).code(
         `
-      .s-position--absolute{
+      .s-position-absolute{
           position: absolute !important;
       }
       `,
@@ -175,7 +175,7 @@ export default function ({
         `,
     ).code(
         `
-      .s-position--relative{
+      .s-position-relative{
           position: relative !important;
       }
       `,
@@ -204,7 +204,7 @@ export default function ({
         `,
     ).code(
         `
-      .s-position--fixed{
+      .s-position-fixed{
           position: fixed !important;
       }
       `,
@@ -233,7 +233,7 @@ export default function ({
       `,
     ).code(
         `
-      .s-position--sticky{
+      .s-position-sticky{
           position: sticky !important;
       }
       `,
@@ -262,7 +262,7 @@ export default function ({
       `,
     ).code(
         `
-      .s-position--top {
+      .s-position-top {
         top: 0;
       }
       `,
@@ -291,7 +291,7 @@ export default function ({
       `,
     ).code(
         `
-      .s-position--left {
+      .s-position-left {
         left: 0;
       }
       `,
@@ -320,7 +320,7 @@ export default function ({
       `,
     ).code(
         `
-      .s-position--bottom {
+      .s-position-bottom {
         bottom: 0;
       }
       `,
@@ -349,7 +349,7 @@ export default function ({
       `,
     ).code(
         `
-      .s-position--right {
+      .s-position-right {
         right: 0;
       }
       `,
@@ -378,18 +378,18 @@ export default function ({
       `,
     ).code(
         `
-      .s-position--center:not(.s-position--top):not(.s-position--bottom):not(.s-position--left):not(.s-position--right) {
+      .s-position-center:not(.s-position-top):not(.s-position-bottom):not(.s-position-left):not(.s-position-right) {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
       }
-      .s-position--center.s-position--left,
-      .s-position--center.s-position--right {
+      .s-position-center.s-position-left,
+      .s-position-center.s-position-right {
         top: 50%;
         transform: translateY(-50%);
       }
-      .s-position--center.s-position--top,
-      .s-position--center.s-position--bottom {
+      .s-position-center.s-position-top,
+      .s-position-center.s-position-bottom {
         left: 50%;
         transform: translateX(-50%);
       }

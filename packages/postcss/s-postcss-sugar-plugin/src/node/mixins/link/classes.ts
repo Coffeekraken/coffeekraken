@@ -106,7 +106,7 @@ export default function ({
     `,
     ).code(
         () => `
-        .s-link--stretch {
+        .s-link-stretch {
             @sugar.link.stretch;
         }
     `,

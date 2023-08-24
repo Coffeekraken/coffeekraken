@@ -193,7 +193,7 @@ export default function ({
           `,
         ).code(
             `
-          .s-gradient--${name}:not(.s-gradient--text):not(.s-gradient--radial) {
+          .s-gradient-${name}:not(.s-gradient-text):not(.s-gradient-radial) {
               @sugar.gradient(
                   $start: sugar.color(${name}, ${__argsToString(
                 __STheme.get('gradient.defaultModifierStart') ?? {},
@@ -235,7 +235,7 @@ export default function ({
           `,
         ).code(
             `
-          .s-gradient--${name}.s-gradient--radial:not(.s-gradient--text) {
+          .s-gradient-${name}.s-gradient-radial:not(.s-gradient-text) {
               @sugar.gradient(
                   $start: sugar.color(${name}, ${__argsToString(
                 __STheme.get('gradient.defaultModifierEnd') ?? {},
@@ -278,7 +278,7 @@ export default function ({
           `,
         ).code(
             `
-          .s-gradient--${name}.s-gradient--text:not(.s-gradient--radial) {
+          .s-gradient-${name}.s-gradient-text:not(.s-gradient-radial) {
               @sugar.gradient.text(
                   $start: sugar.color(${name}, text, ${__argsToString(
                 __STheme.get('gradient.defaultTextModifierStart') ?? {},
@@ -319,7 +319,7 @@ export default function ({
           `,
         ).code(
             `
-          .s-gradient--${name}.s-gradient--text.s-gradient--radial {
+          .s-gradient-${name}.s-gradient-text.s-gradient-radial {
               @sugar.gradient.text(
                   $start: sugar.color(${name}, text, ${__argsToString(
                 __STheme.get('gradient.defaultTextModifierStart') ?? {},
@@ -355,7 +355,7 @@ export default function ({
             `,
         ).code(
             `
-            .s-gradient--end-${name} {
+            .s-gradient-end-${name} {
                 --s-gradient-end: sugar.color(${name});
             }`,
             { type: 'CssClass' },
@@ -387,7 +387,7 @@ export default function ({
         `,
             ).code(
                 `
-        .s-gradient--a-${angle} {
+        .s-gradient-a-${angle} {
             --s-gradient-angle: ${angle}deg;
         }
     `,
@@ -418,7 +418,7 @@ export default function ({
         `,
             ).code(
                 `
-        .s-gradient--y-${y} {
+        .s-gradient-y-${y} {
             --s-gradient-y: ${y}%;
         }
     `,
@@ -449,7 +449,7 @@ export default function ({
         `,
             ).code(
                 `
-        .s-gradient--x-${x} {
+        .s-gradient-x-${x} {
             --s-gradient-x: ${x}%;
         }
     `,

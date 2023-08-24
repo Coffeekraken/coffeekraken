@@ -103,7 +103,7 @@ export default function ({
    `,
     ).code(
         `
-    .s-visibility--hidden {
+    .s-visibility-hidden {
         visibility: hidden;
     }`,
         { type: 'CssClass' },
@@ -125,7 +125,7 @@ export default function ({
    `,
     ).code(
         `
-    .s-visibility--visible {
+    .s-visibility-visible {
         visibility: visible;
     }`,
         { type: 'CssClass' },
@@ -147,7 +147,7 @@ export default function ({
    `,
     ).code(
         `
-    .s-visibility--collapse {
+    .s-visibility-collapse {
         visibility: collapse;
     }`,
         { type: 'CssClass' },

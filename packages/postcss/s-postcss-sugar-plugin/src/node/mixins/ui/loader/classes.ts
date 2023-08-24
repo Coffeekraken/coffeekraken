@@ -145,7 +145,7 @@ export default function ({
         `,
         ).code(
             `
-            .s-loader--${loaderName} {
+            .s-loader-${loaderName} {
                 @sugar.lod.prevent {
                     @sugar.ui.loader.${__camelCase(loaderName)}();
                 }

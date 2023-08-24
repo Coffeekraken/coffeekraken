@@ -60,7 +60,7 @@ export default function ({
     const clearfixes = ['overflow', 'facebook', 'micro', 'after'];
     const notStr = clearfixes
         .filter((c) => c !== finalParams.defaultClearfix)
-        .map((c) => `:not(.s-clearfix--${c})`)
+        .map((c) => `:not(.s-clearfix-${c})`)
         .join('');
 
     vars.comment(
@@ -148,7 +148,7 @@ export default function ({
                 .s-clearfix${
                     clearfixName === finalParams.defaultClearfix
                         ? `${notStr}`
-                        : `--${clearfixName}`
+                        : `-${clearfixName}`
                 } {
                     @sugar.clearfix(${clearfixName});
                 }`,

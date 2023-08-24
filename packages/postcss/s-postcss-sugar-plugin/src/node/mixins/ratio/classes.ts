@@ -125,7 +125,7 @@ export default function ({
  `,
         ).code(
             `
-.s-ratio--${ratioName.replace('/', '-')} {
+.s-ratio-${ratioName.replace('/', '-')} {
     aspect-ratio: ${ratioName.replace('-', '/')};
 }`,
             { type: 'CssClass' },

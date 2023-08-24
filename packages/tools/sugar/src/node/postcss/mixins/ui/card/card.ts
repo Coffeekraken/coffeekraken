@@ -98,6 +98,18 @@ export default function ({
 
             ._ctas {
                 display: flex;
+                flex-direction: column;
+            }
+
+            ._media {
+                width: 100%;
+            }
+            
+            ._img {
+                aspect-ratio: 16/9;
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
             }
 
         `);
@@ -114,11 +126,7 @@ export default function ({
                     ._media {
                         align-self: stretch;
                         width: 50%;
-                    }
-                    ._img {
-                        width: 100%;
                         height: 100%;
-                        object-fit: cover;
                     }
 
                     @sugar.media mobile {
@@ -134,11 +142,7 @@ export default function ({
                     ._media {
                         align-self: stretch;
                         width: 50%;
-                    }
-                    ._img {
-                        width: 100%;
                         height: 100%;
-                        object-fit: cover;
                     }
 
                     @sugar.media mobile {
@@ -170,11 +174,7 @@ export default function ({
             background: sugar.color(main, surface);
             @sugar.border.radius(ui.card.borderRadius);
             @sugar.depth (ui.card.depth);
-
-            ._media {
-                @sugar.border.radius(ui.card.borderRadius);
-            }
-
+            
             ._img {
                 @sugar.border.radius(ui.card.borderRadius);
             }
@@ -183,6 +183,11 @@ export default function ({
                 padding-block: sugar.padding(ui.card.paddingBlock);
                 padding-inline: sugar.padding(ui.card.paddingInline);
             }
+
+            ._ctas {
+                gap: sugar.margin(20);
+            }
+
         `);
     }
 

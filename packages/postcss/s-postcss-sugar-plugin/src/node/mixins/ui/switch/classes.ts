@@ -255,7 +255,7 @@ export default function ({
            `,
             ).code(
                 `
-            .${cls.replace('\n', '--')}:not(.s-bare) {
+            .${cls.replace('\n', '-')}:not(.s-bare) {
                 @sugar.ui.switch($lnf: ${lnf}, $scope: lnf);
             }
         `,

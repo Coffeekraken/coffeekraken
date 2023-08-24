@@ -164,7 +164,7 @@ export default function ({
     `,
     ).code(
         `
-      .s-display--block{
+      .s-display-block{
           display: block !important;
       }
     `,
@@ -193,7 +193,7 @@ export default function ({
     `,
     ).code(
         `
-      .s-display--inline-block{
+      .s-display-inline-block{
           display: inline-block !important;
       }
       `,
@@ -222,7 +222,7 @@ export default function ({
     `,
     ).code(
         `
-      .s-display--contents{
+      .s-display-contents{
           display: contents !important;
       }
       `,
@@ -251,7 +251,7 @@ export default function ({
     `,
     ).code(
         `
-      .s-display--flex{
+      .s-display-flex{
           display: flex !important;
       }
     `,
@@ -280,7 +280,7 @@ export default function ({
       `,
     ).code(
         `
-      .s-display--grid{
+      .s-display-grid{
           display: grid !important;
       }
       `,
@@ -309,7 +309,7 @@ export default function ({
     `,
     ).code(
         `
-      .s-display--inline-flex{
+      .s-display-inline-flex{
           display: inline-flex !important;
       }
       `,
@@ -338,7 +338,7 @@ export default function ({
     `,
     ).code(
         `
-      .s-display--inline-grid{
+      .s-display-inline-grid{
           display: inline-grid !important;
       }
       `,
@@ -367,7 +367,7 @@ export default function ({
         `,
     ).code(
         `
-      .s-display--none{
+      .s-display-none{
           display: none !important;
       }
       `,

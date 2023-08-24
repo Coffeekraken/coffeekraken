@@ -332,7 +332,7 @@ export default function ({
        `,
         ).code(
             `
-.s-font--${fontName} {
+.s-font-${fontName} {
     @sugar.font.family(${fontName});
 }`,
             { type: 'CssClass' },
@@ -357,7 +357,7 @@ export default function ({
  `,
         ).code(
             `
-.s-font--${sizeName} {
+.s-font-${sizeName} {
     @sugar.font.size(${sizeName});
 }`,
             { type: 'CssClass' },
@@ -384,7 +384,7 @@ export default function ({
  `,
     ).code(
         `
-.s-font--reset-size {
+.s-font-reset-size {
   font-size: sugar.scalable(1rem);
 }`,
     );
@@ -408,7 +408,7 @@ export default function ({
  `,
     ).code(
         `
-.s-font--reset-family {
+.s-font-reset-family {
   @sugar.font.family(default);
 }`,
         { type: 'CssClass' },
@@ -434,7 +434,7 @@ export default function ({
            `,
         ).code(
             `
-            .s-font--${value} {
+            .s-font-${value} {
                 font-stretch: ${value};
             }`,
             { type: 'CssClass' },
@@ -460,7 +460,7 @@ export default function ({
            `,
     ).code(
         `
-            .s-font--italic {
+            .s-font-italic {
                 font-style: italic;
             }`,
         { type: 'CssClass' },
@@ -485,7 +485,7 @@ export default function ({
            `,
     ).code(
         `
-            .s-font--oblique {
+            .s-font-oblique {
                 font-style: oblique;
             }`,
         { type: 'CssClass' },
@@ -517,7 +517,7 @@ export default function ({
         `,
         ).code(
             `
-            .s-font--${value} {
+            .s-font-${value} {
                 font-weight: ${value.replace('weight-', '')};
             }`,
             { type: 'CssClass' },

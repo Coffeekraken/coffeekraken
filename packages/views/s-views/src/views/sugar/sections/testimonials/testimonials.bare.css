@@ -1,0 +1,35 @@
+.s-section-testimonials {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    ._testimonial {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .s-media {
+        width: 60px;
+        height: 60px;
+    }
+
+    ._img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    ._author {
+        text-align: left;
+        display: flex;
+        align-items: center;
+        gap: sugar.margin(30);
+    }
+
+    ._ctas {
+        display: flex;
+        gap: sugar.margin(30);
+    }
+}

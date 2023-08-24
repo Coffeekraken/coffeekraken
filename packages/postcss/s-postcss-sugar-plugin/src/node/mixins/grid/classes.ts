@@ -80,7 +80,7 @@ export default function ({
       `,
         ).code(
             `
-        .s-grid--${id} {
+        .s-grid-${id} {
           display: grid;
           grid-template-columns: repeat(${grid}, minmax(0, 1fr));
         }

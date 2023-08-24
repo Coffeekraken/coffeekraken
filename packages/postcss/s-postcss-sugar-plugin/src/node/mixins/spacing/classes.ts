@@ -134,7 +134,7 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMargin.replace(':', '--')} {
+   .${clsMargin.replace(':', '-')} {
         gap: sugar.margin(${spaceName});
    }`,
             { type: 'CssClass' },
@@ -144,16 +144,16 @@ export default function ({
     // direction
     vars.comment(
         () => `/**
-        * @name            s-spacing:column
+        * @name            s-spacing:row
         * @namespace          sugar.style.helpers.spacing
         * @type             CssClass
         * @platform             css
         * @status               beta
         * 
-        * This class allows you to apply the "<yellow>column</yellow>" spacing direction any HTMLElement container
+        * This class allows you to apply the "<yellow>row</yellow>" spacing direction any HTMLElement container
         * 
         * @example      html
-        * <div class="s-spacing:30:column">
+        * <div class="s-spacing:30:row">
         *   <h1 class="s-typo:h1">Hello world</h1>
         *   <p class="s-typo:lead">${__faker.name.findName()}</p>
         *   <p class="s-typo:p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis egestas non tortor sed aliquet. Fusce finibus erat at leo scelerisque, a lobortis purus pretium. Aliquam ornare leo id mi imperdiet.</p>
@@ -166,7 +166,7 @@ export default function ({
         `,
     ).code(
         `
-        .s-spacing--column {
+        .s-spacing-row {
             flex-direction: unset;
         }`,
         { type: 'CssClass' },

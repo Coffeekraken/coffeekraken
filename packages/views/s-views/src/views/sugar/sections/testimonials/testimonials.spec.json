@@ -1,0 +1,76 @@
+{
+    "type": "Section",
+    "category": "sections",
+    "title": "Testimonials",
+    "description": "Display some testimonials with style",
+    "props": {
+        "title": {
+            "type": "Text",
+            "title": "Title",
+            "description": "The testimonials section title"
+        },
+        "intro": {
+            "type": "Text",
+            "title": "Intro",
+            "description": "The testimonials section intro"
+        },
+        "testimonials": {
+            "type": "Object[]",
+            "title": "Testimonials",
+            "description": "The testimonials you want to display",
+            "required": true,
+            "props": {
+                "name": {
+                    "type": "Text",
+                    "title": "Name",
+                    "description": "The testimonial author name"
+                },
+                "role": {
+                    "type": "Text",
+                    "title": "Role",
+                    "description": "The author role"
+                },
+                "image": {
+                    "type": "Image",
+                    "title": "Image",
+                    "description": "The author photo"
+                },
+                "text": {
+                    "type": "Text",
+                    "title": "Text",
+                    "description": "The testimonial text",
+                    "required": true
+                },
+                "rating": {
+                    "type": "Number",
+                    "title": "Rating",
+                    "description": "The testimonial rating between 0 and 5"
+                }
+            }
+        },
+        "primaryCta": "@sugar.views.components.cta",
+        "secondaryCta": "@sugar.views.components.cta",
+        "container": "@sugar.views.props.container",
+        "spacing": "@sugar.views.props.spacing",
+        "attributes": "@sugar.views.props.attributes",
+        "spaces": "@sugar.views.props.spaces"
+    },
+    "examples": {
+        "twig": {
+            "title": "Twig",
+            "description": "Here's a twig sample of how to use the hero section",
+            "code": [
+                "{% include('sugar.sections.hero.hero') with {",
+                "   title: '...',",
+                "   intro: '...',",
+                "   text: '...',",
+                "   image: {",
+                "       url: '...',",
+                "       title: '...',",
+                "       alt: '...'",
+                "   }",
+                "} %}"
+            ]
+        }
+    }
+}

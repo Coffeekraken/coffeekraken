@@ -108,13 +108,13 @@ function default_1({ params, atRule, atRootStart, replaceWith, }) {
                     cursor: pointer;
                 }
 
-                & > i.s-when--active,
-                & > div > i.s-when--active {
+                & > i.s-when-active,
+                & > div > i.s-when-active {
                     display: none;
                 }
                 &.active, &[active] {
-                    & > i.s-when--active,
-                    & > div i.s-when--active {
+                    & > i.s-when-active,
+                    & > div i.s-when-active {
                         display: inline-block;
 
                         & + i {

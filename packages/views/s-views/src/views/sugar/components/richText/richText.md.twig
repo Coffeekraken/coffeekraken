@@ -1,0 +1,22 @@
+{% extends 'sugar/readme/layouts/doc/doc.twig' %}
+{% block body %}
+
+<!--
+/**
+ * @name            Rich text
+ * @namespace       specs.views.components.card
+ * @type            Markdown
+ * @platform        blade
+ * @platform        twig
+ * @status          stable
+ * @menu            Specs / Components          /specs/sugar.views.components.richText
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+{% set specs = __readSpec('sugar.views.components.richText') %}
+{{ __specsToMarkdown(specs)|raw }}
+
+{% endblock %}

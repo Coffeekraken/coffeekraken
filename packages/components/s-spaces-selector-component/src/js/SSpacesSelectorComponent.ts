@@ -118,8 +118,6 @@ export default class SSpacesSelectorComponent extends __SLitComponent {
         // set the new value
         this.state.values[propertyName] = __parse(e.target.value);
 
-        _console.log('^this', this.state.values);
-
         // dispatch a new update event
         this.utils.dispatchEvent('change', {
             bubbles: true,

@@ -84,7 +84,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 */
 `).code(`
-.s-shape--default {
+.s-shape-default {
     @sugar.shape(default);
 }`, { type: 'CssClass' });
     vars.comment(() => `/**
@@ -104,7 +104,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 */
 `).code(`
-.s-shape--square {
+.s-shape-square {
     @sugar.shape(square);
 }`, { type: 'CssClass' });
     vars.comment(() => `/**
@@ -124,7 +124,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 */
 `).code(`
-.s-shape--pill {
+.s-shape-pill {
     @sugar.shape(pill);
 }`, { type: 'CssClass' });
     return vars;

@@ -115,7 +115,7 @@ export default function ({
    `,
     ).code(
         `
-   .s-height--viewport {
+   .s-height-viewport {
         position: relative;
         left: 50%;
         height: 100vh;
@@ -149,7 +149,7 @@ export default function ({
        `,
         ).code(
             `
-      .s-height--${name} {
+      .s-height-${name} {
             height: ${heightObj[name]};
       }`,
             { type: 'CssClass' },

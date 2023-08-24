@@ -82,7 +82,7 @@ export default function ({
       `,
         ).code(
             `
-      .s-layout--${id} {
+      .s-layout-${id} {
         @sugar.layout(${layout}, $scope: bare);
       }
     `,
@@ -123,7 +123,7 @@ export default function ({
       `,
         ).code(
             `
-      .${clsX.replace(':', '--')} > * {
+      .${clsX.replace(':', '-')} > * {
         padding-left: sugar.space(${spaceName});
         padding-right: sugar.space(${spaceName});
       }
@@ -157,7 +157,7 @@ export default function ({
       `,
         ).code(
             `
-        .${clsY.replace(':', '--')} > * {
+        .${clsY.replace(':', '-')} > * {
         padding-top: sugar.space(${spaceName});
         padding-bottom: sugar.space(${spaceName});
       }
@@ -191,7 +191,7 @@ export default function ({
       `,
         ).code(
             `
-      .${cls.replace(':', '--')} > * {
+      .${cls.replace(':', '-')} > * {
         padding: sugar.space(${spaceName});
       }
     `,
@@ -225,7 +225,7 @@ export default function ({
       `,
     ).code(
         `
-      .s-layout--gap-between > * {
+      .s-layout-gap-between > * {
         &:first-child {
           padding-left: 0 !important;
         }
@@ -265,7 +265,7 @@ export default function ({
        `,
         ).code(
             `
-        .s-layout--align-${align} {
+        .s-layout-align-${align} {
           align-items: ${align};
         }
     `,
@@ -301,7 +301,7 @@ export default function ({
        `,
         ).code(
             `
-        .s-layout--justify-${justify} {
+        .s-layout-justify-${justify} {
           justify-items: ${justify};
         }
     `,

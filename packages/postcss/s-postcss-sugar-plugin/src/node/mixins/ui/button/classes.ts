@@ -198,7 +198,7 @@ export default function ({
         finalParams.lnfs.forEach((lnf) => {
             let cls = `s-btn`;
             if (lnf !== finalParams.defaultLnf) {
-                cls += `--${lnf}`;
+                cls += `-${lnf}`;
             }
 
             vars.comment(
@@ -232,21 +232,21 @@ export default function ({
 
     vars.comment(
         () => `/**
-        * @name           s-btn--block
+        * @name           s-btn-block
         * @namespace          sugar.style.ui.button
         * @type           CssClass
         * 
         * This class represent a(n) "<s-color="accent">block</s-color>" button
         * 
         * @example        html
-        * <a class="s-btn--block">I'm a cool block button</a>
+        * <a class="s-btn-block">I'm a cool block button</a>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */`,
     ).code(
         `
-      .s-btn--block {
+      .s-btn-block {
         display: block !important;
         width: 100%;
       }

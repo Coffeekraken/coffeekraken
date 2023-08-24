@@ -115,7 +115,7 @@ export default function ({
    `,
     ).code(
         `
-   .s-width--viewport {
+   .s-width-viewport {
         position: relative;
         left: 50%;
         width: 100vw;
@@ -150,7 +150,7 @@ export default function ({
        `,
         ).code(
             `
-      .s-width--${name} {
+      .s-width-${name} {
             width: ${widthObj[name]};
             max-width: none;
             min-width: none;

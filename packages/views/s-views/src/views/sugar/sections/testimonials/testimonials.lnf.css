@@ -1,0 +1,8 @@
+.s-section-testimonials {
+    background: sugar.color(main, surface);
+
+    .s-media {
+        border-radius: 50%;
+        overflow: hidden;
+    }
+}

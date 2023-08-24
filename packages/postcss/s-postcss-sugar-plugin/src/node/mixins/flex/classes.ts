@@ -177,7 +177,7 @@ export default function ({
         `,
     ).code(
         `
-            .s-flex--row {
+            .s-flex-row {
                 flex-direction: row;
             }`,
         { type: 'CssClass' },
@@ -199,7 +199,7 @@ export default function ({
         `,
     ).code(
         `
-            .s-flex--row-reverse {
+            .s-flex-row-reverse {
                 flex-direction: row-reverse;
             }`,
         { type: 'CssClass' },
@@ -221,7 +221,7 @@ export default function ({
         `,
     ).code(
         `
-            .s-flex--column {
+            .s-flex-column {
                 flex-direction: column;
             }`,
         { type: 'CssClass' },
@@ -243,7 +243,7 @@ export default function ({
            `,
     ).code(
         `
-            .s-flex--column-reverse {
+            .s-flex-column-reverse {
                 flex-direction: column-reverse;
             }`,
         { type: 'CssClass' },
@@ -265,7 +265,7 @@ export default function ({
            `,
     ).code(
         `
-            .s-flex--nowrap {
+            .s-flex-nowrap {
                 flex-wrap: nowrap;
             }`,
         { type: 'CssClass' },
@@ -287,7 +287,7 @@ export default function ({
            `,
     ).code(
         `
-            .s-flex--wrap {
+            .s-flex-wrap {
                 flex-wrap: wrap;
             }`,
         { type: 'CssClass' },
@@ -309,7 +309,7 @@ export default function ({
            `,
     ).code(
         `
-            .s-flex--wrap-reverse {
+            .s-flex-wrap-reverse {
                 flex-wrap: wrap-reverse;
             }`,
         { type: 'CssClass' },
@@ -331,7 +331,7 @@ export default function ({
            `,
     ).code(
         `
-            .s-flex--justify-start {
+            .s-flex-justify-start {
                 justify-content: start;
             }`,
         { type: 'CssClass' },
@@ -353,7 +353,7 @@ export default function ({
            `,
     ).code(
         `
-            .s-flex--justify-flex-start {
+            .s-flex-justify-flex-start {
                 justify-content: flex-start;
             }`,
         { type: 'CssClass' },
@@ -375,7 +375,7 @@ export default function ({
            `,
     ).code(
         `
-            .s-flex--justify-end {
+            .s-flex-justify-end {
                 justify-content: end;
             }`,
         { type: 'CssClass' },
@@ -397,7 +397,7 @@ export default function ({
            `,
     ).code(
         `
-            .s-flex--justify-flex-end {
+            .s-flex-justify-flex-end {
                 justify-content: flex-end;
             }`,
         { type: 'CssClass' },
@@ -419,7 +419,7 @@ export default function ({
            `,
     ).code(
         `
-            .s-flex--justify-center {
+            .s-flex-justify-center {
                 justify-content: center;
             }`,
         { type: 'CssClass' },
@@ -441,7 +441,7 @@ export default function ({
            `,
     ).code(
         `
-            .s-flex--justify-space-between {
+            .s-flex-justify-space-between {
                 justify-content: space-between;
             }`,
         { type: 'CssClass' },
@@ -463,7 +463,7 @@ export default function ({
            `,
     ).code(
         `
-            .s-flex--justify-space-around {
+            .s-flex-justify-space-around {
                 justify-content: space-around;
             }`,
         { type: 'CssClass' },
@@ -485,7 +485,7 @@ export default function ({
            `,
     ).code(
         `
-            .s-flex--justify-space-evenly {
+            .s-flex-justify-space-evenly {
                 justify-content: space-evenly;
             }`,
         { type: 'CssClass' },
@@ -507,7 +507,7 @@ export default function ({
            `,
     ).code(
         `
-            .s-flex--justify-stretch {
+            .s-flex-justify-stretch {
                 justify-content: stretch;
             }`,
         { type: 'CssClass' },
@@ -529,7 +529,7 @@ export default function ({
            `,
     ).code(
         `
-            .s-flex--align-start {
+            .s-flex-align-start {
                 align-items: start;
             }`,
         { type: 'CssClass' },
@@ -551,7 +551,7 @@ export default function ({
            `,
     ).code(
         `
-            .s-flex--align-flex-start {
+            .s-flex-align-flex-start {
                 align-items: flex-start;
             }`,
         { type: 'CssClass' },
@@ -573,7 +573,7 @@ export default function ({
            `,
     ).code(
         `
-            .s-flex--align-end {
+            .s-flex-align-end {
                 align-items: end;
             }`,
         { type: 'CssClass' },
@@ -595,7 +595,7 @@ export default function ({
            `,
     ).code(
         `
-            .s-flex--align-flex-end {
+            .s-flex-align-flex-end {
                 align-items: flex-end;
             }`,
         { type: 'CssClass' },
@@ -617,7 +617,7 @@ export default function ({
            `,
     ).code(
         `
-            .s-flex--align-center {
+            .s-flex-align-center {
                 align-items: center;
             }`,
         { type: 'CssClass' },
@@ -639,7 +639,7 @@ export default function ({
            `,
     ).code(
         `
-            .s-flex--align-baseline {
+            .s-flex-align-baseline {
                 align-items: baseline;
             }`,
         { type: 'CssClass' },
@@ -663,7 +663,7 @@ export default function ({
        `,
     ).code(
         `
-        .s-flex-item--grow {
+        .s-flex-item-grow {
             flex-grow: 1;
         }`,
         { type: 'CssClass' },
@@ -687,7 +687,7 @@ export default function ({
        `,
     ).code(
         `
-        .s-flex-item--shrink {
+        .s-flex-item-shrink {
             flex-shrink: 1;
         }`,
         { type: 'CssClass' },
@@ -712,7 +712,7 @@ export default function ({
                `,
         ).code(
             `
-                .s-flex-item--order-${i} {
+                .s-flex-item-order-${i} {
                     order: ${i};
                 }`,
             { type: 'CssClass' },
@@ -738,7 +738,7 @@ export default function ({
                `,
         ).code(
             `
-                .s-flex-item--grow-${i} {
+                .s-flex-item-grow-${i} {
                     flex-grow: ${i};
                 }`,
             { type: 'CssClass' },
@@ -764,7 +764,7 @@ export default function ({
                `,
         ).code(
             `
-                .s-flex-item--shrink-${i} {
+                .s-flex-item-shrink-${i} {
                     flex-shrink: ${i};
                 }`,
             { type: 'CssClass' },
@@ -789,7 +789,7 @@ export default function ({
            `,
     ).code(
         `
-            .s-flex-item--align-flex-start {
+            .s-flex-item-align-flex-start {
                 align-self: flex-start;
             }`,
         { type: 'CssClass' },
@@ -813,7 +813,7 @@ export default function ({
            `,
     ).code(
         `
-            .s-flex-item--align-flex-end {
+            .s-flex-item-align-flex-end {
                 align-self: flex-end;
             }`,
         { type: 'CssClass' },
@@ -837,7 +837,7 @@ export default function ({
            `,
     ).code(
         `
-            .s-flex-item--align-center {
+            .s-flex-item-align-center {
                 align-self: center;
             }`,
         { type: 'CssClass' },
@@ -861,7 +861,7 @@ export default function ({
            `,
     ).code(
         `
-            .s-flex-item--align-baseline {
+            .s-flex-item-align-baseline {
                 align-self: baseline;
             }`,
         { type: 'CssClass' },
@@ -885,7 +885,7 @@ export default function ({
            `,
     ).code(
         `
-            .s-flex-item--align-stretch {
+            .s-flex-item-align-stretch {
                 align-self: stretch;
             }`,
         { type: 'CssClass' },

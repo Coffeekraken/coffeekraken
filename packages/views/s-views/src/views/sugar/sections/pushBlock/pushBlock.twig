@@ -1,4 +1,4 @@
-<section {{ __id(id) }} class="s-section-push-block {{ __spacesClasses(spaces, frontspec) }}">
+<section id="{{ id }}" class="s-section s-section-push-block {{ attributes.class }} {{ container ? 's-container-' ~ container : '' }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}>
     {{ __nodeDataTemplate('views.sections.heading', _context)|raw }}
 
     <div class="_bkg">
@@ -9,29 +9,33 @@
     <div class="s-container">
         <div class="_layout">
             <div>
-                <div s-appear in="left" delay="500" class="s-spacing:{{ spacing.value ? spacing.value : '30' }}">
+                <div s-appear in="left" delay="500" class="{{ __spacingClasses(spacing, 30) }}">
                     {% if title %}
-                        <h1 class="s-typo:h2 _title">
+                        <h1 class="s-typo s-typo-h2 _title">
                             {{ title|raw }}
                         </h1>
                     {% endif %}
                     {% if intro %}
-                        <p class="s-typo:lead _intro">
+                        <p class="s-typo s-typo-lead _intro">
                             {{ intro|raw }}
                         </p>
                     {% endif %}
                     {% if text %}
-                        <p class="s-typo:p _text">
+                        <p class="s-typo s-typo-p _text">
                             {{ text|raw }}
                         </p>
                     {% endif %}
                     {% if primaryCta or secondaryCta %}
                         <div class="_ctas">
                             {% if primaryCta %}
-                                {% include 'sugar/components/cta/cta.twig' with primaryCta %}
+                                <div class="_cta _primary-cta">
+                                    {% include 'sugar/components/cta/cta.twig' with primaryCta %}
+                                </div>
                             {% endif %}
                             {% if secondaryCta %}
-                                {% include 'sugar/components/cta/cta.twig' with secondaryCta %}
+                                <div class="_cta _secondary-cta">
+                                    {% include 'sugar/components/cta/cta.twig' with secondaryCta %}
+                                </div>
                             {% endif %}
                         </div>
                     {% endif %}

@@ -186,7 +186,7 @@ export default function ({
     );
 
     radiusesKeys.forEach((radiusName) => {
-        const cls = `s-radius--${radiusName}`.replace('--default', '');
+        const cls = `s-radius-${radiusName}`.replace('-default', '');
         const clsName = `s-radius:${radiusName}`.replace(':default', '');
         const radiusCss = `/**
             * @name               ${clsName}
@@ -198,7 +198,7 @@ export default function ({
             * This class allows you to apply a "<yellow>${radiusName}</yellow>" border radius style to any HTMLElement
             * 
             * @example        html
-            * <div class="${clsName.replace(':', ':')} s-color--complementary">
+            * <div class="${clsName.replace(':', ':')} s-color-complementary">
             *     Hello world
             * </div>
             */
@@ -215,7 +215,7 @@ export default function ({
 
     widthsKeys.forEach((widthName) => {
         const cls = `s-bwidth:${widthName}`.replace(':default', '');
-        const clsName = `s-bwidth--${widthName}`.replace('--default', '');
+        const clsName = `s-bwidth-${widthName}`.replace('-default', '');
         vars.comment(
             () => `/**
                 * @name               ${cls}
@@ -243,7 +243,7 @@ export default function ({
 
     Object.keys(__STheme.getTheme().baseColors()).forEach((colorName) => {
         const cls = `s-bcolor:${colorName}`.replace(':default', '');
-        const clsName = `s-bcolor--${colorName}`.replace('--default', '');
+        const clsName = `s-bcolor-${colorName}`.replace('-default', '');
         vars.comment(
             () => `/**
                 * @name               ${cls}

@@ -93,7 +93,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * </div>
     */
    `).code(`
-    .s-pointer-events--none {
+    .s-pointer-events-none {
         pointer-events: none;
     }`, { type: 'CssClass' });
     vars.comment(() => `/**
@@ -111,7 +111,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * </div>
     */
    `).code(`
-    .s-pointer-events--all {
+    .s-pointer-events-all {
         pointer-events: all;
     }`, { type: 'CssClass' });
     vars.comment(() => `/**
@@ -129,7 +129,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * </div>
     */
    `).code(`
-    .s-pointer-events--auto {
+    .s-pointer-events-auto {
         pointer-events: auto;
     }`, { type: 'CssClass' });
     vars.comment(() => `/**
@@ -147,7 +147,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * </div>
     */
    `).code(`
-    .s-pointer-events--fill {
+    .s-pointer-events-fill {
         pointer-events: fill;
     }`, { type: 'CssClass' });
     return vars;

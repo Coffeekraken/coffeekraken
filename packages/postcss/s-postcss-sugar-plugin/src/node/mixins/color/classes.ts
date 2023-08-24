@@ -120,7 +120,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             .code(
                 `
                 @sugar.lod.prevent {
-                    .s-color--${colorName} {
+                    .s-color-${colorName} {
                         @sugar.color(${colorName});
                     }
                 }
@@ -149,7 +149,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             )
             .code(
                 `
-                .s-bg--${colorName} {
+                .s-bg-${colorName} {
                     background-color: sugar.color(${colorName}) !important;
                 }
         `,
@@ -185,7 +185,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             )
             .code(
                 `
-                .s-tc--${colorName} {
+                .s-tc-${colorName} {
                     color: sugar.color(${colorName}, text) !important;
                 }
         `,
@@ -213,7 +213,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             )
             .code(
                 `
-                .s-bg--${colorName} {
+                .s-bg-${colorName} {
                     background-color: sugar.color(${colorName}) !important;
                 }
         `,
@@ -235,16 +235,16 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
                 ` *`,
                 ` * @example        html`,
                 ` * <ol class="s-bg:odd">`,
-                ` *     <li class="s-bg--accent">Something cool</li>`,
-                ` *     <li class="s-bg--accent">Something cool</li>`,
-                ` *     <li class="s-bg--accent">Something cool</li>`,
+                ` *     <li class="s-bg-accent">Something cool</li>`,
+                ` *     <li class="s-bg-accent">Something cool</li>`,
+                ` *     <li class="s-bg-accent">Something cool</li>`,
                 ` * </li>`,
                 ` */`,
             ].join('\n'),
         )
         .code(
             `
-            .s-bg--odd > *:nth-child(even) {
+            .s-bg-odd > *:nth-child(even) {
               background-color: transparent !important;
             }
     `,
@@ -264,16 +264,16 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
                 ` *`,
                 ` * @example        html`,
                 ` * <ol class="s-bg:even">`,
-                ` *     <li class="s-bg--accent">Something cool</li>`,
-                ` *     <li class="s-bg--accent">Something cool</li>`,
-                ` *     <li class="s-bg--accent">Something cool</li>`,
+                ` *     <li class="s-bg-accent">Something cool</li>`,
+                ` *     <li class="s-bg-accent">Something cool</li>`,
+                ` *     <li class="s-bg-accent">Something cool</li>`,
                 ` * </li>`,
                 ` */`,
             ].join('\n'),
         )
         .code(
             `
-        .s-bg--even > *:nth-child(even) {
+        .s-bg-even > *:nth-child(even) {
             background-color: transparent !important;
         }
     `,

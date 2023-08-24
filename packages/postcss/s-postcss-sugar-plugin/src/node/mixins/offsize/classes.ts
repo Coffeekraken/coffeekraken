@@ -141,7 +141,7 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMargin.replace(':', '--')} {
+   .${clsMargin.replace(':', '-')} {
         position: relative;
         
         top: calc(sugar.offsize(${spaceName}) * -1);
@@ -177,7 +177,7 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMarginTop.replace(':', '--')} {
+   .${clsMarginTop.replace(':', '-')} {
         position: relative;
         top: calc(sugar.offsize(${spaceName}) * -1);
         height: calc(var(--height, 100%) + sugar.offsize(${spaceName}));
@@ -204,7 +204,7 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMarginBottom.replace(':', '--')} {
+   .${clsMarginBottom.replace(':', '-')} {
        position: relative;
        top: 0;
         height: calc(var(--height, 100%) + sugar.offsize(${spaceName}));
@@ -231,7 +231,7 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMarginLeft.replace(':', '--')} {
+   .${clsMarginLeft.replace(':', '-')} {
        position: relative;
         left: calc(sugar.offsize(${spaceName}) * -1);
         width: calc(var(--width, 100%) + sugar.offsize(${spaceName}));
@@ -263,7 +263,7 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMarginRight.replace(':', '--')} {
+   .${clsMarginRight.replace(':', '-')} {
        position: relative;
        left: 0;
         width: calc(var(--width, 100%) + sugar.offsize(${spaceName}));
@@ -295,7 +295,7 @@ export default function ({
    `,
         ).code(
             `
-     .${clsMarginX.replace(':', '--')} {
+     .${clsMarginX.replace(':', '-')} {
         position: relative;
         left: calc(sugar.offsize(${spaceName}) * -1);
         width: calc(var(--width, 100%) + sugar.offsize(${spaceName}) * 2);
@@ -322,7 +322,7 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMarginY.replace(':', '--')} {
+   .${clsMarginY.replace(':', '-')} {
         position: relative;
         top: calc(sugar.offsize(${spaceName}) * -1);
         height: calc(var(--height, 100%) + sugar.offsize(${spaceName}) * 2);
@@ -330,162 +330,6 @@ export default function ({
             { type: 'CssClass' },
         );
     });
-
-    //     vars.comment(
-    //         () => `/**
-    //     * @name            s-m:auto
-    //     * @namespace          sugar.style.helpers.offsize
-    //     * @type             CssClass
-    //     * @platform             css
-    //     * @status               beta
-    //     *
-    //     * This class allows you to apply the "<yellow>auto</yellow>" offsize style around any HTMLElement
-    //     *
-    //     * @example      html
-    //     * <span class="s-m:auto">Something cool</span>
-    //     *
-    //     * @since        2.0.0
-    //     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-    //     */
-    //    `,
-    //     ).code(`
-    //    .s-m--auto {
-    //         margin: auto;
-    //    }`);
-
-    //     vars.comment(
-    //         () => `/**
-    //     * @name            s-mbs:auto
-    //     * @namespace          sugar.style.helpers.offsize
-    //     * @type             CssClass
-    //     * @platform             css
-    //     * @status               beta
-    //     *
-    //     * This class allows you to apply the "<yellow>auto</yellow>" block start offsize style around any HTMLElement
-    //     *
-    //     * @example      html
-    //     * <span class="s-mbs:auto">Something cool</span>
-    //     *
-    //     * @since        2.0.0
-    //     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-    //     */
-    //    `,
-    //     ).code(`
-    //    .s-mbs--auto {
-    //         margin-block-start: auto;
-    //    }`);
-
-    //     vars.comment(
-    //         () => `/**
-    //     * @name            s-mie:auto
-    //     * @namespace          sugar.style.helpers.offsize
-    //     * @type             CssClass
-    //     * @platform             css
-    //     * @status               beta
-    //     *
-    //     * This class allows you to apply the "<yellow>auto</yellow>" inline end offsize style around any HTMLElement
-    //     *
-    //     * @example      html
-    //     * <span class="s-mie:auto">Something cool</span>
-    //     *
-    //     * @since        2.0.0
-    //     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-    //     */
-    //    `,
-    //     ).code(`
-    //    .s-mie--auto {
-    //         margin-inline-end: auto;
-    //    }`);
-
-    //     vars.comment(
-    //         () => `/**
-    //     * @name            s-mbe:auto
-    //     * @namespace          sugar.style.helpers.offsize
-    //     * @type             CssClass
-    //     * @platform             css
-    //     * @status               beta
-    //     *
-    //     * This class allows you to apply the "<yellow>auto</yellow>" block end offsize style around any HTMLElement
-    //     *
-    //     * @example      html
-    //     * <span class="s-mbe:auto">Something cool</span>
-    //     *
-    //     * @since        2.0.0
-    //     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-    //     */
-    //    `,
-    //     ).code(`
-    //    .s-mbe--auto {
-    //         margin-block-end: auto;
-    //    }`);
-
-    //     vars.comment(
-    //         () => `/**
-    //     * @name            s-mis:auto
-    //     * @namespace          sugar.style.helpers.offsize
-    //     * @type             CssClass
-    //     * @platform             css
-    //     * @status               beta
-    //     *
-    //     * This class allows you to apply the "<yellow>auto</yellow>" inline start offsize style around any HTMLElement
-    //     *
-    //     * @example      html
-    //     * <span class="s-mis:auto">Something cool</span>
-    //     *
-    //     * @since        2.0.0
-    //     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-    //     */
-    //    `,
-    //     ).code(`
-    //    .s-mis--auto {
-    //         margin-inline-start: auto;
-    //    }`);
-
-    //     vars.comment(
-    //         () => `/**
-    //     * @name            s-mi:auto
-    //     * @namespace          sugar.style.helpers.offsize
-    //     * @type             CssClass
-    //     * @platform             css
-    //     * @status               beta
-    //     *
-    //     * This class allows you to apply the "<yellow>auto</yellow>" inline start and end offsize style around any HTMLElement
-    //     *
-    //     * @example      html
-    //     * <span class="s-mi:auto">Something cool</span>
-    //     *
-    //     * @since        2.0.0
-    //     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-    //     */
-    //    `,
-    //     ).code(`
-    //    .s-mi--auto {
-    //         margin-inline-start: auto;
-    //         margin-inline-end: auto;
-    //    }`);
-
-    //     vars.comment(
-    //         () => `/**
-    //     * @name            s-mb:auto
-    //     * @namespace          sugar.style.helpers.offsize
-    //     * @type             CssClass
-    //     * @platform             css
-    //     * @status               beta
-    //     *
-    //     * This class allows you to apply the "<yellow>auto</yellow>" block start and end offsize style around any HTMLElement
-    //     *
-    //     * @example      html
-    //     * <span class="s-mb:auto">Something cool</span>
-    //     *
-    //     * @since        2.0.0
-    //     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-    //     */
-    //    `,
-    //     ).code(`
-    //    .s-mb--auto {
-    //         margin-block-start: auto;
-    //         margin-block-end: auto;
-    //    }`);
 
     return vars;
 }

@@ -53,11 +53,11 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `).code(`
-            .s-when.s-when--${state}:not(.s-when--sibling):not(.s-when--siblings):not(.s-when--ancestor):not(.s-when--parent):not(.s-when--grandparent):not([${state}]):not(.${state}) {
+            .s-when.s-when-${state}:not(.s-when-sibling):not(.s-when-siblings):not(.s-when-ancestor):not(.s-when-parent):not(.s-when-grandparent):not([${state}]):not(.${state}) {
                 display: none;
             }
-            .s-when.s-when--${state}:not(.s-when--sibling):not(.s-when--siblings):not(.s-when--ancestor):not(.s-when--parent):not(.s-when--grandparent)[${state}],
-            .s-when.s-when--${state}:not(.s-when--sibling):not(.s-when--siblings):not(.s-when--ancestor):not(.s-when--parent):not(.s-when--grandparent).${state} {
+            .s-when.s-when-${state}:not(.s-when-sibling):not(.s-when-siblings):not(.s-when-ancestor):not(.s-when-parent):not(.s-when-grandparent)[${state}],
+            .s-when.s-when-${state}:not(.s-when-sibling):not(.s-when-siblings):not(.s-when-ancestor):not(.s-when-parent):not(.s-when-grandparent).${state} {
                 display: unset;
             }`, { type: 'CssClass' });
         vars.comment(() => `/**
@@ -79,11 +79,11 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `).code(`
-            *:not([${state}]):not(.${state}) + .s-when.s-when--sibling.s-when--${state} {
+            *:not([${state}]):not(.${state}) + .s-when.s-when-sibling.s-when-${state} {
                 display: none;
             }
-            *[${state}] + .s-when.s-when--sibling.s-when--${state},
-            *.${state} + .s-when.s-when--sibling.s-when--${state} {
+            *[${state}] + .s-when.s-when-sibling.s-when-${state},
+            *.${state} + .s-when.s-when-sibling.s-when-${state} {
                 display: unset !important;
             }`, { type: 'CssClass' });
         vars.comment(() => `/**
@@ -105,11 +105,11 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `).code(`
-            *:not([${state}]):not(.${state}) ~ .s-when.s-when--siblings.s-when--${state} {
+            *:not([${state}]):not(.${state}) ~ .s-when.s-when-siblings.s-when-${state} {
                 display: none;
             }
-            *[${state}] ~ .s-when.s-when--siblings.s-when--${state},
-            *.${state} ~ .s-when.s-when--siblings.s-when--${state} {
+            *[${state}] ~ .s-when.s-when-siblings.s-when-${state},
+            *.${state} ~ .s-when.s-when-siblings.s-when-${state} {
                 display: unset !important;
             }`, { type: 'CssClass' });
         vars.comment(() => `/**
@@ -131,11 +131,11 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `).code(`
-            *:not([${state}]):not(.${state}) > .s-when.s-when--parent.s-when--${state} {
+            *:not([${state}]):not(.${state}) > .s-when.s-when-parent.s-when-${state} {
                 display: none;
             }
-            *[${state}] > .s-when.s-when--parent.s-when--${state},
-            *.${state} > .s-when.s-when--parent.s-when--${state} {
+            *[${state}] > .s-when.s-when-parent.s-when-${state},
+            *.${state} > .s-when.s-when-parent.s-when-${state} {
                 display: unset;
             }`, { type: 'CssClass' });
         vars.comment(() => `/**
@@ -157,11 +157,11 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `).code(`
-            *:not([${state}]):not(.${state}) > * > .s-when.s-when--grandparent.s-when--${state} {
+            *:not([${state}]):not(.${state}) > * > .s-when.s-when-grandparent.s-when-${state} {
                 display: none;
             }
-            *[${state}] > * > .s-when.s-when--grandparent.s-when--${state},
-            *.${state} > * > .s-when.s-when--grandparent.s-when--${state} {
+            *[${state}] > * > .s-when.s-when-grandparent.s-when-${state},
+            *.${state} > * > .s-when.s-when-grandparent.s-when-${state} {
                 display: unset;
             }`, { type: 'CssClass' });
         vars.comment(() => `/**
@@ -183,11 +183,11 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `).code(`
-            *:not([${state}]):not(.${state}) .s-when.s-when--ancestor.s-when--${state} {
+            *:not([${state}]):not(.${state}) .s-when.s-when-ancestor.s-when-${state} {
                 display: none;
             }
-            *[${state}] .s-when.s-when--ancestor.s-when--${state},
-            *.${state} .s-when.s-when--ancestor.s-when--${state} {
+            *[${state}] .s-when.s-when-ancestor.s-when-${state},
+            *.${state} .s-when.s-when-ancestor.s-when-${state} {
                 display: unset;
             }`, { type: 'CssClass' });
     });
@@ -210,11 +210,11 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `).code(`
-        .s-when--dark {
+        .s-when-dark {
             display: none;
         }
         
-        [theme$="dark"] .s-when--dark {
+        [theme$="dark"] .s-when-dark {
             display: inherit;
         }
         `, { type: 'CssClass' });
@@ -237,13 +237,13 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `).code(`
-        [theme$="dark"] .s-when--light {
+        [theme$="dark"] .s-when-light {
             display: none;
         }
         `, { type: 'CssClass' });
     // Queries
     vars.comment(() => ``).code(`
-            .s-when--media {
+            .s-when-media {
                 display: none;
             }`, { type: 'CssClass' });
     Object.keys(queries).forEach((query) => {
@@ -264,11 +264,11 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             */
         `).code(`
             @sugar.media(${query}) {
-                .s-when--media.s-when--${query} {
+                .s-when-media.s-when-${query} {
                     display: unset;
                 }
             }`, { type: 'CssClass' });
     });
     return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFFSCxNQUFNLHdDQUF5QyxTQUFRLFlBQVk7SUFDL0QsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTyxFQUFFLENBQUM7SUFDZCxDQUFDO0NBQ0o7QUFJRCxPQUFPLEVBQUUsd0NBQXdDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFakUsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLE9BQU8sRUFDUCxXQUFXLEdBTWQ7SUFDRyxNQUFNLFdBQVcscUJBQ1YsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLE9BQU8sR0FBRyxRQUFRLENBQUMsR0FBRyxDQUFDLGVBQWUsQ0FBQyxDQUFDO0lBQzlDLE1BQU0sTUFBTSxHQUFHLFFBQVEsQ0FBQyxHQUFHLENBQUMsZ0JBQWdCLENBQUMsQ0FBQztJQUU5QyxNQUFNLElBQUksR0FBRyxJQUFJLE9BQU8sRUFBRSxDQUFDO0lBRTNCLE1BQU0sQ0FBQyxPQUFPLENBQUMsQ0FBQyxLQUFLLEVBQUUsRUFBRTtRQUNyQixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDO3NDQUNvQixLQUFLOzs7Ozs7NkZBTWtELEtBQUs7Ozt1Q0FHM0QsS0FBSzs7Ozs7U0FLbkMsQ0FDQSxDQUFDLElBQUksQ0FDRjs4QkFDa0IsS0FBSyw0SEFBNEgsS0FBSyxXQUFXLEtBQUs7Ozs4QkFHdEosS0FBSyx1SEFBdUgsS0FBSzs4QkFDakksS0FBSyx1SEFBdUgsS0FBSzs7Y0FFakosRUFDRixFQUFFLElBQUksRUFBRSxVQUFVLEVBQUUsQ0FDdkIsQ0FBQztRQUVGLElBQUksQ0FBQyxPQUFPLENBQ1Is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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFFSCxNQUFNLHdDQUF5QyxTQUFRLFlBQVk7SUFDL0QsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTyxFQUFFLENBQUM7SUFDZCxDQUFDO0NBQ0o7QUFJRCxPQUFPLEVBQUUsd0NBQXdDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFakUsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLE9BQU8sRUFDUCxXQUFXLEdBTWQ7SUFDRyxNQUFNLFdBQVcscUJBQ1YsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLE9BQU8sR0FBRyxRQUFRLENBQUMsR0FBRyxDQUFDLGVBQWUsQ0FBQyxDQUFDO0lBQzlDLE1BQU0sTUFBTSxHQUFHLFFBQVEsQ0FBQyxHQUFHLENBQUMsZ0JBQWdCLENBQUMsQ0FBQztJQUU5QyxNQUFNLElBQUksR0FBRyxJQUFJLE9BQU8sRUFBRSxDQUFDO0lBRTNCLE1BQU0sQ0FBQyxPQUFPLENBQUMsQ0FBQyxLQUFLLEVBQUUsRUFBRTtRQUNyQixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDO3NDQUNvQixLQUFLOzs7Ozs7NkZBTWtELEtBQUs7Ozt1Q0FHM0QsS0FBSzs7Ozs7U0FLbkMsQ0FDQSxDQUFDLElBQUksQ0FDRjs2QkFDaUIsS0FBSyx1SEFBdUgsS0FBSyxXQUFXLEtBQUs7Ozs2QkFHakosS0FBSyxrSEFBa0gsS0FBSzs2QkFDNUgsS0FBSyxrSEFBa0gsS0FBSzs7Y0FFM0ksRUFDRixFQUFFLElBQUksRUFBRSxVQUFVLEVBQUUsQ0FDdkIsQ0FBQztRQUVGLElBQUksQ0FBQyxPQUFPLENBQ1Is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

@@ -61,27 +61,27 @@ function paddingClasses($paddings = [], $frontspec = [])
         }
     } else {
         if (isset($paddings['padding'])) {
-            array_push($classes, 's-p--' . $paddings['all']);
+            array_push($classes, 's-p-' . $paddings['all']);
         }
 
         if (isset($paddings['paddingBlock'])) {
-            array_push($classes, 's-pb--' . $paddings['block']);
+            array_push($classes, 's-pb-' . $paddings['block']);
         }
         if (isset($paddings['paddingInline'])) {
-            array_push($classes, 's-pi--' . $paddings['inline']);
+            array_push($classes, 's-pi-' . $paddings['inline']);
         }
 
         if (isset($paddings['paddingTop'])) {
-            array_push($classes, 's-pbs--' . $paddings['paddingTop']);
+            array_push($classes, 's-pbs-' . $paddings['paddingTop']);
         }
         if (isset($paddings['paddingRight'])) {
-            array_push($classes, 's-pie--' . $paddings['paddingRight']);
+            array_push($classes, 's-pie-' . $paddings['paddingRight']);
         }
         if (isset($paddings['paddingBottom'])) {
-            array_push($classes, 's-pbe--' . $paddings['paddingBottom']);
+            array_push($classes, 's-pbe-' . $paddings['paddingBottom']);
         }
         if (isset($paddings['paddingLeft'])) {
-            array_push($classes, 's-pis--' . $paddings['paddingLeft']);
+            array_push($classes, 's-pis-' . $paddings['paddingLeft']);
         }
     }
 

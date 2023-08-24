@@ -72,7 +72,7 @@ export default function ({
    `,
         ).code(
             `
-   .${opacityCls.replace(':', '--')} {
+   .${opacityCls.replace(':', '-')} {
         opacity: sugar.opacity(${opacity});
    }`,
             { type: 'CssClass' },

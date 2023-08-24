@@ -117,15 +117,15 @@ export default function ({
                 * This class allows you to apply a "<yellow>${depthName}</yellow>" depth style to any HTMLElement
                 * 
                 * @example        html
-                * <a class="s-btn s-btn--accent s-depth:${
+                * <a class="s-btn s-btn-accent s-depth:${
                     depthName === 'default' ? '' : depthName
                 }">I'm a cool depth button</a>
                 */
                 `,
         ).code(
             `
-.s-depth${depthName === 'default' ? '' : `--${depthName}`}:not(.s-depth--text),
-.s-depth--box.s-depth--${depthName === 'default' ? '' : `--${depthName}`} {
+.s-depth${depthName === 'default' ? '' : `-${depthName}`}:not(.s-depth-text),
+.s-depth-box.s-depth-${depthName === 'default' ? '' : `-${depthName}`} {
     @sugar.depth('${depthName}');
 }`,
             { type: 'CssClass' },
@@ -146,14 +146,14 @@ export default function ({
                 * This class allows you to apply a "<yellow>${depthName}</yellow>" depth style to any text
                 * 
                 * @example        html
-                * <a class="s-btn s-btn--accent s-depth:text:${
+                * <a class="s-btn s-btn-accent s-depth:text:${
                     depthName === 'default' ? '' : depthName
                 }">I'm a cool depth button</a>
                 */
                 `,
         ).code(
             `
-.s-depth--text.s-depth${depthName === 'default' ? '' : `--${depthName}`} {
+.s-depth-text.s-depth${depthName === 'default' ? '' : `-${depthName}`} {
     @sugar.depth(${depthName}, $type: text);
 }`,
             { type: 'CssClass' },

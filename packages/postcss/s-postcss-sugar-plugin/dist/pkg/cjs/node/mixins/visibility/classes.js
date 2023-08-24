@@ -85,7 +85,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     * <div class="s-visibility:hidden">Hello world</div>
     */
    `).code(`
-    .s-visibility--hidden {
+    .s-visibility-hidden {
         visibility: hidden;
     }`, { type: 'CssClass' });
     vars.comment(`/**
@@ -101,7 +101,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     * <div class="s-visibility:visible">Hello world</div>
     */
    `).code(`
-    .s-visibility--visible {
+    .s-visibility-visible {
         visibility: visible;
     }`, { type: 'CssClass' });
     vars.comment(`/**
@@ -117,7 +117,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     * <div class="s-visibility:collapse">Hello world</div>
     */
    `).code(`
-    .s-visibility--collapse {
+    .s-visibility-collapse {
         visibility: collapse;
     }`, { type: 'CssClass' });
     return vars;

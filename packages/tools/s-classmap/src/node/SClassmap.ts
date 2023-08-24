@@ -157,18 +157,18 @@ export default class SClassmap extends __SClassmapBase {
         // // --s-color-accent-tania
         // // --sab
 
-        // if (!map?.['s-lod--0']) {
-        //     map['s-lod--0'] = 's0';
-        //     map['s-lod--1'] = 's1';
-        //     map['s-lod--2'] = 's2';
-        //     map['s-lod--3'] = 's3';
-        //     map['s-lod--4'] = 's4';
-        //     map['s-lod--5'] = 's5';
-        //     map['s-lod--6'] = 's6';
-        //     map['s-lod--7'] = 's7';
-        //     map['s-lod--8'] = 's8';
-        //     map['s-lod--9'] = 's9';
-        //     map['s-lod--10'] = 's10';
+        // if (!map?.['s-lod-0']) {
+        //     map['s-lod-0'] = 's0';
+        //     map['s-lod-1'] = 's1';
+        //     map['s-lod-2'] = 's2';
+        //     map['s-lod-3'] = 's3';
+        //     map['s-lod-4'] = 's4';
+        //     map['s-lod-5'] = 's5';
+        //     map['s-lod-6'] = 's6';
+        //     map['s-lod-7'] = 's7';
+        //     map['s-lod-8'] = 's8';
+        //     map['s-lod-9'] = 's9';
+        //     map['s-lod-10'] = 's10';
         // }
 
         node.walkDecls((decl) => {

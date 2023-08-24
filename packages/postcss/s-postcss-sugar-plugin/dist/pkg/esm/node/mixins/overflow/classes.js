@@ -121,7 +121,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * </div>
     */
     `).code(`
-    .s-overflow--auto {
+    .s-overflow-auto {
         overflow: auto;
     }`, { type: 'CssClass' });
     vars.comment(() => `/**
@@ -139,7 +139,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * </div>
     */
     `).code(`
-    .s-overflow--hidden {
+    .s-overflow-hidden {
         overflow: hidden;
     }`, { type: 'CssClass' });
     vars.comment(() => `/**
@@ -157,7 +157,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * </div>
     */
     `).code(`
-    .s-overflow--inherit {
+    .s-overflow-inherit {
         overflow: inherit;
     }`, { type: 'CssClass' });
     vars.comment(() => `/**
@@ -175,7 +175,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * </div>
     */
     `).code(`
-    .s-overflow--initial {
+    .s-overflow-initial {
         overflow: initial;
     }`, { type: 'CssClass' });
     vars.comment(() => `/**
@@ -193,7 +193,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * </div>
     */
     `).code(`
-    .s-overflow--overlay {
+    .s-overflow-overlay {
         overflow: overlay;
     }`, { type: 'CssClass' });
     vars.comment(() => `/**
@@ -211,7 +211,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * </div>
     */
     `).code(`
-    .s-overflow--revert {
+    .s-overflow-revert {
         overflow: revert;
     }`, { type: 'CssClass' });
     vars.comment(() => `/**
@@ -229,7 +229,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * </div>
     */
     `).code(`
-    .s-overflow--scroll {
+    .s-overflow-scroll {
         overflow: scroll;
     }`, { type: 'CssClass' });
     vars.comment(() => `/**
@@ -247,7 +247,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * </div>
     */
     `).code(`
-    .s-overflow--visible {
+    .s-overflow-visible {
         overflow: visible;
     }`, { type: 'CssClass' });
     vars.comment(() => `/**
@@ -265,7 +265,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * </div>
     */
     `).code(`
-    .s-overflow--unset {
+    .s-overflow-unset {
         overflow: unset;
     }`, { type: 'CssClass' });
     return vars;

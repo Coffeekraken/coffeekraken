@@ -1,0 +1,28 @@
+{
+    "type": "Component",
+    "category": "components",
+    "title": "Cards",
+    "description": "Dsplay some cards in a simple adaptive \"grid\" layout",
+    "props": {
+        "cards": {
+            "type": "Card[]",
+            "title": "Cards",
+            "description": "The cards to display"
+        },
+        "container": "@sugar.views.props.container",
+        "gap": "@sugar.views.props.spaces",
+        "attributes": "@sugar.views.props.attributes",
+        "spaces": "@sugar.views.props.spaces"
+    },
+    "examples": {
+        "twig": {
+            "title": "Twig",
+            "description": "Here's a twig sample of how to use the cards component",
+            "code": [
+                "{% include('sugar.components.cards.cards') with {",
+                "    cards: [...]",
+                "} %}"
+            ]
+        }
+    }
+}

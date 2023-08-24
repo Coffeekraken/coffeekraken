@@ -157,7 +157,7 @@ export default function ({
    `,
         ).code(
             `
-    .s-white-space--${value} {
+    .s-white-space-${value} {
         white-space: ${value};
     }`,
             { type: 'CssClass' },

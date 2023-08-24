@@ -8,16 +8,17 @@
         </div>
     {% endif %}
 
-    <div class="_content s-spacing:{{ spacing.value ? spacing.value : '30' }}">
+    <div class="_content {{ __spacingClasses(spacing, 30) }}">
         {% if title %}
-            <h1 class="_title s-typo:h2">{{ title|raw }}</h1>
+            <h1 class="_title s-typo s-typo-h3">{{ title|raw }}</h1>
         {% endif %}
         {% if intro %}
-            <p class="_lead s-typo:lead s-tc:{{ color.value ? color.value : 'accent' }}">{{ intro|raw }}</p>
+            <p class="_lead s-typo s-typo-lead">{{ intro|raw }}</p>
         {% endif %}
         {% if text %}
-            <p class="_text s-typo:p">{{ text|raw }}</p>
+            <p class="_text s-typo s-typo-p">{{ text|raw }}</p>
         {% endif %}
+        <div class="_spacer"></div>
         {% if primaryCta or secondaryCta %}
             <div class="_ctas">
                 {% if primaryCta %}

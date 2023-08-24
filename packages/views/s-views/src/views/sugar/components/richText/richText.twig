@@ -1,0 +1,9 @@
+<div id="{{ id }}" class="s-rich-text {{ attributes.class }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}
+>
+{{ __nodeDataTemplate('views.components.richText', _context)|raw }}
+    <div class="_content s-format-text {{ __spacingClasses(spacing, 30) }}">
+        {% if content %}
+            {{ content|raw }}
+        {% endif %}
+    </div>
+</div>

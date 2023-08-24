@@ -194,7 +194,7 @@ export default function ({
 
         if (finalParams.scope.includes('bare')) {
             vars.code(
-                `.s-label${finalParams.defaultLnf === lnf ? '' : `--${lnf}`} {
+                `.s-label${finalParams.defaultLnf === lnf ? '' : `-${lnf}`} {
                 @sugar.ui.label($lnf: ${lnf}, $scope: bare);
             } 
             `,
@@ -207,7 +207,7 @@ export default function ({
         if (finalParams.scope.includes('lnf')) {
             vars.code(
                 () => `
-                .${cls.replace(':', '--')}:not(.s-bare) {
+                .${cls.replace(':', '-')}:not(.s-bare) {
                     @sugar.ui.label($lnf: ${lnf}, $scope: lnf);
                 } 
             `,
@@ -239,7 +239,7 @@ export default function ({
      `,
     ).code(
         `
-        .s-label--responsive {
+        .s-label-responsive {
             text-align: initial;
 
             > span {
@@ -261,7 +261,7 @@ export default function ({
                     width: 100%;
                 }
 
-                &:not(.s-label--float) > span {
+                &:not(.s-label-float) > span {
                     padding-block-start: 0;
                 } 
             }

@@ -1,0 +1,38 @@
+.s-cards {
+    ._grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    &-1 {
+        ._grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    &-2 {
+        ._grid {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+    &-3 {
+        ._grid {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+    }
+
+    .s-card {
+        ._media {
+            flex-grow: 0;
+        }
+        ._content {
+            flex-grow: 1;
+        }
+    }
+
+    ._card {
+        display: flex;
+    }
+    ._spacer {
+        flex-grow: 1;
+    }
+}

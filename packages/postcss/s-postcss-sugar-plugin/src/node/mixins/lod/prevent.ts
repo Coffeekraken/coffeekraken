@@ -77,8 +77,8 @@ export default function ({
     // check if the lod feature is enabled or not
     atRule.walkRules((rule) => {
         rule.selectors = rule.selectors.map((sel) => {
-            if (sel.match(/\.s-lod--prevent/)) return sel;
-            return `.s-lod--prevent ${sel}`;
+            if (sel.match(/\.s-lod-prevent/)) return sel;
+            return `.s-lod-prevent ${sel}`;
         });
     });
 

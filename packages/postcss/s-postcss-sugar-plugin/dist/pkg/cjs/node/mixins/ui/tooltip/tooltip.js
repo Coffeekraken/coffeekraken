@@ -83,7 +83,7 @@ function default_1({ params, atRule, replaceWith, }) {
       `);
     }
     vars.push(`
-        .s-tooltip-container--active > & {
+        .s-tooltip-container-active > & {
             opacity: 1;
         }
     `);
@@ -91,7 +91,7 @@ function default_1({ params, atRule, replaceWith, }) {
         if (finalParams.interactive) {
             vars.push(`
                 &:not(.s-tooltip-container > .s-tooltip),
-                .s-tooltip-container--active > &,
+                .s-tooltip-container-active > &,
                 .s-tooltip-container:focus > &,
                 .s-tooltip-container:focus-within > &,
                 .s-tooltip-container &:focus,

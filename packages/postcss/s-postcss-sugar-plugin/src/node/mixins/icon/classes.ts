@@ -292,7 +292,7 @@ export default function ({
                 ).code(
                     `
                     @sugar.lod.prevent {
-                        .s-icon--${iconObj.as} {
+                        .s-icon-${iconObj.as} {
                             @sugar.icon.fa(${iconObj.name}, ${iconObj.protocol});
                         }
                     }
@@ -326,7 +326,7 @@ export default function ({
                 ).code(
                     `
                         @sugar.lod.prevent {
-                            .s-icon--${iconObj.as} {
+                            .s-icon-${iconObj.as} {
                                 @sugar.icon.fs(${iconObj.path}, ${iconObj.as});
                             }
                         }
@@ -360,7 +360,7 @@ export default function ({
                 ).code(
                     `
                         @sugar.lod.prevent {
-                            .s-icon--${iconObj.as} {
+                            .s-icon-${iconObj.as} {
                                 @sugar.icon.sugar(${iconObj.path}, ${iconObj.as});
                             }
                         }

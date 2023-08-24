@@ -60,11 +60,11 @@ export default function ({
     };
 
     atRule.nodes?.forEach((node) => {
-        if (node.selector && !node.selector.match(/^\.s-format--text/)) {
+        if (node.selector && !node.selector.match(/^\.s-format-text/)) {
             node.selector = node.selector
                 .split(',')
                 .map((sel) => {
-                    return `.s-format--text ${sel}:not(.s-format--none ${sel}), .preview .s-format--text ${sel}`;
+                    return `.s-format-text ${sel}:not(.s-format-none ${sel}), .preview .s-format-text ${sel}`;
                 })
                 .join(',');
         }

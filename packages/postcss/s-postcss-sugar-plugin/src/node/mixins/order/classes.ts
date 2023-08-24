@@ -114,7 +114,7 @@ export default function ({
             `,
         ).code(
             `
-            .s-order--${i} {
+            .s-order-${i} {
                 order: ${i};
             }`,
             { type: 'CssClass' },

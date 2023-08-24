@@ -74,7 +74,7 @@ export default function ({
     });
 
     const newRule = postcssApi.rule({
-        selector: `.s-lod-filter--${levels.join('-')}`,
+        selector: `.s-lod-filter-${levels.join('-')}`,
         nodes: atRule.nodes,
     });
 

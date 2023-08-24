@@ -537,13 +537,13 @@ export default class SFront extends __SClass {
         // remove all the lod classes above the wanted level
         for (let i = 0; i <= 10; i++) {
             if (i > level) {
-                finalSettings.$context.classList.remove(`s-lod--${i}`);
+                finalSettings.$context.classList.remove(`s-lod-${i}`);
             }
         }
 
         // add the new classes
         for (let i = 0; i <= level; i++) {
-            finalSettings.$context.classList.add('s-lod', `s-lod--${i}`);
+            finalSettings.$context.classList.add('s-lod', `s-lod-${i}`);
 
             if (lodSettings?.method === 'file' && $stylesheet) {
                 if (

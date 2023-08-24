@@ -84,7 +84,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     * <div class="s-visually:hidden">Hello world</div>
     */
     `).code(`
-    .s-visually--hidden {
+    .s-visually-hidden {
        @sugar.visually.hidden;
     }`, { type: 'CssClass' });
     return vars;

@@ -52,7 +52,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `).code(`
-            .s-until.s-until--${state}:not(.s-until--sibling):not(.s-until--siblings):not(.s-until--parent):not(.s-until--grandparent):not(.s-until--ancestor):is([${state}],[status="${state}"]) {
+            .s-until.s-until-${state}:not(.s-until-sibling):not(.s-until-siblings):not(.s-until-parent):not(.s-until-grandparent):not(.s-until-ancestor):is([${state}],[status="${state}"]) {
                 display: none;
             }`, { type: 'CssClass' });
         vars.comment(() => `/**
@@ -74,9 +74,9 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `).code(`
-            *.${state} + .s-until.s-until--sibling.s-until--${state},
-            *[${state}] + .s-until.s-until--sibling.s-until--${state},
-            *[status="${state}"] + .s-until.s-until--sibling.s-until--${state} {
+            *.${state} + .s-until.s-until-sibling.s-until-${state},
+            *[${state}] + .s-until.s-until-sibling.s-until-${state},
+            *[status="${state}"] + .s-until.s-until-sibling.s-until-${state} {
                 display: none;
             }`, { type: 'CssClass' });
         vars.comment(() => `/**
@@ -98,9 +98,9 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `).code(`
-            *.${state} ~  .s-until.s-until--siblings.s-until--${state},
-            *[${state}] ~ .s-until.s-until--siblings.s-until--${state},
-            *[status="${state}"] ~ .s-until.s-until--siblings.s-until--${state} {
+            *.${state} ~  .s-until.s-until-siblings.s-until-${state},
+            *[${state}] ~ .s-until.s-until-siblings.s-until-${state},
+            *[status="${state}"] ~ .s-until.s-until-siblings.s-until-${state} {
                 display: none;
             }`, { type: 'CssClass' });
         vars.comment(() => `/**
@@ -122,12 +122,12 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `).code(`
-            *:not([status="${state}"]):not([${state}]):not(.${state}) > .s-until.s-until--parent.s-until--${state} {
+            *:not([status="${state}"]):not([${state}]):not(.${state}) > .s-until.s-until-parent.s-until-${state} {
                 display: unset;
             }
-            *[${state}] > .s-until.s-until--parent.s-until--${state},
-            *[status="${state}"] > .s-until.s-until--parent.s-until--${state},
-            *.${state} > .s-until.s-until--parent.s-until--${state} {
+            *[${state}] > .s-until.s-until-parent.s-until-${state},
+            *[status="${state}"] > .s-until.s-until-parent.s-until-${state},
+            *.${state} > .s-until.s-until-parent.s-until-${state} {
                 display: none;
             }`, { type: 'CssClass' });
         vars.comment(() => `/**
@@ -149,12 +149,12 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `).code(`
-            *:not([status="${state}"]):not([${state}]):not(.${state}) > * > .s-until.s-until--grandparent.s-until--${state} {
+            *:not([status="${state}"]):not([${state}]):not(.${state}) > * > .s-until.s-until-grandparent.s-until-${state} {
                 display: unset;
             }
-            *[${state}] > * > .s-until.s-until--grandparent.s-until--${state},
-            *[status="${state}"] > * > .s-until.s-until--grandparent.s-until--${state},
-            *.${state} > * > .s-until.s-until--grandparent.s-until--${state} {
+            *[${state}] > * > .s-until.s-until-grandparent.s-until-${state},
+            *[status="${state}"] > * > .s-until.s-until-grandparent.s-until-${state},
+            *.${state} > * > .s-until.s-until-grandparent.s-until-${state} {
                 display: none;
             }`, { type: 'CssClass' });
         vars.comment(() => `/**
@@ -176,12 +176,12 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `).code(`
-            *:not([status="${state}"]):not([${state}]):not(.${state}) .s-until.s-until--ancestor.s-until--${state} {
+            *:not([status="${state}"]):not([${state}]):not(.${state}) .s-until.s-until-ancestor.s-until-${state} {
                 display: unset;
             }
-            *[${state}] .s-until.s-until--ancestor.s-until--${state},
-            *[status="${state}"] .s-until.s-until--ancestor.s-until--${state},
-            *.${state} .s-until.s-until--ancestor.s-until--${state} {
+            *[${state}] .s-until.s-until-ancestor.s-until-${state},
+            *[status="${state}"] .s-until.s-until-ancestor.s-until-${state},
+            *.${state} .s-until.s-until-ancestor.s-until-${state} {
                 display: none;
             }`, { type: 'CssClass' });
     });
@@ -204,11 +204,11 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             */
         `).code(`
             @sugar.media(${query}) {
-                .s-until--media.s-until--${query} {
+                .s-until-media.s-until-${query} {
                     display: none !important;
                 }
             }`, { type: 'CssClass' });
     });
     return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUVILE1BQU0sdUNBQXdDLFNBQVEsWUFBWTtJQUM5RCxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPLEVBQUUsQ0FBQztJQUNkLENBQUM7Q0FDSjtBQUlELE9BQU8sRUFBRSx1Q0FBdUMsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUVoRSxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sT0FBTyxFQUNQLFdBQVcsR0FNZDtJQUNHLE1BQU0sV0FBVyxxQkFDVixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sT0FBTyxHQUFHLFFBQVEsQ0FBQyxHQUFHLENBQUMsZUFBZSxDQUFDLENBQUM7SUFDOUMsTUFBTSxNQUFNLEdBQUcsUUFBUSxDQUFDLEdBQUcsQ0FBQyxnQkFBZ0IsQ0FBQyxDQUFDO0lBRTlDLE1BQU0sSUFBSSxHQUFHLElBQUksT0FBTyxFQUFFLENBQUM7SUFFM0IsTUFBTSxDQUFDLE9BQU8sQ0FBQyxDQUFDLEtBQUssRUFBRSxFQUFFO1FBQ3JCLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7dUNBQ3FCLEtBQUs7Ozs7Ozs4RkFNa0QsS0FBSzs7O3dDQUczRCxLQUFLOzs7OztTQUtwQyxDQUNBLENBQUMsSUFBSSxDQUNGO2dDQUNvQixLQUFLLGdJQUFnSSxLQUFLLGNBQWMsS0FBSzs7Y0FFL0ssRUFDRixFQUFFLElBQUksRUFBRSxVQUFVLEVBQUUsQ0FDdkIsQ0FBQztRQUVGLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7K0NBQzZCLEtBQUs7Ozs7OztnSEFNNEQsS0FBSzs7Ozs0Q0FJ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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUVILE1BQU0sdUNBQXdDLFNBQVEsWUFBWTtJQUM5RCxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPLEVBQUUsQ0FBQztJQUNkLENBQUM7Q0FDSjtBQUlELE9BQU8sRUFBRSx1Q0FBdUMsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUVoRSxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sT0FBTyxFQUNQLFdBQVcsR0FNZDtJQUNHLE1BQU0sV0FBVyxxQkFDVixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sT0FBTyxHQUFHLFFBQVEsQ0FBQyxHQUFHLENBQUMsZUFBZSxDQUFDLENBQUM7SUFDOUMsTUFBTSxNQUFNLEdBQUcsUUFBUSxDQUFDLEdBQUcsQ0FBQyxnQkFBZ0IsQ0FBQyxDQUFDO0lBRTlDLE1BQU0sSUFBSSxHQUFHLElBQUksT0FBTyxFQUFFLENBQUM7SUFFM0IsTUFBTSxDQUFDLE9BQU8sQ0FBQyxDQUFDLEtBQUssRUFBRSxFQUFFO1FBQ3JCLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7dUNBQ3FCLEtBQUs7Ozs7Ozs4RkFNa0QsS0FBSzs7O3dDQUczRCxLQUFLOzs7OztTQUtwQyxDQUNBLENBQUMsSUFBSSxDQUNGOytCQUNtQixLQUFLLDJIQUEySCxLQUFLLGNBQWMsS0FBSzs7Y0FFekssRUFDRixFQUFFLElBQUksRUFBRSxVQUFVLEVBQUUsQ0FDdkIsQ0FBQztRQUVGLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7K0NBQzZCLEtBQUs7Ozs7OztnSEFNNEQsS0FBSzs7Ozs0Q0FJ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

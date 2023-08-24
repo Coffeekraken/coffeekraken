@@ -1,8 +1,7 @@
-<div id="{{ id }}" class="s-section-hero {{ attributes.class }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}
->
+<section id="{{ id }}" class="s-section s-section-hero {{ attributes.class }} {{ __containerClasses(container) }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}>
 {{ __nodeDataTemplate('views.sections.hero', _context)|raw }}
 
-    <div class="_content s-spacing:{{ spacing.value ? spacing.value : '30' }}">
+    <div class="_content s-spacing:{{ __spacingClasses(spacing, 30) }}">
         {% if title %}
             <h1 class="_title s-typo:h1">{{ title|raw }}</h1>
         {% endif %}
@@ -37,4 +36,4 @@
             {% endif %}
         </div>
     </div>
-</div>
+</section>

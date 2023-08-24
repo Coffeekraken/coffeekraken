@@ -169,14 +169,14 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `).code(`
-        .s-input-container--group {
+        .s-input-container-group {
             @sugar.ui.inputContainer($lnf: group, $scope: bare);
         }
         `);
     }
     if (finalParams.scope.includes('lnf')) {
         vars.code(`
-        .s-input-container--group:not(.s-bare) {
+        .s-input-container-group:not(.s-bare) {
             @sugar.ui.inputContainer($lnf: group, $scope: lnf);
         }
         `, {
@@ -206,7 +206,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `).code(`
-        .s-input-container--addon {
+        .s-input-container-addon {
             @sugar.ui.inputContainer($lnf: addon, $scope: bare);
         }
         `, {
@@ -215,7 +215,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     }
     if (finalParams.scope.includes('lnf')) {
         vars.code(`
-        .s-input-container--addon:not(.s-bare) {
+        .s-input-container-addon:not(.s-bare) {
             @sugar.ui.inputContainer($lnf: addon, $scope: lnf);
         }
         `, {

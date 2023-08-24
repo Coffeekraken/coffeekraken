@@ -46,9 +46,10 @@
             },
             "required": true
         },
-        "spacing": "@sugar.views.props.spacing",
         "primaryCta": "@sugar.views.components.cta",
         "secondaryCta": "@sugar.views.components.cta",
+        "container": "@sugar.views.props.container",
+        "spacing": "@sugar.views.props.spacing",
         "attributes": "@sugar.views.props.attributes",
         "spaces": "@sugar.views.props.spaces"
     }

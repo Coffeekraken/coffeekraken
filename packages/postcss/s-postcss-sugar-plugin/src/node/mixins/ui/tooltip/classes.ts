@@ -254,7 +254,7 @@ export default function ({
                 &:focus,
                 &:focus-within,
                 &:hover {
-                    & > .s-tooltip--interactive {
+                    & > .s-tooltip-interactive {
                         pointer-events: all;
                         opacity: 1;
                     }
@@ -353,7 +353,7 @@ export default function ({
             vars.code(
                 () => `
                 .s-tooltip${
-                    finalParams.defaultLnf === lnf ? '' : `--${lnf}`
+                    finalParams.defaultLnf === lnf ? '' : `-${lnf}`
                 }:not(.s-bare) {
                     @sugar.ui.tooltip($lnf: ${lnf}, $scope: lnf);
                 }
@@ -366,7 +366,7 @@ export default function ({
     // Interactive
     vars.comment(
         () => `/**
-        * @name           s-tooltip--interactive
+        * @name           s-tooltip-interactive
         * @namespace          sugar.style.ui.tooltip
         * @type           CssClass
         * 
@@ -385,7 +385,7 @@ export default function ({
     );
     vars.code(
         () => `
-        .s-tooltip--interactive {
+        .s-tooltip-interactive {
             @sugar.ui.tooltip($interactive: true, $scope: 'interactive');
         }
     `,
@@ -443,7 +443,7 @@ export default function ({
     vars.code(
         () => `
         .s-tooltip[placement="right"],
-        .s-tooltip--right {
+        .s-tooltip-right {
             @sugar.ui.tooltip($position: right, $scope: position);
         }
     `,
@@ -472,7 +472,7 @@ export default function ({
     vars.code(
         () => `
         .s-tooltip[placement="left"],
-        .s-tooltip--left {
+        .s-tooltip-left {
             @sugar.ui.tooltip($position: left, $scope: position);
         }
     `,
@@ -501,7 +501,7 @@ export default function ({
     vars.code(
         () => `
         .s-tooltip[placement="bottom"],
-        .s-tooltip--bottom {
+        .s-tooltip-bottom {
             @sugar.ui.tooltip($position: bottom, $scope: position);
         }
     `,

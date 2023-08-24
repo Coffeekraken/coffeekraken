@@ -117,7 +117,7 @@ export default function ({
    `,
         ).code(
             `
-    .s-user-select--${value} {
+    .s-user-select-${value} {
         user-select: ${value};
     }`,
             { type: 'CssClass' },

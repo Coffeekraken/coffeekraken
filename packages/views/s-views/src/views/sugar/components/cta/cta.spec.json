@@ -5,6 +5,28 @@
     "description": "Display a call to action",
     "props": {
         "color": "@sugar.views.props.themeColors",
+        "lnf": {
+            "type": "Select",
+            "title": "Look and feel",
+            "description": "Button look and feel",
+            "options": [
+                {
+                    "id": "solid",
+                    "name": "Solid",
+                    "value": "solid"
+                },
+                {
+                    "id": "outline",
+                    "name": "Outline",
+                    "value": "outline"
+                },
+                {
+                    "id": "text",
+                    "name": "Text",
+                    "value": "text"
+                }
+            ]
+        },
         "link": {
             "type": "Link",
             "title": "Cta link",

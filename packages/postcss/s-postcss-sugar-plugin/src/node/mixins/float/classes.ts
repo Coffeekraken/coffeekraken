@@ -111,7 +111,7 @@ export default function ({
     `,
     ).code(
         `
-    .s-float--left {
+    .s-float-left {
         float: left;
     }`,
         { type: 'CssClass' },
@@ -135,7 +135,7 @@ export default function ({
     `,
     ).code(
         `
-    .s-float--right {
+    .s-float-right {
         float: right;
     }`,
         { type: 'CssClass' },
@@ -159,7 +159,7 @@ export default function ({
     `,
     ).code(
         `
-    .s-float--none {
+    .s-float-none {
         float: none;
     }`,
         { type: 'CssClass' },

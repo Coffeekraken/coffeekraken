@@ -296,7 +296,7 @@ export default function ({
         finalParams.lnfs.forEach((lnf) => {
             const isDefaultStyle = finalParams.defaultLnf === lnf;
 
-            const styleCls = isDefaultStyle ? '' : `.s-select--${lnf}`;
+            const styleCls = isDefaultStyle ? '' : `.s-select-${lnf}`;
             const cls = `.s-select${styleCls}`;
 
             vars.comment(

@@ -1,0 +1,31 @@
+{
+    "type": "Section",
+    "category": "sections",
+    "title": "Nude section",
+    "description": "Render your \"html\" or \"nodes\" inside a nude section",
+    "props": {
+        "html": {
+            "type": "Html",
+            "description": "Specify the html to render"
+        },
+        "nodes": {
+            "type": "Html[]",
+            "description": "Specify some nodes to render"
+        },
+        "container": "@sugar.views.props.container",
+        "spacing": "@sugar.views.props.spacing",
+        "attributes": "@sugar.views.props.attributes",
+        "spaces": "@sugar.views.props.spaces"
+    },
+    "examples": {
+        "twig": {
+            "title": "Twig",
+            "description": "Here's a twig sample of how to use the nude section view",
+            "code": [
+                "{% include 'sugar.bare.sections.nude' with {",
+                "   html: '<div>Some html</div>',",
+                "} %}"
+            ]
+        }
+    }
+}

@@ -130,8 +130,8 @@ export default function ({
         ).code(
             `
                 .s-gap${
-                    space === 'default' ? '' : `--${space}`
-                }:not(.s-gap--column):not(.s-gap--row) {
+                    space === 'default' ? '' : `-${space}`
+                }:not(.s-gap-column):not(.s-gap-row) {
                     gap: sugar.margin(${space});
                 }`,
             { type: 'CssClass' },
@@ -163,7 +163,7 @@ export default function ({
             `,
         ).code(
             `
-                .s-gap--row.s-gap${space === 'default' ? '' : `--${space}`} {
+                .s-gap-row.s-gap${space === 'default' ? '' : `-${space}`} {
                     row-gap: sugar.margin(${space});
                 }`,
             { type: 'CssClass' },
@@ -195,7 +195,7 @@ export default function ({
             `,
         ).code(
             `
-                .s-gap--column.s-gap${space === 'default' ? '' : `--${space}`} {
+                .s-gap-column.s-gap${space === 'default' ? '' : `-${space}`} {
                     column-gap: sugar.margin(${space});
                 }`,
             { type: 'CssClass' },

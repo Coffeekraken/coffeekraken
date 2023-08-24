@@ -37,6 +37,15 @@ function registerFunctions($twig)
     $twig->addFunction($readClassmap);
 
     // Css
+    $colorClasses = require __DIR__ . '/css/colorClasses.php';
+    $twig->addFunction($colorClasses);
+
+    $containerClasses = require __DIR__ . '/css/containerClasses.php';
+    $twig->addFunction($containerClasses);
+
+    $gapClasses = require __DIR__ . '/css/gapClasses.php';
+    $twig->addFunction($gapClasses);
+
     $layoutCss = require __DIR__ . '/css/layoutCss.php';
     $twig->addFunction($layoutCss);
 
@@ -51,6 +60,9 @@ function registerFunctions($twig)
 
     $spacesClasses = require __DIR__ . '/css/spacesClasses.php';
     $twig->addFunction($spacesClasses);
+
+    $spacingClasses = require __DIR__ . '/css/spacingClasses.php';
+    $twig->addFunction($spacingClasses);
 
     // Frontspec
     $frontspecAssets = require __DIR__ . '/frontspec/assets.php';

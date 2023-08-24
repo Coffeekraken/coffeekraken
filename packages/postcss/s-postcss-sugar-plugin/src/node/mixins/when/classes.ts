@@ -77,11 +77,11 @@ export default function ({
         `,
         ).code(
             `
-            .s-when.s-when--${state}:not(.s-when--sibling):not(.s-when--siblings):not(.s-when--ancestor):not(.s-when--parent):not(.s-when--grandparent):not([${state}]):not(.${state}) {
+            .s-when.s-when-${state}:not(.s-when-sibling):not(.s-when-siblings):not(.s-when-ancestor):not(.s-when-parent):not(.s-when-grandparent):not([${state}]):not(.${state}) {
                 display: none;
             }
-            .s-when.s-when--${state}:not(.s-when--sibling):not(.s-when--siblings):not(.s-when--ancestor):not(.s-when--parent):not(.s-when--grandparent)[${state}],
-            .s-when.s-when--${state}:not(.s-when--sibling):not(.s-when--siblings):not(.s-when--ancestor):not(.s-when--parent):not(.s-when--grandparent).${state} {
+            .s-when.s-when-${state}:not(.s-when-sibling):not(.s-when-siblings):not(.s-when-ancestor):not(.s-when-parent):not(.s-when-grandparent)[${state}],
+            .s-when.s-when-${state}:not(.s-when-sibling):not(.s-when-siblings):not(.s-when-ancestor):not(.s-when-parent):not(.s-when-grandparent).${state} {
                 display: unset;
             }`,
             { type: 'CssClass' },
@@ -109,11 +109,11 @@ export default function ({
         `,
         ).code(
             `
-            *:not([${state}]):not(.${state}) + .s-when.s-when--sibling.s-when--${state} {
+            *:not([${state}]):not(.${state}) + .s-when.s-when-sibling.s-when-${state} {
                 display: none;
             }
-            *[${state}] + .s-when.s-when--sibling.s-when--${state},
-            *.${state} + .s-when.s-when--sibling.s-when--${state} {
+            *[${state}] + .s-when.s-when-sibling.s-when-${state},
+            *.${state} + .s-when.s-when-sibling.s-when-${state} {
                 display: unset !important;
             }`,
             { type: 'CssClass' },
@@ -141,11 +141,11 @@ export default function ({
         `,
         ).code(
             `
-            *:not([${state}]):not(.${state}) ~ .s-when.s-when--siblings.s-when--${state} {
+            *:not([${state}]):not(.${state}) ~ .s-when.s-when-siblings.s-when-${state} {
                 display: none;
             }
-            *[${state}] ~ .s-when.s-when--siblings.s-when--${state},
-            *.${state} ~ .s-when.s-when--siblings.s-when--${state} {
+            *[${state}] ~ .s-when.s-when-siblings.s-when-${state},
+            *.${state} ~ .s-when.s-when-siblings.s-when-${state} {
                 display: unset !important;
             }`,
             { type: 'CssClass' },
@@ -173,11 +173,11 @@ export default function ({
         `,
         ).code(
             `
-            *:not([${state}]):not(.${state}) > .s-when.s-when--parent.s-when--${state} {
+            *:not([${state}]):not(.${state}) > .s-when.s-when-parent.s-when-${state} {
                 display: none;
             }
-            *[${state}] > .s-when.s-when--parent.s-when--${state},
-            *.${state} > .s-when.s-when--parent.s-when--${state} {
+            *[${state}] > .s-when.s-when-parent.s-when-${state},
+            *.${state} > .s-when.s-when-parent.s-when-${state} {
                 display: unset;
             }`,
             { type: 'CssClass' },
@@ -205,11 +205,11 @@ export default function ({
         `,
         ).code(
             `
-            *:not([${state}]):not(.${state}) > * > .s-when.s-when--grandparent.s-when--${state} {
+            *:not([${state}]):not(.${state}) > * > .s-when.s-when-grandparent.s-when-${state} {
                 display: none;
             }
-            *[${state}] > * > .s-when.s-when--grandparent.s-when--${state},
-            *.${state} > * > .s-when.s-when--grandparent.s-when--${state} {
+            *[${state}] > * > .s-when.s-when-grandparent.s-when-${state},
+            *.${state} > * > .s-when.s-when-grandparent.s-when-${state} {
                 display: unset;
             }`,
             { type: 'CssClass' },
@@ -237,11 +237,11 @@ export default function ({
         `,
         ).code(
             `
-            *:not([${state}]):not(.${state}) .s-when.s-when--ancestor.s-when--${state} {
+            *:not([${state}]):not(.${state}) .s-when.s-when-ancestor.s-when-${state} {
                 display: none;
             }
-            *[${state}] .s-when.s-when--ancestor.s-when--${state},
-            *.${state} .s-when.s-when--ancestor.s-when--${state} {
+            *[${state}] .s-when.s-when-ancestor.s-when-${state},
+            *.${state} .s-when.s-when-ancestor.s-when-${state} {
                 display: unset;
             }`,
             { type: 'CssClass' },
@@ -270,11 +270,11 @@ export default function ({
     `,
     ).code(
         `
-        .s-when--dark {
+        .s-when-dark {
             display: none;
         }
         
-        [theme$="dark"] .s-when--dark {
+        [theme$="dark"] .s-when-dark {
             display: inherit;
         }
         `,
@@ -303,7 +303,7 @@ export default function ({
     `,
     ).code(
         `
-        [theme$="dark"] .s-when--light {
+        [theme$="dark"] .s-when-light {
             display: none;
         }
         `,
@@ -313,7 +313,7 @@ export default function ({
     // Queries
     vars.comment(() => ``).code(
         `
-            .s-when--media {
+            .s-when-media {
                 display: none;
             }`,
         { type: 'CssClass' },
@@ -340,7 +340,7 @@ export default function ({
         ).code(
             `
             @sugar.media(${query}) {
-                .s-when--media.s-when--${query} {
+                .s-when-media.s-when-${query} {
                     display: unset;
                 }
             }`,

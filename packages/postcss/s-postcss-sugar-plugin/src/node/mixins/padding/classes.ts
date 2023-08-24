@@ -146,7 +146,7 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMargin.replace(':', '--')} {
+   .${clsMargin.replace(':', '-')} {
         padding: sugar.padding(${spaceName});
    }`,
             { type: 'CssClass' },
@@ -171,7 +171,7 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMarginTop.replace(':', '--')} {
+   .${clsMarginTop.replace(':', '-')} {
         padding-block-start: sugar.padding(${spaceName}) !important;
    }`,
             { type: 'CssClass' },
@@ -196,7 +196,7 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMarginBottom.replace(':', '--')} {
+   .${clsMarginBottom.replace(':', '-')} {
         padding-block-end: sugar.padding(${spaceName}) !important;
    }`,
             { type: 'CssClass' },
@@ -221,7 +221,7 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMarginLeft.replace(':', '--')} {
+   .${clsMarginLeft.replace(':', '-')} {
         padding-inline-start: sugar.padding(${spaceName}) !important;
    }`,
             { type: 'CssClass' },
@@ -246,7 +246,7 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMarginRight.replace(':', '--')} {
+   .${clsMarginRight.replace(':', '-')} {
         padding-inline-end: sugar.padding(${spaceName}) !important;
    }`,
             { type: 'CssClass' },
@@ -271,7 +271,7 @@ export default function ({
    `,
         ).code(
             `
-     .${clsMarginX.replace(':', '--')} {
+     .${clsMarginX.replace(':', '-')} {
         padding-inline-start: sugar.padding(${spaceName}) !important;
         padding-inline-end: sugar.padding(${spaceName}) !important;
    }`,
@@ -297,7 +297,7 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMarginY.replace(':', '--')} {
+   .${clsMarginY.replace(':', '-')} {
         padding-block-start: sugar.padding(${spaceName}) !important;
         padding-block-end: sugar.padding(${spaceName}) !important;
    }`,

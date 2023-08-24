@@ -157,7 +157,7 @@ export default function ({
             @sugar.wireframe {
                 @sugar.wireframe.image;
         
-                &:has(.s-media--map) {
+                &:has(.s-media-map) {
                     @sugar.wireframe.image(map);
                 }
             }

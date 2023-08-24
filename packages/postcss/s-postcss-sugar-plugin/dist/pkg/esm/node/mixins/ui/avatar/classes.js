@@ -187,7 +187,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
           * @since    2.0.0
           * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`
-          .s-avatar--interactive {
+          .s-avatar-interactive {
               @sugar.ui.avatar($scope: 'interactive');
           }
       `, { type: 'CssClass' });

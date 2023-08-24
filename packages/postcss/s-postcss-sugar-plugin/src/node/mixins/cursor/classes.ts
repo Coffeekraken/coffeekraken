@@ -155,7 +155,7 @@ export default function ({
         */
     `,
             ).code(`
-        .s-cursor--${cursor} {
+        .s-cursor-${cursor} {
             cursor: ${cursor};
         }`);
         },

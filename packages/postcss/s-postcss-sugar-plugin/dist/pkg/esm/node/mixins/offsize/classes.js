@@ -115,7 +115,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
-   .${clsMargin.replace(':', '--')} {
+   .${clsMargin.replace(':', '-')} {
         position: relative;
         
         top: calc(sugar.offsize(${spaceName}) * -1);
@@ -146,7 +146,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
-   .${clsMarginTop.replace(':', '--')} {
+   .${clsMarginTop.replace(':', '-')} {
         position: relative;
         top: calc(sugar.offsize(${spaceName}) * -1);
         height: calc(var(--height, 100%) + sugar.offsize(${spaceName}));
@@ -168,7 +168,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
-   .${clsMarginBottom.replace(':', '--')} {
+   .${clsMarginBottom.replace(':', '-')} {
        position: relative;
        top: 0;
         height: calc(var(--height, 100%) + sugar.offsize(${spaceName}));
@@ -190,7 +190,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
-   .${clsMarginLeft.replace(':', '--')} {
+   .${clsMarginLeft.replace(':', '-')} {
        position: relative;
         left: calc(sugar.offsize(${spaceName}) * -1);
         width: calc(var(--width, 100%) + sugar.offsize(${spaceName}));
@@ -217,7 +217,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
-   .${clsMarginRight.replace(':', '--')} {
+   .${clsMarginRight.replace(':', '-')} {
        position: relative;
        left: 0;
         width: calc(var(--width, 100%) + sugar.offsize(${spaceName}));
@@ -244,7 +244,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
-     .${clsMarginX.replace(':', '--')} {
+     .${clsMarginX.replace(':', '-')} {
         position: relative;
         left: calc(sugar.offsize(${spaceName}) * -1);
         width: calc(var(--width, 100%) + sugar.offsize(${spaceName}) * 2);
@@ -266,161 +266,12 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
-   .${clsMarginY.replace(':', '--')} {
+   .${clsMarginY.replace(':', '-')} {
         position: relative;
         top: calc(sugar.offsize(${spaceName}) * -1);
         height: calc(var(--height, 100%) + sugar.offsize(${spaceName}) * 2);
    }`, { type: 'CssClass' });
     });
-    //     vars.comment(
-    //         () => `/**
-    //     * @name            s-m:auto
-    //     * @namespace          sugar.style.helpers.offsize
-    //     * @type             CssClass
-    //     * @platform             css
-    //     * @status               beta
-    //     *
-    //     * This class allows you to apply the "<yellow>auto</yellow>" offsize style around any HTMLElement
-    //     *
-    //     * @example      html
-    //     * <span class="s-m:auto">Something cool</span>
-    //     *
-    //     * @since        2.0.0
-    //     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-    //     */
-    //    `,
-    //     ).code(`
-    //    .s-m--auto {
-    //         margin: auto;
-    //    }`);
-    //     vars.comment(
-    //         () => `/**
-    //     * @name            s-mbs:auto
-    //     * @namespace          sugar.style.helpers.offsize
-    //     * @type             CssClass
-    //     * @platform             css
-    //     * @status               beta
-    //     *
-    //     * This class allows you to apply the "<yellow>auto</yellow>" block start offsize style around any HTMLElement
-    //     *
-    //     * @example      html
-    //     * <span class="s-mbs:auto">Something cool</span>
-    //     *
-    //     * @since        2.0.0
-    //     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-    //     */
-    //    `,
-    //     ).code(`
-    //    .s-mbs--auto {
-    //         margin-block-start: auto;
-    //    }`);
-    //     vars.comment(
-    //         () => `/**
-    //     * @name            s-mie:auto
-    //     * @namespace          sugar.style.helpers.offsize
-    //     * @type             CssClass
-    //     * @platform             css
-    //     * @status               beta
-    //     *
-    //     * This class allows you to apply the "<yellow>auto</yellow>" inline end offsize style around any HTMLElement
-    //     *
-    //     * @example      html
-    //     * <span class="s-mie:auto">Something cool</span>
-    //     *
-    //     * @since        2.0.0
-    //     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-    //     */
-    //    `,
-    //     ).code(`
-    //    .s-mie--auto {
-    //         margin-inline-end: auto;
-    //    }`);
-    //     vars.comment(
-    //         () => `/**
-    //     * @name            s-mbe:auto
-    //     * @namespace          sugar.style.helpers.offsize
-    //     * @type             CssClass
-    //     * @platform             css
-    //     * @status               beta
-    //     *
-    //     * This class allows you to apply the "<yellow>auto</yellow>" block end offsize style around any HTMLElement
-    //     *
-    //     * @example      html
-    //     * <span class="s-mbe:auto">Something cool</span>
-    //     *
-    //     * @since        2.0.0
-    //     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-    //     */
-    //    `,
-    //     ).code(`
-    //    .s-mbe--auto {
-    //         margin-block-end: auto;
-    //    }`);
-    //     vars.comment(
-    //         () => `/**
-    //     * @name            s-mis:auto
-    //     * @namespace          sugar.style.helpers.offsize
-    //     * @type             CssClass
-    //     * @platform             css
-    //     * @status               beta
-    //     *
-    //     * This class allows you to apply the "<yellow>auto</yellow>" inline start offsize style around any HTMLElement
-    //     *
-    //     * @example      html
-    //     * <span class="s-mis:auto">Something cool</span>
-    //     *
-    //     * @since        2.0.0
-    //     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-    //     */
-    //    `,
-    //     ).code(`
-    //    .s-mis--auto {
-    //         margin-inline-start: auto;
-    //    }`);
-    //     vars.comment(
-    //         () => `/**
-    //     * @name            s-mi:auto
-    //     * @namespace          sugar.style.helpers.offsize
-    //     * @type             CssClass
-    //     * @platform             css
-    //     * @status               beta
-    //     *
-    //     * This class allows you to apply the "<yellow>auto</yellow>" inline start and end offsize style around any HTMLElement
-    //     *
-    //     * @example      html
-    //     * <span class="s-mi:auto">Something cool</span>
-    //     *
-    //     * @since        2.0.0
-    //     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-    //     */
-    //    `,
-    //     ).code(`
-    //    .s-mi--auto {
-    //         margin-inline-start: auto;
-    //         margin-inline-end: auto;
-    //    }`);
-    //     vars.comment(
-    //         () => `/**
-    //     * @name            s-mb:auto
-    //     * @namespace          sugar.style.helpers.offsize
-    //     * @type             CssClass
-    //     * @platform             css
-    //     * @status               beta
-    //     *
-    //     * This class allows you to apply the "<yellow>auto</yellow>" block start and end offsize style around any HTMLElement
-    //     *
-    //     * @example      html
-    //     * <span class="s-mb:auto">Something cool</span>
-    //     *
-    //     * @since        2.0.0
-    //     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-    //     */
-    //    `,
-    //     ).code(`
-    //    .s-mb--auto {
-    //         margin-block-start: auto;
-    //         margin-block-end: auto;
-    //    }`);
     return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBQzdDLE9BQU8sRUFBRSxXQUFXLEVBQUUsTUFBTSwyQkFBMkIsQ0FBQztBQUV4RDs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW1CRztBQUVILE1BQU0seUNBQTBDLFNBQVEsWUFBWTtJQUNoRSxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPLEVBQUUsQ0FBQztJQUNkLENBQUM7Q0FDSjtBQUlELE9BQU8sRUFBRSx5Q0FBeUMsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUVsRSxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sT0FBTyxFQUNQLFdBQVcsR0FNZDtJQUNHLE1BQU0sV0FBVyxxQkFDVixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFHLElBQUksT0FBTyxFQUFFLENBQUM7SUFFM0IsTUFBTSxVQUFVLEdBQUcsUUFBUSxDQUFDLEdBQUcsQ0FBQyxTQUFTLENBQUMsQ0FBQztJQUMzQyxNQUFNLFdBQVcsR0FBRyxXQUFXLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsRUFBRSxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUM7SUFFdEUsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7VUF1QkosV0FBVztTQUNSLEdBQUcsQ0FBQyxDQUFDLFNBQVMsRUFBRSxFQUFFO1FBQ2YsSUFBSSxTQUFTLEtBQUssU0FBUztZQUFFLE9BQU8sRUFBRSxDQUFDO1FBQ3ZDLE9BQU87WUFDSCx3QkFBd0IsU0FBUyx1QkFBdUIsU0FBUyx1QkFBdUI7WUFDeEYseUJBQXlCLFNBQVMsdUJBQXVCLFNBQVMsZ0NBQWdDO1lBQ2xHLDBCQUEwQixTQUFTLHVCQUF1QixTQUFTLHdCQUF3QjtZQUMzRiwwQkFBMEIsU0FBUyx1QkFBdUIsU0FBUyxzQkFBc0I7WUFDekYseUJBQXlCLFNBQVMsdUJBQXVCLFNBQVMsaUNBQWlDO1lBQ25HLDBCQUEwQixTQUFTLHVCQUF1QixTQUFTLHlCQUF5QjtZQUM1RiwwQkFBMEIsU0FBUyx1QkFBdUIsU0FBUyx1QkFBdUI7U0FDN0YsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDakIsQ0FBQyxDQUFDO1NBQ0QsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7S0EwQmxCLENBQ0EsQ0FBQztJQUVGLFdBQVcsQ0FBQyxPQUFPLENBQUMsQ0FBQyxTQUFTLEVBQUUsRUFBRTtRQUM5QixVQUFVO1FBQ1YsTUFBTSxTQUFTLEdBQUcsUUFBUSxTQUFTLEVBQUUsQ0FBQztRQUN0QyxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDO3lCQUNPLFNBQVM7Ozs7OztvREFNa0IsU0FBUzs7O3FCQUd4QyxTQUFTLENBQUMsT0FBTyxDQUFDLEdBQUcsRUFBRSxHQUFHLENBQUM7Ozs7O0lBSzVDLENBQ0ssQ0FBQyxJQUFJLENBQ0Y7TUFDTixTQUFTLENBQUMsT0FBTyxDQUFDLEdBQUcsRUFBRSxJQUFJLENBQUM7OztrQ0FHQSxTQUFTO21DQUNSLFNBQVM7Ozs7dUNBSUwsU0FBUzs7O3lEQUdTLFNBQVM7MkRBQ1AsU0FBUztLQUMvRCxFQUNPLEVBQUUsSUFBSSxFQUFFLFVBQVUsRUFBRSxDQUN2QixDQUFDO1FBQ0YsTUFBTSxZQUFZLEdBQUcsVUFBVSxTQUFTLEVBQUUsQ0FBQztRQUMzQyxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDO3lCQUNPLFlBQVk7Ozs7OztvREFNZSxTQUFTOzs7cUJBR3hDLFlBQVksQ0FBQyxPQUFPLENBQUMsR0FBRyxFQUFFLEdBQUcsQ0FBQzs7Ozs7SUFLL0MsQ0FDSyxDQUFDLElBQUksQ0FDRjtNQUNOLFlBQVksQ0FBQyxPQUFPLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQzs7a0NBRUgsU0FBUzsyREFDZ0IsU0FBUztLQUMvRCxFQUNPLEVBQUUsSUFBSSxFQUFFLFVBQVUsRUFBRSxDQUN2QixDQUFDO1FBQ0YsTUFBTSxlQUFlLEdBQUcsVUFBVSxTQUFTLEVBQUUsQ0FBQztRQUM5QyxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDO3lCQUNPLGVBQWU7Ozs7OztvREFNWSxTQUFTOzs7cUJBR3hDLGVBQWUsQ0FBQyxPQUFPLENBQUMsR0FBRyxFQUFFLEdBQUcsQ0FBQzs7Ozs7SUFLbEQsQ0FDSyxDQUFDLElBQUksQ0FDRjtNQUNOLGVBQWUsQ0FBQyxPQUFPLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQzs7OzJEQUdtQixTQUFTO0tBQy9ELEVBQ08sRUFBRSxJQUFJLEVBQUUsVUFBVSxFQUFFLENBQ3ZCLENBQUM7UUFDRixNQUFNLGFBQWEsR0FBRyxVQUFVLFNBQVMsRUFBRSxDQUFDO1FBQzVDLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7eUJBQ08sYUFBYTs7Ozs7O29EQU1jLFNBQVM7OztxQkFHeEMsYUFBYSxDQUFDLE9BQU8sQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDOzs7OztJQUtoRCxDQUNLLENBQUMsSUFBSSxDQUNGO01BQ04sYUFBYSxDQUFDLE9BQU8sQ0FBQyxHQUFHLEVBQUUsSUFBSSxDQUFDOzttQ0FFSCxTQUFTO3lEQUNhLFNBQVM7Ozs7dUNBSTNCLFNBQVM7O0tBRTNDLEVBQ08sRUFBRSxJQUFJLEVBQUUsVUFBVSxFQUFFLENBQ3ZCLENBQUM7UUFDRixNQUFNLGNBQWMsR0FBRyxVQUFVLFNBQVMsRUFBRSxDQUFDO1FBQzdDLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7MEJBQ1EsY0FBYzs7Ozs7O29EQU1ZLFNBQVM7OztxQkFHeEMsY0FBYyxDQUFDLE9BQU8sQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDOzs7OztJQUtqRCxDQUNLLENBQUMsSUFBSSxDQUNGO01BQ04sY0FBYyxDQUFDLE9BQU8sQ0FBQyxHQUFHLEVBQUUsSUFBSSxDQUFDOzs7eURBR2tCLFNBQVM7Ozs7OztLQU03RCxFQUNPLEVBQUUsSUFBSSxFQUFFLFVBQVUsRUFBRSxDQUN2QixDQUFDO1FBQ0YsTUFBTSxVQUFVLEdBQUcsU0FBUyxTQUFTLEVBQUUsQ0FBQztRQUN4QyxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDO3lCQUNPLFVBQVU7Ozs7OztvREFNaUIsU0FBUzs7O3FCQUd4QyxVQUFVLENBQUMsT0FBTyxDQUFDLEdBQUcsRUFBRSxHQUFHLENBQUM7Ozs7O0lBSzdDLENBQ0ssQ0FBQyxJQUFJLENBQ0Y7UUFDSixVQUFVLENBQUMsT0FBTyxDQUFDLEdBQUcsRUFBRSxJQUFJLENBQUM7O21DQUVGLFNBQVM7eURBQ2EsU0FBUztLQUM3RCxFQUNPLEVBQUUsSUFBSSxFQUFFLFVBQVUsRUFBRSxDQUN2QixDQUFDO1FBQ0YsTUFBTSxVQUFVLEdBQUcsU0FBUyxTQUFTLEVBQUUsQ0FBQztRQUN4QyxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDO3lCQUNPLFVBQVU7Ozs7OztvREFNaUIsU0FBUzs7O3FCQUd4QyxVQUFVLENBQUMsT0FBTyxDQUFDLEdBQUcsRUFBRSxHQUFHLENBQUM7Ozs7O0lBSzdDLENBQ0ssQ0FBQyxJQUFJLENBQ0Y7TUFDTixVQUFVLENBQUMsT0FBTyxDQUFDLEdBQUcsRUFBRSxJQUFJLENBQUM7O2tDQUVELFNBQVM7MkRBQ2dCLFNBQVM7S0FDL0QsRUFDTyxFQUFFLElBQUksRUFBRSxVQUFVLEVBQUUsQ0FDdkIsQ0FBQztJQUNOLENBQUMsQ0FBQyxDQUFDO0lBRUgsb0JBQW9CO0lBQ3BCLHFCQUFxQjtJQUNyQixrQ0FBa0M7SUFDbEMsd0RBQXdEO0lBQ3hELG1DQUFtQztJQUNuQyxrQ0FBa0M7SUFDbEMsbUNBQW1DO0lBQ25DLFFBQVE7SUFDUix3R0FBd0c7SUFDeEcsUUFBUTtJQUNSLDJCQUEyQjtJQUMzQixxREFBcUQ7SUFDckQsUUFBUTtJQUNSLDRCQUE0QjtJQUM1Qiw0RkFBNEY7SUFDNUYsU0FBUztJQUNULFFBQVE7SUFDUixlQUFlO0lBQ2Ysa0JBQWtCO0lBQ2xCLHdCQUF3QjtJQUN4QixVQUFVO0lBRVYsb0JBQW9CO0lBQ3BCLHFCQUFxQjtJQUNyQixvQ0FBb0M7SUFDcEMsd0RBQXdEO0lBQ3hELG1DQUFtQztJQUNuQyxrQ0FBa0M7SUFDbEMsbUNBQW1DO0lBQ25DLFFBQVE7SUFDUixvSEFBb0g7SUFDcEgsUUFBUTtJQUNSLDJCQUEyQjtJQUMzQix1REFBdUQ7SUFDdkQsUUFBUTtJQUNSLDRCQUE0QjtJQUM1Qiw0RkFBNEY7SUFDNUYsU0FBUztJQUNULFFBQVE7SUFDUixlQUFlO0lBQ2Ysb0JBQW9CO0lBQ3BCLG9DQUFvQztJQUNwQyxVQUFVO0lBRVYsb0JBQW9CO0lBQ3BCLHFCQUFxQjtJQUNyQixvQ0FBb0M7SUFDcEMsd0RBQXdEO0lBQ3hELG1DQUFtQztJQUNuQyxrQ0FBa0M7SUFDbEMsbUNBQW1DO0lBQ25DLFFBQVE7SUFDUixtSEFBbUg7SUFDbkgsUUFBUTtJQUNSLDJCQUEyQjtJQUMzQix1REFBdUQ7SUFDdkQsUUFBUTtJQUNSLDRCQUE0QjtJQUM1Qiw0RkFBNEY7SUFDNUYsU0FBUztJQUNULFFBQVE7SUFDUixlQUFlO0lBQ2Ysb0JBQW9CO0lBQ3BCLG1DQUFtQztJQUNuQyxVQUFVO0lBRVYsb0JBQW9CO0lBQ3BCLHFCQUFxQjtJQUNyQixvQ0FBb0M7SUFDcEMsd0RBQXdEO0lBQ3hELG1DQUFtQztJQUNuQyxrQ0FBa0M7SUFDbEMsbUNBQW1DO0lBQ25DLFFBQVE7SUFDUixrSEFBa0g7SUFDbEgsUUFBUTtJQUNSLDJCQUEyQjtJQUMzQix1REFBdUQ7SUFDdkQsUUFBUTtJQUNSLDRCQUE0QjtJQUM1Qiw0RkFBNEY7SUFDNUYsU0FBUztJQUNULFFBQVE7SUFDUixlQUFlO0lBQ2Ysb0JBQW9CO0lBQ3BCLGtDQUFrQztJQUNsQyxVQUFVO0lBRVYsb0JBQW9CO0lBQ3BCLHFCQUFxQjtJQUNyQixvQ0FBb0M7SUFDcEMsd0RBQXdEO0lBQ3hELG1DQUFtQztJQUNuQyxrQ0FBa0M7SUFDbEMsbUNBQW1DO0lBQ25DLFFBQVE7SUFDUixxSEFBcUg7SUFDckgsUUFBUTtJQUNSLDJCQUEyQjtJQUMzQix1REFBdUQ7SUFDdkQsUUFBUTtJQUNSLDRCQUE0QjtJQUM1Qiw0RkFBNEY7SUFDNUYsU0FBUztJQUNULFFBQVE7SUFDUixlQUFlO0lBQ2Ysb0JBQW9CO0lBQ3BCLHFDQUFxQztJQUNyQyxVQUFVO0lBRVYsb0JBQW9CO0lBQ3BCLHFCQUFxQjtJQUNyQixtQ0FBbUM7SUFDbkMsd0RBQXdEO0lBQ3hELG1DQUFtQztJQUNuQyxrQ0FBa0M7SUFDbEMsbUNBQW1DO0lBQ25DLFFBQVE7SUFDUiw2SEFBNkg7SUFDN0gsUUFBUTtJQUNSLDJCQUEyQjtJQUMzQixzREFBc0Q7SUFDdEQsUUFBUTtJQUNSLDRCQUE0QjtJQUM1Qiw0RkFBNEY7SUFDNUYsU0FBUztJQUNULFFBQVE7SUFDUixlQUFlO0lBQ2YsbUJBQW1CO0lBQ25CLHFDQUFxQztJQUNyQyxtQ0FBbUM7SUFDbkMsVUFBVTtJQUVWLG9CQUFvQjtJQUNwQixxQkFBcUI7SUFDckIsbUNBQW1DO0lBQ25DLHdEQUF3RDtJQUN4RCxtQ0FBbUM7SUFDbkMsa0NBQWtDO0lBQ2xDLG1DQUFtQztJQUNuQyxRQUFRO0lBQ1IsNEhBQTRIO0lBQzVILFFBQVE7SUFDUiwyQkFBMkI7SUFDM0Isc0RBQXNEO0lBQ3RELFFBQVE7SUFDUiw0QkFBNEI7SUFDNUIsNEZBQTRGO0lBQzVGLFNBQVM7SUFDVCxRQUFRO0lBQ1IsZUFBZTtJQUNmLG1CQUFtQjtJQUNuQixvQ0FBb0M7SUFDcEMsa0NBQWtDO0lBQ2xDLFVBQVU7SUFFVixPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBQzdDLE9BQU8sRUFBRSxXQUFXLEVBQUUsTUFBTSwyQkFBMkIsQ0FBQztBQUV4RDs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW1CRztBQUVILE1BQU0seUNBQTBDLFNBQVEsWUFBWTtJQUNoRSxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPLEVBQUUsQ0FBQztJQUNkLENBQUM7Q0FDSjtBQUlELE9BQU8sRUFBRSx5Q0FBeUMsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUVsRSxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sT0FBTyxFQUNQLFdBQVcsR0FNZDtJQUNHLE1BQU0sV0FBVyxxQkFDVixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFHLElBQUksT0FBTyxFQUFFLENBQUM7SUFFM0IsTUFBTSxVQUFVLEdBQUcsUUFBUSxDQUFDLEdBQUcsQ0FBQyxTQUFTLENBQUMsQ0FBQztJQUMzQyxNQUFNLFdBQVcsR0FBRyxXQUFXLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsRUFBRSxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUM7SUFFdEUsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7VUF1QkosV0FBVztTQUNSLEdBQUcsQ0FBQyxDQUFDLFNBQVMsRUFBRSxFQUFFO1FBQ2YsSUFBSSxTQUFTLEtBQUssU0FBUztZQUFFLE9BQU8sRUFBRSxDQUFDO1FBQ3ZDLE9BQU87WUFDSCx3QkFBd0IsU0FBUyx1QkFBdUIsU0FBUyx1QkFBdUI7WUFDeEYseUJBQXlCLFNBQVMsdUJBQXVCLFNBQVMsZ0NBQWdDO1lBQ2xHLDBC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

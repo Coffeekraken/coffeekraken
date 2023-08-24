@@ -123,7 +123,7 @@ export default function ({
         `,
         ).code(
             `
-        .${cls.replace(':', '--')} {
+        .${cls.replace(':', '-')} {
                 ${css}
         }`,
             { type: 'CssClass' },

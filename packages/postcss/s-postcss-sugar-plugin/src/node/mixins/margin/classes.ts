@@ -153,7 +153,7 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMargin.replace(':', '--')} {
+   .${clsMargin.replace(':', '-')} {
         margin: sugar.margin(${spaceName});
    }`,
             { type: 'CssClass' },
@@ -178,7 +178,7 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMarginTop.replace(':', '--')} {
+   .${clsMarginTop.replace(':', '-')} {
         margin-block-start: sugar.margin(${spaceName}) !important;
    }`,
             { type: 'CssClass' },
@@ -203,7 +203,7 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMarginBottom.replace(':', '--')} {
+   .${clsMarginBottom.replace(':', '-')} {
         margin-block-end: sugar.margin(${spaceName}) !important;
    }`,
             { type: 'CssClass' },
@@ -228,7 +228,7 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMarginLeft.replace(':', '--')} {
+   .${clsMarginLeft.replace(':', '-')} {
         margin-inline-start: sugar.margin(${spaceName}) !important;
    }`,
             { type: 'CssClass' },
@@ -253,7 +253,7 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMarginRight.replace(':', '--')} {
+   .${clsMarginRight.replace(':', '-')} {
         margin-inline-end: sugar.margin(${spaceName}) !important;
    }`,
             { type: 'CssClass' },
@@ -278,7 +278,7 @@ export default function ({
    `,
         ).code(
             `
-     .${clsMarginX.replace(':', '--')} {
+     .${clsMarginX.replace(':', '-')} {
         margin-inline-start: sugar.margin(${spaceName}) !important;
         margin-inline-end: sugar.margin(${spaceName}) !important;
    }`,
@@ -304,7 +304,7 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMarginY.replace(':', '--')} {
+   .${clsMarginY.replace(':', '-')} {
         margin-block-start: sugar.margin(${spaceName}) !important;
         margin-block-end: sugar.margin(${spaceName}) !important;
    }`,
@@ -335,7 +335,7 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMargin.replace(':', '--')} {
+   .${clsMargin.replace(':', '-')} {
         margin: calc(sugar.margin(${spaceName}) * -1);
    }`,
             { type: 'CssClass' },
@@ -360,7 +360,7 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMarginTop.replace(':', '--')} {
+   .${clsMarginTop.replace(':', '-')} {
         margin-block-start: calc(sugar.margin(${spaceName}) * -1) !important;
    }`,
             { type: 'CssClass' },
@@ -385,7 +385,7 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMarginBottom.replace(':', '--')} {
+   .${clsMarginBottom.replace(':', '-')} {
         margin-block-end: calc(sugar.margin(${spaceName}) * -1) !important;
    }`,
             { type: 'CssClass' },
@@ -410,7 +410,7 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMarginLeft.replace(':', '--')} {
+   .${clsMarginLeft.replace(':', '-')} {
         margin-inline-start: calc(sugar.margin(${spaceName}) * -1) !important;
    }`,
             { type: 'CssClass' },
@@ -436,7 +436,7 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMarginRight.replace(':', '--')} {
+   .${clsMarginRight.replace(':', '-')} {
         margin-inline-end: calc(sugar.margin(${spaceName}) * -1) !important;
    }`,
             { type: 'CssClass' },
@@ -461,7 +461,7 @@ export default function ({
    `,
         ).code(
             `
-     .${clsMarginX.replace(':', '--')} {
+     .${clsMarginX.replace(':', '-')} {
         margin-inline-start: calc(sugar.margin(${spaceName}) * -1) !important;
         margin-inline-end: calc(sugar.margin(${spaceName}) * -1) !important;
    }`,
@@ -487,7 +487,7 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMarginY.replace(':', '--')} {
+   .${clsMarginY.replace(':', '-')} {
         margin-block-start: calc(sugar.margin(${spaceName}) * -1) !important;
         margin-block-end: calc(sugar.margin(${spaceName}) * -1) !important;
    }`,
@@ -514,7 +514,7 @@ export default function ({
    `,
     ).code(
         `
-   .s-m--auto {
+   .s-m-auto {
         margin: auto;
    }`,
         { type: 'CssClass' },
@@ -539,7 +539,7 @@ export default function ({
    `,
     ).code(
         `
-   .s-mbs--auto {
+   .s-mbs-auto {
         margin-block-start: auto;
    }`,
         { type: 'CssClass' },
@@ -564,7 +564,7 @@ export default function ({
    `,
     ).code(
         `
-   .s-mie--auto {
+   .s-mie-auto {
         margin-inline-end: auto;
    }`,
         { type: 'CssClass' },
@@ -589,7 +589,7 @@ export default function ({
    `,
     ).code(
         `
-   .s-mbe--auto {
+   .s-mbe-auto {
         margin-block-end: auto;
    }`,
         { type: 'CssClass' },
@@ -614,7 +614,7 @@ export default function ({
    `,
     ).code(
         `
-   .s-mis--auto {
+   .s-mis-auto {
         margin-inline-start: auto;
    }`,
         { type: 'CssClass' },
@@ -639,7 +639,7 @@ export default function ({
    `,
     ).code(
         `
-   .s-mi--auto {
+   .s-mi-auto {
         margin-inline-start: auto;
         margin-inline-end: auto;
    }`,
@@ -665,7 +665,7 @@ export default function ({
    `,
     ).code(
         `
-   .s-mb--auto {
+   .s-mb-auto {
         margin-block-start: auto;
         margin-block-end: auto;
    }`,

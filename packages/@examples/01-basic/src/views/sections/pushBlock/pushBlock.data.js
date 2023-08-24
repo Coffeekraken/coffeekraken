@@ -35,9 +35,13 @@ export default {
         },
     },
     secondaryCta: {
+        lnf: {
+            id: 'outline',
+            value: 'outline',
+        },
         color: {
-            id: 'complementary',
-            value: 'complementary',
+            id: 'main',
+            value: 'main',
         },
         link: {
             text: faker.lorem.words(2),

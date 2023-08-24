@@ -82,7 +82,7 @@ export default function ({
 
     if (atRule.parent && atRule.parent.selector && themeGeneratedCss) {
         const newCss = `
-            .s-rhythm--vertical > ${atRule.parent.selector} {
+            .s-rhythm-vertical > ${atRule.parent.selector} {
                 ${themeGeneratedCss}
             }
         `;
@@ -99,7 +99,7 @@ export default function ({
                 node.selector = node.selector
                     .split(',')
                     .map((sel) => {
-                        return `.s-rhythm--vertical > ${sel}`;
+                        return `.s-rhythm-vertical > ${sel}`;
                     })
                     .join(',');
             } else {
@@ -111,7 +111,7 @@ export default function ({
     }
 
     if (declarations.length) {
-        generatedCss.push(`.s-rhythm--vertical > ${atRule.parent.selector} {
+        generatedCss.push(`.s-rhythm-vertical > ${atRule.parent.selector} {
                 ${declarations.join('\n')}
             }`);
     }

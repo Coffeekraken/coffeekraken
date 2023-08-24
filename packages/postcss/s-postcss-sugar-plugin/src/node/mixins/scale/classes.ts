@@ -130,7 +130,7 @@ export default function ({
  `,
         ).code(
             `
-.s-scale--${scaleName} {
+.s-scale-${scaleName} {
     --s-scale: ${scaleValue};
 }`,
             { type: 'CssClass' },

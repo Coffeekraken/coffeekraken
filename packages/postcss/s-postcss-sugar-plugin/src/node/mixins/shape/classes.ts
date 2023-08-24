@@ -104,7 +104,7 @@ export default function ({
 `,
     ).code(
         `
-.s-shape--default {
+.s-shape-default {
     @sugar.shape(default);
 }`,
         { type: 'CssClass' },
@@ -130,7 +130,7 @@ export default function ({
 `,
     ).code(
         `
-.s-shape--square {
+.s-shape-square {
     @sugar.shape(square);
 }`,
         { type: 'CssClass' },
@@ -156,7 +156,7 @@ export default function ({
 `,
     ).code(
         `
-.s-shape--pill {
+.s-shape-pill {
     @sugar.shape(pill);
 }`,
         { type: 'CssClass' },

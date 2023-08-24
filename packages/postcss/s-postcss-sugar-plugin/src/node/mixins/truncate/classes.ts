@@ -127,7 +127,7 @@ export default function ({
  `,
         ).code(
             `
-.s-truncate--${i + 1} {
+.s-truncate-${i + 1} {
     @sugar.truncate(${i + 1});
 }`,
             { type: 'CssClass' },

@@ -44,7 +44,7 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
             }
 
             // handle already lod scoped rules
-            if (sel.startsWith('.s-lod--')) {
+            if (sel.startsWith('.s-lod-')) {
                 newSelectors.push(sel);
                 return;
             }
@@ -84,7 +84,7 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
             // deep support
             if (levelStr) {
                 // scope the element into the lod class
-                finalSelector.push(`.s-lod--${levelStr} ${finalSelectorStr}`);
+                finalSelector.push(`.s-lod-${levelStr} ${finalSelectorStr}`);
             }
 
             // add theme if needed
@@ -118,13 +118,13 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
         }
 
         // support for @sugar.lod.prevent mixin
-        if (rule.selector.match(/\.s-lod--prevent/)) {
+        if (rule.selector.match(/\.s-lod-prevent/)) {
             return;
         }
 
         // support for @sugar.lod.filter mixin
         const filterLevelMatch = rule.selector.match(
-            /\.s-lod-filter--([0-9\-]+)/,
+            /\.s-lod-filter-([0-9\-]+)/,
         );
         if (filterLevelMatch?.[1]) {
             const filterLevels = filterLevelMatch[1].split('-');
@@ -190,7 +190,7 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
         //
         root.walkDecls(propertiesReg, (decl) => {
             // already setted lod with @sugar.lod(...)
-            if (decl.parent?.selector?.match(/\.s-lod--[0-9]{1,2}/)) {
+            if (decl.parent?.selector?.match(/\.s-lod-[0-9]{1,2}/)) {
                 return;
             }
 
@@ -200,7 +200,7 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
             }
 
             // support for @sugar.lods.prevent mixin
-            if (decl.parent?.selector?.match(/\.s-lod--prevent/)) {
+            if (decl.parent?.selector?.match(/\.s-lod-prevent/)) {
                 return;
             }
 
@@ -226,16 +226,13 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
 
     // handle "file" method on rule
     if (settings.lod.method === 'file') {
-        root.walkRules(/\.s-lod--[0-9]{1,2}/, (rule) => {
+        root.walkRules(/\.s-lod-[0-9]{1,2}/, (rule) => {
             const level = parseInt(
-                rule.selector.match(/\.s-lod--([0-9]{1,2})/)[1],
+                rule.selector.match(/\.s-lod-([0-9]{1,2})/)[1],
             );
 
-            // remove the .s-lod--%level... class from the selector
-            rule.selector = rule.selector.replace(
-                /\.s-lod--[0-9\s]{1,2}/gm,
-                '',
-            );
+            // remove the .s-lod-%level... class from the selector
+            rule.selector = rule.selector.replace(/\.s-lod-[0-9\s]{1,2}/gm, '');
 
             // add the rule in the root
             if (!_lodRulesByLevels[level]) {
@@ -307,26 +304,26 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
     });
 
     // remove .s-lod-filter-... in selectors
-    root.walkRules(/\.s-lod-filter--[0-9\-]+/, (rule) => {
+    root.walkRules(/\.s-lod-filter-[0-9\-]+/, (rule) => {
         rule.selectors = rule.selectors.map((sel) => {
-            return sel.replace(/\.s-lod-filter--[0-9\-]+\s?/gm, '');
+            return sel.replace(/\.s-lod-filter-[0-9\-]+\s?/gm, '');
         });
     });
 
-    // remove .s-lod--prevent in selectors
-    root.walkRules(/\.s-lod--prevent/, (rule) => {
+    // remove .s-lod-prevent in selectors
+    root.walkRules(/\.s-lod-prevent/, (rule) => {
         rule.selectors = rule.selectors.map((sel) => {
-            return sel.replace(/\.s-lod--prevent\s?/gm, '');
+            return sel.replace(/\.s-lod-prevent\s?/gm, '');
         });
     });
 
-    // make sure the remaining ".s-lod--..." classes are at the start of each selectors
+    // make sure the remaining ".s-lod-..." classes are at the start of each selectors
     root.walkRules(
-        /(\.s-lod--[0-9]{1,2}(\:not\(\.s-lod--[0-9]{1,2}\))+)/,
+        /(\.s-lod-[0-9]{1,2}(\:not\(\.s-lod-[0-9]{1,2}\))+)/,
         (rule) => {
             rule.selectors = rule.selectors.map((sel) => {
                 const lodSel = sel.match(
-                    /(\.s-lod--[0-9]{1,2}(\:not\(\.s-lod--[0-9]{1,2}\))+)/gm,
+                    /(\.s-lod-[0-9]{1,2}(\:not\(\.s-lod-[0-9]{1,2}\))+)/gm,
                 );
                 if (!lodSel?.[0]) {
                     return rule.selector;
@@ -338,9 +335,9 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
             });
         },
     );
-    root.walkRules(/(\.s-lod--[0-9]{1,2})/, (rule) => {
+    root.walkRules(/(\.s-lod-[0-9]{1,2})/, (rule) => {
         rule.selectors = rule.selectors.map((sel) => {
-            const lodSel = sel.match(/(\.s-lod--[0-9]{1,2})/gm);
+            const lodSel = sel.match(/(\.s-lod-[0-9]{1,2})/gm);
             if (!lodSel?.[0]) {
                 return rule.selector;
             }
@@ -358,7 +355,7 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
             .map((s) => {
                 s = s.trim();
 
-                if (s.match(/^\.s-lod--/)) {
+                if (s.match(/^\.s-lod-/)) {
                     s = `${'.s-wireframe'}${s.replace('.s-wireframe', '')}`;
                 } else {
                     s = `${'.s-wireframe'} ${s.replace('.s-wireframe', '')}`;
@@ -369,11 +366,11 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
             .join(',');
     });
 
-    // ensure the .s-lod--... [theme^="..."] are put together without space...
-    root.walkRules(/\.s-lod--[0-9]{1,2}\s\[theme[\^\$]=/, (rule) => {
+    // ensure the .s-lod-... [theme^="..."] are put together without space...
+    root.walkRules(/\.s-lod-[0-9]{1,2}\s\[theme[\^\$]=/, (rule) => {
         rule.selector = rule.selector.replace(
-            /\.s-lod--([0-9]{1,2})\s\[theme/gm,
-            '.s-lod--$1[theme',
+            /\.s-lod-([0-9]{1,2})\s\[theme/gm,
+            '.s-lod-$1[theme',
         );
     });
 
@@ -387,10 +384,7 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
 
                 if (matches) {
                     matches.forEach((match) => {
-                        if (
-                            s.match(/^\.s-lod--/) ||
-                            s.match(/^\.s-wireframe/)
-                        ) {
+                        if (s.match(/^\.s-lod-/) || s.match(/^\.s-wireframe/)) {
                             s = `${match}${s.replace(match, '')}`;
                         } else {
                             s = `${match} ${s.replace(match, '')}`;
@@ -403,12 +397,12 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
             .join(',');
     });
 
-    // ensure that .s-wireframe selectors does not have any .s-lod---
+    // ensure that .s-wireframe selectors does not have any .s-lod-
     root.walkRules(/\.s-wireframe/, (rule) => {
         rule.selector = rule.selector
             .split(',')
             .map((s) => {
-                return s.replace(/\.s-lod--[0-9]+/gm, '');
+                return s.replace(/\.s-lod-[0-9]+/gm, '');
             })
             .join(',');
     });

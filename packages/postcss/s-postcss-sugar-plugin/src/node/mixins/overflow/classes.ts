@@ -147,7 +147,7 @@ export default function ({
     `,
     ).code(
         `
-    .s-overflow--auto {
+    .s-overflow-auto {
         overflow: auto;
     }`,
         { type: 'CssClass' },
@@ -171,7 +171,7 @@ export default function ({
     `,
     ).code(
         `
-    .s-overflow--hidden {
+    .s-overflow-hidden {
         overflow: hidden;
     }`,
         { type: 'CssClass' },
@@ -195,7 +195,7 @@ export default function ({
     `,
     ).code(
         `
-    .s-overflow--inherit {
+    .s-overflow-inherit {
         overflow: inherit;
     }`,
         { type: 'CssClass' },
@@ -219,7 +219,7 @@ export default function ({
     `,
     ).code(
         `
-    .s-overflow--initial {
+    .s-overflow-initial {
         overflow: initial;
     }`,
         { type: 'CssClass' },
@@ -243,7 +243,7 @@ export default function ({
     `,
     ).code(
         `
-    .s-overflow--overlay {
+    .s-overflow-overlay {
         overflow: overlay;
     }`,
         { type: 'CssClass' },
@@ -267,7 +267,7 @@ export default function ({
     `,
     ).code(
         `
-    .s-overflow--revert {
+    .s-overflow-revert {
         overflow: revert;
     }`,
         { type: 'CssClass' },
@@ -291,7 +291,7 @@ export default function ({
     `,
     ).code(
         `
-    .s-overflow--scroll {
+    .s-overflow-scroll {
         overflow: scroll;
     }`,
         { type: 'CssClass' },
@@ -315,7 +315,7 @@ export default function ({
     `,
     ).code(
         `
-    .s-overflow--visible {
+    .s-overflow-visible {
         overflow: visible;
     }`,
         { type: 'CssClass' },
@@ -339,7 +339,7 @@ export default function ({
     `,
     ).code(
         `
-    .s-overflow--unset {
+    .s-overflow-unset {
         overflow: unset;
     }`,
         { type: 'CssClass' },

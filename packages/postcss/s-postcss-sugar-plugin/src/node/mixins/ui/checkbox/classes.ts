@@ -229,7 +229,7 @@ export default function ({
     finalParams.lnfs.forEach((lnf) => {
         let cls = `s-checkbox`;
         if (lnf !== finalParams.defaultLnf) {
-            cls += `--${lnf}`;
+            cls += `-${lnf}`;
         }
 
         vars.comment(

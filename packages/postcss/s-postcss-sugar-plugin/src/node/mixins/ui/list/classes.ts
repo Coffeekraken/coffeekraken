@@ -236,7 +236,7 @@ export default function ({
             ).code(
                 `
             .s-list${
-                finalParams.defaultLnf === lnf ? '' : `--${lnf}`
+                finalParams.defaultLnf === lnf ? '' : `-${lnf}`
             }:not(.s-bare) {
                 @sugar.ui.list($scope: lnf);
             }
@@ -251,7 +251,7 @@ export default function ({
     // ul
     vars.comment(
         () => `/**
-        * @name           s-list--ul
+        * @name           s-list-ul
         * @namespace          sugar.style.ui.list
         * @type           CssClass
         * 
@@ -271,7 +271,7 @@ export default function ({
      `,
     ).code(
         `
-      .s-list--ul {
+      .s-list-ul {
         @sugar.ui.list($lnf: ul, $scope: '${finalParams.scope.join(',')}');
       }
   `,
@@ -283,7 +283,7 @@ export default function ({
     // ul:icon
     vars.comment(
         () => `/**
-        * @name           s-list--icon
+        * @name           s-list-icon
         * @namespace          sugar.style.ui.list
         * @type           CssClass
         * 
@@ -303,7 +303,7 @@ export default function ({
     );
     vars.code(
         () => `
-      .s-list--icon {
+      .s-list-icon {
           @sugar.ui.list($lnf: icon, $scope: '${finalParams.scope.join(',')}');
       }`,
         {
@@ -314,7 +314,7 @@ export default function ({
     // ol
     vars.comment(
         () => `/**
-        * @name           s-list--ol
+        * @name           s-list-ol
         * @namespace          sugar.style.ui.list
         * @type           CssClass
         * 
@@ -323,7 +323,7 @@ export default function ({
         * @feature       Support vertical rhythm
         * 
         * @example        html
-        * <ul class="s-list--ol">
+        * <ul class="s-list-ol">
         *   <li>Hello</li>
         *   <li>World</li>
         * </ul>
@@ -334,7 +334,7 @@ export default function ({
      `,
     ).code(
         `
-      .s-list--ol {
+      .s-list-ol {
         @sugar.ui.list($lnf: ol, $scope: '${finalParams.scope.join(',')}');
       }   
   `,
@@ -346,7 +346,7 @@ export default function ({
     // dl
     vars.comment(
         () => `/**
-        * @name           s-list--dl
+        * @name           s-list-dl
         * @namespace          sugar.style.ui.list
         * @type           CssClass
         * 
@@ -355,7 +355,7 @@ export default function ({
         * @feature       Support vertical rhythm
         * 
         * @example        html
-        * <ul class="s-list--dl">
+        * <ul class="s-list-dl">
         *   <li>Hello</li>
         *   <li>World</li>
         * </ul>
@@ -366,7 +366,7 @@ export default function ({
      `,
     ).code(
         `
-      .s-list--dl {
+      .s-list-dl {
         @sugar.ui.list($lnf: dl, $scope: '${finalParams.scope.join(',')}');
       }   
   `,
@@ -480,8 +480,8 @@ export default function ({
        `,
         ).code(`
             @sugar.rhythm.vertical {
-                ul, .s-list--ul,
-                ol, .s-list--ol {
+                ul, .s-list-ul,
+                ol, .s-list-ol {
                     ${__STheme.jsObjectToCssProperties(
                         __STheme.get('ui.list.rhythmVertical'),
                     )}

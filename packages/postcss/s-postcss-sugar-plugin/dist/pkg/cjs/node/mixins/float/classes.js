@@ -91,7 +91,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     * </div>
     */
     `).code(`
-    .s-float--left {
+    .s-float-left {
         float: left;
     }`, { type: 'CssClass' });
     vars.comment(() => `/**
@@ -109,7 +109,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     * </div>
     */
     `).code(`
-    .s-float--right {
+    .s-float-right {
         float: right;
     }`, { type: 'CssClass' });
     vars.comment(() => `/**
@@ -127,7 +127,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     * </div>
     */
     `).code(`
-    .s-float--none {
+    .s-float-none {
         float: none;
     }`, { type: 'CssClass' });
     return vars;

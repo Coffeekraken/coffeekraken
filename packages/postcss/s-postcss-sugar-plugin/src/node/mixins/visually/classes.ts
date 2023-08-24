@@ -102,7 +102,7 @@ export default function ({
     `,
     ).code(
         `
-    .s-visually--hidden {
+    .s-visually-hidden {
        @sugar.visually.hidden;
     }`,
         { type: 'CssClass' },

@@ -122,7 +122,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             @sugar.wireframe {
                 @sugar.wireframe.image;
         
-                &:has(.s-media--map) {
+                &:has(.s-media-map) {
                     @sugar.wireframe.image(map);
                 }
             }

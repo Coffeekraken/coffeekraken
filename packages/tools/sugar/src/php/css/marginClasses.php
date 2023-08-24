@@ -58,27 +58,27 @@ function marginClasses($margins = [], $frontspec = [])
         }
     } else {
         if (isset($margins['margin'])) {
-            array_push($classes, 's-m--' . $margins['all']);
+            array_push($classes, 's-m-' . $margins['all']);
         }
 
         if (isset($margins['marginBlock'])) {
-            array_push($classes, 's-mb--' . $margins['block']);
+            array_push($classes, 's-mb-' . $margins['block']);
         }
         if (isset($margins['marginInline'])) {
-            array_push($classes, 's-mi--' . $margins['inline']);
+            array_push($classes, 's-mi-' . $margins['inline']);
         }
 
         if (isset($margins['marginTop'])) {
-            array_push($classes, 's-mbs--' . $margins['marginTop']);
+            array_push($classes, 's-mbs-' . $margins['marginTop']);
         }
         if (isset($margins['marginRight'])) {
-            array_push($classes, 's-mie--' . $margins['marginRight']);
+            array_push($classes, 's-mie-' . $margins['marginRight']);
         }
         if (isset($margins['marginBottom'])) {
-            array_push($classes, 's-mbe--' . $margins['marginBottom']);
+            array_push($classes, 's-mbe-' . $margins['marginBottom']);
         }
         if (isset($margins['marginLeft'])) {
-            array_push($classes, 's-mis--' . $margins['marginLeft']);
+            array_push($classes, 's-mis-' . $margins['marginLeft']);
         }
     }
 

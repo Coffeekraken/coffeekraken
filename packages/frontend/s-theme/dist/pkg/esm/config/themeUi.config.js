@@ -147,6 +147,162 @@ export default (api) => {
                 'margin-bottom': 60,
             },
         },
+        menu: {
+            /**
+             * @name          paddingInline
+             * @namespace     config.themeUi.menu
+             * @type          String
+             * @default      [theme.padding.50]
+             *
+             * Specify the default padding inline for code ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get paddingInline() {
+                return api.theme.padding['40'];
+            },
+            /**
+             * @name          paddingBlock
+             * @namespace     config.themeUi.menu
+             * @type          String
+             * @default      [theme.padding.50]
+             *
+             * Specify the default padding block for code ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get paddingBlock() {
+                return api.theme.padding['30'];
+            },
+            /**
+             * @name          borderRadius
+             * @namespace     config.themeUi.menu
+             * @type          String
+             * @default      [theme.ui.default.borderRadius]
+             *
+             * Specify the default border radius for code ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get borderRadius() {
+                return api.theme.ui.default.borderRadius;
+            },
+            /**
+             * @name          borderWidth
+             * @namespace     config.themeUi.menu
+             * @type          String
+             * @default      [theme.ui.default.borderWidth]
+             *
+             * Specify the default border width for code ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get borderWidth() {
+                return api.theme.ui.default.borderWidth;
+            },
+            /**
+             * @name          transition
+             * @namespace     config.themeUi.menu
+             * @type          String
+             * @default      [theme.ui.default.transition]
+             *
+             * Specify the default transition for code ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get transition() {
+                return api.theme.ui.default.transition;
+            },
+            /**
+             * @name          defaultLnf
+             * @namespace     config.themeUi.menu
+             * @type          Number
+             * @default      [theme.ui.default.defaultLnf]
+             *
+             * Specify the default look and feel for your menus
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get defaultLnf() {
+                return api.theme.ui.default.defaultLnf;
+            },
+            /**
+             * @name          defaultType
+             * @namespace     config.themeUi.menu
+             * @type          Number
+             * @default      primary
+             *
+             * Specify the default look and feel for your menus
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            defaultType: 'primary',
+            /**
+             * @name          depth
+             * @namespace     config.themeUi.menu
+             * @type          String
+             * @default      [theme.ui.default.depth]
+             *
+             * Specify the default depth for code items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get depth() {
+                return api.theme.ui.default.depth;
+            },
+            /**
+             * @name          rhythmVertical
+             * @namespace     config.themeUi.menu
+             * @type          Object
+             * @default      [theme.ui.default.rhythmVertical]
+             *
+             * Specify the default vertical rhythm for your code ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get rhythmVertical() {
+                return api.theme.ui.default.rhythmVertical;
+            },
+        },
+        card: {
+            /**
+             * @name          paddingInline
+             * @namespace     config.themeUi.card
+             * @type          String
+             * @default      [theme.padding.50]
+             *
+             * Specify the default padding inline for code ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get paddingInline() {
+                return api.theme.padding['50'];
+            },
+            /**
+             * @name          paddingBlock
+             * @namespace     config.themeUi.card
+             * @type          String
+             * @default      [theme.padding.50]
+             *
+             * Specify the default padding block for code ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get paddingBlock() {
+                return api.theme.padding['50'];
+            },
+        },
         form: {
             /**
              * @name          paddingInline
@@ -185,20 +341,6 @@ export default (api) => {
              */
             borderRadius: 1,
             /**
-             * @name          borderWidth
-             * @namespace     config.themeUi.form
-             * @type          String
-             * @default      [theme.border.width.default]
-             *
-             * Specify the default border width for form items
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            get borderWidth() {
-                return api.theme.border.width.default;
-            },
-            /**
              * @name          transition
              * @namespace     config.themeUi.form
              * @type          String
@@ -225,20 +367,6 @@ export default (api) => {
              */
             get outline() {
                 return api.theme.ui.outline.active;
-            },
-            /**
-             * @name          depth
-             * @namespace     config.themeUi.form
-             * @type          String
-             * @default      [theme.ui.default.depth]
-             *
-             * Specify the default depth for form items
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            get depth() {
-                return api.theme.ui.default.depth;
             },
             rhythmVertical: {
                 /**
@@ -499,4 +627,4 @@ export default (api) => {
         },
     };
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7R0FZRztBQUVILGVBQWUsQ0FBQyxHQUFHLEVBQUUsRUFBRTtJQUNuQixPQUFPO1FBQ0gsT0FBTyxFQUFFO1lBQ0w7Ozs7Ozs7Ozs7ZUFVRztZQUNILGFBQWEsRUFBRSxJQUFJO1lBQ25COzs7Ozs7Ozs7O2VBVUc7WUFDSCxZQUFZLEVBQUUsSUFBSTtZQUNsQjs7Ozs7Ozs7OztlQVVHO1lBQ0gsWUFBWSxFQUFFLENBQUM7WUFDZjs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxXQUFXO2dCQUNYLE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQztZQUMxQyxDQUFDO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksVUFBVTtnQkFDVixPQUFPLEdBQUcsQ0FBQyxLQUFLLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQztZQUNyQyxDQUFDO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILFVBQVUsRUFBRSxPQUFPO1lBRW5COzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEtBQUs7Z0JBQ0wsT0FBTyxHQUFHLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUM7WUFDbkMsQ0FBQztZQUNEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLE9BQU87Z0JBQ1AsT0FBTyxHQUFHLENBQUMsS0FBSyxDQUFDLEVBQUUsQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDO1lBQ3ZDLENBQUM7WUFDRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxPQUFPO2dCQUNQLE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDakMsQ0FBQztZQUVELGNBQWMsRUFBRTtnQkFDWjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxlQUFlLEVBQUUsRUFBRTthQUN0QjtT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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7R0FZRztBQUVILGVBQWUsQ0FBQyxHQUFHLEVBQUUsRUFBRTtJQUNuQixPQUFPO1FBQ0gsT0FBTyxFQUFFO1lBQ0w7Ozs7Ozs7Ozs7ZUFVRztZQUNILGFBQWEsRUFBRSxJQUFJO1lBQ25COzs7Ozs7Ozs7O2VBVUc7WUFDSCxZQUFZLEVBQUUsSUFBSTtZQUNsQjs7Ozs7Ozs7OztlQVVHO1lBQ0gsWUFBWSxFQUFFLENBQUM7WUFDZjs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxXQUFXO2dCQUNYLE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQztZQUMxQyxDQUFDO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksVUFBVTtnQkFDVixPQUFPLEdBQUcsQ0FBQyxLQUFLLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQztZQUNyQyxDQUFDO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILFVBQVUsRUFBRSxPQUFPO1lBRW5COzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEtBQUs7Z0JBQ0wsT0FBTyxHQUFHLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUM7WUFDbkMsQ0FBQztZQUNEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLE9BQU87Z0JBQ1AsT0FBTyxHQUFHLENBQUMsS0FBSyxDQUFDLEVBQUUsQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDO1lBQ3ZDLENBQUM7WUFDRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxPQUFPO2dCQUNQLE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDakMsQ0FBQztZQUVELGNBQWMsRUFBRTtnQkFDWjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxlQUFlLEVBQUUsRUFBRTthQUN0QjtT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

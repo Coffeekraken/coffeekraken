@@ -156,7 +156,7 @@ export default function ({
         */`,
         ).code(
             `
-            .s-toggle--${type} {
+            .s-toggle-${type} {
                 @sugar.ui.toggle(${type});
             }
         `,

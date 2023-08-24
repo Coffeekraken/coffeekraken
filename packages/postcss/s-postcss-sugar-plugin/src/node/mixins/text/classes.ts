@@ -153,7 +153,7 @@ export default function ({
     `,
     ).code(
         `
-        .s-text--left {
+        .s-text-left {
             text-align: left;
         }
         `,
@@ -180,7 +180,7 @@ export default function ({
         `,
     ).code(
         `
-        .s-text--right {
+        .s-text-right {
             text-align: right;
         }
         `,
@@ -207,7 +207,7 @@ export default function ({
          `,
     ).code(
         `
-        .s-text--center {
+        .s-text-center {
             text-align: center;
         }
         `,
@@ -234,7 +234,7 @@ export default function ({
         `,
     ).code(
         `
-        .s-text--start {
+        .s-text-start {
             text-align: start;
         }
         `,
@@ -261,7 +261,7 @@ export default function ({
         `,
     ).code(
         `
-        .s-text--end {
+        .s-text-end {
             text-align: end;
         }
         `,
@@ -288,7 +288,7 @@ export default function ({
         `,
     ).code(
         `
-        .s-text--justify {
+        .s-text-justify {
             text-align: justify;
         }
         `,
@@ -315,7 +315,7 @@ export default function ({
         `,
     ).code(
         `
-        .s-text--decoration.s-text--none {
+        .s-text-decoration.s-text-none {
             text-decoration: none !important;
         }
         `,
@@ -342,7 +342,7 @@ export default function ({
         `,
     ).code(
         `
-        .s-text--overline {
+        .s-text-overline {
             text-decoration: overline;
         }
         `,
@@ -369,7 +369,7 @@ export default function ({
         `,
     ).code(
         `
-        .s-text--underline {
+        .s-text-underline {
             text-decoration: underline;
         }
         `,
@@ -396,7 +396,7 @@ export default function ({
         `,
     ).code(
         `
-        .s-text--line-through {
+        .s-text-line-through {
             text-decoration: line-through;
         }
         `,
@@ -423,7 +423,7 @@ export default function ({
         `,
     ).code(
         `
-        .s-text--lowercase {
+        .s-text-lowercase {
             text-transform: lowercase;
         }
         `,
@@ -450,7 +450,7 @@ export default function ({
         `,
     ).code(
         `
-        .s-text--uppercase {
+        .s-text-uppercase {
             text-transform: uppercase;
         }
         `,
@@ -477,7 +477,7 @@ export default function ({
         `,
     ).code(
         `
-        .s-text--capitalize {
+        .s-text-capitalize {
             text-transform: capitalize;
         }
         `,

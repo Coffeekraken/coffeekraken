@@ -1,0 +1,59 @@
+<section id="{{ id }}" class="s-section s-section-testimonials {{ attributes.class }} {{ __containerClasses(container) }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}>
+{{ __nodeDataTemplate('views.sections.testimonials', _context)|raw }}
+
+    <div class="_content {{ __spacingClasses(spacing, 30) }}">
+        {% if title %}
+            <h1 class="_title s-typo s-typo-h1">{{ title|raw }}</h1>
+        {% endif %}
+        {% if intro %}
+            <p class="_lead s-typo s-typo-lead">{{ intro|raw }}</p>
+        {% endif %}
+        {% if text %}
+            <p class="_text s-typo s-typo-p">{{ text|raw }}</p>
+        {% endif %}
+
+        <ol class="_testimonials">
+        {% for idx, testimonial in testimonials %}
+            <li class="_testimonial {{ __spacingClasses(spacing, 30) }}">
+                {% if testimonial.rating %}
+                    <p class="_rating">{{ testimonial.rating }}</p>
+                {% endif %}
+                {% if testimonial.text %}
+                    <p class="_text s-typo s-typo-lead">{{ testimonial.text }}</p>
+                {% endif %}
+                <div class="_author">
+                    {% if testimonial.image %}
+                        <figure class="_figure s-media">
+                            <img class="_img" src="{{ testimonial.image.url }}" alt="{{ testimonial.name }}" />
+                        </figure>
+                    {% endif %}
+                    {% if testimonial.name or testimonial.role %}
+                        <div class="_metas">
+                            {% if testimonial.name %}
+                                <h3 class="_name s-typo s-typo-h4">{{ testimonial.name }}</h3>
+                            {% endif %}
+                            {% if testimonial.role %}
+                                <h3 class="_name s-typo s-typo-p">{{ testimonial.role }}</h3>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+            </li>
+        {% endfor %}
+        </ol>
+
+        <div class="_ctas">
+            {% if primaryCta %}
+                <div class="_cta _primary-cta">
+                    {% include 'sugar/components/cta/cta.twig' with primaryCta only %}
+                </div>
+            {% endif %}
+            {% if secondaryCta %}
+                <div class="_cta _secondary-cta">
+                    {% include 'sugar/components/cta/cta.twig' with secondaryCta only %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+</section>

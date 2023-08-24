@@ -1,0 +1,10 @@
+<section id="{{ id }}" class="s-section s-section-nude {{ attributes.class }} {{ __containerClasses(container) }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}>
+{{ __nodeDataTemplate('views.sections.nude', _context)|raw }}
+
+    {% if nodes %}
+        {{ nodes|join()|raw }}
+    {% else %}
+        {{ html|raw }}
+    {% endif %}
+
+</section>

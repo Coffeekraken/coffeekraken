@@ -128,7 +128,7 @@ export default async function ({ root, sharedData, settings }) {
         name: fantasticonConfig.name,
         normalize: true,
         selector: '.s-icon',
-        prefix: '--',
+        prefix: '-',
     });
 
     // read folder icons
@@ -141,9 +141,9 @@ export default async function ({ root, sharedData, settings }) {
         iconsSelectorsArray: string[] = [];
     iconsFilenames.forEach((filename) => {
         iconsSelectorsArrayBefore.push(
-            `.s-icon--${filename.replace(/\.svg$/, '')}:before`,
+            `.s-icon-${filename.replace(/\.svg$/, '')}:before`,
         );
-        iconsSelectorsArray.push(`.s-icon--${filename.replace(/\.svg$/, '')}`);
+        iconsSelectorsArray.push(`.s-icon-${filename.replace(/\.svg$/, '')}`);
     });
 
     const cssPath = `${fantasticonConfig.outputDir}/${fantasticonConfig.name}.css`;
@@ -156,7 +156,7 @@ export default async function ({ root, sharedData, settings }) {
     );
 
     // replace some parts in the output css
-    cssStr = cssStr.replace(/\.s-icon\.--/gm, '.s-icon-');
+    cssStr = cssStr.replace(/\.s-icon\.-/gm, '.s-icon-');
     cssStr = cssStr.replace(
         /\.s-icon:before\s?{/,
         `${iconsSelectorsArrayBefore.join(',')} {\nposition: relative;\n`,

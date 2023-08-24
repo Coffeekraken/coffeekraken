@@ -152,6 +152,171 @@ export default (api) => {
                 'margin-bottom': 60,
             },
         },
+        menu: {
+            /**
+             * @name          paddingInline
+             * @namespace     config.themeUi.menu
+             * @type          String
+             * @default      [theme.padding.50]
+             *
+             * Specify the default padding inline for code ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get paddingInline() {
+                return api.theme.padding['40'];
+            },
+
+            /**
+             * @name          paddingBlock
+             * @namespace     config.themeUi.menu
+             * @type          String
+             * @default      [theme.padding.50]
+             *
+             * Specify the default padding block for code ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get paddingBlock() {
+                return api.theme.padding['30'];
+            },
+
+            /**
+             * @name          borderRadius
+             * @namespace     config.themeUi.menu
+             * @type          String
+             * @default      [theme.ui.default.borderRadius]
+             *
+             * Specify the default border radius for code ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get borderRadius() {
+                return api.theme.ui.default.borderRadius;
+            },
+
+            /**
+             * @name          borderWidth
+             * @namespace     config.themeUi.menu
+             * @type          String
+             * @default      [theme.ui.default.borderWidth]
+             *
+             * Specify the default border width for code ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get borderWidth() {
+                return api.theme.ui.default.borderWidth;
+            },
+
+            /**
+             * @name          transition
+             * @namespace     config.themeUi.menu
+             * @type          String
+             * @default      [theme.ui.default.transition]
+             *
+             * Specify the default transition for code ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get transition() {
+                return api.theme.ui.default.transition;
+            },
+
+            /**
+             * @name          defaultLnf
+             * @namespace     config.themeUi.menu
+             * @type          Number
+             * @default      [theme.ui.default.defaultLnf]
+             *
+             * Specify the default look and feel for your menus
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get defaultLnf() {
+                return api.theme.ui.default.defaultLnf;
+            },
+
+            /**
+             * @name          defaultType
+             * @namespace     config.themeUi.menu
+             * @type          Number
+             * @default      primary
+             *
+             * Specify the default look and feel for your menus
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            defaultType: 'primary',
+
+            /**
+             * @name          depth
+             * @namespace     config.themeUi.menu
+             * @type          String
+             * @default      [theme.ui.default.depth]
+             *
+             * Specify the default depth for code items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get depth() {
+                return api.theme.ui.default.depth;
+            },
+
+            /**
+             * @name          rhythmVertical
+             * @namespace     config.themeUi.menu
+             * @type          Object
+             * @default      [theme.ui.default.rhythmVertical]
+             *
+             * Specify the default vertical rhythm for your code ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get rhythmVertical() {
+                return api.theme.ui.default.rhythmVertical;
+            },
+        },
+        card: {
+            /**
+             * @name          paddingInline
+             * @namespace     config.themeUi.card
+             * @type          String
+             * @default      [theme.padding.50]
+             *
+             * Specify the default padding inline for code ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get paddingInline() {
+                return api.theme.padding['50'];
+            },
+
+            /**
+             * @name          paddingBlock
+             * @namespace     config.themeUi.card
+             * @type          String
+             * @default      [theme.padding.50]
+             *
+             * Specify the default padding block for code ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get paddingBlock() {
+                return api.theme.padding['50'];
+            },
+        },
         form: {
             /**
              * @name          paddingInline
@@ -189,20 +354,6 @@ export default (api) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderRadius: 1,
-            /**
-             * @name          borderWidth
-             * @namespace     config.themeUi.form
-             * @type          String
-             * @default      [theme.border.width.default]
-             *
-             * Specify the default border width for form items
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            get borderWidth() {
-                return api.theme.border.width.default;
-            },
 
             /**
              * @name          transition
@@ -232,21 +383,6 @@ export default (api) => {
              */
             get outline() {
                 return api.theme.ui.outline.active;
-            },
-
-            /**
-             * @name          depth
-             * @namespace     config.themeUi.form
-             * @type          String
-             * @default      [theme.ui.default.depth]
-             *
-             * Specify the default depth for form items
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            get depth() {
-                return api.theme.ui.default.depth;
             },
 
             rhythmVertical: {

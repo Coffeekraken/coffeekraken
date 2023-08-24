@@ -94,7 +94,7 @@ export default function ({
         `,
         ).code(
             `
-        .s-platform--${name} {
+        .s-platform-${name} {
           @sugar.platform(${name});
         }
 

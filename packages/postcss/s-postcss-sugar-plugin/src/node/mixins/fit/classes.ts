@@ -127,7 +127,7 @@ export default function ({
             `,
         ).code(
             `
-                .s-fit--${fitSizeName} {
+                .s-fit-${fitSizeName} {
                     @sugar.fit(${fitSizeName});
                 }`,
             { type: 'CssClass' },

@@ -20,82 +20,28 @@
                     "type": "node"
                 },
                 {
-                    "uid": "layout-aaa",
+                    "uid": "section-rich-text",
                     "type": "node",
                     "nodes": [
                         {
-                            "uid": "area-1",
-                            "type": "container",
-                            "nodes": [
-                                {
-                                    "uid": "card-aws",
-                                    "type": "node"
-                                }
-                            ]
-                        },
-                        {
-                            "uid": "area-2",
-                            "type": "container",
-                            "nodes": [
-                                {
-                                    "uid": "card-asasas",
-                                    "type": "node"
-                                }
-                            ]
+                            "uid": "component-rich-text",
+                            "type": "node"
                         }
                     ]
                 },
                 {
-                    "uid": "layout-header",
+                    "uid": "section-cards",
                     "type": "node",
                     "nodes": [
                         {
-                            "uid": "area-1",
-                            "type": "container",
-                            "nodes": [
-                                {
-                                    "uid": "separator-asdfasd",
-                                    "type": "node"
-                                },
-                                {
-                                    "uid": "card-header-2",
-                                    "type": "node"
-                                },
-                                {
-                                    "uid": "card-3",
-                                    "type": "node"
-                                }
-                            ]
-                        },
-                        {
-                            "uid": "area-2",
-                            "type": "container",
-                            "nodes": [
-                                {
-                                    "uid": "card-plop-1",
-                                    "type": "node"
-                                },
-                                {
-                                    "uid": "card-ddddd",
-                                    "type": "node"
-                                }
-                            ]
-                        },
-                        {
-                            "uid": "area-3",
-                            "type": "container",
-                            "nodes": [
-                                {
-                                    "uid": "card-wwwwwwww",
-                                    "type": "node"
-                                },
-                                {
-                                    "uid": "card-plop",
-                                    "type": "node"
-                                }
-                            ]
+                            "uid": "component-cards",
+                            "type": "node"
                         }
                     ]
+                },
+                {
+                    "uid": "section-testimonials",
+                    "type": "node"
                 }
             ]
         }

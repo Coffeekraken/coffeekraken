@@ -184,7 +184,7 @@ export default function ({
     let newSelectors: string[] = [];
 
     levels.forEach((lod) => {
-        let cls = `.s-lod--${lod}`;
+        let cls = `.s-lod-${lod}`;
         newSelectors.push(`${cls}`);
     });
 
@@ -192,7 +192,7 @@ export default function ({
     if (action === '<') {
         newSelectors = newSelectors.map((s) => {
             for (let i = levelInt; i < Object.keys(levelsObj).length; i++) {
-                s += `:not(.s-lod--${i})`;
+                s += `:not(.s-lod-${i})`;
             }
             s += ' ';
             return s;
@@ -200,7 +200,7 @@ export default function ({
     } else if (action === '<=') {
         newSelectors = newSelectors.map((s) => {
             for (let i = levelInt + 1; i < Object.keys(levelsObj).length; i++) {
-                s += `:not(.s-lod--${i})`;
+                s += `:not(.s-lod-${i})`;
             }
             s += ' ';
             return s;

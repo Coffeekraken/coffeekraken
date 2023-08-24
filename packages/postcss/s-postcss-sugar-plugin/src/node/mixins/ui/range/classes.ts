@@ -257,7 +257,7 @@ export default function ({
         finalParams.lnfs.forEach((lnf) => {
             let cls = `s-range`;
             if (lnf !== finalParams.defaultLnf) {
-                cls += `--${lnf}`;
+                cls += `-${lnf}`;
             }
 
             vars.comment(

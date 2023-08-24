@@ -216,7 +216,7 @@ export default function ({
         finalParams.lnfs.forEach((lnf) => {
             const isDefaultStyle = finalParams.defaultLnf === lnf;
 
-            const styleCls = isDefaultStyle ? '' : `.s-input--${lnf}`;
+            const styleCls = isDefaultStyle ? '' : `.s-input-${lnf}`;
             const cls = `.s-input${styleCls}`;
 
             vars.comment(

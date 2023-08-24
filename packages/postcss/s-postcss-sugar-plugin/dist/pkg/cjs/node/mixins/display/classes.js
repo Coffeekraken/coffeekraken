@@ -144,7 +144,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
        */
     `).code(`
-      .s-display--block{
+      .s-display-block{
           display: block !important;
       }
     `, { type: 'CssClass' });
@@ -167,7 +167,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
        */
     `).code(`
-      .s-display--inline-block{
+      .s-display-inline-block{
           display: inline-block !important;
       }
       `, { type: 'CssClass' });
@@ -190,7 +190,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
     `).code(`
-      .s-display--contents{
+      .s-display-contents{
           display: contents !important;
       }
       `, { type: 'CssClass' });
@@ -213,7 +213,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
     `).code(`
-      .s-display--flex{
+      .s-display-flex{
           display: flex !important;
       }
     `, { type: 'CssClass' });
@@ -236,7 +236,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
        */
       `).code(`
-      .s-display--grid{
+      .s-display-grid{
           display: grid !important;
       }
       `, { type: 'CssClass' });
@@ -259,7 +259,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
     `).code(`
-      .s-display--inline-flex{
+      .s-display-inline-flex{
           display: inline-flex !important;
       }
       `, { type: 'CssClass' });
@@ -282,7 +282,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
     `).code(`
-      .s-display--inline-grid{
+      .s-display-inline-grid{
           display: inline-grid !important;
       }
       `, { type: 'CssClass' });
@@ -305,7 +305,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         `).code(`
-      .s-display--none{
+      .s-display-none{
           display: none !important;
       }
       `, { type: 'CssClass' });

@@ -85,7 +85,7 @@ export default function (api) {
          *
          * Specify the method to generate the lod (level of details).
          * The "class" one let all the css in the same output file and scope each lod things (properties, rules, etc...) into
-         * a "s-lod--%level" class.
+         * a "s-lod-%level" class.
          * The "file" one exports all the lod things into an external file that will be called "${source.input.filename}.lod-%level.css"
          * You can override this method for each of your `@sugar.lod...` mixin calls.
          *

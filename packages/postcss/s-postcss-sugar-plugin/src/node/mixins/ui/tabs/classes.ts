@@ -213,14 +213,14 @@ export default function ({
 
     vars.comment(
         () => `/**
-        * @name           s-tabs--grow
+        * @name           s-tabs-grow
         * @namespace          sugar.style.ui.tabs
         * @type           CssClass
         * 
         * This class represent a "<yellow>grow</yellow>" tabs
         * 
         * @example        html
-        * <div class="s-tabs--grow">
+        * <div class="s-tabs-grow">
         *    <div class="active">An active tab</div>
         *    <div>A tab</div>
         * </div>
@@ -228,7 +228,7 @@ export default function ({
      `,
     ).code(
         `
-    .s-tabs--grow {
+    .s-tabs-grow {
       @sugar.ui.tabs($grow: true, $scope: grow);
     }
   `,
@@ -237,14 +237,14 @@ export default function ({
 
     vars.comment(
         () => `/**
-        * @name           s-tabs--fill
+        * @name           s-tabs-fill
         * @namespace          sugar.style.ui.tabs
         * @type           CssClass
         * 
         * This class represent a "<yellow>fill</yellow>" tabs
         * 
         * @example        html
-        * <div class="s-tabs--fill">
+        * <div class="s-tabs-fill">
         *    <div class="active">An active tab</div>
         *    <div>A tab</div>
         * </div>
@@ -252,7 +252,7 @@ export default function ({
      `,
     ).code(
         `
-    .s-tabs--fill {
+    .s-tabs-fill {
       @sugar.ui.tabs($fill: true, $scope: fill);
     }
   `,
@@ -261,14 +261,14 @@ export default function ({
 
     vars.comment(
         () => `/**
-        * @name           s-tabs--vertical
+        * @name           s-tabs-vertical
         * @namespace          sugar.style.ui.tabs
         * @type           CssClass
         * 
         * This class represent a "<yellow>vertical</yellow>" tabs
         * 
         * @example        html
-        * <div class="s-tabs--vertical">
+        * <div class="s-tabs-vertical">
         *    <div class="active">An active tab</div>
         *    <div>A tab</div>
         * </div>
@@ -276,7 +276,7 @@ export default function ({
      `,
     ).code(
         `
-    .s-tabs--vertical {
+    .s-tabs-vertical {
       @sugar.ui.tabs($direction: vertical, $scope: 'direction');
     }
   `,

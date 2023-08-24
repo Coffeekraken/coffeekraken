@@ -264,7 +264,7 @@ export default function ({
         */`,
     ).code(
         `
-          .s-avatar--interactive {
+          .s-avatar-interactive {
               @sugar.ui.avatar($scope: 'interactive');
           }
       `,

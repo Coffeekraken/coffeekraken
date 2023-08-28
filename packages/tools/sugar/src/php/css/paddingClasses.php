@@ -61,14 +61,14 @@ function paddingClasses($paddings = [], $frontspec = [])
         }
     } else {
         if (isset($paddings['padding'])) {
-            array_push($classes, 's-p-' . $paddings['all']);
+            array_push($classes, 's-p-' . $paddings['padding']);
         }
 
         if (isset($paddings['paddingBlock'])) {
-            array_push($classes, 's-pb-' . $paddings['block']);
+            array_push($classes, 's-pb-' . $paddings['paddingBlock']);
         }
         if (isset($paddings['paddingInline'])) {
-            array_push($classes, 's-pi-' . $paddings['inline']);
+            array_push($classes, 's-pi-' . $paddings['paddingInline']);
         }
 
         if (isset($paddings['paddingTop'])) {

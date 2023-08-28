@@ -24,16 +24,14 @@ namespace Sugar\css;
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function containerClasses($type = null)
+function containerClasses($type)
 {
     if (is_array($type)) {
         $type = $type['value'];
     } elseif (is_object($type)) {
         $type = $type->value;
-    }
-
-    if (!$type) {
-        return '';
+    } elseif ($type == null) {
+        $type = 'default';
     }
 
     if ($type == 'default') {

@@ -1,0 +1,54 @@
+{
+    "type": "Section",
+    "category": "sections",
+    "title": "Hero",
+    "description": "Display a nice and clean hero section",
+    "props": {
+        "title": {
+            "type": "Text",
+            "title": "Title",
+            "description": "The card title",
+            "required": true
+        },
+        "intro": {
+            "type": "Text",
+            "title": "Intro",
+            "description": "The card intro"
+        },
+        "text": {
+            "type": "Text",
+            "title": "Text",
+            "description": "The card text"
+        },
+        "cards": {
+            "type": "Card[]",
+            "title": "Cards",
+            "description": "The cards to display",
+            "required": true
+        },
+        "primaryCta": "@sugar.views.components.cta",
+        "secondaryCta": "@sugar.views.components.cta",
+        "container": "@sugar.views.props.container",
+        "spacing": "@sugar.views.props.spacing",
+        "attributes": "@sugar.views.props.attributes",
+        "spaces": "@sugar.views.props.spaces"
+    },
+    "examples": {
+        "twig": {
+            "title": "Twig",
+            "description": "Here's a twig sample of how to use the hero section",
+            "code": [
+                "{% include('sugar.sections.hero.hero') with {",
+                "   title: '...',",
+                "   intro: '...',",
+                "   text: '...',",
+                "   image: {",
+                "       url: '...',",
+                "       title: '...',",
+                "       alt: '...'",
+                "   }",
+                "} %}"
+            ]
+        }
+    }
+}

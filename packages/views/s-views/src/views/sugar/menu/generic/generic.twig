@@ -5,7 +5,7 @@
                 {{ item.raw|raw }}
             {% else %}
                 <a class="s-menu_link s-menu_link--level-{{ level - 1 }}" href="{{ item.href }}">
-                    {{ item.label|raw }}
+                    {{ item.text|raw }}
                 </a>
             {% endif %}
             {% if item.children %}

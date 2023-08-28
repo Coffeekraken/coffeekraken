@@ -1,7 +1,12 @@
-<section id="{{ id }}" class="s-section s-section-hero {{ attributes.class }} {{ __containerClasses(container) }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}>
-{{ __nodeDataTemplate('views.sections.hero', _context)|raw }}
+{% set section = {
+    type: 'hero'
+}|merge(section ?? {}) %}
 
+{% extends 'sugar/sections/nude/nude.twig' %}
+
+{% block content %}
     <div class="_content s-spacing:{{ __spacingClasses(spacing, 30) }}">
+
         {% if title %}
             <h1 class="_title s-typo:h1">{{ title|raw }}</h1>
         {% endif %}
@@ -14,26 +19,15 @@
         <div class="_ctas">
             {% if primaryCta %}
                 <div class="_cta _primary-cta">
-                    {% set override = {} %}
-                    {% if color.value and not primaryCta.color.value %}
-                        {% set override = {
-                            color: color
-                        } %}
-                    {% endif %}
-                    {% include 'sugar/components/cta/cta.twig' with primaryCta|merge(override) only %}
+                    {% include 'sugar/components/cta/cta.twig' with primaryCta only %}
                 </div>
             {% endif %}
             {% if secondaryCta %}
                 <div class="_cta _secondary-cta">
-                    {% set override = {} %}
-                    {% if color.value and not secondaryCta.color.value %}
-                        {% set override = {
-                            color: color
-                        } %}
-                    {% endif %}
-                    {% include 'sugar/components/cta/cta.twig' with secondaryCta|merge(override) only %}
+                    {% include 'sugar/components/cta/cta.twig' with secondaryCta only %}
                 </div>
             {% endif %}
         </div>
     </div>
-</section>
+{% endblock %}
+

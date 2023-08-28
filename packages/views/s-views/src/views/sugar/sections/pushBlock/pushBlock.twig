@@ -1,17 +1,17 @@
-<section id="{{ id }}" class="s-section s-section-push-block {{ attributes.class }} {{ container ? 's-container-' ~ container : '' }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}>
-    {{ __nodeDataTemplate('views.sections.heading', _context)|raw }}
+{% set section = {
+    type: 'push-block'
+}|merge(section ?? {}) %}
 
-    <div class="_bkg">
-        <div class="s-media-container">
-            <img class="s-media" src="{{ bkg.url }}" />
-        </div>
-    </div>
+{% extends 'sugar/sections/nude/nude.twig' %}
+
+{% block content %}
+
     <div class="s-container">
         <div class="_layout">
             <div>
-                <div s-appear in="left" delay="500" class="{{ __spacingClasses(spacing, 30) }}">
+                <div class="{{ __spacingClasses(spacing, 30) }}">
                     {% if title %}
-                        <h1 class="s-typo s-typo-h2 _title">
+                        <h1 class="s-typo s-typo-h3 _title">
                             {{ title|raw }}
                         </h1>
                     {% endif %}
@@ -43,7 +43,7 @@
             </div>
             <div>
                 {% if image.url %}
-                    <div s-appear in="right" delay="600">
+                    <div>
                         <picture class="s-media-container">
                             {% for media, image in image.media %}
                                 <source srcset="{{ image.url }}" media="{{ media }}">
@@ -55,4 +55,5 @@
             </div>
         </div>
     </div>
-</section>
+
+{% endblock %}

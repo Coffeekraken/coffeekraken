@@ -20,14 +20,8 @@
                     "type": "node"
                 },
                 {
-                    "uid": "section-rich-text",
-                    "type": "node",
-                    "nodes": [
-                        {
-                            "uid": "component-rich-text",
-                            "type": "node"
-                        }
-                    ]
+                    "uid": "section-separator",
+                    "type": "node"
                 },
                 {
                     "uid": "section-cards",
@@ -40,7 +34,19 @@
                     ]
                 },
                 {
+                    "uid": "section-tile-1",
+                    "type": "node"
+                },
+                {
+                    "uid": "section-tile-2",
+                    "type": "node"
+                },
+                {
                     "uid": "section-testimonials",
+                    "type": "node"
+                },
+                {
+                    "uid": "section-separator-1",
                     "type": "node"
                 }
             ]

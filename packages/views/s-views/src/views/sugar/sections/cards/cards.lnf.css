@@ -1,0 +1,11 @@
+.s-section-hero {
+    padding-block: sugar.padding(90);
+
+    ._title {
+        max-width: 30ch;
+    }
+
+    ._ctas {
+        gap: sugar.margin(30);
+    }
+}

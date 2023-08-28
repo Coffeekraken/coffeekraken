@@ -1,32 +1,10 @@
 {
+    "extends": "sugar.views.section.simple",
     "type": "Section",
     "category": "sections",
     "title": "Hero",
     "description": "Display a nice and clean hero section",
-    "props": {
-        "title": {
-            "type": "Text",
-            "title": "Title",
-            "description": "The card title",
-            "required": true
-        },
-        "intro": {
-            "type": "Text",
-            "title": "Intro",
-            "description": "The card intro"
-        },
-        "text": {
-            "type": "Text",
-            "title": "Text",
-            "description": "The card text"
-        },
-        "primaryCta": "@sugar.views.components.cta",
-        "secondaryCta": "@sugar.views.components.cta",
-        "container": "@sugar.views.props.container",
-        "spacing": "@sugar.views.props.spacing",
-        "attributes": "@sugar.views.props.attributes",
-        "spaces": "@sugar.views.props.spaces"
-    },
+    "props": {},
     "examples": {
         "twig": {
             "title": "Twig",

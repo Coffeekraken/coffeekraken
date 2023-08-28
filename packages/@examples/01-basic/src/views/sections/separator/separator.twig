@@ -1,17 +1,1 @@
-<section {{ __id(id) }} class="section-separator {{ __spacesClasses(spaces, frontspec) }}">
-    {{ __nodeDataTemplate('views.sections.separator', _context)|raw }}
-    <div class="_bkg">
-        {% if image %}
-            <img class="_img" src="{{ image.url }}" alt="{{ image.alt }}" />
-        {% endif %}
-    </div>
-    <div class="_content">
-        <div class="s-container">
-            {% if title %}
-                <h1 class="s-typo:h2">
-                    {{ title|raw }}
-                </h1>
-            {% endif %}
-        </div>
-    </div>
-</section>
+{% include 'sugar/sections/simple/simple.twig' %}

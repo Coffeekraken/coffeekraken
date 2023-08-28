@@ -65,8 +65,8 @@ export default {
         generateCard(),
         generateCard(),
         generateCard(),
-        generateCard(),
-        generateCard(),
-        generateCard(),
+        // generateCard(),
+        // generateCard(),
+        // generateCard(),
     ],
 };

@@ -145,12 +145,14 @@ export default function ({
     atRule,
     settings,
     postcss,
+    getRoot,
     postcssApi,
 }: {
     params: Partial<postcssSugarPluginViewMixinParams>;
     atRule: any;
     settings: any;
     postcss: any;
+    getRoot: Function;
     postcssApi: any;
 }) {
     const finalParams = <postcssSugarPluginViewMixinParams>{

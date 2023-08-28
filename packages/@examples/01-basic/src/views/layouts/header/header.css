@@ -1,41 +1,17 @@
-._menu-toggle {
-    @sugar.ui.toggle ('burger');
-}
-
-.s-label--float {
-    @sugar.wireframe {
-        pointer-events: none;
-
-        ::placeholder {
-            opacity: 0;
-        }
-    }
-}
-.s-input {
-    @sugar.wireframe {
-        border: solid 1px rgba(0, 0, 0, 0.1);
-    }
-}
-
-.header {
+.s-header {
     position: sticky !important;
-    top: sugar.margin(30);
+    top: 0;
     width: 100%;
     z-index: 100;
     pointer-events: none;
     @sugar.transition();
 
-    body.scrolled & {
-        top: 0;
+    ._menu-toggle {
+        @sugar.ui.toggle ('burger');
     }
 
-    .s-flex {
-        pointer-events: all;
-    }
-
-    @sugar.wireframe {
-        background: white;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    body.scroll-down & {
+        transform: translateY(-100%);
     }
 
     @sugar.media mobile {
@@ -48,7 +24,7 @@
     }
 
     .logo {
-        width: 150px;
+        height: 40px;
 
         @sugar.media mobile {
             width: 130px;
@@ -69,27 +45,19 @@
 
     .s-container {
         position: relative;
-        perspective: 800px;
+        padding: sugar.padding(20) 0;
 
         &:before {
             content: '';
             position: absolute;
             top: 0;
-            left: calc(sugar.margin(30) * -1);
-            right: calc(sugar.margin(30) * -1);
+            left: 50%;
             bottom: 0;
+            width: 100vw;
+            transform: translateX(-50%);
             z-index: -1;
-            background: sugar.color(main, surface);
-            opacity: 0;
-            transform: rotateX(-10deg) rotateY(1deg) translateX(2%) scale(1.1);
-            @sugar.border.radius();
-            @sugar.depth (100);
+            background: sugar.color(main, background);
             @sugar.transition();
-
-            body.scrolled & {
-                opacity: 1;
-                background: sugar.color(main, surface, --darken 5%);
-            }
 
             @sugar.media mobile {
                 display: none;

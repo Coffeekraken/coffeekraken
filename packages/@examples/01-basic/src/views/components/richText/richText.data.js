@@ -2,10 +2,10 @@ import { faker } from '@faker-js/faker';
 
 export default {
     content: `
-        <h1>${faker.lorem.sentence({
+        <h3>${faker.lorem.sentence({
             min: 4,
             max: 10,
-        })}</h1>
+        })}</h3>
         <h5>${faker.lorem.sentence({
             min: 10,
             max: 30,

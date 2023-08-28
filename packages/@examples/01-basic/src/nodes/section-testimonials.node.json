@@ -1,10 +1,4 @@
 {
     "uid": "section-testimonials",
-    "view": "views.sections.testimonials",
-    "values": {
-        "spaces": {
-            "paddingTop": 70,
-            "paddingBottom": 70
-        }
-    }
+    "view": "views.sections.testimonials"
 }

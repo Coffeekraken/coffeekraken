@@ -2,12 +2,11 @@
     "uid": "section-rich-text",
     "view": "views.sections.nude",
     "values": {
+        "align": "center",
         "spaces": {
             "paddingTop": 100,
             "paddingBottom": 100
         },
-        "container": {
-            "value": "default"
-        }
+        "container": "default"
     }
 }

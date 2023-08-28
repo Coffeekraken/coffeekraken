@@ -1,37 +1,10 @@
 {
+    "extends": "sugar.views.sections.simple",
     "type": "Section",
     "category": "sections",
     "title": "Heading",
     "description": "Heading section",
     "props": {
-        "bkg": {
-            "type": "Image",
-            "title": "Background image",
-            "description": "Background image",
-            "default": {
-                "url": "https://picsum.photos/1600/900",
-                "media": {
-                    "desktop": {
-                        "url": "https://picsum.photos/1600/900"
-                    }
-                }
-            },
-            "required": true
-        },
-        "title": {
-            "type": "Text",
-            "title": "Title",
-            "description": "Heading title",
-            "default": "Heading title",
-            "required": true
-        },
-        "text": {
-            "type": "Text",
-            "title": "Text",
-            "description": "Heading text",
-            "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id euismod quam, at fringilla odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae molestie augue. Curabitur et consectetur diam. Mauris vitae dui sit amet ipsum dignissim sollicitudin at ac ante. Donec porta, libero ut auctor efficitur",
-            "required": true
-        },
         "image": {
             "type": "Image",
             "title": "Image",
@@ -45,12 +18,6 @@
                 }
             },
             "required": true
-        },
-        "primaryCta": "@sugar.views.components.cta",
-        "secondaryCta": "@sugar.views.components.cta",
-        "container": "@sugar.views.props.container",
-        "spacing": "@sugar.views.props.spacing",
-        "attributes": "@sugar.views.props.attributes",
-        "spaces": "@sugar.views.props.spaces"
+        }
     }
 }

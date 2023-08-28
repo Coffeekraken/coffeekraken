@@ -1,6 +1,10 @@
 import { faker } from '@faker-js/faker';
 
 export default {
+    bgColor: {
+        format: 'hex',
+        value: '#fdfdfd',
+    },
     // title: faker.lorem.words({
     //     min: 2,
     //     max: 10,
@@ -51,4 +55,8 @@ export default {
         },
     },
     container: 'full',
+    spaces: {
+        paddingTop: 70,
+        paddingBottom: 70,
+    },
 };

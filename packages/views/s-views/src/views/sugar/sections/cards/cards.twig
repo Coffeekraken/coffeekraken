@@ -1,0 +1,13 @@
+{% set section = {
+    type: 'cards'
+}|merge(section ?? {}) %}
+
+{% extends 'sugar/sections/simple/simple.twig' %}
+
+{% block simpleContent %}
+    
+    {% include 'sugar/components/cards/cards.twig' with {
+        cards: cards
+    } only %}
+
+{% endblock %}

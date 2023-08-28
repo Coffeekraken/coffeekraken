@@ -7,7 +7,7 @@ export default {
         alt: 'Macbook air',
     },
     image: {
-        url: '/dist/img/macbookair.png',
+        url: 'https://static.wixstatic.com/media/d921b2_e8352cef668e4f09b2aa3bc2d598eb46~mv2.png/v1/fill/w_664,h_498,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/imposing%2Bch.png',
         title: 'Macbook air',
         alt: 'Macbook air',
     },

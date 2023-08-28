@@ -3,6 +3,7 @@
 * needed variables
 */
 @sugar.init ($variant: 'light');
+@sugar.theme.import ($variant: 'dark');
 
 /**
 * Generate some utility classes like "s-tc:accent, s-mb:30", etc...

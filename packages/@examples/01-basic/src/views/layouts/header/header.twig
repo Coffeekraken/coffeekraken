@@ -1,13 +1,12 @@
-<header class="header">
+<header class="s-header">
     <div class="s-container">
-
-        <nav class="s-flex:align-center">
-            <div>
+        <nav class="_nav">
+            <div class="_brand">
                 <a href="/" title="Kraken">
                     {% include 'generic/logo/logo.twig' %}
                 </a>
             </div>
-            <div class="s-flex-item:grow">
+            <div class="_primary-menu">
                 {% include 'sugar/menu/generic/generic.twig' with {
                     id: 'primary-menu',
                     menu: menus.primary

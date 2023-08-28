@@ -1,5 +1,4 @@
 {
     "uid": "component-rich-text",
-    "view": "views.components.richText",
-    "values": {}
+    "view": "views.components.richText"
 }

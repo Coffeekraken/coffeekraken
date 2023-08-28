@@ -1,5 +1,4 @@
 {
     "uid": "component-cards",
-    "view": "views.components.cards",
-    "values": {}
+    "view": "views.components.cards"
 }

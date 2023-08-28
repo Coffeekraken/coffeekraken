@@ -1,0 +1,21 @@
+{% extends 'sugar/readme/layouts/doc/doc.twig' %}
+{% block body %}
+
+<!--
+/**
+ * @name            Tile
+ * @namespace       specs.views.sections.tile
+ * @type            Markdown
+ * @platform        twig
+ * @status          stable
+ * @menu            Specs / Sections          /specs/sugar.views.sections.tile
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+{% set specs = __readSpec('sugar.views.sections.tile') %}
+{{ __specsToMarkdown(specs)|raw }}
+
+{% endblock %}

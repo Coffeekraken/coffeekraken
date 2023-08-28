@@ -1,0 +1,10 @@
+{
+    "uid": "section-tile-2",
+    "view": "views.sections.tile",
+    "values": {
+        "imageSide": "right",
+        "image": {
+            "url": "https://images.unsplash.com/photo-1516049084740-9a14b9c4239c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2725&q=80"
+        }
+    }
+}

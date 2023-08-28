@@ -5,6 +5,9 @@
 
 /* Load custom views css */
 @sugar.view ('sugar.components.cards');
+@sugar.view ('sugar.sections.nude');
+@sugar.view ('sugar.sections.simple');
+@sugar.view ('sugar.sections.tile');
 @sugar.view ('sugar.sections.pushBlock');
 @sugar.view ('sugar.sections.testimonials');
 @sugar.view ('sugar.sections.hero');

@@ -4,6 +4,16 @@
     "title": "Nude section",
     "description": "Render your \"html\" or \"nodes\" inside a nude section",
     "props": {
+        "bgColor": {
+            "type": "Color",
+            "title": "Background color",
+            "description": "Background color"
+        },
+        "bgImage": {
+            "type": "Image",
+            "title": "Background image",
+            "description": "Background image"
+        },
         "html": {
             "type": "Html",
             "description": "Specify the html to render"
@@ -12,10 +22,71 @@
             "type": "Html[]",
             "description": "Specify some nodes to render"
         },
+        "align": {
+            "type": "Select",
+            "title": "Align",
+            "description": "Specify the align of the section (top, center, bottom)",
+            "options": [
+                {
+                    "id": "start",
+                    "value": "start",
+                    "name": "Start"
+                },
+                {
+                    "id": "center",
+                    "value": "center",
+                    "name": "Center"
+                },
+                {
+                    "id": "end",
+                    "value": "end",
+                    "name": "End"
+                }
+            ]
+        },
+        "justify": {
+            "type": "Select",
+            "title": "Justify",
+            "description": "Specify the justify of the section (left, center, right)",
+            "options": [
+                {
+                    "id": "start",
+                    "value": "start",
+                    "name": "Start"
+                },
+                {
+                    "id": "center",
+                    "value": "center",
+                    "name": "Center"
+                },
+                {
+                    "id": "end",
+                    "value": "end",
+                    "name": "End"
+                }
+            ]
+        },
+        "variant": {
+            "type": "Select",
+            "title": "Theme variant",
+            "description": "Specify a theme variant you want to apply to the section",
+            "options": [
+                {
+                    "id": "light",
+                    "value": "light",
+                    "name": "Light"
+                },
+                {
+                    "id": "dark",
+                    "value": "dark",
+                    "name": "Dark"
+                }
+            ]
+        },
         "container": "@sugar.views.props.container",
         "spacing": "@sugar.views.props.spacing",
         "attributes": "@sugar.views.props.attributes",
-        "spaces": "@sugar.views.props.spaces"
+        "spaces": "@sugar.views.props.spaces",
     },
     "examples": {
         "twig": {

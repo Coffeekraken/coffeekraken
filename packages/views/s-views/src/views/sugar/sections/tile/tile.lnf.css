@@ -1,0 +1,5 @@
+.s-section-tile {
+    ._layout {
+        gap: sugar.margin(50);
+    }
+}

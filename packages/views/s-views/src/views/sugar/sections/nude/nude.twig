@@ -1,10 +1,33 @@
-<section id="{{ id }}" class="s-section s-section-nude {{ attributes.class }} {{ __containerClasses(container) }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}>
-{{ __nodeDataTemplate('views.sections.nude', _context)|raw }}
+<section id="{{ id }}" class="s-section
+    s-section-{{ section.type }}
+    {{ attributes.class }}
+    {{ __spacesClasses(spaces, frontspec) }}
+    {{ align ? 's-section-align-' ~ align.value ?? align }}
+    {{ justify ? 's-section-justify-' ~ justify.value ?? justify }}
+" {{ __attrs(attributes, ['class'])|raw }}
+    {% if variant %} theme="{{ variant.value ?? variant }}" {% endif %}
+    style="{{ bgColor ? '--s-section-bkg-color:' ~ bgColor.value ~ ';' }}"
+>
+{{ __nodeDataTemplate('views.sections.' ~ section.type, _context)|raw }}
 
-    {% if nodes %}
-        {{ nodes|join()|raw }}
-    {% else %}
-        {{ html|raw }}
+    {% if bgImage %}
+        <div class="_bkg">
+            <img class="s-media _img" src="{{ bgImage.url }}" title="{{ bgImage.title }}" alt="{{ bgImage.alt }}" />
+        </div>
     {% endif %}
+
+    <div class="_container {{ __containerClasses(container) }}">
+
+        {% block content %}
+            <div class="_content {{ __spacingClasses(spacing ?? {}) }}">
+                {% if nodes %}
+                    {{ nodes|join()|raw }}
+                {% else %}
+                    {{ html|raw }}
+                {% endif %}
+            </div>
+        {% endblock %}
+
+    </div>
 
 </section>

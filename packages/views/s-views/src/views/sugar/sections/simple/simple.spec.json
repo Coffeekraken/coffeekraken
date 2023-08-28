@@ -1,0 +1,39 @@
+{
+    "extends": "sugar.views.sections.nude",
+    "type": "Section",
+    "category": "sections",
+    "title": "Simple section",
+    "description": "Render your \"html\" or \"nodes\" inside a simple section",
+    "props": {
+        "title": {
+            "type": "Text",
+            "title": "Title",
+            "description": "The card title",
+            "required": true
+        },
+        "intro": {
+            "type": "Text",
+            "title": "Intro",
+            "description": "The card intro"
+        },
+        "text": {
+            "type": "Text",
+            "title": "Text",
+            "description": "The card text"
+        },
+        "primaryCta": "@sugar.views.components.cta",
+        "secondaryCta": "@sugar.views.components.cta"
+    },
+    "examples": {
+        "twig": {
+            "title": "Twig",
+            "description": "Here's a twig sample of how to use the simple section view",
+            "code": [
+                "{% include 'sugar.bare.sections.simple' with {",
+                "   title: 'Some title',",
+                "   html: '<div>Some html</div>',",
+                "} %}"
+            ]
+        }
+    }
+}

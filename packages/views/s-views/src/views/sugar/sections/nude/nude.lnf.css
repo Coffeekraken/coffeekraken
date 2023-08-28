@@ -1,0 +1,7 @@
+.s-section {
+    background-color: var(--s-section-bkg-color);
+
+    ._img {
+        object-fit: cover;
+    }
+}

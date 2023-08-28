@@ -23,6 +23,6 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-return new \Twig\TwigFunction('__containerClasses', function ($type = null) {
+return new \Twig\TwigFunction('__containerClasses', function ($type) {
     return \Sugar\css\containerClasses($type);
 });

@@ -79,7 +79,7 @@ export default function ({
         selectors.push(`[theme$="${finalParams.variant}"]`);
 
     if (finalParams.scope) {
-        vars.unshift(`${selectors.join('')} body {`);
+        vars.unshift(`${selectors.join('')} {`);
         vars.push(`@sugar.lnf.base;`);
         vars.push('}');
     } else if (atRule.parent.type === 'root') {

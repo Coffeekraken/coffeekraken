@@ -1,0 +1,47 @@
+
+{% set section = {
+    type: 'simple'
+}|merge(section ?? {}) %}
+
+{% extends 'sugar/sections/nude/nude.twig' %}
+
+{% block content %}
+
+    <div class="{{ __spacingClasses(spacing, 30) }}">
+
+        {% if title %}
+            <h1 class="_title s-typo:h2">{{ title|raw }}</h1>
+        {% endif %}
+        {% if intro %}
+            <p class="_lead s-typo:lead">{{ intro|raw }}</p>
+        {% endif %}
+        {% if text %}
+            <p class="_text s-typo:p">{{ text|raw }}</p>
+        {% endif %}
+
+        <div class="_content">
+            {% if nodes %}
+                {{ nodes|join()|raw }}
+            {% else %}
+                {{ html|raw }}
+            {% endif %}
+        </div>
+
+        {% if primaryCta or secondaryCta %}
+            <div class="_ctas">
+                {% if primaryCta %}
+                    <div class="_cta _primary-cta">
+                        {% include 'sugar/components/cta/cta.twig' with primaryCta only %}
+                    </div>
+                {% endif %}
+                {% if secondaryCta %}
+                    <div class="_cta _secondary-cta">
+                        {% include 'sugar/components/cta/cta.twig' with secondaryCta only %}
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+
+    </div>
+
+{% endblock %}

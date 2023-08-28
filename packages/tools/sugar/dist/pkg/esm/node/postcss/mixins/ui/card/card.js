@@ -137,7 +137,7 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
     // lnf
     if (finalParams.scope.includes('lnf')) {
         vars.push(`
-            background: sugar.color(main, surface);
+            background: sugar.color(main, background);
             @sugar.border.radius(ui.card.borderRadius);
             @sugar.depth (ui.card.depth);
             

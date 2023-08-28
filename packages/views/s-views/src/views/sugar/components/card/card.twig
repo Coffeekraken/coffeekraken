@@ -22,22 +22,10 @@
         {% if primaryCta or secondaryCta %}
             <div class="_ctas">
                 {% if primaryCta %}
-                    {% set override = {} %}
-                    {% if color.value and not primaryCta.color.value %}
-                        {% set override = {
-                            color: color
-                        } %}
-                    {% endif %}
-                    {% include 'sugar/components/cta/cta.twig' with primaryCta|merge(override) only %}
+                    {% include 'sugar/components/cta/cta.twig' with primaryCta only %}
                 {% endif %}
                 {% if secondaryCta %}
-                    {% set override = {} %}
-                    {% if color.value and not secondaryCta.color.value %}
-                        {% set override = {
-                            color: color
-                        } %}
-                    {% endif %}
-                    {% include 'sugar/components/cta/cta.twig' with secondaryCta|merge(override) only %}
+                    {% include 'sugar/components/cta/cta.twig' with secondaryCta only %}
                 {% endif %}
             </div>
         {% endif %}

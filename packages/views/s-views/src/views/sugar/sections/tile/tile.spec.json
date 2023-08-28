@@ -1,0 +1,38 @@
+{
+    "extends": "sugar.views.sections.simple",
+    "type": "Section",
+    "category": "sections",
+    "title": "Tile",
+    "description": "Tile section that let you make left/right image with text",
+    "props": {
+        "image": {
+            "type": "Image",
+            "title": "Image",
+            "description": "Tile image",
+            "required": true
+        },
+        "imageSide": {
+            "type": "Select",
+            "title": "Image side",
+            "description": "Image side",
+            "options": [
+                {
+                    "id": "left",
+                    "value": "left",
+                    "name": "Left"
+                },
+                {
+                    "id": "right",
+                    "value": "right",
+                    "name": "Right"
+                }
+            ],
+            "default": {
+                "id": "left",
+                "value": "left",
+                "name": "Left"
+            },
+            "required": true
+        }
+    }
+}

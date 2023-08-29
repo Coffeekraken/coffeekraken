@@ -1,0 +1,114 @@
+{
+    "type": "Component",
+    "section": "form",
+    "title": "Generic form",
+    "description": "Generic form with fields options like text, textarea, select, checkbox, radio, etc.",
+    "props": {
+        "lnf": {
+            "labelType": {
+                "type": "Select",
+                "title": "Label type",
+                "description": "Label type like inline, block or float",
+                "options": [
+                    {
+                        "id": "inline",
+                        "name": "Inline",
+                        "value": "inline"
+                    },
+                    {
+                        "id": "block",
+                        "name": "Block",
+                        "value": "block"
+                    },
+                    {
+                        "id": "float",
+                        "name": "Float",
+                        "value": "float"
+                    }
+                ],
+                "default": {
+                    "id": "inline",
+                    "name": "Inline",
+                    "value": "inline"
+                },
+                "required": true
+            }
+        },
+        "fields": {
+            "type": "Object[]",
+            "title": "Fields",
+            "description": "Specify the fields you want in your form",
+            "required": true,
+            "props": {
+                "type": {
+                    "type": "Select",
+                    "title": "Type",
+                    "description": "Type of field",
+                    "require": true,
+                    "options": [
+                        {
+                            "id": "text",
+                            "name": "Text",
+                            "value": "text"
+                        },
+                        {
+                            "id": "textarea",
+                            "name": "Textarea",
+                            "value": "textarea"
+                        }
+                    ]
+                },
+                "name": {
+                    "type": "Text",
+                    "title": "Name",
+                    "description": "Name of field",
+                    "required": true
+                },
+                "label": {
+                    "type": "Text",
+                    "title": "Label",
+                    "description": "Label of field",
+                    "required": true
+                },
+                "placeholder": {
+                    "type": "Text",
+                    "title": "Placeholder",
+                    "description": "Placeholder of field"
+                },
+                "attributes": "@sugar.views.props.attributes",
+            }
+        },
+        "actions": {
+            "type": "Object[]",
+            "title": "Actions",
+            "description": "Some actions for your form like submit, reset, etc...",
+            "props": {
+                "type": {
+                    "type": "Select",
+                    "title": "Type",
+                    "description": "Type of action",
+                    "require": true,
+                    "options": [
+                        {
+                            "id": "submit",
+                            "name": "Submit",
+                            "value": "submit"
+                        },
+                        {
+                            "id": "reset",
+                            "name": "Reset",
+                            "value": "reset"
+                        }
+                    ]
+                },
+                "label": {
+                    "type": "Text",
+                    "title": "Label",
+                    "description": "Label of action",
+                    "required": true
+                },
+                "attributes": "@sugar.views.props.attributes",
+            }
+        }
+    }
+}

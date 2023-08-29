@@ -312,6 +312,11 @@ class SViewRenderer
             $html = [];
 
             foreach ($nodes as $idx => $node) {
+                // default node type "node"
+                if (!isset($node->type)) {
+                    $node->type = 'node';
+                }
+
                 if ($node->type == 'root') {
                     continue;
                 }

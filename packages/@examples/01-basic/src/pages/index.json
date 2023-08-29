@@ -12,42 +12,36 @@
             "type": "container",
             "nodes": [
                 {
-                    "uid": "section-hero",
-                    "type": "node"
+                    "uid": "section-hero"
                 },
                 {
-                    "uid": "section-pushBlock",
-                    "type": "node"
+                    "uid": "section-pushBlock"
                 },
                 {
-                    "uid": "section-separator",
-                    "type": "node"
+                    "uid": "section-separator"
                 },
                 {
                     "uid": "section-cards",
-                    "type": "node",
                     "nodes": [
                         {
-                            "uid": "component-cards",
-                            "type": "node"
+                            "uid": "component-cards"
                         }
                     ]
                 },
                 {
-                    "uid": "section-tile-1",
-                    "type": "node"
+                    "uid": "section-tile-1"
                 },
                 {
-                    "uid": "section-tile-2",
-                    "type": "node"
+                    "uid": "section-tile-2"
                 },
                 {
-                    "uid": "section-testimonials",
-                    "type": "node"
+                    "uid": "section-testimonials"
                 },
                 {
-                    "uid": "section-separator-1",
-                    "type": "node"
+                    "uid": "section-separator-1"
+                },
+                {
+                    "uid": "section-contact"
                 }
             ]
         }

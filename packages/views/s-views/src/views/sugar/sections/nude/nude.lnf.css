@@ -1,6 +1,10 @@
 .s-section {
     background-color: var(--s-section-bkg-color);
 
+    ._title {
+        max-width: 30ch;
+    }
+
     ._img {
         object-fit: cover;
     }

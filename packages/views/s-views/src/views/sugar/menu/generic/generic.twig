@@ -1,15 +1,15 @@
 {% macro menu(items, level) %}
     {% for item in items %}
-        <li class="s-menu_item {{ item.attributes.class }} s-menu_item--level-{{ level - 1 }}" {{ __attrs(item.attributes, ['class']) }}>
+        <li class="s-menu_item s-menu-level-{{ level - 1 }}_item {{ item.attributes.class }}" {{ __attrs(item.attributes, ['class']) }}>
             {% if item.raw %}
                 {{ item.raw|raw }}
             {% else %}
-                <a class="s-menu_link s-menu_link--level-{{ level - 1 }}" href="{{ item.href }}">
-                    {{ item.text|raw }}
+                <a class="s-menu_link s-menu-level-{{ level - 1 }}_link" href="{{ item.link.url }}" {% if item.link.target %} target="{{ item.link.target }}" {% endif %}>
+                    {{ item.link.text|raw }}
                 </a>
             {% endif %}
             {% if item.children %}
-                <ul class="s-menu_children s-menu--level-{{ level }}" style="--s-menu-items: {{ item.children|length }};">
+                <ul class="s-menu_children s-menu-level-{{ level }}" style="--s-menu-items: {{ item.children|length }};">
                     {{ _self.menu(item.children, level + 1)|raw }}
                 </ul>
             {% endif %}
@@ -18,8 +18,8 @@
 {% endmacro %}
 
 <input type="checkbox" id="{{ id ? id : 'menu' }}" hidden />
-<div id="{{ id ? id : 'menu' }}" class="s-menu {{ lnf ? 's-menu--{{ lnf }}' }} {{ not lnf ? 's-bare' : '' }} {{ attributes.class }}" {{ __attrs(attributes, ['class']) }} style="--s-menu-items: {{ menu.items|length }};">
-    <ul class="s-menu_inner s-menu--level-0">
+<div id="{{ id ? id : 'menu' }}" class="s-menu s-menu-generic {{ attributes.class }}" {{ __attrs(attributes, ['class']) }} style="--s-menu-items: {{ menu.items|length }};">
+    <ul class="s-menu-level s-menu-level-0">
         {{ _self.menu(menu.items, 1)|raw }}
     </ul>
 </div>

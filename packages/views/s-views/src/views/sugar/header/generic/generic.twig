@@ -1,0 +1,16 @@
+<header class="s-header s-header-generic">
+    <div class="s-container">
+        <div class="_brand">
+            <a href="/" title="Kraken">
+                {% include 'generic/logo/logo.twig' %}
+            </a>
+        </div>
+        <nav class="_primary-menu">
+            {% include 'sugar/menu/generic/generic.twig' with {
+                id: 'primary-menu',
+                menu: primaryMenu
+            } %}
+            <label for="primary-menu" class="_menu-toggle"></label>
+        </nav>
+    </div>
+</header>

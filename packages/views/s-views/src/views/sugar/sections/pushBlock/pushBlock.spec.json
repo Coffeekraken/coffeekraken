@@ -2,22 +2,13 @@
     "extends": "sugar.views.sections.simple",
     "type": "Section",
     "category": "sections",
-    "title": "Heading",
-    "description": "Heading section",
+    "title": "Push block",
+    "description": "Push block section",
     "props": {
         "image": {
             "type": "Image",
             "title": "Image",
-            "description": "Heading image",
-            "default": {
-                "url": "https://picsum.photos/1600/900",
-                "media": {
-                    "desktop": {
-                        "url": "https://picsum.photos/1600/900"
-                    }
-                }
-            },
-            "required": true
+            "description": "Push block image"
         }
     }
 }

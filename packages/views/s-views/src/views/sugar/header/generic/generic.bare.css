@@ -3,8 +3,8 @@
     top: 0;
     width: 100%;
     z-index: 100;
-    pointer-events: none;
     @sugar.transition();
+    @sugar.depth (10);
 
     ._menu-toggle {
         @sugar.ui.toggle ('burger');
@@ -23,8 +23,12 @@
         @sugar.depth (100);
     }
 
-    .logo {
-        height: 40px;
+    .s-logo {
+        height: 30px;
+
+        [fill='white'] {
+            fill: sugar.color(main, text);
+        }
 
         @sugar.media mobile {
             width: 130px;
@@ -43,9 +47,16 @@
         }
     }
 
+    ._primary-menu {
+        flex-grow: 1;
+    }
+
     .s-container {
         position: relative;
         padding: sugar.padding(20) 0;
+        display: flex;
+        align-items: center;
+        gap: sugar.margin(30);
 
         &:before {
             content: '';

@@ -4,7 +4,13 @@
     "category": "sections",
     "title": "Hero",
     "description": "Display a nice and clean hero section",
-    "props": {},
+    "props": {
+        "image": {
+            "type": "Image",
+            "title": "Image",
+            "description": "Hero image"
+        }
+    },
     "examples": {
         "twig": {
             "title": "Twig",

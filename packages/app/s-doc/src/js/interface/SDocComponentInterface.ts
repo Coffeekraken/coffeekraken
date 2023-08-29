@@ -32,7 +32,7 @@ export default class SDocComponentInterface extends __SInterface {
             loaderSvg: {
                 type: 'String',
                 description: 'Specify an svg to use as the loader',
-                default: `<svg class="s-logo s-logo--coffeekraken-picto" viewBox="0 0 299 229" fill="none" xmlns="http://www.w3.org/2000/svg">
+                default: `<svg class="s-logo s-logo-coffeekraken-picto" viewBox="0 0 299 229" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M102.5 55.3151V202.802H191V229H71V29H142V55.3151H102.5Z" fill="white"/>
                         <path d="M265.5 26.3151V202.802H227.5V229H298.5V0H227.5V26.3151H265.5Z" fill="white"/>
                         <path d="M31.5 109.315V166.802H31V193H0V83H71V109.315H31.5Z" fill="white"/>

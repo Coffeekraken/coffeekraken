@@ -2,12 +2,38 @@
 
 return [
     'carpenter' => true,
-    'menus' => [
-        'primary' => [
-            'items' => [
-                [
-                    'href' => '/',
+    'primaryMenu' => [
+        'items' => [
+            [
+                'link' => [
+                    'url' => '/',
                     'text' => 'Menu #1',
+                ],
+            ],
+            [
+                'link' => [
+                    'url' => '/',
+                    'text' => 'Menu #2',
+                ],
+                'children' => [
+                    [
+                        'link' => [
+                            'url' => '/',
+                            'text' => 'Menu #2.1',
+                        ],
+                    ],
+                    [
+                        'link' => [
+                            'url' => '/',
+                            'text' => 'Long menu item',
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'link' => [
+                    'url' => '/',
+                    'text' => 'Menu #3',
                 ],
             ],
         ],

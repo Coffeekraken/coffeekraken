@@ -1,4 +1,3 @@
-import "./index-4cd7da31.js";
 function __matches(el, selector) {
   if (el.nodeName == "#comment" || el.nodeName == "#text") {
     return false;

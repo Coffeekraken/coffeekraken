@@ -1,5 +1,13 @@
-import { _ as __deepMerge, r as __isColor, s as SClass, S as SInterface, t as format, p as SFeature, v as SComponentUtils, d as __camelCase, e as __parse, m as __querySelectorLive } from "./index-4cd7da31.js";
-import { _ as __querySelectorUp } from "./querySelectorUp-0290440e.js";
+import { F as SEnv, x as get, c as __deepMerge, G as __isPlainObject, H as __isInteger, I as __isColor, J as SClass, S as SInterface, K as format, e as SFeature, L as SComponentUtils, j as __camelCase, k as __parse, _ as __querySelectorLive } from "./index.esm.js";
+import { _ as __querySelectorUp } from "./querySelectorUp-ba01e0d2.js";
+function __isBase64(value) {
+  if (typeof value !== "string")
+    return false;
+  if (value === "" || value.trim() === "")
+    return false;
+  const reg = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+  return reg.test(value);
+}
 function __isCreditCard(value) {
   const re = /^(?:(4[0-9]{12}(?:[0-9]{3})?)|(5[1-5][0-9]{14})|(6(?:011|5[0-9]{2})[0-9]{12})|(3[47][0-9]{13})|(3(?:0[0-5]|[68][0-9])[0-9]{11})|((?:2131|1800|35[0-9]{3})[0-9]{11}))$/;
   return re.test(value);
@@ -17,87 +25,336 @@ function __isIsoDateTime(value) {
 function __isIsoTime(value) {
   return value.match(/^(2[0-3]|[01][0-9]):?([0-5][0-9])$/) || value.match(/^(2[0-3]|[01][0-9]):?([0-5][0-9]):?([0-5][0-9])$/) || value.match(/^(Z|[+-](?:2[0-3]|[01][0-9])(?::?(?:[0-5][0-9]))?)$/) || value.match(/^(2[0-3]|[01][0-9]):?([0-5][0-9]):?([0-5][0-9])(Z|[+-](?:2[0-3]|[01][0-9])(?::?(?:[0-5][0-9]))?)$/);
 }
-const __en = {
+function __isUrl(data) {
+  try {
+    return Boolean(new URL(data));
+  } catch (e) {
+    return false;
+  }
+}
+function __i18n$1(str, settings) {
+  var _a, _b, _c;
+  const finalSettings = Object.assign({ tokens: {} }, settings !== null && settings !== void 0 ? settings : {});
+  const i18n = (_a = SEnv.get("i18n")) !== null && _a !== void 0 ? _a : {};
+  let translation;
+  if (finalSettings.id) {
+    translation = (_b = i18n[finalSettings.id]) !== null && _b !== void 0 ? _b : get(i18n, finalSettings.id);
+  }
+  if (!translation) {
+    translation = (_c = i18n[str]) !== null && _c !== void 0 ? _c : str;
+  }
+  const tokens = ` ${translation} `.match(/(__\([^__\)]*\)__|(?!\|)%[a-zA-Z0-9])/gm);
+  if (!tokens) {
+    return translation;
+  }
+  function getTokenValue(t) {
+    var _a2, _b2;
+    return (_b2 = (_a2 = finalSettings.tokens[t]) !== null && _a2 !== void 0 ? _a2 : finalSettings.tokens[t.replace(/^%/, "")]) !== null && _b2 !== void 0 ? _b2 : t;
+  }
+  let currentToken;
+  tokens.forEach((token) => {
+    var _a2;
+    if (token.match(/^%/)) {
+      currentToken = token;
+      const tokenValue = getTokenValue(token);
+      translation = translation.replaceAll(new RegExp(`([^(])?${token}`, "g"), `$1${tokenValue}`);
+    } else {
+      const tokenMatch = token.match(/\|(%[a-zA-Z0-9]+)\)__/), activeToken = (_a2 = tokenMatch === null || tokenMatch === void 0 ? void 0 : tokenMatch[1]) !== null && _a2 !== void 0 ? _a2 : currentToken, tokenValue = getTokenValue(activeToken);
+      if (typeof tokenValue !== "number") {
+        translation = translation.replace(token, `**(invalid token "${activeToken}" for pluralization)**`);
+        return;
+      }
+      token = token.replace(/\\\|/gm, "_$_");
+      let parts = token.split(/\|/gm);
+      parts = parts.map((p) => {
+        return p.replace(/_\$_/gm, "|").replace(/^__\(/, "").replace(/\)__$/, "");
+      });
+      token = token.replace(/_\$_/gm, "\\|");
+      if (parts.length === 1) {
+        translation = translation.replace(token, tokenValue > 1 ? parts[0] : "");
+      } else if (parts.length === 2 && parts[0].match(/^%[a-zA-Z0-9]+/)) {
+        translation = translation.replace(token, tokenValue > 1 ? parts[1] : "");
+      } else if (parts.length === 2 && !parts[0].match(/^%[a-zA-Z0-9]+/)) {
+        translation = translation.replace(token, tokenValue > 1 ? parts[1] : parts[0]);
+      } else if (parts.length === 3) {
+        translation = translation.replace(token, tokenValue > 1 ? parts[2] : parts[1]);
+      }
+    }
+  });
+  return translation;
+}
+const __i18n = {
   min: {
-    string: "Must have at least %n characters",
-    object: "Must have at least %n properties",
-    number: "Must be greater than %n",
-    array: "Must have at least %n items"
+    string: __i18n$1("Must have at least %n characters", {
+      id: "s-validator.min.string"
+    }),
+    object: __i18n$1("Must have at least %n properties", {
+      id: "s-validator.min.object"
+    }),
+    number: __i18n$1("Must be greater than %n", {
+      id: "s-validator.min.number"
+    }),
+    array: __i18n$1("Must have at least %n items", {
+      id: "s-validator.min.array"
+    })
   },
   max: {
-    string: "Must have at max %n characters",
-    object: "Must have at max %n properties",
-    number: "Must be lower than %n",
-    array: "Must have at max %n items"
+    string: __i18n$1("Must have at max %n characters", {
+      id: "s-validator.max.string"
+    }),
+    object: __i18n$1("Must have at max %n properties", {
+      id: "s-validator.max.object"
+    }),
+    number: __i18n$1("Must be lower than %n", {
+      id: "s-validator.max.number"
+    }),
+    array: __i18n$1("Must have at max %n items", {
+      id: "s-validator.max.array"
+    })
   },
   email: {
-    string: "Must be a valid email address"
+    default: __i18n$1("Must be a valid email address", {
+      id: "s-validator.email.default"
+    })
   },
   required: {
-    default: "This is required"
+    default: __i18n$1("This is required", {
+      id: "s-validator.required.default"
+    })
   },
   isoDate: {
-    string: "Must be a valid ISO date"
+    default: __i18n$1("Must be a valid ISO date", {
+      id: "s-validator.isoDate.default"
+    })
   },
   isoTime: {
-    string: "Must be a valid ISO time"
+    default: __i18n$1("Must be a valid ISO time", {
+      id: "s-validator.isoTime.default"
+    })
   },
   isoDateTime: {
-    string: "Must be a valid ISO date time"
+    default: __i18n$1("Must be a valid ISO date time", {
+      id: "s-validator.isoDateTime.default"
+    })
   },
   integer: {
-    string: "Must be an integer"
+    default: __i18n$1("Must be an integer", {
+      id: "s-validator.integer.default"
+    })
   },
   number: {
-    string: "Must be an number"
+    default: __i18n$1("Must be an number", {
+      id: "s-validator.number.default"
+    })
   },
   negative: {
-    string: "Must be a negative number"
+    default: __i18n$1("Must be a negative number", {
+      id: "s-validator.negative.default"
+    })
   },
   positive: {
-    string: "Must be a positive number"
+    default: __i18n$1("Must be a positive number", {
+      id: "s-validator.positive.default"
+    })
   },
   pattern: {
-    string: "Must match the pattern %pattern"
+    default: __i18n$1("Must match the pattern %pattern", {
+      id: "s-validator.pattern.default"
+    })
   },
   alphanum: {
-    string: "Must contain only alphanumeric characters"
+    default: __i18n$1("Must contain only alphanumeric characters", {
+      id: "s-validator.alphanum.default"
+    })
   },
   creditCard: {
-    string: "Must be a valid credit card number"
+    default: __i18n$1("Must be a valid credit card number", {
+      id: "s-validator.creditCard.default"
+    })
   },
   color: {
-    string: "Must be a valid color (hex, rgb, rgba, hsl, hsla)"
+    default: __i18n$1("Must be a valid color (hex, rgb, rgba, hsl, hsla)", {
+      id: "s-validator.color.default"
+    })
   },
   hex: {
-    string: "Must be a valid hex color"
+    default: __i18n$1("Must be a valid hex color", {
+      id: "s-validator.hex.default"
+    })
+  },
+  type: {
+    default: __i18n$1("Must be of type %type", {
+      id: "s-validator.type.default"
+    })
+  },
+  base64: {
+    default: __i18n$1("Must be a valid base64 string", {
+      id: "s-validator.base64.default"
+    })
+  },
+  url: {
+    default: __i18n$1("Must be a valid url", {
+      id: "s-validator.url.default"
+    }),
+    secure: __i18n$1("Must be a secure url", {
+      id: "s-validator.url.secure"
+    })
   },
   password: {
-    weak: "",
-    medium: "Must be >=6 characters, at least 1 lowercase/uppercase/special character",
-    strong: "Must be >=8 characters, at least 1 lowercase/uppercase/digit/special character"
+    default: __i18n$1("Must be a password string", {
+      id: "s-validator.password.default"
+    }),
+    weak: __i18n$1("Must be a password elligible string", {
+      id: "s-validator.password.weak"
+    }),
+    medium: __i18n$1("Must be >=6 characters, at least 1 lowercase/uppercase/special character", {
+      id: "s-validator.password.medium"
+    }),
+    strong: __i18n$1("Must be >=8 characters, at least 1 lowercase/uppercase/digit/special character", {
+      id: "s-validator.password.strong"
+    })
   }
 };
-const definition$g = {
-  description: "Validate an alphanum string",
-  type: "String"
+const definition$j = {
+  description: "Validate a specific type",
+  type: "String",
+  values: ["string", "number", "boolean", "integer", "array", "object"]
 };
-function alphanum(value, settings) {
-  var _a;
+function number$1(value, type, settings) {
+  var _a, _b;
   let message, valid;
   const finalSettings = __deepMerge({
-    i18n: __en.alphanum,
+    i18n: (_a = settings === null || settings === void 0 ? void 0 : settings.i18n) === null || _a === void 0 ? void 0 : _a.type
+  }, settings !== null && settings !== void 0 ? settings : {});
+  switch (type.toLowerCase()) {
+    case "array":
+      valid = Array.isArray(value);
+      break;
+    case "boolean":
+      valid = value === true || value === false;
+      break;
+    case "integer":
+      valid = __isInteger(value);
+      break;
+    case "number":
+      valid = typeof value === "number";
+      break;
+    case "string":
+      valid = typeof value === "string";
+      break;
+    case "object":
+      valid = __isPlainObject(value);
+      break;
+    case "checkbox":
+    case "select":
+      valid = __isPlainObject(value) && value.id;
+      console.log("VALUID", value);
+      break;
+    case "image":
+      valid = __isPlainObject(value) && value.url;
+      break;
+    case "video":
+      valid = __isPlainObject(value) && value.sources && (value.sources.webm || value.sources.mp4 || value.sources.ogg);
+      break;
+    case "datetime":
+      valid = __isPlainObject(value) && value.iso && value.value && value.format;
+      break;
+    case "link":
+      valid = __isPlainObject(value) && value.text && value.url;
+      break;
+    case "color":
+      valid = __isPlainObject(value) && (value.format === "hex" || value.format === "hexa" || value.format === "hsl" || value.format === "hsla" || value.format === "rgb" || value.format === "rgba") && value.value;
+      break;
+  }
+  if (!valid) {
+    message = (_b = finalSettings.i18n) === null || _b === void 0 ? void 0 : _b.default.replace("%type", finalSettings.type);
+  }
+  return {
+    valid,
+    message
+  };
+}
+const definition$i = {
+  description: "Validate a base64 string",
+  type: "Boolean"
+};
+function alphanum$1(value, validatorValue, settings) {
+  var _a;
+  let message;
+  const finalSettings = __deepMerge({
+    i18n: settings.i18n.base64,
     trim: true
   }, settings !== null && settings !== void 0 ? settings : {});
   if (typeof value !== "string") {
-    throw new Error(`Sorry but the "alphanum" validation only works with string`);
+    return {
+      valid: false,
+      message: (_a = finalSettings.i18n) === null || _a === void 0 ? void 0 : _a.default
+    };
+  }
+  if (finalSettings.trim) {
+    value = value.trim();
+  }
+  const isBase64 = __isBase64(value);
+  if (!isBase64) {
+    message = finalSettings.i18n.default;
+  }
+  return {
+    valid: isBase64,
+    message
+  };
+}
+const definition$h = {
+  description: "Validate an alphanum string",
+  type: "Boolean"
+};
+function alphanum(value, validatorValue, settings) {
+  var _a;
+  let message, valid;
+  const finalSettings = __deepMerge({
+    i18n: settings.i18n.alphanum,
+    trim: true
+  }, settings !== null && settings !== void 0 ? settings : {});
+  if (typeof value !== "string") {
+    return {
+      valid: false,
+      message: finalSettings.i18n.default
+    };
   }
   if (finalSettings.trim) {
     value = value.trim();
   }
   valid = value.match(/^[a-z0-9]+$/i);
   if (!valid) {
-    message = (_a = finalSettings.i18n) === null || _a === void 0 ? void 0 : _a.string;
+    message = (_a = finalSettings.i18n) === null || _a === void 0 ? void 0 : _a.default;
+  }
+  return {
+    valid,
+    message
+  };
+}
+const definition$g = {
+  description: "Validate a color string",
+  type: "Boolean"
+};
+function color(value, validatorValue, settings) {
+  var _a, _b;
+  let message, valid;
+  const finalSettings = __deepMerge({
+    i18n: (_a = settings === null || settings === void 0 ? void 0 : settings.i18n) === null || _a === void 0 ? void 0 : _a.color,
+    trim: true
+  }, settings !== null && settings !== void 0 ? settings : {});
+  if (typeof value !== "string") {
+    return {
+      valid: false,
+      message: finalSettings.i18n.default
+    };
+  }
+  if (finalSettings.trim) {
+    value = value.trim();
+  }
+  valid = __isColor(value);
+  if (!valid) {
+    message = (_b = finalSettings.i18n) === null || _b === void 0 ? void 0 : _b.default;
   }
   return {
     valid,
@@ -105,25 +362,28 @@ function alphanum(value, settings) {
   };
 }
 const definition$f = {
-  description: "Validate a color string",
-  type: "String"
+  description: "Validate a credit card string",
+  type: "Boolean"
 };
-function color(value, settings) {
-  var _a;
+function creditCard(value, validatorValue, settings) {
+  var _a, _b;
   let message, valid;
   const finalSettings = __deepMerge({
-    i18n: __en.color,
+    i18n: (_a = settings === null || settings === void 0 ? void 0 : settings.i18n) === null || _a === void 0 ? void 0 : _a.creditCard,
     trim: true
   }, settings !== null && settings !== void 0 ? settings : {});
   if (typeof value !== "string") {
-    throw new Error(`Sorry but the "color" validation only works with string`);
+    return {
+      valid: false,
+      message: finalSettings.i18n.default
+    };
   }
   if (finalSettings.trim) {
     value = value.trim();
   }
-  valid = __isColor(value);
+  valid = __isCreditCard(value);
   if (!valid) {
-    message = (_a = finalSettings.i18n) === null || _a === void 0 ? void 0 : _a.string;
+    message = (_b = finalSettings.i18n) === null || _b === void 0 ? void 0 : _b.default;
   }
   return {
     valid,
@@ -131,25 +391,28 @@ function color(value, settings) {
   };
 }
 const definition$e = {
-  description: "Validate a credit card string",
-  type: "String"
+  description: "Validate an email string",
+  type: "Boolean"
 };
-function creditCard(value, settings) {
-  var _a;
+function email(value, validatorValue, settings) {
+  var _a, _b;
   let message, valid;
   const finalSettings = __deepMerge({
-    i18n: __en.creditCard,
+    i18n: (_a = settings === null || settings === void 0 ? void 0 : settings.i18n) === null || _a === void 0 ? void 0 : _a.email,
     trim: true
   }, settings !== null && settings !== void 0 ? settings : {});
   if (typeof value !== "string") {
-    throw new Error(`Sorry but the "creditCard" validation only works with string`);
+    return {
+      valid: false,
+      message: finalSettings.i18n.default
+    };
   }
   if (finalSettings.trim) {
     value = value.trim();
   }
-  valid = __isCreditCard(value);
+  valid = __isEmail(value);
   if (!valid) {
-    message = (_a = finalSettings.i18n) === null || _a === void 0 ? void 0 : _a.string;
+    message = (_b = finalSettings.i18n) === null || _b === void 0 ? void 0 : _b.default;
   }
   return {
     valid,
@@ -157,25 +420,28 @@ function creditCard(value, settings) {
   };
 }
 const definition$d = {
-  description: "Validate an email string",
-  type: "String"
+  description: "Validate a hexadecimal string",
+  type: "Boolean"
 };
-function email(value, settings) {
-  var _a;
+function hex(value, validatorValue, settings) {
+  var _a, _b;
   let message, valid;
   const finalSettings = __deepMerge({
-    i18n: __en.email,
+    i18n: (_a = settings === null || settings === void 0 ? void 0 : settings.i18n) === null || _a === void 0 ? void 0 : _a.hex,
     trim: true
   }, settings !== null && settings !== void 0 ? settings : {});
   if (typeof value !== "string") {
-    throw new Error(`Sorry but the "email" validation only works with string`);
+    return {
+      valid: false,
+      message: finalSettings.i18n.default
+    };
   }
   if (finalSettings.trim) {
     value = value.trim();
   }
-  valid = __isEmail(value);
+  valid = value.match(/^#[a-zA-Z0-9]{3,6}$/);
   if (!valid) {
-    message = (_a = finalSettings.i18n) === null || _a === void 0 ? void 0 : _a.string;
+    message = (_b = finalSettings.i18n) === null || _b === void 0 ? void 0 : _b.default;
   }
   return {
     valid,
@@ -183,45 +449,22 @@ function email(value, settings) {
   };
 }
 const definition$c = {
-  description: "Validate a hexadecimal string",
-  type: "String"
-};
-function hex(value, settings) {
-  var _a;
-  let message, valid;
-  const finalSettings = __deepMerge({
-    i18n: __en.hex,
-    trim: true
-  }, settings !== null && settings !== void 0 ? settings : {});
-  if (typeof value !== "string") {
-    throw new Error(`Sorry but the "hex" validation only works with string`);
-  }
-  if (finalSettings.trim) {
-    value = value.trim();
-  }
-  valid = value.match(/^#[a-zA-Z0-9]{3,6}$/);
-  if (!valid) {
-    message = (_a = finalSettings.i18n) === null || _a === void 0 ? void 0 : _a.string;
-  }
-  return {
-    valid,
-    message
-  };
-}
-const definition$b = {
   description: "Validate an integer",
-  type: "number"
+  type: "Boolean"
 };
-function integer(value, settings) {
-  var _a;
+function integer(value, validatorValue, settings) {
+  var _a, _b;
   let message, valid;
   const finalSettings = __deepMerge({
-    i18n: __en.integer,
+    i18n: (_a = settings === null || settings === void 0 ? void 0 : settings.i18n) === null || _a === void 0 ? void 0 : _a.integer,
     cast: true,
     trim: true
   }, settings !== null && settings !== void 0 ? settings : {});
   if (typeof value !== "string" && typeof value !== "number") {
-    throw new Error(`Sorry but the "integer" validation only works with string and number`);
+    return {
+      valid: false,
+      message: finalSettings.i18n.default
+    };
   }
   if (typeof value === "string" && finalSettings.trim) {
     value = value.trim();
@@ -235,7 +478,36 @@ function integer(value, settings) {
     valid = Number.isInteger(value);
   }
   if (!valid) {
-    message = (_a = finalSettings.i18n) === null || _a === void 0 ? void 0 : _a.string;
+    message = (_b = finalSettings.i18n) === null || _b === void 0 ? void 0 : _b.default;
+  }
+  return {
+    valid,
+    message
+  };
+}
+const definition$b = {
+  description: "Validate an iso date string",
+  type: "Boolean"
+};
+function isoDate(value, validatorValue, settings) {
+  var _a, _b;
+  let message, valid;
+  const finalSettings = __deepMerge({
+    i18n: (_a = settings === null || settings === void 0 ? void 0 : settings.i18n) === null || _a === void 0 ? void 0 : _a.isoDate,
+    trim: true
+  }, settings !== null && settings !== void 0 ? settings : {});
+  if (typeof value !== "string") {
+    return {
+      valid: false,
+      message: finalSettings.i18n.default
+    };
+  }
+  if (finalSettings.trim) {
+    value = value.trim();
+  }
+  valid = __isIsoDate(value);
+  if (!valid) {
+    message = (_b = finalSettings.i18n) === null || _b === void 0 ? void 0 : _b.default;
   }
   return {
     valid,
@@ -244,24 +516,27 @@ function integer(value, settings) {
 }
 const definition$a = {
   description: "Validate an iso date string",
-  type: "String"
+  type: "Boolean"
 };
-function isoDate(value, settings) {
-  var _a;
+function isoDateTime(value, validatorValue, settings) {
+  var _a, _b;
   let message, valid;
   const finalSettings = __deepMerge({
-    i18n: __en.isoDate,
+    i18n: (_a = settings === null || settings === void 0 ? void 0 : settings.i18n) === null || _a === void 0 ? void 0 : _a.isoDateTime,
     trim: true
   }, settings !== null && settings !== void 0 ? settings : {});
   if (typeof value !== "string") {
-    throw new Error(`Sorry but the "isoDate" validation only works with string`);
+    return {
+      valid: false,
+      message: finalSettings.i18n.default
+    };
   }
   if (finalSettings.trim) {
     value = value.trim();
   }
-  valid = __isIsoDate(value);
+  valid = __isIsoDateTime(value);
   if (!valid) {
-    message = (_a = finalSettings.i18n) === null || _a === void 0 ? void 0 : _a.string;
+    message = (_b = finalSettings.i18n) === null || _b === void 0 ? void 0 : _b.default;
   }
   return {
     valid,
@@ -269,25 +544,28 @@ function isoDate(value, settings) {
   };
 }
 const definition$9 = {
-  description: "Validate an iso date string",
-  type: "String"
+  description: "Validate an iso time string",
+  type: "Boolean"
 };
-function isoDateTime(value, settings) {
-  var _a;
+function isoTime(value, validatorValue, settings) {
+  var _a, _b;
   let message, valid;
   const finalSettings = __deepMerge({
-    i18n: __en.isoDateTime,
+    i18n: (_a = settings === null || settings === void 0 ? void 0 : settings.i18n) === null || _a === void 0 ? void 0 : _a.isoTime,
     trim: true
   }, settings !== null && settings !== void 0 ? settings : {});
   if (typeof value !== "string") {
-    throw new Error(`Sorry but the "isoDateTime" validation only works with string`);
+    return {
+      valid: false,
+      message: finalSettings.i18n.default
+    };
   }
   if (finalSettings.trim) {
     value = value.trim();
   }
-  valid = __isIsoDateTime(value);
+  valid = __isIsoTime(value);
   if (!valid) {
-    message = (_a = finalSettings.i18n) === null || _a === void 0 ? void 0 : _a.string;
+    message = (_b = finalSettings.i18n) === null || _b === void 0 ? void 0 : _b.default;
   }
   return {
     valid,
@@ -295,25 +573,41 @@ function isoDateTime(value, settings) {
   };
 }
 const definition$8 = {
-  description: "Validate an iso time string",
-  type: "String"
+  description: 'Validate string, array, object and number using the "max" rule',
+  type: "Number"
 };
-function isoTime(value, settings) {
-  var _a;
+function max(value, n, settings) {
+  var _a, _b, _c, _d, _e;
   let message, valid;
   const finalSettings = __deepMerge({
-    i18n: __en.isoTime,
+    i18n: (_a = settings === null || settings === void 0 ? void 0 : settings.i18n) === null || _a === void 0 ? void 0 : _a.max,
     trim: true
   }, settings !== null && settings !== void 0 ? settings : {});
-  if (typeof value !== "string") {
-    throw new Error(`Sorry but the "isoTime" validation only works with string`);
-  }
-  if (finalSettings.trim) {
-    value = value.trim();
-  }
-  valid = __isIsoTime(value);
-  if (!valid) {
-    message = (_a = finalSettings.i18n) === null || _a === void 0 ? void 0 : _a.string;
+  switch (true) {
+    case typeof value === "string":
+      if (finalSettings.trim) {
+        value = value.trim();
+      }
+      valid = value.length <= n;
+      message = (_b = finalSettings.i18n) === null || _b === void 0 ? void 0 : _b.string.replace("%n", n);
+      break;
+    case typeof value === "number":
+      valid = value <= n;
+      message = (_c = finalSettings.i18n) === null || _c === void 0 ? void 0 : _c.number.replace("%n", n);
+      break;
+    case Array.isArray(value):
+      valid = value.length <= n;
+      message = (_d = finalSettings.i18n) === null || _d === void 0 ? void 0 : _d.array.replace("%n", n);
+      break;
+    case typeof value === "object":
+      valid = Object.keys(value).length <= n;
+      message = (_e = finalSettings.i18n) === null || _e === void 0 ? void 0 : _e.object.replace("%n", n);
+      break;
+    default:
+      return {
+        valid: false,
+        message: finalSettings.i18n.string
+      };
   }
   return {
     valid,
@@ -321,14 +615,14 @@ function isoTime(value, settings) {
   };
 }
 const definition$7 = {
-  description: 'Validate string, array, object and number using the "max" rule',
-  type: "String|Array|Object|Number"
+  description: 'Validate string, array, object and number using the "min" rule',
+  type: "Number"
 };
-function max(value, n, settings) {
-  var _a, _b, _c, _d;
+function min(value, n, settings) {
+  var _a, _b, _c, _d, _e;
   let message, valid;
   const finalSettings = __deepMerge({
-    i18n: __en.max,
+    i18n: (_a = settings === null || settings === void 0 ? void 0 : settings.i18n) === null || _a === void 0 ? void 0 : _a.min,
     trim: true
   }, settings !== null && settings !== void 0 ? settings : {});
   switch (true) {
@@ -336,23 +630,26 @@ function max(value, n, settings) {
       if (finalSettings.trim) {
         value = value.trim();
       }
-      valid = value.length <= n;
-      message = (_a = finalSettings.i18n) === null || _a === void 0 ? void 0 : _a.string.replace("%n", n);
+      valid = value.length >= n;
+      message = (_b = finalSettings.i18n) === null || _b === void 0 ? void 0 : _b.string.replace("%n", n);
       break;
     case typeof value === "number":
-      valid = value <= n;
-      message = (_b = finalSettings.i18n) === null || _b === void 0 ? void 0 : _b.number.replace("%n", n);
+      valid = value >= n;
+      message = (_c = finalSettings.i18n) === null || _c === void 0 ? void 0 : _c.number.replace("%n", n);
       break;
     case Array.isArray(value):
-      valid = value.length <= n;
-      message = (_c = finalSettings.i18n) === null || _c === void 0 ? void 0 : _c.array.replace("%n", n);
+      valid = value.length >= n;
+      message = (_d = finalSettings.i18n) === null || _d === void 0 ? void 0 : _d.array.replace("%n", n);
       break;
     case typeof value === "object":
-      valid = Object.keys(value).length <= n;
-      message = (_d = finalSettings.i18n) === null || _d === void 0 ? void 0 : _d.object.replace("%n", n);
+      valid = Object.keys(value).length >= n;
+      message = (_e = finalSettings.i18n) === null || _e === void 0 ? void 0 : _e.object.replace("%n", n);
       break;
     default:
-      throw new Error(`Sorry but the "max" validation only works with string, number, array or object values.`);
+      return {
+        valid: false,
+        message: finalSettings.i18n.string
+      };
   }
   return {
     valid,
@@ -360,58 +657,22 @@ function max(value, n, settings) {
   };
 }
 const definition$6 = {
-  description: 'Validate string, array, object and number using the "min" rule',
-  type: "String|Array|Object|Number"
-};
-function min(value, n, settings) {
-  var _a, _b, _c, _d;
-  let message, valid;
-  const finalSettings = __deepMerge({
-    i18n: __en.min,
-    trim: true
-  }, settings !== null && settings !== void 0 ? settings : {});
-  switch (true) {
-    case typeof value === "string":
-      if (finalSettings.trim) {
-        value = value.trim();
-      }
-      valid = value.length >= n;
-      message = (_a = finalSettings.i18n) === null || _a === void 0 ? void 0 : _a.string.replace("%n", n);
-      break;
-    case typeof value === "number":
-      valid = value >= n;
-      message = (_b = finalSettings.i18n) === null || _b === void 0 ? void 0 : _b.number.replace("%n", n);
-      break;
-    case Array.isArray(value):
-      valid = value.length >= n;
-      message = (_c = finalSettings.i18n) === null || _c === void 0 ? void 0 : _c.array.replace("%n", n);
-      break;
-    case typeof value === "object":
-      valid = Object.keys(value).length >= n;
-      message = (_d = finalSettings.i18n) === null || _d === void 0 ? void 0 : _d.object.replace("%n", n);
-      break;
-    default:
-      throw new Error(`Sorry but the "min" validation only works with string, number, array or object values.`);
-  }
-  return {
-    valid,
-    message
-  };
-}
-const definition$5 = {
   description: "Validate an negative number",
-  type: "number"
+  type: "Boolean"
 };
-function negative(value, settings) {
-  var _a;
+function negative(value, validatorValue, settings) {
+  var _a, _b;
   let message, valid;
   const finalSettings = __deepMerge({
-    i18n: __en.negative,
+    i18n: (_a = settings === null || settings === void 0 ? void 0 : settings.i18n) === null || _a === void 0 ? void 0 : _a.negative,
     cast: true,
     trim: true
   }, settings !== null && settings !== void 0 ? settings : {});
   if (typeof value !== "string" && typeof value !== "number") {
-    throw new Error(`Sorry but the "negative" validation only works with string and number`);
+    return {
+      valid: false,
+      message: finalSettings.i18n.default
+    };
   }
   if (typeof value === "string" && finalSettings.trim) {
     value = value.trim();
@@ -425,27 +686,30 @@ function negative(value, settings) {
     valid = value < 0;
   }
   if (!valid) {
-    message = (_a = finalSettings.i18n) === null || _a === void 0 ? void 0 : _a.string;
+    message = (_b = finalSettings.i18n) === null || _b === void 0 ? void 0 : _b.default;
   }
   return {
     valid,
     message
   };
 }
-const definition$4 = {
+const definition$5 = {
   description: "Validate an number",
-  type: "number"
+  type: "Boolean"
 };
-function number(value, settings) {
-  var _a;
+function number(value, validatorValue, settings) {
+  var _a, _b;
   let message, valid;
   const finalSettings = __deepMerge({
-    i18n: __en.number,
+    i18n: (_a = settings === null || settings === void 0 ? void 0 : settings.i18n) === null || _a === void 0 ? void 0 : _a.number,
     cast: true,
     trim: true
   }, settings !== null && settings !== void 0 ? settings : {});
   if (typeof value !== "string" && typeof value !== "number") {
-    throw new Error(`Sorry but the "number" validation only works with string and number`);
+    return {
+      valid: false,
+      message: finalSettings.i18n.default
+    };
   }
   if (typeof value === "string" && finalSettings.trim) {
     value = value.trim();
@@ -459,29 +723,32 @@ function number(value, settings) {
     valid = true;
   }
   if (!valid) {
-    message = (_a = finalSettings.i18n) === null || _a === void 0 ? void 0 : _a.string;
+    message = (_b = finalSettings.i18n) === null || _b === void 0 ? void 0 : _b.default;
   }
   return {
     valid,
     message
   };
 }
-const definition$3 = {
+const definition$4 = {
   description: "Validate a password string",
   type: "String"
 };
 function password(value, level, settings) {
-  var _a;
+  var _a, _b;
   let message, valid = false;
   const finalSettings = __deepMerge({
-    i18n: __en.password,
+    i18n: (_a = settings === null || settings === void 0 ? void 0 : settings.i18n) === null || _a === void 0 ? void 0 : _a.password,
     trim: true,
     weakReg: /.*/,
     mediumReg: /((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,}))|((?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,}))/,
     strongReg: /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/
   }, settings !== null && settings !== void 0 ? settings : {});
   if (typeof value !== "string") {
-    throw new Error(`Sorry but the "password" validation only works with string`);
+    return {
+      valid: false,
+      message: finalSettings.i18n.default
+    };
   }
   if (finalSettings.trim) {
     value = value.trim();
@@ -512,7 +779,7 @@ function password(value, level, settings) {
     }
   }
   if (!valid) {
-    message = (_a = finalSettings.i18n) === null || _a === void 0 ? void 0 : _a[level];
+    message = (_b = finalSettings.i18n) === null || _b === void 0 ? void 0 : _b[level];
   }
   return {
     valid,
@@ -523,19 +790,22 @@ function password(value, level, settings) {
     }
   };
 }
-const definition$2 = {
+const definition$3 = {
   description: "Validate a string using a regex pattern",
   type: "String"
 };
 function pattern(value, pattern2, settings) {
-  var _a;
+  var _a, _b;
   let message, valid;
   const finalSettings = __deepMerge({
-    i18n: __en.pattern,
+    i18n: (_a = settings === null || settings === void 0 ? void 0 : settings.i18n) === null || _a === void 0 ? void 0 : _a.pattern,
     trim: true
   }, settings !== null && settings !== void 0 ? settings : {});
   if (typeof value !== "string") {
-    throw new Error(`Sorry but the "pattern" validation only works with string`);
+    return {
+      valid: false,
+      message: finalSettings.i18n.default
+    };
   }
   if (finalSettings.trim) {
     value = value.trim();
@@ -543,27 +813,30 @@ function pattern(value, pattern2, settings) {
   const reg = new RegExp(pattern2);
   valid = reg.test(value);
   if (!valid) {
-    message = (_a = finalSettings.i18n) === null || _a === void 0 ? void 0 : _a.string.replace("%pattern", pattern2);
+    message = (_b = finalSettings.i18n) === null || _b === void 0 ? void 0 : _b.default.replace("%pattern", pattern2);
   }
   return {
     valid,
     message
   };
 }
-const definition$1 = {
+const definition$2 = {
   description: "Validate an positive number",
-  type: "number"
+  type: "Boolean"
 };
-function positive(value, settings) {
-  var _a;
+function positive(value, validatorValue, settings) {
+  var _a, _b;
   let message, valid;
   const finalSettings = __deepMerge({
-    i18n: __en.positive,
+    i18n: (_a = settings === null || settings === void 0 ? void 0 : settings.i18n) === null || _a === void 0 ? void 0 : _a.positive,
     cast: true,
     trim: true
   }, settings !== null && settings !== void 0 ? settings : {});
   if (typeof value !== "string" && typeof value !== "number") {
-    throw new Error(`Sorry but the "positive" validation only works with string and number`);
+    return {
+      valid: false,
+      message: finalSettings.i18n.default
+    };
   }
   if (typeof value === "string" && finalSettings.trim) {
     value = value.trim();
@@ -577,22 +850,22 @@ function positive(value, settings) {
     valid = value >= 0;
   }
   if (!valid) {
-    message = (_a = finalSettings.i18n) === null || _a === void 0 ? void 0 : _a.string;
+    message = (_b = finalSettings.i18n) === null || _b === void 0 ? void 0 : _b.default;
   }
   return {
     valid,
     message
   };
 }
-const definition = {
+const definition$1 = {
   description: "Make sure a value has been provided",
   type: "Boolean"
 };
-function required(value, settings) {
-  var _a;
+function required(value, validatorValue, settings) {
+  var _a, _b;
   let message, valid;
   const finalSettings = __deepMerge({
-    i18n: __en.required,
+    i18n: (_a = settings === null || settings === void 0 ? void 0 : settings.i18n) === null || _a === void 0 ? void 0 : _a.required,
     trim: true
   }, settings !== null && settings !== void 0 ? settings : {});
   if (typeof value === "string" && finalSettings.trim) {
@@ -600,7 +873,37 @@ function required(value, settings) {
   }
   valid = value !== void 0 && value !== null && value !== "";
   if (!valid) {
-    message = (_a = finalSettings.i18n) === null || _a === void 0 ? void 0 : _a.default;
+    message = (_b = finalSettings.i18n) === null || _b === void 0 ? void 0 : _b.default;
+  }
+  return {
+    valid,
+    message
+  };
+}
+const definition = {
+  description: "Make sure the provided value is a valid url",
+  type: "Boolean"
+};
+function url(value, validatorValue, settings) {
+  var _a, _b, _c;
+  let message, valid;
+  const finalSettings = __deepMerge({
+    i18n: (_a = settings === null || settings === void 0 ? void 0 : settings.i18n) === null || _a === void 0 ? void 0 : _a.url,
+    trim: true,
+    secure: false
+  }, settings !== null && settings !== void 0 ? settings : {});
+  if (typeof value === "string" && finalSettings.trim) {
+    value = value.trim();
+  }
+  valid = __isUrl(value);
+  if (!valid) {
+    message = (_b = finalSettings.i18n) === null || _b === void 0 ? void 0 : _b.default;
+  }
+  if (valid && finalSettings.secure) {
+    if (!value.match(/^https:\/\//)) {
+      valid = false;
+      message = (_c = finalSettings.i18n) === null || _c === void 0 ? void 0 : _c.secure;
+    }
   }
   return {
     valid,
@@ -668,7 +971,7 @@ class SValidator extends SClass {
    */
   constructor(settings) {
     super(__deepMerge({
-      i18n: __en
+      i18n: __i18n
     }, settings !== null && settings !== void 0 ? settings : {}));
   }
   /**
@@ -719,7 +1022,7 @@ class SValidator extends SClass {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
-  validate(value, rulesOrPreset, settings) {
+  validate(value, rulesOrPreset) {
     var _a, _b, _c;
     let result = {
       valid: true,
@@ -733,20 +1036,24 @@ class SValidator extends SClass {
       }
       rules = SValidator._presets[rulesOrPreset].rules;
     }
+    if (!rules.required) {
+      if (value === void 0 || value === null || value === "") {
+        return {
+          valid: true,
+          messages: null
+        };
+      }
+    }
     for (let [validator, valueOrObj] of Object.entries(rules)) {
-      let validatorSettings = (_a = valueOrObj.settings) !== null && _a !== void 0 ? _a : {}, validatorValue = (_b = valueOrObj.value) !== null && _b !== void 0 ? _b : valueOrObj, res;
+      let validatorSettings = __isPlainObject(valueOrObj) ? valueOrObj : {}, validatorValue = (_a = valueOrObj === null || valueOrObj === void 0 ? void 0 : valueOrObj.value) !== null && _a !== void 0 ? _a : valueOrObj, res;
       const validatorObj = SValidator._validators[validator];
       if (!validatorObj) {
         throw new Error(`Sorry but the validator "${validator}" is not registered`);
       }
-      const finalValidatorSettings = Object.assign(Object.assign({}, validatorSettings), { i18n: (_c = this.settings.i18n[validator]) !== null && _c !== void 0 ? _c : {} });
-      if (typeof rulesOrPreset === "boolean") {
-        res = validatorObj.validator(value, finalValidatorSettings);
-      } else {
-        res = validatorObj.validator(value, validatorValue, finalValidatorSettings);
-      }
+      const finalValidatorSettings = Object.assign(Object.assign({}, validatorSettings), { i18n: (_b = this.settings.i18n[validator]) !== null && _b !== void 0 ? _b : {} });
+      res = validatorObj.validator(value, validatorValue, finalValidatorSettings);
       if (!res.valid) {
-        res.message = res.message.replace("%value", value).replace("%validator", validator);
+        res.message = (_c = res.message) === null || _c === void 0 ? void 0 : _c.replace("%value", value).replace("%validator", validator);
         result.valid = false;
         result.rules[validator] = res;
         result.messages.push(res.message);
@@ -759,87 +1066,67 @@ class SValidator extends SClass {
 }
 SValidator._validators = {};
 SValidator._presets = {};
-SValidator.registerValidator("min", min, {
-  definition: definition$6
+SValidator.registerValidator("base64", alphanum$1, {
+  definition: definition$i
 });
-SValidator.registerValidator("max", max, {
+SValidator.registerValidator("min", min, {
   definition: definition$7
 });
-SValidator.registerValidator("email", email, {
-  definition: definition$d
-});
-SValidator.registerValidator("required", required, {
-  definition
-});
-SValidator.registerValidator("isoDate", isoDate, {
-  definition: definition$a
-});
-SValidator.registerValidator("isoTime", isoTime, {
+SValidator.registerValidator("max", max, {
   definition: definition$8
 });
-SValidator.registerValidator("isoDateTime", isoDateTime, {
-  definition: definition$9
-});
-SValidator.registerValidator("integer", integer, {
-  definition: definition$b
-});
-SValidator.registerValidator("number", number, {
-  definition: definition$4
-});
-SValidator.registerValidator("negative", negative, {
-  definition: definition$5
-});
-SValidator.registerValidator("positive", positive, {
-  definition: definition$1
-});
-SValidator.registerValidator("pattern", pattern, {
-  definition: definition$2
-});
-SValidator.registerValidator("alphanum", alphanum, {
-  definition: definition$g
-});
-SValidator.registerValidator("creditCard", creditCard, {
+SValidator.registerValidator("email", email, {
   definition: definition$e
 });
-SValidator.registerValidator("color", color, {
-  definition: definition$f
+SValidator.registerValidator("required", required, {
+  definition: definition$1
 });
-SValidator.registerValidator("hex", hex, {
+SValidator.registerValidator("isoDate", isoDate, {
+  definition: definition$b
+});
+SValidator.registerValidator("isoTime", isoTime, {
+  definition: definition$9
+});
+SValidator.registerValidator("isoDateTime", isoDateTime, {
+  definition: definition$a
+});
+SValidator.registerValidator("integer", integer, {
   definition: definition$c
 });
-SValidator.registerValidator("password", password, {
+SValidator.registerValidator("number", number, {
+  definition: definition$5
+});
+SValidator.registerValidator("negative", negative, {
+  definition: definition$6
+});
+SValidator.registerValidator("positive", positive, {
+  definition: definition$2
+});
+SValidator.registerValidator("pattern", pattern, {
   definition: definition$3
 });
-const __css = `@keyframes error-message-appear {
-    from {
-        line-height: 1;
-        max-height: 0;
-    }
-    to {
-        max-height: 2em;
-        line-height: 2;
-    }
-}
-
-.s-form-validate + .s-form-validate-error-message {
-    text-align: end;
-    overflow: hidden;
-    max-height: 0;
-    line-height: 1;
-    margin: 0;
-}
-
-.s-lod--2 .s-form-validate + .s-form-validate-error-message {
-    animation: 0.2s error-message-appear var(--s-theme-easing-default, 0) forwards;
-}
-
-.s-lod--1 .s-form-validate + .s-form-validate-error-message {
-    color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0)) * 1%),calc((var(--s-theme-color-error-l, 0)) * 1%),var(--s-theme-color-error-a, 1));
-}body:after {
-                    display: none;;
-                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
-}
-`;
+SValidator.registerValidator("alphanum", alphanum, {
+  definition: definition$h
+});
+SValidator.registerValidator("creditCard", creditCard, {
+  definition: definition$f
+});
+SValidator.registerValidator("color", color, {
+  definition: definition$g
+});
+SValidator.registerValidator("hex", hex, {
+  definition: definition$d
+});
+SValidator.registerValidator("type", number$1, {
+  definition: definition$j
+});
+SValidator.registerValidator("password", password, {
+  definition: definition$4
+});
+SValidator.registerValidator("url", url, {
+  definition
+});
+const __css = "@keyframes error-message-appear {\n    from {\n        line-height: 1;\n        max-height: 0;\n    }\n    to {\n        max-height: 2em;\n        line-height: 2;\n    }\n}\n\n.s-form-validate + .s-form-validate-error-message {\n    text-align: end;\n    color: hsla(calc(var(--s-color-error-h, 0) + var(--s-color-error-spin ,0)),calc((var(--s-color-error-s, 0)) * 1%),calc((var(--s-color-error-l, 0)) * 1%),var(--s-color-error-a, 1));\n    overflow: hidden;\n    max-height: 0;\n    line-height: 1;\n    margin: 0;\n    animation: 0.2s error-message-appear var(--s-easing-default, 0) forwards;\n}\n";
 const validatorsDefinition = SValidator.getValidatorsDefinition(), validatorsMessagesDefinition = {};
 for (let [validator, definition2] of Object.entries(validatorsDefinition)) {
   validatorsMessagesDefinition[`${validator}Message`] = {

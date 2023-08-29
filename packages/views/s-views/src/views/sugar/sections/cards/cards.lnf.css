@@ -1,11 +1,12 @@
-.s-section-hero {
-    padding-block: sugar.padding(90);
+.s-section-cards {
+    .s-card {
+        @sugar.depth (0);
+        transform: scale(1);
+        @sugar.transition;
 
-    ._title {
-        max-width: 30ch;
-    }
-
-    ._ctas {
-        gap: sugar.margin(30);
+        &:hover {
+            transform: scale(1.01);
+            @sugar.depth (100);
+        }
     }
 }

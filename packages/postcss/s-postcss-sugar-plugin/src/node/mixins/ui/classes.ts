@@ -56,9 +56,6 @@ export default function ({
         '@sugar.ui.tabs.classes;',
         '@sugar.ui.toggle.classes;',
         '@sugar.ui.tooltip.classes;',
-        // from @coffeekraken/sugar package
-        '@sugar.ui.card.classes;',
-        '@sugar.ui.menu.classes;',
     ];
 
     return cssArray;

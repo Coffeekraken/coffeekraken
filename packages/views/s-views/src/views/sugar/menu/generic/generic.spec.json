@@ -1,0 +1,15 @@
+{
+    "type": "Menu",
+    "category": "menu",
+    "title": "Generic menu",
+    "description": "Describe a generic menu with children etc",
+    "props": {
+        "items": {
+            "extends": "sugar.views.props.menuItem",
+            "type": "Object[]",
+            "description": "Specify a menu item",
+            "required": true
+        },
+        "attributes": "@sugar.views.props.attributes"
+    }
+}

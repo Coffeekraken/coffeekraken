@@ -21,7 +21,7 @@
 
     ._ctas {
         display: flex;
-        gap: sugar.margin(30);
+        gap: sugar.margin(20);
     }
 
     &-align-start ._container {

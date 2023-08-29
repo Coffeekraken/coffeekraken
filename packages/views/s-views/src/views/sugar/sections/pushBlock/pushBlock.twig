@@ -44,7 +44,7 @@
             <div>
                 {% if image.url %}
                     <div>
-                        <picture class="s-media-container">
+                        <picture class="_image s-media-container">
                             {% for media, image in image.media %}
                                 <source srcset="{{ image.url }}" media="{{ media }}">
                             {% endfor %}

@@ -34,14 +34,14 @@ exports.default = (api) => {
          * @name                main
          * @namespace            config.themeColor
          * @type                Color
-         * @default             #6F7C90
+         * @default             #808080
          *
          * Specify the "main" color value.
          *
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        main: '#6F7C90',
+        main: '#808080',
         /**
          * @name                accent
          * @namespace            config.themeColor

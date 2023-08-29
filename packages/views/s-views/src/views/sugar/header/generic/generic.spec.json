@@ -1,0 +1,14 @@
+{
+    "type": "Header",
+    "category": "layout",
+    "title": "Generic header",
+    "description": "Describe a generic header",
+    "props": {
+        "primaryMenu": {
+            "extends": "sugar.views.props.menu",
+            "title": "Primary menu",
+            "description": "Specify a primary menu",
+        },
+        "attributes": "@sugar.views.props.attributes"
+    }
+}

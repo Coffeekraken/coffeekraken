@@ -36,7 +36,7 @@ export class SherlockHeaderComponent extends LitElement {
             <header class="sh-header">
                 <div class="_metas">
                     <svg
-                        class="s-logo s-logo--coffeekraken-picto"
+                        class="s-logo s-logo-coffeekraken-picto"
                         viewBox="0 0 299 229"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"

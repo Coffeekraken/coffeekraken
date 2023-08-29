@@ -8,11 +8,11 @@ function generateCard() {
         }),
         intro: faker.lorem.words({
             min: 3,
-            max: 10,
+            max: 6,
         }),
         text: faker.lorem.words({
-            min: 10,
-            max: 20,
+            min: 5,
+            max: 15,
         }),
         image: {
             url: `https://picsum.photos/600?v=${Math.random()}`,
@@ -69,4 +69,8 @@ export default {
         // generateCard(),
         // generateCard(),
     ],
+    spaces: {
+        marginTop: 50,
+        marginBottom: 50,
+    },
 };

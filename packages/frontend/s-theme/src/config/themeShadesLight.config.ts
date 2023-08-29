@@ -30,7 +30,7 @@ export default (api) => {
 
             color: {
                 main: {
-                    darken: 10,
+                    darken: 15,
                 },
                 complementary: {
                     lighten: 15,
@@ -93,12 +93,6 @@ export default (api) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             lighten: 50,
-
-            color: {
-                surface: {
-                    darken: 20,
-                },
-            },
         },
         surface: {
             /**
@@ -115,9 +109,6 @@ export default (api) => {
             lighten: 40,
 
             color: {
-                base: {
-                    lighten: 49,
-                },
                 main: {
                     lighten: 49,
                 },

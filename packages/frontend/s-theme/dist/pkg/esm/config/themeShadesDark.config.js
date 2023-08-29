@@ -28,7 +28,7 @@ export default (api) => {
             lighten: 15,
             color: {
                 main: {
-                    lighten: 46,
+                    lighten: 50,
                 },
             },
         },

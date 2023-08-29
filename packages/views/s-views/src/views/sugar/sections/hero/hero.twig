@@ -7,6 +7,15 @@
 {% block content %}
     <div class="_content s-spacing:{{ __spacingClasses(spacing, 30) }}">
 
+        {% if image.url %}
+            <picture class="_image s-media-container">
+                {% for media, image in image.media %}
+                    <source srcset="{{ image.url }}" media="{{ media }}">
+                {% endfor %}
+                <img class="_img s-media" src="{{ image.url }}" title="{{ image.title }}" alt="{{ image.alt }}" />
+            </picture>
+        {% endif %}
+
         {% if title %}
             <h1 class="_title s-typo:h1">{{ title|raw }}</h1>
         {% endif %}

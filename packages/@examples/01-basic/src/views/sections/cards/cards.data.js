@@ -39,7 +39,6 @@ export default {
         },
     },
     align: 'center',
-    spacing: 50,
     spaces: {
         paddingTop: 80,
         paddingBottom: 80,

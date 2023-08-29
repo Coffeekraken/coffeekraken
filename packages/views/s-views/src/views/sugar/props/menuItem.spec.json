@@ -4,14 +4,6 @@
     "title": "Menu item",
     "description": "Describe a menu item with props like url, target, etc...",
     "props": {
-        "label": {
-            "type": "String",
-            "description": "Specify the label to display"
-        },
-        "raw": {
-            "type": "Html",
-            "description": "Specify some raw html to be used for the menu. If specified, will be used instead of the \"label\" property"
-        },
         "link": {
             "type": "Link",
             "title": "Menu item link",
@@ -23,6 +15,11 @@
                 "newWindow": false
             }
         },
+        "raw": {
+            "type": "Html",
+            "description": "Specify some raw html to be used for the menu. If specified, will be used instead of the \"label\" property"
+        },
+        "attributes": "@sugar.views.props.attributes",
         "children": {
             "type": "Object[]",
             "description": "Specify a menu item child"

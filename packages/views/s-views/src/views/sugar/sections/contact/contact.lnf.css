@@ -1,0 +1,36 @@
+.s-section-contact {
+    ._layout {
+    }
+
+    ._address {
+    }
+
+    ._socials {
+        font-size: sugar.font.size(50);
+
+        a {
+            opacity: 0.5;
+            @sugar.transition (fast);
+
+            &:hover {
+                color: sugar.color(accent);
+                opacity: 1;
+            }
+        }
+    }
+
+    .s-form {
+    }
+
+    /* .s-google-map {
+        width: 43vw;
+        margin-bottom: calc(sugar.padding(80) * 2 * -1);
+        top: calc(sugar.padding(80) * -1);
+        height: 700px;
+    }
+
+    .s-google-map-marker {
+        @sugar.color (accent);
+    }
+     */
+}

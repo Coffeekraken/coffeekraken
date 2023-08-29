@@ -4,8 +4,4 @@
     ._title {
         max-width: 30ch;
     }
-
-    ._img {
-        object-fit: cover;
-    }
 }

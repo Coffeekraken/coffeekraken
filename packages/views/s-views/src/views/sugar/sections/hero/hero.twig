@@ -16,15 +16,10 @@
             </picture>
         {% endif %}
 
-        {% if title %}
-            <h1 class="_title s-typo:h1">{{ title|raw }}</h1>
-        {% endif %}
-        {% if intro %}
-            <p class="_lead s-typo:lead">{{ intro|raw }}</p>
-        {% endif %}
-        {% if text %}
-            <p class="_text s-typo:p">{{ text|raw }}</p>
-        {% endif %}
+        {% include 'sugar/components/metas/metas.twig' with {
+            titleSize: 1
+        } %}
+
         <div class="_ctas">
             {% if primaryCta %}
                 <div class="_cta _primary-cta">

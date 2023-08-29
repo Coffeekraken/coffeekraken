@@ -7,16 +7,22 @@
         flex-direction: column;
     }
 
-    ._bkg {
+    ._metas {
+        display: flex;
+        flex-direction: column;
+    }
+
+    ._bg {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
     }
-    ._img {
+    ._bg-img {
         width: 100%;
         height: 100%;
+        object-fit: cover;
     }
 
     ._ctas {
@@ -24,25 +30,31 @@
         gap: sugar.margin(20);
     }
 
-    &-align-start ._container {
+    &-align-start ._container,
+    &-align-start ._metas {
         align-items: start;
     }
-    &-align-center ._container {
+    &-align-center ._container,
+    &-align-center ._metas {
         align-items: center;
         text-align: center;
     }
-    &-align-end ._container {
+    &-align-end ._container,
+    &-align-end ._metas {
         align-items: end;
         text-align: right;
     }
 
-    &-justify-start ._container {
+    &-justify-start ._container,
+    &-justify-start ._metas {
         justify-content: start;
     }
-    &-justify-center ._container {
+    &-justify-center ._container,
+    &-justify-center ._metas {
         justify-content: center;
     }
-    &-justify-end ._container {
+    &-justify-end ._container,
+    &-justify-end ._metas {
         justify-content: end;
     }
 }

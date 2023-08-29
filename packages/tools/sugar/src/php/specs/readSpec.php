@@ -27,9 +27,7 @@ namespace Sugar\specs;
 function readSpec(string $specDotPath, $settings = [])
 {
     $settings = array_merge_recursive((array) $settings, [
-        'namespaces' => [
-            'sugar.views' => [realpath(__DIR__ . '/../../views')],
-        ],
+        'namespaces' => [],
     ]);
     $specs = new \SSpecs($settings);
     $spec = $specs->read($specDotPath);

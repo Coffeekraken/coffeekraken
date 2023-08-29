@@ -1,5 +1,5 @@
 {
-    "extends": "sugar.views.section.simple",
+    "extends": "sugar.views.sections.simple",
     "type": "Section",
     "category": "sections",
     "title": "Hero",

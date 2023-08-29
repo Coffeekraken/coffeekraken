@@ -1,0 +1,17 @@
+{% if title or intro or text %}
+
+    {% set titleSize = titleSize|default('3') %}
+
+    <div class="_metas {{ __spacingClasses(spacing, 30) }}">
+        {% if title %}
+            <h{{ titleSize }} class="_title s-typo s-typo-h{{ titleSize }}">{{ title|raw }}</h{{ titleSize}}>
+        {% endif %}
+        {% if intro %}
+            <p class="_lead s-typo s-typo-lead">{{ intro|raw }}</p>
+        {% endif %}
+        {% if text %}
+            <p class="_text s-typo s-typo-p">{{ text|raw }}</p>
+        {% endif %}
+    </div>
+
+{% endif %}

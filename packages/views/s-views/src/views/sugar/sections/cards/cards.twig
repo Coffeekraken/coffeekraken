@@ -5,9 +5,7 @@
 {% extends 'sugar/sections/simple/simple.twig' %}
 
 {% block simpleContent %}
-    
-    {% include 'sugar/components/cards/cards.twig' with {
-        cards: cards
-    } only %}
+
+    {% include 'sugar/components/cards/cards.twig' with {}|merge(cards) only %}
 
 {% endblock %}

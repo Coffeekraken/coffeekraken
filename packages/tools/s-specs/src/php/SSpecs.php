@@ -260,6 +260,7 @@ class SSpecs
         // loop on each registered namespaces directories to check if the specDotPath
         // correspond to a file in one of them...
         $dirs = $this->settings->namespaces[$currentNamespace];
+
         foreach ($dirs as $dir) {
             // direct path my/path => my/path.spec.json
             $potentialSpecPath = $dir . '/' . $internalPath;

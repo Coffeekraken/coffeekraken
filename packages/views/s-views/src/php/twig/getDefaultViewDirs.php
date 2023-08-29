@@ -14,10 +14,10 @@ namespace SViews\twig;
  *
  * @return      {String[]}                  The root directories for views
  *
- * @snippet             \Sugar\twig\getDefaultViewDirs();
+ * @snippet             \SViews\twig\getDefaultViewDirs();
  *
  * @example       twig
- * $viewDirs = \Sugar\twig\getDefaultViewDirs();
+ * $viewDirs = \SViews\twig\getDefaultViewDirs();
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

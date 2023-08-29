@@ -38,7 +38,7 @@ $viewName = str_replace('.blade.php', '', $params->viewDotPath);
 // add the default sugar views path
 $params->rootDirs = array_merge(
     $params->rootDirs,
-    \Sugar\blade\getDefaultViewDirs()
+    \SViews\blade\getDefaultViewDirs()
 );
 
 $blade = new eftec\bladeone\BladeOne(

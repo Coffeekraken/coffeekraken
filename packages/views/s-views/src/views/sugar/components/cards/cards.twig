@@ -1,6 +1,5 @@
 <section id="{{ id }}" class="s-cards s-cards-{{ cards|length }} {{ attributes.class }} {{ __containerClasses(container) }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}>
 {{ __nodeDataTemplate('views.components.cards', _context)|raw }}
-
     <div class="_grid {{ __gapClasses(gap, 30) }}">
         {% for idx, card in cards %}
             <div class="_card">

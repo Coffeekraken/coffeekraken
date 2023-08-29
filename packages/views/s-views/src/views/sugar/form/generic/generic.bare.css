@@ -1,2 +1,6 @@
 .s-form-generic {
+    .s-form_actions {
+        display: flex;
+        justify-content: flex-end;
+    }
 }

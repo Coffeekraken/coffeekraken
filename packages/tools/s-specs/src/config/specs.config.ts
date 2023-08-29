@@ -31,8 +31,8 @@ export default function (api) {
                 )}/components`,
             ],
         },
-        get cwd() {
-            return api.config.storage.package.rootDir;
-        },
+        // get cwd() {
+        //     return api.config.storage.package.rootDir;
+        // },
     };
 }

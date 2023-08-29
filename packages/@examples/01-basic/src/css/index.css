@@ -6,6 +6,7 @@
 /* Load custom views css */
 @sugar.view ('sugar.menu.generic');
 @sugar.view ('sugar.header.generic');
+@sugar.view ('sugar.form.generic');
 @sugar.view ('sugar.components.card');
 @sugar.view ('sugar.components.cards');
 @sugar.view ('sugar.sections.nude');
@@ -15,6 +16,7 @@
 @sugar.view ('sugar.sections.pushBlock');
 @sugar.view ('sugar.sections.testimonials');
 @sugar.view ('sugar.sections.hero');
+@sugar.view ('sugar.sections.contact');
 
 body {
     background: sugar.color(main, background);

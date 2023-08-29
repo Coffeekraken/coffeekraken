@@ -1,5 +1,6 @@
 <section id="{{ id }}" class="s-section
     s-section-{{ section.type }}
+    {{ section.class }}
     {{ attributes.class }}
     {{ __spacesClasses(spaces, frontspec) }}
     {{ align ? 's-section-align-' ~ align.value ?? align }}
@@ -11,8 +12,8 @@
 {{ __nodeDataTemplate('views.sections.' ~ section.type, _context)|raw }}
 
     {% if bgImage %}
-        <div class="_bkg">
-            <img class="s-media _img" src="{{ bgImage.url }}" title="{{ bgImage.title }}" alt="{{ bgImage.alt }}" />
+        <div class="_bg">
+            <img class="s-media _bg-img" src="{{ bgImage.url }}" title="{{ bgImage.title }}" alt="{{ bgImage.alt }}" />
         </div>
     {% endif %}
 

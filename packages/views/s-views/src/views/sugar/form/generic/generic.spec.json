@@ -27,9 +27,9 @@
                     }
                 ],
                 "default": {
-                    "id": "inline",
-                    "name": "Inline",
-                    "value": "inline"
+                    "id": "block",
+                    "name": "Block",
+                    "value": "block"
                 },
                 "required": true
             }
@@ -109,6 +109,9 @@
                 },
                 "attributes": "@sugar.views.props.attributes",
             }
-        }
+        },
+        "spacing": "@sugar.views.props.spacing",
+        "attributes": "@sugar.views.props.attributes",
+        "spaces": "@sugar.views.props.spaces"
     }
 }

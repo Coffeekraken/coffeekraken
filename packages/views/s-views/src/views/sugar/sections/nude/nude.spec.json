@@ -6,11 +6,13 @@
     "props": {
         "bgColor": {
             "type": "Color",
+            "category": "design",
             "title": "Background color",
             "description": "Background color"
         },
         "bgImage": {
             "type": "Image",
+            "category": "design",
             "title": "Background image",
             "description": "Background image"
         },
@@ -24,6 +26,7 @@
         },
         "align": {
             "type": "Select",
+            "category": "design",
             "title": "Align",
             "description": "Specify the align of the section (top, center, bottom)",
             "options": [
@@ -46,6 +49,7 @@
         },
         "justify": {
             "type": "Select",
+            "category": "design",
             "title": "Justify",
             "description": "Specify the justify of the section (left, center, right)",
             "options": [
@@ -68,6 +72,7 @@
         },
         "variant": {
             "type": "Select",
+            "category": "design",
             "title": "Theme variant",
             "description": "Specify a theme variant you want to apply to the section",
             "options": [
@@ -83,8 +88,8 @@
                 }
             ]
         },
-        "container": "@sugar.views.props.container",
         "spacing": "@sugar.views.props.spacing",
+        "container": "@sugar.views.props.container",
         "attributes": "@sugar.views.props.attributes",
         "spaces": "@sugar.views.props.spaces"
     },

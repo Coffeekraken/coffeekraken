@@ -1,5 +1,19 @@
 {
     "$custom": {
+        "categories": {
+            "default": {
+                "title": "General",
+                "description": "Block specified content"
+            },
+            "design": {
+                "title": "Design",
+                "description": "Design specified attributes like spaces, etc..."
+            },
+            "settings": {
+                "title": "Settings",
+                "description": "Settings specified attributes like id, attributes, etc..."
+            }
+        },
         "menus": {
             "primary": {
                 "name": "Primary menu"
@@ -788,6 +802,20 @@
         "enabled": false,
         "url": "/classmap.json",
         "path": "./classmap.json"
+    },
+    "categories": {
+        "default": {
+            "title": "General",
+            "description": "Block specified content"
+        },
+        "design": {
+            "title": "Design",
+            "description": "Design specified attributes like spaces, etc..."
+        },
+        "settings": {
+            "title": "Settings",
+            "description": "Settings specified attributes like id, attributes, etc..."
+        }
     },
     "menus": {
         "primary": {

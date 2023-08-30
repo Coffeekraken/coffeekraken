@@ -1,6 +1,5 @@
 {
     "type": "Select",
-    "category": "props",
     "title": "Media",
     "description": "Specify the media on which to apply this new layout",
     "required": true,

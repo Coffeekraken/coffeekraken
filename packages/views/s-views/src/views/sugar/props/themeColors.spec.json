@@ -1,6 +1,5 @@
 {
     "type": "Select",
-    "category": "props",
     "title": "Theme color",
     "description": "List of available theme colors",
     "options": [

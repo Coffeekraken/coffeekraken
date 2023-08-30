@@ -21,7 +21,8 @@
             "description": "The card text"
         },
         "cards": {
-            "type": "Card[]",
+            "extends": "@sugar.views.components.card",
+            "type": "Object[]",
             "title": "Cards",
             "description": "The cards to display",
             "required": true

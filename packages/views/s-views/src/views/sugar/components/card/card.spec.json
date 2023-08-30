@@ -4,6 +4,11 @@
     "title": "Card",
     "description": "Display a nice card with some infos like \"image\", \"title\", \"intro\", \"description\" and \"cta\"",
     "props": {
+        "image": {
+            "type": "Image",
+            "title": "Card image",
+            "description": "Card image"
+        },
         "title": {
             "type": "Text",
             "title": "Title",
@@ -20,6 +25,7 @@
             "title": "Text",
             "description": "The card text"
         },
+        "cta": "@sugar.views.components.cta",
         "direction": {
             "type": "Select",
             "title": "Direction",
@@ -51,13 +57,7 @@
                 }
             ]
         },
-        "image": {
-            "type": "Image",
-            "title": "Card image",
-            "description": "Card image"
-        },
         "spacing": "@sugar.views.props.spacing",
-        "cta": "@sugar.views.components.cta",
         "attributes": "@sugar.views.props.attributes",
         "spaces": "@sugar.views.props.spaces"
     },

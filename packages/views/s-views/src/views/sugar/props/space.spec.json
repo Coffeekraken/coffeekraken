@@ -1,6 +1,5 @@
 {
     "type": "Select",
-    "category": "props",
     "title": "Spaces",
     "description": "The available spaces option.",
     "default": null,

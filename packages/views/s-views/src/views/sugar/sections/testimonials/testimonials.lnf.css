@@ -4,14 +4,20 @@
         overflow: hidden;
     }
 
+    ._rating {
+        display: flex;
+        flex-direction: column;
+        gap: sugar.margin(20);
+    }
+
     ._stars {
         position: relative;
 
-        ._base {
-            opacity: 0.2;
+        ._stars-total {
+            color: sugar.color(main, text, --alpha 0.2);
         }
 
-        ._top {
+        ._stars-rating {
             color: sugar.color(accent);
             clip-path: polygon(
                 0% 0%,

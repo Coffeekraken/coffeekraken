@@ -4,36 +4,6 @@
     "title": "Generic form",
     "description": "Generic form with fields options like text, textarea, select, checkbox, radio, etc.",
     "props": {
-        "lnf": {
-            "labelType": {
-                "type": "Select",
-                "title": "Label type",
-                "description": "Label type like inline, block or float",
-                "options": [
-                    {
-                        "id": "inline",
-                        "name": "Inline",
-                        "value": "inline"
-                    },
-                    {
-                        "id": "block",
-                        "name": "Block",
-                        "value": "block"
-                    },
-                    {
-                        "id": "float",
-                        "name": "Float",
-                        "value": "float"
-                    }
-                ],
-                "default": {
-                    "id": "block",
-                    "name": "Block",
-                    "value": "block"
-                },
-                "required": true
-            }
-        },
         "fields": {
             "type": "Object[]",
             "title": "Fields",
@@ -108,6 +78,36 @@
                     "required": true
                 },
                 "attributes": "@sugar.views.props.attributes",
+            }
+        },
+        "lnf": {
+            "labelType": {
+                "type": "Select",
+                "title": "Label type",
+                "description": "Label type like inline, block or float",
+                "options": [
+                    {
+                        "id": "inline",
+                        "name": "Inline",
+                        "value": "inline"
+                    },
+                    {
+                        "id": "block",
+                        "name": "Block",
+                        "value": "block"
+                    },
+                    {
+                        "id": "float",
+                        "name": "Float",
+                        "value": "float"
+                    }
+                ],
+                "default": {
+                    "id": "block",
+                    "name": "Block",
+                    "value": "block"
+                },
+                "required": true
             }
         },
         "spacing": "@sugar.views.props.spacing",

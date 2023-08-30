@@ -13,14 +13,14 @@
             <li class="_testimonial {{ __spacingClasses(spacing, 30) }}">
                 {% if testimonial.rating %}
                     <div class="_rating">
-                        <p class="_score">{{ testimonial.rating }}</p>
+                        <p class="_text">{{ testimonial.rating }}</p>
                         <div class="_stars" style="--percent: {{ 100 / testimonial.total * testimonial.rating }}">
-                            <div class="_base">
+                            <div class="_stars-total">
                                 {% for i in 0..testimonial.total - 1 %}
                                     {{ testimonial.icon|raw }}
                                 {% endfor %}
                             </div>
-                            <div class="_top">
+                            <div class="_stars-rating">
                                 {% for i in 0..testimonial.total - 1 %}
                                     {{ testimonial.icon|raw }}
                                 {% endfor %}

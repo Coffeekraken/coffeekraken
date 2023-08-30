@@ -1,6 +1,6 @@
 {
     "type": "Spaces",
-    "category": "props",
+    "category": "design",
     "title": "Spaces",
     "description": "Specify the spaces you want around your layout",
     "responsive": true,

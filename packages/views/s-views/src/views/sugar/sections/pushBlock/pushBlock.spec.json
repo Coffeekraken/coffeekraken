@@ -1,7 +1,7 @@
 {
     "extends": "sugar.views.sections.simple",
     "type": "Section",
-    "category": "sections111",
+    "category": "sections",
     "title": "Push block",
     "description": "Push block section",
     "props": {

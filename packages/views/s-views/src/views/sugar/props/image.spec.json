@@ -1,6 +1,5 @@
 {
     "type": "Object",
-    "category": "props",
     "title": "Image",
     "description": "Describe an image with his alt and title attributes",
     "props": {

@@ -1,6 +1,5 @@
 {
     "type": "Object",
-    "category": "props",
     "title": "Menu item",
     "description": "Describe a menu item with props like url, target, etc...",
     "props": {

@@ -1,6 +1,6 @@
 {
     "extends": "sugar.views.props.space",
-    "category": "props",
+    "category": "design",
     "description": "The available spacing option. Spacing are the space between elements in card for example.",
     "default": {
         "id": "20",

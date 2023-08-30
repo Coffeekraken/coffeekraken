@@ -9,8 +9,8 @@
             "title": "Cards",
             "description": "The cards to display"
         },
-        "container": "@sugar.views.props.container",
         "gap": "@sugar.views.props.spaces",
+        "container": "@sugar.views.props.container",
         "attributes": "@sugar.views.props.attributes",
         "spaces": "@sugar.views.props.spaces"
     },

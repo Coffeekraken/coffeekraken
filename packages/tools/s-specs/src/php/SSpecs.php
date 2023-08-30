@@ -231,7 +231,7 @@ class SSpecs
 
         if (!$currentNamespace) {
             throw new Exception(
-                '[SSpecs.read] The passed dotpath ' .
+                '[SSpecs.read] The passed dotpath "' .
                     $specDotPath .
                     '" does not correspond to any registered namespaces which are:' .
                     implode("\n- ", $definedNamespacesKeys)
@@ -309,49 +309,13 @@ class SSpecs
         // make sure we have an object
         $specJson = \Sugar\convert\toObject($specJson);
 
-        // handle "extends" property
-        $specJson = \Sugar\object\deepMap($specJson, function (
-            $prop,
-            $value,
-            &$object
-        ) {
-            if ($prop == 'extends') {
-                if (substr($value, 0, 1) == '@') {
-                    throw new Exception(
-                        'The "extends": "' .
-                            $value .
-                            '" property cannot start with an "@"'
-                    );
-                }
-                $extendsJson = $this->read($value);
-                $extendsJson = \Sugar\convert\toObject($extendsJson);
-
-                $object_vars = get_object_vars($extendsJson);
-                $keys = array_keys($object_vars);
-                foreach ($object_vars as $propertyName => $propertyValue) {
-                    if (property_exists($object, $propertyName)) {
-                        $fromValueMergeable =
-                            is_object($extendsJson->$propertyName) ||
-                            is_array($extendsJson->$propertyName);
-                        $toValueMergeable =
-                            is_object($object->$propertyName) ||
-                            is_array($object->$propertyName);
-
-                        if ($fromValueMergeable && $toValueMergeable) {
-                            $object->$propertyName = \Sugar\object\deepMerge(
-                                $extendsJson->$propertyName,
-                                $object->$propertyName
-                            );
-                        } else {
-                        }
-                    } elseif ($propertyName != 'extends') {
-                        $object->$propertyName = $propertyValue;
-                    } else {
-                    }
-                }
+        foreach ($specJson as $key => $value) {
+            if ($key === 'extends') {
+                $dotPath = str_replace('@', '', $value);
+                $newSpecs = $this->read($dotPath);
+                $specJson = \Sugar\object\deepMerge($newSpecs, $specJson);
             }
-            return $value;
-        });
+        }
 
         // check if we have a ".preview.png" file alongside the spec file
         $potentialPreviewUrl = str_replace(

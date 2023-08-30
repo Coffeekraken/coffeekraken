@@ -13,6 +13,6 @@
         "eftec/bladeone": "^4.8",
         "twig/twig": "^3.0"
     },
-    "version": "2.0.0-alpha.28",
+    "version": "2.0.0-alpha.29",
     "homepage": "https://coffeekraken.io"
 }

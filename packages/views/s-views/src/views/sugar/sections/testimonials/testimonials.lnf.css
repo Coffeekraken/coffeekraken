@@ -3,4 +3,22 @@
         border-radius: 50%;
         overflow: hidden;
     }
+
+    ._stars {
+        position: relative;
+
+        ._base {
+            opacity: 0.2;
+        }
+
+        ._top {
+            color: sugar.color(accent);
+            clip-path: polygon(
+                0% 0%,
+                calc(var(--percent) * 1%) 0,
+                calc(var(--percent) * 1%) 100%,
+                0% 100%
+            );
+        }
+    }
 }

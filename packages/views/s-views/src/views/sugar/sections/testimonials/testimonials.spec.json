@@ -45,6 +45,18 @@
                     "type": "Number",
                     "title": "Rating",
                     "description": "The testimonial rating between 0 and 5"
+                },
+                "total": {
+                    "type": "Number",
+                    "title": "Total",
+                    "description": "The total rating",
+                    "default": 5
+                },
+                "icon": {
+                    "type": "String",
+                    "title": "Icon",
+                    "description": "The testimonial icon",
+                    "default": "★"
                 }
             }
         },

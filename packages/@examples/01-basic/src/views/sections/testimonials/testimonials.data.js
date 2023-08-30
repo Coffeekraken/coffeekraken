@@ -26,6 +26,9 @@ export default {
                 min: 20,
                 max: 40,
             }),
+            rating: 4.5,
+            total: 5,
+            icon: '★',
         },
     ],
     primaryCta: {

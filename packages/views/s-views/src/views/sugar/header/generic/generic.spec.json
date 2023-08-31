@@ -7,8 +7,9 @@
         "primaryMenu": {
             "extends": "sugar.views.props.menu",
             "title": "Primary menu",
-            "description": "Specify a primary menu",
+            "description": "Specify a primary menu"
         },
-        "attributes": "@sugar.views.props.attributes"
+        "attributes": "@sugar.views.props.attributes",
+        "additionalClasses": "@sugar.views.props.additionalClasses"
     }
 }

@@ -31,32 +31,34 @@ export default {
             icon: '★',
         },
     ],
-    primaryCta: {
-        color: {
-            id: 'accent',
-            value: 'accent',
+    ctas: [
+        {
+            color: {
+                id: 'accent',
+                value: 'accent',
+            },
+            link: {
+                text: faker.lorem.words(2),
+                url: '#',
+                title: faker.lorem.words(2),
+            },
         },
-        link: {
-            text: faker.lorem.words(2),
-            url: '#',
-            title: faker.lorem.words(2),
+        {
+            lnf: {
+                id: 'outline',
+                value: 'outline',
+            },
+            color: {
+                id: 'main',
+                value: 'main',
+            },
+            link: {
+                text: faker.lorem.words(2),
+                url: '#',
+                title: faker.lorem.words(2),
+            },
         },
-    },
-    secondaryCta: {
-        lnf: {
-            id: 'outline',
-            value: 'outline',
-        },
-        color: {
-            id: 'main',
-            value: 'main',
-        },
-        link: {
-            text: faker.lorem.words(2),
-            url: '#',
-            title: faker.lorem.words(2),
-        },
-    },
+    ],
     container: 'full',
     spaces: {
         paddingTop: 70,

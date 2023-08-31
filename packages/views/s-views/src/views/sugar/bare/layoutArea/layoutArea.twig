@@ -1,4 +1,10 @@
-<div class="s-layout_area-{{ areaId }} {{ attributes.class }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}>
+<div class="s-layout_area-{{ areaId }}
+    {{ __classes({
+        spaces: spaces
+    }) }}
+    {{ attributes.class }}
+    {{ additionalClasses }}
+" {{ __attrs(attributes, ['class'])|raw }}>
     {{ __nodeDataTemplate('sugar.views.bare.layoutArea', _context)|raw }}
     {{ html|raw }}
 </div>

@@ -39,7 +39,8 @@
             },
             "required": true
         },
-        "attributes": "@sugar.views.props.attributes"
+        "attributes": "@sugar.views.props.attributes",
+        "additionalClasses": "@sugar.views.props.additionalClasses"
     },
     "examples": {
         "twig": {

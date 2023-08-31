@@ -1,0 +1,23 @@
+{
+    "type": "String",
+    "category": "design",
+    "title": "Backdrop",
+    "description": "Some backdrop specific features like color, opacity, blur, etc...",
+    "props": {
+        "color": {
+            "type": "Color",
+            "title": "Color",
+            "description": "Specify a color to use as backdrop"
+        },
+        "opacity": {
+            "type": "Number",
+            "title": "Opacity",
+            "description": "Specify the opacity of the backdrop"
+        },
+        "blur": {
+            "type": "Number",
+            "title": "Blur",
+            "description": "Specify the blur of the backdrop"
+        }
+    }
+}

@@ -112,6 +112,7 @@
         },
         "spacing": "@sugar.views.props.spacing",
         "attributes": "@sugar.views.props.attributes",
-        "spaces": "@sugar.views.props.spaces"
+        "spaces": "@sugar.views.props.spaces",
+        "additionalClasses": "@sugar.views.props.additionalClasses"
     }
 }

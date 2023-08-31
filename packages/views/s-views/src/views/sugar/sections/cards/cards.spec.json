@@ -27,8 +27,10 @@
             "description": "The cards to display",
             "required": true
         },
-        "primaryCta": "@sugar.views.components.cta",
-        "secondaryCta": "@sugar.views.components.cta",
+        "ctas": {
+            "extends": "sugar.views.components.cta",
+            "type": "Object[]"
+        },
         "container": "@sugar.views.props.container",
         "spacing": "@sugar.views.props.spacing",
         "attributes": "@sugar.views.props.attributes",

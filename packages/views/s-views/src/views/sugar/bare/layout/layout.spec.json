@@ -173,6 +173,7 @@
     "gap": "@sugar.views.props.space",
     "spacing": "@sugar.views.props.spacing",
     "spaces": "@sugar.views.props.spaces",
+    "additionalClasses": "@sugar.views.props.additionalClasses",
     "examples": {
         "twig": {
             "title": "Twig",

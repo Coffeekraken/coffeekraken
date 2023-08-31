@@ -25,38 +25,40 @@ function generateCard() {
                 max: 10,
             }),
         },
-        primaryCta: {
-            color: {
-                id: 'accent',
-                value: 'accent',
+        ctas: [
+            {
+                color: {
+                    id: 'accent',
+                    value: 'accent',
+                },
+                link: {
+                    text: faker.lorem.words({
+                        min: 2,
+                        max: 4,
+                    }),
+                    url: '#',
+                    title: '',
+                },
             },
-            link: {
-                text: faker.lorem.words({
-                    min: 2,
-                    max: 4,
-                }),
-                url: '#',
-                title: '',
+            {
+                color: {
+                    id: 'main',
+                    value: 'main',
+                },
+                lnf: {
+                    id: 'outline',
+                    value: 'outline',
+                },
+                link: {
+                    text: faker.lorem.words({
+                        min: 2,
+                        max: 4,
+                    }),
+                    url: '#',
+                    title: '',
+                },
             },
-        },
-        secondaryCta: {
-            color: {
-                id: 'main',
-                value: 'main',
-            },
-            lnf: {
-                id: 'outline',
-                value: 'outline',
-            },
-            link: {
-                text: faker.lorem.words({
-                    min: 2,
-                    max: 4,
-                }),
-                url: '#',
-                title: '',
-            },
-        },
+        ],
     };
 }
 
@@ -83,28 +85,30 @@ export default {
             marginBottom: 50,
         },
     },
-    primaryCta: {
-        color: {
-            id: 'accent',
-            value: 'accent',
+    ctas: [
+        {
+            color: {
+                id: 'accent',
+                value: 'accent',
+            },
+            link: {
+                text: faker.lorem.words(2),
+                url: '#',
+                title: faker.lorem.words(2),
+            },
         },
-        link: {
-            text: faker.lorem.words(2),
-            url: '#',
-            title: faker.lorem.words(2),
+        {
+            color: {
+                id: 'complementary',
+                value: 'complementary',
+            },
+            link: {
+                text: faker.lorem.words(2),
+                url: '#',
+                title: faker.lorem.words(2),
+            },
         },
-    },
-    secondaryCta: {
-        color: {
-            id: 'complementary',
-            value: 'complementary',
-        },
-        link: {
-            text: faker.lorem.words(2),
-            url: '#',
-            title: faker.lorem.words(2),
-        },
-    },
+    ],
     align: 'center',
     spaces: {
         paddingTop: 80,

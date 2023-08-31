@@ -1,6 +1,12 @@
-<div id="{{ id }}"
-    class="{{ attributes.class }} {{ container ? 's-container:' ~ container : '' }} {{ __marginClasses(margin, frontspec) }} {{ __paddingClasses(padding, frontspec) }}"
-    {{ __attrs(attributes, ['class'])|raw }}>
+<div id="{{ id }}" class="
+    {{ __classes({
+        margin: margin,
+        padding: padding
+    }) }} 
+    {{ container ? 's-container:' ~ container : '' }}
+    {{ attributes.class }}
+    {{ additionalClasses }}
+" {{ __attrs(attributes, ['class'])|raw }}>
     
     {{ __nodeDataTemplate('views.components.slider', _context)|raw }}
 

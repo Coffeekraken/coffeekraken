@@ -1,4 +1,13 @@
-<form id="{{ id }}" action="{{ action }}" class="s-form s-form-generic {{ __spacingClasses(spacing, 30) }}">
+<form id="{{ id }}" action="{{ action }}" class="s-form s-form-generic
+    {{ __classes({
+        spacing: [spacing, 30],
+        spaces: spaces
+    }) }}
+    {{ attributes.class }}
+    {{ additionalClasses }}    
+">
+    {{ __nodeDataTemplate('views.form.generic', _context)|raw }}
+
     {% for field in fields %}
         <div class="s-form_field">
             

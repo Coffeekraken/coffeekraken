@@ -14,6 +14,24 @@ namespace Sugar\css;
  * - "marginLeft" => 30
  * - etc...
  * This function will returns you the classes like "s-mbs:10" that you can apply where you want in your views.
+ * * Supported margins are:
+ * - margin
+ * - marginBlock
+ * - marginInline
+ * - marginTop
+ * - marginRight
+ * - marginBottom
+ * - marginLeft
+ * - block
+ * - inline
+ * - top
+ * - right
+ * - bottom
+ * - left
+ * - blockStart
+ * - inlineEnd
+ * - blockEnd
+ * - inlineStart
  *
  * @param       {Array|Object}         $margins           Some margins like "marginTop" => 10, etc...
  * @param       {Array|Object}          [$frontspec=[]]     The frontspec json to handle things like defaultMedia, etc...
@@ -23,8 +41,8 @@ namespace Sugar\css;
  *
  * @example         php
  * \Sugar\css\marginClasses([
- *      'block' => 20,
- *      'inlineEnd' => 10
+ *      'marginBlock' => 20,
+ *      'marginRight' => 10
  * ]);
  *
  * @since       2.0.0
@@ -58,27 +76,61 @@ function marginClasses($margins = [], $frontspec = [])
         }
     } else {
         if (isset($margins['margin'])) {
-            array_push($classes, 's-m-' . $margins['all']);
+            array_push($classes, 's-m-' . $margins['margin']);
         }
 
+        // block
         if (isset($margins['marginBlock'])) {
+            array_push($classes, 's-mb-' . $margins['marginBlock']);
+        } elseif (isset($margins['block'])) {
             array_push($classes, 's-mb-' . $margins['block']);
-        }
-        if (isset($margins['marginInline'])) {
-            array_push($classes, 's-mi-' . $margins['inline']);
+        } elseif (isset($margins['y'])) {
+            array_push($classes, 's-mb-' . $margins['y']);
         }
 
+        // inline
+        if (isset($margins['marginInline'])) {
+            array_push($classes, 's-mi-' . $margins['marginInline']);
+        } elseif (isset($margins['inline'])) {
+            array_push($classes, 's-mi-' . $margins['inline']);
+        } elseif (isset($margins['x'])) {
+            array_push($classes, 's-mi-' . $margins['x']);
+        }
+
+        // top
         if (isset($margins['marginTop'])) {
             array_push($classes, 's-mbs-' . $margins['marginTop']);
+        } elseif (isset($margins['top'])) {
+            array_push($classes, 's-mbs-' . $margins['top']);
+        } elseif (isset($margins['blockStart'])) {
+            array_push($classes, 's-mbs-' . $margins['blockStart']);
         }
+
+        // right
         if (isset($margins['marginRight'])) {
             array_push($classes, 's-mie-' . $margins['marginRight']);
+        } elseif (isset($margins['right'])) {
+            array_push($classes, 's-mie-' . $margins['right']);
+        } elseif (isset($margins['inlineEnd'])) {
+            array_push($classes, 's-mie-' . $margins['inlineEnd']);
         }
+
+        // bottom
         if (isset($margins['marginBottom'])) {
             array_push($classes, 's-mbe-' . $margins['marginBottom']);
+        } elseif (isset($margins['bottom'])) {
+            array_push($classes, 's-mbe-' . $margins['bottom']);
+        } elseif (isset($margins['blockEnd'])) {
+            array_push($classes, 's-mbe-' . $margins['blockEnd']);
         }
+
+        // left
         if (isset($margins['marginLeft'])) {
             array_push($classes, 's-mis-' . $margins['marginLeft']);
+        } elseif (isset($margins['left'])) {
+            array_push($classes, 's-mis-' . $margins['left']);
+        } elseif (isset($margins['inlineStart'])) {
+            array_push($classes, 's-mis-' . $margins['inlineStart']);
         }
     }
 

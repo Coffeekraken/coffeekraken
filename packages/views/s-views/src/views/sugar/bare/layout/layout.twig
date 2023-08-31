@@ -2,7 +2,13 @@
 {% if not id  %}
     {% set finalId = 's-layout-' ~ __uniqid() %}
 {% endif %}
-<div id="{{ finalId }}" class="{{ attributes.class }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}>
+<div id="{{ finalId }}" class="
+    {{ __classes({
+        spaces: spaces
+    }) }} 
+    {{ attributes.class }}
+    {{ additionalClasses }}
+" {{ __attrs(attributes, ['class'])|raw }}>
     {% set filteredContext = _context %}
     {% set filteredContext = filteredContext|filter((v, k) => k != 'nodes') %}
     {{ __nodeDataTemplate(specs ? specs : 'sugar.views.bare.layout', filteredContext)|raw }}

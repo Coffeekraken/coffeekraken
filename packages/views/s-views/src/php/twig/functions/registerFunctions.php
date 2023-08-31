@@ -37,6 +37,9 @@ function registerFunctions($twig)
     $twig->addFunction($readClassmap);
 
     // Css
+    $classes = require __DIR__ . '/css/classes.php';
+    $twig->addFunction($classes);
+
     $colorClasses = require __DIR__ . '/css/colorClasses.php';
     $twig->addFunction($colorClasses);
 

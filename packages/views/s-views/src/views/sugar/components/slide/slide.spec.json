@@ -6,6 +6,7 @@
     "description": "Simple slide usable in a slider",
     "props": {
         "attributes": "@sugar.views.props.attributes",
+        "additionalClasses": "@sugar.views.props.additionalClasses",
         "html": {
             "type": "Html",
             "description": "The content to print in the slide",

@@ -101,6 +101,10 @@ export default function ({
                 flex-direction: column;
             }
 
+            .s-cta {
+                display: block;
+            }
+
             ._media {
                 width: 100%;
             }

@@ -12,6 +12,10 @@
             "settings": {
                 "title": "Settings",
                 "description": "Settings specified attributes like id, attributes, etc..."
+            },
+            "development": {
+                "title": "Dev",
+                "description": "Some development related stuffs"
             }
         },
         "menus": {
@@ -815,6 +819,10 @@
         "settings": {
             "title": "Settings",
             "description": "Settings specified attributes like id, attributes, etc..."
+        },
+        "development": {
+            "title": "Dev",
+            "description": "Some development related stuffs"
         }
     },
     "menus": {

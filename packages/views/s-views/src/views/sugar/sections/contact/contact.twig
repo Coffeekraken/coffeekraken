@@ -10,7 +10,7 @@
         {% if form %}
             <div class="_form">
                 {% include 'sugar/form/generic/generic.twig' with form|merge({
-                    spacing: spacing
+                    spacing: form.spacing ?? spacing
                 }) only %}
             </div>
         {% endif %}

@@ -21,8 +21,10 @@
             "title": "Text",
             "description": "The card text"
         },
-        "primaryCta": "@sugar.views.components.cta",
-        "secondaryCta": "@sugar.views.components.cta"
+        "ctas": {
+            "extends": "sugar.views.components.cta",
+            "type": "Object[]"
+        }
     },
     "examples": {
         "twig": {

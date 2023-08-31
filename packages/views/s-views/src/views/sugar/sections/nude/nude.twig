@@ -1,10 +1,16 @@
-<section id="{{ id }}" class="s-section
+<section {% if id %} id="{{ id }}" {% endif %} class="s-section
     s-section-{{ section.type }}
     {{ section.class }}
-    {{ attributes.class }}
-    {{ __spacesClasses(spaces, frontspec) }}
+    {{ __classes({
+        padding: padding,
+        margin: margin,
+        spacing: spacing,
+        spaces: spaces
+    }) }}
     {{ align ? 's-section-align-' ~ align.value ?? align }}
     {{ justify ? 's-section-justify-' ~ justify.value ?? justify }}
+    {{ attributes.class }}
+    {{ additionalClasses }}
 " {{ __attrs(attributes, ['class'])|raw }}
     {% if variant %} theme="{{ variant.value ?? variant }}" {% endif %}
     style="{{ bgColor ? '--s-section-bkg-color:' ~ bgColor.value ~ ';' }}"
@@ -15,6 +21,18 @@
         <div class="_bg">
             <img class="s-media _bg-img" src="{{ bgImage.url }}" title="{{ bgImage.title }}" alt="{{ bgImage.alt }}" />
         </div>
+    {% endif %}
+
+    {% if backdrop.color or backdrop.opacity %}
+        <div class="_backdrop" style="
+            {% if backdrop.color %} background-color: {{ backdrop.color.value }}; {% endif %}
+            {% if backdrop.opacity %} opacity: {{ backdrop.opacity }}; {% endif %}
+        "></div>
+    {% endif %}
+    {% if backdrop.blur %}
+        <div class="_backdrop-blur" style="
+            {% if backdrop.blur %} backdrop-filter: blur({{ backdrop.blur }}px); {% endif %}
+        "></div>
     {% endif %}
 
     <div class="_container {{ __containerClasses(container) }}">

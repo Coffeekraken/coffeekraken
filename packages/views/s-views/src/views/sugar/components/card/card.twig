@@ -1,4 +1,11 @@
-<div id="{{ id }}" class="s-card {{ attributes.class }} {{ direction.value ? 's-card--' ~ direction.value : '' }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}
+<div id="{{ id }}" class="s-card
+    {{ direction.value ? 's-card--' ~ direction.value : '' }}
+    {{ __classes({
+        spaces: spaces
+    }) }}
+    {{ attributes.class }}
+    {{ additionalClasses }}
+" {{ __attrs(attributes, ['class'])|raw }}
 >
 {{ __nodeDataTemplate('views.components.card', _context)|raw }}
 
@@ -19,14 +26,13 @@
             <p class="_text s-typo s-typo-p">{{ text|raw }}</p>
         {% endif %}
         <div class="_spacer"></div>
-        {% if primaryCta or secondaryCta %}
+        {% if ctas|length %}
             <div class="_ctas">
-                {% if primaryCta %}
-                    {% include 'sugar/components/cta/cta.twig' with primaryCta only %}
-                {% endif %}
-                {% if secondaryCta %}
-                    {% include 'sugar/components/cta/cta.twig' with secondaryCta only %}
-                {% endif %}
+                {% for cta in ctas %}
+                    <div class="_cta">
+                        {% include 'sugar/components/cta/cta.twig' with cta only %}
+                    </div>
+                {% endfor %}
             </div>
         {% endif %}
     </div>

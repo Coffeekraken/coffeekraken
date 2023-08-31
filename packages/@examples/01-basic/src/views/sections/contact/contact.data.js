@@ -85,6 +85,7 @@ export default {
                 },
             },
         },
+        spacing: 30,
     },
     spaces: {
         paddingBlock: 80,

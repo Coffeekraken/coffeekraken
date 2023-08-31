@@ -19,18 +19,13 @@
         </div>
     {% endblock %}
 
-    {% if primaryCta or secondaryCta %}
+    {% if ctas|length %}
         <div class="_ctas">
-            {% if primaryCta %}
-                <div class="_cta _primary-cta">
-                    {% include 'sugar/components/cta/cta.twig' with primaryCta only %}
+            {% for cta in ctas %}
+                <div class="_cta">
+                    {% include 'sugar/components/cta/cta.twig' with cta only %}
                 </div>
-            {% endif %}
-            {% if secondaryCta %}
-                <div class="_cta _secondary-cta">
-                    {% include 'sugar/components/cta/cta.twig' with secondaryCta only %}
-                </div>
-            {% endif %}
+            {% endfor %}
         </div>
     {% endif %}
 

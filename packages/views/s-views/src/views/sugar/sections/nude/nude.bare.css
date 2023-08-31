@@ -12,6 +12,13 @@
         flex-direction: column;
     }
 
+    ._backdrop-blur,
+    ._backdrop {
+        pointer-events: none;
+    }
+
+    ._backdrop-blur,
+    ._backdrop,
     ._bg {
         position: absolute;
         top: 0;

@@ -1,3 +1,6 @@
-<div id="{{ id }}" s-slider-slide class="{{ attributes.class }}" {{ __attrs(attributes, ['class'])|raw }}>
+<div id="{{ id }}" s-slider-slide class="
+    {{ attributes.class }}
+    {{ additionalClasses }}
+" {{ __attrs(attributes, ['class'])|raw }}>
     {{ content|raw }}
 </div>

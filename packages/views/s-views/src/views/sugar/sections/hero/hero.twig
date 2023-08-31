@@ -5,7 +5,7 @@
 {% extends 'sugar/sections/nude/nude.twig' %}
 
 {% block content %}
-    <div class="_content s-spacing:{{ __spacingClasses(spacing, 30) }}">
+    <div class="_content {{ __spacingClasses(spacing, 30) }}">
 
         {% if image.url %}
             <picture class="_image s-media-container">
@@ -20,18 +20,15 @@
             titleSize: 1
         } %}
 
-        <div class="_ctas">
-            {% if primaryCta %}
-                <div class="_cta _primary-cta">
-                    {% include 'sugar/components/cta/cta.twig' with primaryCta only %}
-                </div>
-            {% endif %}
-            {% if secondaryCta %}
-                <div class="_cta _secondary-cta">
-                    {% include 'sugar/components/cta/cta.twig' with secondaryCta only %}
-                </div>
-            {% endif %}
-        </div>
+        {% if ctas|length %}
+            <div class="_ctas">
+                {% for cta in ctas %}
+                    <div class="_cta">
+                        {% include 'sugar/components/cta/cta.twig' with cta only %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 

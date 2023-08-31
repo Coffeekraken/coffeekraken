@@ -1,4 +1,11 @@
-<div s-container="{{ uid }}" class="{{ __containerClasses(type) }} {{ attributes.class }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}>
+<div s-container="{{ uid }}" class="{{
+    __classes({
+        container: type,
+        spaces: spaces
+    })
+    {{ attributes.class }}
+    {{ additionalClasses }}
+}}" {{ __attrs(attributes, ['class'])|raw }}>
     {{ __nodeDataTemplate('views.bare.container', _context)|raw }}
     {% if nodes %}
         {{ nodes|join()|raw }}

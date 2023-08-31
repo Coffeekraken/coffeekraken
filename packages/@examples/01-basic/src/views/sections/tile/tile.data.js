@@ -17,28 +17,30 @@ export default {
         min: 15,
         max: 30,
     }),
-    primaryCta: {
-        color: {
-            id: 'accent',
-            value: 'accent',
+    ctas: [
+        {
+            color: {
+                id: 'accent',
+                value: 'accent',
+            },
+            link: {
+                text: faker.lorem.words(2),
+                url: '#',
+                title: faker.lorem.words(2),
+            },
         },
-        link: {
-            text: faker.lorem.words(2),
-            url: '#',
-            title: faker.lorem.words(2),
+        {
+            color: {
+                id: 'complementary',
+                value: 'complementary',
+            },
+            link: {
+                text: faker.lorem.words(2),
+                url: '#',
+                title: faker.lorem.words(2),
+            },
         },
-    },
-    secondaryCta: {
-        color: {
-            id: 'complementary',
-            value: 'complementary',
-        },
-        link: {
-            text: faker.lorem.words(2),
-            url: '#',
-            title: faker.lorem.words(2),
-        },
-    },
+    ],
     spaces: {
         paddingTop: 70,
         paddingBottom: 70,

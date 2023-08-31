@@ -1,5 +1,5 @@
 {
-    "type": "String",
+    "type": "Object",
     "category": "design",
     "title": "Backdrop",
     "description": "Some backdrop specific features like color, opacity, blur, etc...",

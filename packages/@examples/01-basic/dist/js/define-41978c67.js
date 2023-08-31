@@ -244,7 +244,7 @@ max-width: 55ch;
  font-weight: var(--s-font-family-default-font-weight, 400);font-size: calc(var(--s-font-size-default, 16px) * calc(var(--s-font-size-30, 1.1) * var(--s-scale, 1) * var(--s-scale-global, 1)));
 line-height: 1.8;
 max-width: 55ch;
-color: hsla(calc(var(--s-color-main-h, 0) + var(--s-color-main-text-spin ,0)),calc((var(--s-color-main-s, 0) + var(--s-color-main-text-saturation-offset, 0)) * 1%),calc((var(--s-color-main-l, 0) + var(--s-color-main-text-lightness-offset, 0)) * 1%),0.7);
+color: hsla(calc(var(--s-color-main-h, 0) + var(--s-color-main-text-spin ,0)),calc((var(--s-color-main-s, 0) + var(--s-color-main-text-saturation-offset, 0)) * 1%),calc((var(--s-color-main-l, 0) + var(--s-color-main-text-lightness-offset, 0)) * 1%),0.5);
     max-width: 100%;
 }
 

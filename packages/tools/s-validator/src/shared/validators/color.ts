@@ -1,10 +1,12 @@
 // @ts-nocheck
 import { __isColor } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
+import type { ISValidatorResult } from '../SValidator.js';
+
 import type {
-    ISValidatorResult,
-    ISValidatorValidatorSettings,
-} from '../SValidator.js';
+    ISRulesColorI18nSettings,
+    ISRulesColorSettings,
+} from '@specim3n/types';
 
 /**
  * @name            color
@@ -33,14 +35,9 @@ import type {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface IValidatorColorI18nSettings {
-    default: string;
-}
+export interface IValidatorColorI18nSettings extends ISRulesColorI18nSettings {}
 
-export interface IValidatorColorSettings extends ISValidatorValidatorSettings {
-    i18n: IValidatorColorI18nSettings;
-    trim: boolean;
-}
+export interface IValidatorColorSettings extends ISRulesColorSettings {}
 
 export const definition = {
     description: 'Validate a color string',

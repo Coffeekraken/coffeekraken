@@ -53,6 +53,35 @@
             "title": "Actions",
             "description": "Some actions for your form like submit, reset, etc...",
             "props": {
+                "label": {
+                    "type": "Text",
+                    "title": "Label",
+                    "description": "Label of action",
+                    "required": true
+                },
+                "color": "@sugar.views.props.themeColors",
+                "lnf": {
+                    "type": "Select",
+                    "title": "Look and feel",
+                    "description": "Button look and feel",
+                    "options": [
+                        {
+                            "id": "solid",
+                            "name": "Solid",
+                            "value": "solid"
+                        },
+                        {
+                            "id": "outline",
+                            "name": "Outline",
+                            "value": "outline"
+                        },
+                        {
+                            "id": "text",
+                            "name": "Text",
+                            "value": "text"
+                        }
+                    ]
+                },
                 "type": {
                     "type": "Select",
                     "title": "Type",
@@ -71,13 +100,8 @@
                         }
                     ]
                 },
-                "label": {
-                    "type": "Text",
-                    "title": "Label",
-                    "description": "Label of action",
-                    "required": true
-                },
                 "attributes": "@sugar.views.props.attributes",
+                "additionalClasses": "@sugar.views.props.additionalClasses"
             }
         },
         "lnf": {

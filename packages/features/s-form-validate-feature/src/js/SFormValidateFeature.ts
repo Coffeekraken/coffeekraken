@@ -348,12 +348,6 @@ export default class SFormValidateFeature extends __SFeature {
                 scopes: false,
             },
         );
-
-        // set the validation type depending on input type etc...
-        if (this.props.type) {
-            if (this.props.type === 'text') this._validationType = 'string';
-            else this._validationType = this.props.type;
-        }
     }
 
     _passwordDefaultHandler({ result, $feature }) {
@@ -502,6 +496,12 @@ export default class SFormValidateFeature extends __SFeature {
             if (this.props[validator] !== undefined) {
                 validatorRules[validator] = this.props[validator];
             }
+        }
+
+        // handle special case when the type is "text" (form input field),
+        // and that we don't have any real rule "type" specified
+        if (validatorRules.type === 'text') {
+            validatorRules.type = 'string';
         }
 
         // validate our value with the SValidator class

@@ -16,6 +16,10 @@
             "development": {
                 "title": "Dev",
                 "description": "Some development related stuffs"
+            },
+            "zones": {
+                "title": "Zones",
+                "description": "Some zones where you can add content into"
             }
         },
         "menus": {

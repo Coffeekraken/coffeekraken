@@ -6,7 +6,7 @@
 
 {% block simpleContent %}
 
-    <div class="_layout">
+    <div class="_layout {{ imageSide.value ?? imageSide }}">
         {% if form %}
             <div class="_form">
                 {% include 'sugar/form/generic/generic.twig' with form|merge({
@@ -18,10 +18,18 @@
             <div>
                 {% if address %}
                     <div class="_address {{ __spacingClasses(spacing, 10) }}">
-                        <h3 class="s-typo s-typo-h4">{{ address.title }}</h3>
-                        <p class="s-typo s-typo-p">{{ address.name }}</p>
-                        <p class="s-typo s-typo-p">{{ address.street }}</p>
-                        <p class="s-typo s-typo-p">{{ address.city }}</p>
+                        {% if address.title %}
+                            <h3 class="s-typo s-typo-h4">{{ address.title }}</h3>
+                        {% endif %}
+                        {% if address.name %}
+                            <p class="s-typo s-typo-p">{{ address.name }}</p>
+                        {% endif %}
+                        {% if address.street %}
+                            <p class="s-typo s-typo-p">{{ address.street }}</p>
+                        {% endif %}
+                        {% if address.city %}
+                            <p class="s-typo s-typo-p">{{ address.city }}</p>
+                        {% endif %}
                         {% if address.phone %}
                             <a href="tel: {{ address.phone }}" class="s-typo s-typo-a s-typo-p">{{ address.phone }}</a>
                         {% endif %}

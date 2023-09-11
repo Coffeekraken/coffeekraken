@@ -1,10 +1,12 @@
 // @ts-nocheck
 import { __isEmail } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
+import type { ISValidatorResult } from '../SValidator.js';
+
 import type {
-    ISValidatorResult,
-    ISValidatorValidatorSettings,
-} from '../SValidator.js';
+    ISRulesEmailI18nSettings,
+    ISRulesEmailSettings,
+} from '@specim3n/types';
 
 /**
  * @name            email
@@ -32,14 +34,9 @@ import type {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface IValidatorEmailI18nSettings {
-    default: string;
-}
+export interface IValidatorEmailI18nSettings extends ISRulesEmailI18nSettings {}
 
-export interface IValidatorEmailSettings extends ISValidatorValidatorSettings {
-    i18n: IValidatorEmailI18nSettings;
-    trim: boolean;
-}
+export interface IValidatorEmailSettings extends ISRulesEmailSettings {}
 
 export const definition = {
     description: 'Validate an email string',

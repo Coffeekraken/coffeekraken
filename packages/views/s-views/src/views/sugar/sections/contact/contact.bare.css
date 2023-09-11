@@ -12,6 +12,11 @@
                 display: none;
             }
         }
+
+        &.left {
+            @sugar.layout '3 3 2 1 1';
+            gap: sugar.margin(50);
+        }
     }
 
     ._metas {

@@ -42,13 +42,16 @@ function classes($classes)
         $finalClasses[] = containerClasses($classes['container']);
     }
     if (isset($classes['gap'])) {
-        if (is_array($classes['gap'])) {
+        if (
+            is_array($classes['gap']) &&
+            !\Sugar\is\assocArray($classes['gap'])
+        ) {
             $finalClasses[] = gapClasses(
                 $classes['gap'][0],
                 $classes['gap'][1]
             );
         } else {
-            $finalClasses[] = gapClasses($classes['spacing']);
+            $finalClasses[] = gapClasses($classes['gap']);
         }
     }
     if (isset($classes['margin'])) {
@@ -61,7 +64,10 @@ function classes($classes)
         $finalClasses[] = spacesClasses($classes['spaces']);
     }
     if (isset($classes['spacing'])) {
-        if (is_array($classes['spacing'])) {
+        if (
+            is_array($classes['spacing']) &&
+            !\Sugar\is\assocArray($classes['spacing'])
+        ) {
             $finalClasses[] = spacingClasses(
                 $classes['spacing'][0],
                 $classes['spacing'][1]

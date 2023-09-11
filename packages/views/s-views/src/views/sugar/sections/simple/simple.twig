@@ -7,7 +7,19 @@
 
 {% block content %}
 
+    <div s-container="beforeMetas">
+        {{ beforeMetas|raw }}
+    </div>
+
     {% include 'sugar/components/metas/metas.twig' %}
+
+    <div s-container="afterMetas">
+        {{ afterMetas|raw }}
+    </div>
+
+    <div s-container="beforeContent">
+        {{ beforeContent|raw }}
+    </div>
 
     {% block simpleContent %}
         <div class="_content">
@@ -19,6 +31,14 @@
         </div>
     {% endblock %}
 
+    <div s-container="afterContent">
+        {{ afterContent|raw }}
+    </div>
+
+    <div s-container="beforeCtas">
+        {{ beforeCtas|raw }}
+    </div>
+
     {% if ctas|length %}
         <div class="_ctas">
             {% for cta in ctas %}
@@ -28,5 +48,9 @@
             {% endfor %}
         </div>
     {% endif %}
+
+    <div s-container="afterCtas">
+        {{ afterCtas|raw }}
+    </div>
 
 {% endblock %}

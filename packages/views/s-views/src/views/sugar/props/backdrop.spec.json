@@ -11,13 +11,23 @@
         },
         "opacity": {
             "type": "Number",
+            "widget": "Range",
             "title": "Opacity",
-            "description": "Specify the opacity of the backdrop"
+            "description": "Specify the opacity of the backdrop",
+            "rules": {
+                "min": 0,
+                "max": 100
+            }
         },
         "blur": {
             "type": "Number",
+            "widget": "Range",
             "title": "Blur",
-            "description": "Specify the blur of the backdrop"
+            "description": "Specify the blur of the backdrop",
+            "rules": {
+                "min": 0,
+                "max": 50
+            }
         }
     }
 }

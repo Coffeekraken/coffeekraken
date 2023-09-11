@@ -4,8 +4,8 @@
         spaces: spaces
     }) }}
     {{ attributes.class }}
-    {{ additionalClasses }}    
-">
+    {{ additionalClasses }}
+" {% if ajax %} s-ajax {% endif %}>
     {{ __nodeDataTemplate('views.form.generic', _context)|raw }}
 
     {% for field in fields %}
@@ -31,7 +31,14 @@
     {% if actions %}
         <div class="s-form_actions">
             {% for action in actions %}
-                <button class="s-form_action s-btn {{ action.attributes.class }}" {{ __attrs(field.attributes, ['class'])|raw }} type="{{ action.type }}">
+                <button class="s-form_action s-btn
+                    {% if action.lnf %} {{ 's-btn-' ~ (action.lnf.value ? action.lnf.value : action.lnf) }} {% endif %}
+                    {{ __classes({
+                        color: action.color
+                    }) }}
+                    {{ action.attributes.class }}
+                    {{ action.additionalClasses }}
+                " {{ __attrs(action.attributes, ['class'])|raw }} type="{{ action.type }}">
                     {{ action.label }}
                 </button>
             {% endfor %}

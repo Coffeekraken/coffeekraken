@@ -4,67 +4,122 @@
     "title": "Contact",
     "description": "Display a contact section with a form and a google map",
     "props": {
-        "name": {
-            "type": "String",
-            "title": "Name",
-            "description": "Address name",
-            "required": true
+        "form": {
+            "extends": "sugar.views.form.generic",
+            "title": "Contact form",
+            "description": "Contact form"
         },
-        "street": {
-            "type": "String",
-            "title": "Street",
-            "description": "Address street with number",
-            "required": true
-        },
-        "city": {
-            "type": "String",
-            "title": "City",
-            "description": "Address city with postcode",
-            "required": true
-        },
-        "phone": {
-            "type": "String",
-            "title": "Phone",
-            "description": "Phone number"
-        },
-        "email": {
-            "type": "String",
-            "title": "Email",
-            "description": "Email address"
-        },
-        "facebookUrl": {
-            "type": "String",
-            "title": "Facebook URL",
-            "description": "Facebook URL"
-        },
-        "twitterUrl": {
-            "type": "String",
-            "title": "Twitter URL",
-            "description": "Twitter URL"
-        },
-        "instagramUrl": {
-            "type": "String",
-            "title": "Instagram URL",
-            "description": "Instagram URL"
-        },
-        "markers": {
-            "type": "Object[]",
-            "title": "Markers",
-            "description": "Google map markers",
+        "address": {
+            "type": "Object",
+            "title": "Address",
+            "description": "Address information",
             "props": {
-                "lat": {
-                    "type": "Number",
-                    "title": "Latitude",
-                    "description": "Marker latitude",
-                    "required": true
+                "title": {
+                    "type": "String",
+                    "title": "Title",
+                    "description": "Address title"
                 },
-                "lng": {
-                    "type": "Number",
-                    "title": "Longitude",
-                    "description": "Marker longitude",
-                    "required": true
+                "name": {
+                    "type": "String",
+                    "title": "Name",
+                    "description": "Address name"
+                },
+                "street": {
+                    "type": "String",
+                    "title": "Street",
+                    "description": "Address street with number"
+                },
+                "city": {
+                    "type": "String",
+                    "title": "City",
+                    "description": "Address city with postcode"
+                },
+                "phone": {
+                    "type": "String",
+                    "title": "Phone",
+                    "description": "Phone number"
+                },
+                "email": {
+                    "type": "String",
+                    "title": "Email",
+                    "description": "Email address"
                 }
             }
+        },
+        "socials": {
+            "type": "Object",
+            "title": "Socials",
+            "description": "Social media info",
+            "props": {
+                "facebookUrl": {
+                    "type": "String",
+                    "title": "Facebook URL",
+                    "description": "Facebook URL"
+                },
+                "twitterUrl": {
+                    "type": "String",
+                    "title": "Twitter URL",
+                    "description": "Twitter URL"
+                },
+                "instagramUrl": {
+                    "type": "String",
+                    "title": "Instagram URL",
+                    "description": "Instagram URL"
+                }
+            }
+        },
+        "map": {
+            "type": "Object",
+            "title": "Map",
+            "description": "Google map",
+            "props": {
+                "markers": {
+                    "type": "Object[]",
+                    "title": "Markers",
+                    "description": "Google map markers",
+                    "props": {
+                        "lat": {
+                            "type": "Number",
+                            "title": "Latitude",
+                            "description": "Marker latitude",
+                            "required": true
+                        },
+                        "lng": {
+                            "type": "Number",
+                            "title": "Longitude",
+                            "description": "Marker longitude",
+                            "required": true
+                        }
+                    }
+                }
+            }
+        },
+        "image": {
+            "type": "Image",
+            "title": "Image",
+            "description": "Image to display on the side of the contact form"
+        },
+        "imageSide": {
+            "type": "Select",
+            "title": "Image side",
+            "description": "Image side",
+            "default": {
+                "id": "right",
+                "name": "Right",
+                "value": "right"
+            },
+            "options": [
+                {
+                    "id": "left",
+                    "name": "Left",
+                    "value": "left"
+                },
+                {
+                    "id": "right",
+                    "name": "Right",
+                    "value": "right"
+                }
+            ]
         }
     }
 }

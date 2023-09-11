@@ -1,9 +1,11 @@
 // @ts-nocheck
 import { __deepMerge } from '@coffeekraken/sugar/object';
+import type { ISValidatorResult } from '../SValidator.js';
+
 import type {
-    ISValidatorResult,
-    ISValidatorValidatorSettings,
-} from '../SValidator.js';
+    ISRulesAlphanumI18nSettings,
+    ISRulesAlphanumSettings,
+} from '@specim3n/types';
 
 /**
  * @name            alphanum
@@ -31,15 +33,10 @@ import type {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface IValidatorAlphanumI18nSettings {
-    default: string;
-}
+export interface IValidatorAlphanumI18nSettings
+    extends ISRulesAlphanumI18nSettings {}
 
-export interface IValidatorAlphanumSettings
-    extends ISValidatorValidatorSettings {
-    i18n: IValidatorAlphanumI18nSettings;
-    trim: boolean;
-}
+export interface IValidatorAlphanumSettings extends ISRulesAlphanumSettings {}
 
 export const definition = {
     description: 'Validate an alphanum string',

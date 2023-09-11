@@ -3322,6 +3322,7 @@ __metadata:
     "@coffeekraken/s-i18n": ^2.0.0-alpha.27
     "@coffeekraken/s-interface": ^2.0.0-alpha.27
     "@coffeekraken/sugar": ^2.0.0-alpha.27
+    "@specim3n/types": 1.0.0-alpha.1
   languageName: unknown
   linkType: soft
 
@@ -8207,7 +8208,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@specim3n/types@^1.0.0-alpha.1, @specim3n/types@workspace:packages/@specimen/types":
+"@specim3n/types@1.0.0-alpha.1, @specim3n/types@^1.0.0-alpha.1, @specim3n/types@workspace:packages/@specimen/types":
   version: 0.0.0-use.local
   resolution: "@specim3n/types@workspace:packages/@specimen/types"
   dependencies:

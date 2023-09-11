@@ -1,10 +1,12 @@
 // @ts-nocheck
 import { __isCreditCard } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
+import type { ISValidatorResult } from '../SValidator.js';
+
 import type {
-    ISValidatorResult,
-    ISValidatorValidatorSettings,
-} from '../SValidator.js';
+    ISRulesCreditCardI18nSettings,
+    ISRulesCreditCardSettings,
+} from '@specim3n/types';
 
 /**
  * @name            creditCard
@@ -32,15 +34,11 @@ import type {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface IValidatorCreditCardI18nSettings {
-    default: string;
-}
+export interface IValidatorCreditCardI18nSettings
+    extends ISRulesCreditCardI18nSettings {}
 
 export interface IValidatorCreditCardSettings
-    extends ISValidatorValidatorSettings {
-    i18n: IValidatorCreditCardI18nSettings;
-    trim: boolean;
-}
+    extends ISRulesCreditCardSettings {}
 
 export const definition = {
     description: 'Validate a credit card string',

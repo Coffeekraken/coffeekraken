@@ -18,6 +18,7 @@ export default {
     image: {
         url: 'https://clipart-library.com/new_gallery/24-245092_old-telephone-black-manufactured-by-indian-telephone-corded.png',
     },
+    imageSide: 'right',
     // map: {
     //     markers: [
     //         {
@@ -31,6 +32,7 @@ export default {
     //     ],
     // },
     form: {
+        ajax: true,
         action: '/',
         lnf: {
             labelType: 'block',
@@ -39,6 +41,7 @@ export default {
             submit: {
                 type: 'submit',
                 label: 'Send my message!',
+                color: 'accent',
             },
         },
         fields: {
@@ -47,9 +50,8 @@ export default {
                 label: 'Name',
                 name: 'name',
                 placeholder: 'Firstname lastname',
-                validations: {
+                rules: {
                     required: true,
-                    something: 'cool',
                 },
             },
             email: {
@@ -57,21 +59,11 @@ export default {
                 label: 'Email',
                 name: 'email',
                 placeholder: 'something@something.com',
-                validations: {
+                rules: {
                     required: true,
                     email: true,
                 },
             },
-            // url: {
-            //     type: 'text',
-            //     label: 'Website url',
-            //     name: 'url',
-            //     placeholder: 'coffeekraken.io',
-            //     validations: {
-            //         required: true,
-            //         url: true,
-            //     },
-            // },
             message: {
                 type: 'textarea',
                 label: 'Message',
@@ -80,7 +72,7 @@ export default {
                 attributes: {
                     rows: 5,
                 },
-                validations: {
+                rules: {
                     required: true,
                 },
             },

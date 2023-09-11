@@ -1,11 +1,13 @@
 // @ts-nocheck
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import type {
-    ISValidatorResult,
-    ISValidatorValidatorSettings,
-} from '../SValidator.js';
+import type { ISValidatorResult } from '../SValidator.js';
 
 import { __isBase64 } from '@coffeekraken/sugar/is';
+
+import type {
+    ISRulesBase64I18nSettings,
+    ISRulesBase64Settings,
+} from '@specim3n/types';
 
 /**
  * @name            base64
@@ -33,14 +35,10 @@ import { __isBase64 } from '@coffeekraken/sugar/is';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface IValidatorBase64I18nSettings {
-    default: string;
-}
+export interface IValidatorBase64I18nSettings
+    extends ISRulesBase64I18nSettings {}
 
-export interface IValidatorBase64Settings extends ISValidatorValidatorSettings {
-    i18n: IValidatorBase64I18nSettings;
-    trim: boolean;
-}
+export interface IValidatorBase64Settings extends ISRulesBase64Settings {}
 
 export const definition = {
     description: 'Validate a base64 string',

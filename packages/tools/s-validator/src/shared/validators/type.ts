@@ -83,7 +83,6 @@ export default function number(
         case 'checkbox':
         case 'select':
             valid = __isPlainObject(value) && value.id;
-            console.log('VALUID', value);
             break;
         case 'image':
             valid = __isPlainObject(value) && value.url;

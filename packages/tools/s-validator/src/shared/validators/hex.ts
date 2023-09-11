@@ -1,9 +1,11 @@
 // @ts-nocheck
 import { __deepMerge } from '@coffeekraken/sugar/object';
+import type { ISValidatorResult } from '../SValidator.js';
+
 import type {
-    ISValidatorResult,
-    ISValidatorValidatorSettings,
-} from '../SValidator.js';
+    ISRulesHex18nSettings,
+    ISRulesHexSettings,
+} from '@specim3n/types';
 
 /**
  * @name            hex
@@ -32,14 +34,9 @@ import type {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface IValidatorHexI18nSettings {
-    default: string;
-}
+export interface IValidatorHexI18nSettings extends ISRulesHex18nSettings {}
 
-export interface IValidatorHexSettings extends ISValidatorValidatorSettings {
-    i18n: IValidatorHexI18nSettings;
-    trim: boolean;
-}
+export interface IValidatorHexSettings extends ISRulesHexSettings {}
 
 export const definition = {
     description: 'Validate a hexadecimal string',

@@ -9,7 +9,8 @@
         "@coffeekraken/s-class": "^2.0.0-alpha.27",
         "@coffeekraken/s-i18n": "^2.0.0-alpha.27",
         "@coffeekraken/s-interface": "^2.0.0-alpha.27",
-        "@coffeekraken/sugar": "^2.0.0-alpha.27"
+        "@coffeekraken/sugar": "^2.0.0-alpha.27",
+        "@specim3n/types": "1.0.0-alpha.1"
     },
     "main": "dist/pkg/cjs/shared/exports.js",
     "module": "dist/pkg/esm/shared/exports.js",

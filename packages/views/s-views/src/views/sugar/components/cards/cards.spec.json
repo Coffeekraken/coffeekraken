@@ -5,7 +5,7 @@
     "description": "Dsplay some cards in a simple adaptive \"grid\" layout",
     "props": {
         "cards": {
-            "type": "node[]",
+            "type": "Node[]",
             "nodes": [
                 "sugar.views.components.card"
             ],

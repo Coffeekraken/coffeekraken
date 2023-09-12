@@ -1,4 +1,4 @@
-<form id="{{ id }}" action="{{ action }}" class="s-form s-form-generic
+<form id="{{ id }}" action="{{ action }}" method="{{ method.value }}" class="s-form s-form-generic
     {{ __classes({
         spacing: [spacing, 30],
         spaces: spaces
@@ -13,16 +13,20 @@
             
             {% if field.type == 'text' %}
                 <label class="s-form_label s-label s-label-{{ lnf.labelType ? lnf.labelType : 'default' }}" s-form-validate {{ __attrs(field.rules)|raw }}>
-                    <input class="s-form_text s-input {{ field.attributes.class }}" {{ __attrs(field.attributes, ['class'])|raw }} placeholder="{{ field.placeholder ? field.placeholder : field.label }}" type="text" name="{{ field.name }}" />
+                    <input class="s-form_text s-input {{ field.attributes.class }}" {{ __attrs(field.attributes, ['class'])|raw }} placeholder="{{ field.placeholder ? field.placeholder : field.label }}" type="text" name="{{ field.name }}" value="{{ field.value }}" />
                     <span>{{ field.label }}</span>
                 </label>
             {% endif %}
 
             {% if field.type == 'textarea' %}
                 <label class="s-form_label s-label s-label-{{ lnf.labelType ? lnf.labelType : 'default' }}" s-form-validate {{ __attrs(field.rules)|raw }}>
-                    <textarea class="s-form_textarea s-input {{ field.attributes.class }}" {{ __attrs(field.attributes, ['class'])|raw }} placeholder="{{ field.placeholder ? field.placeholder : field.label }}" name="{{ field.name }}"></textarea>
+                    <textarea class="s-form_textarea s-input {{ field.attributes.class }}" {{ __attrs(field.attributes, ['class'])|raw }} placeholder="{{ field.placeholder ? field.placeholder : field.label }}" name="{{ field.name }}">{{ field.value }}</textarea>
                     <span>{{ field.label }}</span>
                 </label>
+            {% endif %}
+
+            {% if field.type == 'hidden' %}
+                <input type="hidden" {{ __attrs(field.attributes, ['class'])|raw }} name="{{ field.name }}" value="{{ field.value }}" />
             {% endif %}
 
         </div>

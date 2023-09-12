@@ -25,6 +25,11 @@
                             "id": "textarea",
                             "name": "Textarea",
                             "value": "textarea"
+                        },
+                        {
+                            "id": "hidden",
+                            "name": "Hidden",
+                            "value": "hidden"
                         }
                     ]
                 },
@@ -40,6 +45,11 @@
                     "description": "Label of field",
                     "required": true
                 },
+                "value": {
+                    "type": "Text",
+                    "title": "Value",
+                    "description": "Value of field"
+                },
                 "placeholder": {
                     "type": "Text",
                     "title": "Placeholder",
@@ -47,6 +57,37 @@
                 },
                 "attributes": "@sugar.views.props.attributes",
             }
+        },
+        "action": {
+            "type": "Text",
+            "category": "development",
+            "title": "Action",
+            "description": "Action of form",
+            "required": true
+        },
+        "method": {
+            "type": "Select",
+            "category": "development",
+            "title": "Method",
+            "description": "Method of form",
+            "required": true,
+            "default": {
+                "id": "post",
+                "name": "POST",
+                "value": "post"
+            },
+            "options": [
+                {
+                    "id": "get",
+                    "name": "GET",
+                    "value": "get"
+                },
+                {
+                    "id": "post",
+                    "name": "POST",
+                    "value": "post"
+                }
+            ]
         },
         "actions": {
             "type": "Object[]",

@@ -18,7 +18,7 @@
         "intro": {
             "type": "Text",
             "title": "Intro",
-            "description": "The card intro"
+            "description": "The card intr<o"
         },
         "text": {
             "type": "Text",

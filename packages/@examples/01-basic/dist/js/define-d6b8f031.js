@@ -248,7 +248,6 @@ function number$1(value, type, settings) {
     case "checkbox":
     case "select":
       valid = __isPlainObject(value) && value.id;
-      console.log("VALUID", value);
       break;
     case "image":
       valid = __isPlainObject(value) && value.url;
@@ -1287,12 +1286,6 @@ class SFormValidateFeature extends SFeature {
       rootNode: this.node,
       scopes: false
     });
-    if (this.props.type) {
-      if (this.props.type === "text")
-        this._validationType = "string";
-      else
-        this._validationType = this.props.type;
-    }
   }
   _passwordDefaultHandler({ result, $feature }) {
     var _a;
@@ -1411,6 +1404,9 @@ class SFormValidateFeature extends SFeature {
       if (this.props[validator] !== void 0) {
         validatorRules[validator] = this.props[validator];
       }
+    }
+    if (validatorRules.type === "text") {
+      validatorRules.type = "string";
     }
     resultObj = this._validator.validate(value, validatorRules);
     if (event.type === "reset") {

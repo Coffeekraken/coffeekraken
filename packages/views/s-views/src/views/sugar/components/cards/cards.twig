@@ -10,7 +10,11 @@
     <div class="_grid {{ __gapClasses(gap, 30) }}">
         {% for idx, card in cards %}
             <div class="_card">
-                {% include 'sugar/components/card/card.twig' with card only %}
+                {% if card is iterable %}
+                    {% include 'sugar/components/card/card.twig' with card only %}
+                {% else %}
+                    {{ card|raw }}
+                {% endif %}
             </div>
         {% endfor %}
     </div>

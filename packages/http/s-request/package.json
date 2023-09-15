@@ -1,14 +1,14 @@
 {
     "name": "@coffeekraken/s-request",
-    "version": "2.0.0-alpha.27",
+    "version": "2.0.0-beta.1",
     "description": "Simple request class that make use of the AMAZING axios under the hood. The goal of this package is more to keep a single implementation for futur updates than anything else.",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.27",
-        "@coffeekraken/s-promise": "^2.0.0-alpha.27",
-        "@coffeekraken/sugar": "^2.0.0-alpha.27",
+        "@coffeekraken/s-class": "^2.0.0-beta.1",
+        "@coffeekraken/s-promise": "^2.0.0-beta.1",
+        "@coffeekraken/sugar": "^2.0.0-beta.1",
         "axios": "^0.27.2"
     },
     "main": "dist/pkg/cjs/shared/exports.js",

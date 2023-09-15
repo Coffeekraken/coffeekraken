@@ -52,7 +52,7 @@
     "package": {
         "name": "@coffeekraken/s-postcss-sugar-plugin",
         "description": "Postcss Coffeekraken plugin that gives you access to a ton of sugar like \"@sugar.when.dark\", \"@sugar.classes\", etc... mixins as well as functions like \"sugar.padding\", \"sugar.color\", etc... All of these makes uses of your theme configuration defined using the @coffeekraken/s-sugar-config system.",
-        "version": "2.0.0-alpha.27",
+        "version": "2.0.0-beta.1",
         "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
         "license": "MIT"
     },

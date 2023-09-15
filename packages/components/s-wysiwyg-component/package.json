@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/s-wysiwyg-component",
-    "version": "2.0.0-alpha.27",
+    "version": "2.0.0-beta.1",
     "description": "Create a nice wysiwyg component that let you specify the tools/styles you want as well as getting back a well structured AST like json of your content. This make use of the AMAZING editorjs library",
     "type": "module",
     "homepage": "https://coffeekraken.io",
@@ -12,12 +12,12 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-frontspec": "^2.0.0-alpha.27",
-        "@coffeekraken/s-i18n": "^2.0.0-alpha.27",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.27",
-        "@coffeekraken/s-lit-component": "^2.0.0-alpha.27",
-        "@coffeekraken/s-theme": "^2.0.0-alpha.27",
-        "@coffeekraken/sugar": "^2.0.0-alpha.27",
+        "@coffeekraken/s-frontspec": "^2.0.0-beta.1",
+        "@coffeekraken/s-i18n": "^2.0.0-beta.1",
+        "@coffeekraken/s-interface": "^2.0.0-beta.1",
+        "@coffeekraken/s-lit-component": "^2.0.0-beta.1",
+        "@coffeekraken/s-theme": "^2.0.0-beta.1",
+        "@coffeekraken/sugar": "^2.0.0-beta.1",
         "@specim3n/types": "^1.0.0-alpha.1",
         "lit": "^2.2.8"
     },

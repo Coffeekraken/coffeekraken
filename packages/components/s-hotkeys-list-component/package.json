@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/s-hotkeys-list-component",
-    "version": "2.0.0-alpha.27",
+    "version": "2.0.0-beta.1",
     "description": "Simply list the registered hotkeys stored in the document.env.HOTKEYS stack and update itself on the 'hotkey.update' event. Works fine with the `__hotkey` function from \"@coffeekraken/sugar/dom\" package.",
     "type": "module",
     "homepage": "https://coffeekraken.io",
@@ -10,9 +10,9 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-interface": "^2.0.0-alpha.27",
-        "@coffeekraken/s-lit-component": "^2.0.0-alpha.27",
-        "@coffeekraken/sugar": "^2.0.0-alpha.27",
+        "@coffeekraken/s-interface": "^2.0.0-beta.1",
+        "@coffeekraken/s-lit-component": "^2.0.0-beta.1",
+        "@coffeekraken/sugar": "^2.0.0-beta.1",
         "lit": "^2.2.8"
     },
     "main": "dist/pkg/cjs/js/exports.js",

@@ -5,7 +5,7 @@
     "description": "Coffeekraken sugar helpers like snippets, etc...",
     "icon": "icon.png",
     "publisher": "coffeekraken",
-    "version": "2.0.0-alpha.27",
+    "version": "2.0.0-beta.1",
     "engines": {
         "vscode": "^1.75.0"
     },

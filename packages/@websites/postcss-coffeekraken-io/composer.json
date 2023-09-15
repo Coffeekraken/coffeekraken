@@ -14,6 +14,6 @@
     "require": {
         "coffeekraken/sugar": "^2.0.0"
     },
-    "version": "2.0.0-alpha.27",
+    "version": "2.0.0-beta.1",
     "homepage": "https://coffeekraken.io"
 }

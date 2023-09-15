@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/s-dropzone-component",
-    "version": "2.0.0-alpha.27",
+    "version": "2.0.0-beta.1",
     "description": "Simple to use asset selector that allows you to choose for images, video or other files",
     "type": "module",
     "homepage": "https://coffeekraken.io",
@@ -10,11 +10,11 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-i18n": "^2.0.0-alpha.27",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.27",
-        "@coffeekraken/s-lit-component": "^2.0.0-alpha.27",
-        "@coffeekraken/s-promise": "^2.0.0-alpha.27",
-        "@coffeekraken/sugar": "^2.0.0-alpha.27",
+        "@coffeekraken/s-i18n": "^2.0.0-beta.1",
+        "@coffeekraken/s-interface": "^2.0.0-beta.1",
+        "@coffeekraken/s-lit-component": "^2.0.0-beta.1",
+        "@coffeekraken/s-promise": "^2.0.0-beta.1",
+        "@coffeekraken/sugar": "^2.0.0-beta.1",
         "lit": "^2.2.8"
     },
     "main": "dist/pkg/cjs/js/exports.js",

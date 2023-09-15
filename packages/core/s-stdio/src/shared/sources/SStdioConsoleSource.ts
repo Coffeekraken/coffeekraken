@@ -2,6 +2,8 @@ import __SLog from '@coffeekraken/s-log';
 import type { ISStdioSource, ISStdioSourceSettings } from '../SStdioSource.js';
 import __SStdioSource from '../SStdioSource.js';
 
+import { __wait } from '@coffeekraken/sugar/datetime';
+
 export interface ISStdioConsoleSource extends ISStdioSource {}
 
 export interface ISStdioConsoleSourceSettings extends ISStdioSourceSettings {}

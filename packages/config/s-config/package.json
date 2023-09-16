@@ -9,7 +9,8 @@
         "@coffeekraken/s-duration": "^2.0.0-beta.1",
         "@coffeekraken/s-env": "^2.0.0-beta.1",
         "@coffeekraken/s-typescript-builder": "^2.0.0-beta.1",
-        "@coffeekraken/sugar": "^2.0.0-beta.1"
+        "@coffeekraken/sugar": "^2.0.0-beta.1",
+        "@coffeekraken/s-config-adapter": "^2.0.0-beta.1"
     },
     "main": "dist/pkg/cjs/node/exports.js",
     "module": "dist/pkg/esm/node/exports.js",

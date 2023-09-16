@@ -16,7 +16,8 @@
         "@coffeekraken/s-sugar-config": "^2.0.0-beta.1",
         "@coffeekraken/s-theme": "^2.0.0-beta.1",
         "@coffeekraken/sugar": "^2.0.0-beta.1",
-        "glob": "^7.2.3"
+        "glob": "^7.2.3",
+        "@coffeekraken/s-frontspec": "^2.0.0-beta.1"
     },
     "main": "dist/pkg/cjs/js/exports.js",
     "module": "dist/pkg/esm/js/exports.js",

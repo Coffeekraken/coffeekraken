@@ -27,12 +27,39 @@ export default class SPackageCheckDependenciesParamsInterface extends __SInterfa
                 default: __SSugarConfig.get('package.checkDependencies.dirs'),
                 alias: 'd',
             },
+            missing: {
+                description:
+                    'Specify if you want to check for missing packages',
+                type: 'Boolean',
+                default: true,
+                alias: 'm',
+            },
+            unused: {
+                description: 'Specify if you want to check for unused packages',
+                type: 'Boolean',
+                default: false,
+                alias: 'u',
+            },
             installMissing: {
                 description:
                     'Specify if you would like to install missing dependencies.',
                 type: 'Boolean',
                 default: undefined,
                 alias: 'i',
+            },
+            removeUnused: {
+                description:
+                    'Specigy if you want to remove unused dependencies',
+                type: 'Boolean',
+                default: undefined,
+                alias: 'r',
+            },
+            allYes: {
+                description:
+                    'Specify if you want to answer yes to all questions',
+                type: 'Boolean',
+                default: false,
+                alias: 'y',
             },
             packagesMap: {
                 description:

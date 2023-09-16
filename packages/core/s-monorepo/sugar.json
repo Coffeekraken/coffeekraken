@@ -41,6 +41,12 @@
                     "description": "Upgrade the repositories informations depending on the mono repo ones",
                     "interface": "./dist/pkg/esm/node/interface/SMonorepoUpgradeParamsInterface.js",
                     "process": "./dist/pkg/esm/cli/upgrade.cli.js"
+                },
+                "checkDependencies": {
+                    "scope": "package",
+                    "description": "Clean the repositories dependencies",
+                    "interface": "./dist/pkg/esm/node/interface/SMonorepoCheckDependenciesParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/checkDependencies.cli.js"
                 }
             }
         }

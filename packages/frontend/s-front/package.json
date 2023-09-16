@@ -21,7 +21,8 @@
         "@coffeekraken/sugar": "^2.0.0-beta.1",
         "fastdom": "^1.0.11",
         "known-css-properties": "^0.25.0",
-        "micromatch": "^4.0.5"
+        "micromatch": "^4.0.5",
+        "@coffeekraken/s-theme": "^2.0.0-beta.1"
     },
     "main": "dist/pkg/cjs/js/exports.js",
     "module": "dist/pkg/esm/js/exports.js",

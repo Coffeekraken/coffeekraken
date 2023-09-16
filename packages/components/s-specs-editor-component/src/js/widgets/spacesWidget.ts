@@ -33,7 +33,6 @@ export default class SSpecsEditorComponentSpacesWidget extends __SSpecsEditorWid
             <div
                 class="${this.editor.utils.cls('_spaces-widget')}"
                 @s-spaces-selector.change=${(e) => {
-                    _console.log('SA', e.detail, Object.keys(e.detail));
                     if (!Object.keys(e.detail).length) {
                         this.resetValue();
                     } else {

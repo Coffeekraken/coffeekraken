@@ -20,6 +20,12 @@ import __childProcess from 'child_process';
 import __fs from 'fs';
 import __path from 'path';
 
+import type {
+    ISPackageCheckDependenciesParams,
+    ISPackageCheckDependenciesResult,
+} from '@coffeekraken/s-package';
+
+import __SMonorepoCheckDependendiesParamsInterface from './interface/SMonorepoCheckDependenciesParamsInterface.js';
 import __SMonorepoDevParamsInterface from './interface/SMonorepoDevParamsInterface.js';
 import __SMonorepoExecParamsInterface from './interface/SMonorepoExecParamsInterface.js';
 import __SMonorepoListParamsInteface from './interface/SMonorepoListParamsInterface.js';
@@ -104,6 +110,13 @@ export interface ISMonorepoDevParams {
 }
 export interface ISMonorepoDevResult {}
 
+export interface ISMonorepoCheckDependenciesParams
+    extends ISPackageCheckDependenciesParams {
+    packagesGlob: string;
+}
+export interface ISMonorepoCheckDependenciesResult
+    extends ISPackageCheckDependenciesResult {}
+
 export interface ISMonorepoUpgradeParams {
     packagesGlob: string;
     files: string[];
@@ -157,10 +170,19 @@ export default class SMonorepo extends __SClass {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    checkDependencies(): Promise<boolean> {
+    checkDependencies(
+        params: Partial<ISMonorepoCheckDependenciesParams>,
+    ): Promise<Record<string, ISMonorepoCheckDependenciesResult>> {
         return new Promise(async (resolve, reject) => {
             // get all the packages
             const packages = await this.list({});
+
+            // @ts-ignore
+            const finalParams: ISMonorepoCheckDependenciesParams =
+                __SMonorepoCheckDependendiesParamsInterface.apply(params);
+
+            const results: Record<string, ISMonorepoCheckDependenciesResult> =
+                {};
 
             for (let i = 0; i < packages.length; i++) {
                 const packageObj = packages[i];
@@ -171,9 +193,16 @@ export default class SMonorepo extends __SClass {
 
                 const pack = new __SPackage(packageObj.path);
 
-                const result = await pack.checkDependencies();
+                let result;
+                try {
+                    result = await pack.checkDependencies(finalParams);
+                } catch (e) {
+                    return reject(e);
+                }
 
-                if (result !== true) {
+                results[packageObj.name] = result;
+
+                if (!result.ok) {
                     console.error(
                         `<red>[check]</red> Your package has some dependencies issues`,
                     );
@@ -191,7 +220,7 @@ export default class SMonorepo extends __SClass {
             }
 
             // all seems ok
-            resolve(true);
+            resolve(results);
         });
     }
 

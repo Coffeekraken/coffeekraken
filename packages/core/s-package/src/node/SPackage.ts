@@ -23,6 +23,8 @@ import __SPackageExportsParamsInterface from './interface/SPackageExportsParamsI
 import __SPackageInstallParamsInterface from './interface/SPackageInstallParamsInterface.js';
 import __SPackageSettingsInterface from './interface/SPackageSettingsInterface.js';
 
+import __depcheck from 'depcheck';
+
 /**
  * @name                SPackage
  * @namespace           node
@@ -62,14 +64,26 @@ export interface ISPackageInstallParams {
     manager: 'npm' | 'yarn';
     dependencies: Record<string, string> | string[];
 }
-export interface ISPackageInstallResult {}
+export interface ISPackageInstallResult {
+    installedPackages: string[];
+}
 
 export interface ISPackageCheckDependenciesParams {
     dirs: string[];
+    missing: boolean;
+    unused: boolean;
     installMissing: boolean | undefined;
+    removeUnused: boolean | undefined;
+    allYes: boolean;
     packagesMap: { [key: string]: string };
 }
-export interface ISPackageCheckDependenciesResult {}
+export interface ISPackageCheckDependenciesResult {
+    missingPackages: string[];
+    unusedPackages: string[];
+    installedPackages: string[];
+    removedPackages: string[];
+    ok: boolean;
+}
 
 export interface ISPackageAddReadmeParams {
     path: string;
@@ -95,6 +109,20 @@ export default class SPackage extends __SClass {
      * Store the root package directory
      */
     private _rootDir: string;
+
+    /**
+     * @name            packageJson
+     * @type            Object
+     * @get
+     *
+     * Store the package.json content
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    public get packageJson(): any {
+        return __packageJsonSync(this._rootDir);
+    }
 
     /**
      * @name            constructor
@@ -335,12 +363,10 @@ export default class SPackage extends __SClass {
             const finalParams: ISPackageExportsParams =
                 __SPackageExportsParamsInterface.apply(params);
 
-            const packageJson = __packageJsonSync(this._rootDir);
-
             // check if the "autoExports" exists and is at "false" to avoid exporting
-            if (packageJson.autoExports === false) {
+            if (this.packageJson.autoExports === false) {
                 console.log(
-                    `<magenta>[exports]</magenta> The package "<yellow>${packageJson.name}</yellow>" is marked as "<cyan>autoExports</cyan>:<red>false</red>" and will not generate the exports property automatically`,
+                    `<magenta>[exports]</magenta> The package "<yellow>${this.packageJson.name}</yellow>" is marked as "<cyan>autoExports</cyan>:<red>false</red>" and will not generate the exports property automatically`,
                 );
                 return resolve();
             }
@@ -401,7 +427,7 @@ export default class SPackage extends __SClass {
     install(
         params: Partial<ISPackageInstallParams>,
     ): Promise<ISPackageInstallResult | void> {
-        return new Promise(async (resolve) => {
+        return new Promise(async (resolve, reject) => {
             // @ts-ignore
             const finalParams: ISPackageInstallParams =
                 __SPackageInstallParamsInterface.apply(params);
@@ -438,20 +464,25 @@ export default class SPackage extends __SClass {
                 console.log(
                     `<yellow>[install]</yellow> Installing the <cyan>node_modules</cyan> dependencies using <cyan>${finalParams.manager}</cyan>...`,
                 );
-                __childProcess.execSync(
+
+                const res = __childProcess.spawnSync(
                     `${finalParams.manager} ${
-                        finalParams.manager === 'yarn'
-                            ? 'add --quiet'
-                            : 'install --no-warnings'
+                        finalParams.manager === 'yarn' ? 'add' : 'install'
                     } ${
                         Array.isArray(finalParams.dependencies)
                             ? finalParams.dependencies.join(' ')
                             : ''
                     }`,
+                    [],
                     {
+                        shell: true,
                         cwd: packageRoot,
                     },
                 );
+
+                if (res.status) {
+                    return reject(res.stdout.toString());
+                }
             }
 
             if (__fs.existsSync(`${packageRoot}/composer.json`)) {
@@ -466,7 +497,11 @@ export default class SPackage extends __SClass {
             console.log(
                 `<green>[install]</green> Dependencies have been installed <green>successfully</green>`,
             );
-            resolve();
+            resolve({
+                installedPackages: Array.isArray(finalParams.dependencies)
+                    ? finalParams.dependencies
+                    : Object.keys(finalParams.dependencies ?? {}),
+            });
         });
     }
 
@@ -485,20 +520,30 @@ export default class SPackage extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     checkDependencies(
-        params: Partial<ISPackageCheckDependenciesParams>,
-    ): Promise<boolean> {
+        params?: Partial<ISPackageCheckDependenciesParams>,
+    ): Promise<ISPackageCheckDependenciesResult> {
         return new Promise(async (resolve, reject) => {
             // @ts-ignore
             const finalParams: ISPackageCheckDependenciesParams =
-                __SPackageCheckDependenciesParamsInterface.apply(params);
+                __SPackageCheckDependenciesParamsInterface.apply(params ?? {});
 
-            let result = true;
+            let result: ISPackageCheckDependenciesResult = {
+                missingPackages: [],
+                unusedPackages: [],
+                installedPackages: [],
+                removedPackages: [],
+                ok: false,
+            };
 
             let needJsonWrite = false;
 
-            const missingModules: string[] = [];
+            const missingPackages: string[] = [];
 
             const packageRoot = this._rootDir;
+
+            console.log(
+                `<yellow>[checkDependencies]</yellow> Checking <cyan>${this.packageJson.name}</cyan> package...`,
+            );
 
             if (!__fs.existsSync(`${packageRoot}/package.json`)) {
                 console.error(
@@ -511,127 +556,237 @@ export default class SPackage extends __SClass {
                 __fs.readFileSync(`${packageRoot}/package.json`).toString(),
             );
 
-            const ARRAY_OF_FILES_AND_DIRS_TO_CRUISE: string[] =
-                finalParams.dirs.map((d) => __path.relative(packageRoot, d));
+            // unused dependencies
+            if (finalParams.unused) {
+                const depcheckResult = await __depcheck(packageRoot, {
+                    specials: [],
+                    ignorePatterns: [
+                        'node_modules',
+                        'dist',
+                        'bower_components',
+                        'vendor',
+                    ],
+                });
+                if (
+                    depcheckResult.dependencies?.length ||
+                    depcheckResult.devDependencies?.length
+                ) {
+                    result.unusedPackages = [
+                        ...(depcheckResult.dependencies ?? []),
+                        ...(depcheckResult.devDependencies ?? []),
+                    ];
+                }
 
-            console.log(
-                `<yellow>[checkDependencies]</yellow> Checking dependencies in these directories:`,
-            );
-            ARRAY_OF_FILES_AND_DIRS_TO_CRUISE.forEach((dirPath) => {
-                console.log(
-                    `<yellow>[checkDependencies]</yellow> - <cyan>${dirPath}</cyan>`,
-                );
-            });
+                // ask if want to install missing packages
+                if (result.unusedPackages?.length) {
+                    result.unusedPackages.forEach((packageName) => {
+                        console.log(
+                            `<red>[checkDependencies]</red> Unused package "<magenta>${packageName}</magenta>"`,
+                        );
+                    });
 
-            const cruiseResult = cruise(ARRAY_OF_FILES_AND_DIRS_TO_CRUISE, {});
-
-            for (
-                let i = 0;
-                // @ts-ignore
-                i < cruiseResult.output.modules.length;
-                i++
-            ) {
-                // filter
-                // @ts-ignore
-                const module = cruiseResult.output.modules[i];
-                if (module.source.match(/^node_modules/)) continue;
-                if (!module.source.match(/^[a-zA-Z0-9@]+/)) continue;
-                if (!module.dependencies.length) continue;
-
-                // handle dependencies
-                for (let j = 0; j < module.dependencies.length; j++) {
-                    const dependency = module.dependencies[j];
-
-                    if (dependency.coreModule) continue;
-                    if (dependency.module.match(/^\./)) continue;
-                    let moduleName = dependency.module;
-                    if (moduleName.match(/^@/)) {
-                        moduleName = moduleName
-                            .split('/')
-                            .slice(0, 2)
-                            .join('/');
-                    } else {
-                        moduleName = moduleName.split('/')[0];
-                    }
-                    // check if the dependency is well defines in the package.json file
                     if (
-                        !packageJson.dependencies?.[moduleName] &&
-                        !packageJson.devDependencies?.[moduleName]
+                        finalParams.allYes ||
+                        finalParams.installMissing === true ||
+                        (finalParams.installMissing === undefined &&
+                            (await console.ask?.({
+                                type: 'confirm',
+                                message: `${
+                                    result.unusedPackages.length
+                                } package${
+                                    result.unusedPackages.length > 1 ? 's' : ''
+                                } listed above ${
+                                    result.unusedPackages.length > 1
+                                        ? 'are'
+                                        : 'is'
+                                } are unused. Would you like to remove ${
+                                    result.unusedPackages.length > 1
+                                        ? 'them'
+                                        : 'it'
+                                }?`,
+                                default: true,
+                            })))
                     ) {
-                        let addedFromPackagesMap = false;
+                        console.log(
+                            `<yellow>[checkDependencies]</yellow> Removing unused packages...`,
+                        );
 
-                        // check packages map
-                        for (let [pattern, version] of Object.entries(
-                            finalParams.packagesMap,
-                        )) {
-                            if (
-                                pattern.match(/^\^/) &&
-                                moduleName.startsWith(pattern.slice(1))
-                            ) {
-                                packageJson.dependencies[moduleName] = version;
-                                addedFromPackagesMap = true;
-                            } else if (
-                                pattern.match(/\$$/) &&
-                                moduleName.endsWith(pattern.slice(0, -1))
-                            ) {
-                                packageJson.dependencies[moduleName] = version;
-                                addedFromPackagesMap = true;
-                            } else if (pattern === moduleName) {
-                                packageJson.dependencies[moduleName] = version;
-                                addedFromPackagesMap = true;
+                        // remove from package.json
+                        result.unusedPackages.forEach((packageName) => {
+                            packageJson.dependencies &&
+                                delete packageJson.dependencies[packageName];
+                            packageJson.devDependencies &&
+                                delete packageJson.devDependencies[packageName];
+                        });
+
+                        result.removedPackages = [
+                            ...(depcheckResult.dependencies ?? []),
+                            ...(depcheckResult.devDependencies ?? []),
+                        ];
+
+                        needJsonWrite = true;
+                    }
+                }
+
+                // rewrite json
+                if (needJsonWrite) {
+                    __writeJsonSync(`${packageRoot}/package.json`, packageJson);
+                }
+            }
+
+            // missing
+            if (finalParams.missing) {
+                const ARRAY_OF_FILES_AND_DIRS_TO_CRUISE: string[] =
+                    finalParams.dirs.map((d) => {
+                        return __path.join(
+                            packageRoot,
+                            d.replace(`${process.cwd()}/`, ''),
+                        );
+                    });
+
+                console.log(
+                    `<yellow>[checkDependencies]</yellow> Checking dependencies in these directories:`,
+                );
+                ARRAY_OF_FILES_AND_DIRS_TO_CRUISE.forEach((dirPath) => {
+                    console.log(
+                        `<yellow>[checkDependencies]</yellow> - <cyan>${dirPath}</cyan>`,
+                    );
+                });
+
+                const cruiseResult = cruise(ARRAY_OF_FILES_AND_DIRS_TO_CRUISE, {
+                    doNotFollow: {
+                        path: '(node_modules|packages/.*/dist)',
+                    },
+                });
+
+                for (
+                    let i = 0;
+                    // @ts-ignore
+                    i < cruiseResult.output.modules.length;
+                    i++
+                ) {
+                    // filter
+                    // @ts-ignore
+                    const module = cruiseResult.output.modules[i];
+
+                    if (module.source.match(/^node_modules/)) continue;
+                    if (!module.source.match(/^[a-zA-Z0-9@]+/)) continue;
+                    if (!module.dependencies.length) continue;
+
+                    // handle dependencies
+                    for (let j = 0; j < module.dependencies.length; j++) {
+                        const dependency = module.dependencies[j];
+
+                        if (dependency.coreModule) continue;
+                        if (dependency.module.match(/^\./)) continue;
+                        let moduleName = dependency.module;
+                        if (moduleName.match(/^@/)) {
+                            moduleName = moduleName
+                                .split('/')
+                                .slice(0, 2)
+                                .join('/');
+                        } else {
+                            moduleName = moduleName.split('/')[0];
+                        }
+
+                        // check if the dependency is well defines in the package.json file
+                        if (
+                            !packageJson.dependencies?.[moduleName] &&
+                            !packageJson.devDependencies?.[moduleName]
+                        ) {
+                            let addedFromPackagesMap = false;
+
+                            // check packages map
+                            for (let [pattern, version] of Object.entries(
+                                finalParams.packagesMap,
+                            )) {
+                                if (
+                                    pattern.match(/^\^/) &&
+                                    moduleName.startsWith(pattern.slice(1))
+                                ) {
+                                    packageJson.dependencies[moduleName] =
+                                        version;
+                                    addedFromPackagesMap = true;
+                                } else if (
+                                    pattern.match(/\$$/) &&
+                                    moduleName.endsWith(pattern.slice(0, -1))
+                                ) {
+                                    packageJson.dependencies[moduleName] =
+                                        version;
+                                    addedFromPackagesMap = true;
+                                } else if (pattern === moduleName) {
+                                    packageJson.dependencies[moduleName] =
+                                        version;
+                                    addedFromPackagesMap = true;
+                                }
+                            }
+
+                            if (addedFromPackagesMap) {
+                                console.log(
+                                    `<yellow>[checkDependencies]</yellow> Missing package <magenta>${moduleName}</magenta> added from packages map`,
+                                );
+                                needJsonWrite = true;
+                                continue;
+                            }
+
+                            if (!missingPackages.includes(moduleName)) {
+                                console.log(
+                                    `<red>[checkDependencies]</red> Missing package "<magenta>${moduleName}</magenta>" in package.json used in "<cyan>${module.source}</cyan>"`,
+                                );
+                                missingPackages.push(moduleName);
                             }
                         }
+                    }
+                }
 
-                        //
-                        if (addedFromPackagesMap) {
-                            console.log(
-                                `<yellow>[checkDependencies]</yellow> <magenta>${moduleName}</magenta> added from packages map`,
-                            );
-                            needJsonWrite = true;
-                            continue;
-                        }
+                // rewrite json
+                if (needJsonWrite) {
+                    __writeJsonSync(`${packageRoot}/package.json`, packageJson);
+                }
 
+                // set the missing packages in the result
+                result.missingPackages = missingPackages;
+
+                // ask if want to install missing packages
+                if (missingPackages.length) {
+                    if (
+                        finalParams.allYes ||
+                        finalParams.installMissing === true ||
+                        (finalParams.installMissing === undefined &&
+                            (await console.ask?.({
+                                type: 'confirm',
+                                message: `${missingPackages.length} package${
+                                    missingPackages.length > 1 ? 's' : ''
+                                } (${missingPackages.join(',')}) ${
+                                    missingPackages.length > 1 ? 'are' : 'is'
+                                } missing. Would you like to install ${
+                                    missingPackages.length > 1 ? 'them' : 'it'
+                                }?`,
+                                default: true,
+                            })))
+                    ) {
                         console.log(
-                            `<red>[checkDependencies]</red> Missing module "<magenta>${moduleName}</magenta>" in package.json used in "<cyan>${module.source}</cyan>"`,
+                            `<yellow>[checkDependencies]</yellow> Installing missing packages...`,
                         );
-                        if (!missingModules.includes(moduleName)) {
-                            missingModules.push(moduleName);
+                        try {
+                            await this.install({
+                                dependencies: missingPackages,
+                            });
+                        } catch (e) {
+                            return reject(e);
                         }
+
+                        result.installedPackages = missingPackages;
                     }
                 }
             }
 
-            // rewrite json
-            if (needJsonWrite) {
-                __writeJsonSync(`${packageRoot}/package.json`, packageJson);
-            }
-
-            if (missingModules.length && finalParams.installMissing !== false) {
-                if (
-                    finalParams.installMissing === true ||
-                    (finalParams.installMissing === undefined &&
-                        (await console.ask?.('ask', {
-                            type: 'confirm',
-                            message: `${missingModules.length} package${
-                                missingModules.length > 1 ? 's' : ''
-                            } ${
-                                missingModules.length > 1 ? 'are' : 'is'
-                            } missing. Would you like to install ${
-                                missingModules.length > 1 ? 'them' : 'it'
-                            }?`,
-                            default: true,
-                        })))
-                ) {
-                    console.log(
-                        `<yellow>[checkDependencies]</yellow> Installing missing modules...`,
-                    );
-                    await this.install({
-                        dependencies: missingModules,
-                    });
-                } else {
-                    result = false;
-                }
-            }
+            // check if the module is now ok, meaning that it can have some missing modules
+            // or unused ones, but they have been installed or removed
+            result.ok =
+                result.missingPackages.length ===
+                    result.installedPackages.length &&
+                result.unusedPackages.length === result.removedPackages.length;
 
             console.log(
                 `<green>[checkDependencies]</green> Dependencies have been checked <green>successfully</green>`,

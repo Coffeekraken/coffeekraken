@@ -137,7 +137,7 @@ export default function (api) {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             packagesMap: {
-                '^@coffeekraken/': '^2.0.0',
+                '^@coffeekraken/': '^2.0.0-beta.1',
             },
         },
 

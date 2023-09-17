@@ -187,6 +187,12 @@ export default class SMonorepo extends __SClass {
             for (let i = 0; i < packages.length; i++) {
                 const packageObj = packages[i];
 
+                if (
+                    packageObj.name !== '@coffeekraken/s-postcss-sugar-plugin'
+                ) {
+                    // continue;
+                }
+
                 console.log(
                     `<yellow>[check]</yellow> Checking dependencies for the package "<cyan>${packageObj.name}</cyan>"...`,
                 );

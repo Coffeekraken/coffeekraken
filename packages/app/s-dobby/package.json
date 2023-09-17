@@ -24,7 +24,8 @@
         "playwright": "^1.36.1",
         "playwright-lighthouse": "^3.1.0",
         "pocketbase": "^0.16.0",
-        "ws": "^8.13.0"
+        "ws": "^8.13.0",
+        "@coffeekraken/s-duration": "^2.0.0-beta.1"
     },
     "main": "dist/pkg/cjs/js/exports.js",
     "module": "dist/pkg/esm/js/exports.js",

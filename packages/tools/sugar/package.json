@@ -211,6 +211,16 @@
             "require": "./dist/pkg/cjs/shared/datetime/_exports.js",
             "import": "./dist/pkg/esm/shared/datetime/_exports.js"
         },
+        "./dependencies": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/dependencies/_exports.js",
+                "import": "./dist/pkg/esm/node/dependencies/_exports.js"
+            },
+            "browser": {
+                "require": "./dist/pkg/cjs/js/dependencies/_exports.js",
+                "import": "./dist/pkg/esm/js/dependencies/_exports.js"
+            }
+        },
         "./dev": {
             "node": {
                 "require": "./dist/pkg/cjs/node/dev/_exports.js",

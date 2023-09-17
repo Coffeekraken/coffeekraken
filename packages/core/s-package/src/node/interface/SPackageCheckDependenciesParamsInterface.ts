@@ -37,7 +37,7 @@ export default class SPackageCheckDependenciesParamsInterface extends __SInterfa
             unused: {
                 description: 'Specify if you want to check for unused packages',
                 type: 'Boolean',
-                default: false,
+                default: true,
                 alias: 'u',
             },
             installMissing: {

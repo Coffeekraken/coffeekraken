@@ -108,7 +108,7 @@ export default function (api) {
              * @name            dirs
              * @namespace       config.package.checkDependencies
              * @type            String
-             * @default         ['dist/** /exports.js']
+             * @default         [api.config.storage.src.rootDir]
              *
              * Specify some directories in which to check for dependencies issues, etc...
              *
@@ -116,12 +116,7 @@ export default function (api) {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get dirs() {
-                return [
-                    api.config.storage.src.jsDir,
-                    api.config.storage.src.nodeDir,
-                    api.config.storage.src.pagesDir,
-                    api.config.storage.src.configDir,
-                ];
+                return [api.config.storage.src.rootDirRel];
             },
 
             /**

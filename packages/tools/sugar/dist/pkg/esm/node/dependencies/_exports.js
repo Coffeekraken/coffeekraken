@@ -1,0 +1,4 @@
+import __listDependenciesFromFiles from './listDependenciesFromFiles.js';
+export * from '../../shared/dependencies/_exports.js';
+export { __listDependenciesFromFiles };
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sMkJBQTJCLE1BQU0sZ0NBQWdDLENBQUM7QUFFekUsY0FBYyx1Q0FBdUMsQ0FBQztBQUN0RCxPQUFPLEVBQUUsMkJBQTJCLEVBQUUsQ0FBQyJ9

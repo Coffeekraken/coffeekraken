@@ -23,7 +23,7 @@ import __SPackageExportsParamsInterface from './interface/SPackageExportsParamsI
 import __SPackageInstallParamsInterface from './interface/SPackageInstallParamsInterface.js';
 import __SPackageSettingsInterface from './interface/SPackageSettingsInterface.js';
 
-import __depcheck from 'depcheck';
+import { __listDependenciesFromFiles } from '@coffeekraken/sugar/dependencies';
 
 /**
  * @name                SPackage
@@ -552,30 +552,27 @@ export default class SPackage extends __SClass {
                 return reject();
             }
 
-            const packageJson = JSON.parse(
-                __fs.readFileSync(`${packageRoot}/package.json`).toString(),
-            );
+            const packageJson = this.packageJson;
 
             // unused dependencies
             if (finalParams.unused) {
-                const depcheckResult = await __depcheck(packageRoot, {
-                    specials: [],
-                    ignorePatterns: [
-                        'node_modules',
-                        'dist',
-                        'bower_components',
-                        'vendor',
-                    ],
-                });
-                if (
-                    depcheckResult.dependencies?.length ||
-                    depcheckResult.devDependencies?.length
-                ) {
-                    result.unusedPackages = [
-                        ...(depcheckResult.dependencies ?? []),
-                        ...(depcheckResult.devDependencies ?? []),
-                    ];
+                const dependencies = __listDependenciesFromFiles(
+                    finalParams.dirs,
+                    {
+                        cwd: packageRoot,
+                    },
+                );
+
+                const unusedDependencies: string[] = [];
+                for (let [dependency, version] of Object.entries(
+                    packageJson.dependencies,
+                )) {
+                    if (!dependencies.includes(dependency)) {
+                        unusedDependencies.push(dependency);
+                    }
                 }
+
+                result.unusedPackages = unusedDependencies;
 
                 // ask if want to install missing packages
                 if (result.unusedPackages?.length) {

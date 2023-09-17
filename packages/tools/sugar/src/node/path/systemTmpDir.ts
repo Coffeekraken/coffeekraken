@@ -18,7 +18,7 @@ import __tmpDir from 'temp-dir';
  * @todo      tests
  *
  * @snippet         __systemTmpDir()
- * 
+ *
  * @example             js
  * import { __systemTmpDir } from '@coffeekraken/sugar/path';
  * __systemTmpDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'
@@ -27,6 +27,6 @@ import __tmpDir from 'temp-dir';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export default function __systemTmpDir() {
+export default function __systemTmpDir(): string {
     return __tmpDir;
 }

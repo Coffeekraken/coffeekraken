@@ -612,14 +612,9 @@ export default class SPackage extends __SClass {
                         result.unusedPackages.forEach((packageName) => {
                             packageJson.dependencies &&
                                 delete packageJson.dependencies[packageName];
-                            packageJson.devDependencies &&
-                                delete packageJson.devDependencies[packageName];
                         });
 
-                        result.removedPackages = [
-                            ...(depcheckResult.dependencies ?? []),
-                            ...(depcheckResult.devDependencies ?? []),
-                        ];
+                        result.removedPackages = result.unusedPackages;
 
                         needJsonWrite = true;
                     }
@@ -687,10 +682,7 @@ export default class SPackage extends __SClass {
                         }
 
                         // check if the dependency is well defines in the package.json file
-                        if (
-                            !packageJson.dependencies?.[moduleName] &&
-                            !packageJson.devDependencies?.[moduleName]
-                        ) {
+                        if (!packageJson.dependencies?.[moduleName]) {
                             let addedFromPackagesMap = false;
 
                             // check packages map

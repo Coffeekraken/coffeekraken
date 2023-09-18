@@ -5,10 +5,10 @@
     {{ attributes.class }}
     {{ additionalClasses }}
 " {{ __attrs(attributes, ['class'])|raw }}
-    href="{{ link.url }}"
-    {% if link.newWindow %} target="_blank" {% endif %}
+    href="{{ url }}"
+    {% if newWindow %} target="_blank" {% endif %}
     color="{{ color.value }}"
-    title="{{ link.title }}"
+    title="{{ title }}"
 >
-    {{ link.text }}
+    {{ text }}
 </a>    

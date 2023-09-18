@@ -1,4 +1,5 @@
 {
+    "extends": "sugar.views.sections.simple",
     "type": "section",
     "category": "sections",
     "title": "Contact",

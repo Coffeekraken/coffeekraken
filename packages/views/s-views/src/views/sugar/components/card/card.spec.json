@@ -25,7 +25,10 @@
             "title": "Text",
             "description": "The card text"
         },
-        "cta": "@sugar.views.components.cta",
+        "cta": {
+            "type": "Object[]",
+            "extends": "sugar.views.components.cta"
+        },
         "direction": {
             "type": "Select",
             "title": "Direction",

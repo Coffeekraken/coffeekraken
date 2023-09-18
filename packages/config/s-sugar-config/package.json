@@ -10,6 +10,8 @@
         "@coffeekraken/s-config": "^2.0.0-beta.1",
         "@coffeekraken/s-config-folder-adapter": "^2.0.0-beta.1",
         "@coffeekraken/s-docblock": "^2.0.0-beta.1",
+        "@coffeekraken/s-interface": "^2.0.0-beta.1",
+        "@coffeekraken/s-sugar-config": "^2.0.0-beta.1",
         "@coffeekraken/s-sugar-json": "^2.0.0-beta.1",
         "@coffeekraken/sugar": "^2.0.0-beta.1"
     },

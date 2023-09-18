@@ -6,10 +6,6 @@
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-beta.1",
-        "@coffeekraken/s-descriptor": "^2.0.0-beta.1",
-        "@coffeekraken/s-interface": "^2.0.0-beta.1",
-        "@coffeekraken/s-promise": "^2.0.0-beta.1",
         "@coffeekraken/sugar": "^2.0.0-beta.1"
     },
     "main": "dist/pkg/cjs/js/exports.js",

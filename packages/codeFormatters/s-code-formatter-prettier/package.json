@@ -6,17 +6,10 @@
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-beta.1",
         "@coffeekraken/s-code-formatter": "^2.0.0-beta.1",
-        "@coffeekraken/s-duration": "^2.0.0-beta.1",
-        "@coffeekraken/s-interface": "^2.0.0-beta.1",
-        "@coffeekraken/s-log": "^2.0.0-beta.1",
-        "@coffeekraken/s-promise": "^2.0.0-beta.1",
         "@coffeekraken/s-sugar-config": "^2.0.0-beta.1",
         "@coffeekraken/sugar": "^2.0.0-beta.1",
-        "@prettier/plugin-php": "^0.18.9",
-        "prettier": "^2.7.1",
-        "prettier-plugin-sh": "^0.12.8"
+        "prettier": "^2.7.1"
     },
     "main": "dist/pkg/cjs/node/exports.js",
     "module": "dist/pkg/esm/node/exports.js",

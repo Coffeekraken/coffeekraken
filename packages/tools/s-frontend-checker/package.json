@@ -13,14 +13,13 @@
         "@coffeekraken/s-class": "^2.0.0-beta.1",
         "@coffeekraken/s-color": "^2.0.0-beta.1",
         "@coffeekraken/s-duration": "^2.0.0-beta.1",
-        "@coffeekraken/s-file": "^2.0.0-beta.1",
         "@coffeekraken/s-interface": "^2.0.0-beta.1",
         "@coffeekraken/s-promise": "^2.0.0-beta.1",
         "@coffeekraken/sugar": "^2.0.0-beta.1",
         "aria-query": "^5.2.1",
-        "dom-accessibility-api": "^0.6.1",
         "html2canvas": "^1.4.1",
-        "puppeteer": "^20.7.3"
+        "puppeteer": "^20.7.3",
+        "vite": "^4.4.9"
     },
     "homepage": "https://coffeekraken.io",
     "main": "dist/pkg/cjs/js/exports.js",

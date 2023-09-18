@@ -11,12 +11,8 @@
         "@coffeekraken/s-duration": "^2.0.0-beta.1",
         "@coffeekraken/s-file": "^2.0.0-beta.1",
         "@coffeekraken/s-interface": "^2.0.0-beta.1",
-        "@coffeekraken/s-process": "^2.0.0-beta.1",
         "@coffeekraken/s-promise": "^2.0.0-beta.1",
         "@coffeekraken/s-sugar-config": "^2.0.0-beta.1",
-        "@coffeekraken/s-view-renderer-engine-blade": "^2.0.0-beta.1",
-        "@coffeekraken/s-view-renderer-engine-lit": "^2.0.0-beta.1",
-        "@coffeekraken/s-view-renderer-engine-twig": "^2.0.0-beta.1",
         "@coffeekraken/sugar": "^2.0.0-beta.1",
         "glob": "^8.0.3"
     },

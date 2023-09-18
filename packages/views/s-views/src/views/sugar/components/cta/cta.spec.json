@@ -1,5 +1,5 @@
 {
-    "type": "Object",
+    "type": "Link",
     "category": "components",
     "title": "Cta",
     "description": "Display a call to action",
@@ -26,18 +26,6 @@
                     "value": "text"
                 }
             ]
-        },
-        "link": {
-            "type": "Link",
-            "title": "Cta link",
-            "description": "Call to action link",
-            "default": {
-                "text": "Click me!",
-                "url": "https://google.com",
-                "title": "Click me!",
-                "newWindow": false
-            },
-            "required": true
         },
         "attributes": "@sugar.views.props.attributes",
         "additionalClasses": "@sugar.views.props.additionalClasses"

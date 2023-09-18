@@ -8,14 +8,7 @@
     "dependencies": {
         "@coffeekraken/s-bench": "^2.0.0-beta.1",
         "@coffeekraken/s-class": "^2.0.0-beta.1",
-        "@coffeekraken/s-duration": "^2.0.0-beta.1",
-        "@coffeekraken/s-event-emitter": "^2.0.0-beta.1",
-        "@coffeekraken/s-glob": "^2.0.0-beta.1",
         "@coffeekraken/s-interface": "^2.0.0-beta.1",
-        "@coffeekraken/s-kitchen": "^2.0.0-beta.1",
-        "@coffeekraken/s-log": "^2.0.0-beta.1",
-        "@coffeekraken/s-promise": "^2.0.0-beta.1",
-        "@coffeekraken/s-stdio": "^2.0.0-beta.1",
         "@coffeekraken/sugar": "^2.0.0-beta.1",
         "glob-all": "^3.3.0"
     },

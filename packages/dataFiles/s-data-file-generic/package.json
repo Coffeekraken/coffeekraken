@@ -8,9 +8,6 @@
     "dependencies": {
         "@coffeekraken/s-data-file-js": "^2.0.0-beta.1",
         "@coffeekraken/s-data-file-php": "^2.0.0-beta.1",
-        "@coffeekraken/s-interface": "^2.0.0-beta.1",
-        "@coffeekraken/s-promise": "^2.0.0-beta.1",
-        "@coffeekraken/s-sugar-config": "^2.0.0-beta.1",
         "@coffeekraken/sugar": "^2.0.0-beta.1"
     },
     "main": "dist/pkg/cjs/node/exports.js",

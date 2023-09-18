@@ -8,7 +8,6 @@
     "dependencies": {
         "@coffeekraken/s-interface": "^2.0.0-beta.1",
         "@coffeekraken/s-promise": "^2.0.0-beta.1",
-        "@coffeekraken/s-sugar-config": "^2.0.0-beta.1",
         "@coffeekraken/sugar": "^2.0.0-beta.1",
         "@lit-labs/ssr": "^2.2.2"
     },

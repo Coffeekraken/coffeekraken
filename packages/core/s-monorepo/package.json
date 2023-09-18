@@ -14,7 +14,6 @@
         "@coffeekraken/s-interface": "^2.0.0-beta.1",
         "@coffeekraken/s-log": "^2.0.0-beta.1",
         "@coffeekraken/s-package": "^2.0.0-beta.1",
-        "@coffeekraken/s-promise": "^2.0.0-beta.1",
         "@coffeekraken/s-sugar-config": "^2.0.0-beta.1",
         "@coffeekraken/s-typescript-builder": "^2.0.0-beta.1",
         "@coffeekraken/s-vite": "^2.0.0-beta.1",

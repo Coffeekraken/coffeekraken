@@ -214,7 +214,7 @@ export default class SSugarCli {
         });
 
         // console.log('LOADED');
-        // console.log(__SSugarConfig.get('viewRenderer.rootDirs'));
+        // console.log(__SSugarConfig.get('storage.src.jsDir'));
         // return;
 
         this._bench = new __SBench('sugar.cli', {

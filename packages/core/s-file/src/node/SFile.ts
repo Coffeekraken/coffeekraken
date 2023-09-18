@@ -12,7 +12,7 @@ import {
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __toString } from '@coffeekraken/sugar/string';
 import __fs from 'fs';
-import __minimatch from 'minimatch';
+import { minimatch as __minimatch } from 'minimatch';
 import __path from 'path';
 
 /**

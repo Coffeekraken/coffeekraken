@@ -17,9 +17,7 @@
         "@coffeekraken/s-lit-component": "^2.0.0-beta.1",
         "@coffeekraken/s-theme": "^2.0.0-beta.1",
         "@coffeekraken/sugar": "^2.0.0-beta.1",
-        "faker": "^5.5.3",
-        "lit": "^2.2.8",
-        "react": "^17.0.2"
+        "lit": "^2.2.8"
     },
     "main": "dist/pkg/cjs/js/exports.js",
     "module": "dist/pkg/esm/js/exports.js",

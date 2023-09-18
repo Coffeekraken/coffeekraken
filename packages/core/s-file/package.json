@@ -7,10 +7,10 @@
     "license": "MIT",
     "dependencies": {
         "@coffeekraken/s-class": "^2.0.0-beta.1",
-        "@coffeekraken/s-descriptor": "^2.0.0-beta.1",
         "@coffeekraken/s-event-emitter": "^2.0.0-beta.1",
         "@coffeekraken/s-interface": "^2.0.0-beta.1",
-        "@coffeekraken/sugar": "^2.0.0-beta.1"
+        "@coffeekraken/sugar": "^2.0.0-beta.1",
+        "minimatch": "^9.0.3"
     },
     "main": "dist/pkg/cjs/node/exports.js",
     "module": "dist/pkg/esm/node/exports.js",

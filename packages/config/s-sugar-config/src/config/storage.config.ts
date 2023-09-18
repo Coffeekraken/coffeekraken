@@ -355,7 +355,7 @@ export default function (api): IStorageConfig {
              * @name            jsDir
              * @namespace       config.storage.src
              * @type            String
-             * @default         [config.storage.src.rootDir]/[config.storage.src.jsDirRel]
+             * @default         [config.storage.package.rootDir]/[config.storage.src.jsDirRel]
              *
              * Configure where is located the javascript/typescript source files
              *
@@ -363,7 +363,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get jsDir() {
-                return `${this.rootDir}/${this.jsDirRel}`;
+                return `${api.this.package.rootDir}/${this.jsDirRel}`;
             },
 
             /**
@@ -385,7 +385,7 @@ export default function (api): IStorageConfig {
              * @name            nodeDir
              * @namespace       config.storage.src
              * @type            String
-             * @default         [config.storage.src.rootDir]/[config.storage.src.nodeDirRel]
+             * @default         [config.storage.package.rootDir]/[config.storage.src.nodeDirRel]
              *
              * Configure where is located the javascript/typescript node source files
              *
@@ -393,7 +393,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get nodeDir() {
-                return `${this.rootDir}/${this.nodeDirRel}`;
+                return `${api.this.package.rootDir}/${this.nodeDirRel}`;
             },
 
             /**
@@ -415,7 +415,7 @@ export default function (api): IStorageConfig {
              * @name            cssDir
              * @namespace       config.storage.src
              * @type            String
-             * @default         [config.storage.src.rootDir]/[config.storage.src.cssDirRel]
+             * @default         [config.storage.package.rootDir]/[config.storage.src.cssDirRel]
              *
              * Configure where is located the css source files
              *
@@ -423,7 +423,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get cssDir() {
-                return `${this.rootDir}/${this.cssDirRel}`;
+                return `${api.this.package.rootDir}/${this.cssDirRel}`;
             },
 
             /**
@@ -445,7 +445,7 @@ export default function (api): IStorageConfig {
              * @name            configDir
              * @namespace       config.storage.src
              * @type            String
-             * @default         [config.storage.src.rootDir]/[config.storage.src.configDirRel]
+             * @default         [config.storage.package.rootDir]/[config.storage.src.configDirRel]
              *
              * Configure where is located the config source files
              *
@@ -453,7 +453,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get configDir() {
-                return `${this.rootDir}/${this.configDirRel}`;
+                return `${api.this.package.rootDir}/${this.configDirRel}`;
             },
 
             /**
@@ -475,7 +475,7 @@ export default function (api): IStorageConfig {
              * @name            docDir
              * @namespace       config.storage.src
              * @type            String
-             * @default         [config.storage.src.rootDir]/[config.storage.src.docDirRel]
+             * @default         [config.storage.package.rootDir]/[config.storage.src.docDirRel]
              *
              * Configure where is located the documentation markdown source files
              *
@@ -483,7 +483,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get docDir() {
-                return `${this.rootDir}/${this.docDirRel}`;
+                return `${api.this.package.rootDir}/${this.docDirRel}`;
             },
 
             /**
@@ -505,7 +505,7 @@ export default function (api): IStorageConfig {
              * @name            fontsDir
              * @namespace       config.storage.src
              * @type            String
-             * @default         [config.storage.src.rootDir]/[config.storage.src.fontsDirRel]
+             * @default         [config.storage.package.rootDir]/[config.storage.src.fontsDirRel]
              *
              * Configure where is located the fonts source files
              *
@@ -513,7 +513,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get fontsDir() {
-                return `${this.rootDir}/${this.fontsDirRel}`;
+                return `${api.this.package.rootDir}/${this.fontsDirRel}`;
             },
 
             /**
@@ -535,7 +535,7 @@ export default function (api): IStorageConfig {
              * @name            iconsDir
              * @namespace       config.storage.src
              * @type            String
-             * @default         [config.storage.src.rootDir]/[config.storage.src.iconsDirRel]
+             * @default         [config.storage.package.rootDir]/[config.storage.src.iconsDirRel]
              *
              * Configure where is located the icons source files
              *
@@ -543,7 +543,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get iconsDir() {
-                return `${this.rootDir}/${this.iconsDirRel}`;
+                return `${api.this.package.rootDir}/${this.iconsDirRel}`;
             },
 
             /**
@@ -565,7 +565,7 @@ export default function (api): IStorageConfig {
              * @name            i18nDir
              * @namespace       config.storage.src
              * @type            String
-             * @default         [config.storage.src.rootDir]/[config.storage.src.i18nDirRel]
+             * @default         [config.storage.package.rootDir]/[config.storage.src.i18nDirRel]
              *
              * Configure where is located the i18n source files
              *
@@ -573,7 +573,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get i18nDir() {
-                return `${this.rootDir}/${this.i18nDirRel}`;
+                return `${api.this.package.rootDir}/${this.i18nDirRel}`;
             },
 
             /**
@@ -595,7 +595,7 @@ export default function (api): IStorageConfig {
              * @name            imgDir
              * @namespace       config.storage.src
              * @type            String
-             * @default         [config.storage.src.rootDir]/[config.storage.src.imgDirRel]
+             * @default         [config.storage.package.rootDir]/[config.storage.src.imgDirRel]
              *
              * Configure where is located the images source files
              *
@@ -603,7 +603,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get imgDir() {
-                return `${this.rootDir}/${this.imgDirRel}`;
+                return `${api.this.package.rootDir}/${this.imgDirRel}`;
             },
 
             /**
@@ -625,7 +625,7 @@ export default function (api): IStorageConfig {
              * @name            pagesDir
              * @namespace       config.storage.src
              * @type            String
-             * @default         [config.storage.src.rootDir]/[config.storage.src.pagesDirRel]
+             * @default         [config.storage.package.rootDir]/[config.storage.src.pagesDirRel]
              *
              * Configure where is located the pages definition source files
              *
@@ -633,7 +633,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get pagesDir() {
-                return `${this.rootDir}/${this.pagesDirRel}`;
+                return `${api.this.package.rootDir}/${this.pagesDirRel}`;
             },
 
             /**
@@ -655,7 +655,7 @@ export default function (api): IStorageConfig {
              * @name            nodesDir
              * @namespace       config.storage.src
              * @type            String
-             * @default         [config.storage.src.rootDir]/[config.storage.src.nodesDirRel]
+             * @default         [config.storage.package.rootDir]/[config.storage.src.nodesDirRel]
              *
              * Configure where is located the nodes definition source files
              *
@@ -663,7 +663,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get nodesDir() {
-                return `${this.rootDir}/${this.nodesDirRel}`;
+                return `${api.this.package.rootDir}/${this.nodesDirRel}`;
             },
 
             /**
@@ -685,7 +685,7 @@ export default function (api): IStorageConfig {
              * @name            publicDir
              * @namespace       config.storage.src
              * @type            String
-             * @default         [config.storage.src.rootDir]/[config.storage.src.publicDirRel]
+             * @default         [config.storage.package.rootDir]/[config.storage.src.publicDirRel]
              *
              * Configure where is located the public source files
              *
@@ -693,7 +693,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get publicDir() {
-                return `${this.rootDir}/${this.publicDirRel}`;
+                return `${api.this.package.rootDir}/${this.publicDirRel}`;
             },
 
             /**
@@ -715,7 +715,7 @@ export default function (api): IStorageConfig {
              * @name            viewsDir
              * @namespace       config.storage.src
              * @type            String
-             * @default         [config.storage.src.rootDir]/[config.storage.src.viewsDirRel]
+             * @default         [config.storage.package.rootDir]/[config.storage.src.viewsDirRel]
              *
              * Configure where is located the views (blade, twig, etc...) source files
              *
@@ -723,7 +723,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get viewsDir() {
-                return `${this.rootDir}/${this.viewsDirRel}`;
+                return `${api.this.package.rootDir}/${this.viewsDirRel}`;
             },
         },
 
@@ -778,7 +778,7 @@ export default function (api): IStorageConfig {
              * @name            jsDir
              * @namespace       config.storage.dist
              * @type            String
-             * @default         [config.storage.dist.rootDir]/[config.storage.dist.jsDirRel]
+             * @default         [config.storage.package.rootDir]/[config.storage.dist.jsDirRel]
              *
              * Configure where is located the javascript/typescript distribution files
              *
@@ -786,7 +786,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get jsDir() {
-                return `${this.rootDir}/${this.jsDirRel}`;
+                return `${api.this.package.rootDir}/${this.jsDirRel}`;
             },
 
             /**
@@ -808,7 +808,7 @@ export default function (api): IStorageConfig {
              * @name            nodeDir
              * @namespace       config.storage.dist
              * @type            String
-             * @default         [config.storage.dist.rootDir]/[config.storage.dist.nodeDirRel]
+             * @default         [config.storage.package.rootDir]/[config.storage.dist.nodeDirRel]
              *
              * Configure where is located the javascript/typescript node distribution files
              *
@@ -816,7 +816,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get nodeDir() {
-                return `${this.rootDir}/${this.nodeDirRel}`;
+                return `${api.this.package.rootDir}/${this.nodeDirRel}`;
             },
 
             /**
@@ -838,7 +838,7 @@ export default function (api): IStorageConfig {
              * @name            cssDir
              * @namespace       config.storage.dist
              * @type            String
-             * @default         [config.storage.dist.rootDir]/[config.storage.dist.cssDirRel]
+             * @default         [config.storage.package.rootDir]/[config.storage.dist.cssDirRel]
              *
              * Configure where is located the css distribution files
              *
@@ -846,7 +846,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get cssDir() {
-                return `${this.rootDir}/${this.cssDirRel}`;
+                return `${api.this.package.rootDir}/${this.cssDirRel}`;
             },
 
             /**
@@ -868,7 +868,7 @@ export default function (api): IStorageConfig {
              * @name            configDir
              * @namespace       config.storage.dist
              * @type            String
-             * @default         [config.storage.dist.rootDir]/[config.storage.dist.configDirRel]
+             * @default         [config.storage.package.rootDir]/[config.storage.dist.configDirRel]
              *
              * Configure where is located the config source files
              *
@@ -876,7 +876,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get configDir() {
-                return `${this.rootDir}/${this.configDirRel}`;
+                return `${api.this.package.rootDir}/${this.configDirRel}`;
             },
 
             /**
@@ -898,7 +898,7 @@ export default function (api): IStorageConfig {
              * @name            docDir
              * @namespace       config.storage.dist
              * @type            String
-             * @default         [config.storage.dist.rootDir]/[config.storage.dist.docDirRel]
+             * @default         [config.storage.package.rootDir]/[config.storage.dist.docDirRel]
              *
              * Configure where is located the doc markdown distribution files
              *
@@ -906,7 +906,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get docDir() {
-                return `${this.rootDir}/${this.docDirRel}`;
+                return `${api.this.package.rootDir}/${this.docDirRel}`;
             },
 
             /**
@@ -928,7 +928,7 @@ export default function (api): IStorageConfig {
              * @name            fontsDir
              * @namespace       config.storage.dist
              * @type            String
-             * @default         [config.storage.dist.rootDir]/[config.storage.dist.fontsDirRel]
+             * @default         [config.storage.package.rootDir]/[config.storage.dist.fontsDirRel]
              *
              * Configure where is located the fonts distribution files
              *
@@ -936,7 +936,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get fontsDir() {
-                return `${this.rootDir}/${this.fontsDirRel}`;
+                return `${api.this.package.rootDir}/${this.fontsDirRel}`;
             },
 
             /**
@@ -958,7 +958,7 @@ export default function (api): IStorageConfig {
              * @name            iconsDir
              * @namespace       config.storage.dist
              * @type            String
-             * @default         [config.storage.dist.rootDir]/[config.storage.dist.iconsDirRel]
+             * @default         [config.storage.package.rootDir]/[config.storage.dist.iconsDirRel]
              *
              * Configure where is located the icons distribution files
              *
@@ -966,7 +966,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get iconsDir() {
-                return `${this.rootDir}/${this.iconsDirRel}`;
+                return `${api.this.package.rootDir}/${this.iconsDirRel}`;
             },
 
             /**
@@ -988,7 +988,7 @@ export default function (api): IStorageConfig {
              * @name            i18nDir
              * @namespace       config.storage.dist
              * @type            String
-             * @default         [config.storage.dist.rootDir]/[config.storage.dist.i18nDirRel]
+             * @default         [config.storage.package.rootDir]/[config.storage.dist.i18nDirRel]
              *
              * Configure where is located the i18n distribution files
              *
@@ -996,7 +996,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get i18nDir() {
-                return `${this.rootDir}/${this.i18nDirRel}`;
+                return `${api.this.package.rootDir}/${this.i18nDirRel}`;
             },
 
             /**
@@ -1018,7 +1018,7 @@ export default function (api): IStorageConfig {
              * @name            imgDir
              * @namespace       config.storage.dist
              * @type            String
-             * @default         [config.storage.dist.rootDir]/[config.storage.dist.imgDirRel]
+             * @default         [config.storage.package.rootDir]/[config.storage.dist.imgDirRel]
              *
              * Configure where is located the images distribution files
              *
@@ -1026,7 +1026,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get imgDir() {
-                return `${this.rootDir}/${this.imgDirRel}`;
+                return `${api.this.package.rootDir}/${this.imgDirRel}`;
             },
 
             /**
@@ -1048,7 +1048,7 @@ export default function (api): IStorageConfig {
              * @name            pagesDir
              * @namespace       config.storage.dist
              * @type            String
-             * @default         [config.storage.dist.rootDir]/[config.storage.dist.pagesDirRel]
+             * @default         [config.storage.package.rootDir]/[config.storage.dist.pagesDirRel]
              *
              * Configure where is located the pages definition distribution files
              *
@@ -1056,7 +1056,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get pagesDir() {
-                return `${this.rootDir}/${this.pagesDirRel}`;
+                return `${api.this.package.rootDir}/${this.pagesDirRel}`;
             },
 
             /**
@@ -1078,7 +1078,7 @@ export default function (api): IStorageConfig {
              * @name            nodesDir
              * @namespace       config.storage.dist
              * @type            String
-             * @default         [config.storage.dist.rootDir]/[config.storage.dist.nodesDirRel]
+             * @default         [config.storage.package.rootDir]/[config.storage.dist.nodesDirRel]
              *
              * Configure where is located the nodes definition source files
              *
@@ -1086,7 +1086,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get nodesDir() {
-                return `${this.rootDir}/${this.nodesDirRel}`;
+                return `${api.this.package.rootDir}/${this.nodesDirRel}`;
             },
 
             /**
@@ -1108,7 +1108,7 @@ export default function (api): IStorageConfig {
              * @name            publicDir
              * @namespace       config.storage.dist
              * @type            String
-             * @default         [config.storage.dist.rootDir]/[config.storage.dist.publicDirRel]
+             * @default         [config.storage.package.rootDir]/[config.storage.dist.publicDirRel]
              *
              * Configure where is located the public source files
              *
@@ -1116,7 +1116,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get publicDir() {
-                return `${this.rootDir}/${this.publicDirRel}`;
+                return `${api.this.package.rootDir}/${this.publicDirRel}`;
             },
 
             /**
@@ -1138,7 +1138,7 @@ export default function (api): IStorageConfig {
              * @name            viewsDir
              * @namespace       config.storage.dist
              * @type            String
-             * @default         [config.storage.dist.rootDir]/[config.storage.dist.viewsDirRel]
+             * @default         [config.storage.package.rootDir]/[config.storage.dist.viewsDirRel]
              *
              * Configure where is located the views (blade, twig, etc...) distribution files
              *
@@ -1146,7 +1146,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get viewsDir() {
-                return `${this.rootDir}/${this.viewsDirRel}`;
+                return `${api.this.package.rootDiry}/${this.viewsDirRel}`;
             },
         },
 

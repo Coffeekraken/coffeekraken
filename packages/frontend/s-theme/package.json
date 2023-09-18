@@ -6,9 +6,6 @@
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@builder.io/partytown": "^0.7.4",
-        "@coffeekraken/s-class": "^2.0.0-beta.1",
-        "@coffeekraken/s-classmap": "^2.0.0-beta.1",
         "@coffeekraken/s-color": "^2.0.0-beta.1",
         "@coffeekraken/s-env": "^2.0.0-beta.1",
         "@coffeekraken/s-event-emitter": "^2.0.0-beta.1",

@@ -14,11 +14,8 @@
         "@coffeekraken/s-form-validate-feature": "^2.0.0-beta.1",
         "@coffeekraken/s-inline-feature": "^2.0.0-beta.1",
         "@coffeekraken/s-lazy-feature": "^2.0.0-beta.1",
-        "@coffeekraken/s-panel-component": "^2.0.0-beta.1",
-        "@coffeekraken/s-range-component": "^2.0.0-beta.1",
         "@coffeekraken/s-refocus-feature": "^2.0.0-beta.1",
         "@coffeekraken/s-scroll-component": "^2.0.0-beta.1",
-        "@coffeekraken/s-slider-component": "^2.0.0-beta.1",
         "@coffeekraken/s-sugar-feature": "^2.0.0-beta.1"
     },
     "main": "dist/pkg/cjs/js/exports.js",

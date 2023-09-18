@@ -9,6 +9,7 @@
         "@coffeekraken/s-class": "^2.0.0-beta.1",
         "@coffeekraken/s-i18n": "^2.0.0-beta.1",
         "@coffeekraken/s-interface": "^2.0.0-beta.1",
+        "@coffeekraken/s-validator": "^2.0.0-beta.1",
         "@coffeekraken/sugar": "^2.0.0-beta.1",
         "@specim3n/types": "1.0.0-alpha.1"
     },

@@ -477,6 +477,7 @@ export default class SPackage extends __SClass {
                     {
                         shell: true,
                         cwd: packageRoot,
+                        stdio: 'inherit',
                     },
                 );
 
@@ -565,7 +566,7 @@ export default class SPackage extends __SClass {
 
                 const unusedDependencies: string[] = [];
                 for (let [dependency, version] of Object.entries(
-                    packageJson.dependencies,
+                    packageJson.dependencies ?? {},
                 )) {
                     if (!dependencies.includes(dependency)) {
                         unusedDependencies.push(dependency);
@@ -682,7 +683,10 @@ export default class SPackage extends __SClass {
                         }
 
                         // check if the dependency is well defines in the package.json file
-                        if (!packageJson.dependencies?.[moduleName]) {
+                        if (
+                            !packageJson.dependencies?.[moduleName] &&
+                            !packageJson.devDependencies?.[moduleName]
+                        ) {
                             let addedFromPackagesMap = false;
 
                             // check packages map
@@ -763,6 +767,10 @@ export default class SPackage extends __SClass {
                             });
                         } catch (e) {
                             return reject(e);
+                        }
+
+                        if (packageJson.name === '@coffeekraken/s-dashboard') {
+                            process.exit();
                         }
 
                         result.installedPackages = missingPackages;

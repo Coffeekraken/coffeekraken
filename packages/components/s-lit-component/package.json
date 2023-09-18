@@ -10,11 +10,9 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-classmap": "^2.0.0-beta.1",
         "@coffeekraken/s-component-utils": "^2.0.0-beta.1",
         "@coffeekraken/s-interface": "^2.0.0-beta.1",
         "@coffeekraken/sugar": "^2.0.0-beta.1",
-        "fastdom": "^1.0.11",
         "lit": "^2.2.8"
     },
     "main": "dist/pkg/cjs/js/exports.js",

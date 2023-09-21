@@ -1,0 +1,13 @@
+#get-started {
+    padding-block: sugar.padding(100);
+
+    ._layout {
+        @sugar.layout ('1 1 2 2 2');
+        gap: sugar.margin(50);
+
+        @sugar.media <=tablet {
+            @sugar.layout ('1 _ 2');
+            gap: sugar.margin(50);
+        }
+    }
+}

@@ -55,7 +55,7 @@
                     "title": "Placeholder",
                     "description": "Placeholder of field"
                 },
-                "attributes": "@sugar.views.props.attributes",
+                "attributes": "@sugar.views.props.attributes"
             }
         },
         "action": {

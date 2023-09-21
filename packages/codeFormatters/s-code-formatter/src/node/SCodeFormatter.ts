@@ -233,7 +233,7 @@ class SCodeFormatter extends __SClass {
 
             // resolve with formatted code
             // @ts-ignore
-            resolve(formatResult[0].raw);
+            resolve(formatResult[0]?.raw);
         });
     }
 

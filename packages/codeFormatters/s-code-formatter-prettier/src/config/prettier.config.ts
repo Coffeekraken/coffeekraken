@@ -1,5 +1,6 @@
 import { __loadConfigFile } from '@coffeekraken/sugar/load';
 import { __deepMerge } from '@coffeekraken/sugar/object';
+import __prettierPluginSh from 'prettier-plugin-sh';
 
 export async function preprocess(api) {
     const config =

@@ -1,0 +1,1 @@
+.s-shape-default{--s-shape:calc(5px * var(--s-scale, 1) * var(--s-scale-global, 1))}.s-shape-square{--s-shape:0}.s-shape-pill{--s-shape:99999px}

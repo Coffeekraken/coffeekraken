@@ -23,7 +23,8 @@
         "compression": "^1.7.4",
         "cors": "^2.8.5",
         "express": "^4.18.2",
-        "lit": "^2.2.8"
+        "lit": "^2.2.8",
+        "prettier-plugin-sh": "^0.13.1"
     },
     "main": "dist/pkg/cjs/js/exports.js",
     "module": "dist/pkg/esm/js/exports.js",

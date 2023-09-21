@@ -1,0 +1,25 @@
+.s-code-example {
+    &_code,
+    code {
+        background: none !important;
+    }
+
+    &_content {
+        border: 1px solid sugar.color(base, border, --alpha 0.2);
+    }
+
+    &_tab {
+        background: none !important;
+        color: sugar.color(base) !important;
+    }
+
+    &_more-bar {
+        &:before {
+            display: none;
+        }
+    }
+
+    .s-clipboard-copy .icon-copy * {
+        fill: sugar.color(base);
+    }
+}

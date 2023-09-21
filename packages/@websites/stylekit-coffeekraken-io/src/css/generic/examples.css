@@ -1,0 +1,56 @@
+.examples {
+    display: flex;
+
+    @sugar.media <=tablet {
+        flex-direction: column;
+    }
+
+    ._sidebar {
+        width: 400px;
+        flex-shrink: 0;
+        @sugar.border.radius();
+
+        @sugar.media <=tablet {
+            display: flex;
+            width: 100%;
+            overflow-x: auto;
+            @sugar.scrollbar;
+        }
+
+        a {
+            display: block;
+            padding: sugar.padding(30) sugar.padding(30);
+            white-space: nowrap;
+            @sugar.transition;
+            @sugar.focus.outline (accent);
+
+            &:hover {
+            }
+            &:active,
+            &.active {
+                color: sugar.color(accent);
+            }
+
+            i {
+                margin-inline-end: sugar.margin(10);
+            }
+        }
+    }
+
+    ._content {
+        flex-grow: 1;
+    }
+
+    ._code {
+        display: none;
+
+        &.active {
+            display: block;
+        }
+
+        .s-code-example_tabs,
+        .s-code-example_toolbar {
+            display: none;
+        }
+    }
+}

@@ -61,18 +61,16 @@ class SSpecs
      */
     public function __construct($settings = [])
     {
-        $this->settings = \Sugar\object\deepMerge(
-            [
-                'namespaces' => [],
-                'sFrontspecSettings' => [],
-                'read' => [
-                    'metas' => true,
-                    'models' => true,
-                ],
-                'previewUrl' => null,
+        $defaultSettings = (object) [
+            'namespaces' => [],
+            'sFrontspecSettings' => [],
+            'read' => [
+                'metas' => true,
+                'models' => true,
             ],
-            $settings
-        );
+            'previewUrl' => null,
+        ];
+        $this->settings = \Sugar\object\deepMerge($defaultSettings, $settings);
 
         $frontspec = new \SFrontspec($this->settings->sFrontspecSettings);
         $frontspecJson = $frontspec->read();
@@ -302,13 +300,28 @@ class SSpecs
         // make sure we have an object
         $specJson = \Sugar\convert\toObject($specJson);
 
+        if (isset($specJson->extends)) {
+            $specs = $this->read($specJson->extends, [
+                'metas' => false,
+                'models' => false,
+            ]);
+            $specJson = \Sugar\object\deepMerge($specJson, $specs);
+        }
+
         // traverse each values to resolve them if needed
         $specJson = \Sugar\object\deepMap($specJson, function (
             $p,
             $v,
             &$object
         ) use ($specJson) {
-            return $this->resolve($p, $v, $object, $specJson);
+            if (is_string($v) && str_starts_with($v, '@')) {
+                $specs = $this->read(str_replace('@', '', $v), [
+                    'metas' => false,
+                    'models' => false,
+                ]);
+                return $specs;
+            }
+            return $v;
         });
 
         // check if we have a ".preview.png" file alongside the spec file
@@ -399,68 +412,5 @@ class SSpecs
 
         // return the getted specJson
         return $specJson;
-    }
-
-    /**
-     * This method take a value (string, boolean, etc...) and try to resolve it
-     * if it is something like "@this.props...", or "@sugar.views...", etc...
-     */
-    private function resolve($prop, $value, &$object, $specJson)
-    {
-        $newValue = $value;
-
-        if ($prop === 'extends') {
-            $spec = \Sugar\convert\toObject($this->read($value));
-
-            foreach ($spec as $key => $val) {
-                if ($key === 'extends') {
-                    unset($object->{$key});
-                } elseif (isset($spec->{$key})) {
-                    $mergeable =
-                        (is_array($val) || is_object($val)) &&
-                        (is_array(@$object->{$key}) ||
-                            is_object(@$object->{$key}));
-
-                    if ($mergeable) {
-                        $object->{$key} = Sugar\object\deepMerge(
-                            $spec->{$key},
-                            isset($object->{$key})
-                                ? $object->{$key}
-                                : (object) []
-                        );
-                    } else {
-                        $object->{$key} = $val;
-                    }
-                } else {
-                    $object->{$key} = $val;
-                }
-            }
-
-            return -1;
-        }
-
-        if (is_string($value)) {
-            if (str_starts_with($value, '@this')) {
-                $internalDotPath = str_replace('@this.', '', $value);
-                $newValue = \Sugar\ar\get($specJson, $internalDotPath);
-                if (is_array($newValue) || is_object($newValue)) {
-                    $newValue = \Sugar\object\deepMap($newValue, function (
-                        $p,
-                        $v,
-                        &$obj
-                    ) use ($newValue) {
-                        return $this->resolve($p, $v, $obj, $newValue);
-                    });
-                }
-            } elseif (str_starts_with($value, '@')) {
-                $dotPath = str_replace('@', '', $value);
-                $spec = $this->read($dotPath, [
-                    'metas' => false,
-                    'models' => false,
-                ]);
-                $newValue = $spec;
-            }
-        }
-        return $newValue;
     }
 }

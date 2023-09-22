@@ -55,7 +55,6 @@ function deepMap(&$value, $callback, $prop = null, &$object = null)
     } else {
         $value = call_user_func_array($callback, [$prop, &$value, &$object]);
         if (is_int($value) && $value == -1) {
-            $object->$prop = 'CCCC';
             unset($object->$prop);
         }
     }

@@ -67,9 +67,9 @@
         transform: translateY(-50%) scale(1);
         user-select: none;
         pointer-events: none;
-        filter: drop-shadow(
+        /* filter: drop-shadow(
             150px 100px 15px sugar.color(main, background, --darken 10)
-        );
+        ); */
         @sugar.transition;
 
         @sugar.media <=1000 {

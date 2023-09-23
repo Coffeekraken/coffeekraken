@@ -193,6 +193,34 @@ class SSpecs
         return $results;
     }
 
+    public function resolve($specJson)
+    {
+        if (isset($specJson->extends)) {
+            $specs = $this->read($specJson->extends, [
+                'metas' => false,
+                'models' => false,
+            ]);
+            unset($specJson->extends);
+            $specJson = \Sugar\object\deepMerge($specs, $specJson);
+        }
+
+        foreach ($specJson as $key => $value) {
+            if (is_object($value) || is_array($value)) {
+                $specJson->{$key} = $this->resolve($value);
+            }
+
+            if (is_string($value) && str_starts_with($value, '@')) {
+                $specs = $this->read(str_replace('@', '', $value), [
+                    'metas' => false,
+                    'models' => false,
+                ]);
+                $specJson->{$key} = $specs;
+            }
+        }
+
+        return $specJson;
+    }
+
     /**
      * @name            read
      * @type            Function
@@ -300,29 +328,8 @@ class SSpecs
         // make sure we have an object
         $specJson = \Sugar\convert\toObject($specJson);
 
-        if (isset($specJson->extends)) {
-            $specs = $this->read($specJson->extends, [
-                'metas' => false,
-                'models' => false,
-            ]);
-            $specJson = \Sugar\object\deepMerge($specJson, $specs);
-        }
-
-        // traverse each values to resolve them if needed
-        $specJson = \Sugar\object\deepMap($specJson, function (
-            $p,
-            $v,
-            &$object
-        ) use ($specJson) {
-            if (is_string($v) && str_starts_with($v, '@')) {
-                $specs = $this->read(str_replace('@', '', $v), [
-                    'metas' => false,
-                    'models' => false,
-                ]);
-                return $specs;
-            }
-            return $v;
-        });
+        // resolve extends and "@" references
+        $specJson = $this->resolve($specJson);
 
         // check if we have a ".preview.png" file alongside the spec file
         $potentialPreviewUrl = str_replace(

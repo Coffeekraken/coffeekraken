@@ -86,9 +86,9 @@ export default function ({
         * 
         * @example        html          Simple flex grid
         * <div class="s-flex s-gap:40">
-        *   <div class="s-ratio:16-9 s-flex-item:grow s-radius s-p:30 s-bg:main-surface">1</div>
-        *   <div class="s-ratio:16-9 s-flex-item:grow s-radius s-p:30 s-bg:main-surface">2</div>
-        *   <div class="s-ratio:16-9 s-flex-item:grow s-radius s-p:30 s-bg:main-surface">3</div>
+        *   <div class="s-ratio:16-9 s-grow s-radius s-p:30 s-bg:main-surface">1</div>
+        *   <div class="s-ratio:16-9 s-grow s-radius s-p:30 s-bg:main-surface">2</div>
+        *   <div class="s-ratio:16-9 s-grow s-radius s-p:30 s-bg:main-surface">3</div>
         * </div>
         * 
         * @example        html          Simple grid

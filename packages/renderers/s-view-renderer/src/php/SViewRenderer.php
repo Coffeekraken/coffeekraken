@@ -412,7 +412,7 @@ class SViewRenderer
             )
         );
 
-        return $layoutRenderResult;
+        return \Sugar\html\expandPleasantCssClassnames($layoutRenderResult);
     }
 
     /**

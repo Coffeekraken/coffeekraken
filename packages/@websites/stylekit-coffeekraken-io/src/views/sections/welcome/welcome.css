@@ -24,12 +24,8 @@
 }
 
 #homepage-welcome {
-    height: calc(100vh - 200px);
-    min-height: 800px;
     text-align: left;
     position: relative;
-    display: flex;
-    align-items: center;
     z-index: 10;
 
     .s-logo-coffeekraken-picto {
@@ -44,9 +40,15 @@
         width: 100%;
     }
 
-    ._logo {
-        height: 30px;
-        width: 30px;
+    ._title  {
+        display: flex;
+        gap: sugar.margin(30);
+        align-items: center;
+    }
+
+    .s-logo {
+        height: 40px;
+        margin-block-end: sugar.margin(30);
     }
 
     ._content {

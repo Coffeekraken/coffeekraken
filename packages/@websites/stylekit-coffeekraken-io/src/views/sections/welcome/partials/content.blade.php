@@ -1,9 +1,13 @@
-<h1 class="s-typo:h3:bold s-mbe:30">
-    Stylekit<br />
-    <span class="s-tc:complementary">Sugar</span> plugin
-</h1>
 
-<h2 class="s-typo:h5:bold s-mbe:50">
+<div class="_title">
+    @include ('sugar.logos.coffeekraken.picto')
+
+    <h1 class="s-typo:h3:bold s-mbe:30">
+        <span class="s-tc:complementary">Sugar</span> css
+    </h1>
+</div>
+
+<h2 class="s-typo:h2:bold s-mbe:50">
     The frontend <span class="s-tc:accent">CSS toolkit</span><br />that make our days better...
 </h2>
 

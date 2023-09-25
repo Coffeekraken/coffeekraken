@@ -101,7 +101,7 @@ export default class CKRatings extends __SLitComponent {
     render() {
         return html`
             <div class="s-flex:align-bottom">
-                <div class="s-flex-item:grow">
+                <div class="s-grow">
                     <i
                         @click=${() => {
                             this.state.state = 'idle';
@@ -130,7 +130,7 @@ export default class CKRatings extends __SLitComponent {
                     : ''}
             </div>
 
-            <h2 class="s-typo:h4 s-flex-item:grow s-mbe:30">
+            <h2 class="s-typo:h4 s-grow s-mbe:30">
                 We'd <span class="s-tc:accent">love</span><br />to hear
                 <span class="s-tc:complementary">from you</span>!
             </h2>
@@ -155,12 +155,12 @@ export default class CKRatings extends __SLitComponent {
                               <i class="s-icon:google s-mie:10"></i> Sign in
                               with Google
                           </button>
-                          <div class="s-flex-item:grow">
+                          <div class="s-grow">
                               ${this.state.user.pictureUrl
                                   ? html`
                                         <div class="s-flex:align-center">
                                             <div
-                                                class="s-flex-item:grow s-text:right s-font:bold s-pi:20"
+                                                class="s-grow s-text:right s-font:bold s-pi:20"
                                             >
                                                 ${this.state.user.name}
                                             </div>
@@ -188,7 +188,7 @@ export default class CKRatings extends __SLitComponent {
                       >
                           <label class="s-label:block s-mbe:30">
                               <span class="s-flex">
-                                  <div class="s-flex-item:grow">Comment</div>
+                                  <div class="s-grow">Comment</div>
                                   <div>
                                       <span class="s-font:bold"
                                           >${this.state.comment.length}</span

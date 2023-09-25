@@ -12,8 +12,8 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Generate the button classes
  *
- * @param       {('solid'|'gradient'|'outline'|'text'|'loading')[]}                           [lnfs=['solid','gradient','outline','text','loading']]         The style(s) you want to generate
- * @param       {'solid'|'gradient'|'outline'|'text'|'loading'}                [defaultLnf='theme.ui.button.defaultLnf']           The default style you want
+ * @param       {('solid'|'outline'|'text'|'loading')[]}                           [lnfs=['solid','outline','text','loading']]         The style(s) you want to generate
+ * @param       {'solid'|'outline'|'text'|'loading'}                [defaultLnf='theme.ui.button.defaultLnf']           The default style you want
  * @param       {('bare'|'lnf'|'vr'|'tf)[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
@@ -31,12 +31,12 @@ class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
         return {
             lnfs: {
                 type: 'String[]',
-                values: ['solid', 'gradient', 'outline', 'text', 'loading'],
-                default: ['solid', 'gradient', 'outline', 'text', 'loading'],
+                values: ['solid', 'outline', 'text', 'loading'],
+                default: ['solid', 'outline', 'text', 'loading'],
             },
             defaultLnf: {
                 type: 'String',
-                values: ['solid', 'gradient', 'outline', 'text', 'loading'],
+                values: ['solid', 'outline', 'text', 'loading'],
                 default: __STheme.get('ui.button.defaultLnf') ?? 'solid',
             },
             scope: {
@@ -52,8 +52,8 @@ class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiButtonClassesParams {
-    lnfs: ('solid' | 'gradient' | 'outline' | 'text' | 'loading')[];
-    defaultLnf: 'solid' | 'gradient' | 'outline' | 'text' | 'loading';
+    lnfs: ('solid' | 'outline' | 'text' | 'loading')[];
+    defaultLnf: 'solid' | 'outline' | 'text' | 'loading';
     scope: ('bare' | 'lnf' | 'bare' | 'vr' | 'tf')[];
 }
 
@@ -73,7 +73,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiButtonClassesParams = {
-        lnfs: ['solid', 'gradient', 'outline', 'text', 'loading'],
+        lnfs: ['solid', 'outline', 'text', 'loading'],
         defaultLnf: 'solid',
         scope: ['bare', 'lnf', 'vr', 'tf'],
         ...params,
@@ -123,43 +123,45 @@ export default function ({
         * 
         ${finalParams.lnfs
             .map((lnf) => {
-                return ` * @example        html       ${lnf} lnf ${
-                    finalParams.defaultLnf === lnf
-                        ? '<span class="s-badge:outline s-scale:05">default</span>'
-                        : ''
-                }
-            *   <a tabindex="0" class="s-btn:${
+                return ` * @example        html       ${lnf} lnf
+            * <div class="s-flex s-gap:20">
+            *   <a class="s-btn:${
                 finalParams.defaultLnf === lnf ? '' : `:${lnf}`
-            } s-mie:20 s-mbe:20"><span>Click me!</span></a>
-            *   <a tabindex="0" class="s-btn:${
+            }">Click me!</button>
+            *   <a class="s-btn:${
                 finalParams.defaultLnf === lnf ? '' : `:${lnf}`
-            } s-mie:20 s-mbe:20 s-color:accent"><span>Click me!</span></a>
-            *   <a tabindex="0" class="s-btn:${
+            } s-color:accent">Click me!</a>
+            *   <a class="s-btn:${
                 finalParams.defaultLnf === lnf ? '' : `:${lnf}`
-            } s-mie:20 s-mbe:20 s-color:complementary"><span>Click me!</span></a>
-            *   <a tabindex="0" class="s-btn:${
+            } s-color:complementary">Click me!</a>
+            *   <a class="s-btn:${
                 finalParams.defaultLnf === lnf ? '' : `:${lnf}`
-            } s-mie:20 s-mbe:20 s-color:info"><span>Click me!</span></a>
-            *   <a tabindex="0" class="s-btn:${
+            } s-color:info">Click me!</a>
+            *   <a class="s-btn:${
                 finalParams.defaultLnf === lnf ? '' : `:${lnf}`
-            } s-mie:20 s-mbe:20 s-color:error"><span>Click me!</span></a>
-            *   <a tabindex="0" disabled class="s-btn:${
+            } s-color:error">Click me!</a>
+            *   <a disabled class="s-btn:${
                 finalParams.defaultLnf === lnf ? '' : `:${lnf}`
-            } s-mie:20 s-mbe:20"><span>Click me!</span></a>
+            }">Click me!</a>
+            * </div>
             * `;
             })
             .join('\n')}
         * 
         * @example       html       Shapes
-        *   <a tabindex="0" class="s-btn s-shape:default s-mie:20">Click me!</a>
-        *   <a tabindex="0" class="s-btn s-shape:pill s-mie:20">Click me!</a>
-        *   <a tabindex="0" class="s-btn s-shape:square s-mie:20">Click me!</a>
+        * <div class="s-flex s-gap:20">
+        *   <a class="s-btn">Click me!</a>
+        *   <a class="s-btn s-shape:pill">Click me!</a>
+        *   <a class="s-btn s-shape:square">Click me!</a>
+        * </div>
         * 
         * @example       html       Scales
-        *   <a tabindex="0" class="s-btn s-scale:07 s-mie:20">Click me!</a>
-        *   <a tabindex="0" class="s-btn s-scale:1 s-mie:20">Click me!</a>
-        *   <a tabindex="0" class="s-btn s-scale:13 s-mie:20">Click me!</a>
-        *   <a tabindex="0" class="s-btn s-scale:16 s-mie:20">Click me!</a>
+        * <div class="s-flex s-gap:20">
+        *   <a class="s-btn s-scale:07">Click me!</a>
+        *   <a class="s-btn s-scale:1">Click me!</a>
+        *   <a class="s-btn s-scale:13">Click me!</a>
+        *   <a class="s-btn s-scale:16">Click me!</a>
+        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -267,7 +269,7 @@ export default function ({
             * 
             * @example        html
             * <div class="s-format:text">
-            *   <button>
+            *   <a>
             *       Hello world
             *   </button>
             * </div>
@@ -301,15 +303,15 @@ export default function ({
             * 
             * @example        html
             * <div class="s-rhythm:vertical">
-            *   <button class="s-btn">
+            *   <a class="s-btn">
             *       Hello world
             *   </button>
             *   <br />
-            *   <button class="s-btn">
+            *   <a class="s-btn">
             *       Hello world
             *   </button>
             *   <br />
-            *   <button class="s-btn">
+            *   <a class="s-btn">
             *       Hello world
             *   </button>
             * </div>

@@ -1,4 +1,4 @@
-<template s-lazy id="examples">
+{{-- <template s-lazy id="examples"> --}}
 
     <section class="section">
 
@@ -7,11 +7,11 @@
             <div class="_layout s-mbe:50">
                 
                 <div>
-                    <h2 class="s-typo:h3 s-mbe:30 _title">
+                    <h2 class="s-typo:h3 s-mbe:30 s-tc:complementary">
                         Examples
                     </h2>
                     <p class="s-typo:h5 s-mbe:30">
-                        Here are some examples to <span class="s-tc:complementary">showcase the power</span> of our sugar css plugin.
+                        Here are some examples to <span class="s-tc:accent">showcase the power</span> of our sugar css plugin.
                     </p>
                 </div>
 
@@ -50,7 +50,7 @@
 
                     <div class="_code" id="example-sugar">
 
-                            <s-code-example>
+                            <s-code-example lines="100">
                                 <template language="css">
     /**
     &nbsp;* Init sugar. This will import a reset css and print the
@@ -65,7 +65,7 @@
     &nbsp;* See the API section for more details...
     &nbsp;*/
     @sugar.classes();
-    @sugar.flex.classes(); /&nbsp;* import only the flex helper classes */
+    @sugar.flex.classes(); /* import only the flex helper classes */
 
     /**
     &nbsp;* Generate media scoped classes to use like "@mobile s-pbe:100", etc...
@@ -81,7 +81,7 @@
                     </div>
 
                     <div class="_code" id="example-index">
-                        <s-code-example>
+                        <s-code-example no-more>
                             <template language="css">
     &nbsp;
     /*
@@ -185,19 +185,24 @@
                             <template language="css">
     /**
     &nbsp;* Colors in a design toolkit is a central part.
-    &nbsp;* Sugar let you define your own colors through the .sugar/themeColor.config.ts
+    &nbsp;* Sugar let you define your own colors through
+    &nbsp;* the .sugar/themeColor.config.ts
     &nbsp;* and using them with the convinient sugar.color function.
-    &nbsp;* Default colors available are: "main", "accent", "complementary", "success", "warning",
+    &nbsp;* Default colors available are: "main", "accent",
+    &nbsp;* "complementary", "success", "warning",
     &nbsp;* "error", "info" and "current" (more on this one) bellow.
     &nbsp;*/
     .my-element {
     &nbsp;&nbsp;&nbsp;&nbsp;background: sugar.color(main);
+    }
 
     &nbsp;&nbsp;&nbsp;&nbsp;/**
                             * You can use modifiers like "lighten", "darken", "saturate", "desaturate",
                             * "spin" and "alpha" to tweak your color
                             */
+    .my-element {
     &nbsp;&nbsp;&nbsp;&nbsp;color: sugar.color(main, --alpha 0.3 --lighten 10); 
+    }
 
     &nbsp;&nbsp;&nbsp;&nbsp;/**
                             * For more convinience, some modifier "presets" are available like "text",
@@ -205,15 +210,18 @@
                             * These presets are defined and can be customized in the
                             * .sugar/themeColorSchema(Light|Dark).config.ts
                             */
+    .my-element {
     &nbsp;&nbsp;&nbsp;&nbsp;color: sugar.color(accent, text);
+    }
 
-    &nbsp;&nbsp;&nbsp;&nbsp;/**
+    /**
                             * The "current" color act like the "currentColor" css native value, but
                             * difference that it will have the value of the color defined with the
                             * @sugar.color mixin.
                             * It uses variables under the hood so the value will be propagated down
                             * just like any any other variables.
                             */
+    .my-element {
     &nbsp;&nbsp;&nbsp;&nbsp;@sugar.color(accent);
     &nbsp;&nbsp;&nbsp;&nbsp;color: sugar.color(current);
     }                         
@@ -249,28 +257,18 @@
                     <div class="_code" id="example-html">
                         <s-code-example>
                             <template language="html">
-    <!--
-    * applying our layout generated in the layout.css example
-    *-->
+    <!-- -->
+    <!-- Applying the layout described in the layout.css file -->
     <div class="my-layout">
-    &nbsp;&nbsp;&nbsp;&nbsp;<div>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<!-- area 1 -->
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h1 class="s-typo:h1 s-mbe:30">
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hello world
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<p class="s-typo:p">
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sunt cillum irure...
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-    &nbsp;&nbsp;&nbsp;&nbsp;</div>
-    &nbsp;&nbsp;&nbsp;&nbsp;<div>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<!-- area 2 -->
-    &nbsp;&nbsp;&nbsp;&nbsp;</div>
-    &nbsp;&nbsp;&nbsp;&nbsp;<div>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<!-- area 3 -->
-    &nbsp;&nbsp;&nbsp;&nbsp;</div>
-    &nbsp;&nbsp;&nbsp;&nbsp;<div>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<!-- area 4 -->
-    &nbsp;&nbsp;&nbsp;&nbsp;</div>
+        <div><!-- area 1 -->
+            <h1 class="s-typo:h1 s-mbe:30">Hello world</h1>
+            <p class="s-typo:p">sunt cillum irure...</p>
+        </div>
+        <div><!-- area 2 -->
+            <i class="s-icon:github"></i>
+        </div>
+        <div><!-- area 3 --></div>
+        <div><!-- area 4 --></div>
     </div>                   
                             </template>
                         </s-code-example>
@@ -284,4 +282,4 @@
 
     </section>
 
-</template>
+{{-- </template> --}}

@@ -53,7 +53,7 @@ __sFiltrableInputDefine({
                             <div class="ck-search__list-item">
                                 <div class="s-flex s-mbe:10">
                                     <h4
-                                        class="ck-search__list-item-title s-typo:bold s-tc:accent s-flex-item:grow"
+                                        class="ck-search__list-item-title s-typo:bold s-tc:accent s-grow"
                                     >
                                         ${unsafeHTML(item.name)}
                                     </h4>
@@ -69,7 +69,7 @@ __sFiltrableInputDefine({
                             <div class="ck-search__list-item">
                                 <div class="s-flex s-mbe:10">
                                     <h4
-                                        class="ck-search__list-item-title s-typo:bold s-tc:accent s-flex-item:grow"
+                                        class="ck-search__list-item-title s-typo:bold s-tc:accent s-grow"
                                     >
                                         ${unsafeHTML(item.name)}
                                     </h4>

@@ -1,47 +1,23 @@
 #header {
     position: fixed;
-    top: 0;
-    left: 50%;
-    width: calc(1280px + sugar.padding(30) * 2);
-    max-width: 100vw;
+    top: sugar.margin(10);
+    left: sugar.margin(10);
     z-index: 200;
-    height: 80px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     background: sugar.color(main, background);
     padding-inline: 0;
 
-    transform: translateX(-50%);
     @sugar.transition;
-
-    @sugar.media tablet {
-        padding-inline: sugar.padding(50) sugar.padding(30);
-    }
-
-    @sugar.media mobile {
-        padding-inline: sugar.padding(30) sugar.padding(10);
-        width: 100%;
-    }
 
     body:has(.s-doc_explorer:focus, .s-doc_explorer:focus-within) &,
     .scrolled.scroll-down & {
-        transform: translate(-50%, -100%);
-    }
-
-    @sugar.wireframe {
-        @sugar.wireframe.border;
-        @sugar.wireframe.background;
     }
 
     ._nav {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        flex-grow: 1;
-
         ._main-link {
-            padding: sugar.padding(20);
-            font-size: sugar.font.size(30);
+            display: none;
+            font-size: sugar.font.size(20);
             @sugar.focus.outline;
 
             &.active {
@@ -52,29 +28,15 @@
 
     ._links {
         display: flex;
-        justify-content: space-around;
-        align-items: center;
-        flex-grow: 1;
-        padding-inline: sugar.padding(50);
-
-        @sugar.media mobile {
-            display: none;
-        }
-    }
-
-    .s-container {
-        flex-grow: 1;
-        position: relative;
-        top: 5px;
+        flex-direction: column;
     }
 
     ._logo {
         flex-grow: 0;
-        margin-inline-end: sugar.margin(20);
-
-        @sugar.media mobile {
-            flex-grow: 1;
-        }
+        background: sugar.color(main, surface);
+        padding: sugar.margin(20);
+        padding-inline-end: sugar.margin(30);
+        display: inline-block;
 
         a {
             @sugar.focus.outline accent;
@@ -82,7 +44,7 @@
 
         svg {
             height: 40px;
-            width: 150px;
+            width: 40px;
             display: inline-block;
 
             @sugar.media mobile {
@@ -92,19 +54,6 @@
 
         svg .main {
             fill: sugar.color(main, --darken 10);
-        }
-        svg .accent {
-            fill: sugar.color(accent);
-        }
-    }
-
-    ._menu {
-        flex-grow: 0;
-    }
-
-    @sugar.theme (dark) {
-        svg .main {
-            fill: sugar.color(main, text);
         }
         svg .accent {
             fill: sugar.color(accent);

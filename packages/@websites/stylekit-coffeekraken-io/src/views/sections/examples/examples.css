@@ -1,6 +1,4 @@
 #examples {
-    padding-block: sugar.padding(100);
-
     ._layout {
         @sugar.layout ('1 2 2');
         gap: sugar.margin(50);

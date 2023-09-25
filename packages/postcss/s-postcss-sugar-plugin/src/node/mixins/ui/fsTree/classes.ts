@@ -3,13 +3,13 @@ import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 /**
- * @name          classes
- * @as          @sugar.ui.fsTree.classes
- * @namespace     node.mixin.ui.fsTree
- * @type               PostcssMixin
- * @interface     ./classes          interface
- * @platform      postcss
- * @status        beta
+ * @___name          classes
+ * @___as          @sugar.ui.fsTree.classes
+ * @___namespace     node.mixin.ui.fsTree
+ * @___type               PostcssMixin
+ * @___interface     ./classes          interface
+ * @___platform      postcss
+ * @___status        beta
  *
  * Generate the fsTree classes
  *
@@ -131,12 +131,12 @@ export default function ({
     vars.comment(
         () => `
       /**
-        * @name          Fs Tree
-        * @namespace          sugar.style.ui.fsTree
-        * @type               Styleguide
-        * @menu           Styleguide / UI        /styleguide/ui/fs-tree
-        * @platform       css
-        * @status       beta
+        * @___name          Fs Tree
+        * @___namespace          sugar.style.ui.fsTree
+        * @___type               Styleguide
+        * @___menu           Styleguide / UI        /styleguide/ui/fs-tree
+        * @___platform       css
+        * @___status       beta
         * 
         * These classes allows you to display a nice filesystem tree
         * 
@@ -183,9 +183,9 @@ export default function ({
     if (finalParams.scope.includes('bare')) {
         vars.comment(
             () => `/**
-            * @name           s-fs-tree
-            * @namespace          sugar.style.ui.fsTree
-            * @type           CssClass
+            * @___name           s-fs-tree
+            * @___namespace          sugar.style.ui.fsTree
+            * @___type           CssClass
             * 
             * This class represent an "<yellow>${__STheme.get(
                 'ui.fsTree.defaultLnf',
@@ -226,9 +226,9 @@ export default function ({
     if (finalParams.scope.includes('lnf')) {
         vars.comment(
             () => `/**
-                * @name           s-fs-tree
-                * @namespace          sugar.style.ui.fsTree
-                * @type           CssClass
+                * @___name           s-fs-tree
+                * @___namespace          sugar.style.ui.fsTree
+                * @___type           CssClass
                 * 
                 * This class represent an filesystem tree
                 * 

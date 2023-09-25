@@ -48,6 +48,7 @@ function expandPleasantCssClassnames($html)
 
     // grab do not touch tags
     $tags = ['code', 'template'];
+    $tags = [];
     foreach ($tags as $tag) {
         $tagsHtmls = get_tag($tag, $html);
 

@@ -62,7 +62,7 @@ function default_1({ params, atRule, replaceWith, }) {
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
             border-inline-start: sugar.theme(ui.blockquote.borderWidth) solid sugar.color(current);
-            color: sugar.color(current, surfaceForeground);
+            color: sugar.color(current, foreground);
             background-color: sugar.color(current, surface);
             font-size: sugar.scalable(1rem);
             @sugar.shape();

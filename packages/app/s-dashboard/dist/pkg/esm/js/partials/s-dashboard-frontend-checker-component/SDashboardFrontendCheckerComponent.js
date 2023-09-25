@@ -299,7 +299,7 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                                                           ></i>`}
                                                 </span>
                                                 <span
-                                                    class="s-flex-item:grow s-typo:p:bold"
+                                                    class="s-grow s-typo:p:bold"
                                                 >
                                                     ${checkObj.name}
                                                 </span>
@@ -404,7 +404,7 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                     : ''}"
                                                           >
                                                               <div
-                                                                  class="s-flex-item:grow"
+                                                                  class="s-grow"
                                                               >
                                                                   ${checkObj
                     .result

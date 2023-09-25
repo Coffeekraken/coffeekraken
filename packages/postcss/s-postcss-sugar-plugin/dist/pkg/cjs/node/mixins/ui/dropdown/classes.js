@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
-const faker_1 = __importDefault(require("faker"));
 /**
  * @name          classes
  * @as          @sugar.ui.dropdown.classes
@@ -83,97 +82,117 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * 
         * @example        html       Simple dropdown
         * <div class="s-dropdown-container">
-        *   <button class="s-btn s-color:accent">
+        *   <button class="s-btn">
         *      Click me!
         *   </button>
-        *   <div class="s-dropdown s-bg:base s-p:30 s-radius">
-        *      <p class="s-typo:p s-mbe:30">${faker_1.default.name.title()} ${faker_1.default.name.findName()}</p>
-        *      <a class="s-btn s-color:accent">You find me!</a>
+        *   <div class="s-dropdown:bottom-start">
+        *      <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *      <a class="s-btn">You find me!</a>
         *   </div>
         * </div>
         * 
         * @example        html       Position
         * <div class="s-dropdown-container s-mie:20">
-        *   <button class="s-btn s-color:accent">
+        *   <button class="s-btn">
         *       Bottom (default)
         *   </button>
         *   <div class="s-dropdown">
-        *          <p class="s-typo:p s-mbe:30">${faker_1.default.name.title()} ${faker_1.default.name.findName()}</p>
-        *          <a class="s-btn s-color:accent">You find me!</a>
+        *       <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *          <a class="s-btn">You find me!</a>
         *       </div>
         * </div>
         * <div class="s-dropdown-container s-mie:20">
-        *   <button class="s-btn s-color:accent">
-        *       Bottom start
+        *   <button class="s-btn">
+        *       Bottom
         *   </button>
-        *   <div class="s-dropdown:bottom-start">
-        *          <p class="s-typo:p s-mbe:30">${faker_1.default.name.title()} ${faker_1.default.name.findName()}</p>
-        *          <a class="s-btn s-color:accent">You find me!</a>
+        *   <div class="s-dropdown:bottom">
+        *       <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *          <a class="s-btn">You find me!</a>
         *       </div>
         * </div>
         * <div class="s-dropdown-container s-mie:20">
-        *   <button class="s-btn s-color:accent">
+        *   <button class="s-btn">
         *       Bottom end
         *   </button>
         *   <div class="s-dropdown:bottom-end">
-        *          <p class="s-typo:p s-mbe:30">${faker_1.default.name.title()} ${faker_1.default.name.findName()}</p>
-        *          <a class="s-btn s-color:accent">You find me!</a>
+        *          <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *          <a class="s-btn">You find me!</a>
         *       </div>
         * </div>
         * <div class="s-dropdown-container s-mie:20">
-        *   <button class="s-btn s-color:accent">
+        *   <button class="s-btn">
         *       Top
         *   </button>
         *   <div class="s-dropdown:top">
-        *          <p class="s-typo:p s-mbe:30">${faker_1.default.name.title()} ${faker_1.default.name.findName()}</p>
-        *          <a class="s-btn s-color:accent">You find me!</a>
+        *          <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *          <a class="s-btn">You find me!</a>
         *       </div>
         * </div>
         * <div class="s-dropdown-container s-mie:20">
-        *   <button class="s-btn s-color:accent">
+        *   <button class="s-btn">
         *       Top start
         *   </button>
         *   <div class="s-dropdown:top-start">
-        *          <p class="s-typo:p s-mbe:30">${faker_1.default.name.title()} ${faker_1.default.name.findName()}</p>
-        *          <a class="s-btn s-color:accent">You find me!</a>
+        *          <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *          <a class="s-btn">You find me!</a>
         *       </div>
         * </div>
         * <div class="s-dropdown-container s-mie:20">
-        *   <button class="s-btn s-color:accent">
+        *   <button class="s-btn">
         *      Top end
         *   </button>
         *   <div class="s-dropdown:top-end">
-        *          <p class="s-typo:p s-mbe:30">${faker_1.default.name.title()} ${faker_1.default.name.findName()}</p>
-        *          <a class="s-btn s-color:accent">You find me!</a>
+        *          <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *          <a class="s-btn">You find me!</a>
         *       </div>
         * </div>
         * 
         * @example      html        RTL Support
         *  <div class="s-dropdown-container s-mie:20" dir="rtl">
-        *   <button class="s-btn s-color:accent">
+        *   <button class="s-btn">
         *       Click me!
         *   </button>
         *   <div class="s-dropdown">
-        *          <p class="s-typo:p s-mbe:30">${faker_1.default.name.title()} ${faker_1.default.name.findName()}</p>
-        *          <a class="s-btn s-color:accent">You find me!</a>
+        *          <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *          <a class="s-btn">You find me!</a>
         *       </div>
         * </div>
         *  <div class="s-dropdown-container s-mie:20" dir="rtl">
-        *   <button class="s-btn s-color:accent">
+        *   <button class="s-btn">
         *       Top start
         *   </button>
         *   <div class="s-dropdown:top-start">
-        *          <p class="s-typo:p s-mbe:30">${faker_1.default.name.title()} ${faker_1.default.name.findName()}</p>
-        *          <a class="s-btn s-color:accent">You find me!</a>
+        *          <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *          <a class="s-btn">You find me!</a>
         *       </div>
         * </div>
         * <div class="s-dropdown-container s-mie:20" dir="rtl">
-        *   <button class="s-btn s-color:accent">
+        *   <button class="s-btn">
         *       Top end
         *   </button>
         *   <div class="s-dropdown:top-end">
-        *          <p class="s-typo:p s-mbe:30">${faker_1.default.name.title()} ${faker_1.default.name.findName()}</p>
-        *          <a class="s-btn s-color:accent">You find me!</a>
+        *          <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *          <a class="s-btn">You find me!</a>
         *       </div>
         * </div>
         * 
@@ -193,8 +212,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * <span class="s-dropdown-container">
             *     <button class="s-btn">Click me!</button>
             *     <div class="s-dropdown">
-            *         <p class="s-typo:p s-mbe:30">${faker_1.default.name.title()} ${faker_1.default.name.findName()}</p>
-            *         <a class="s-btn s-color:accent">You find me!</a>
+            *         <p class="s-typo:p s-mbe:30">
+            *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+            *       </p>
+            *         <a class="s-btn">You find me!</a>
             *     </div>
             * </span>
             * 
@@ -221,8 +242,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * <span class="s-dropdown-container">
             *     <button class="s-btn">Click me!</button>
             *     <div class="s-dropdown">
-            *         <p class="s-typo:p s-mbe:30">${faker_1.default.name.title()} ${faker_1.default.name.findName()}</p>
-            *         <a class="s-btn s-color:accent">You find me!</a>
+            *         <p class="s-typo:p s-mbe:30">
+            *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+            *       </p>
+            *         <a class="s-btn">You find me!</a>
             *     </div>
             * </span>
             * 
@@ -248,8 +271,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:bottom">
-        *       <p class="s-typo:p s-mbe:30">${faker_1.default.name.title()} ${faker_1.default.name.findName()}</p>
-        *       <a class="s-btn s-color:accent">You find me!</a>
+        *       <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *       <a class="s-btn">You find me!</a>
         *   </div>
         * </button>
         *     
@@ -275,8 +300,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:bottom-start">
-        *       <p class="s-typo:p s-mbe:30">${faker_1.default.name.title()} ${faker_1.default.name.findName()}</p>
-        *       <a class="s-btn s-color:accent">You find me!</a>
+        *       <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *       <a class="s-btn">You find me!</a>
         *   </div>
         * </button>
         *     
@@ -302,8 +329,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:bottom-end">
-        *       <p class="s-typo:p s-mbe:30">${faker_1.default.name.title()} ${faker_1.default.name.findName()}</p>
-        *       <a class="s-btn s-color:accent">You find me!</a>
+        *       <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *       <a class="s-btn">You find me!</a>
         *   </div>
         * </button>
         *     
@@ -329,8 +358,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:top">
-        *       <p class="s-typo:p s-mbe:30">${faker_1.default.name.title()} ${faker_1.default.name.findName()}</p>
-        *       <a class="s-btn s-color:accent">You find me!</a>
+        *       <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *       <a class="s-btn">You find me!</a>
         *   </div>
         * </button>
         *     
@@ -356,8 +387,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:top-start">
-        *       <p class="s-typo:p s-mbe:30">${faker_1.default.name.title()} ${faker_1.default.name.findName()}</p>
-        *       <a class="s-btn s-color:accent">You find me!</a>
+        *       <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *       <a class="s-btn">You find me!</a>
         *   </div>
         * </button>
         *     
@@ -383,8 +416,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:top-end">
-        *       <p class="s-typo:p s-mbe:30">${faker_1.default.name.title()} ${faker_1.default.name.findName()}</p>
-        *       <a class="s-btn s-color:accent">You find me!</a>
+        *       <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *       <a class="s-btn">You find me!</a>
         *   </div>
         * </button>
         *     
@@ -455,4 +490,4 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     return vars;
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUNyRCxrREFBNEI7QUFFNUI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXFCRztBQUVILE1BQU0sNENBQTZDLFNBQVEscUJBQVk7SUFDbkUsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUU7b0JBQ0YsSUFBSSxFQUFFLGVBQWU7b0JBQ3JCLFVBQVUsRUFBRSxDQUFDLEdBQUcsRUFBRSxHQUFHLENBQUM7aUJBQ3pCO2dCQUNELE1BQU0sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUM7Z0JBQ3ZCLE9BQU8sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUM7YUFDM0I7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBTXdELGlFQUFTO0FBRWxFLG1CQUF5QixFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLE9BQU8sRUFDUCxXQUFXLEdBTWQ7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsS0FBSyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssQ0FBQyxJQUNuQixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFHLElBQUksT0FBTyxFQUFFLENBQUM7SUFFM0IsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OENBeUNnQyxlQUFPLENBQUMsSUFBSSxDQUFDLEtBQUssRUFBRSxJQUFJLGVBQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFOzs7Ozs7Ozs7OztrREFXM0MsZUFBTyxDQUFDLElBQUksQ0FBQyxLQUFLLEVBQUUsSUFBSSxlQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7Ozs7O2tEQVMvQyxlQUFPLENBQUMsSUFBSSxDQUFDLEtBQUssRUFB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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBRUgsTUFBTSw0Q0FBNkMsU0FBUSxxQkFBWTtJQUNuRSxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsS0FBSyxFQUFFO2dCQUNILElBQUksRUFBRTtvQkFDRixJQUFJLEVBQUUsZUFBZTtvQkFDckIsVUFBVSxFQUFFLENBQUMsR0FBRyxFQUFFLEdBQUcsQ0FBQztpQkFDekI7Z0JBQ0QsTUFBTSxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssQ0FBQztnQkFDdkIsT0FBTyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssQ0FBQzthQUMzQjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFNd0QsaUVBQVM7QUFFbEUsbUJBQXlCLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sT0FBTyxFQUNQLFdBQVcsR0FNZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixLQUFLLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxDQUFDLElBQ25CLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQUcsSUFBSSxPQUFPLEVBQUUsQ0FBQztJQUUzQixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0tBMEpULENBQ0EsQ0FBQztJQUVGLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxRQUFRLENBQUMsTUFBTSxDQUFDLEVBQUU7UUFDcEMsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O1FBcUJWLENBQ0MsQ0FBQyxJQUFJLENBQ0Y7Ozs7YUFJQyxFQUNEO1lBQ0ksSUFBSSxFQUFFLFVBQVU7U0FDbkIsQ0FDSixDQUFDO0tBQ0w7SUFFRCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLEtBQUssQ0FBQyxFQUFFO1FBQ25DLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztRQXFCVixDQUNDLENBQUMsSUFBSSxDQUNGOzs7O2FBSUMsRUFDRDtZQUNJLElBQUksRUFBRSxVQUFVO1NBQ25CLENBQ0osQ0FBQztLQUNMO0lBRUQsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztNQXNCUixDQUNELENBQUMsSUFBSSxDQUNGOzs7O1NBSUMsRUFDRDtRQUNJLElBQUksRUFBRSxVQUFVO0tBQ25CLENBQ0osQ0FBQztJQUVGLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7TUFzQlIsQ0FDRCxDQUFDLElBQUksQ0FDRjs7OztTQUlDLEVBQ0Q7UUFDSSxJQUFJLEVBQUUsVUFBVTtLQUNuQixDQUNKLENBQUM7SUFFRixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O01Bc0JSLENBQ0QsQ0FBQyxJQUFJLENBQ0Y7Ozs7U0FJQyxFQUNEO1FBQ0ksSUFBSSxFQUFFLFVBQVU7S0FDbkIsQ0FDSixDQUFDO0lBRUYsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztNQXNCUixDQUNELENBQUMsSUFBSSxDQUNGOzs7O1NBSUMsRUFDRDtRQUNJLElBQUksRUFBRSxVQUFVO0tBQ25CLENBQ0osQ0FBQztJQUVGLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7TUFzQlIsQ0FDRCxDQUFDLElBQUksQ0FDRjs7OztTQUlDLEVBQ0Q7UUFDSSxJQUFJLEVBQUUsVUFBVTtLQUNuQixDQUNKLENBQUM7SUFFRixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O01Bc0JSLENBQ0QsQ0FBQyxJQUFJLENBQ0Y7Ozs7U0FJQyxFQUNEO1FBQ0ksSUFBSSxFQUFFLFVBQVU7S0FDbkIsQ0FDSixDQUFDO0lBRUYsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxNQUFNLENBQUMsRUFBRTtRQUNwQyxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O2VBeUJILENBQ04sQ0FBQztRQUNGLElBQUksQ0FBQyxJQUFJLENBQ0wsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7U0FzQlQsRUFDRztZQUNJLElBQUksRUFBRSxVQUFVO1NBQ25CLENBQ0osQ0FBQztLQUNMO0lBRUQsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQztBQXRnQkQsNEJBc2dCQyJ9

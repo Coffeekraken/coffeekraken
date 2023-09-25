@@ -261,7 +261,7 @@ export default class DocNav extends __SLitComponent {
                                             class="s-flex s-font:40 s-p:20 s-pie:30 s-bg:ui-background"
                                         >
                                             <label
-                                                class="s-flex-item:grow"
+                                                class="s-grow"
                                                 for="platform-${platform}"
                                             >
                                                 ${platform}
@@ -292,7 +292,7 @@ export default class DocNav extends __SLitComponent {
                                             class="s-flex s-font:40 s-p:20 s-pie:30 s-bg:ui-background"
                                         >
                                             <label
-                                                class="s-flex-item:grow"
+                                                class="s-grow"
                                                 for="type-${type}"
                                             >
                                                 ${type}
@@ -323,7 +323,7 @@ export default class DocNav extends __SLitComponent {
                                             class="s-flex s-font:40 s-p:20 s-pie:30 s-bg:ui-background"
                                         >
                                             <label
-                                                class="s-flex-item:grow"
+                                                class="s-grow"
                                                 for="status-${status}"
                                             >
                                                 ${status}
@@ -351,7 +351,7 @@ export default class DocNav extends __SLitComponent {
                                 <div class="s-p:50">
                                     <div class="">
                                         <div class="s-flex">
-                                            <div class="s-flex-item:grow">
+                                            <div class="s-grow">
                                                 <div>
                                                     ${item.platform.map((platform) => html `
                                                             <i
@@ -360,7 +360,7 @@ export default class DocNav extends __SLitComponent {
                                                         `)}
                                                 </div>
                                                 <h4
-                                                    class="s-font:title s-font:60 s-tc:accent s-mbe:10 s-flex-item:grow"
+                                                    class="s-font:title s-font:60 s-tc:accent s-mbe:10 s-grow"
                                                 >
                                                     <a
                                                         href="/doc/api/${this._striptags(item
@@ -406,7 +406,7 @@ export default class DocNav extends __SLitComponent {
                 ? html `
                                                             <s-code-example
                                                                 style="max-width:100%;"
-                                                                class="s-depth:50 s-flex-item:grow:shrink"
+                                                                class="s-depth:50 s-grow:shrink"
                                                                 s-deps
                                                                 css="codeExample"
                                                             >

@@ -90,99 +90,105 @@ export default function ({
         * @cssClass             s-avatar:interactive            Specify that this avatar is interactive
         * 
         * @example        html         Default
-        *   <div class="s-avatar s-font:100 s-mie:20">
-        *   <img src="https://i.pravatar.cc/300?v=${Math.round(
+        * <div class="s-flex s-gap:20 s-font:70">
+        *   <div class="s-avatar">
+        *       <img src="https://i.pravatar.cc/300?v=${Math.round(
             Math.random() * 99999,
         )}" />
-        * </div>
-        *   <div class="s-avatar s-font:100 s-mie:20 s-color:accent">
-        *   <img src="https://i.pravatar.cc/300?v=${Math.round(
+        *   </div>
+        *       <div class="s-avatar s-color:accent">
+        *       <img src="https://i.pravatar.cc/300?v=${Math.round(
             Math.random() * 99999,
         )}" />
-        * </div>
-        *   <div class="s-avatar s-font:100 s-mie:20 s-color:complementary">
-        *   <img src="https://i.pravatar.cc/300?v=${Math.round(
+        *   </div>
+        *   <div class="s-avatar s-color:complementary">
+        *       <img src="https://i.pravatar.cc/300?v=${Math.round(
             Math.random() * 99999,
         )}" />
-        * </div>
-        *   <div class="s-avatar s-font:100 s-mie:20 s-color:info">
-        *   <img src="https://i.pravatar.cc/300?v=${Math.round(
+        *   </div>
+        *   <div class="s-avatar s-color:info">
+        *       <img src="https://i.pravatar.cc/300?v=${Math.round(
             Math.random() * 99999,
         )}" />
-        * </div>
-        *   <div class="s-avatar s-font:100 s-mie:20 s-color:success">
-        *   <img src="https://i.pravatar.cc/300?v=${Math.round(
+        *   </div>
+        *   <div class="s-avatar s-color:success">
+        *       <img src="https://i.pravatar.cc/300?v=${Math.round(
             Math.random() * 99999,
         )}" />
-        * </div>
-        *   <div class="s-avatar s-font:100 s-mie:20 s-color:error">
-        *   <img src="https://i.pravatar.cc/300?v=${Math.round(
+        *   </div>
+        *   <div class="s-avatar s-color:error">
+        *      <img src="https://i.pravatar.cc/300?v=${Math.round(
             Math.random() * 99999,
         )}" />
+        *   </div>
         * </div>
         * 
         * @example       html         Notifications
-        * <div class="s-avatar s-font:100 s-mie:20" notifications="10">
-        *   <img src="https://i.pravatar.cc/300?v=${Math.round(
+        * <div class="s-flex s-gap:20 s-font:70">
+        *   <div class="s-avatar notifications="10">
+        *      <img src="https://i.pravatar.cc/300?v=${Math.round(
             Math.random() * 99999,
         )}" />
-        * </div>
-        * <div class="s-avatar s-font:100 s-mie:20 s-color:accent" notifications="10">
-        *   <img src="https://i.pravatar.cc/300?v=${Math.round(
+        *   </div>
+        *   <div class="s-avatar s-color:accent" notifications="10">
+        *       <img src="https://i.pravatar.cc/300?v=${Math.round(
             Math.random() * 99999,
         )}" />
-        * </div>
-        * <div class="s-avatar s-font:100 s-mie:20 s-color:complementary" notifications="10">
-        *   <img src="https://i.pravatar.cc/300?v=${Math.round(
+        *   </div>
+        *   <div class="s-avatar s-color:complementary" notifications="10">
+        *       <img src="https://i.pravatar.cc/300?v=${Math.round(
             Math.random() * 99999,
         )}" />
-        * </div>
-        * <div class="s-avatar s-color:info s-font:100 s-mie:20" notifications>
-        *   <img src="https://i.pravatar.cc/300?v=${Math.round(
+        *   </div>
+        *   <div class="s-avatar s-color:info" notifications>
+        *       <img src="https://i.pravatar.cc/300?v=${Math.round(
             Math.random() * 99999,
         )}" />
-        * </div>
-        * <div class="s-avatar s-color:success s-font:100 s-mie:20" notifications>
-        *   <img src="https://i.pravatar.cc/300?v=${Math.round(
+        *   </div>
+        *   <div class="s-avatar s-color:success" notifications>
+        *       <img src="https://i.pravatar.cc/300?v=${Math.round(
             Math.random() * 99999,
         )}" />
-        * </div>
-        * <div class="s-avatar s-color:error s-font:100 s-mie:20" notifications>
-        *   <img src="https://i.pravatar.cc/300?v=${Math.round(
+        *   </div>
+        *   <div class="s-avatar s-color:error" notifications>
+        *       <img src="https://i.pravatar.cc/300?v=${Math.round(
             Math.random() * 99999,
         )}" />
+        *   </div>
         * </div>
         * 
         * @example       html         Interactive
-        * <div class="s-avatar:interactive s-font:100 s-mie:20">
-        *    <img src="https://i.pravatar.cc/300?v=${Math.round(
+        * <div class="s-flex s-gap:20 s-font:70">
+        *   <div class="s-avatar:interactive">
+        *        <img src="https://i.pravatar.cc/300?v=${Math.round(
             Math.random() * 99999,
         )}" />
-        * </div>
-        * <div class="s-avatar:interactive s-font:100 s-mie:20 s-color:accent">
-        *    <img src="https://i.pravatar.cc/300?v=${Math.round(
+        *   </div>
+        *   <div class="s-avatar:interactive s-color:accent">
+        *       <img src="https://i.pravatar.cc/300?v=${Math.round(
             Math.random() * 99999,
         )}" />
-        * </div>
-        * <div class="s-avatar:interactive s-font:100 s-mie:20 s-color:complementary">
-        *    <img src="https://i.pravatar.cc/300?v=${Math.round(
+        *   </div>
+        *   <div class="s-avatar:interactive s-color:complementary">
+        *       <img src="https://i.pravatar.cc/300?v=${Math.round(
             Math.random() * 99999,
         )}" />
-        * </div>
-        * <div class="s-avatar:interactive s-font:100 s-mie:20 s-color:info">
-        *    <img src="https://i.pravatar.cc/300?v=${Math.round(
+        *   </div>
+        *   <div class="s-avatar:interactive s-color:info">
+        *       <img src="https://i.pravatar.cc/300?v=${Math.round(
             Math.random() * 99999,
         )}" />
-        * </div>
-        * <div class="s-avatar:interactive s-font:100 s-mie:20 s-color:success">
-        *    <img src="https://i.pravatar.cc/300?v=${Math.round(
+        *   </div>
+        *   <div class="s-avatar:interactive s-color:success">
+        *       <img src="https://i.pravatar.cc/300?v=${Math.round(
             Math.random() * 99999,
         )}" />
-        * </div>
-        * <div class="s-avatar:interactive s-font:100 s-mie:20 s-color:error">
-        *    <img src="https://i.pravatar.cc/300?v=${Math.round(
+        *   </div>
+        *   <div class="s-avatar:interactive s-color:error">
+        *       <img src="https://i.pravatar.cc/300?v=${Math.round(
             Math.random() * 99999,
         )}" />
+        *   </div>
         * </div>
         * 
         * @since      2.0.0

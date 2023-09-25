@@ -1,6 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
-import __faker from 'faker';
 
 /**
  * @name          classes
@@ -119,76 +118,79 @@ export default function ({
         ${finalParams.lnfs
             .map((lnf) => {
                 return ` * @example        html       ${lnf}
-            *   <label class="s-mbe:30 s-label">
-            *     ${__faker.name.title()} ${__faker.name.findName()}
+            * <div class="s-flex:column s-gap:30">
+            *   <label class="s-label">
+            *     <span>John Doe</span>
             *     <input type="checkbox" checked class="s-checkbox" name="checkbox-lnf-${lnf}-1" value="hello 1" />
             *   </label>
-            *   <label class="s-mbe:30 s-label">
+            *   <label class="s-label">
             *     <span>I'm disabled</span>
             *     <input type="checkbox" disabled class="s-checkbox s-color:accent" name="checkbox-lnf-${lnf}-3" value="hello 3" />
             *   </label>
+            * </div>
             * `;
             })
             .join('\n')}
         * 
         * @example      html       Shapes
-        *   <label class="s-mbe:30 s-label">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        * <div class="s-flex:column s-gap:30">
+        *   <label class="s-label">
+        *     <span>John Doe</span>
         *     <input type="checkbox" class="s-checkbox s-shape:default s-color:accent" name="checkbox-style-color-2" value="hello 2" />
         *   </label>
-        * <label class="s-mbe:30 s-label">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *   <label class="s-label">
+        *     <span>John Doe</span>
         *     <input type="checkbox" class="s-checkbox s-shape:square s-color:accent" name="checkbox-style-color-2" value="hello 2" />
         *   </label>
-        * <label class="s-mbe:30 s-label">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        * <label class="s-label">
+        *     <span>John Doe</span>
         *     <input type="checkbox" class="s-checkbox s-shape:pill s-color:accent" name="checkbox-style-color-2" value="hello 2" />
         *   </label>
+        * </div>
         * 
         * @example      html       Colors (none-exhaustive)
-        *   <label class="s-mbe:30 s-label">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        * <div class="s-flex:column s-gap:30">
+        *   <label class="s-label">
+        *     <span>John Doe</span>
         *     <input type="checkbox" class="s-checkbox s-color:accent" name="checkbox-style-color-2" value="hello 2" />
         *   </label>
-        *   <label class="s-mbe:30 s-label">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *   <label class="s-label">
+        *     <span>John Doe</span>
         *     <input type="checkbox" class="s-checkbox s-color:complementary" name="checkbox-style-color-3" value="hello 3" />
         *   </label>
-        *   <label class="s-mbe:30 s-label">
+        *   <label class="s-label">
         *     <span>I'm disabled</span>
         *     <input type="checkbox" disabled class="s-checkbox s-color:error" name="checkbox-style-color-4" value="hello 4" />
         *   </label>
+        * </div>
         * 
         * @example          html        RTL
-        * <div dir="rtl">
-        *   <label class="s-mbe:30 s-label">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        * <div class="s-flex:column s-gap:30" dir="rtl">
+        *   <label class="s-label">
+        *     <span>John Doe</span>
         *     <input type="checkbox" checked class="s-checkbox" name="checkbox-style-ltr-1" value="hello 1" />
         *   </label>
-        *   <label class="s-mbe:30 s-label">
+        *   <label class="s-label">
         *     <span>I'm disabled</span>
         *     <input type="checkbox" disabled class="s-checkbox" name="checkbox-style-ltr-3" value="hello 3" />
         *   </label>
         * </div>
         * 
         * @example          html        Scales
-        *   <label class="s-mbe:30 s-label s-scale:07">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        * <div class="s-flex:column s-gap:30">
+        *   <label class="s-label s-scale:07">
+        *     <span>John Doe</span>
         *     <input type="checkbox" checked class="s-checkbox" name="checkbox-style-ltr-1" value="hello 1" />
         *   </label>
-        *   <label class="s-mbe:30 s-label">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *   <label class="s-label">
+        *     <span>John Doe</span>
         *     <input type="checkbox" class="s-checkbox" name="checkbox-style-ltr-2" value="hello 2" />
         *   </label>
-        *   <label class="s-mbe:30 s-label s-scale:13">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *   <label class="s-label s-scale:13">
+        *     <span>John Doe</span>
         *     <input type="checkbox" class="s-checkbox" name="checkbox-style-ltr-3" value="hello 3" />
         *   </label>
-        * 
-        * @example      html        Vertical rhythm / Text format
-        *   <div class="s-format:text">
-        *     <input type="checkbox" />
-        *   </div>
+        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

@@ -73,9 +73,6 @@
 @sugar.chunk 'toggle' {
     @sugar.ui.toggle.classes;
 }
-@sugar.chunk 'card' {
-    @sugar.ui.card.classes;
-}
 
 /* chunked helpers */
 @sugar.chunk 'gradient' {

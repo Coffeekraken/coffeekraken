@@ -1,6 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
-import __faker from 'faker';
 
 /**
  * @name          classes
@@ -100,45 +99,51 @@ export default function ({
         * @cssClass         s-rhythm:vertical &                 Apply the vertical rhythm on the blockquote
         *
         * @example        html       Colors (none-exhaustive)
-        *   <p class="s-blockquote s-mbe:30 s-color:accent">
-        *       ${__faker.lorem.paragraph()}
+        * <div class="s-flex:column s-gap:30">
+        *   <p class="s-blockquote s-color:accent">
+        *       Est mollit consectetur occaecat culpa irure dolor proident esse labore voluptate dolor.
         *   </p>
-        *   <p class="s-blockquote s-mbe:30 s-color:error">
-        *       ${__faker.lorem.paragraph()}
+        *   <p class="s-blockquote s-color:error">
+        *       Est mollit consectetur occaecat culpa irure dolor proident esse labore voluptate dolor.
         *   </p>
-        *   <p class="s-blockquote s-mbe:30 s-color:info">
-        *       ${__faker.lorem.paragraph()}
+        *   <p class="s-blockquote s-color:info">
+        *       Est mollit consectetur occaecat culpa irure dolor proident esse labore voluptate dolor.
         *   </p>
+        * </div>
         *
         * @example    html       RTL Support
-        *   <p class="s-blockquote s-mbe:30" dir="rtl">
-        *       ${__faker.lorem.paragraph()}
+        *   <p class="s-blockquote" dir="rtl">
+        *       Est mollit consectetur occaecat culpa irure dolor proident esse labore voluptate dolor.
         *   </p>
         * 
         * @example          html        Shapes
-        * <p class="s-blockquote s-color:accent s-shape:default s-mbe:30">
-        *       ${__faker.lorem.paragraph()}
+        * <div class="s-flex:column s-gap:30">
+        *   <p class="s-blockquote s-color:accent">
+        *       Est mollit consectetur occaecat culpa irure dolor proident esse labore voluptate dolor.
         *   </p>
-        *   <p class="s-blockquote s-color:accent s-shape:pill s-mbe:30">
-        *       ${__faker.lorem.paragraph()}
+        *   <p class="s-blockquote s-shape:pill">
+        *       Est mollit consectetur occaecat culpa irure dolor proident esse labore voluptate dolor.
         *   </p>
-        * <p class="s-blockquote s-color:accent s-shape:square s-mbe:30">
-        *       ${__faker.lorem.paragraph()}
+        *   <p class="s-blockquote s-shape:square">
+        *       Est mollit consectetur occaecat culpa irure dolor proident esse labore voluptate dolor.
         *   </p>
+        * </div>
         * 
         * @example          html        Scales
-        * <p class="s-blockquote s-scale:07 s-mbe:30">
-        *       ${__faker.lorem.paragraph()}
+        * <div class="s-flex:column s-gap:30">
+        *   <p class="s-blockquote s-scale:07">
+        *       Est mollit consectetur occaecat culpa irure dolor proident esse labore voluptate dolor.
         *   </p>
-        *   <p class="s-blockquote s-scale:10 s-mbe:30">
-        *       ${__faker.lorem.paragraph()}
+        *   <p class="s-blockquote s-scale:10">
+        *       Est mollit consectetur occaecat culpa irure dolor proident esse labore voluptate dolor.
         *   </p>
-        * <p class="s-blockquote s-scale:13 s-mbe:30">
-        *       ${__faker.lorem.paragraph()}
+        *   <p class="s-blockquote s-scale:13">
+        *       Est mollit consectetur occaecat culpa irure dolor proident esse labore voluptate dolor.
         *   </p>
-        * <p class="s-blockquote s-scale:16 s-mbe:30">
-        *       ${__faker.lorem.paragraph()}
+        *   <p class="s-blockquote s-scale:16">
+        *       Est mollit consectetur occaecat culpa irure dolor proident esse labore voluptate dolor.
         *   </p>
+        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

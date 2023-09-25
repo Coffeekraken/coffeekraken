@@ -130,7 +130,7 @@ import __css from '../../../../src/css/s-panel.css'; // relative to /dist/pkg/es
  *              <span>Lastname</span>
  *          </label>
  *          <div class="s-flex:align-center s-mbs:30">
- *              <span class="s-flex-item:grow">
+ *              <span class="s-grow">
  *                  <a href="#" class="s-typo:a">Forgot password?</a>
  *              </span>
  *              <input type="submit" class="s-btn s-color:accent" value="Submit" />

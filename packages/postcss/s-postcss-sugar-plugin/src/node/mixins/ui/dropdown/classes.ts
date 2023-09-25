@@ -1,5 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __faker from 'faker';
 
 /**
  * @name          classes
@@ -101,97 +100,117 @@ export default function ({
         * 
         * @example        html       Simple dropdown
         * <div class="s-dropdown-container">
-        *   <button class="s-btn s-color:accent">
+        *   <button class="s-btn">
         *      Click me!
         *   </button>
-        *   <div class="s-dropdown s-bg:base s-p:30 s-radius">
-        *      <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *      <a class="s-btn s-color:accent">You find me!</a>
+        *   <div class="s-dropdown:bottom-start">
+        *      <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *      <a class="s-btn">You find me!</a>
         *   </div>
         * </div>
         * 
         * @example        html       Position
         * <div class="s-dropdown-container s-mie:20">
-        *   <button class="s-btn s-color:accent">
+        *   <button class="s-btn">
         *       Bottom (default)
         *   </button>
         *   <div class="s-dropdown">
-        *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *          <a class="s-btn s-color:accent">You find me!</a>
+        *       <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *          <a class="s-btn">You find me!</a>
         *       </div>
         * </div>
         * <div class="s-dropdown-container s-mie:20">
-        *   <button class="s-btn s-color:accent">
-        *       Bottom start
+        *   <button class="s-btn">
+        *       Bottom
         *   </button>
-        *   <div class="s-dropdown:bottom-start">
-        *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *          <a class="s-btn s-color:accent">You find me!</a>
+        *   <div class="s-dropdown:bottom">
+        *       <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *          <a class="s-btn">You find me!</a>
         *       </div>
         * </div>
         * <div class="s-dropdown-container s-mie:20">
-        *   <button class="s-btn s-color:accent">
+        *   <button class="s-btn">
         *       Bottom end
         *   </button>
         *   <div class="s-dropdown:bottom-end">
-        *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *          <a class="s-btn s-color:accent">You find me!</a>
+        *          <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *          <a class="s-btn">You find me!</a>
         *       </div>
         * </div>
         * <div class="s-dropdown-container s-mie:20">
-        *   <button class="s-btn s-color:accent">
+        *   <button class="s-btn">
         *       Top
         *   </button>
         *   <div class="s-dropdown:top">
-        *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *          <a class="s-btn s-color:accent">You find me!</a>
+        *          <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *          <a class="s-btn">You find me!</a>
         *       </div>
         * </div>
         * <div class="s-dropdown-container s-mie:20">
-        *   <button class="s-btn s-color:accent">
+        *   <button class="s-btn">
         *       Top start
         *   </button>
         *   <div class="s-dropdown:top-start">
-        *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *          <a class="s-btn s-color:accent">You find me!</a>
+        *          <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *          <a class="s-btn">You find me!</a>
         *       </div>
         * </div>
         * <div class="s-dropdown-container s-mie:20">
-        *   <button class="s-btn s-color:accent">
+        *   <button class="s-btn">
         *      Top end
         *   </button>
         *   <div class="s-dropdown:top-end">
-        *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *          <a class="s-btn s-color:accent">You find me!</a>
+        *          <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *          <a class="s-btn">You find me!</a>
         *       </div>
         * </div>
         * 
         * @example      html        RTL Support
         *  <div class="s-dropdown-container s-mie:20" dir="rtl">
-        *   <button class="s-btn s-color:accent">
+        *   <button class="s-btn">
         *       Click me!
         *   </button>
         *   <div class="s-dropdown">
-        *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *          <a class="s-btn s-color:accent">You find me!</a>
+        *          <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *          <a class="s-btn">You find me!</a>
         *       </div>
         * </div>
         *  <div class="s-dropdown-container s-mie:20" dir="rtl">
-        *   <button class="s-btn s-color:accent">
+        *   <button class="s-btn">
         *       Top start
         *   </button>
         *   <div class="s-dropdown:top-start">
-        *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *          <a class="s-btn s-color:accent">You find me!</a>
+        *          <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *          <a class="s-btn">You find me!</a>
         *       </div>
         * </div>
         * <div class="s-dropdown-container s-mie:20" dir="rtl">
-        *   <button class="s-btn s-color:accent">
+        *   <button class="s-btn">
         *       Top end
         *   </button>
         *   <div class="s-dropdown:top-end">
-        *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *          <a class="s-btn s-color:accent">You find me!</a>
+        *          <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *          <a class="s-btn">You find me!</a>
         *       </div>
         * </div>
         * 
@@ -214,8 +233,10 @@ export default function ({
             * <span class="s-dropdown-container">
             *     <button class="s-btn">Click me!</button>
             *     <div class="s-dropdown">
-            *         <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *         <a class="s-btn s-color:accent">You find me!</a>
+            *         <p class="s-typo:p s-mbe:30">
+            *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+            *       </p>
+            *         <a class="s-btn">You find me!</a>
             *     </div>
             * </span>
             * 
@@ -248,8 +269,10 @@ export default function ({
             * <span class="s-dropdown-container">
             *     <button class="s-btn">Click me!</button>
             *     <div class="s-dropdown">
-            *         <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *         <a class="s-btn s-color:accent">You find me!</a>
+            *         <p class="s-typo:p s-mbe:30">
+            *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+            *       </p>
+            *         <a class="s-btn">You find me!</a>
             *     </div>
             * </span>
             * 
@@ -281,8 +304,10 @@ export default function ({
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:bottom">
-        *       <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *       <a class="s-btn s-color:accent">You find me!</a>
+        *       <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *       <a class="s-btn">You find me!</a>
         *   </div>
         * </button>
         *     
@@ -314,8 +339,10 @@ export default function ({
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:bottom-start">
-        *       <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *       <a class="s-btn s-color:accent">You find me!</a>
+        *       <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *       <a class="s-btn">You find me!</a>
         *   </div>
         * </button>
         *     
@@ -347,8 +374,10 @@ export default function ({
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:bottom-end">
-        *       <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *       <a class="s-btn s-color:accent">You find me!</a>
+        *       <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *       <a class="s-btn">You find me!</a>
         *   </div>
         * </button>
         *     
@@ -380,8 +409,10 @@ export default function ({
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:top">
-        *       <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *       <a class="s-btn s-color:accent">You find me!</a>
+        *       <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *       <a class="s-btn">You find me!</a>
         *   </div>
         * </button>
         *     
@@ -413,8 +444,10 @@ export default function ({
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:top-start">
-        *       <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *       <a class="s-btn s-color:accent">You find me!</a>
+        *       <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *       <a class="s-btn">You find me!</a>
         *   </div>
         * </button>
         *     
@@ -446,8 +479,10 @@ export default function ({
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:top-end">
-        *       <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *       <a class="s-btn s-color:accent">You find me!</a>
+        *       <p class="s-typo:p s-mbe:30">
+        *           Veniam ut ad et amet adipisicing labore sint non excepteur nisi labore mollit.
+        *       </p>
+        *       <a class="s-btn">You find me!</a>
         *   </div>
         * </button>
         *     

@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
-const faker_1 = __importDefault(require("faker"));
 /**
  * @name          classes
  * @as              @sugar.blockquote.classes
@@ -82,45 +81,51 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @cssClass         s-rhythm:vertical &                 Apply the vertical rhythm on the blockquote
         *
         * @example        html       Colors (none-exhaustive)
-        *   <p class="s-blockquote s-mbe:30 s-color:accent">
-        *       ${faker_1.default.lorem.paragraph()}
+        * <div class="s-flex:column s-gap:30">
+        *   <p class="s-blockquote s-color:accent">
+        *       Est mollit consectetur occaecat culpa irure dolor proident esse labore voluptate dolor.
         *   </p>
-        *   <p class="s-blockquote s-mbe:30 s-color:error">
-        *       ${faker_1.default.lorem.paragraph()}
+        *   <p class="s-blockquote s-color:error">
+        *       Est mollit consectetur occaecat culpa irure dolor proident esse labore voluptate dolor.
         *   </p>
-        *   <p class="s-blockquote s-mbe:30 s-color:info">
-        *       ${faker_1.default.lorem.paragraph()}
+        *   <p class="s-blockquote s-color:info">
+        *       Est mollit consectetur occaecat culpa irure dolor proident esse labore voluptate dolor.
         *   </p>
+        * </div>
         *
         * @example    html       RTL Support
-        *   <p class="s-blockquote s-mbe:30" dir="rtl">
-        *       ${faker_1.default.lorem.paragraph()}
+        *   <p class="s-blockquote" dir="rtl">
+        *       Est mollit consectetur occaecat culpa irure dolor proident esse labore voluptate dolor.
         *   </p>
         * 
         * @example          html        Shapes
-        * <p class="s-blockquote s-color:accent s-shape:default s-mbe:30">
-        *       ${faker_1.default.lorem.paragraph()}
+        * <div class="s-flex:column s-gap:30">
+        *   <p class="s-blockquote s-color:accent">
+        *       Est mollit consectetur occaecat culpa irure dolor proident esse labore voluptate dolor.
         *   </p>
-        *   <p class="s-blockquote s-color:accent s-shape:pill s-mbe:30">
-        *       ${faker_1.default.lorem.paragraph()}
+        *   <p class="s-blockquote s-shape:pill">
+        *       Est mollit consectetur occaecat culpa irure dolor proident esse labore voluptate dolor.
         *   </p>
-        * <p class="s-blockquote s-color:accent s-shape:square s-mbe:30">
-        *       ${faker_1.default.lorem.paragraph()}
+        *   <p class="s-blockquote s-shape:square">
+        *       Est mollit consectetur occaecat culpa irure dolor proident esse labore voluptate dolor.
         *   </p>
+        * </div>
         * 
         * @example          html        Scales
-        * <p class="s-blockquote s-scale:07 s-mbe:30">
-        *       ${faker_1.default.lorem.paragraph()}
+        * <div class="s-flex:column s-gap:30">
+        *   <p class="s-blockquote s-scale:07">
+        *       Est mollit consectetur occaecat culpa irure dolor proident esse labore voluptate dolor.
         *   </p>
-        *   <p class="s-blockquote s-scale:10 s-mbe:30">
-        *       ${faker_1.default.lorem.paragraph()}
+        *   <p class="s-blockquote s-scale:10">
+        *       Est mollit consectetur occaecat culpa irure dolor proident esse labore voluptate dolor.
         *   </p>
-        * <p class="s-blockquote s-scale:13 s-mbe:30">
-        *       ${faker_1.default.lorem.paragraph()}
+        *   <p class="s-blockquote s-scale:13">
+        *       Est mollit consectetur occaecat culpa irure dolor proident esse labore voluptate dolor.
         *   </p>
-        * <p class="s-blockquote s-scale:16 s-mbe:30">
-        *       ${faker_1.default.lorem.paragraph()}
+        *   <p class="s-blockquote s-scale:16">
+        *       Est mollit consectetur occaecat culpa irure dolor proident esse labore voluptate dolor.
         *   </p>
+        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -229,4 +234,4 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     return vars;
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUNyRCxvRUFBNkM7QUFDN0Msa0RBQTRCO0FBRTVCOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FxQkc7QUFFSCxNQUFNLDhDQUErQyxTQUFRLHFCQUFZO0lBQ3JFLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFO29CQUNGLElBQUksRUFBRSxlQUFlO29CQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDO2lCQUN6QjtnQkFDRCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLElBQUksRUFBRSxJQUFJLENBQUM7Z0JBQ25DLE9BQU8sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLEVBQUUsSUFBSSxFQUFFLElBQUksQ0FBQzthQUN2QztTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFNMEQsbUVBQVM7QUFFcEUsbUJBQXlCLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sT0FBTyxFQUNQLFdBQVcsR0FNZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixLQUFLLEVBQUUsRUFBRSxJQUNOLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQUcsSUFBSSxPQUFPLEVBQUUsQ0FBQztJQUUzQixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7a0JBb0NJLGVBQU8sQ0FBQyxLQUFLLENBQUMsU0FBUyxFQUFFOzs7a0JBR3pCLGVBQU8sQ0FBQyxLQUFLLENBQUMsU0FBUyxFQUFFOzs7a0JBR3pCLGVBQU8sQ0FBQyxLQUFLLENBQUMsU0FBUyxFQUFFOzs7OztrQkFLekIsZUFBTyxDQUFDLEtBQUssQ0FBQyxTQUFTLEVBQUU7Ozs7O2tCQUt6QixlQUFPLENBQUMsS0FBSyxDQUFDLFNBQVMsRUFBRTs7O2tCQUd6QixlQUFPLENBQUMsS0FBSyxDQUFDLFNBQVMsRUFBRTs7O2tCQUd6QixlQUFPLENBQUMsS0FBSyxDQUFDLFNBQVMsRUFBRTs7Ozs7a0JBS3pCLGVBQU8sQ0FBQyxLQUFLLENBQUMsU0FBUyxFQUFFOzs7a0JBR3pCLGVBQU8sQ0FBQyxLQUFLLENBQUMsU0FBUyxFQUFFOzs7a0JBR3pCLGVBQU8sQ0FBQyxLQUFLLENBQUMsU0FBUyxFQUFFOzs7a0JBR3pCLGVBQU8sQ0FBQyxLQUFLLENBQUMsU0FBUyxFQUFFOzs7Ozs7S0FNdEMsQ0FDQSxDQUFDO0lBRUYsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxNQUFNLENBQUMsRUFBRTtRQUNwQyxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7TUFlWixDQUNHLENBQUMsSUFBSSxDQUNGOzs7VUFHRixFQUNFLEVBQUUsSUFBSSxFQUFFLFVBQVUsRUFBRSxDQUN2QixDQUFDO0tBQ0w7SUFFRCxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Q0FlYixDQUNJLENBQUMsSUFBSSxDQUNGOzs7T0FHRCxFQUNDLEVBQUUsSUFBSSxFQUFFLFVBQVUsRUFBRSxDQUN2QixDQUFDO0lBRUYsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUN4QyxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7OztRQWlCVixDQUNDLENBQUMsSUFBSSxDQUNGOzs7b0RBR3dDLFdBQVcsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUNsRCxHQUFHLENBQ047OztTQUdaLEVBQ0csRUFBRSxJQUFJLEVBQUUsVUFBVSxFQUFFLENBQ3ZCLENBQUM7S0FDTDtJQUVELElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDeEMsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztRQXlCVixDQUNDLENBQUMsSUFBSSxDQUNGOzs7c0JBR1UsaUJBQVEsQ0FBQyx1QkFBdUIsQ0FDOUIsaUJBQVEsQ0FBQyxHQUFHLENBQUMsMkJBQTJCLENBQUMsQ0FDNUM7OztTQUdaLEVBQ0csRUFBRSxJQUFJLEVBQUUsVUFBVSxFQUFFLENBQ3ZCLENBQUM7S0FDTDtJQUVELE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUM7QUFyT0QsNEJBcU9DIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUNyRCxvRUFBNkM7QUFFN0M7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXFCRztBQUVILE1BQU0sOENBQStDLFNBQVEscUJBQVk7SUFDckUsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUU7b0JBQ0YsSUFBSSxFQUFFLGVBQWU7b0JBQ3JCLFVBQVUsRUFBRSxDQUFDLEdBQUcsRUFBRSxHQUFHLENBQUM7aUJBQ3pCO2dCQUNELE1BQU0sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLEVBQUUsSUFBSSxFQUFFLElBQUksQ0FBQztnQkFDbkMsT0FBTyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxJQUFJLEVBQUUsSUFBSSxDQUFDO2FBQ3ZDO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQU0wRCxtRUFBUztBQUVwRSxtQkFBeUIsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixPQUFPLEVBQ1AsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLG1CQUNiLEtBQUssRUFBRSxFQUFFLElBQ04sTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBRyxJQUFJLE9BQU8sRUFBRSxDQUFDO0lBRTNCLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztLQW9GVCxDQUNBLENBQUM7SUFFRixJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLE1BQU0sQ0FBQyxFQUFFO1FBQ3BDLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7OztNQWVaLENBQ0csQ0FBQyxJQUFJLENBQ0Y7OztVQUdGLEVBQ0UsRUFBRSxJQUFJLEVBQUUsVUFBVSxFQUFFLENBQ3ZCLENBQUM7S0FDTDtJQUVELElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7OztDQWViLENBQ0ksQ0FBQyxJQUFJLENBQ0Y7OztPQUdELEVBQ0MsRUFBRSxJQUFJLEVBQUUsVUFBVSxFQUFFLENBQ3ZCLENBQUM7SUFFRixJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQ3hDLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7O1FBaUJWLENBQ0MsQ0FBQyxJQUFJLENBQ0Y7OztvREFHd0MsV0FBVyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQ2xELEdBQUcsQ0FDTjs7O1NBR1osRUFDRyxFQUFFLElBQUksRUFBRSxVQUFVLEVBQUUsQ0FDdkIsQ0FBQztLQUNMO0lBRUQsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUN4QyxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O1FBeUJWLENBQ0MsQ0FBQyxJQUFJLENBQ0Y7OztzQkFHVSxpQkFBUSxDQUFDLHVCQUF1QixDQUM5QixpQkFBUSxDQUFDLEdBQUcsQ0FBQywyQkFBMkIsQ0FBQyxDQUM1Qzs7O1NBR1osRUFDRyxFQUFFLElBQUksRUFBRSxVQUFVLEVBQUUsQ0FDdkIsQ0FBQztLQUNMO0lBRUQsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQztBQTNPRCw0QkEyT0MifQ==

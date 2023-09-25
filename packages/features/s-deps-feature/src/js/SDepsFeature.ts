@@ -144,16 +144,16 @@ export default class SDepsFeature extends __SFeature {
             // check if we have some "chunks" in the cssFrontData
             // that is coming from the postcssSugarPlugin.
             // if not, accept all chunks. if some, check if the requested chunk is in the list
-            if (
-                finalDepPath.match(/[a-zA-Z0-9_-]+/) &&
-                SDepsFeature._cssFrontData.chunks
-            ) {
-                if (
-                    !SDepsFeature._cssFrontData.chunks.includes?.(finalDepPath)
-                ) {
-                    continue;
-                }
-            }
+            // if (
+            //     finalDepPath.match(/[a-zA-Z0-9_-]+/) &&
+            //     SDepsFeature._cssFrontData.chunks
+            // ) {
+            //     if (
+            //         !SDepsFeature._cssFrontData.chunks.includes?.(finalDepPath)
+            //     ) {
+            //         continue;
+            //     }
+            // }
 
             // check if a partial already exists for this
             const $existing = document.querySelector(

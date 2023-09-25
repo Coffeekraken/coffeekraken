@@ -1,1 +1,0 @@
-.s-disabled,[disabled]{pointer-events:none;opacity:var(--s-helpers-disabled-opacity, 0.4)!important}.s-disabled:active,.s-disabled:focus,.s-disabled:hover,[disabled]:active,[disabled]:focus,[disabled]:hover{opacity:var(--s-helpers-disabled-opacity, 0.4)!important}.s-disabled,.s-disabled *,[disabled],[disabled] *{cursor:not-allowed!important;user-select:none!important}

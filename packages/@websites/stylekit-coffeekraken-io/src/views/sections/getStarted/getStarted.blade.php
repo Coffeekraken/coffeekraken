@@ -1,17 +1,17 @@
-<template s-lazy id="get-started">
+{{-- <template s-lazy id="get-started"> --}}
 
-    <section class="section">
+    <section class="section" id="get-started">
 
         <div class="s-container">
 
             <div class="_layout">
                 
                 <div>
-                    <h2 class="s-typo:h3 s-mbe:30 _title">
+                    <h2 class="s-typo:h3 s-mbe:30 s-tc:complementary">
                         Get started
                     </h2>
                     <p class="s-typo:h5 s-mbe:30">
-                        Install the <span class="s-tc:complementary">PostCSS plugin</span><br />and start working!
+                        Install the <span class="s-tc:accent">PostCSS plugin</span><br />and start working!
                     </p>
                     <p class="s-typo:p s-mbe:30">
                         Our PostCSS plugin can be installed just as any other ones. For more informations about PostCSS, please refer to the official website.
@@ -55,4 +55,4 @@
 
     </section>
 
-</template>
+{{-- </template> --}}

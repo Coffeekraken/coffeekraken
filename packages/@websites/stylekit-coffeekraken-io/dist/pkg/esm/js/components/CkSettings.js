@@ -100,7 +100,7 @@ export default class CkSettings extends __SLitComponent {
                 </s-range>
               </label>
               <div class="s-flex s-text:right s-pi:50 s-pb:30 @mobile s-pi:40">
-                <div class="s-flex-item:grow"></div>
+                <div class="s-grow"></div>
                 ${this._front.lod.level === 0
             ? html `
                               <p class="s-typo:p s-font:25">

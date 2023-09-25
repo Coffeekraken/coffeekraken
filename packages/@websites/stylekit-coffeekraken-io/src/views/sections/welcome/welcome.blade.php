@@ -1,10 +1,10 @@
-<section id="homepage-welcome" viewport-aware>
+<section class="section" id="homepage-welcome" viewport-aware>
 
-    <pre>
+    {{-- <pre>
         @php
         print_r(\SViews\specs\readViewSpec('sugar.views.sections.contact'));
         @endphp
-    </pre>
+    </pre> --}}
 
     <div class="s-container section">
 
@@ -12,27 +12,10 @@
             @include('sections.welcome.partials.content')
         </div>
 
-        <div class="_illustration">
+        {{-- <div class="_illustration">
 
             <div welcome-slider>
-
-                {{-- <div class="_code _postcss">
-<div class="_line _comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:!JYJ?JB#&YJ55YJ7^&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-<div class="_line _comment">&nbsp;&nbsp;&nbsp;&nbsp;!5Y7^.&nbsp;:Y7.7P~&nbsp;&nbsp;:~7Y5?.&nbsp;&nbsp;&nbsp;</div>
-<div class="_line _comment">&nbsp;&nbsp;^PY^&nbsp;&nbsp;&nbsp;&nbsp;?Y:&nbsp;&nbsp;&nbsp;:PY.&nbsp;&nbsp;&nbsp;&nbsp;:5B!&nbsp;&nbsp;</div>
-<div class="_line _comment">&nbsp;?B~&nbsp;&nbsp;&nbsp;&nbsp;^57.&nbsp;.....Y#!.&nbsp;&nbsp;&nbsp;&nbsp;^BY&nbsp;</div>
-<div class="_line _comment">?B:&nbsp;&nbsp;&nbsp;.7G#JYB#GGB#5YG#:&nbsp;&nbsp;&nbsp;&nbsp;:@J</div>
-<div class="_line _comment">&^&nbsp;&nbsp;&nbsp;:7:J#75?^:.:!YJ7@B~&nbsp;&nbsp;&nbsp;&nbsp;5&</div>
-<div class="_line _comment">Y&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;J@Y.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;J@#!GY&nbsp;&nbsp;&nbsp;J@</div>
-<div class="_line _comment">7:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5@#.&nbsp;YB~&nbsp;5@</div>
-<div class="_line _comment">.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JB!:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.?G5@:&nbsp;&nbsp;~GJ#5</div>
-<div class="_line _comment">&nbsp;.^^~~~^P#~J55YYPB5!?#!~!~!#&~</div>
-<div class="_line _comment">&nbsp;.^7~^~~~~~^^~~^^::::.:..:GB^&nbsp;</div>
-<div class="_line _comment">&nbsp;&nbsp;&nbsp;~Y7:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:?GJ.&nbsp;&nbsp;</div>
-<div class="_line _comment">&nbsp;&nbsp;&nbsp;&nbsp;.~JYJ!^..&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.:~J5P?:&nbsp;&nbsp;&nbsp;&nbsp;</div>
-<div class="_line _comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.~?JY55Y55555?!:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                </div> --}}
-
+PGet
                 <div class="_code">
     <div class="_line _comment">░░░&nbsp;&nbsp;&nbsp;░░░&nbsp;░░░░░░░░░</div>
     <div class="_line _comment">░░░&nbsp;&nbsp;&nbsp;░░░&nbsp;&nbsp;&nbsp;&nbsp;░░░</div>
@@ -229,7 +212,7 @@
             
 
             </div>
-        </div>
+        </div> --}}
 
     </div>
 

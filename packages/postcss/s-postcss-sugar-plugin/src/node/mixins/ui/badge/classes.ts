@@ -72,7 +72,7 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiBadgeClassesParams = {
         lnfs: [],
-        defaultLnf: 'default',
+        defaultLnf: 'solid',
         scope: [],
         ...params,
     };
@@ -118,33 +118,39 @@ export default function ({
         ${finalParams.lnfs
             .map((lnf) => {
                 return ` * @example        html       ${lnf}
+            * <div class="s-flex s-gap:20">
             *   <a class="s-badge${
                 finalParams.defaultLnf === lnf ? '' : `:${lnf}`
-            } s-mie:20">Say hello!</a>
+            }">Say hello!</a>
             *   <a class="s-badge${
                 finalParams.defaultLnf === lnf ? '' : `:${lnf}`
-            } s-mie:20 s-color:accent">Say hello!</a>
+            } s-color:accent">Say hello!</a>
             *   <a class="s-badge${
                 finalParams.defaultLnf === lnf ? '' : `:${lnf}`
-            } s-mie:20 s-color:complementary">Say hello!</a>
+            } s-color:complementary">Say hello!</a>
             *   <a class="s-badge${
                 finalParams.defaultLnf === lnf ? '' : `:${lnf}`
             } s-color:error">Say hello!</a>
+            * </div>
             * `;
             })
             .join('\n')}
         * 
         * @example          html        Shapes
-        * <a class="s-badge s-mie:20 s-mbe:20">Say hello!</a>
-        * <a class="s-badge s-shape:pill s-mie:20 s-mbe:20">Say hello!</a>
-        * <a class="s-badge s-shape:square s-mie:20 s-mbe:20">Say hello!</a>
+        * <div class="s-flex s-gap:20">
+        *   <a class="s-badge">Say hello!</a>
+        *   <a class="s-badge s-shape:pill">Say hello!</a>
+        *   <a class="s-badge s-shape:square">Say hello!</a>
+        * </div>
         * 
         * @example        html       Scales
-        *   <a class="s-badge s-scale:05 s-mie:20 s-mbe:20">Say hello!</a>
-        *   <a class="s-badge s-scale:1 s-mie:20 s-mbe:20">Say hello!</a>
-        *   <a class="s-badge s-scale:12 s-mie:20 s-mbe:20">Say hello!</a>
-        *   <a class="s-badge s-scale:15 s-mie:20 s-mbe:20">Say hello!</a>
-        *   <a class="s-badge s-scale:20 s-mbe:20">Say hello!</a>
+        * <div class="s-flex s-gap:20">
+        *   <a class="s-badge s-scale:05">Say hello!</a>
+        *   <a class="s-badge s-scale:1">Say hello!</a>
+        *   <a class="s-badge s-scale:12">Say hello!</a>
+        *   <a class="s-badge s-scale:15">Say hello!</a>
+        *   <a class="s-badge s-scale:20">Say hello!</a>
+        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -200,7 +206,7 @@ export default function ({
             ).code(
                 `
             .s-badge${
-                lnf === finalParams.defaultLnf ? '' : `--${lnf}`
+                lnf === finalParams.defaultLnf ? '' : `-${lnf}`
             }:not(.s-bare) {
                 @sugar.ui.badge($lnf: ${lnf}, $scope: lnf);
             }

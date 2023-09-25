@@ -188,12 +188,10 @@ export default class SSugarCli {
      */
     static async init() {
         // listen for ctrl+c
-        if (!__isChildProcess()) {
-            __hotkey('ctrl+c').on('press', () => {
-                process.emit('custom_exit');
-                process.emit('SIGINT');
-            });
-        }
+        __hotkey('ctrl+c')?.on('press', () => {
+            process.emit('custom_exit');
+            process.emit('SIGINT');
+        });
 
         // singleton
         if (global._sugarCli) return global._sugarCli;

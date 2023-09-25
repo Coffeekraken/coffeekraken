@@ -38,7 +38,7 @@ __sFiltrableInputDefine({
                 ? html `
                                   <div class="s-mbe:10">
                                       <h4
-                                          class="s-dashboard-pages_list-item-title s-typo:bold s-tc:accent s-flex-item:grow"
+                                          class="s-dashboard-pages_list-item-title s-typo:bold s-tc:accent s-grow"
                                       >
                                           ${unsafeHTML(item.title)}
                                       </h4>

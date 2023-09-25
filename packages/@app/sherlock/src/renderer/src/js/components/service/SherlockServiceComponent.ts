@@ -132,7 +132,7 @@ export class SherlockServiceComponent extends LitElement {
                 <div class="_inner">
                     <header class="_metas">
                         <div class="s-flex">
-                            <h1 class="_title s-flex-item:grow">${service.name}</h1>
+                            <h1 class="_title s-grow">${service.name}</h1>
                             <div class="_tools">
                                 <a
                                     class="s-btn s-shape:pill s-color:complementary"
@@ -238,7 +238,7 @@ export class SherlockServiceComponent extends LitElement {
                                                     ${task.name} ${task.state}
                                                 </h1>
                                             </div>
-                                            <div class="s-flex-item:grow"></div>
+                                            <div class="s-grow"></div>
 
                                             <div class="_result-widget">
                                                 ${task.state !== 'running'
@@ -343,7 +343,7 @@ export class SherlockServiceComponent extends LitElement {
                                                                 ${taskState.details
                                                                     ? html`
                                                                           <div
-                                                                              class="s-flex:align-center s-flex-item:grow s-gap:20"
+                                                                              class="s-flex:align-center s-grow s-gap:20"
                                                                           >
                                                                               ${taskResult.data
                                                                                   .status ===

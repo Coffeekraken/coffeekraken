@@ -98,15 +98,10 @@ export default function ({
                     margin-inline-start: 0;
                   }
 
-                  & input:not([type="checkbox"]):not([type="radio"]),
-                  & textarea {
-                    padding-block: calc(sugar.padding(ui.form.paddingBlock) * 1.5);
-                  }
-
                   & > span {
                     top: 0;
                     line-height: initial;
-                    left: sugar.padding(ui.form.paddingInline);
+                    left: calc(sugar.padding(ui.form.paddingInline) * 1.3);
                     padding-block: calc(sugar.padding(ui.form.paddingBlock) * 1.2);
                     position: absolute;
                     z-index: 1;
@@ -119,27 +114,25 @@ export default function ({
                   &:focus-within {
                     & > span {
                       top: 0;
-                      left: sugar.padding(ui.form.paddingInline);
                       transform: scale(0.6);
                       opacity: 0.8;
                     }
                     & input:not([type="checkbox"]):not([type="radio"]),
                     & textarea {
-                      padding-block-start: calc(sugar.padding(ui.form.paddingBlock, true) * 1.5 * 1.2);
-                      padding-block-end: calc(sugar.padding(ui.form.paddingBlock, true) * 1.5 * 0.8);
+                      padding-block-start: calc(sugar.padding(ui.form.paddingBlock, true) * 1.4);
+                      padding-block-end: calc(sugar.padding(ui.form.paddingBlock, true) * 0.6);
                     }
                   }
                   
                   & input:not(:placeholder-shown),
                   & textarea:not(:placeholder-shown) {
-                      padding-block-start: calc(sugar.padding(ui.form.paddingBlock, true) * 1.5 * 1.2) !important;
-                      padding-block-end: calc(sugar.padding(ui.form.paddingBlock, true) * 1.5 * 0.8) !important;
+                      padding-block-start: calc(sugar.padding(ui.form.paddingBlock, true) * 1.4) !important;
+                      padding-block-end: calc(sugar.padding(ui.form.paddingBlock, true) * 0.6) !important;
                   }
                   
-                  & input:not(:placeholder-shown):not([type="checkbox"]):not([type="radio"]) + span,
-                  & textarea:not(:placeholder-shown) + span {
+                  & > span:has(+ input:not(:placeholder-shown):not([type="checkbox"]):not([type="radio"])),
+                  & > span:has(+ textarea:not(:placeholder-shown)) {
                     top: 0;
-                    left: sugar.padding(ui.form.paddingInline);
                     transform: scale(0.6);
                     opacity: 0.8;
                   }

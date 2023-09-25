@@ -1,6 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
-import __faker from 'faker';
 
 /**
  * @name          classes
@@ -53,8 +52,8 @@ class postcssSugarPluginUiLabelClassesInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiLabelClassesParams {
-    lnfs: ('inline' | 'float')[];
-    defaultLnf: 'inline' | 'float';
+    lnfs: ('inline' | 'float' | 'block')[];
+    defaultLnf: 'inline' | 'float' | 'block';
     scope: ('bare' | 'lnf' | 'vr')[];
 }
 
@@ -106,7 +105,7 @@ export default function ({
         *
         ${finalParams.lnfs
             .map((lnf) => {
-                return ` * @cssClass     s-label${
+                return ` * @cssClass     s-label:responsive${
                     lnf === finalParams.defaultLnf ? '' : `:${lnf}`
                 }           Apply the ${lnf} label lnf`;
             })
@@ -116,46 +115,38 @@ export default function ({
         ${finalParams.lnfs
             .map((lnf) => {
                 return ` * @example        html       ${lnf} lnf
-            *   <label class="s-mbe:30 s-label${
+            * <form class="s-flex:column s-gap:30">
+            *   <label class="s-label:responsive${
                 lnf === finalParams.defaultLnf ? '' : `:${lnf}`
             }">
-            *     <input type="text" class="s-input ${
-                lnf !== 'block' ? 's-width:40' : ''
-            }" placeholder="Type something!" />
-            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+            *     <span>John Doe</span>
+            *     <input type="text" class="s-input" placeholder="Type something!" />
             *   </label>
-            *   <label class="s-mbe:30 s-label${
+            *   <label class="s-label:responsive${
                 lnf === finalParams.defaultLnf ? '' : `:${lnf}`
             }">
-            *     <textarea class="s-input ${
-                lnf !== 'block' ? 's-width:40' : ''
-            }" placeholder="Type something!" rows="3"></textarea>
-            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+            *     <span>John Doe</span>
+            *     <textarea class="s-input" placeholder="Type something!" rows="3"></textarea>
             *   </label>
-        *   <label class="s-mbe:30 s-label${
-            lnf === finalParams.defaultLnf ? '' : `:${lnf}`
-        }">
-        *     <input type="text" disabled class="s-input ${
-            lnf !== 'block' ? 's-width:40' : ''
-        }" placeholder="Type something!" />
-        *     <span>I'm disabled</span>
-    *   </label>
-    *   <label dir="rtl" class="s-mbe:30 s-label${
-        lnf === finalParams.defaultLnf ? '' : `:${lnf}`
-    }">
-    *     <input type="text" class="s-input ${
-        lnf !== 'block' ? 's-width:40' : ''
-    }" placeholder="Type something!" />
-    *     <span>Support RTL</span>
-    *   </label>
-    *   <label class="s-mbe:30 s-label${
-        lnf === finalParams.defaultLnf ? '' : `:${lnf}`
-    } s-color:accent">
-    *     <input type="text" class="s-input ${
-        lnf !== 'block' ? 's-width:40' : ''
-    }" placeholder="Type something!" />
-    *     <span>With the accent color</span>
-    *   </label>
+            *   <label class=" s-label:responsive${
+                lnf === finalParams.defaultLnf ? '' : `:${lnf}`
+            }">
+            *     <span>I'm disabled</span>
+            *     <input type="text" disabled class="s-input" placeholder="Type something!" />
+            *   </label>
+            *   <label dir="rtl" class="s-label:responsive${
+                lnf === finalParams.defaultLnf ? '' : `:${lnf}`
+            }">
+            *     <span>Support RTL</span>
+            *     <input type="text" class="s-input" placeholder="Type something!" />
+            *   </label>
+            *   <label class="s-label:responsive${
+                lnf === finalParams.defaultLnf ? '' : `:${lnf}`
+            } s-color:accent">
+            *     <span>With the accent color</span>
+            *     <input type="text" class="s-input" placeholder="Type something!" />
+            *   </label>
+            * </div>
             * `;
             })
             .join('\n')}
@@ -239,31 +230,23 @@ export default function ({
      `,
     ).code(
         `
-        .s-label-responsive {
+        .s-label-responsive:not(.s-label-float) {
             text-align: initial;
-
-            > span {
-                width: clamp(100px, 50%, 50%);
-            }   
-            > input:not([type="radio"][type="checkbox"]),
-            > textarea,
-            > div {
-                width: clamp(250px, 50%, 50%);
+            
+            display: flex;
+            
+            > * {
+                width: auto;
+                flex-grow: 1;
+                flex-shrink: 0;
             }
 
             @sugar.media(<=mobile) {
                 @sugar.ui.label($lnf: block, $scope: bare);
 
-                > span,
-                > input:not([type="radio"][type="checkbox"]),
-                > textarea,
-                > div {
+                > * {
                     width: 100%;
                 }
-
-                &:not(.s-label-float) > span {
-                    padding-block-start: 0;
-                } 
             }
         }
         `,

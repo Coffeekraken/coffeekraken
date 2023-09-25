@@ -18,15 +18,15 @@ import { query } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import __SCodeExampleComponentInterface from './interface/SCodeExampleComponentInterface.js';
 
-// // // @ts-ignore
-// import __prettier from 'prettier/esm/standalone.mjs';
 // // @ts-ignore
-// import __prettierJs from 'prettier/esm/parser-babel.mjs';
-// // @ts-ignore
-// import __prettierHtml from 'prettier/esm/parser-html.mjs';
-// // @ts-ignore
-// import __prettierPhp from '@prettier/plugin-php/standalone';
-// import __prettierCss from 'prettier/esm/parser-postcss.mjs';
+import __prettier from 'prettier/esm/standalone.mjs';
+// @ts-ignore
+import __prettierJs from 'prettier/esm/parser-babel.mjs';
+// @ts-ignore
+import __prettierHtml from 'prettier/esm/parser-html.mjs';
+// @ts-ignore
+import __prettierPhp from '@prettier/plugin-php/standalone';
+import __prettierCss from 'prettier/esm/parser-postcss.mjs';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-code-example.css'; // relative to /dist/pkg/esm/js
@@ -194,15 +194,15 @@ export default class SCodeExample extends __SLitComponent {
             );
             let formatedCode = rawCode;
             try {
-                // formatedCode = __prettier.format(rawCode, {
-                //     parser,
-                //     plugins: [
-                //         __prettierCss,
-                //         __prettierHtml,
-                //         __prettierJs,
-                //         __prettierPhp,
-                //     ],
-                // });
+                formatedCode = __prettier.format(rawCode, {
+                    parser,
+                    plugins: [
+                        __prettierCss,
+                        __prettierHtml,
+                        __prettierJs,
+                        __prettierPhp,
+                    ],
+                });
             } catch (e) {}
             this.props.items = [
                 ...this.props.items,
@@ -390,7 +390,9 @@ export default class SCodeExample extends __SLitComponent {
                         </pre>
                         `,
                     )}
-                    ${this.props.lines && currentItem.lines > this.props.lines
+                    ${this.props.more &&
+                    this.props.lines &&
+                    currentItem.lines > this.props.lines
                         ? html`
                         <div class="${this.utils.cls('_more-bar')}">
                             ${

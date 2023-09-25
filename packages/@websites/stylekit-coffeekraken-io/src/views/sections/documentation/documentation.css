@@ -18,5 +18,17 @@
         @sugar.media mobile {
             margin-inline: calc(sugar.margin(30) * -1);
         }
+
+        .s-format-text {
+            h1 {
+                font-size: sugar.font.size(70);
+            }
+            h2 {
+                font-size: sugar.font.size(60);
+            }
+            h3 {
+                font-size: sugar.font.size(50);
+            }
+        }
     }
 }

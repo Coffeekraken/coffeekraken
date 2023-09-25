@@ -341,7 +341,7 @@ export default class SDocComponent extends __SLitComponent {
                                                               ' ',
                                                           ),
                                                           (chunk) => {
-                                                              return `<span class="s-tc--accent">${chunk}</span>`;
+                                                              return `<span class="s-tc-accent">${chunk}</span>`;
                                                           },
                                                       ),
                                                   )}
@@ -388,7 +388,7 @@ export default class SDocComponent extends __SLitComponent {
                           <h1
                               class="${this.utils.cls(
                                   '_doc-title',
-                                  's-typo--h1 s-mbe--30',
+                                  's-typo-h1 s-mbe-30',
                               )}"
                           >
                               ${itemObj.as ?? itemObj.name}
@@ -412,7 +412,7 @@ export default class SDocComponent extends __SLitComponent {
                     : ''}
                 ${itemObj.type?.raw?.toLowerCase?.() === 'config'
                     ? html`
-                          <div class="${this.utils.cls('_file', 's-mbe--30')}">
+                          <div class="${this.utils.cls('_file', 's-mbe-30')}">
                               ${unsafeHTML(this.props.icons.file)}
                               <span>.sugar/${itemObj.name}.config.ts</span>
                           </div>
@@ -422,7 +422,7 @@ export default class SDocComponent extends __SLitComponent {
                     ? html`
                 <p class="${this.utils.cls(
                     '_doc-description',
-                    's-typo--lead s-mbe--30',
+                    's-typo-lead s-mbe-30',
                 )}">${itemObj.description}</h1>
             `
                     : ''}
@@ -457,7 +457,7 @@ export default class SDocComponent extends __SLitComponent {
                           <h2
                               class="${this.utils.cls(
                                   '_section-title',
-                                  's-typo--h2 s-mbe--30',
+                                  's-typo-h2 s-mbe-30',
                               )}"
                           >
                               ${this.props.i18n.examplesTitle}
@@ -467,13 +467,13 @@ export default class SDocComponent extends __SLitComponent {
                                   <div
                                       class="${this.utils.cls(
                                           '_example',
-                                          's-mbe--50',
+                                          's-mbe-50',
                                       )}"
                                   >
                                       <h3
                                           class="${this.utils.cls(
                                               '_example-title',
-                                              's-typo--h3 s-mbe--50',
+                                              's-typo-h3 s-mbe-50',
                                           )}"
                                       >
                                           ${__upperFirst(example.title ?? '')}
@@ -483,7 +483,7 @@ export default class SDocComponent extends __SLitComponent {
                                           ? html`<div
                                                 class="${this.utils.cls(
                                                     '_example-preview',
-                                                    's-mbe--50',
+                                                    's-mbe-50',
                                                 )}"
                                             >
                                                 ${unsafeHTML(example.code)}
@@ -543,7 +543,7 @@ export default class SDocComponent extends __SLitComponent {
                               <h2
                                   class="${this.utils.cls(
                                       '_section-title',
-                                      's-typo--h2 s-mbe--30',
+                                      's-typo-h2 s-mbe-30',
                                   )}"
                               >
                                   ${this.props.i18n.paramsTitle}
@@ -668,7 +668,7 @@ export default class SDocComponent extends __SLitComponent {
                 <label
                     class="${this.utils.cls(
                         '_search',
-                        's-input-container--addon',
+                        's-input-container-addon',
                     )}"
                 >
                     <input

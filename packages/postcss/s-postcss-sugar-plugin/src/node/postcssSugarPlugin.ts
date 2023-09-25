@@ -122,13 +122,13 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             },
             target: __SEnv.get('target') ?? 'vite',
             plugins: [],
-            chunks: true,
+            chunks: false,
             verbose: __SEnv.is('verbose'),
         },
         settings,
     );
 
-    let themeHash, settingsHash, bench;
+    let themeHash, settingsHash;
 
     if (_configLoaded) {
         updateConfig();

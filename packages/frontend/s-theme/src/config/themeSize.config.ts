@@ -129,7 +129,7 @@ export default function (api) {
          * @name          40
          * @namespace     config.themeSize
          * @type          String
-         * @default       1.35
+         * @default       1.4
          *
          * Declare the size "40".
          * MUST be a scale factor relative to the "default" absolute value specified.
@@ -137,7 +137,7 @@ export default function (api) {
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        40: 1.35,
+        40: 1.4,
 
         /**
          * @name          50
@@ -171,7 +171,7 @@ export default function (api) {
          * @name          70
          * @namespace     config.themeSize
          * @type          String
-         * @default       3.2
+         * @default       3.5
          *
          * Declare the size "70".
          * MUST be a scale factor relative to the "default" absolute value specified.
@@ -179,7 +179,7 @@ export default function (api) {
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        70: 3.2,
+        70: 3.5,
 
         /**
          * @name          80
@@ -199,7 +199,7 @@ export default function (api) {
          * @name          90
          * @namespace     config.themeSize
          * @type          String
-         * @default       7
+         * @default       5.5
          *
          * Declare the size "90".
          * MUST be a scale factor relative to the "default" absolute value specified.
@@ -207,13 +207,13 @@ export default function (api) {
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        90: 7,
+        90: 5.5,
 
         /**
          * @name          100
          * @namespace     config.themeSize
          * @type          String
-         * @default       9
+         * @default       7
          *
          * Declare the size "100".
          * MUST be a scale factor relative to the "default" absolute value specified.
@@ -221,6 +221,6 @@ export default function (api) {
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        100: 20,
+        100: 7,
     };
 }

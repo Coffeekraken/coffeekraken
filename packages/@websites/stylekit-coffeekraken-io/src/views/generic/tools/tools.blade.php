@@ -1,12 +1,12 @@
 <div class="tools s-until:media:mobile">
 
     <div class="tools_hotkeys s-tooltip-container">
-        <button class="s-btn:block" aria-label="Hotkeys">
+        <button class="_btn" aria-label="Hotkeys">
             <i class="s-icon:keyboard"></i>
         </button>
         <div s-floating placement="left" class="s-bare s-tooltip:interactive">
             <div class="s-position:relative">
-                <i class="s-icon:keyboard s-font:100 s-mbe:30"></i>
+                <i class="s-icon:keyboard s-font:90 s-mbe:30"></i>
                 <h1 class="s-typo:h5 s-mbe:30">
                     <span class="s-tc:accent">Hotkeys</span><br /> makes the difference!
                 </h1>
@@ -20,17 +20,17 @@
     </div>
 
     <div class="tools_issue s-tooltip-container">
-        <button class="s-btn:block s-color:error" aria-label="Share the love">
+        <button class="_btn" aria-label="Declare an issue">
             <i class="s-icon:fire"></i>
         </button>
         <div s-floating placement="left" class="s-bare s-tooltip:interactive">
             <div class="s-position:relative">
-                <i class="s-icon:bugs s-font:100 s-mbe:30"></i>
+                <i class="s-icon:bugs s-font:90 s-mbe:30"></i>
                 <h1 class="s-typo:h5 s-mbe:30">
                     <span class="s-tc:accent">Bugs</span><br />are not our friends...
                 </h1>
                 <p class="s-typo:p s-font:30 s-mbe:30">
-                    <span class="s-tc:accent">Don't hesitate</span> to declare an issue<br />if something does not works as
+                    <span class="s-tc:accent">Don't hesitate</span> to declare an issue<br />if something does not works<br />as
                     expected.
                 </p>
                 <a class="s-btn s-color:error s-display:block s-mbe:20 s-depth:50"
@@ -47,7 +47,7 @@
         </div>
     </div>
     <div class="tools_share s-tooltip-container">
-        <button class="s-btn:block s-color:accent" aria-label="Share the love">
+        <button class="_btn" aria-label="Share the love">
             <i class="s-icon:heart"></i>
         </button>
         <div s-floating placement="left" class="s-bare s-tooltip:interactive">
@@ -57,8 +57,7 @@
                     <span class="s-tc:accent">The more we are</span>,<br />the stronger we become.
                 </h1>
                 <p class="s-typo:p s-font:30 s-mbe:30">
-                    Don't hesitate to tell some words to your<br />friends about us.<br />The goal is to became more and more each<br />
-                    days to help each others...
+                    Don't hesitate to tell some words<br />to your friends about us.<br />The goal is to became more and more<br /> each days to help each others...
                 </p>
                 <a href="https://www.patreon.com/coffeekraken" class="s-btn:block s-color:error s-mbe:20"
                     title="Support us on Patreon" target="_blank">
@@ -85,7 +84,7 @@
         </div>
     </div>
     <div class="tools_share s-tooltip-container">
-        <button class="s-btn:block s-color:complementary" aria-label="Join us on Discord">
+        <button class="_btn" aria-label="Join us on Discord">
             <i class="s-icon:user"></i>
         </button>
         <div s-floating placement="left" class="s-bare s-tooltip:interactive">
@@ -106,7 +105,7 @@
         </div>
     </div>
     <div class="tools_opensource s-tooltip-container">
-        <button class="s-btn:block s-bg:main-surface" aria-label="We love open source!">
+        <button class="_btn" aria-label="We love open source!">
             <i class="s-icon:logo-opensource s-tc:base"></i>
         </button>
         <div s-floating placement="left" class="s-bare s-tooltip:interactive">

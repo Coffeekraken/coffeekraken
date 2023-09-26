@@ -8,7 +8,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 /**
  * @name          label
- * @as          @sugar.ui.label
+ * @as          @s.ui.label
  * @namespace     node.mixin.ui.label
  * @type               PostcssMixin
  * @interface     ./label          interface
@@ -21,11 +21,11 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet     @sugar.ui.label
+ * @snippet     @s.ui.label
  *
  * @example     css
  * .my-label {
- *    @sugar.ui.label;
+ *    @s.ui.label;
  * }
  *
  * @since      2.0.0
@@ -58,7 +58,7 @@ function default_1({ params, atRule, replaceWith, }) {
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
           width: 100%;
-          font-size: sugar.font.size(30);
+          font-size: s.font.size(30);
           display: flex;
 
           > span {
@@ -67,7 +67,7 @@ function default_1({ params, atRule, replaceWith, }) {
           }
 
           &[disabled] {
-            @sugar.disabled();
+            @s.disabled();
           }
 
     `);
@@ -84,8 +84,8 @@ function default_1({ params, atRule, replaceWith, }) {
                   & > span {
                     top: 0;
                     line-height: initial;
-                    left: calc(sugar.padding(ui.form.paddingInline) * 1.3);
-                    padding-block: calc(sugar.padding(ui.form.paddingBlock) * 1.2);
+                    left: calc(s.padding(ui.form.paddingInline) * 1.3);
+                    padding-block: calc(s.padding(ui.form.paddingBlock) * 1.2);
                     position: absolute;
                     z-index: 1;
                     transform: scale(1);
@@ -102,15 +102,15 @@ function default_1({ params, atRule, replaceWith, }) {
                     }
                     & input:not([type="checkbox"]):not([type="radio"]),
                     & textarea {
-                      padding-block-start: calc(sugar.padding(ui.form.paddingBlock, true) * 1.4);
-                      padding-block-end: calc(sugar.padding(ui.form.paddingBlock, true) * 0.6);
+                      padding-block-start: calc(s.padding(ui.form.paddingBlock, true) * 1.4);
+                      padding-block-end: calc(s.padding(ui.form.paddingBlock, true) * 0.6);
                     }
                   }
                   
                   & input:not(:placeholder-shown),
                   & textarea:not(:placeholder-shown) {
-                      padding-block-start: calc(sugar.padding(ui.form.paddingBlock, true) * 1.4) !important;
-                      padding-block-end: calc(sugar.padding(ui.form.paddingBlock, true) * 0.6) !important;
+                      padding-block-start: calc(s.padding(ui.form.paddingBlock, true) * 1.4) !important;
+                      padding-block-end: calc(s.padding(ui.form.paddingBlock, true) * 0.6) !important;
                   }
                   
                   & > span:has(+ input:not(:placeholder-shown):not([type="checkbox"]):not([type="radio"])),
@@ -124,21 +124,21 @@ function default_1({ params, atRule, replaceWith, }) {
                   &[dir="rtl"] {
                     & > *:not(input):not(textarea):not(select) {
                       left: auto;
-                      right: sugar.padding(ui.form.paddingInline);
+                      right: s.padding(ui.form.paddingInline);
                       transform-origin: 100% 0;
                     }
                     &:focus,
                     &:focus-within {
                       & > *:not(input):not(textarea):not(select) {
                         left: auto;
-                        right: sugar.padding(ui.form.paddingInline);
+                        right: s.padding(ui.form.paddingInline);
                         opacity: 0.8;
                       }
                     }
                     & > input:not(:placeholder-shown):not([type="checkbox"]):not([type="radio"]) + span,
                     & > textarea:not(:placeholder-shown) + span {
                       left: auto;
-                      right: sugar.padding(ui.form.paddingInline);
+                      right: s.padding(ui.form.paddingInline);
                       opacity: 0.8;
                     }
                   }
@@ -151,7 +151,7 @@ function default_1({ params, atRule, replaceWith, }) {
 
                   & > .disabled + *,
                   & > [disabled] + * {
-                    @sugar.disabled();
+                    @s.disabled();
                   }
 
                 `);
@@ -161,7 +161,7 @@ function default_1({ params, atRule, replaceWith, }) {
                   display: flex;
                   justify-content: space-between;
                   align-items: initial !important;
-                  gap: sugar.margin(20);
+                  gap: s.margin(20);
                   flex-direction: column;
 
                   & input:not([type="checkbox"]):not([type="radio"]),
@@ -176,14 +176,14 @@ function default_1({ params, atRule, replaceWith, }) {
                 vars.push(`
                   display: flex;
                   justify-content: space-between;
-                  gap: sugar.margin(20);
+                  gap: s.margin(20);
 
                   &:not(:has(textarea)) {
                     align-items: center;
                   }
 
                   &:has(textarea) > span {
-                    padding-block-start: sugar.padding(sugar.theme(ui.form.paddingBlock));
+                    padding-block-start: s.padding(s.theme(ui.form.paddingBlock));
                   }
 
                 `);
@@ -198,21 +198,21 @@ function default_1({ params, atRule, replaceWith, }) {
                   width: 100%;  
 
                   & > *:not(input):not(textarea):not(select) {
-                    transition: sugar.theme(ui.label.transition);
+                    transition: s.theme(ui.label.transition);
                   }
 
                   & > *:not(input):not(textarea):not(select) {
-                    color: sugar.color(current, text);
+                    color: s.color(current, text);
                   }
 
                   & > input:not([type="checkbox"]):not([type="radio"]),
                   & > textarea,
                   & > select {
                     width: 100% !important;
-                    transition: sugar.theme(ui.label.transition);
+                    transition: s.theme(ui.label.transition);
 
                     &::placeholder {
-                      color: sugar.color(current, --alpha 0);
+                      color: s.color(current, --alpha 0);
                     }
                   }
 
@@ -222,14 +222,14 @@ function default_1({ params, atRule, replaceWith, }) {
                     & > textarea,
                     & > select {
                       &::placeholder {
-                        color: sugar.color(current, placeholder);
+                        color: s.color(current, placeholder);
                       }
                     }
                   }
                   & > input:not(:placeholder-shown):not([type="checkbox"]):not([type="radio"]),
                   & > textarea:not(:placeholder-shown) {
                     &::placeholder {
-                      color: sugar.color(current, placeholder);
+                      color: s.color(current, placeholder);
                     }
                   }
 

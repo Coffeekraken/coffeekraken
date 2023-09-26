@@ -9,17 +9,17 @@ export { postcssSugarPluginUiClassesInterface as interface };
 
 /**
  * @name           classes
- * @as              @sugar.ui.classes
+ * @as              @s.ui.classes
  * @namespace      node.mixin.ui
  * @type           Mixin
  * @status        beta
  *
  * This mixin allows you to print all the ui classes like button, form, etc...
  *
- * @snippet         @sugar.ui.classes
+ * @snippet         @s.ui.classes
  *
  * @example        css
- * \@sugar.ui.classes;
+ * \@s.ui.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bospsel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -34,28 +34,28 @@ export default function ({
     replaceWith: Function;
 }) {
     const cssArray = [
-        '@sugar.ui.avatar.classes;',
-        '@sugar.ui.backdrop.classes;',
-        '@sugar.ui.badge.classes;',
-        '@sugar.ui.blockquote.classes;',
-        '@sugar.ui.button.classes;',
-        '@sugar.ui.checkbox.classes;',
-        '@sugar.ui.dropdown.classes;',
-        '@sugar.ui.fsTree.classes;',
-        '@sugar.ui.input.classes;',
-        '@sugar.ui.inputContainer.classes;',
-        '@sugar.ui.label.classes;',
-        '@sugar.ui.list.classes;',
-        '@sugar.ui.loader.classes;',
-        '@sugar.ui.media.classes;',
-        '@sugar.ui.radio.classes;',
-        '@sugar.ui.range.classes;',
-        '@sugar.ui.select.classes;',
-        '@sugar.ui.switch.classes;',
-        '@sugar.ui.table.classes;',
-        '@sugar.ui.tabs.classes;',
-        '@sugar.ui.toggle.classes;',
-        '@sugar.ui.tooltip.classes;',
+        '@s.ui.avatar.classes;',
+        '@s.ui.backdrop.classes;',
+        '@s.ui.badge.classes;',
+        '@s.ui.blockquote.classes;',
+        '@s.ui.button.classes;',
+        '@s.ui.checkbox.classes;',
+        '@s.ui.dropdown.classes;',
+        '@s.ui.fsTree.classes;',
+        '@s.ui.input.classes;',
+        '@s.ui.inputContainer.classes;',
+        '@s.ui.label.classes;',
+        '@s.ui.list.classes;',
+        '@s.ui.loader.classes;',
+        '@s.ui.media.classes;',
+        '@s.ui.radio.classes;',
+        '@s.ui.range.classes;',
+        '@s.ui.select.classes;',
+        '@s.ui.switch.classes;',
+        '@s.ui.table.classes;',
+        '@s.ui.tabs.classes;',
+        '@s.ui.toggle.classes;',
+        '@s.ui.tooltip.classes;',
     ];
 
     return cssArray;

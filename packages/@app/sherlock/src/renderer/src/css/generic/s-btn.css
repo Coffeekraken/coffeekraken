@@ -1,21 +1,21 @@
 .s-btn:not(.s-color) {
-    @sugar.color (accent);
+    @s.color (accent);
 }
 .s-btn--text {
-    /* @sugar.color (complementary); */
+    /* @s.color (complementary); */
 
     * {
         color: white;
     }
 }
 .s-btn {
-    @sugar.shape (pill);
+    @s.shape (pill);
 
     svg:not(.s-color) [fill] {
         fill: white;
     }
 
     /* .s-tooltip {
-        @sugar.color (main);
+        @s.color (main);
     } */
 }

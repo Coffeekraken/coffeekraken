@@ -12,7 +12,7 @@ export interface postcssSugarPluginWireframeMixinParams {}
 
 /**
  * @name           wireframe
- * @as              @sugar.wireframe
+ * @as              @s.wireframe
  * @namespace      node.mixin.wireframe
  * @type           PostcssMixin
  * @platform        css
@@ -21,13 +21,13 @@ export interface postcssSugarPluginWireframeMixinParams {}
  * This mixin allows you to specify some css used only for wireframe.
  * It also prevent the lod to be applied inside the atRule.
  *
- * @snippet         @sugar.lod.wireframe
- * \@sugar.wireframe {
+ * @snippet         @s.lod.wireframe
+ * \@s.wireframe {
  *      $1
  * }
  *
  * @example        css
- * \@sugar.wireframe() {
+ * \@s.wireframe() {
  *      // ...
  * }
  *

@@ -1,11 +1,11 @@
 /* importing sugar toolkit */
-@sugar.import ('./sugar.css');
-@sugar.import ('./carpenter.css');
-@sugar.import ('../views/**/*.css');
-@sugar.import ('./generic/**/*.css');
+@s.import ('./sugar.css');
+@s.import ('./carpenter.css');
+@s.import ('../views/**/*.css');
+@s.import ('./generic/**/*.css');
 
 body {
-    background: sugar.color(main, background);
+    background: s.color(main, background);
     /* overflow-x: hidden; */
 }
 
@@ -20,7 +20,7 @@ body {
     min-height: 100vh;
 }
 
-@sugar.lod.prevent {
+@s.lod.prevent {
     html[class='s-lod s-lod--0'] *:hover,
     html[class='s-lod s-lod--0 s-lod--1'] *:hover {
         position: relative;
@@ -42,18 +42,18 @@ body {
 /* logo */
 .logo {
     svg [fill='white'] {
-        fill: sugar.color(main, --darken 10);
+        fill: s.color(main, --darken 10);
     }
     svg [fill='#FEBD0F'] {
-        fill: sugar.color(accent);
+        fill: s.color(accent);
     }
 
-    @sugar.theme (dark) {
+    @s.theme (dark) {
         svg [fill='white'] {
-            fill: sugar.color(main, text);
+            fill: s.color(main, text);
         }
         svg [fill='#FEBD0F'] {
-            fill: sugar.color(accent);
+            fill: s.color(accent);
         }
     }
 }

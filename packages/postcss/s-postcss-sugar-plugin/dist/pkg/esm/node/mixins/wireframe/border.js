@@ -7,7 +7,7 @@ class postcssSugarPluginWireframeBorderMixinInterface extends __SInterface {
 export { postcssSugarPluginWireframeBorderMixinInterface as interface };
 /**
  * @name           border
- * @as              @sugar.wireframe.border
+ * @as              @s.wireframe.border
  * @namespace      node.mixin.wireframe
  * @type           PostcssMixin
  * @platform      postcss
@@ -15,12 +15,12 @@ export { postcssSugarPluginWireframeBorderMixinInterface as interface };
  *
  * This mixin gives you back the wireframe border statement that depend on you themeWireframe config
  *
- * @snippet         @sugar.wireframe.border
- * \@sugar.wireframe.border;
+ * @snippet         @s.wireframe.border
+ * \@s.wireframe.border;
  *
  * @example        css
  * .myCoolItem {
- *  \@sugar.wireframe.border;
+ *  \@s.wireframe.border;
  * }
  *
  * @since       2.0.0
@@ -30,10 +30,10 @@ export default function ({ params, atRule, replaceWith, }) {
     const finalParams = Object.assign({}, (params !== null && params !== void 0 ? params : {}));
     const vars = [];
     vars.push(`
-        border: sugar.wireframe.border(light);
+        border: s.wireframe.border(light);
 
-        @sugar.theme dark {
-            border: sugar.wireframe.border(dark);
+        @s.theme dark {
+            border: s.wireframe.border(dark);
         }
     `);
     return vars;

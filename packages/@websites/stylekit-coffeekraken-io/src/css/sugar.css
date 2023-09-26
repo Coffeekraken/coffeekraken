@@ -1,197 +1,197 @@
 /* init theme */
-@sugar.init ($theme: coffeekraken, $variant: dark);
-/* @sugar.theme.import ($variant: light); */
+@s.init ($theme: coffeekraken, $variant: dark);
+/* @s.theme.import ($variant: light); */
 
 /* main sugar classes */
 /* we need to load them all to display correctly the documentation */
-@sugar.ui.tooltip.classes;
-@sugar.ui.dropdown.classes;
-@sugar.ui.badge.classes;
-@sugar.ui.tabs.classes;
-@sugar.ui.button.classes;
-@sugar.container.classes;
-@sugar.disabled.classes;
-@sugar.layout.classes;
-@sugar.typo.classes;
-@sugar.format.classes;
-@sugar.font.classes;
-@sugar.color.classes;
-@sugar.margin.classes;
-@sugar.padding.classes;
+@s.ui.tooltip.classes;
+@s.ui.dropdown.classes;
+@s.ui.badge.classes;
+@s.ui.tabs.classes;
+@s.ui.button.classes;
+@s.container.classes;
+@s.disabled.classes;
+@s.layout.classes;
+@s.typo.classes;
+@s.format.classes;
+@s.font.classes;
+@s.color.classes;
+@s.margin.classes;
+@s.padding.classes;
 
-@sugar.ui.gauge.classes;
+@s.ui.gauge.classes;
 
 /* chunked ui's */
-@sugar.chunk 'avatar' {
-    @sugar.ui.avatar.classes;
+@s.chunk 'avatar' {
+    @s.ui.avatar.classes;
 }
-@sugar.chunk 'backdrop' {
-    @sugar.ui.backdrop.classes;
+@s.chunk 'backdrop' {
+    @s.ui.backdrop.classes;
 }
-@sugar.chunk 'blockquote' {
-    @sugar.ui.blockquote.classes;
+@s.chunk 'blockquote' {
+    @s.ui.blockquote.classes;
 }
-@sugar.chunk 'checkbox' {
-    @sugar.ui.checkbox.classes;
+@s.chunk 'checkbox' {
+    @s.ui.checkbox.classes;
 }
-@sugar.chunk 'fsTree' {
-    @sugar.ui.fstree.classes;
+@s.chunk 'fsTree' {
+    @s.ui.fstree.classes;
 }
-@sugar.chunk 'input' {
-    @sugar.ui.input.classes;
+@s.chunk 'input' {
+    @s.ui.input.classes;
 }
-@sugar.chunk 'inputContainer' {
-    @sugar.ui.inputcontainer.classes;
+@s.chunk 'inputContainer' {
+    @s.ui.inputcontainer.classes;
 }
-@sugar.chunk 'label' {
-    @sugar.ui.label.classes;
+@s.chunk 'label' {
+    @s.ui.label.classes;
 }
-@sugar.chunk 'list' {
-    @sugar.ui.list.classes;
+@s.chunk 'list' {
+    @s.ui.list.classes;
 }
-@sugar.chunk 'loader' {
-    @sugar.ui.loader.classes;
+@s.chunk 'loader' {
+    @s.ui.loader.classes;
 }
-@sugar.chunk 'media' {
-    @sugar.ui.media.classes;
+@s.chunk 'media' {
+    @s.ui.media.classes;
 }
-@sugar.chunk 'radio' {
-    @sugar.ui.radio.classes;
+@s.chunk 'radio' {
+    @s.ui.radio.classes;
 }
-@sugar.chunk 'range' {
-    @sugar.ui.range.classes;
+@s.chunk 'range' {
+    @s.ui.range.classes;
 }
-@sugar.chunk 'select' {
-    @sugar.ui.select.classes;
+@s.chunk 'select' {
+    @s.ui.select.classes;
 }
-@sugar.chunk 'switch' {
-    @sugar.ui.switch.classes;
+@s.chunk 'switch' {
+    @s.ui.switch.classes;
 }
-@sugar.chunk 'table' {
-    @sugar.ui.table.classes;
+@s.chunk 'table' {
+    @s.ui.table.classes;
 }
-@sugar.chunk 'toggle' {
-    @sugar.ui.toggle.classes;
+@s.chunk 'toggle' {
+    @s.ui.toggle.classes;
 }
 
 /* chunked helpers */
-@sugar.chunk 'gradient' {
-    @sugar.gradient.classes;
+@s.chunk 'gradient' {
+    @s.gradient.classes;
 }
-@sugar.chunk 'grid' {
-    @sugar.grid.classes;
+@s.chunk 'grid' {
+    @s.grid.classes;
 }
-@sugar.chunk 'group' {
-    @sugar.group.classes;
+@s.chunk 'group' {
+    @s.group.classes;
 }
-@sugar.chunk 'hide' {
-    @sugar.hide.classes;
+@s.chunk 'hide' {
+    @s.hide.classes;
 }
-@sugar.chunk 'clearfix' {
-    @sugar.clearfix.classes;
+@s.chunk 'clearfix' {
+    @s.clearfix.classes;
 }
-@sugar.chunk 'cursor' {
-    @sugar.cursor.classes;
+@s.chunk 'cursor' {
+    @s.cursor.classes;
 }
-@sugar.chunk 'link' {
-    @sugar.link.classes;
+@s.chunk 'link' {
+    @s.link.classes;
 }
-@sugar.chunk 'gap' {
-    @sugar.gap.classes;
+@s.chunk 'gap' {
+    @s.gap.classes;
 }
-@sugar.chunk 'text' {
-    @sugar.text.classes;
+@s.chunk 'text' {
+    @s.text.classes;
 }
-@sugar.chunk 'depth' {
-    @sugar.depth.classes;
+@s.chunk 'depth' {
+    @s.depth.classes;
 }
-@sugar.chunk 'flex' {
-    @sugar.flex.classes;
+@s.chunk 'flex' {
+    @s.flex.classes;
 }
-@sugar.chunk 'fit' {
-    @sugar.fit.classes;
+@s.chunk 'fit' {
+    @s.fit.classes;
 }
-@sugar.chunk 'float' {
-    @sugar.float.classes;
+@s.chunk 'float' {
+    @s.float.classes;
 }
-@sugar.chunk 'font' {
-    @sugar.font.classes;
+@s.chunk 'font' {
+    @s.font.classes;
 }
-@sugar.chunk 'ratio' {
-    @sugar.ratio.classes;
+@s.chunk 'ratio' {
+    @s.ratio.classes;
 }
-@sugar.chunk 'scale' {
-    @sugar.scale.classes;
+@s.chunk 'scale' {
+    @s.scale.classes;
 }
-@sugar.chunk 'border' {
-    @sugar.border.classes;
+@s.chunk 'border' {
+    @s.border.classes;
 }
-@sugar.chunk 'display' {
-    @sugar.display.classes;
+@s.chunk 'display' {
+    @s.display.classes;
 }
-@sugar.chunk 'overflow' {
-    @sugar.overflow.classes;
+@s.chunk 'overflow' {
+    @s.overflow.classes;
 }
-@sugar.chunk 'position' {
-    @sugar.position.classes;
+@s.chunk 'position' {
+    @s.position.classes;
 }
-@sugar.chunk 'pointer' {
-    @sugar.pointer.classes;
+@s.chunk 'pointer' {
+    @s.pointer.classes;
 }
-@sugar.chunk 'transition' {
-    @sugar.transition.classes;
+@s.chunk 'transition' {
+    @s.transition.classes;
 }
-@sugar.chunk 'offsize' {
-    @sugar.offsize.classes;
+@s.chunk 'offsize' {
+    @s.offsize.classes;
 }
-@sugar.chunk 'opacity' {
-    @sugar.opacity.classes;
+@s.chunk 'opacity' {
+    @s.opacity.classes;
 }
-@sugar.chunk 'order' {
-    @sugar.order.classes;
+@s.chunk 'order' {
+    @s.order.classes;
 }
-@sugar.chunk 'spacing' {
-    @sugar.spacing.classes;
+@s.chunk 'spacing' {
+    @s.spacing.classes;
 }
-@sugar.chunk 'until' {
-    @sugar.until.classes;
+@s.chunk 'until' {
+    @s.until.classes;
 }
-@sugar.chunk 'when' {
-    @sugar.when.classes;
+@s.chunk 'when' {
+    @s.when.classes;
 }
-@sugar.chunk 'userSelect' {
-    @sugar.userselect.classes;
+@s.chunk 'userSelect' {
+    @s.userselect.classes;
 }
-@sugar.chunk 'visibility' {
-    @sugar.visibility.classes;
+@s.chunk 'visibility' {
+    @s.visibility.classes;
 }
-@sugar.chunk 'visually' {
-    @sugar.visually.classes;
+@s.chunk 'visually' {
+    @s.visually.classes;
 }
-@sugar.chunk 'truncate' {
-    @sugar.truncate.classes;
+@s.chunk 'truncate' {
+    @s.truncate.classes;
 }
-@sugar.chunk 'shape' {
-    @sugar.shape.classes;
+@s.chunk 'shape' {
+    @s.shape.classes;
 }
-@sugar.chunk 'width' {
-    @sugar.width.classes;
+@s.chunk 'width' {
+    @s.width.classes;
 }
-@sugar.chunk 'whiteSpace' {
-    @sugar.whitespace.classes;
+@s.chunk 'whiteSpace' {
+    @s.whitespace.classes;
 }
 
 /* UI's */
-@sugar.ui.codeexample.classes;
-@sugar.ui.clipboardcopy;
+@s.ui.codeexample.classes;
+@s.ui.clipboardcopy;
 
 /* mobile specific classes */
-@sugar.media.classes mobile {
-    @sugar.layout.classes;
+@s.media.classes mobile {
+    @s.layout.classes;
 }
 
 /* icons */
-@sugar.icon.classes (
+@s.icon.classes (
   fa:fire
   fa:user-graduate:documentation
   fa:synagogue:start

@@ -30,10 +30,10 @@ export { postcssUiPanelClassesInterface as interface };
  *
  * This mixin represent a panel
  *
- * @snippet      @sugar.ui.panel.classes($1);
+ * @snippet      @s.ui.panel.classes($1);
  *
  * @example        css
- * \@sugar.ui.panel.classes;
+ * \@s.ui.panel.classes;
  *
  * @since    2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -61,7 +61,7 @@ export default function ({
         vars.code(
             `
         .s-panel {
-            @sugar.ui.panel($scope: bare);
+            @s.ui.panel($scope: bare);
         }
     `,
             {
@@ -92,7 +92,7 @@ export default function ({
         ).code(
             `
             .s-panel[lnf="default"]:not(.s-bare) {
-                @sugar.ui.panel($scope: lnf);
+                @s.ui.panel($scope: lnf);
             }
         `,
             {

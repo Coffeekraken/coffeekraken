@@ -5,14 +5,14 @@
     bottom: var(--s-carpenter-media-bottom);
     display: flex;
     align-items: center;
-    gap: sugar.margin(30);
-    background: sugar.color(main, background);
-    padding: sugar.padding(20);
+    gap: s.margin(30);
+    background: s.color(main, background);
+    padding: s.padding(20);
     opacity: 1;
     pointer-events: all;
-    @sugar.transition();
-    @sugar.border.radius (30);
-    @sugar.depth (100);
+    @s.transition();
+    @s.border.radius (30);
+    @s.depth (100);
 
     .s-carpenter--preview & {
         transform: translate(0, 200%);

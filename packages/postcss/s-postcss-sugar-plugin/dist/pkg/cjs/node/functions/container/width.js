@@ -16,15 +16,15 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @status        beta
  *
  * This function allows you to get the max-width value of the nearest container either applied using
- * the `@sugar.container()` mixin, of by applying the `s-container:...` classes...
+ * the `@s.container()` mixin, of by applying the `s-container:...` classes...
  *
  * @return      {Css}                   The corresponding css
  *
- * @snippet         sugar.container.width($1)
+ * @snippet         s.container.width($1)
  *
  * @example       css
  * .my-element {
- *    max-width: sugar.container.width();
+ *    max-width: s.container.width();
  * }
  *
  * @since     2.0.0

@@ -2,21 +2,21 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           classes
- * @as              @sugar.visibility.classes
+ * @as              @s.visibility.classes
  * @namespace      node.mixin.visibility
  * @type           PostcssMixin
  * @platform      postcss
  * @interface       ./classes
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the overflow helper classes like ```.s-visibility:hidden```, etc...
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.visibility.classes
+ * @snippet         @s.visibility.classes
  *
  * @example        css
- * \@sugar.visibility.classes;
+ * \@s.visibility.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -56,7 +56,7 @@ export default function ({
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/visibility
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply a visibility style on any HTMLElement
         * 
@@ -66,10 +66,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.visibility.classes;
+        * \\@s.visibility.classes;
         * 
         * .my-element {
-        *   \\@sugar.visibility.hidden;
+        *   \\@s.visibility.hidden;
         * } 
         * 
         * @cssClass         s-visibility:hidden             Make the element hidden in the ui
@@ -93,7 +93,7 @@ export default function ({
     * @namespace          sugar.style.helpers.visibility
     * @type               CssClass
     * @platform             css
-    * @status             beta
+    * @status             stable
     * 
     * This class allows you to apply a "<yellow>hidden</yellow>" visibility style to any HTMLElement
     * 
@@ -115,7 +115,7 @@ export default function ({
     * @namespace          sugar.style.helpers.visibility
     * @type               CssClass
     * @platform             css
-    * @status             beta
+    * @status             stable
     * 
     * This class allows you to apply a "<yellow>visible</yellow>" visibility style to any HTMLElement
     * 
@@ -137,7 +137,7 @@ export default function ({
     * @namespace          sugar.style.helpers.visibility
     * @type               CssClass
     * @platform             css
-    * @status             beta
+    * @status             stable
     * 
     * This class allows you to apply a "<yellow>collapse</yellow>" visibility style to any HTMLElement
     * 

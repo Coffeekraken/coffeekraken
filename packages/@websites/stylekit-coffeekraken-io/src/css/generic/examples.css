@@ -1,38 +1,38 @@
 .examples {
     display: flex;
 
-    @sugar.media <=tablet {
+    @s.media <=tablet {
         flex-direction: column;
     }
 
     ._sidebar {
         width: 400px;
         flex-shrink: 0;
-        @sugar.border.radius();
+        @s.border.radius();
 
-        @sugar.media <=tablet {
+        @s.media <=tablet {
             display: flex;
             width: 100%;
             overflow-x: auto;
-            @sugar.scrollbar;
+            @s.scrollbar;
         }
 
         a {
             display: block;
-            padding: sugar.padding(30) sugar.padding(30);
+            padding: s.padding(30) s.padding(30);
             white-space: nowrap;
-            @sugar.transition;
-            @sugar.focus.outline (accent);
+            @s.transition;
+            @s.focus.outline (accent);
 
             &:hover {
             }
             &:active,
             &.active {
-                color: sugar.color(accent);
+                color: s.color(accent);
             }
 
             i {
-                margin-inline-end: sugar.margin(10);
+                margin-inline-end: s.margin(10);
             }
         }
     }

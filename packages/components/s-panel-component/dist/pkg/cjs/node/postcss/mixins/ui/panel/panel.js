@@ -29,11 +29,11 @@ exports.interface = postcssUiPanelInterface;
  *
  * Apply the panel style to any s-panel element
  *
- * @snippet         @sugar.ui.panel($1);
+ * @snippet         @s.ui.panel($1);
  *
  * @example     css
  * .s-panel {
- *    @sugar.ui.panel;
+ *    @s.ui.panel;
  * }
  *
  * @since      2.0.0
@@ -53,13 +53,13 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
         vars.push(`
 
             .s-panel_container {
-                transition: sugar.theme(ui.panel.transition);
-                background: sugar.color(main, background);
-                @sugar.depth (ui.panel.depth);
-                @sugar.border.radius (ui.panel.borderRadius);
-                @sugar.scrollbar;
+                transition: s.theme(ui.panel.transition);
+                background: s.color(main, background);
+                @s.depth (ui.panel.depth);
+                @s.border.radius (ui.panel.borderRadius);
+                @s.scrollbar;
 
-                @sugar.media <=mobile {
+                @s.media <=mobile {
                     width: 90vw;
                     min-width: auto;
                     max-width: auto;
@@ -67,9 +67,9 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
             }
 
             .s-panel_backdrop {
-                background: sugar.color(main, surface, --alpha 0.6);
-                transition: sugar.theme(ui.panel.transition);
-                @sugar.ui.backdrop;
+                background: s.color(main, surface, --alpha 0.6);
+                transition: s.theme(ui.panel.transition);
+                @s.ui.backdrop;
                 z-index: 0;
             }
 
@@ -77,16 +77,16 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
     }
     // wireframe
     vars.push(`
-        @sugar.wireframe {
+        @s.wireframe {
             .s-panel_container {
-                    @sugar.wireframe.background;
-                    @sugar.wireframe.border;
+                    @s.wireframe.background;
+                    @s.wireframe.border;
                 }
             .s-panel_backdrop {
-                background: sugar.color(sugar.wireframe.background(light), --alpha 0.7);
+                background: s.color(s.wireframe.background(light), --alpha 0.7);
 
-                @sugar.theme dark {
-                    background: sugar.color(sugar.wireframe.background(dark), --alpha 0.7);
+                @s.theme dark {
+                    background: s.color(s.wireframe.background(dark), --alpha 0.7);
                 }
             }
         }

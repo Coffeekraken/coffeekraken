@@ -14,10 +14,10 @@ import __SDepsFeatureInterface from './interface/SDepsFeatureInterface.js';
 /**
  * @name            SDepsFeature
  * @as              Dependencies feature
- * @__namespace       js
+ * @namespace       js
  * @type            Feature
  * @interface       ./interface/SDepsFeatureInterface.ts
- * @__menu            Styleguide / Features               /styleguide/feature/s-deps-feature
+ * @menu            Styleguide / Features               /styleguide/feature/s-deps-feature
  * @platform        js
  * @status          wip
  *

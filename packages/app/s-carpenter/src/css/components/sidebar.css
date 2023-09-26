@@ -4,14 +4,14 @@
     left: var(--s-carpenter-sidebar-margin);
     bottom: var(--s-carpenter-sidebar-bottom);
     width: var(--s-carpenter-sidebar-width);
-    background: sugar.color(main, background);
+    background: s.color(main, background);
     transform: translateX(-100%);
     opacity: 0;
-    padding-block-end: sugar.padding(50);
+    padding-block-end: s.padding(50);
     pointer-events: none;
-    @sugar.border.radius();
-    @sugar.depth (100);
-    @sugar.transition();
+    @s.border.radius();
+    @s.depth (100);
+    @s.transition();
 
     .s-carpenter--open & {
         transform: translateX(0);
@@ -21,24 +21,24 @@
 
     ._loader {
         opacity: 0.3;
-        margin-inline-end: sugar.margin(10);
-        @sugar.color (#fff);
+        margin-inline-end: s.margin(10);
+        @s.color (#fff);
     }
 
     i {
-        margin-inline-end: sugar.margin(10);
-        @sugar.color (#fff);
+        margin-inline-end: s.margin(10);
+        @s.color (#fff);
     }
     .active > div > i {
-        color: sugar.color(accent);
+        color: s.color(accent);
     }
 
     ._item {
-        @sugar.transition (fast);
+        @s.transition (fast);
 
         > div {
             border: 1px solid transparent;
-            @sugar.transition (fast);
+            @s.transition (fast);
         }
     }
 
@@ -48,20 +48,20 @@
     }
 
     ._item:not(.active):hover > div {
-        background: sugar.color(main, --alpha 0.05);
+        background: s.color(main, --alpha 0.05);
     }
 
     ._item.active:not(:has(._loader)) > div,
     ._item.active:hover:not(:has(._loader)) > div {
-        background: sugar.color(complementary, --alpha 0.5);
-        color: sugar.color(complementary, foreground);
+        background: s.color(complementary, --alpha 0.5);
+        color: s.color(complementary, foreground);
     }
     ._item.active:before {
         display: none;
     }
 
     ._item:has(._loader) > div {
-        border: 1px solid sugar.color(main, border);
+        border: 1px solid s.color(main, border);
     }
 
     ._item:has(._loader) > div > ._loader {
@@ -71,20 +71,20 @@
 
     .s-carpenter-app_logo {
         flex-grow: 0;
-        padding: sugar.padding(30);
-        margin-block-end: sugar.margin(30);
-        /* @sugar.depth (100); */
-        border-bottom: 1px solid sugar.color(main, border);
+        padding: s.padding(30);
+        margin-block-end: s.margin(30);
+        /* @s.depth (100); */
+        border-bottom: 1px solid s.color(main, border);
 
         svg {
             *[fill='#FECE0F'] {
-                fill: sugar.color(accent);
+                fill: s.color(accent);
             }
             *[fill='black'] {
-                fill: sugar.color(main, text);
+                fill: s.color(main, text);
             }
             *[fill='#4900E6'] {
-                full: sugar.color(complementary);
+                full: s.color(complementary);
             }
 
             display: inline-block;
@@ -96,8 +96,8 @@
 
     .s-carpenter-app_navigation {
         flex-grow: 1;
-        padding: sugar.padding(30);
+        padding: s.padding(30);
         overflow-y: auto;
-        @sugar.scrollbar();
+        @s.scrollbar();
     }
 }

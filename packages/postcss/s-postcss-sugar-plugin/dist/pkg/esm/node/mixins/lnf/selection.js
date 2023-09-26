@@ -7,7 +7,7 @@ class postcssSugarPluginLiikAndFeelSelectionInterface extends __SInterface {
 export { postcssSugarPluginLiikAndFeelSelectionInterface as interface };
 /**
  * @name          selection
- * @as          @sugar.lnf.selection
+ * @as          @s.lnf.selection
  * @namespace     node.mixin.lnf
  * @type          PostcssMixin
  * @platform      postcss
@@ -20,10 +20,10 @@ export { postcssSugarPluginLiikAndFeelSelectionInterface as interface };
  * @param       {String}        layout      The layout to generate
  * @return      {Css}                   The corresponding grid css
  *
- * @snippet         @sugar.lnf.selection
+ * @snippet         @s.lnf.selection
  *
  * @example       css
- * \@sugar.lnf.selection;
+ * \@s.lnf.selection;
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -33,8 +33,8 @@ export default function ({ params, atRule, replaceWith, }) {
     const vars = [];
     const css = `
     ::selection {
-        color: sugar.color(accent, --darken 40);
-        background: sugar.color(accent);
+        color: s.color(accent, --darken 40);
+        background: s.color(accent);
     }
   `;
     vars.push(css);

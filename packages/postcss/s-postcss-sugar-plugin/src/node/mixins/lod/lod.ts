@@ -2,24 +2,24 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           lod
- * @as          @sugar.lod
+ * @as          @s.lod
  * @namespace      node.mixin.lod
  * @type           PostcssMixin
  * @platform      postcss
  * @interface       ./lod
- * @status        beta
+ * @status        alpha
  *
  * This mixin allows you to set certain part of your css in a lod (level of details) specific level.
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.lod($1)
- * \@sugar.lod($1) {
+ * @snippet         @s.lod($1)
+ * \@s.lod($1) {
  *      $2
  * }
  *
  * @example        css
- * \@sugar.lod(4) {
+ * \@s.lod(4) {
  *      .myElement {
  *          background: red;
  *          width: 100%;
@@ -112,7 +112,7 @@ export default function ({
         atRule.nodes.forEach((node) => {
             if (!node.selector) {
                 throw new Error(
-                    `<red>[postcssSugarPlugin.lod]</red> When using the "<yellow>@sugar.lod</yellow>" mixin at root level, children MUST be css rule and not a property or anything else...`,
+                    `<red>[postcssSugarPlugin.lod]</red> When using the "<yellow>@s.lod</yellow>" mixin at root level, children MUST be css rule and not a property or anything else...`,
                 );
             }
         });

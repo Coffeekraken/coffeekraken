@@ -2,20 +2,20 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           classes
- * @as          @sugar.fit.classes
+ * @as          @s.fit.classes
  * @namespace      node.mixin.fit
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin allows you to generate all the clearfix helper classes like s-clearfix:micro, etc...
  *
  * @return        {Css}        The generated css
  *
- * @snippet         @sugar.fit.classes
+ * @snippet         @s.fit.classes
  *
  * @example        css
- * \@sugar.fit.classes;
+ * \@s.fit.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -65,7 +65,7 @@ export default function ({
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/fit-sizes
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply a fit size on any HTMLElement.
         * On image and video, uses \`object-fit\` property, on all others,
@@ -77,10 +77,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.fit.classes;
+        * \\@s.fit.classes;
         * 
         * .my-element {
-        *   \\@sugar.fit(fill);
+        *   \\@s.fit(fill);
         * }  
         * 
         ${fitSizes
@@ -112,7 +112,7 @@ export default function ({
                 * @namespace          sugar.style.helpers.fit
                 * @type               CssClass
                 * @platform         css
-                * @status           beta
+                * @status           stable
                 * 
                 * This class allows you to apply a "<yellow>${fitSizeName}</yellow>" fit size to any HTMLElement. Work best on images and videos
                 * 
@@ -128,7 +128,7 @@ export default function ({
         ).code(
             `
                 .s-fit-${fitSizeName} {
-                    @sugar.fit(${fitSizeName});
+                    @s.fit(${fitSizeName});
                 }`,
             { type: 'CssClass' },
         );

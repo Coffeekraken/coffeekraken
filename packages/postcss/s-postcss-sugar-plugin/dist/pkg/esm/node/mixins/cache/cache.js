@@ -2,25 +2,25 @@ import __SInterface from '@coffeekraken/s-interface';
 import { __sha256 } from '@coffeekraken/sugar/crypto';
 import __fs from 'fs';
 /**
- * @__name           cache
- * @__namespace      node.mixin.cache
- * @__type           PostcssMixin
- * @__platform      postcss
- * @__status        wip
+ * @name           cache
+ * @namespace      node.mixin.cache
+ * @type           PostcssMixin
+ * @platform      postcss
+ * @status        wip
  *
  * This mixin allows you to cache some generated css to avoid generating it when it's not absolutely necessary.
  * This cache depends on the config.theme configuration as well as on the @coffeekraken/s-postcss-sugar-plugin integrity.
  * You can always clear the cache manually using the command `sugar postcss.clearCache`
  *
- * @__return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
- * @__example        css
- * \@sugar.cache {
- *   @sugar.classes;
+ * @example        css
+ * \@s.cache {
+ *   @s.classes;
  * }
  *
- * @__since       2.0.0
- * @__author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginCacheInterface extends __SInterface {
     static get _definition() {

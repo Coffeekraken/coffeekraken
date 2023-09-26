@@ -2,24 +2,24 @@
     &_list {
         display: flex;
         flex-direction: column;
-        gap: sugar.margin(40);
+        gap: s.margin(40);
     }
     &_list-item {
     }
     &_hotkey {
-        margin-block-end: sugar.margin(30);
+        margin-block-end: s.margin(30);
     }
     &_metas {
     }
     &_key {
         text-transform: uppercase;
-        padding: sugar.padding(10) sugar.padding(20);
-        margin-inline: sugar.margin(10);
-        border: 1px solid sugar.color(accent);
-        @sugar.border.radius;
+        padding: s.padding(10) s.padding(20);
+        margin-inline: s.margin(10);
+        border: 1px solid s.color(accent);
+        @s.border.radius;
     }
     &_title {
-        color: sugar.color(accent, text);
-        margin-block-end: sugar.margin(10);
+        color: s.color(accent, text);
+        margin-block-end: s.margin(10);
     }
 }

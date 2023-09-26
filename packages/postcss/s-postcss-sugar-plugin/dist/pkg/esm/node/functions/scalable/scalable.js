@@ -1,26 +1,26 @@
 import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name          scalable
- * @as            sugar.scalable
+ * @as            s.scalable
  * @namespace     node.function.scalable
  * @type          PostcssFunction
  * @platform      postcss
  * @interface       ./scalable
- * @status        beta
+ * @status        stable
  *
  * This function allows you to get value that will be scaled using the "--s-scale" variable.
  * This allows you to make your components aware of classes like "s-scale-10", etc...
  * The resulting value of this will be affected by the --s-scale-global variable that you can change
- * using the `@sugar.scale.global(0.9)` mixin...
+ * using the `@s.scale.global(0.9)` mixin...
  *
  * @param       {Number}        value      The value you want to be scalable
  * @return      {Css}                   The corresponding css
  *
- * @snippet         sugar.scalable($1)
+ * @snippet         s.scalable($1)
  *
  * @example       css
  * .my-element {
- *    padding: sugar.scalable(20px);
+ *    padding: s.scalable(20px);
  * }
  *
  * @since     2.0.0

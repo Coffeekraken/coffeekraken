@@ -30,14 +30,14 @@ export { postcssUiSpecsEditorClassesInterface as interface };
  * @platform            css
  * @status              beta
  * @private
- * 
+ *
  * This mixin represent a specs editor
  *
- * @snippet      @sugar.ui.specsEditor.classes($1);
+ * @snippet      @s.ui.specsEditor.classes($1);
  *
  * @example        css
- * \@sugar.ui.specsEditor.classes;
- * 
+ * \@s.ui.specsEditor.classes;
+ *
  * @since    2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
@@ -66,7 +66,7 @@ export default function ({
         vars.code(
             `
         .s-specs-editor {
-            @sugar.ui.specsEditor($scope: bare);
+            @s.ui.specsEditor($scope: bare);
         }
     `,
             {
@@ -96,7 +96,7 @@ export default function ({
         ).code(
             `
             .s-specs-editor[lnf="default"]:not(.s-bare) {
-                @sugar.ui.specsEditor($lnf: ${finalParams.defaultLnf}, $scope: lnf);
+                @s.ui.specsEditor($lnf: ${finalParams.defaultLnf}, $scope: lnf);
             }
             `,
             {
@@ -112,7 +112,7 @@ export default function ({
         vars.code(
             `
             .s-specs-editor[behavior="default"] {
-                @sugar.ui.specsEditor($lnf: ${finalParams.defaultLnf}, $scope: behavior);
+                @s.ui.specsEditor($lnf: ${finalParams.defaultLnf}, $scope: behavior);
             }`,
             {
                 type: 'CssClass',
@@ -140,7 +140,7 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
         ).code(
-            `@sugar.rhythm.vertical {
+            `@s.rhythm.vertical {
                 .s-specs-editor {
                     ${__STheme.jsObjectToCssProperties(
                         __STheme.get('ui.specsEditor.rhythmVertical'),

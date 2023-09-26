@@ -1,8 +1,8 @@
-@sugar.init ($variant: dark);
+@s.init ($variant: dark);
 
-@sugar.classes;
+@s.classes;
 
-@sugar.icon.classes (
+@s.icon.classes (
   fa:check:success
   fa:exclamation:error
   fa:exclamation:warning

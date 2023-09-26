@@ -2,21 +2,21 @@ import { interface as PostcssSugarPluginGradientInterface } from './gradient.js'
 
 /**
  * @name           text
- * @as              @sugar.gradient.text
+ * @as              @s.gradient.text
  * @namespace      node.mixin.gradient
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        alpha
  *
  * This mixin generate all the css needed to apply a gradient on your text
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.gradient.text($1, $2, $3)
+ * @snippet         @s.gradient.text($1, $2, $3)
  *
  * @example        css
  * .my-cool-element {
- *    \@sugar.gradient.text(accent, secondary, radial);
+ *    \@s.gradient.text(accent, secondary, radial);
  * }
  *
  * @since       2.0.0
@@ -39,7 +39,7 @@ export default function ({
         background-size: 100%;
         background-clip: text;
         color: transparent;
-        @sugar.gradient ${atRule.params};
+        @s.gradient ${atRule.params};
     `,
     ];
 

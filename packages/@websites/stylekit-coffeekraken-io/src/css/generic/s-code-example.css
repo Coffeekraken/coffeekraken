@@ -2,16 +2,16 @@
     &_code,
     code {
         /* background: none !important; */
-        background: sugar.color(base, border, --alpha 0.02) !important;
+        background: s.color(base, border, --alpha 0.02) !important;
     }
 
     &_content {
-        border: 1px solid sugar.color(base, border, --alpha 0.2);
+        border: 1px solid s.color(base, border, --alpha 0.2);
     }
 
     &_tab {
         background: none !important;
-        color: sugar.color(base) !important;
+        color: s.color(base) !important;
     }
 
     &_more-bar {
@@ -21,6 +21,6 @@
     }
 
     .s-clipboard-copy .icon-copy * {
-        fill: sugar.color(base);
+        fill: s.color(base);
     }
 }

@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          gauge
- * @as          @sugar.ui.gauge
+ * @as          @s.ui.gauge
  * @namespace     node.mixin.ui.gauge
  * @type               PostcssMixin
  * @interface       ./input
@@ -16,11 +16,11 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.gauge
+ * @snippet         @s.ui.gauge
  *
  * @example     css
  * .my-gauge {
- *    @sugar.ui.gauge;
+ *    @s.ui.gauge;
  * }
  *
  * @since      2.0.0
@@ -116,32 +116,32 @@ export default function ({
                     font-size: 150px;
                     
                     &.low {
-                        @sugar.color (error);
+                        @s.color (error);
                     }
                     &.medium {
-                        @sugar.color (accent);
+                        @s.color (accent);
                     }
                     &.high {
-                        @sugar.color (success);
+                        @s.color (success);
                     }
                 
                     ._track {
-                        stroke: sugar.color(main, --alpha 0.1);
+                        stroke: s.color(main, --alpha 0.1);
                         stroke-dashoffset: var(--dash-circle);
                         animation: s-gauge-track-in 0.3s ease-in-out 0s forwards;
-                        @sugar.transition fast;
+                        @s.transition fast;
                     }
                     ._gauge {
-                        stroke: sugar.color(current);
+                        stroke: s.color(current);
                         stroke-dashoffset: var(--dash-circle);
                         animation: s-gauge-in 0.3s ease-in-out 0.2s forwards;
-                        @sugar.transition fast;
+                        @s.transition fast;
                     }
                 
                     ._value {
                         opacity: 0;
                         animation: s-gauge-value-in 0.3s ease-out 0.3s forwards;
-                        @sugar.transition fast;
+                        @s.transition fast;
                     }
                 
                 `);

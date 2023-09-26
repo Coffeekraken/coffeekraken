@@ -4,13 +4,13 @@
     right: var(--s-carpenter-editor-margin);
     bottom: var(--s-carpenter-editor-bottom);
     width: var(--s-carpenter-editor-width);
-    background: sugar.color(main, background);
+    background: s.color(main, background);
     transform: translateX(100%);
     opacity: 0;
     pointer-events: none;
-    @sugar.border.radius();
-    @sugar.depth (100);
-    @sugar.transition();
+    @s.border.radius();
+    @s.depth (100);
+    @s.transition();
 
     body:not(.s-carpenter--preview).s-carpenter--open & {
         transform: translateX(0);
@@ -24,7 +24,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
         font-size: 30px;
-        @sugar.color (main);
+        @s.color (main);
         animation: s-carpenter-loader-color 0.5s
             cubic-bezier(0.56, -0.005, 0.46, 1.505) infinite;
         opacity: 0.3;
@@ -39,8 +39,8 @@
     bottom: 0;
     overflow-y: auto;
     overflow-x: hidden;
-    @sugar.scrollbar();
-    @sugar.border.radius();
+    @s.scrollbar();
+    @s.border.radius();
 
     &:after {
         content: '';
@@ -53,23 +53,23 @@
         z-index: 999;
         pointer-events: none;
         border: 0 solid transparent;
-        @sugar.transition fast;
+        @s.transition fast;
     }
 
     &:has(s-specs-editor.error):after {
-        border: 4px solid sugar.color(error);
+        border: 4px solid s.color(error);
     }
     &:has(s-specs-editor.unsaved):after {
-        border: 4px solid sugar.color(accent);
+        border: 4px solid s.color(accent);
     }
 }
 
 .s-carpenter-app_editor.scrolled .s-specs-editor_metas-heading,
 .s-carpenter-app_editor.scrolled .s-specs-editor_metas-source {
-    padding-block: sugar.padding(20);
-    padding-inline: sugar.padding(30);
+    padding-block: s.padding(20);
+    padding-inline: s.padding(30);
 
     * {
-        @sugar.scale (0.8);
+        @s.scale (0.8);
     }
 }

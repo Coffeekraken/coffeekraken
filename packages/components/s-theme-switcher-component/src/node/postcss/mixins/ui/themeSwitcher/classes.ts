@@ -28,14 +28,14 @@ export { postcssUiThemeSwitcherClassesInterface as interface };
  * @type                 PostcssMixin
  * @platform            css
  * @status              beta
- * 
+ *
  * This mixin represent a color picker
  *
- * @snippet      @sugar.ui.themeSwitcher.classes($1);
+ * @snippet      @s.ui.themeSwitcher.classes($1);
  *
  * @example        css
- * \@sugar.ui.themeSwitcher.classes;
- * 
+ * \@s.ui.themeSwitcher.classes;
+ *
  * @since    2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
@@ -62,7 +62,7 @@ export default function ({
         vars.code(
             `
         .s-theme-switcher {
-            @sugar.ui.themeSwitcher($scope: bare);
+            @s.ui.themeSwitcher($scope: bare);
         }
     `,
             {
@@ -89,7 +89,7 @@ export default function ({
         ).code(
             `
             .s-theme-switcher[lnf="default"]:not(.s-bare) {
-                @sugar.ui.themeSwitcher($scope: lnf);
+                @s.ui.themeSwitcher($scope: lnf);
             }`,
             {
                 type: 'CssClass',
@@ -117,7 +117,7 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
         ).code(
-            `@sugar.rhythm.vertical {
+            `@s.rhythm.vertical {
                 .s-theme-switcher {
                     ${__STheme.jsObjectToCssProperties(
                         __STheme.get('ui.themeSwitcher.rhythmVertical'),

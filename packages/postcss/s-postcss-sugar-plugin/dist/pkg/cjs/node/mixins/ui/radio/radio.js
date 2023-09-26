@@ -8,7 +8,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 /**
  * @name          radio
- * @as              @sugar.ui.radio
+ * @as              @s.ui.radio
  * @namespace     node.mixin.ui.radio
  * @type               PostcssMixin
  * @interface     ./radio          interface
@@ -21,11 +21,11 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  * @param       {('bare'|'lnf'')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.radio
+ * @snippet         @s.ui.radio
  *
  * @example     css
  * .my-radio {
- *    @sugar.ui.radio;
+ *    @s.ui.radio;
  * }
  *
  * @since      2.0.0
@@ -68,11 +68,11 @@ function default_1({ params, atRule, replaceWith, }) {
                 position: relative;
                 width: 1.4em;
                 height: 1.4em;
-                font-size: sugar.scalable(1rem);
+                font-size: s.scalable(1rem);
                 margin-block: 0.7em 0.9em;
 
                 &:disabled {
-                    @sugar.disabled;
+                    @s.disabled;
                 }
             `);
     }
@@ -82,14 +82,14 @@ function default_1({ params, atRule, replaceWith, }) {
             if (finalParams.scope.indexOf('lnf') !== -1) {
                 vars.push(`
                 
-                    transition: sugar.theme(ui.form.transition);
-                    border: sugar.theme(ui.form.borderWidth) solid sugar.color(current);
+                    transition: s.theme(ui.form.transition);
+                    border: s.theme(ui.form.borderWidth) solid s.color(current);
                     background-color: transparent;
-                    transition: sugar.theme(ui.form.transition);
-                    box-shadow: 0 0 0 0 sugar.color(current, --alpha 0.2);
+                    transition: s.theme(ui.form.transition);
+                    box-shadow: 0 0 0 0 s.color(current, --alpha 0.2);
                     
                     &.s-shape {
-                        @sugar.shape();
+                        @s.shape();
                     }
                     &:not(.s-shape) {
                         border-radius: 999px;
@@ -101,9 +101,9 @@ function default_1({ params, atRule, replaceWith, }) {
                         top: 50%; left: 50%;
                         width: 0.4em; height: 0.4em;
                         transform: translate(-50%, -50%);
-                        background: sugar.color(current);
+                        background: s.color(current);
                         opacity: 0;
-                        transition: sugar.theme(ui.form.transition);
+                        transition: s.theme(ui.form.transition);
                     }
                     label:hover > &:not(:disabled):after,
                     &:hover:not(:disabled):after {
@@ -114,7 +114,7 @@ function default_1({ params, atRule, replaceWith, }) {
                     }
 
                     &:focus:not(:hover):not(:active):not(:disabled) {
-                        box-shadow: 0 0 0 sugar.theme(ui.outline.borderWidth) sugar.color(current, --alpha 0.3);
+                        box-shadow: 0 0 0 s.theme(ui.outline.borderWidth) s.color(current, --alpha 0.3);
                     }
  
         `);

@@ -15,11 +15,11 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {String}        width      The width to get
  * @return      {Css}                   The corresponding css
  *
- * @snippet         sugar.border.width($1)
+ * @snippet         s.border.width($1)
  *
  * @example       css
  * .my-element {
- *    border-width: sugar.border.width(50);
+ *    border-width: s.border.width(50);
  * }
  *
  * @since     2.0.0
@@ -76,11 +76,11 @@ export default function ({
         if (`${s}`.match(/[a-zA-Z]+$/)) {
             // @ts-ignore
             if (finalParams.scalable) {
-                return `sugar.scalable(${s})`;
+                return `s.scalable(${s})`;
             }
             return `${s}`;
         } else {
-            return `calc(sugar.theme(border.width.default, ${finalParams.scalable}) * ${s})`;
+            return `calc(s.theme(border.width.default, ${finalParams.scalable}) * ${s})`;
         }
     });
 

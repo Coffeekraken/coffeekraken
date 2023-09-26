@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          input
- * @as          @sugar.ui.input
+ * @as          @s.ui.input
  * @namespace     node.mixin.ui.input
  * @type               PostcssMixin
  * @interface       ./input
@@ -16,11 +16,11 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.input
+ * @snippet         @s.ui.input
  *
  * @example     css
  * .my-input {
- *    @sugar.ui.input;
+ *    @s.ui.input;
  * }
  *
  * @since      2.0.0
@@ -81,14 +81,14 @@ export default function ({
         if (finalParams.outline) {
             vars.push(`
                 &:focus:not(:hover) {
-                    @sugar.outline;
+                    @s.outline;
                 }
             `);
         }
 
         vars.push(`
-            @sugar.ui.base(input);
-            @sugar.shape();
+            @s.ui.base(input);
+            @s.shape();
   `);
     }
 
@@ -102,16 +102,16 @@ export default function ({
         case 'underline':
             if (finalParams.scope.indexOf('lnf') !== -1) {
                 vars.push(`
-                    background-color: sugar.color(current, --alpha 0);
+                    background-color: s.color(current, --alpha 0);
                     border-top: none !important;
                     border-left: none !important;
                     border-right: none !important;
-                    border-bottom: sugar.color(current, --alpha 0.3) solid sugar.border.width(ui.form.borderWidth) !important;
+                    border-bottom: s.color(current, --alpha 0.3) solid s.border.width(ui.form.borderWidth) !important;
                     padding-inline: 1ch !important;
 
                     &:hover, &:focus {
-                        border-bottom: sugar.color(current, --alpha 1) solid sugar.border.width(ui.form.borderWidth) !important;
-                        background-color: sugar.color(current, --alpha 0.1);
+                        border-bottom: s.color(current, --alpha 1) solid s.border.width(ui.form.borderWidth) !important;
+                        background-color: s.color(current, --alpha 0.1);
                     }
                 `);
             }

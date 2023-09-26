@@ -3,21 +3,21 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           gradient
- * @as              @sugar.gradient
+ * @as              @s.gradient
  * @namespace      node.mixin.gradient
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        alpha
  *
  * This mixin generate all the css needed to apply a gradient on your elements
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.gradient($1, $2, $3)
+ * @snippet         @s.gradient($1, $2, $3)
  *
  * @example        css
  * .my-cool-element {
- *    \@sugar.gradient(accent, secondary, radial);
+ *    \@s.gradient(accent, secondary, radial);
  * }
  *
  * @since       2.0.0
@@ -103,13 +103,13 @@ export default function ({
         startColorValue.match(/^[a-zA-Z0-9:_-]+$/) &&
         themeColorsObj[startColorValue]
     ) {
-        startColorValue = `sugar.color(${startColorValue})`;
+        startColorValue = `s.color(${startColorValue})`;
     }
     if (
         endColorValue.match(/^[a-zA-Z0-9:_-]+$/) &&
         themeColorsObj[endColorValue]
     ) {
-        endColorValue = `sugar.color(${endColorValue})`;
+        endColorValue = `s.color(${endColorValue})`;
     }
 
     const variables = [];

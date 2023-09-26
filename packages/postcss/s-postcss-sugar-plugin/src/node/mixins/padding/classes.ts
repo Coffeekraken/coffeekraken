@@ -5,20 +5,20 @@ import __faker from 'faker';
 
 /**
  * @name           classes
- * @as          @sugar.padding.classes
+ * @as          @s.padding.classes
  * @namespace      node.mixin.padding
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the padding helper classes like s-p:10, s-pie:40, etc...
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.padding.classes
+ * @snippet         @s.padding.classes
  *
  * @example        css
- * \@sugar.padding.classes;
+ * \@s.padding.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -62,7 +62,7 @@ export default function ({
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/padding
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply padding to any HTMLElement
         * 
@@ -74,7 +74,7 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.padding.classes;
+        * \\@s.padding.classes;
         * 
         ${paddingsKeys
             .map((spaceName) => {
@@ -133,7 +133,7 @@ export default function ({
     * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" padding style around any HTMLElement
     * 
@@ -147,7 +147,7 @@ export default function ({
         ).code(
             `
    .${clsMargin.replace(':', '-')} {
-        padding: sugar.padding(${spaceName});
+        padding: s.padding(${spaceName});
    }`,
             { type: 'CssClass' },
         );
@@ -158,7 +158,7 @@ export default function ({
     * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" block start padding style to any HTMLElement
     * 
@@ -172,7 +172,7 @@ export default function ({
         ).code(
             `
    .${clsMarginTop.replace(':', '-')} {
-        padding-block-start: sugar.padding(${spaceName}) !important;
+        padding-block-start: s.padding(${spaceName}) !important;
    }`,
             { type: 'CssClass' },
         );
@@ -183,7 +183,7 @@ export default function ({
     * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" block end padding style to any HTMLElement
     * 
@@ -197,7 +197,7 @@ export default function ({
         ).code(
             `
    .${clsMarginBottom.replace(':', '-')} {
-        padding-block-end: sugar.padding(${spaceName}) !important;
+        padding-block-end: s.padding(${spaceName}) !important;
    }`,
             { type: 'CssClass' },
         );
@@ -208,7 +208,7 @@ export default function ({
     * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" inline start padding style to any HTMLElement
     * 
@@ -222,7 +222,7 @@ export default function ({
         ).code(
             `
    .${clsMarginLeft.replace(':', '-')} {
-        padding-inline-start: sugar.padding(${spaceName}) !important;
+        padding-inline-start: s.padding(${spaceName}) !important;
    }`,
             { type: 'CssClass' },
         );
@@ -233,7 +233,7 @@ export default function ({
     * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" inline end padding style to any HTMLElement
     * 
@@ -247,7 +247,7 @@ export default function ({
         ).code(
             `
    .${clsMarginRight.replace(':', '-')} {
-        padding-inline-end: sugar.padding(${spaceName}) !important;
+        padding-inline-end: s.padding(${spaceName}) !important;
    }`,
             { type: 'CssClass' },
         );
@@ -258,7 +258,7 @@ export default function ({
     * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" inline start and end padding style to any HTMLElement
     * 
@@ -272,8 +272,8 @@ export default function ({
         ).code(
             `
      .${clsMarginX.replace(':', '-')} {
-        padding-inline-start: sugar.padding(${spaceName}) !important;
-        padding-inline-end: sugar.padding(${spaceName}) !important;
+        padding-inline-start: s.padding(${spaceName}) !important;
+        padding-inline-end: s.padding(${spaceName}) !important;
    }`,
             { type: 'CssClass' },
         );
@@ -284,7 +284,7 @@ export default function ({
     * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" block start and end padding style to any HTMLElement
     * 
@@ -298,8 +298,8 @@ export default function ({
         ).code(
             `
    .${clsMarginY.replace(':', '-')} {
-        padding-block-start: sugar.padding(${spaceName}) !important;
-        padding-block-end: sugar.padding(${spaceName}) !important;
+        padding-block-start: s.padding(${spaceName}) !important;
+        padding-block-end: s.padding(${spaceName}) !important;
    }`,
             { type: 'CssClass' },
         );

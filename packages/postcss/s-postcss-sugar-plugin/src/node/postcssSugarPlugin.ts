@@ -262,7 +262,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
 
     const postProcessorsRegisteredFn: Function[] = [];
 
-    async function _loadFolder(folderPath, type: 'xins' | 'functions') {
+    async function _loadFolder(folderPath, type: 'mixins' | 'functions') {
         // process some tokens
         folderPath = __replaceTokens(folderPath);
 
@@ -343,10 +343,11 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                 value = value.replace(match, `calc(${val} * var(--vh,1vh)) `);
             });
         }
-        if (!value.match(/\s?sugar\.[a-zA-Z0-9]+.*/)) return value;
+
+        if (!value.match(/\s?s\.[a-zA-Z0-9]+.*/)) return value;
 
         const calls = value.match(
-            /@?sugar\.[a-zA-Z0-9\.]+\((?:[^\)]+|\([^\(;,]*\(;,){0,999999999999999999999}\)/gm,
+            /@?s\.[a-zA-Z0-9\.]+\((?:[^\)]+|\([^\(;,]*\(;,){0,999999999999999999999}\)/gm,
         );
 
         if (!calls || !calls.length) return value;
@@ -372,11 +373,9 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             }
 
             // @ts-ignore
-            const functionName = sugarStatement.match(
-                /sugar\.([a-zA-Z0-9\.]+)/,
-            )[1];
+            const functionName = sugarStatement.match(/s\.([a-zA-Z0-9\.]+)/)[1];
             const paramsStatement = sugarStatement.replace(
-                /sugar\.[a-zA-Z0-9\.]+/,
+                /s\.[a-zA-Z0-9\.]+/,
                 '',
             );
 
@@ -611,8 +610,8 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             sharedData.isPristine = false;
         },
         async AtRule(atRule, postcssApi) {
-            if (atRule.name.match(/^sugar\./)) {
-                let mixinId = atRule.name.replace(/^sugar\./, '');
+            if (atRule.name.match(/^s\./)) {
+                let mixinId = atRule.name.replace(/^s\./, '');
 
                 if (!mixinsStack[mixinId]) {
                     mixinId = `${mixinId}.${mixinId.split('.').slice(-1)[0]}`;
@@ -640,7 +639,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
 
                 const params = mixinInterface.apply(processedParams, {});
 
-                // handle the @sugar.scope(.exclude) mixins
+                // handle the @s.scope(.exclude) mixins
                 if (mixinInterface.definition.scope) {
                     // "scope" that specify exactyle the scope we want
                     if (atRule._scope) {

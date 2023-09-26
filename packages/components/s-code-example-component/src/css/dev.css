@@ -1,4 +1,4 @@
-@sugar.init ($variant: dark);
-/* @sugar.classes; */
+@s.init ($variant: dark);
+/* @s.classes; */
 
-@sugar.highlightjs.theme;
+@s.highlightjs.theme;

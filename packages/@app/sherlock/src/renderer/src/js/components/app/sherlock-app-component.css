@@ -93,7 +93,7 @@ sherlock-app {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background: sugar.color(main, surface, --lighten 5% --alpha 0.6);
+        background: s.color(main, surface, --lighten 5% --alpha 0.6);
         backdrop-filter: blur(10px);
         opacity: 0;
     }

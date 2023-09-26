@@ -28,14 +28,14 @@ export { postcssUiGoogleMapClassesInterface as interface };
  * @type                 PostcssMixin
  * @platform            css
  * @status              beta
- * 
+ *
  * This mixin represent a google map
  *
- * @snippet      @sugar.ui.googleMap.classes($1);
+ * @snippet      @s.ui.googleMap.classes($1);
  *
  * @example        css
- * \@sugar.ui.googleMap.classes;
- * 
+ * \@s.ui.googleMap.classes;
+ *
  * @since    2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
@@ -62,7 +62,7 @@ export default function ({
         vars.code(
             `
         .s-google-map {
-            @sugar.ui.googleMap($scope: bare);
+            @s.ui.googleMap($scope: bare);
         }
     `,
             {
@@ -89,7 +89,7 @@ export default function ({
         ).code(
             `
             .s-google-map[lnf="default"]:not(.s-bare) {
-                @sugar.ui.googleMap($scope: lnf);
+                @s.ui.googleMap($scope: lnf);
             }`,
             {
                 type: 'CssClass',
@@ -117,7 +117,7 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
         ).code(
-            `@sugar.rhythm.vertical {
+            `@s.rhythm.vertical {
                 .s-google-map {
                     ${__STheme.jsObjectToCssProperties(
                         __STheme.get('ui.googleMap.rhythmVertical'),

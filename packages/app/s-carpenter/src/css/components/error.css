@@ -1,8 +1,8 @@
 .s-carpenter-app_error {
     width: 100%;
-    background: sugar.color(error, surface);
-    color: sugar.color(error, text);
-    padding: sugar.padding(30);
-    border: solid 1px sugar.color(error, border);
-    @sugar.border.radius;
+    background: s.color(error, surface);
+    color: s.color(error, text);
+    padding: s.padding(30);
+    border: solid 1px s.color(error, border);
+    @s.border.radius;
 }

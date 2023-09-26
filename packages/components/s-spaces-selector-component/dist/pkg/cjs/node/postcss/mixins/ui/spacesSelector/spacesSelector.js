@@ -29,11 +29,11 @@ exports.interface = postcssUiSpacesSelectorInterface;
  *
  * Apply the clipbord copy style to any s-spacesSelector element
  *
- * @snippet         @sugar.ui.spacesSelector($1);
+ * @snippet         @s.ui.spacesSelector($1);
  *
  * @example     css
  * .s-spaces-selector {
- *    @sugar.ui.spacesSelector;
+ *    @s.ui.spacesSelector;
  * }
  *
  * @since      2.0.0
@@ -52,40 +52,40 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
         vars.push(`            
 
             .s-spaces-selector_inner {
-                border: 1px solid sugar.color(main, border);
-                @sugar.border.radius;
+                border: 1px solid s.color(main, border);
+                @s.border.radius;
             }
 
             .s-spaces-selector_clear {
-                @sugar.ui.button ($lnf: text);
+                @s.ui.button ($lnf: text);
             }
 
             .s-spaces-selector_space {
-                @sugar.transition (fast);
+                @s.transition (fast);
 
                 &-margin {
-                    box-shadow: 0px 0px 0px 25px sugar.color(accent, --alpha 0.05);
+                    box-shadow: 0px 0px 0px 25px s.color(accent, --alpha 0.05);
 
                     &:hover {
-                        box-shadow: 0px 0px 0px 25px sugar.color(accent, --alpha 0.3);
+                        box-shadow: 0px 0px 0px 25px s.color(accent, --alpha 0.3);
                     }
                 }
                 &-padding {
                     box-shadow: inset 0px 0px 0px 25px
-                        sugar.color(complementary, --alpha 0.05);
+                        s.color(complementary, --alpha 0.05);
 
                     &:hover {
                         box-shadow: inset 0px 0px 0px 25px
-                            sugar.color(complementary, --alpha 0.3);
+                            s.color(complementary, --alpha 0.3);
                     }
                 }
             }
 
             .s-spaces-selector_select {
-                padding: sugar.padding(20) sugar.padding(10) !important;
-                padding-inline-end: sugar.padding(40) !important;
-                @sugar.ui.select();
-                @sugar.scale (0.9);
+                padding: s.padding(20) s.padding(10) !important;
+                padding-inline-end: s.padding(40) !important;
+                @s.ui.select();
+                @s.scale (0.9);
 
                 &-margin {
                     &-top {

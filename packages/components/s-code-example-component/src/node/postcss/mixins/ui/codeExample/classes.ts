@@ -31,10 +31,10 @@ export { postcssUiCodeExampleClassesInterface as interface };
  *
  * This mixin represent a code example
  *
- * @snippet      @sugar.ui.codeExample.classes($1);
+ * @snippet      @s.ui.codeExample.classes($1);
  *
  * @example        css
- * \@sugar.ui.codeExample.classes;
+ * \@s.ui.codeExample.classes;
  *
  * @since    2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -62,7 +62,7 @@ export default function ({
         vars.code(
             `
         .s-code-example {
-            @sugar.ui.codeExample($scope: bare);
+            @s.ui.codeExample($scope: bare);
         }
     `,
             {
@@ -92,7 +92,7 @@ export default function ({
         */`,
         ).code(
             `.s-code-example[lnf="default"]:not(.s-bare) {
-                @sugar.ui.codeExample($scope: lnf);
+                @s.ui.codeExample($scope: lnf);
             }`,
             {
                 type: 'CssClass',
@@ -104,7 +104,7 @@ export default function ({
         vars.code(
             `
             .s-code-example:not(.s-bare) {
-                @sugar.highlightjs.theme;
+                @s.highlightjs.theme;
             }
         `,
             {
@@ -140,7 +140,7 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
         ).code(
-            `@sugar.rhythm.vertical {
+            `@s.rhythm.vertical {
                 .s-code-example {
                     ${__STheme.jsObjectToCssProperties(
                         __STheme.get('ui.codeExample.rhythmVertical'),

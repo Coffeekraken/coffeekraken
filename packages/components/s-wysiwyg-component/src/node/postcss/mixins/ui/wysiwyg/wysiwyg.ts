@@ -31,11 +31,11 @@ export { postcssUiWysiwygInterface as interface };
  *
  * Apply the wysiwyg style to any s-wysiwyg element
  *
- * @snippet         @sugar.ui.wysiwyg($1);
+ * @snippet         @s.ui.wysiwyg($1);
  *
  * @example     css
  * .s-wysiwyg {
- *    @sugar.ui.wysiwyg;
+ *    @s.ui.wysiwyg;
  * }
  *
  * @since      2.0.0
@@ -70,29 +70,29 @@ export default function ({
     // lnf
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
-            @sugar.ui.input();
+            @s.ui.input();
 
             .ce-inline-toolbar {
-                @sugar.depth (100);
-                padding: sugar.padding(10);
-                @sugar.border.radius();
+                @s.depth (100);
+                padding: s.padding(10);
+                @s.border.radius();
             }
         
             .codex-editor__redactor {
-                padding-bottom: sugar.padding(60) !important;
+                padding-bottom: s.padding(60) !important;
             }
         
             .ce-inline-toolbar__buttons {
-                gap: sugar.margin(10);
+                gap: s.margin(10);
         
                 button {
-                    padding: sugar.padding(10) sugar.padding(20);
-                    border: 1px solid sugar.color(main, --alpha 0.1);
-                    @sugar.transition (fast);
-                    @sugar.border.radius;
+                    padding: s.padding(10) s.padding(20);
+                    border: 1px solid s.color(main, --alpha 0.1);
+                    @s.transition (fast);
+                    @s.border.radius;
         
                     &:not(._color) {
-                        background: sugar.color(accent, --alpha 0);
+                        background: s.color(accent, --alpha 0);
                     }
         
                     &._color {
@@ -101,21 +101,21 @@ export default function ({
                     &._color:hover,
                     &._color.active {
                         background: var(--s-wysiwyg-color);
-                        color: sugar.color(main, foreground);
+                        color: s.color(main, foreground);
                     }
         
                     &:not(._color):hover {
-                        background: sugar.color(main, --alpha 0.3);
+                        background: s.color(main, --alpha 0.3);
                     }
                     &:not(._color).active {
-                        background: sugar.color(main);
-                        color: sugar.color(main, foreground);
+                        background: s.color(main);
+                        color: s.color(main, foreground);
         
                         * {
-                            fill: sugar.color(main, foreground);
+                            fill: s.color(main, foreground);
                         }
                         *[stroke] {
-                            stroke: sugar.color(main, foreground);
+                            stroke: s.color(main, foreground);
                         }
                     }
                 }

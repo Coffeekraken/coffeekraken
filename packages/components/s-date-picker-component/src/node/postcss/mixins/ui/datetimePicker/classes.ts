@@ -35,7 +35,6 @@ export interface IPostcssUiDatetimePickerInputClassesParams {
 
 export { postcssUiDatetimePickerClassesInterface as interface };
 
-
 /**
  * @name          datePicker
  * @namespace     ui.datePicker
@@ -45,10 +44,10 @@ export { postcssUiDatetimePickerClassesInterface as interface };
  *
  * Represent a date picker
  *
- * @snippet         @sugar.ui.datePicker.classes($1);
- * 
+ * @snippet         @s.ui.datePicker.classes($1);
+ *
  * @example     css
- * \@sugar.ui.datePicker();
+ * \@s.ui.datePicker();
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -78,7 +77,7 @@ export default function ({
         vars.code(
             `
         .s-datetime-picker {
-            @sugar.ui.datetimePicker($scope: bare);
+            @s.ui.datetimePicker($scope: bare);
         }
     `,
             {
@@ -107,7 +106,7 @@ export default function ({
         */`,
         ).code(
             `.s-datetime-picker[lnf="default"]:not(.s-bare) {
-                @sugar.ui.datetimePicker($lnf: ${finalParams.defaultLnf}, $scope: lnf);
+                @s.ui.datetimePicker($lnf: ${finalParams.defaultLnf}, $scope: lnf);
             }`,
             {
                 type: 'CssClass',
@@ -134,7 +133,7 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
         ).code(
-            `@sugar.rhythm.vertical {
+            `@s.rhythm.vertical {
                 .s-datetime-picker[inline] {
                     ${__STheme.jsObjectToCssProperties(
                         __STheme.get('ui.datetimePicker.rhythmVertical'),

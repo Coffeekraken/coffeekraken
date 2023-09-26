@@ -3,22 +3,22 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           size
- * @as          @sugar.font.size
+ * @as          @s.font.size
  * @namespace      node.mixin.font
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate the css needed to apply a font-size depending on the font sizes
  * defines in the config.theme.font.size stack
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.font.size($1)
+ * @snippet         @s.font.size($1)
  *
  * @example        css
  * .my-cool-element {
- *    \@sugar.font.size(20);
+ *    \@s.font.size(20);
  * }
  *
  * @since       2.0.0
@@ -58,7 +58,7 @@ export default function ({
     };
 
     const vars: string[] = [];
-    vars.push(`font-size: sugar.font.size(${finalParams.size})`);
+    vars.push(`font-size: s.font.size(${finalParams.size})`);
 
     return vars;
 }

@@ -1,7 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name          fsTree
- * @as              @sugar.ui.fsTree
+ * @as              @s.ui.fsTree
  * @namespace    node.mixin.ui.fsTree
  * @type               PostcssMixin
  * @interface     ./fsTree          interface
@@ -13,11 +13,11 @@ import __SInterface from '@coffeekraken/s-interface';
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.fsTree
+ * @snippet         @s.ui.fsTree
  *
  * @example     css
  * .my-fsTree {
- *    @sugar.ui.fsTree;
+ *    @s.ui.fsTree;
  * }
  *
  * @since      2.0.0
@@ -56,7 +56,7 @@ export default function ({ params, atRule, atRootStart, replaceWith, }) {
     //     left: calc(0.5em * var(--s-fs-tree-inline-space-ratio, 1));
     //     width: 1em;
     //     height: 1px;
-    //     background-color: sugar.color(current, border);
+    //     background-color: s.color(current, border);
     // }
     // &:before {
     //     content: '';
@@ -67,11 +67,11 @@ export default function ({ params, atRule, atRootStart, replaceWith, }) {
     //     top: 0;
     //     left: 0.5em;
     //     width: 1px; height: 100%;
-    //     background-color: sugar.color(current, border);
+    //     background-color: s.color(current, border);
     // }
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
-            font-size: sugar.font.size(30);
+            font-size: s.font.size(30);
             user-select: none;
 
             li > div {
@@ -92,10 +92,10 @@ export default function ({ params, atRule, atRootStart, replaceWith, }) {
                 position: relative;
 
                 > div {
-                    padding-inline: sugar.padding(ui.fsTree.paddingInline);
-                    padding-block: sugar.padding(ui.fsTree.paddingBlock);
+                    padding-inline: s.padding(ui.fsTree.paddingInline);
+                    padding-block: s.padding(ui.fsTree.paddingBlock);
                     text-overflow: ellipsis;
-                    @sugar.shape();
+                    @s.shape();
                 }
 
                 &:not(.s-disabled &) {
@@ -130,7 +130,7 @@ export default function ({ params, atRule, atRootStart, replaceWith, }) {
 
 
                 & > [tabindex]:focus:not(:hover):not(.s-disabled &) {
-                    @sugar.outline;
+                    @s.outline;
                 }
 
                 & > ul,
@@ -142,12 +142,12 @@ export default function ({ params, atRule, atRootStart, replaceWith, }) {
 
                     > ul > li:before,
                     > ol > li:before {
-                        background-color: sugar.color(current, --alpha 0.5);
+                        background-color: s.color(current, --alpha 0.5);
                     }
                 }
             }
 
-            @sugar.direction.rtl {
+            @s.direction.rtl {
                 ul, ol {
                     li > div {
                         &:before {
@@ -173,11 +173,11 @@ export default function ({ params, atRule, atRootStart, replaceWith, }) {
         vars.push(`
             li:not(.s-disabled) {
                 > div:hover {
-                    background-color: sugar.color(current, surface);
+                    background-color: s.color(current, surface);
                 }
             }
         `);
     }
     return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBRXJEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUVILE1BQU0sbUNBQW9DLFNBQVEsWUFBWTtJQUMxRCxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsS0FBSyxFQUFFO2dCQUNILElBQUksRUFBRTtvQkFDRixJQUFJLEVBQUUsZUFBZTtvQkFDckIsVUFBVSxFQUFFLENBQUMsR0FBRyxFQUFFLEdBQUcsQ0FBQztpQkFDekI7Z0JBQ0QsTUFBTSxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssQ0FBQztnQkFDdkIsT0FBTyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssQ0FBQzthQUMzQjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFNRCxPQUFPLEVBQUUsbUNBQW1DLElBQUksU0FBUyxFQUFFLENBQUM7QUFFNUQsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsRUFDWCxXQUFXLEdBTWQ7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsS0FBSyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssQ0FBQyxJQUNuQixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixXQUFXLENBQUM7Ozs7S0FJWCxDQUFDLENBQUM7SUFFSCxZQUFZO0lBQ1osbUJBQW1CO0lBQ25CLHNCQUFzQjtJQUN0Qix3QkFBd0I7SUFDeEIsMEJBQTBCO0lBQzFCLG1CQUFtQjtJQUNuQixpQkFBaUI7SUFDakIsa0VBQWtFO0lBQ2xFLGtCQUFrQjtJQUNsQixtQkFBbUI7SUFDbkIsc0RBQXNEO0lBQ3RELElBQUk7SUFFSixhQUFhO0lBQ2IsbUJBQW1CO0lBQ25CLHNCQUFzQjtJQUN0Qix3QkFBd0I7SUFDeEIsMEJBQTBCO0lBQzFCLG1CQUFtQjtJQUNuQixjQUFjO0lBQ2QsbUJBQW1CO0lBQ25CLGdDQUFnQztJQUNoQyxzREFBc0Q7SUFDdEQsSUFBSTtJQUVKLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDMUMsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztTQThGVCxDQUFDLENBQUM7S0FDTjtJQUVELElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDekMsSUFBSSxDQUFDLElBQUksQ0FBQzs7U0FFVCxDQUFDLENBQUM7UUFFSCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7U0FNVCxDQUFDLENBQUM7S0FDTjtJQUVELE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBRXJEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUVILE1BQU0sbUNBQW9DLFNBQVEsWUFBWTtJQUMxRCxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsS0FBSyxFQUFFO2dCQUNILElBQUksRUFBRTtvQkFDRixJQUFJLEVBQUUsZUFBZTtvQkFDckIsVUFBVSxFQUFFLENBQUMsR0FBRyxFQUFFLEdBQUcsQ0FBQztpQkFDekI7Z0JBQ0QsTUFBTSxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssQ0FBQztnQkFDdkIsT0FBTyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssQ0FBQzthQUMzQjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFNRCxPQUFPLEVBQUUsbUNBQW1DLElBQUksU0FBUyxFQUFFLENBQUM7QUFFNUQsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsRUFDWCxXQUFXLEdBTWQ7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsS0FBSyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssQ0FBQyxJQUNuQixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixXQUFXLENBQUM7Ozs7S0FJWCxDQUFDLENBQUM7SUFFSCxZQUFZO0lBQ1osbUJBQW1CO0lBQ25CLHNCQUFzQjtJQUN0Qix3QkFBd0I7SUFDeEIsMEJBQTBCO0lBQzFCLG1CQUFtQjtJQUNuQixpQkFBaUI7SUFDakIsa0VBQWtFO0lBQ2xFLGtCQUFrQjtJQUNsQixtQkFBbUI7SUFDbkIsa0RBQWtEO0lBQ2xELElBQUk7SUFFSixhQUFhO0lBQ2IsbUJBQW1CO0lBQ25CLHNCQUFzQjtJQUN0Qix3QkFBd0I7SUFDeEIsMEJBQTBCO0lBQzFCLG1CQUFtQjtJQUNuQixjQUFjO0lBQ2QsbUJBQW1CO0lBQ25CLGdDQUFnQztJQUNoQyxrREFBa0Q7SUFDbEQsSUFBSTtJQUVKLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDMUMsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztTQThGVCxDQUFDLENBQUM7S0FDTjtJQUVELElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDekMsSUFBSSxDQUFDLElBQUksQ0FBQzs7U0FFVCxDQUFDLENBQUM7UUFFSCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7U0FNVCxDQUFDLENBQUM7S0FDTjtJQUVELE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==

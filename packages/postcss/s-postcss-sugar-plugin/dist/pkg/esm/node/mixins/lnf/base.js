@@ -7,7 +7,7 @@ class postcssSugarPluginLiikAndFeelBaseInterface extends __SInterface {
 export { postcssSugarPluginLiikAndFeelBaseInterface as interface };
 /**
  * @name          base
- * @as          @sugar.lnf.base
+ * @as          @s.lnf.base
  * @namespace     node.mixin.lnf
  * @type          PostcssMixin
  * @platform      postcss
@@ -22,10 +22,10 @@ export { postcssSugarPluginLiikAndFeelBaseInterface as interface };
  * @param       {String}        layout      The layout to generate
  * @return      {Css}                   The corresponding grid css
  *
- * @snippet         @sugar.lnf.base
+ * @snippet         @s.lnf.base
  *
  * @example       css
- * \@sugar.lnf.base;
+ * \@s.lnf.base;
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -34,18 +34,18 @@ export default function ({ params, atRule, replaceWith, }) {
     const finalParams = Object.assign({}, params);
     const vars = [];
     const css = `
-        color: sugar.color(main, text);
-        background-color: sugar.color(main, background);
-        @sugar.font.family(default);
-        @sugar.font.size(default);
-        @sugar.shape(default);
-        --s-scale: sugar.theme(scale.default);
+        color: s.color(main, text);
+        background-color: s.color(main, background);
+        @s.font.family(default);
+        @s.font.size(default);
+        @s.shape(default);
+        --s-scale: s.theme(scale.default);
 
-        @sugar.wireframe {
+        @s.wireframe {
             color: rgba(0, 0, 0, 0.5);
-            @sugar.wireframe.background;
+            @s.wireframe.background;
 
-            @sugar.theme dark {
+            @s.theme dark {
                 color: rgba(255, 255, 255, 0.7);
             }
         }       

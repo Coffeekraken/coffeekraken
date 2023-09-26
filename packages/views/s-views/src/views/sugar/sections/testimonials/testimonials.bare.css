@@ -25,7 +25,7 @@
         text-align: left;
         display: flex;
         align-items: center;
-        gap: sugar.margin(30);
+        gap: s.margin(30);
     }
 
     ._stars {

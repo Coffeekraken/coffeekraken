@@ -4,21 +4,21 @@ import { __uniqid } from '@coffeekraken/sugar/string';
 
 /**
  * @name           classes
- * @as              @sugar.transition.classes
+ * @as              @s.transition.classes
  * @namespace      node.mixin.transition
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the transition helper classes like s-transition:slow, etc.
  * The generated transitions are specified in the config.theme.transition configuration stack
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.transition.classes
+ * @snippet         @s.transition.classes
  *
  * @example        css
- * \@sugar.transition.classes;
+ * \@s.transition.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -61,7 +61,7 @@ export default function ({
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/transition
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows to apply some transitions on any HTMLElement.
         * These transitions are defined in the \`theme.transition\` theme settings.
@@ -72,7 +72,7 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.transition.classes;
+        * \\@s.transition.classes;
         * 
         ${Object.keys(transitionObj).map((transition) => {
             return ` * @cssClass             s-transition${
@@ -110,7 +110,7 @@ export default function ({
   * @namespace          sugar.style.helpers.transition
   * @type               CssClass
   * @platform             css
-  * @status             beta
+  * @status             stable
   * 
   * This class allows you to apply a "<yellow>${transitionName}</yellow>" transition style to any HTMLElement
   * 
@@ -123,7 +123,7 @@ export default function ({
         ).code(
             `
 .s-transition${transitionName === 'default' ? '' : `--${transitionName}`} {
-    @sugar.transition(${transitionName});
+    @s.transition(${transitionName});
 }`,
             { type: 'CssClass' },
         );

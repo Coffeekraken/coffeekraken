@@ -14,7 +14,7 @@ class postcssSugarPluginWireframeImageMixinInterface extends __SInterface {
 export { postcssSugarPluginWireframeImageMixinInterface as interface };
 /**
  * @name           image
- * @as              @sugar.wireframe.image
+ * @as              @s.wireframe.image
  * @namespace      node.mixin.wireframe
  * @type           PostcssMixin
  * @platform      postcss
@@ -22,12 +22,12 @@ export { postcssSugarPluginWireframeImageMixinInterface as interface };
  *
  * This mixin gives you back the wireframe image statement that depend on you themeWireframe config
  *
- * @snippet         @sugar.wireframe.image
- * \@sugar.wireframe.image;
+ * @snippet         @s.wireframe.image
+ * \@s.wireframe.image;
  *
  * @example        css
  * .myCoolItem {
- *  \@sugar.wireframe.image;
+ *  \@s.wireframe.image;
  * }
  *
  * @since       2.0.0
@@ -42,7 +42,7 @@ export default function ({ params, atRule, replaceWith, }) {
         background-position: 50% 50%;
         background-repeat: no-repeat;
         background-size: 50%;
-        @sugar.wireframe.background;
+        @s.wireframe.background;
         
         & > * {
             display: block !important;
@@ -53,8 +53,8 @@ export default function ({ params, atRule, replaceWith, }) {
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            @sugar.wireframe.border;
-            @sugar.border.radius;
+            @s.wireframe.border;
+            @s.border.radius;
         }
 
     `);

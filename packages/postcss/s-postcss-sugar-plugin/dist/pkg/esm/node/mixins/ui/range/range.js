@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 /**
  * @name          range
- * @as              @sugar.ui.range
+ * @as              @s.ui.range
  * @namespace     node.mixin.ui.range
  * @type               PostcssMixin
  * @interface     ./range          interface
@@ -15,11 +15,11 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.range
+ * @snippet         @s.ui.range
  *
  * @example     css
  * .my-range {
- *    @sugar.ui.range;
+ *    @s.ui.range;
  * }
  *
  * @since      2.0.0
@@ -49,28 +49,28 @@ export default function ({ params, atRule, replaceWith, }) {
     const finalParams = Object.assign({ lnf: 'solid', scope: ['bare', 'lnf'] }, params);
     const vars = [
         `
-        --track-color: sugar.color(main, ui);
-        --thumb-color: sugar.color(current);
+        --track-color: s.color(main, ui);
+        --thumb-color: s.color(current);
 
-        --focus-spread: sugar.theme(ui.outline.borderWidth);
+        --focus-spread: s.theme(ui.outline.borderWidth);
 
-        --thumb-radius: var(--s-shape, sugar.border.radius(ui.form.borderRadius));
-        --thumb-height: sugar.scalable(1em);
-        --thumb-width: sugar.scalable(1em);
-        --thumb-border-width: sugar.theme(ui.form.borderWidth);
-        --thumb-border-color: sugar.color(current, border);
+        --thumb-radius: var(--s-shape, s.border.radius(ui.form.borderRadius));
+        --thumb-height: s.scalable(1em);
+        --thumb-width: s.scalable(1em);
+        --thumb-border-width: s.theme(ui.form.borderWidth);
+        --thumb-border-color: s.color(current, border);
 
         --track-width: 100%;
-        --track-height: sugar.scalable(0.5em);
-        --track-border-width: sugar.theme(ui.form.borderWidth);
-        --track-border-color: sugar.color(current, --alpha 0.2);
+        --track-height: s.scalable(0.5em);
+        --track-border-width: s.theme(ui.form.borderWidth);
+        --track-border-color: s.color(current, --alpha 0.2);
 
-        --track-radius: var(--s-shape, sugar.border.radius(ui.form.borderRadius));
+        --track-radius: var(--s-shape, s.border.radius(ui.form.borderRadius));
         --contrast: 5%;
 `,
     ];
     const trackCss = `
-        transition: sugar.theme(ui.form.transition);
+        transition: s.theme(ui.form.transition);
     `;
     const trackCssBare = `
         height: var(--track-height);
@@ -97,15 +97,15 @@ export default function ({ params, atRule, replaceWith, }) {
 
                 &::-webkit-slider-runnable-track {
                     background: var(--track-color);
-                    border: var(--thumb-border-width) solid sugar.color(current, --alpha 0.3);
+                    border: var(--thumb-border-width) solid s.color(current, --alpha 0.3);
                 }
                 &::-moz-range-track {
                     background: var(--track-color);
-                    border: var(--thumb-border-width) solid sugar.color(current, --alpha 0.3);
+                    border: var(--thumb-border-width) solid s.color(current, --alpha 0.3);
                 }
                 &::-ms-track {
                     background: var(--track-color);
-                    border: var(--thumb-border-width) solid sugar.color(current, --alpha 0.3);
+                    border: var(--thumb-border-width) solid s.color(current, --alpha 0.3);
                 }
 
                 &::-ms-fill-lower {
@@ -175,7 +175,7 @@ export default function ({ params, atRule, replaceWith, }) {
             -webkit-appearance: none;
             background: transparent;
 
-            margin-block: sugar.padding(sugar.theme(ui.form.paddingBlock));
+            margin-block: s.padding(s.theme(ui.form.paddingBlock));
 
             &::-moz-focus-outer {
                 border: 0;
@@ -225,7 +225,7 @@ export default function ({ params, atRule, replaceWith, }) {
                 &::-webkit-slider-runnable-track,
                 &::-ms-fill-lower,
                 &::-ms-fill-upper {
-                    @sugar.disabled;
+                    @s.disabled;
                 }
             }
 
@@ -242,41 +242,41 @@ export default function ({ params, atRule, replaceWith, }) {
     }
     // wireframe
     vars.push(`
-        @sugar.wireframe {
+        @s.wireframe {
             &::-webkit-slider-runnable-track {
-                @sugar.wireframe.background;
-                @sugar.wireframe.border;
+                @s.wireframe.background;
+                @s.wireframe.border;
             }
             &::-moz-range-track {
-                @sugar.wireframe.background;
-                @sugar.wireframe.border;
+                @s.wireframe.background;
+                @s.wireframe.border;
             }
             &::-ms-track {
-                @sugar.wireframe.background;
-                @sugar.wireframe.border;
+                @s.wireframe.background;
+                @s.wireframe.border;
             }
 
             &::-ms-fill-lower {
-                @sugar.wireframe.background;
-                @sugar.wireframe.border;
+                @s.wireframe.background;
+                @s.wireframe.border;
             }
 
             &::-ms-fill-upper {
-                @sugar.wireframe.background;
-                @sugar.wireframe.border;
+                @s.wireframe.background;
+                @s.wireframe.border;
             }
 
             &::-webkit-slider-thumb {
-                @sugar.wireframe.background;
-                @sugar.wireframe.border;
+                @s.wireframe.background;
+                @s.wireframe.border;
             }
             &::-moz-range-thumb {
-                @sugar.wireframe.background;
-                @sugar.wireframe.border;
+                @s.wireframe.background;
+                @s.wireframe.border;
             }
             &::-ms-thumb {
-                @sugar.wireframe.background;
-                @sugar.wireframe.border;
+                @s.wireframe.background;
+                @s.wireframe.border;
             }
         }
     `);

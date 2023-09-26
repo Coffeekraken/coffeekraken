@@ -30,10 +30,10 @@ exports.interface = postcssUiFiltrableInputClassesInterface;
  *
  * This mixin represent a filtrable input
  *
- * @snippet      @sugar.ui.filtrableInput.classes($1);
+ * @snippet      @s.ui.filtrableInput.classes($1);
  *
  * @example        css
- * \@sugar.ui.filtrableInput.classes;
+ * \@s.ui.filtrableInput.classes;
  *
  * @since    2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -43,7 +43,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     const vars = new CssVars();
     vars.code(`
         .s-filtrable-input[lnf="default"] {
-            @sugar.ui.filtrableInput($scope: bare);
+            @s.ui.filtrableInput($scope: bare);
         }
         `, {
         type: 'CssClass',
@@ -63,7 +63,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`
                 .s-filtrable-input[lnf="default"]:not(.s-bare) {
-                    @sugar.ui.filtrableInput($lnf: solid, $scope: lnf);
+                    @s.ui.filtrableInput($lnf: solid, $scope: lnf);
                 }`, {
         type: 'CssClass',
     });
@@ -83,7 +83,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * 
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */`).code(`@sugar.rhythm.vertical {
+        */`).code(`@s.rhythm.vertical {
                 .s-filtrable-input {
                     ${s_theme_1.default.jsObjectToCssProperties(s_theme_1.default.get('ui.filtrableInput.rhythmVertical'))}
                 } 

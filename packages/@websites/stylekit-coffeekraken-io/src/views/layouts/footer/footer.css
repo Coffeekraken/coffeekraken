@@ -1,52 +1,52 @@
 .footer {
-    background-color: sugar.color(main, surface);
+    background-color: s.color(main, surface);
     position: relative;
     z-index: 20;
-    border-top: 1px solid sugar.color(main, --alpha 0.05);
+    border-top: 1px solid s.color(main, --alpha 0.05);
 
     a {
-        @sugar.focus.outline accent;
+        @s.focus.outline accent;
     }
 
-    @sugar.wireframe {
-        @sugar.wireframe.border;
+    @s.wireframe {
+        @s.wireframe.border;
     }
 
-    @sugar.theme dark {
-        background-color: sugar.color(main, surface);
+    @s.theme dark {
+        background-color: s.color(main, surface);
     }
 
-    @sugar.media mobile {
-        padding-block: sugar.padding(30);
+    @s.media mobile {
+        padding-block: s.padding(30);
     }
 
     ._main {
-        padding-block: sugar.padding(70);
+        padding-block: s.padding(70);
 
-        @sugar.media tablet {
-            padding-inline: sugar.padding(50);
+        @s.media tablet {
+            padding-inline: s.padding(50);
         }
-        @sugar.media mobile {
-            padding-inline: sugar.padding(30);
+        @s.media mobile {
+            padding-inline: s.padding(30);
         }
 
         svg {
             /* height: 60px; */
             width: 250px;
-            margin-block-end: sugar.margin(30);
+            margin-block-end: s.margin(30);
 
-            @sugar.media mobile {
+            @s.media mobile {
                 width: 150px;
             }
         }
     }
 
-    @sugar.theme (dark) {
+    @s.theme (dark) {
         svg .main {
-            fill: sugar.color(main, text);
+            fill: s.color(main, text);
         }
         svg .accent {
-            fill: sugar.color(accent);
+            fill: s.color(accent);
         }
     }
 
@@ -55,32 +55,32 @@
         justify-content: space-between;
         margin-block-start: 35px;
 
-        @sugar.media mobile {
+        @s.media mobile {
             flex-wrap: wrap;
             display: none;
 
             > div {
                 width: 100%;
-                margin-block-start: sugar.margin(30);
+                margin-block-start: s.margin(30);
             }
         }
     }
 
     ._collab {
-        background: sugar.color(main, background);
-        padding-block: sugar.margin(50);
+        background: s.color(main, background);
+        padding-block: s.margin(50);
         overflow: hidden;
         position: relative;
 
-        @sugar.wireframe {
-            @sugar.wireframe.border;
+        @s.wireframe {
+            @s.wireframe.border;
         }
 
-        @sugar.media mobile {
+        @s.media mobile {
             display: none;
         }
-        @sugar.media tablet {
-            padding-inline: sugar.padding(50);
+        @s.media tablet {
+            padding-inline: s.padding(50);
         }
 
         ._bkg svg {
@@ -101,10 +101,10 @@
         .s-container {
             display: flex;
             align-items: center;
-            /* gap: sugar.margin(50); */
+            /* gap: s.margin(50); */
 
             > * {
-                margin-inline-end: sugar.margin(50);
+                margin-inline-end: s.margin(50);
             }
         }
 

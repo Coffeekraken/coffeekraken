@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           active
- * @as              @sugar.when
+ * @as              @s.when
  * @namespace      node.mixin.when
  * @type           PostcssMixin
  * @platform      postcss
@@ -25,7 +25,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * .myElement {
  *      display: none;
  *
- *      @sugar.when mounted {
+ *      @s.when mounted {
  *          display: block;
  *      }
  * }

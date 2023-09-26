@@ -1,14 +1,14 @@
 .s-fs-tree {
     position: relative;
-    font-size: sugar.font.size(25) !important;
+    font-size: s.font.size(25) !important;
 
     ._folder > div,
     [s-activate] > div {
-        color: sugar.color(main, text);
+        color: s.color(main, text);
     }
 
     .s-fs-tree {
-        font-size: sugar.font.size(20);
+        font-size: s.font.size(20);
 
         li {
             position: relative;
@@ -21,9 +21,9 @@
             left: 0.65em;
             width: 1px;
             height: 100%;
-            background: sugar.color(main, border);
+            background: s.color(main, border);
             opacity: 0.4;
-            @sugar.transition (fast);
+            @s.transition (fast);
         }
         li:hover:before {
             opacity: 0;

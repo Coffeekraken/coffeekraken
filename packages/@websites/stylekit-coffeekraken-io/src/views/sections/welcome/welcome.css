@@ -2,24 +2,24 @@
 
 @keyframes welcome-letters-1n {
     0% {
-        color: sugar.color(main, text, --alpha 0.4);
+        color: s.color(main, text, --alpha 0.4);
     }
     50% {
-        color: sugar.color(accent, text);
+        color: s.color(accent, text);
     }
     100% {
-        color: sugar.color(main, text, --alpha 0.4);
+        color: s.color(main, text, --alpha 0.4);
     }
 }
 @keyframes welcome-letters-2n {
     0% {
-        color: sugar.color(main, text, --alpha 0.4);
+        color: s.color(main, text, --alpha 0.4);
     }
     50% {
-        color: sugar.color(complementary, text);
+        color: s.color(complementary, text);
     }
     100% {
-        color: sugar.color(main, text, --alpha 0.4);
+        color: s.color(main, text, --alpha 0.4);
     }
 }
 
@@ -32,7 +32,7 @@
         width: 100px;
     }
 
-    @sugar.media mobile {
+    @s.media mobile {
         height: auto;
         position: relative;
         top: 0;
@@ -42,20 +42,20 @@
 
     ._title  {
         display: flex;
-        gap: sugar.margin(30);
+        gap: s.margin(30);
         align-items: center;
     }
 
     .s-logo {
         height: 40px;
-        margin-block-end: sugar.margin(30);
+        margin-block-end: s.margin(30);
     }
 
     ._content {
         position: relative;
         width: 100%;
 
-        @sugar.media mobile {
+        @s.media mobile {
             top: 40px;
         }
     }
@@ -70,20 +70,20 @@
         user-select: none;
         pointer-events: none;
         /* filter: drop-shadow(
-            150px 100px 15px sugar.color(main, background, --darken 10)
+            150px 100px 15px s.color(main, background, --darken 10)
         ); */
-        @sugar.transition;
+        @s.transition;
 
-        @sugar.media <=1000 {
+        @s.media <=1000 {
             transform: translateX(-15%) translateY(-50%) scale(0.6);
         }
 
-        @sugar.media tablet {
+        @s.media tablet {
             display: none;
         }
 
         * {
-            @sugar.font.family (code);
+            @s.font.family (code);
             white-space: nowrap;
         }
 
@@ -100,25 +100,25 @@
             opacity: 0;
 
             &:not(:empty).active {
-                @sugar.transition fast;
+                @s.transition fast;
                 transform: scale(2) !important;
 
                 &:nth-child(1n) {
-                    color: sugar.color(accent, text);
+                    color: s.color(accent, text);
                 }
                 &:nth-child(2n) {
-                    color: sugar.color(complementary, text);
+                    color: s.color(complementary, text);
                 }
                 &:nth-child(3n) {
-                    color: sugar.color(error, text);
+                    color: s.color(error, text);
                 }
                 &:nth-child(4n) {
-                    color: sugar.color(info, text);
+                    color: s.color(info, text);
                 }
             }
             &:not(:empty):hover {
-                @sugar.transition fast;
-                color: sugar.color(accent);
+                @s.transition fast;
+                color: s.color(accent);
                 transform: scale(2) !important;
             }
         }
@@ -128,10 +128,10 @@
         }
 
         ._text {
-            color: sugar.color(main, text);
+            color: s.color(main, text);
         }
         ._comment {
-            color: sugar.color(main, text, --alpha 0.5);
+            color: s.color(main, text, --alpha 0.5);
         }
 
         ._code {
@@ -146,25 +146,25 @@
 
                 ._comment {
                     color: #f16f48;
-                    color: sugar.color(complementary, text);
+                    color: s.color(complementary, text);
 
                     /* > span > span:nth-child(1n) {
                         animation: welcome-letters-1n 7s ease-in-out infinite;
                     }
 
                     > span > span:nth-child(2n) {
-                        color: sugar.color(accent, text);
+                        color: s.color(accent, text);
                         animation: welcome-letters-2n 10s ease-in-out infinite
                             0.5s;
                     } */
                     /* > span > span:nth-child(3n) {
-                        color: sugar.color(info, text);
+                        color: s.color(info, text);
                     }
                     > span > span:nth-child(4n) {
-                        color: sugar.color(error, text);
+                        color: s.color(error, text);
                     }
                     > span > span:nth-child(5n) {
-                        color: sugar.color(main, text, --alpha 0.3);
+                        color: s.color(main, text, --alpha 0.3);
                     } */
                 }
             }

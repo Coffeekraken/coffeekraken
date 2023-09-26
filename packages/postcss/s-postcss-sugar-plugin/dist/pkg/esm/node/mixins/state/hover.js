@@ -8,7 +8,7 @@ class postcssSugarPluginStateHoverMixinInterface extends __SInterface {
 export { postcssSugarPluginStateHoverMixinInterface as interface };
 /**
  * @name           hover
- * @as              @sugar.state.hover
+ * @as              @s.state.hover
  * @namespace      node.mixin.state
  * @type           PostcssMixin
  * @platform      postcss
@@ -18,14 +18,14 @@ export { postcssSugarPluginStateHoverMixinInterface as interface };
  * Here's the generated selector:
  * - &:hover
  *
- * @snippet         @sugar.state.hover
- * \@sugar.state.hover {
+ * @snippet         @s.state.hover
+ * \@s.state.hover {
  *      $1
  * }
  *
  * @example        css
  * .myCoolItem {
- *  \@sugar.state.hover {
+ *  \@s.state.hover {
  *      // ...
  *  }
  * }

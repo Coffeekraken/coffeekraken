@@ -60,7 +60,7 @@ body:has(.s-doc-fullscreen) {
         left: 0;
         width: 100%;
         height: 100%;
-        background: sugar.color(main, surface, --alpha 0.6);
+        background: s.color(main, surface, --alpha 0.6);
         animation: s-doc-loading 1s ease-in-out infinite;
 
         svg {
@@ -81,20 +81,20 @@ body:has(.s-doc-fullscreen) {
     max-width: 100vw;
     /* width: 90vw; */
     display: flex;
-    background: sugar.color(main, surface, --alpha 0.3);
+    background: s.color(main, surface, --alpha 0.3);
     position: relative;
     /* left: 50%;
     transform: translateX(-50%); */
-    /* @sugar.depth (100); */
+    /* @s.depth (100); */
 
-    @sugar.media <=tablet {
+    @s.media <=tablet {
         max-height: none;
         display: block;
     }
 
     &_search-input,
     [tabindex]:not([tabindex='-1']) {
-        @sugar.focus.outline accent;
+        @s.focus.outline accent;
     }
 
     &_explorer {
@@ -103,10 +103,10 @@ body:has(.s-doc-fullscreen) {
         height: 100%;
         max-height: 80vh;
         overflow-y: auto;
-        @sugar.scrollbar;
+        @s.scrollbar;
 
-        @sugar.media <=tablet {
-            background: sugar.color(main, background);
+        @s.media <=tablet {
+            background: s.color(main, background);
             position: absolute;
             top: 0;
             left: 0;
@@ -115,7 +115,7 @@ body:has(.s-doc-fullscreen) {
             max-height: 100vh;
             z-index: 50;
             transform: translateX(-100%);
-            @sugar.transition fast;
+            @s.transition fast;
 
             &:focus,
             &:focus-within {
@@ -130,14 +130,14 @@ body:has(.s-doc-fullscreen) {
     &_menu-btn {
         display: none;
         position: fixed;
-        bottom: sugar.margin(30);
-        right: sugar.margin(30);
-        background: sugar.color(main, surface);
-        padding: sugar.padding(30);
+        bottom: s.margin(30);
+        right: s.margin(30);
+        background: s.color(main, surface);
+        padding: s.padding(30);
         z-index: 100;
-        @sugar.border.radius;
+        @s.border.radius;
 
-        @sugar.media <=tablet {
+        @s.media <=tablet {
             display: block;
         }
     }
@@ -147,15 +147,15 @@ body:has(.s-doc-fullscreen) {
         cursor: pointer;
 
         > div {
-            padding: sugar.padding(30) !important;
-            background: sugar.color(main, surface, --alpha 0);
-            @sugar.transition fast;
+            padding: s.padding(30) !important;
+            background: s.color(main, surface, --alpha 0);
+            @s.transition fast;
 
             > i {
-                margin-inline-end: sugar.margin(10);
+                margin-inline-end: s.margin(10);
                 position: relative;
                 top: -2px;
-                @sugar.transition;
+                @s.transition;
             }
         }
 
@@ -164,14 +164,14 @@ body:has(.s-doc-fullscreen) {
         }
 
         &:hover > div {
-            background: sugar.color(main, surface, --alpha 0.3);
+            background: s.color(main, surface, --alpha 0.3);
         }
         &:active > div,
         &.active > div {
-            background: sugar.color(main, surface);
+            background: s.color(main, surface);
 
             > i {
-                color: sugar.color(complementary, --lighten 20);
+                color: s.color(complementary, --lighten 20);
             }
         }
 
@@ -179,11 +179,11 @@ body:has(.s-doc-fullscreen) {
             content: '';
             display: none;
             position: absolute;
-            top: calc(sugar.margin(30) * 0.6 * 2 + 1em);
-            left: calc(sugar.margin(30) + 0.5em);
+            top: calc(s.margin(30) * 0.6 * 2 + 1em);
+            left: calc(s.margin(30) + 0.5em);
             width: 1px;
             bottom: 0;
-            background: sugar.color(main, border);
+            background: s.color(main, border);
         }
 
         &.active:after {
@@ -202,22 +202,22 @@ body:has(.s-doc-fullscreen) {
 
     &_item {
         > div {
-            padding: calc(sugar.padding(30) * 0.6) sugar.padding(30)
-                calc(sugar.padding(30) * 0.6) sugar.padding(50);
+            padding: calc(s.padding(30) * 0.6) s.padding(30)
+                calc(s.padding(30) * 0.6) s.padding(50);
 
             > span {
                 /* font-size: 0.9em; */
                 opacity: 0.8;
-                @sugar.transition fast;
+                @s.transition fast;
             }
         }
 
         &:hover > div > span {
-            color: sugar.color(accent);
+            color: s.color(accent);
         }
 
         &.active > div > span {
-            color: sugar.color(accent);
+            color: s.color(accent);
             opacity: 1;
         }
     }
@@ -227,7 +227,7 @@ body:has(.s-doc-fullscreen) {
         z-index: 1;
         top: 0;
         display: block;
-        background: sugar.color(main, background) !important;
+        background: s.color(main, background) !important;
 
         i {
             opacity: 0.3;
@@ -236,9 +236,9 @@ body:has(.s-doc-fullscreen) {
     &_search-input {
         display: block;
         width: 100%;
-        padding: sugar.padding(30) sugar.padding(30);
-        background: sugar.color(main, ui);
-        border-bottom: 1px solid sugar.color(main, border);
+        padding: s.padding(30) s.padding(30);
+        background: s.color(main, ui);
+        border-bottom: 1px solid s.color(main, border);
     }
 
     &_content {
@@ -247,15 +247,15 @@ body:has(.s-doc-fullscreen) {
     &_body {
         display: flex;
         flex-direction: column;
-        gap: sugar.margin(50);
-        background: sugar.color(main, background);
-        padding: sugar.padding(50);
+        gap: s.margin(50);
+        background: s.color(main, background);
+        padding: s.padding(50);
         overflow-y: auto;
-        @sugar.border.radius();
-        @sugar.scrollbar;
+        @s.border.radius();
+        @s.scrollbar;
 
-        @sugar.media mobile {
-            padding: sugar.padding(30);
+        @s.media mobile {
+            padding: s.padding(30);
         }
 
         > * {
@@ -265,15 +265,15 @@ body:has(.s-doc-fullscreen) {
 
     &_file {
         display: inline-block;
-        padding: sugar.padding(30);
-        background: sugar.color(main, background);
-        @sugar.border.radius();
+        padding: s.padding(30);
+        background: s.color(main, background);
+        @s.border.radius();
 
         span {
-            color: sugar.color(info, text);
+            color: s.color(info, text);
         }
         i {
-            margin-inline-end: sugar.margin(20);
+            margin-inline-end: s.margin(20);
         }
     }
 
@@ -284,18 +284,18 @@ body:has(.s-doc-fullscreen) {
     }
 
     &_toolbar {
-        @sugar.media <=tablet {
+        @s.media <=tablet {
             display: none;
         }
     }
     &_toolbar > button {
-        padding: sugar.padding(30);
-        background: sugar.color(main, surface);
-        @sugar.transition;
-        @sugar.focus.outline accent;
+        padding: s.padding(30);
+        background: s.color(main, surface);
+        @s.transition;
+        @s.focus.outline accent;
 
         &:hover {
-            background: sugar.color(main, surface);
+            background: s.color(main, surface);
         }
     }
 
@@ -315,7 +315,7 @@ body:has(.s-doc-fullscreen) {
     }
 
     &_color-preview {
-        @sugar.border.radius();
+        @s.border.radius();
     }
 
     &_configs,
@@ -326,20 +326,20 @@ body:has(.s-doc-fullscreen) {
     &_config-metas,
     &_param-metas {
         display: flex;
-        gap: sugar.margin(30);
-        background: sugar.color(main, surface);
-        padding: sugar.padding(30);
-        @sugar.border.radius();
+        gap: s.margin(30);
+        background: s.color(main, surface);
+        padding: s.padding(30);
+        @s.border.radius();
     }
     &_config-name,
     &_param-name {
-        color: sugar.color(accent);
+        color: s.color(accent);
         flex-grow: 1;
     }
     &_config-default,
     &_param-default {
         display: inline-flex;
-        gap: sugar.margin(10);
+        gap: s.margin(10);
 
         ._value {
             opacity: 0.6;
@@ -347,18 +347,18 @@ body:has(.s-doc-fullscreen) {
     }
     &_config-type,
     &_param-type {
-        color: sugar.color(info);
+        color: s.color(info);
     }
     &_config-description,
     &_param-description {
-        padding: sugar.padding(30);
-        @sugar.typo (p);
+        padding: s.padding(30);
+        @s.typo (p);
     }
 }
 
 html:has(.s-doc_explorer:focus, .s-doc_explorer:focus-within),
 body:has(.s-doc_explorer:focus, .s-doc_explorer:focus-within) {
-    @sugar.media <=tablet {
+    @s.media <=tablet {
         overflow: hidden;
     }
 }

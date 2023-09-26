@@ -7,18 +7,18 @@
     ._rating {
         display: flex;
         flex-direction: column;
-        gap: sugar.margin(20);
+        gap: s.margin(20);
     }
 
     ._stars {
         position: relative;
 
         ._stars-total {
-            color: sugar.color(main, text, --alpha 0.2);
+            color: s.color(main, text, --alpha 0.2);
         }
 
         ._stars-rating {
-            color: sugar.color(accent);
+            color: s.color(accent);
             clip-path: polygon(
                 0% 0%,
                 calc(var(--percent) * 1%) 0,

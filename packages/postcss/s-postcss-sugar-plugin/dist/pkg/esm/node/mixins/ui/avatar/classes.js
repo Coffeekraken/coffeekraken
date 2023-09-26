@@ -1,22 +1,22 @@
 import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name          classes
- * @as              @sugar.ui.avatar.classes
+ * @as              @s.ui.avatar.classes
  * @namespace     node.mixin.ui.avatar
  * @type          PostcssMixin
  * @interface     ./classes
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * Generate the avatar classes
  *
  * @param       {('bare'|'lnf'|'shape'|'interactive'|'notifications')[]}        [scope=['bare','lnf','shape','interactive','notifications']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
- * @snippet         @sugar.ui.avatar.classes
+ * @snippet         @s.ui.avatar.classes
  *
  * @example       css
- * \@sugar.ui.avatar.classes();
+ * \@s.ui.avatar.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -46,7 +46,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/avatar
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows to apply some avatar style around any image.
         * 
@@ -56,10 +56,10 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support      edge
         * 
         * @install          css
-        * \\@sugar.ui.avatar.classes;
+        * \\@s.ui.avatar.classes;
         * 
         * .my-avatar {
-        *   \@sugar.ui.avatar;
+        *   \@s.ui.avatar;
         * }
         * 
         * @cssClass             s-avatar                Apply the avatar style
@@ -153,7 +153,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         */
        `).code(`
           .s-avatar {
-            @sugar.ui.avatar($scope: 'bare,notifications');
+            @s.ui.avatar($scope: 'bare,notifications');
           }
       `, { type: 'CssClass' });
     }
@@ -174,7 +174,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`
         .s-avatar:not(.s-bare) {
-            @sugar.ui.avatar($scope: 'lnf,notifications');
+            @s.ui.avatar($scope: 'lnf,notifications');
         }
     `, { type: 'CssClass' });
     }
@@ -194,7 +194,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
           * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`
           .s-avatar-interactive {
-              @sugar.ui.avatar($scope: 'interactive');
+              @s.ui.avatar($scope: 'interactive');
           }
       `, { type: 'CssClass' });
     return vars;

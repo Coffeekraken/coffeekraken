@@ -2,20 +2,20 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 /**
  * @name           classes
- * @as          @sugar.order.classes
+ * @as          @s.order.classes
  * @namespace      node.mixin.order
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the order helper classes like s-order:1, s-order:2, etc...
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.order.classes
+ * @snippet         @s.order.classes
  *
  * @example        css
- * \@sugar.order.classes;
+ * \@s.order.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -37,7 +37,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/order
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply some order attributes on any HTMLElement.
         * 
@@ -47,7 +47,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.order.classes;
+        * \\@s.order.classes;
         * 
         ${Array.from(Array(count))
         .map((v, i) => `
@@ -72,7 +72,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                 * @namespace          sugar.style.helpers.order
                 * @type               CssClass
                 * @platform           css
-                * @status               beta
+                * @status               stable
                 * 
                 * This class allows you to apply the order ${i} styling to any HTMLElement
                 * 

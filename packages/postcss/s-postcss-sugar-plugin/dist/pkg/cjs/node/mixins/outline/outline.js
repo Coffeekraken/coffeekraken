@@ -18,7 +18,7 @@ class postcssSugarPluginStateOutlineMixinInterface extends s_interface_1.default
 exports.interface = postcssSugarPluginStateOutlineMixinInterface;
 /**
  * @name           outline
- * @as              @sugar.outline
+ * @as              @s.outline
  * @namespace      node.mixin.outline
  * @type           PostcssMixin
  * @platform      postcss
@@ -26,15 +26,15 @@ exports.interface = postcssSugarPluginStateOutlineMixinInterface;
  *
  * This mixin allows you to apply a nice outline on any HTMLElement.
  * This outline will be display on hover and focus by default but can be displayed
- * always by passing the `on` parameter to `always` like so `@sugar.outline(always)`
+ * always by passing the `on` parameter to `always` like so `@s.outline(always)`
  *
  * @return      {Css}         The generated css
  *
- * @snippet         @sugar.outline
+ * @snippet         @s.outline
  *
  * @example        css
  * .myCoolItem {
- *      @sugar.outline();
+ *      @s.outline();
  * }
  *
  * @since       2.0.0
@@ -47,10 +47,10 @@ function default_1({ params, atRule, replaceWith, }) {
 
         @keyframes s-outline-in {
             from {
-                outline: 0px solid sugar.color(${finalParams.color}, --alpha 0);
+                outline: 0px solid s.color(${finalParams.color}, --alpha 0);
             }
             to {
-                outline: 10px solid sugar.color(${finalParams.color}, --alpha 0.2);
+                outline: 10px solid s.color(${finalParams.color}, --alpha 0.2);
             }
         }
 
@@ -59,4 +59,4 @@ function default_1({ params, atRule, replaceWith, }) {
     return vars;
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRCxNQUFNLDRDQUE2QyxTQUFRLHFCQUFZO0lBQ25FLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsT0FBTyxFQUFFLFNBQVM7YUFDckI7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBQ3dELGlFQUFTO0FBTWxFOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILG1CQUF5QixFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsR0FLZDtJQUNHLE1BQU0sV0FBVyxHQUFHLGdCQUNoQixLQUFLLEVBQUUsU0FBUyxJQUNiLENBQUMsTUFBTSxhQUFOLE1BQU0sY0FBTixNQUFNLEdBQUksRUFBRSxDQUFDLENBQ3BCLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsSUFBSSxDQUFDLElBQUksQ0FBQzs7OztpREFJbUMsV0FBVyxDQUFDLEtBQUs7OztrREFHaEIsV0FBVyxDQUFDLEtBQUs7Ozs7O0tBSzlELENBQUMsQ0FBQztJQUVILE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUM7QUEvQkQsNEJBK0JDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRCxNQUFNLDRDQUE2QyxTQUFRLHFCQUFZO0lBQ25FLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsT0FBTyxFQUFFLFNBQVM7YUFDckI7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBQ3dELGlFQUFTO0FBTWxFOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILG1CQUF5QixFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsR0FLZDtJQUNHLE1BQU0sV0FBVyxHQUFHLGdCQUNoQixLQUFLLEVBQUUsU0FBUyxJQUNiLENBQUMsTUFBTSxhQUFOLE1BQU0sY0FBTixNQUFNLEdBQUksRUFBRSxDQUFDLENBQ3BCLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs2Q0FJK0IsV0FBVyxDQUFDLEtBQUs7Ozs4Q0FHaEIsV0FBVyxDQUFDLEtBQUs7Ozs7O0tBSzFELENBQUMsQ0FBQztJQUVILE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUM7QUEvQkQsNEJBK0JDIn0=

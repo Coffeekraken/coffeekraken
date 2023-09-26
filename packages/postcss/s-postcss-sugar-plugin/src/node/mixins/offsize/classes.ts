@@ -4,7 +4,7 @@ import { __keysFirst } from '@coffeekraken/sugar/array';
 
 /**
  * @name           classes
- * @as              @sugar.offsize.classes
+ * @as              @s.offsize.classes
  * @namespace      node.mixin.offsize
  * @type           PostcssMixin
  * @platform      postcss
@@ -14,10 +14,10 @@ import { __keysFirst } from '@coffeekraken/sugar/array';
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.offsize.classes
+ * @snippet         @s.offsize.classes
  *
  * @example        css
- * \@sugar.offsize.classes;
+ * \@s.offsize.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -75,7 +75,7 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.offsize.classes;
+        * \\@s.offsize.classes;
         * 
         ${offsizeKeys
             .map((spaceName) => {
@@ -144,16 +144,16 @@ export default function ({
    .${clsMargin.replace(':', '-')} {
         position: relative;
         
-        top: calc(sugar.offsize(${spaceName}) * -1);
-        left: calc(sugar.offsize(${spaceName}) * -1);
+        top: calc(s.offsize(${spaceName}) * -1);
+        left: calc(s.offsize(${spaceName}) * -1);
 
         &[dir="rtl"], [dir="rtl"] & {
             left: auto;
-           right: calc(sugar.offsize(${spaceName}) * -1);
+           right: calc(s.offsize(${spaceName}) * -1);
         }
 
-        width: calc(var(--width, 100%) + sugar.offsize(${spaceName}) * 2);
-        height: calc(var(--height, 100%) + sugar.offsize(${spaceName}) * 2);
+        width: calc(var(--width, 100%) + s.offsize(${spaceName}) * 2);
+        height: calc(var(--height, 100%) + s.offsize(${spaceName}) * 2);
    }`,
             { type: 'CssClass' },
         );
@@ -179,8 +179,8 @@ export default function ({
             `
    .${clsMarginTop.replace(':', '-')} {
         position: relative;
-        top: calc(sugar.offsize(${spaceName}) * -1);
-        height: calc(var(--height, 100%) + sugar.offsize(${spaceName}));
+        top: calc(s.offsize(${spaceName}) * -1);
+        height: calc(var(--height, 100%) + s.offsize(${spaceName}));
    }`,
             { type: 'CssClass' },
         );
@@ -207,7 +207,7 @@ export default function ({
    .${clsMarginBottom.replace(':', '-')} {
        position: relative;
        top: 0;
-        height: calc(var(--height, 100%) + sugar.offsize(${spaceName}));
+        height: calc(var(--height, 100%) + s.offsize(${spaceName}));
    }`,
             { type: 'CssClass' },
         );
@@ -233,12 +233,12 @@ export default function ({
             `
    .${clsMarginLeft.replace(':', '-')} {
        position: relative;
-        left: calc(sugar.offsize(${spaceName}) * -1);
-        width: calc(var(--width, 100%) + sugar.offsize(${spaceName}));
+        left: calc(s.offsize(${spaceName}) * -1);
+        width: calc(var(--width, 100%) + s.offsize(${spaceName}));
 
         &[dir="rtl"], [dir="rtl"] & {
             left: auto;
-           right: calc(sugar.offsize(${spaceName}) * -1);
+           right: calc(s.offsize(${spaceName}) * -1);
         }
    }`,
             { type: 'CssClass' },
@@ -266,7 +266,7 @@ export default function ({
    .${clsMarginRight.replace(':', '-')} {
        position: relative;
        left: 0;
-        width: calc(var(--width, 100%) + sugar.offsize(${spaceName}));
+        width: calc(var(--width, 100%) + s.offsize(${spaceName}));
 
         &[dir="rtl"], [dir="rtl"] & {
             left: auto;
@@ -297,8 +297,8 @@ export default function ({
             `
      .${clsMarginX.replace(':', '-')} {
         position: relative;
-        left: calc(sugar.offsize(${spaceName}) * -1);
-        width: calc(var(--width, 100%) + sugar.offsize(${spaceName}) * 2);
+        left: calc(s.offsize(${spaceName}) * -1);
+        width: calc(var(--width, 100%) + s.offsize(${spaceName}) * 2);
    }`,
             { type: 'CssClass' },
         );
@@ -324,8 +324,8 @@ export default function ({
             `
    .${clsMarginY.replace(':', '-')} {
         position: relative;
-        top: calc(sugar.offsize(${spaceName}) * -1);
-        height: calc(var(--height, 100%) + sugar.offsize(${spaceName}) * 2);
+        top: calc(s.offsize(${spaceName}) * -1);
+        height: calc(var(--height, 100%) + s.offsize(${spaceName}) * 2);
    }`,
             { type: 'CssClass' },
         );

@@ -1,6 +1,6 @@
 body {
     background: red;
-    color: sugar.color(accent);
+    color: s.color(accent);
 }
 
 div {

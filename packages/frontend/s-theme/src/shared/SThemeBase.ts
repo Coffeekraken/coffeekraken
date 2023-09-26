@@ -876,7 +876,7 @@ export default class SThemeBase extends __SEventEmitter {
      * - `margin`: And all the margins properties like `margin-inline`, etc...
      * - `padding`: And all the paddings properties like `padding-block`, etc...
      * - `depth`: Special property that will apply nice shadows depending on your theme configuration
-     * - `default-color`: Apply the default color using `@sugar.color` mixin
+     * - `default-color`: Apply the default color using `@s.color` mixin
      *
      * @param           {Object}        jsObject        An object to convert to css string
      * @return          {String}                            The processed css string
@@ -921,7 +921,7 @@ export default class SThemeBase extends __SEventEmitter {
             // media queries
             const medias = Object.keys(this.get('media.queries'));
             if (medias.includes(originalProp)) {
-                propsStack.push(`@sugar.media(${prop.replace(/^@/, '')}) {`);
+                propsStack.push(`@s.media(${prop.replace(/^@/, '')}) {`);
                 propsStack.push(
                     this.jsObjectToCssProperties(value, finalSettings),
                 );
@@ -929,10 +929,10 @@ export default class SThemeBase extends __SEventEmitter {
             } else {
                 switch (prop) {
                     case 'font-family':
-                        propsStack.push(`@sugar.font.family(${value});`);
+                        propsStack.push(`@s.font.family(${value});`);
                         break;
                     case 'font-size':
-                        propsStack.push(`@sugar.font.size(${value});`);
+                        propsStack.push(`@s.font.size(${value});`);
                         break;
 
                     case 'color':
@@ -965,18 +965,16 @@ export default class SThemeBase extends __SEventEmitter {
                     case 'border-bottom-right-radius':
                     case 'border-bottom-left-radius':
                         propsStack.push(
-                            `border-radius: sugar.border.radius(${value});`,
+                            `border-radius: s.border.radius(${value});`,
                         );
                         break;
                     case 'border-width':
                         propsStack.push(
-                            `border-width: sugar.border.width(${value});`,
+                            `border-width: s.border.width(${value});`,
                         );
                         break;
                     case 'transition':
-                        propsStack.push(
-                            `transition: sugar.transition(${value});`,
-                        );
+                        propsStack.push(`transition: s.transition(${value});`);
                         break;
                     case 'margin-inline':
                     case 'margin-block':
@@ -989,7 +987,7 @@ export default class SThemeBase extends __SEventEmitter {
                     case 'margin-bottom':
                     case 'margin-left':
                     case 'margin-right':
-                        propsStack.push(`${prop}: sugar.margin(${value});`);
+                        propsStack.push(`${prop}: s.margin(${value});`);
                         break;
                     case 'padding-inline':
                     case 'padding-block':
@@ -1002,13 +1000,13 @@ export default class SThemeBase extends __SEventEmitter {
                     case 'padding-bottom':
                     case 'padding-left':
                     case 'padding-right':
-                        propsStack.push(`${prop}: sugar.padding(${value});`);
+                        propsStack.push(`${prop}: s.padding(${value});`);
                         break;
                     case 'depth':
-                        propsStack.push(`@sugar.depth(${value});`);
+                        propsStack.push(`@s.depth(${value});`);
                         break;
                     case 'default-color':
-                        propsStack.push(`@sugar.color(${value});`);
+                        propsStack.push(`@s.color(${value});`);
                         break;
                     default:
                         const props = __knownCssProperties.all;

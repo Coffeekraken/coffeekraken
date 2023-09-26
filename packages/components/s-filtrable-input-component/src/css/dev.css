@@ -1,5 +1,5 @@
-@sugar.init ($variant: dark);
+@s.init ($variant: dark);
 
-@sugar.ui.input.classes;
+@s.ui.input.classes;
 
-@sugar.ui.filtrableinput.classes;
+@s.ui.filtrableinput.classes;

@@ -2,24 +2,24 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
 /**
- * @__name           classes
- * @__namespace      node.mixin.height
- * @__type           PostcssMixin
- * @__platform      postcss
- * @__status        wip
+ * @name           classes
+ * @namespace      node.mixin.height
+ * @type           PostcssMixin
+ * @platform      postcss
+ * @status        alpha
  *
  * This mixin generate all the height helper classes like s-height:20, s-height:50, etc...
  * It will generate all the height defined in the config.theme.height configuration stack
  *
- * @__return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
- * @__snippet         @sugar.height.classes
+ * @snippet         @s.height.classes
  *
- * @__example        css
- * \@sugar.height.classes;
+ * @example        css
+ * \@s.height.classes;
  *
- * @__since       2.0.0
- * @__author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 class postcssSugarPluginWidthClassesMixinInterface extends __SInterface {
@@ -70,7 +70,7 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.height.classes; 
+        * \\@s.height.classes; 
         * 
         ${Object.keys(heightObj).map((height) => {
             return ` * @cssClass             s-height:${height}            Apply the \`${height}\` height`;

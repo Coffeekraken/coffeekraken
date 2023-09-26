@@ -1,20 +1,20 @@
 import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name           classes
- * @as          @sugar.fit.classes
+ * @as          @s.fit.classes
  * @namespace      node.mixin.fit
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin allows you to generate all the clearfix helper classes like s-clearfix:micro, etc...
  *
  * @return        {Css}        The generated css
  *
- * @snippet         @sugar.fit.classes
+ * @snippet         @s.fit.classes
  *
  * @example        css
- * \@sugar.fit.classes;
+ * \@s.fit.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -41,7 +41,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/fit-sizes
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply a fit size on any HTMLElement.
         * On image and video, uses \`object-fit\` property, on all others,
@@ -53,10 +53,10 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.fit.classes;
+        * \\@s.fit.classes;
         * 
         * .my-element {
-        *   \\@sugar.fit(fill);
+        *   \\@s.fit(fill);
         * }  
         * 
         ${fitSizes
@@ -85,7 +85,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                 * @namespace          sugar.style.helpers.fit
                 * @type               CssClass
                 * @platform         css
-                * @status           beta
+                * @status           stable
                 * 
                 * This class allows you to apply a "<yellow>${fitSizeName}</yellow>" fit size to any HTMLElement. Work best on images and videos
                 * 
@@ -99,9 +99,9 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                 */
             `).code(`
                 .s-fit-${fitSizeName} {
-                    @sugar.fit(${fitSizeName});
+                    @s.fit(${fitSizeName});
                 }`, { type: 'CssClass' });
     });
     return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBRXJEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBbUJHO0FBRUgsTUFBTSxxQ0FBc0MsU0FBUSxZQUFZO0lBQzVELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxjQUFjLEVBQUU7Z0JBQ1osSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsT0FBTyxFQUFFLE1BQU07YUFDbEI7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBTUQsT0FBTyxFQUFFLHFDQUFxQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRTlELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixPQUFPLEVBQ1AsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLG1CQUNiLGNBQWMsRUFBRSxNQUFNLElBQ25CLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQUcsSUFBSSxPQUFPLEVBQUUsQ0FBQztJQUMzQixNQUFNLFFBQVEsR0FBRyxDQUFDLE1BQU0sRUFBRSxPQUFPLEVBQUUsU0FBUyxFQUFFLE1BQU0sRUFBRSxLQUFLLENBQUMsQ0FBQztJQUU3RCxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O1VBeUJKLFFBQVE7U0FDTCxHQUFHLENBQUMsQ0FBQyxXQUFXLEVBQUUsRUFBRTtRQUNqQixPQUFPLDBCQUEwQixXQUFXLG9CQUFvQixXQUFXLFdBQVcsQ0FBQztJQUMzRixDQUFDLENBQUM7U0FDRCxJQUFJLENBQUMsSUFBSSxDQUFDOztVQUViLFFBQVE7U0FDTCxHQUFHLENBQUMsQ0FBQyxXQUFXLEVBQUUsRUFBRTtRQUNqQixPQUFPLG1DQUFtQyxXQUFXOzt5Q0FFNUIsV0FBVzs7ZUFFckMsQ0FBQztJQUNKLENBQUMsQ0FBQztTQUNELElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7O0tBS2xCLENBQ0EsQ0FBQztJQUVGLFFBQVEsQ0FBQyxPQUFPLENBQUMsQ0FBQyxXQUFXLEVBQUUsRUFBRTtRQUM3QixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDO3lDQUN1QixXQUFXOzs7Ozs7OERBTVUsV0FBVzs7Ozs2Q0FJNUIsV0FBVzs7Ozs7O2FBTTNDLENBQ0osQ0FBQyxJQUFJLENBQ0Y7eUJBQ2EsV0FBVztpQ0FDSCxXQUFXO2tCQUMxQixFQUNOLEVBQUUsSUFBSSxFQUFFLFVBQVUsRUFBRSxDQUN2QixDQUFDO0lBQ04sQ0FBQyxDQUFDLENBQUM7SUFFSCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBRXJEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBbUJHO0FBRUgsTUFBTSxxQ0FBc0MsU0FBUSxZQUFZO0lBQzVELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxjQUFjLEVBQUU7Z0JBQ1osSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsT0FBTyxFQUFFLE1BQU07YUFDbEI7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBTUQsT0FBTyxFQUFFLHFDQUFxQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRTlELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixPQUFPLEVBQ1AsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLG1CQUNiLGNBQWMsRUFBRSxNQUFNLElBQ25CLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQUcsSUFBSSxPQUFPLEVBQUUsQ0FBQztJQUMzQixNQUFNLFFBQVEsR0FBRyxDQUFDLE1BQU0sRUFBRSxPQUFPLEVBQUUsU0FBUyxFQUFFLE1BQU0sRUFBRSxLQUFLLENBQUMsQ0FBQztJQUU3RCxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O1VBeUJKLFFBQVE7U0FDTCxHQUFHLENBQUMsQ0FBQyxXQUFXLEVBQUUsRUFBRTtRQUNqQixPQUFPLDBCQUEwQixXQUFXLG9CQUFvQixXQUFXLFdBQVcsQ0FBQztJQUMzRixDQUFDLENBQUM7U0FDRCxJQUFJLENBQUMsSUFBSSxDQUFDOztVQUViLFFBQVE7U0FDTCxHQUFHLENBQUMsQ0FBQyxXQUFXLEVBQUUsRUFBRTtRQUNqQixPQUFPLG1DQUFtQyxXQUFXOzt5Q0FFNUIsV0FBVzs7ZUFFckMsQ0FBQztJQUNKLENBQUMsQ0FBQztTQUNELElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7O0tBS2xCLENBQ0EsQ0FBQztJQUVGLFFBQVEsQ0FBQyxPQUFPLENBQUMsQ0FBQyxXQUFXLEVBQUUsRUFBRTtRQUM3QixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDO3lDQUN1QixXQUFXOzs7Ozs7OERBTVUsV0FBVzs7Ozs2Q0FJNUIsV0FBVzs7Ozs7O2FBTTNDLENBQ0osQ0FBQyxJQUFJLENBQ0Y7eUJBQ2EsV0FBVzs2QkFDUCxXQUFXO2tCQUN0QixFQUNOLEVBQUUsSUFBSSxFQUFFLFVBQVUsRUFBRSxDQUN2QixDQUFDO0lBQ04sQ0FBQyxDQUFDLENBQUM7SUFFSCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDIn0=

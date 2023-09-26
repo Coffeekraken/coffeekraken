@@ -1,5 +1,5 @@
-@sugar.init;
-@sugar.classes;
+@s.init;
+@s.classes;
 
 body {
     text-align: center;
@@ -7,8 +7,8 @@ body {
 
 h1 {
     font-size: 50px;
-    margin-bottom: sugar.margin(30);
-    margin-top: sugar.margin(100);
+    margin-bottom: s.margin(30);
+    margin-top: s.margin(100);
 }
 
 s-slider {
@@ -17,7 +17,7 @@ s-slider {
     margin-bottom: 50px;
     color: white;
 
-    @sugar.color (accent);
+    @s.color (accent);
 }
 
 .s-slider {
@@ -41,9 +41,9 @@ s-slider[status='mounted'] .s-slider {
 }
 
 s-slider[lnf*='contained'] {
-    @sugar.color.current (#ffffff);
+    @s.color.current (#ffffff);
 }
 
 .s-slider_progress {
-    @sugar.color.current (#ffffff);
+    @s.color.current (#ffffff);
 }

@@ -11,20 +11,20 @@ export { postcssSugarPluginClassesMixinInterface as interface };
 
 /**
  * @name           classes
- * @as          @sugar.color.classes
+ * @as          @s.color.classes
  * @namespace      node.mixin.color
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin allows you to generate all the colors helpers classes like s-tc:accent, etc...
  *
  * @return    {Css}         The generated css for color classes
  *
- * @snippet         @sugar.color.classes
+ * @snippet         @s.color.classes
  *
  * @example        css
- * \@sugar.color.classes;
+ * \@s.color.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -40,7 +40,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/colors
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to set text and background colors easily to any HTMLElement
         * 
@@ -50,10 +50,10 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.color.classes;
+        * \\@s.color.classes;
         * 
         * .my-element {
-        *   \\@sugar.color(accent);
+        *   \\@s.color(accent);
         * }                   
         * 
         ${Object.keys(__STheme.getTheme().baseColors())
@@ -102,6 +102,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
        * @name        s-color:${colorName}
        * @namespace          sugar.style.helpers.color
        * @type          CssClass
+       * @status        stable
        * 
        * This class allows you to apply the "<span class="s-color:${colorName}">${colorName}</span>" text color to any ui element.
        * This does apply the color only on the item itself and not on his childs...
@@ -119,9 +120,9 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             )
             .code(
                 `
-                @sugar.lod.prevent {
+                @s.lod.prevent {
                     .s-color-${colorName} {
-                        @sugar.color(${colorName});
+                        @s.color(${colorName});
                     }
                 }
     `,
@@ -136,7 +137,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
                     ` * @namespace          sugar.style.helpers.color`,
                     ` * @type           CssClass`,
                     ` * @platform       css`,
-                    ` * @status         beta`,
+                    ` * @status         stable`,
                     ` *`,
                     ` * This class allows you to apply the "${colorName}" color to the background of an HTMLElement`,
                     ` *`,
@@ -150,7 +151,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             .code(
                 `
                 .s-bg-${colorName} {
-                    background-color: sugar.color(${colorName}) !important;
+                    background-color: s.color(${colorName}) !important;
                 }
         `,
                 { type: 'CssClass' },
@@ -172,7 +173,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
                     ` * @namespace          sugar.style.helpers.color`,
                     ` * @type           CssClass`,
                     ` * @platform       css`,
-                    ` * @status         beta`,
+                    ` * @status         stable`,
                     ` *`,
                     ` * This class allows you to apply the "${colorName}" text color to an HTMLElement`,
                     ` *`,
@@ -186,7 +187,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             .code(
                 `
                 .s-tc-${colorName} {
-                    color: sugar.color(${colorName}, text) !important;
+                    color: s.color(${colorName}, text) !important;
                 }
         `,
                 { type: 'CssClass' },
@@ -200,7 +201,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
                     ` * @namespace          sugar.style.helpers.color`,
                     ` * @type           CssClass`,
                     ` * @platform       css`,
-                    ` * @status         beta`,
+                    ` * @status         stable`,
                     ` *`,
                     ` * This class allows you to apply the "${colorName}" color to the background of an HTMLElement`,
                     ` *`,
@@ -214,7 +215,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             .code(
                 `
                 .s-bg-${colorName} {
-                    background-color: sugar.color(${colorName}) !important;
+                    background-color: s.color(${colorName}) !important;
                 }
         `,
                 { type: 'CssClass' },
@@ -229,7 +230,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
                 ` * @namespace          sugar.style.helpers.color`,
                 ` * @type           CssClass`,
                 ` * @platform       css`,
-                ` * @status         beta`,
+                ` * @status         stable`,
                 ` *`,
                 ` * This class allows you to scope the applied bgs on the direct childs to only be applied on "odd" HTMLElement`,
                 ` *`,
@@ -258,7 +259,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
                 ` * @namespace          sugar.style.helpers.color`,
                 ` * @type           CssClass`,
                 ` * @platform       css`,
-                ` * @status         beta`,
+                ` * @status         stable`,
                 ` *`,
                 ` * This class allows you to scope the applied colors on the direct childs to only be applied on "even" HTMLElement`,
                 ` *`,

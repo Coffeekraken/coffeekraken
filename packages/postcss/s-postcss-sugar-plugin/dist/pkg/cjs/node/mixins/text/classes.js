@@ -8,20 +8,20 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const faker_1 = __importDefault(require("faker"));
 /**
  * @name           classes
- * @as              @sugar.text.classes
+ * @as              @s.text.classes
  * @namespace      node.mixin.text
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the text helper classes like s-text:center, s-text:left, etc...
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.text.classes
+ * @snippet         @s.text.classes
  *
  * @example        css
- * \@sugar.text.classes;
+ * \@s.text.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -42,7 +42,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/text
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows to apply some text styling like \`text-align: left\`, \`text-align: right\`, \`text-decoration: underline\`, etc...
         * directly inside your HTML.
@@ -53,7 +53,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.text.classes; 
+        * \\@s.text.classes; 
         * 
         * @cssClass             s-text:left             Align the text to the left
         * @cssClass             s-text:right             Align the text to the right
@@ -120,7 +120,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
          * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
-         * @status        beta
+         * @status        stable
          * 
          * This class allows you to align text to the left side
          * 
@@ -141,7 +141,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
          * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
-         * @status        beta
+         * @status        stable
          * 
          * This class allows you to align text to the right side
          * 
@@ -162,7 +162,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
          * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
-         * @status        beta
+         * @status        stable
          * 
          * This class allows you to align text to the center
          * 
@@ -183,7 +183,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
          * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
-         * @status        beta
+         * @status        stable
          * 
          * This class allows you to align text to the start (left) side, (right) when rtl
          * 
@@ -204,7 +204,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
          * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
-         * @status        beta
+         * @status        stable
          * 
          * This class allows you to align text to the end (right) side, (left) when rtl
          * 
@@ -225,7 +225,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
          * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
-         * @status        beta
+         * @status        stable
          * 
          * This class allows you to justify the text
          * 
@@ -246,7 +246,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
          * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
-         * @status        beta
+         * @status        stable
          * 
          * This class allows you to remove any text decoration on the text
          * 
@@ -267,7 +267,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
          * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
-         * @status        beta
+         * @status        stable
          * 
          * This class allows you to overline the text
          * 
@@ -288,7 +288,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
          * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
-         * @status        beta
+         * @status        stable
          * 
          * This class allows you to underline the text
          * 
@@ -309,7 +309,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
          * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
-         * @status        beta
+         * @status        stable
          * 
          * This class allows you to line-through the text
          * 
@@ -330,7 +330,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
          * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
-         * @status        beta
+         * @status        stable
          * 
          * This class allows you to lowercase the text
          * 
@@ -351,7 +351,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
          * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
-         * @status        beta
+         * @status        stable
          * 
          * This class allows you to uppercase the text
          * 
@@ -372,7 +372,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
          * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
-         * @status        beta
+         * @status        stable
          * 
          * This class allows you to capitalize the text
          * 

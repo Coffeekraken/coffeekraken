@@ -104,18 +104,18 @@ export default function (api) {
 
             excludeByTags: {
                 /**
-                 * @name        namespace
+                 * @name        status
                  * @namespace   config.docmap.build.excludeByTags
                  * @type        Regex[]
-                 * @default      [/\.config\.)/]
+                 * @default      [/^(?!stable)([a-z0-9]+)$/]
                  *
                  * Specify some regex to apply on the namespace.
-                 * All namespaces that does not match one of the specified regex will be excluded
+                 * All status that are not "stable" will be excluded
                  *
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                // namespace: [/\.config\./],
+                status: [/^(?!stable)([a-z0-9]+)$/],
 
                 /**
                  * @name        type

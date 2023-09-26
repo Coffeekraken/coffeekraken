@@ -3,20 +3,20 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           classes
- * @as              @sugar.container.classes
+ * @as              @s.container.classes
  * @namespace      node.mixin.container
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the layout helper classes like s-container, etc...
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.container.classes
+ * @snippet         @s.container.classes
  *
  * @example        css
- * \@sugar.container.classes;
+ * \@s.container.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -64,7 +64,7 @@ export default function ({
       * @namespace          sugar.style.helpers.container
       * @type               CssClass
       * @platform       css
-      * @status         beta
+      * @status         stable
       * 
       * This class allows you to apply the "<yellow>${containerName}</yellow>" container styling to any HTMLElement
       * 
@@ -77,7 +77,7 @@ export default function ({
         ).code(
             `
       .${cls.replace(':', '-')} {
-                @sugar.container(${containerName});
+                @s.container(${containerName});
         }`,
             { type: 'CssClass' },
         );

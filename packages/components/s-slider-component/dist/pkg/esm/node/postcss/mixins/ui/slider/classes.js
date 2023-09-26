@@ -24,10 +24,10 @@ export { postcssUiSliderClassesInterface as interface };
  *
  * This mixin represent a color picker
  *
- * @snippet      @sugar.ui.slider.classes($1);
+ * @snippet      @s.ui.slider.classes($1);
  *
  * @example        css
- * \@sugar.ui.slider.classes;
+ * \@s.ui.slider.classes;
  *
  * @since    2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -38,7 +38,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     if (finalParams.scope.includes('bare')) {
         vars.code(`
         .s-slider {
-            @sugar.ui.slider($scope: bare);
+            @s.ui.slider($scope: bare);
         }
     `, {
             type: 'CssClass',
@@ -59,7 +59,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`
             .s-slider[lnf*="default"]:not(.s-bare) {
-                @sugar.ui.slider($scope: lnf);
+                @s.ui.slider($scope: lnf);
             }
             `, {
             type: 'CssClass',
@@ -68,7 +68,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     if (finalParams.scope.includes('behavior')) {
         vars.code(`
             .s-slider[behavior*="default"] {
-                @sugar.ui.slider($scope: behavior);
+                @s.ui.slider($scope: behavior);
             }`, {
             type: 'CssClass',
         });
@@ -90,7 +90,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * 
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */`).code(`@sugar.rhythm.vertical {
+        */`).code(`@s.rhythm.vertical {
                 .s-slider {
                     ${__STheme.jsObjectToCssProperties(__STheme.get('ui.slider.rhythmVertical'))}
                 } 

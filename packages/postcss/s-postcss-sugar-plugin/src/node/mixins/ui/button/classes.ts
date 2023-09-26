@@ -3,12 +3,12 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          classes
- * @as              @sugar.ui.button.classes
+ * @as              @s.ui.button.classes
  * @namespace     node.mixin.ui.button
  * @type          PostcssMixin
  * @interface       ./classes
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * Generate the button classes
  *
@@ -17,10 +17,10 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {('bare'|'lnf'|'vr'|'tf)[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
- * @snippet         @sugar.ui.button.classes
+ * @snippet         @s.ui.button.classes
  *
  * @example       css
- * \@sugar.ui.button.classes();
+ * \@s.ui.button.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -89,7 +89,7 @@ export default function ({
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/button
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to display any HTMLElement as a button
         * 
@@ -105,10 +105,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.ui.button.classes;
+        * \\@s.ui.button.classes;
         * 
         * .my-button {
-        *   \@sugar.ui.button;
+        *   \@s.ui.button;
         * }
         * 
         ${finalParams.lnfs
@@ -188,7 +188,7 @@ export default function ({
         ).code(
             `
         .s-btn {
-            @sugar.ui.button($scope: bare);
+            @s.ui.button($scope: bare);
         }`,
             {
                 type: 'CssClass',
@@ -223,7 +223,7 @@ export default function ({
             ).code(
                 `
         .${cls}:not(.s-bare) {
-            @sugar.ui.button($lnf: ${lnf}, $scope: lnf);
+            @s.ui.button($lnf: ${lnf}, $scope: lnf);
         }`,
                 {
                     type: 'CssClass',
@@ -280,9 +280,9 @@ export default function ({
        `,
         ).code(
             `
-            @sugar.format.text {
+            @s.format.text {
                 button {
-                    @sugar.ui.button($scope: '${finalParams.scope.join(',')}');
+                    @s.ui.button($scope: '${finalParams.scope.join(',')}');
                 } 
             }
         `,
@@ -322,7 +322,7 @@ export default function ({
        `,
         ).code(
             `
-            @sugar.rhythm.vertical {
+            @s.rhythm.vertical {
                 button, .s-btn {
                     ${__STheme.jsObjectToCssProperties(
                         __STheme.get('ui.button.rhythmVertical'),

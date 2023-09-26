@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           depth
- * @as              @sugar.depth
+ * @as              @s.depth
  * @namespace      node.mixin.depth
  * @type           PostcssMixin
  * @platform      postcss
@@ -13,11 +13,11 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.depth($1)
+ * @snippet         @s.depth($1)
  *
  * @example        css
  * .my-element {
- *    \@sugar.depth(20);
+ *    \@s.depth(20);
  * }
  *
  * @since       2.0.0
@@ -64,7 +64,7 @@ export default function ({
     };
 
     const vars: string[] = [
-        `${finalParams.type}-shadow: sugar.depth(${finalParams.depth});`,
+        `${finalParams.type}-shadow: s.depth(${finalParams.depth});`,
     ];
     return vars;
 }

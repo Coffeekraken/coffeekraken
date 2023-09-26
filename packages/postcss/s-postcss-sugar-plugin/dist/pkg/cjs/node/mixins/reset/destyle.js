@@ -7,11 +7,11 @@ exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 /**
  * @name           destyle
- * @as          @sugar.reset.destyle
+ * @as          @s.reset.destyle
  * @namespace      node.mixin.reset
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin print the destyle css reset
  *
@@ -19,10 +19,10 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  *
  * @return        {Css}         The generated css
  *
- * @snippet     @sugar.reset.destyle
+ * @snippet     @s.reset.destyle
  *
  * @example        css
- * \@sugar.reset.destyle;
+ * \@s.reset.destyle;
  *
  * @see       https://github.com/nicolas-cusan/destyle.css
  * @since       2.0.0
@@ -44,7 +44,7 @@ function default_1({ params, CssVars, atRule, replaceWith, }) {
         * @type               Styleguide
         * @menu           Styleguide / Resets        /styleguide/resets/destyle
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These mixins allows you to apply the \`destyle\` reset easily.
         * 
@@ -64,7 +64,7 @@ function default_1({ params, CssVars, atRule, replaceWith, }) {
         * @support      edge
         * 
         * @example        css
-        * \@sugar.reset.destyle;
+        * \@s.reset.destyle;
         * 
         * @see          https://github.com/nicolas-cusan/destyle.css
         * @since      2.0.0
@@ -72,7 +72,7 @@ function default_1({ params, CssVars, atRule, replaceWith, }) {
         */
     `).code(`
     
-@sugar.lod.prevent() {
+@s.lod.prevent() {
       
   /* purgecss start ignore */
 

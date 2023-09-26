@@ -5,20 +5,20 @@ import __faker from 'faker';
 
 /**
  * @name           classes
- * @as              @sugar.spacing.classes
+ * @as              @s.spacing.classes
  * @namespace      node.mixin.spacing
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the spacing helper classes like s-p:10, s-pie:40, etc...
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.spacing.classes
+ * @snippet         @s.spacing.classes
  *
  * @example        css
- * \@sugar.spacing.classes;
+ * \@s.spacing.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -62,7 +62,7 @@ export default function ({
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/spacing
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply spacing to any HTMLElement container
         * 
@@ -72,7 +72,7 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.spacing.classes;
+        * \\@s.spacing.classes;
         * 
         ${spacingsKeys
             .map((spaceName) => {
@@ -116,7 +116,7 @@ export default function ({
     * @namespace          sugar.style.helpers.spacing
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" spacing style any HTMLElement container
     * 
@@ -135,7 +135,7 @@ export default function ({
         ).code(
             `
    .${clsMargin.replace(':', '-')} {
-        gap: sugar.margin(${spaceName});
+        gap: s.margin(${spaceName});
    }`,
             { type: 'CssClass' },
         );
@@ -148,7 +148,7 @@ export default function ({
         * @namespace          sugar.style.helpers.spacing
         * @type             CssClass
         * @platform             css
-        * @status               beta
+        * @status               stable
         * 
         * This class allows you to apply the "<yellow>row</yellow>" spacing direction any HTMLElement container
         * 

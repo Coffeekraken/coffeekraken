@@ -28,14 +28,14 @@ export { postcssUiRatingClassesInterface as interface };
  * @type                 PostcssMixin
  * @platform            css
  * @status              beta
- * 
+ *
  * This mixin represent rating
  *
- * @snippet      @sugar.ui.rating.classes($1);
+ * @snippet      @s.ui.rating.classes($1);
  *
  * @example        css
- * \@sugar.ui.rating.classes;
- * 
+ * \@s.ui.rating.classes;
+ *
  * @since    2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
@@ -62,7 +62,7 @@ export default function ({
         vars.code(
             `
         .s-rating {
-            @sugar.ui.rating($scope: bare);
+            @s.ui.rating($scope: bare);
         }
     `,
             {
@@ -89,7 +89,7 @@ export default function ({
         ).code(
             `
             .s-rating[lnf="default"]:not(.s-bare) {
-                @sugar.ui.rating($scope: lnf);
+                @s.ui.rating($scope: lnf);
             }`,
             {
                 type: 'CssClass',
@@ -117,7 +117,7 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
         ).code(
-            `@sugar.rhythm.vertical {
+            `@s.rhythm.vertical {
                 .s-rating {
                     ${__STheme.jsObjectToCssProperties(
                         __STheme.get('ui.rating.rhythmVertical'),

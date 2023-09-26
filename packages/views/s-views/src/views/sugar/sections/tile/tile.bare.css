@@ -8,7 +8,7 @@
     }
 
     .s-container ._layout {
-        max-width: sugar.container.width();
+        max-width: s.container.width();
         margin: 0 auto;
     }
 
@@ -48,14 +48,14 @@
     }
 
     ._layout {
-        @sugar.layout ('1 2');
+        @s.layout ('1 2');
         gap: 0 !important;
         align-items: stretch;
     }
 
     &-image-side-left {
         ._layout {
-            @sugar.layout ('2 1');
+            @s.layout ('2 1');
         }
     }
 }

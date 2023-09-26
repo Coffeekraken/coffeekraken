@@ -3,12 +3,12 @@ import { __fromQuantifier } from '@coffeekraken/sugar/array';
 
 /**
  * @name           filter
- * @as              @sugar.lod.filter
+ * @as              @s.lod.filter
  * @namespace      node.mixin.lod
  * @type           PostcssMixin
  * @platform      postcss
  * @interface       ./lod
- * @status        beta
+ * @status        alpha
  *
  * This mixin allows you to specify which lod you want to keep from the enclosed css.
  * This is useful for example if you want to start with some sugar classes but filter
@@ -17,14 +17,14 @@ import { __fromQuantifier } from '@coffeekraken/sugar/array';
  * @param           {Number|String}         level           The level of details you want to keep. "2" will mean 0, 1 and 2. "=2" will mean filter the level 2. ">=2" will mean 2 and greater, etc...
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.lod.filter($1)
- * \@sugar.lod.filter($1) {
+ * @snippet         @s.lod.filter($1)
+ * \@s.lod.filter($1) {
  *      $2
  * }
  *
  * @example        css
- * \@sugar.lod.filter(2) {
- *      \@sugar.ui.button.classes;
+ * \@s.lod.filter(2) {
+ *      \@s.ui.button.classes;
  * }
  *
  * @since       2.0.0

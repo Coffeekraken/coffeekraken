@@ -96,9 +96,7 @@ export default class SDashboardResponsiveComponent extends __SLitComponent {
                                       )}
                                       {...}
                                   `
-                                : html`
-                                      @sugar.media ${this._activeQuery} {...}
-                                  `}
+                                : html` @s.media ${this._activeQuery} {...} `}
                         </p>
                         <button
                             class="_switch ck-action"

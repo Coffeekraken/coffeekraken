@@ -4,11 +4,11 @@ import __faker from 'faker';
 
 /**
  * @name           classes
- * @as              @sugar.truncate.classes
+ * @as              @s.truncate.classes
  * @namespace      node.mixin.truncate
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the truncate classes like s-truncate, s-truncate:2, etc...
  * The number of truncate classes generated is defined in the theme.helpers.truncate.count settings
@@ -16,10 +16,10 @@ import __faker from 'faker';
  * @param           {Number}            [count=__STheme.get('helpers.truncate.count')]          Specify how many s-truncate:{lines} classes you want to generate
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.truncate.classes
+ * @snippet         @s.truncate.classes
  *
  * @example        css
- * \@sugar.truncate.classes;
+ * \@s.truncate.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -68,7 +68,7 @@ export default function ({
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/truncate
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to **truncate texts to a number of lines** on any HTMLElement
         * 
@@ -78,7 +78,7 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.truncate.classes;
+        * \\@s.truncate.classes;
         * 
         ${[...Array(finalParams.count).keys()].map((i) => {
             return ` * @cssClass        s-truncate:${
@@ -128,7 +128,7 @@ export default function ({
         ).code(
             `
 .s-truncate-${i + 1} {
-    @sugar.truncate(${i + 1});
+    @s.truncate(${i + 1});
 }`,
             { type: 'CssClass' },
         );

@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          classes
- * @as          @sugar.ui.checkbox.classes
+ * @as          @s.ui.checkbox.classes
  * @namespace     node.mixin.ui.checkbox
  * @type          PostcssMixin
  * @interface       ./classes
@@ -17,10 +17,10 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
- * @snippet         @sugar.checkbox.classes
+ * @snippet         @s.checkbox.classes
  *
  * @example       css
- * \@sugar.ui.form.classes();
+ * \@s.ui.form.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -101,10 +101,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.ui.checkbox.classes;
+        * \\@s.ui.checkbox.classes;
         * 
         * .my-checkbox {
-        *   \@sugar.ui.checkbox;
+        *   \@s.ui.checkbox;
         * }
         * 
         ${finalParams.lnfs
@@ -219,7 +219,7 @@ export default function ({
         ).code(
             `
             .s-checkbox {
-                @sugar.ui.checkbox($scope: bare);
+                @s.ui.checkbox($scope: bare);
             }
             `,
             {
@@ -260,7 +260,7 @@ export default function ({
         ).code(
             `
         .${cls}:not(.s-bare) {
-            @sugar.ui.checkbox($lnf: ${lnf}, $scope: lnf);
+            @s.ui.checkbox($lnf: ${lnf}, $scope: lnf);
         }
         `,
             {
@@ -291,11 +291,9 @@ export default function ({
        `,
         ).code(
             `
-            @sugar.format.text {
+            @s.format.text {
                 input[type="checkbox"] {
-                    @sugar.ui.checkbox($scope: '${finalParams.scope.join(
-                        ',',
-                    )}');
+                    @s.ui.checkbox($scope: '${finalParams.scope.join(',')}');
                 } 
             }
         `,
@@ -329,7 +327,7 @@ export default function ({
        `,
         ).code(
             `
-            @sugar.rhythm.vertical {
+            @s.rhythm.vertical {
                 input[type="checkbox"], .s-checkbox {
                     ${__STheme.jsObjectToCssProperties(
                         __STheme.get('ui.form.rhythmVertical'),

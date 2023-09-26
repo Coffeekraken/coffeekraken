@@ -7,46 +7,46 @@ class postcssSugarPluginUiClassesInterface extends __SInterface {
 export { postcssSugarPluginUiClassesInterface as interface };
 /**
  * @name           classes
- * @as              @sugar.ui.classes
+ * @as              @s.ui.classes
  * @namespace      node.mixin.ui
  * @type           Mixin
  * @status        beta
  *
  * This mixin allows you to print all the ui classes like button, form, etc...
  *
- * @snippet         @sugar.ui.classes
+ * @snippet         @s.ui.classes
  *
  * @example        css
- * \@sugar.ui.classes;
+ * \@s.ui.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bospsel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function ({ params, atRule, replaceWith, }) {
     const cssArray = [
-        '@sugar.ui.avatar.classes;',
-        '@sugar.ui.backdrop.classes;',
-        '@sugar.ui.badge.classes;',
-        '@sugar.ui.blockquote.classes;',
-        '@sugar.ui.button.classes;',
-        '@sugar.ui.checkbox.classes;',
-        '@sugar.ui.dropdown.classes;',
-        '@sugar.ui.fsTree.classes;',
-        '@sugar.ui.input.classes;',
-        '@sugar.ui.inputContainer.classes;',
-        '@sugar.ui.label.classes;',
-        '@sugar.ui.list.classes;',
-        '@sugar.ui.loader.classes;',
-        '@sugar.ui.media.classes;',
-        '@sugar.ui.radio.classes;',
-        '@sugar.ui.range.classes;',
-        '@sugar.ui.select.classes;',
-        '@sugar.ui.switch.classes;',
-        '@sugar.ui.table.classes;',
-        '@sugar.ui.tabs.classes;',
-        '@sugar.ui.toggle.classes;',
-        '@sugar.ui.tooltip.classes;',
+        '@s.ui.avatar.classes;',
+        '@s.ui.backdrop.classes;',
+        '@s.ui.badge.classes;',
+        '@s.ui.blockquote.classes;',
+        '@s.ui.button.classes;',
+        '@s.ui.checkbox.classes;',
+        '@s.ui.dropdown.classes;',
+        '@s.ui.fsTree.classes;',
+        '@s.ui.input.classes;',
+        '@s.ui.inputContainer.classes;',
+        '@s.ui.label.classes;',
+        '@s.ui.list.classes;',
+        '@s.ui.loader.classes;',
+        '@s.ui.media.classes;',
+        '@s.ui.radio.classes;',
+        '@s.ui.range.classes;',
+        '@s.ui.select.classes;',
+        '@s.ui.switch.classes;',
+        '@s.ui.table.classes;',
+        '@s.ui.tabs.classes;',
+        '@s.ui.toggle.classes;',
+        '@s.ui.tooltip.classes;',
     ];
     return cssArray;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBRXJELE1BQU0sb0NBQXFDLFNBQVEsWUFBWTtJQUMzRCxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPLEVBQUUsQ0FBQztJQUNkLENBQUM7Q0FDSjtBQUNELE9BQU8sRUFBRSxvQ0FBb0MsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUU3RDs7Ozs7Ozs7Ozs7Ozs7OztHQWdCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFFBQVEsR0FBRztRQUNiLDJCQUEyQjtRQUMzQiw2QkFBNkI7UUFDN0IsMEJBQTBCO1FBQzFCLCtCQUErQjtRQUMvQiwyQkFBMkI7UUFDM0IsNkJBQTZCO1FBQzdCLDZCQUE2QjtRQUM3QiwyQkFBMkI7UUFDM0IsMEJBQTBCO1FBQzFCLG1DQUFtQztRQUNuQywwQkFBMEI7UUFDMUIseUJBQXlCO1FBQ3pCLDJCQUEyQjtRQUMzQiwwQkFBMEI7UUFDMUIsMEJBQTBCO1FBQzFCLDBCQUEwQjtRQUMxQiwyQkFBMkI7UUFDM0IsMkJBQTJCO1FBQzNCLDBCQUEwQjtRQUMxQix5QkFBeUI7UUFDekIsMkJBQTJCO1FBQzNCLDRCQUE0QjtLQUMvQixDQUFDO0lBRUYsT0FBTyxRQUFRLENBQUM7QUFDcEIsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBRXJELE1BQU0sb0NBQXFDLFNBQVEsWUFBWTtJQUMzRCxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPLEVBQUUsQ0FBQztJQUNkLENBQUM7Q0FDSjtBQUNELE9BQU8sRUFBRSxvQ0FBb0MsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUU3RDs7Ozs7Ozs7Ozs7Ozs7OztHQWdCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFFBQVEsR0FBRztRQUNiLHVCQUF1QjtRQUN2Qix5QkFBeUI7UUFDekIsc0JBQXNCO1FBQ3RCLDJCQUEyQjtRQUMzQix1QkFBdUI7UUFDdkIseUJBQXlCO1FBQ3pCLHlCQUF5QjtRQUN6Qix1QkFBdUI7UUFDdkIsc0JBQXNCO1FBQ3RCLCtCQUErQjtRQUMvQixzQkFBc0I7UUFDdEIscUJBQXFCO1FBQ3JCLHVCQUF1QjtRQUN2QixzQkFBc0I7UUFDdEIsc0JBQXNCO1FBQ3RCLHNCQUFzQjtRQUN0Qix1QkFBdUI7UUFDdkIsdUJBQXVCO1FBQ3ZCLHNCQUFzQjtRQUN0QixxQkFBcUI7UUFDckIsdUJBQXVCO1FBQ3ZCLHdCQUF3QjtLQUMzQixDQUFDO0lBRUYsT0FBTyxRQUFRLENBQUM7QUFDcEIsQ0FBQyJ9

@@ -3,22 +3,22 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           scrollbar
- * @as          @sugar.scrollbar
+ * @as          @s.scrollbar
  * @namespace      node.mixin.scrollbar
  * @type           PostcssMixin
  * @platform        css
- * @status        beta
+ * @status        stable
  *
  * This mixin allows you to skin your scrollbar easily by applying a color and
  * a width to it.
  *
  * @return        {Css}           The generated css
  *
- * @snippet         @sugar.scrollbar($1, $2, $3)
+ * @snippet         @s.scrollbar($1, $2, $3)
  *
  * @example        css
  * body {
- *    @sugar.scrollbar(accent, complementary, 5px);
+ *    @s.scrollbar(accent, complementary, 5px);
  * }
  *
  * @since       2.0.0
@@ -72,7 +72,7 @@ export default function ({
     // lnf
     vars.push(`
 
-        @sugar.lod.prevent {
+        @s.lod.prevent {
 
             &::-webkit-scrollbar {
                 width: ${finalParams.size};
@@ -86,7 +86,7 @@ export default function ({
                         background-color: ${finalParams.background};
                     `
                             : `
-                        background-color: sugar.color(${finalParams.background}, --alpha 0.1);
+                        background-color: s.color(${finalParams.background}, --alpha 0.1);
                     `
                     }
 
@@ -99,7 +99,7 @@ export default function ({
                         background-color: ${finalParams.color};
                 `
                         : `
-                    background-color: sugar.color(${finalParams.color});
+                    background-color: s.color(${finalParams.color});
                 `
                 }
             }
@@ -108,18 +108,18 @@ export default function ({
 
     // wireframe
     vars.push(`
-        @sugar.wireframe {
+        @s.wireframe {
             &::-webkit-scrollbar-track {
                 background-color: rgba(0,0,0,0.05);
                 
-                @sugar.theme dark {
+                @s.theme dark {
                     background-color: rgba(255,255,255,0.05);
                 }
             }
             &::-webkit-scrollbar-thumb {
                 background-color: rgba(0,0,0,0.1);
                 
-                @sugar.theme dark {
+                @s.theme dark {
                     background-color: rgba(255,255,255,0.1);
                 }
             }

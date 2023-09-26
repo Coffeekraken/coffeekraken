@@ -5,20 +5,20 @@ import __faker from 'faker';
 
 /**
  * @name           classes
- * @as              @sugar.margin.classes
+ * @as              @s.margin.classes
  * @namespace      node.mixin.margin
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the margin helper classes like s-mie10, s-mis:40, etc...
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.margin.classes
+ * @snippet         @s.margin.classes
  *
  * @example        css
- * \@sugar.margin.classes;
+ * \@s.margin.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -62,7 +62,7 @@ export default function ({
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/margin
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply margins to any HTMLElement
         * 
@@ -74,7 +74,7 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.margin.classes;
+        * \\@s.margin.classes;
         * 
         ${marginsKeys
             .map((spaceName) => {
@@ -140,7 +140,7 @@ export default function ({
     * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" margin style around any HTMLElement
     * 
@@ -154,7 +154,7 @@ export default function ({
         ).code(
             `
    .${clsMargin.replace(':', '-')} {
-        margin: sugar.margin(${spaceName});
+        margin: s.margin(${spaceName});
    }`,
             { type: 'CssClass' },
         );
@@ -165,7 +165,7 @@ export default function ({
     * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" block start margin style to any HTMLElement
     * 
@@ -179,7 +179,7 @@ export default function ({
         ).code(
             `
    .${clsMarginTop.replace(':', '-')} {
-        margin-block-start: sugar.margin(${spaceName}) !important;
+        margin-block-start: s.margin(${spaceName}) !important;
    }`,
             { type: 'CssClass' },
         );
@@ -190,7 +190,7 @@ export default function ({
     * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" block end margin style to any HTMLElement
     * 
@@ -204,7 +204,7 @@ export default function ({
         ).code(
             `
    .${clsMarginBottom.replace(':', '-')} {
-        margin-block-end: sugar.margin(${spaceName}) !important;
+        margin-block-end: s.margin(${spaceName}) !important;
    }`,
             { type: 'CssClass' },
         );
@@ -215,7 +215,7 @@ export default function ({
     * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" inline start margin style to any HTMLElement
     * 
@@ -229,7 +229,7 @@ export default function ({
         ).code(
             `
    .${clsMarginLeft.replace(':', '-')} {
-        margin-inline-start: sugar.margin(${spaceName}) !important;
+        margin-inline-start: s.margin(${spaceName}) !important;
    }`,
             { type: 'CssClass' },
         );
@@ -240,7 +240,7 @@ export default function ({
     * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" inline end margin style to any HTMLElement
     * 
@@ -254,7 +254,7 @@ export default function ({
         ).code(
             `
    .${clsMarginRight.replace(':', '-')} {
-        margin-inline-end: sugar.margin(${spaceName}) !important;
+        margin-inline-end: s.margin(${spaceName}) !important;
    }`,
             { type: 'CssClass' },
         );
@@ -265,7 +265,7 @@ export default function ({
     * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" inline start and end margin style to any HTMLElement
     * 
@@ -279,8 +279,8 @@ export default function ({
         ).code(
             `
      .${clsMarginX.replace(':', '-')} {
-        margin-inline-start: sugar.margin(${spaceName}) !important;
-        margin-inline-end: sugar.margin(${spaceName}) !important;
+        margin-inline-start: s.margin(${spaceName}) !important;
+        margin-inline-end: s.margin(${spaceName}) !important;
    }`,
             { type: 'CssClass' },
         );
@@ -291,7 +291,7 @@ export default function ({
     * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" block start and end margin style to any HTMLElement
     * 
@@ -305,8 +305,8 @@ export default function ({
         ).code(
             `
    .${clsMarginY.replace(':', '-')} {
-        margin-block-start: sugar.margin(${spaceName}) !important;
-        margin-block-end: sugar.margin(${spaceName}) !important;
+        margin-block-start: s.margin(${spaceName}) !important;
+        margin-block-end: s.margin(${spaceName}) !important;
    }`,
             { type: 'CssClass' },
         );
@@ -322,7 +322,7 @@ export default function ({
     * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>-${spaceName}</yellow>" margin style around any HTMLElement
     * 
@@ -336,7 +336,7 @@ export default function ({
         ).code(
             `
    .${clsMargin.replace(':', '-')} {
-        margin: calc(sugar.margin(${spaceName}) * -1);
+        margin: calc(s.margin(${spaceName}) * -1);
    }`,
             { type: 'CssClass' },
         );
@@ -347,7 +347,7 @@ export default function ({
     * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>-${spaceName}</yellow>" block start margin style to any HTMLElement
     * 
@@ -361,7 +361,7 @@ export default function ({
         ).code(
             `
    .${clsMarginTop.replace(':', '-')} {
-        margin-block-start: calc(sugar.margin(${spaceName}) * -1) !important;
+        margin-block-start: calc(s.margin(${spaceName}) * -1) !important;
    }`,
             { type: 'CssClass' },
         );
@@ -372,7 +372,7 @@ export default function ({
     * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>-${spaceName}</yellow>" block end margin style to any HTMLElement
     * 
@@ -386,7 +386,7 @@ export default function ({
         ).code(
             `
    .${clsMarginBottom.replace(':', '-')} {
-        margin-block-end: calc(sugar.margin(${spaceName}) * -1) !important;
+        margin-block-end: calc(s.margin(${spaceName}) * -1) !important;
    }`,
             { type: 'CssClass' },
         );
@@ -397,7 +397,7 @@ export default function ({
     * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>-${spaceName}</yellow>" inline start margin style to any HTMLElement
     * 
@@ -411,7 +411,7 @@ export default function ({
         ).code(
             `
    .${clsMarginLeft.replace(':', '-')} {
-        margin-inline-start: calc(sugar.margin(${spaceName}) * -1) !important;
+        margin-inline-start: calc(s.margin(${spaceName}) * -1) !important;
    }`,
             { type: 'CssClass' },
         );
@@ -423,7 +423,7 @@ export default function ({
     * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>-${spaceName}</yellow>" inline end margin style to any HTMLElement
     * 
@@ -437,7 +437,7 @@ export default function ({
         ).code(
             `
    .${clsMarginRight.replace(':', '-')} {
-        margin-inline-end: calc(sugar.margin(${spaceName}) * -1) !important;
+        margin-inline-end: calc(s.margin(${spaceName}) * -1) !important;
    }`,
             { type: 'CssClass' },
         );
@@ -448,7 +448,7 @@ export default function ({
     * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>-${spaceName}</yellow>" inline start and end margin style to any HTMLElement
     * 
@@ -462,8 +462,8 @@ export default function ({
         ).code(
             `
      .${clsMarginX.replace(':', '-')} {
-        margin-inline-start: calc(sugar.margin(${spaceName}) * -1) !important;
-        margin-inline-end: calc(sugar.margin(${spaceName}) * -1) !important;
+        margin-inline-start: calc(s.margin(${spaceName}) * -1) !important;
+        margin-inline-end: calc(s.margin(${spaceName}) * -1) !important;
    }`,
             { type: 'CssClass' },
         );
@@ -474,7 +474,7 @@ export default function ({
     * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>-${spaceName}</yellow>" block start and end margin style to any HTMLElement
     * 
@@ -488,8 +488,8 @@ export default function ({
         ).code(
             `
    .${clsMarginY.replace(':', '-')} {
-        margin-block-start: calc(sugar.margin(${spaceName}) * -1) !important;
-        margin-block-end: calc(sugar.margin(${spaceName}) * -1) !important;
+        margin-block-start: calc(s.margin(${spaceName}) * -1) !important;
+        margin-block-end: calc(s.margin(${spaceName}) * -1) !important;
    }`,
             { type: 'CssClass' },
         );
@@ -501,7 +501,7 @@ export default function ({
     * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>auto</yellow>" margin style around any HTMLElement
     * 
@@ -526,7 +526,7 @@ export default function ({
     * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>auto</yellow>" block start margin style around any HTMLElement
     * 
@@ -551,7 +551,7 @@ export default function ({
     * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>auto</yellow>" inline end margin style around any HTMLElement
     * 
@@ -576,7 +576,7 @@ export default function ({
     * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>auto</yellow>" block end margin style around any HTMLElement
     * 
@@ -601,7 +601,7 @@ export default function ({
     * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>auto</yellow>" inline start margin style around any HTMLElement
     * 
@@ -626,7 +626,7 @@ export default function ({
     * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>auto</yellow>" inline start and end margin style around any HTMLElement
     * 
@@ -652,7 +652,7 @@ export default function ({
     * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>auto</yellow>" block start and end margin style around any HTMLElement
     * 

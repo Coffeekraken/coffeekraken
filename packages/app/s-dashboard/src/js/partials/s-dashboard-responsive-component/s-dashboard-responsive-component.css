@@ -4,21 +4,21 @@
         width: 100%;
         line-height: 1.5;
         align-items: center;
-        padding: sugar.padding(30);
-        margin-block-start: sugar.margin(20);
-        padding-inline-end: sugar.padding(100);
+        padding: s.padding(30);
+        margin-block-start: s.margin(20);
+        padding-inline-end: s.padding(100);
         position: relative;
         min-height: 90px;
-        font-family: sugar.font.family(code);
-        background: sugar.color(main, background, --darken 2);
+        font-family: s.font.family(code);
+        background: s.color(main, background, --darken 2);
 
-        @sugar.theme dark {
-            background: sugar.color(main, background, --lighten 5);
+        @s.theme dark {
+            background: s.color(main, background, --lighten 5);
         }
     }
     ._switch {
         position: absolute !important;
-        top: sugar.margin(20);
-        right: sugar.margin(20);
+        top: s.margin(20);
+        right: s.margin(20);
     }
 }

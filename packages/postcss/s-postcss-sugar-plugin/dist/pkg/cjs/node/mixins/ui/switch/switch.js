@@ -8,7 +8,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 /**
  * @name          switch
- * @as              @sugar.ui.switch
+ * @as              @s.ui.switch
  * @namespace     node.mixin.ui.form
  * @type               PostcssMixin
  * @interface     ./switch          interface
@@ -21,11 +21,11 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.switch
+ * @snippet         @s.ui.switch
  *
  * @example     css
  * .my-switch {
- *    @sugar.ui.switch;
+ *    @s.ui.switch;
  * }
  *
  * @since      2.0.0
@@ -58,28 +58,28 @@ function default_1({ params, atRule, replaceWith, }) {
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
         
-        font-size: sugar.scalable(1rem);
+        font-size: s.scalable(1rem);
         margin-block: 0.7em 0.9em;
 
         --thumb-size: 1.4em;
-        --thumb-color-active: sugar.color(main, surface);
-        --thumb-color-inactive: sugar.color(current);
-        --thumb-color-highlight: sugar.color(current, --alpha 0.2);
+        --thumb-color-active: s.color(main, surface);
+        --thumb-color-inactive: s.color(current);
+        --thumb-color-highlight: s.color(current, --alpha 0.2);
 
         --track-size: calc(var(--thumb-size) * 2);
         --track-padding: 0.2em;
-        --track-color-active: sugar.color(current);
-        --track-color-inactive: sugar.color(current, --alpha 0);
+        --track-color-active: s.color(current);
+        --track-color-inactive: s.color(current, --alpha 0);
 
         --isLTR: 1;
 
-        @sugar.direction.rtl {
+        @s.direction.rtl {
             --isLTR: -1;
         }
 
         --thumb-position: 0%;
 
-        --thumb-transition-duration: sugar.theme(ui.form.transition);
+        --thumb-transition-duration: s.theme(ui.form.transition);
         
         padding: var(--track-padding);
         inline-size: var(--track-size);
@@ -142,9 +142,9 @@ function default_1({ params, atRule, replaceWith, }) {
             );
         }
 
-        @sugar.state.disabled {
+        @s.state.disabled {
             --thumb-color: transparent;
-            @sugar.disabled;
+            @s.disabled;
         }
 
     `);
@@ -154,10 +154,10 @@ function default_1({ params, atRule, replaceWith, }) {
             if (finalParams.scope.indexOf('lnf') !== -1) {
                 vars.push(`
         
-                    font-size: sugar.scalable(0.8rem);        
+                    font-size: s.scalable(0.8rem);        
                     background: var(--track-color-inactive);
 
-                    border: sugar.color(main, border) solid sugar.border.width(ui.form.borderWidth);
+                    border: s.color(main, border) solid s.border.width(ui.form.borderWidth);
                     outline-offset: 5px;
                     
                     transition: var(--thumb-transition-duration);
@@ -202,22 +202,22 @@ function default_1({ params, atRule, replaceWith, }) {
     }
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
-                    @sugar.shape();
+                    @s.shape();
                     &:after,
                     &:before {
-                        @sugar.shape();
+                        @s.shape();
                     }
                 `);
     }
     // wireframe
     vars.push(`
-        @sugar.wireframe {
-            @sugar.wireframe.background;
-            @sugar.wireframe.border;
+        @s.wireframe {
+            @s.wireframe.background;
+            @s.wireframe.border;
 
             &::before {
-                @sugar.wireframe.background;
-                @sugar.wireframe.border;
+                @s.wireframe.background;
+                @s.wireframe.border;
             }
         }
     `);

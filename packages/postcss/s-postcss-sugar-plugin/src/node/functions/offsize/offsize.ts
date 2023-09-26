@@ -16,11 +16,11 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {Boolean}       [scalable='theme.scalable.offsize']      Whether to scale the value or not
  * @return      {Css}                   The corresponding css
  *
- * @snippet         sugar.offsize($1)
+ * @snippet         s.offsize($1)
  *
  * @example       css
  * .my-element {
- *      margin-top: sugar.offsize(20);
+ *      margin-top: s.offsize(20);
  * }
  *
  * @since     2.0.0
@@ -76,13 +76,13 @@ export default function ({
             // @ts-ignore
             factor = '1';
         } else if (registeredValue !== undefined) {
-            factor = `sugar.theme(offsize.${s}, ${finalParams.scalable})`;
+            factor = `s.theme(offsize.${s}, ${finalParams.scalable})`;
         } else if (
             isNaN(parseFloat(s)) &&
             s.match(/[a-zA-Z0-9]+\.[a-zA-Z0-9]+/)
         ) {
             // support dotPath
-            factor = `sugar.theme(${s}, ${finalParams.scalable})`;
+            factor = `s.theme(${s}, ${finalParams.scalable})`;
         } else if (!isNaN(parseFloat(s))) {
             // support simple number
             factor = `${s}`;
@@ -92,7 +92,7 @@ export default function ({
             );
         }
         // generate css value
-        return `calc(sugar.theme(offsize.default) * ${factor})`;
+        return `calc(s.theme(offsize.default) * ${factor})`;
     });
 
     return offsizes.join(' ');
@@ -101,12 +101,12 @@ export default function ({
     // let offsizes = offsize.split(' ').map((s) => {
     //     // support dotPath
     //     if (s.match(/\./)) {
-    //         s = `sugar.theme(${s}, ${finalParams.scalable})`;
+    //         s = `s.theme(${s}, ${finalParams.scalable})`;
     //     } else {
-    //         s = `sugar.theme(offsize.${s}, ${finalParams.scalable})`;
+    //         s = `s.theme(offsize.${s}, ${finalParams.scalable})`;
     //     }
     //     // generate css value
-    //     return `calc(sugar.theme(offsize.default) * ${s})`;
+    //     return `calc(s.theme(offsize.default) * ${s})`;
     // });
 
     // return offsizes.join(' ');

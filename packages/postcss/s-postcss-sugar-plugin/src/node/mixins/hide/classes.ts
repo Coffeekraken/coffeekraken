@@ -2,20 +2,20 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           classes
- * @as          @sugar.hide.classes
+ * @as          @s.hide.classes
  * @namespace      node.mixin.hide
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the hide helper classes like ```.s-hide```, etc...
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.hide.classes
+ * @snippet         @s.hide.classes
  *
  * @example        css
- * \@sugar.hide.classes;
+ * \@s.hide.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -54,7 +54,7 @@ export default function ({
     * @namespace          sugar.style.helpers.hide
     * @type               CssClass
     * @platform             css
-    * @status             beta
+    * @status             stable
     * 
     * This class allows you to hide any HTMLElement
     * 

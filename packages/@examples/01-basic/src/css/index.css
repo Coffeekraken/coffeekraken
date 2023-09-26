@@ -1,25 +1,25 @@
 /* importing sugar toolkit */
-@sugar.import ('./sugar.css');
-@sugar.import ('../views/**/*.css');
-@sugar.import ('./generic/**/*.css');
+@s.import ('./sugar.css');
+@s.import ('../views/**/*.css');
+@s.import ('./generic/**/*.css');
 
 /* Load custom views css */
-@sugar.view ('sugar.menu.generic');
-@sugar.view ('sugar.header.generic');
-@sugar.view ('sugar.form.generic');
-@sugar.view ('sugar.components.card');
-@sugar.view ('sugar.components.cards');
-@sugar.view ('sugar.sections.nude');
-@sugar.view ('sugar.sections.simple');
-@sugar.view ('sugar.sections.tile');
-@sugar.view ('sugar.sections.cards');
-@sugar.view ('sugar.sections.pushBlock');
-@sugar.view ('sugar.sections.testimonials');
-@sugar.view ('sugar.sections.hero');
-@sugar.view ('sugar.sections.contact');
+@s.view ('sugar.menu.generic');
+@s.view ('sugar.header.generic');
+@s.view ('sugar.form.generic');
+@s.view ('sugar.components.card');
+@s.view ('sugar.components.cards');
+@s.view ('sugar.sections.nude');
+@s.view ('sugar.sections.simple');
+@s.view ('sugar.sections.tile');
+@s.view ('sugar.sections.cards');
+@s.view ('sugar.sections.pushBlock');
+@s.view ('sugar.sections.testimonials');
+@s.view ('sugar.sections.hero');
+@s.view ('sugar.sections.contact');
 
 body {
-    background: sugar.color(main, background);
+    background: s.color(main, background);
     overflow-x: hidden;
 }
 
@@ -37,18 +37,18 @@ body {
 /* logo */
 .logo {
     svg [fill='white'] {
-        fill: sugar.color(main, --darken 10);
+        fill: s.color(main, --darken 10);
     }
     svg [fill='#FEBD0F'] {
-        fill: sugar.color(accent);
+        fill: s.color(accent);
     }
 
-    @sugar.theme (dark) {
+    @s.theme (dark) {
         svg [fill='white'] {
-            fill: sugar.color(main, text);
+            fill: s.color(main, text);
         }
         svg [fill='#FEBD0F'] {
-            fill: sugar.color(accent);
+            fill: s.color(accent);
         }
     }
 }

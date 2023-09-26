@@ -1,12 +1,12 @@
 .s-dashboard {
     .header {
-        /* padding-block: sugar.padding(100) sugar.padding(100); */
-        /* padding: sugar.padding(30); */
+        /* padding-block: s.padding(100) s.padding(100); */
+        /* padding: s.padding(30); */
         display: flex;
         align-items: center;
         height: 80px;
-        /* margin-block-end: sugar.margin(50); */
-        /* @sugar.border.radius (10); */
+        /* margin-block-end: s.margin(50); */
+        /* @s.border.radius (10); */
 
         .s-container {
             width: 100%;
@@ -23,7 +23,7 @@
 
         ._logo {
             width: 140px;
-            margin-inline-end: sugar.margin(20);
+            margin-inline-end: s.margin(20);
             cursor: pointer;
 
             svg {
@@ -31,7 +31,7 @@
                 width: 140px;
                 transform-origin: 0 50%;
 
-                @sugar.media mobile {
+                @s.media mobile {
                     position: relative;
                     top: 0;
                 }
@@ -39,31 +39,31 @@
 
             [fill='white'],
             .main {
-                fill: sugar.color(main);
+                fill: s.color(main);
             }
             [fill='#FFBB01'],
             [fill='#FEBD0F'],
             .accent {
-                fill: sugar.color(accent);
+                fill: s.color(accent);
             }
             [stroke='#FFBB01'],
             [stroke='#FEBD0F'] {
-                stroke: sugar.color(accent);
+                stroke: s.color(accent);
             }
 
-            @sugar.theme (dark) {
+            @s.theme (dark) {
                 [fill='white'],
                 .main {
-                    fill: sugar.color(main, text);
+                    fill: s.color(main, text);
                 }
                 [fill='#FFBB01'],
                 [fill='#FEBD0F'],
                 .accent {
-                    fill: sugar.color(accent);
+                    fill: s.color(accent);
                 }
                 [stroke='#FFBB01'],
                 [stroke='#FEBD0F'] {
-                    stroke: sugar.color(accent);
+                    stroke: s.color(accent);
                 }
             }
         }

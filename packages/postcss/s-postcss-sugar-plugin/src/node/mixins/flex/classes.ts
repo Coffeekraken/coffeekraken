@@ -3,20 +3,20 @@ import __faker from 'faker';
 
 /**
  * @name           classes
- * @as              @sugar.flex.classes
+ * @as              @s.flex.classes
  * @namespace      node.mixin.flex
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the flex helper classes like s-flex, s-flex:align-top, etc...
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.flex.classes
+ * @snippet         @s.flex.classes
  *
  * @example        css
- * \@sugar.flex.classes;
+ * \@s.flex.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -52,12 +52,12 @@ export default function ({
     vars.comment(
         () => `
       /**
-        * @name          Flexbox
+        * @name          Flex
         * @namespace          sugar.style.helpers.flex
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/flexbox
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply some flex attributes on any HTMLElement and with
         * that you can **create some layouts directly in your HTML**.
@@ -68,7 +68,7 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.flex.classes;
+        * \\@s.flex.classes;
         * 
         * @cssClass                 s-flex              Apply a display "flex" on any HTMLElement
         * @cssClass                 s-flex:row          Apply the flex direction to "row"
@@ -135,7 +135,7 @@ export default function ({
             * @namespace          sugar.style.helper.flex
             * @type               CssClass
             * @platform           css
-            * @status               beta
+            * @status               stable
             * 
             * This class allows you to apply the flex styling to any HTMLElement
             * 
@@ -157,7 +157,7 @@ export default function ({
             * @namespace          sugar.style.helpers.flex
             * @type               CssClass
             * @platform           css
-            * @status               beta
+            * @status               stable
             * 
             * This class allows specify the flex-direction to row
             * 
@@ -179,7 +179,7 @@ export default function ({
             * @namespace          sugar.style.helpers.flex
             * @type               CssClass
             * @platform           css
-            * @status               beta
+            * @status               stable
             * 
             * This class allows specify the flex-direction to row-reverse
             * 
@@ -201,7 +201,7 @@ export default function ({
             * @namespace          sugar.style.helpers.flex
             * @type               CssClass
             * @platform           css
-            * @status               beta
+            * @status               stable
             * 
             * This class allows specify the flex-direction to column
             * 
@@ -223,7 +223,7 @@ export default function ({
             * @namespace          sugar.style.helpers.flex
             * @type               CssClass
             * @platform           css
-            * @status               beta
+            * @status               stable
             * 
             * This class allows specify the flex-direction to column-reverse
             * 
@@ -245,7 +245,7 @@ export default function ({
             * @namespace          sugar.style.helpers.flex
             * @type               CssClass
             * @platform           css
-            * @status               beta
+            * @status               stable
             * 
             * This class allows specify the flex-wrap to nowrap
             * 
@@ -267,7 +267,7 @@ export default function ({
             * @namespace          sugar.style.helpers.flex
             * @type               CssClass
             * @platform           css
-            * @status               beta
+            * @status               stable
             * 
             * This class allows specify the flex-wrap to wrap
             * 
@@ -289,7 +289,7 @@ export default function ({
             * @namespace          sugar.style.helpers.flex
             * @type               CssClass
             * @platform           css
-            * @status               beta
+            * @status               stable
             * 
             * This class allows specify the flex-wrap to wrap-reverse
             * 
@@ -311,7 +311,7 @@ export default function ({
             * @namespace          sugar.style.helpers.flex
             * @type               CssClass
             * @platform           css
-            * @status               beta
+            * @status               stable
             * 
             * This class allows specify the justify-content property to start
             * 
@@ -333,7 +333,7 @@ export default function ({
             * @namespace          sugar.style.helpers.flex
             * @type               CssClass
             * @platform           css
-            * @status               beta
+            * @status               stable
             * 
             * This class allows specify the justify-content property to flex-start
             * 
@@ -355,7 +355,7 @@ export default function ({
             * @namespace          sugar.style.helpers.flex
             * @type               CssClass
             * @platform           css
-            * @status               beta
+            * @status               stable
             * 
             * This class allows specify the justify-content property to end
             * 
@@ -377,7 +377,7 @@ export default function ({
             * @namespace          sugar.style.helpers.flex
             * @type               CssClass
             * @platform           css
-            * @status               beta
+            * @status               stable
             * 
             * This class allows specify the justify-content property to flex-end
             * 
@@ -399,7 +399,7 @@ export default function ({
             * @namespace          sugar.style.helpers.flex
             * @type               CssClass
             * @platform           css
-            * @status               beta
+            * @status               stable
             * 
             * This class allows specify the justify-content property to flex-center
             * 
@@ -421,7 +421,7 @@ export default function ({
             * @namespace          sugar.style.helpers.flex
             * @type               CssClass
             * @platform           css
-            * @status               beta
+            * @status               stable
             * 
             * This class allows specify the justify-content property to space-between
             * 
@@ -443,7 +443,7 @@ export default function ({
             * @namespace          sugar.style.helpers.flex
             * @type               CssClass
             * @platform           css
-            * @status               beta
+            * @status               stable
             * 
             * This class allows specify the justify-content property to space-around
             * 
@@ -465,7 +465,7 @@ export default function ({
             * @namespace          sugar.style.helpers.flex
             * @type               CssClass
             * @platform           css
-            * @status               beta
+            * @status               stable
             * 
             * This class allows specify the justify-content property to space-evenly
             * 
@@ -487,7 +487,7 @@ export default function ({
             * @namespace          sugar.style.helpers.flex
             * @type               CssClass
             * @platform           css
-            * @status               beta
+            * @status               stable
             * 
             * This class allows specify the justify-content property to stretch
             * 
@@ -509,7 +509,7 @@ export default function ({
             * @namespace          sugar.style.helpers.flex
             * @type               CssClass
             * @platform           css
-            * @status               beta
+            * @status               stable
             * 
             * This class allows specify the align-items property to start
             * 
@@ -531,7 +531,7 @@ export default function ({
             * @namespace          sugar.style.helpers.flex
             * @type               CssClass
             * @platform           css
-            * @status               beta
+            * @status               stable
             * 
             * This class allows specify the align-items property to flex-start
             * 
@@ -553,7 +553,7 @@ export default function ({
             * @namespace          sugar.style.helpers.flex
             * @type               CssClass
             * @platform           css
-            * @status               beta
+            * @status               stable
             * 
             * This class allows specify the align-items property to end
             * 
@@ -575,7 +575,7 @@ export default function ({
             * @namespace          sugar.style.helpers.flex
             * @type               CssClass
             * @platform           css
-            * @status               beta
+            * @status               stable
             * 
             * This class allows specify the align-items property to flex-end
             * 
@@ -597,7 +597,7 @@ export default function ({
             * @namespace          sugar.style.helpers.flex
             * @type               CssClass
             * @platform           css
-            * @status               beta
+            * @status               stable
             * 
             * This class allows specify the align-items property to center
             * 
@@ -619,7 +619,7 @@ export default function ({
             * @namespace          sugar.style.helpers.flex
             * @type               CssClass
             * @platform           css
-            * @status               beta
+            * @status               stable
             * 
             * This class allows specify the align-items property to baseline
             * 

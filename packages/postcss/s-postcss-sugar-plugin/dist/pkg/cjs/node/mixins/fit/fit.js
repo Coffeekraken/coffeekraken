@@ -7,21 +7,21 @@ exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 /**
  * @name           fit
- * @as              @sugar.fit
+ * @as              @s.fit
  * @namespace      node.mixin.fit
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin allows you to apply a certain object-fit on your element
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.fit($1)
+ * @snippet         @s.fit($1)
  *
  * @example        css
  * .my-element {
- *    \@sugar.fit(cover);
+ *    \@s.fit(cover);
  * }
  *
  * @since       2.0.0

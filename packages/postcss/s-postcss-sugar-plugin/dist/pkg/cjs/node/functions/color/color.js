@@ -14,7 +14,7 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  * @type          PostcssFunction
  * @platform      postcss
  * @interface       ./color
- * @status        beta
+ * @status        stable
  *
  * This function allows you to get a color value depending on your theme config.
  *
@@ -23,11 +23,11 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  * @param       {String}        [modifier=null]     A color modifier like "--alpha 0.3 --saturate 20", etc...
  * @return      {Css}                   The corresponding css
  *
- * @snippet         sugar.color($1)
+ * @snippet         s.color($1)
  *
  * @example       css
  * .my-element {
- *    color: sugar.color(accent);
+ *    color: s.color(accent);
  * }
  *
  * @since     2.0.0

@@ -1,7 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name          blockquote
- * @as          @sugar.ui.blockquote
+ * @as          @s.ui.blockquote
  * @namespace     node.mixin.ui.blockquote
  * @type          PostcssMixin
  * @interface     ./blockquote
@@ -13,11 +13,11 @@ import __SInterface from '@coffeekraken/s-interface';
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
- * @snippet         @sugar.ui.blockquote
+ * @snippet         @s.ui.blockquote
  *
  * @example       css
  * .my-element {
- *      \@sugar.ui.blockquote();
+ *      \@s.ui.blockquote();
  * }
  *
  * @since     2.0.0
@@ -43,24 +43,24 @@ export default function ({ params, atRule, replaceWith, }) {
     const vars = [];
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
-            font-size: sugar.scalable(1rem);
+            font-size: s.scalable(1rem);
         `);
     }
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
             display: block;
-            padding-inline: sugar.padding(ui.blockquote.paddingInline);
-            padding-block: sugar.padding(ui.blockquote.paddingBlock);
+            padding-inline: s.padding(ui.blockquote.paddingInline);
+            padding-block: s.padding(ui.blockquote.paddingBlock);
     `);
     }
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
-            border-inline-start: sugar.theme(ui.blockquote.borderWidth) solid sugar.color(current);
-            color: sugar.color(current, foreground);
-            background-color: sugar.color(current, surface);
-            font-size: sugar.scalable(1rem);
-            @sugar.shape();
-            @sugar.font.family(quote);
+            border-inline-start: s.theme(ui.blockquote.borderWidth) solid s.color(current);
+            color: s.color(current, foreground);
+            background-color: s.color(current, surface);
+            font-size: s.scalable(1rem);
+            @s.shape();
+            @s.font.family(quote);
     `);
     }
     return vars;

@@ -2,9 +2,9 @@ sherlock-new-space {
 }
 .sh-new-space {
     ._adapter {
-        background: sugar.color(main, surface, --alpha 0.7);
-        padding: sugar.padding(50);
+        background: s.color(main, surface, --alpha 0.7);
+        padding: s.padding(50);
         backdrop-filter: blur(10px);
-        @sugar.border.radius;
+        @s.border.radius;
     }
 }

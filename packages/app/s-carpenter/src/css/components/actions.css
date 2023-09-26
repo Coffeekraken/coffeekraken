@@ -3,7 +3,7 @@
     bottom: var(--s-carpenter-editor-bottom);
     right: var(--s-carpenter-editor-margin);
     opacity: 1;
-    @sugar.transition();
+    @s.transition();
 
     .s-carpenter--open & {
         right: calc(
@@ -19,21 +19,21 @@
     }
 
     ._save {
-        @sugar.ui.button();
-        @sugar.color (complementary);
-        @sugar.depth (100);
+        @s.ui.button();
+        @s.color (complementary);
+        @s.depth (100);
 
         i {
-            color: sugar.color(complementary, foreground);
+            color: s.color(complementary, foreground);
         }
 
         &.success {
-            @sugar.color (success);
+            @s.color (success);
         }
 
         &.loading {
-            @sugar.ui.button ($lnf: loading);
-            @sugar.color (accent);
+            @s.ui.button ($lnf: loading);
+            @s.color (accent);
         }
     }
 }

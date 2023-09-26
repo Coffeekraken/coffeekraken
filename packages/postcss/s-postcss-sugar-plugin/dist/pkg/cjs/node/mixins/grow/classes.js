@@ -7,20 +7,20 @@ exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 /**
  * @name           classes
- * @as              @sugar.grow.classes
+ * @as              @s.grow.classes
  * @namespace      node.mixin.grow
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all grow helpers like s-grow, s-grow:1...10, etc...
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.grow.classes
+ * @snippet         @s.grow.classes
  *
  * @example        css
- * \@sugar.grow.classes;
+ * \@s.grow.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -41,7 +41,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/grow
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply some grow attributes on any HTMLElement
         * 
@@ -51,7 +51,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.grow.classes;
+        * \\@s.grow.classes;
         * 
         * @cssClass                 s-grow             Apply the default grow to any HTMLElement
         * ${Array.from(Array(10)).map((i) => `
@@ -73,7 +73,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * @namespace          sugar.style.helpers.grow
             * @type               CssClass
             * @platform           css
-            * @status               beta
+            * @status               stable
             * 
             * This class allows you to apply the grow styling to any HTMLElement
             * 
@@ -96,7 +96,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
                 * @namespace          sugar.style.helpers.grow
                 * @type               CssClass
                 * @platform           css
-                * @status               beta
+                * @status               stable
                 * 
                 * This class allows you to apply the grow "${i}" styling to any HTMLElement
                 * 

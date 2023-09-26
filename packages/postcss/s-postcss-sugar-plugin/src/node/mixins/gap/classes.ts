@@ -4,20 +4,20 @@ import { __keysFirst } from '@coffeekraken/sugar/array';
 
 /**
  * @name           classes
- * @as              @sugar.gap.classes
+ * @as              @s.gap.classes
  * @namespace      node.mixin.gap
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the gap helper classes like s-gap, s-gap:row, etc...
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.gap.classes
+ * @snippet         @s.gap.classes
  *
  * @example        css
- * \@sugar.gap.classes;
+ * \@s.gap.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -61,7 +61,7 @@ export default function ({
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/gap
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply some gap attributes on any HTMLElement and with
         * 
@@ -71,7 +71,7 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.gap.classes;
+        * \\@s.gap.classes;
         * 
         * @cssClass                 s-gap              Apply the default gap to any HTMLElement
         * @cssClass                s-gap:row          Apply the default row gap to any HTMLElement
@@ -111,7 +111,7 @@ export default function ({
                 * @namespace          sugar.style.helpers.gap
                 * @type               CssClass
                 * @platform           css
-                * @status               beta
+                * @status               stable
                 * 
                 * This class allows you to apply the gap "${space}" styling to any HTMLElement
                 * 
@@ -132,7 +132,7 @@ export default function ({
                 .s-gap${
                     space === 'default' ? '' : `-${space}`
                 }:not(.s-gap-column):not(.s-gap-row) {
-                    gap: sugar.margin(${space});
+                    gap: s.margin(${space});
                 }`,
             { type: 'CssClass' },
         );
@@ -145,7 +145,7 @@ export default function ({
                 * @namespace          sugar.style.helpers.gap
                 * @type               CssClass
                 * @platform           css
-                * @status               beta
+                * @status               stable
                 * 
                 * This class allows you to apply the row gap "${space}" styling to any HTMLElement
                 * 
@@ -164,7 +164,7 @@ export default function ({
         ).code(
             `
                 .s-gap-row.s-gap${space === 'default' ? '' : `-${space}`} {
-                    row-gap: sugar.margin(${space});
+                    row-gap: s.margin(${space});
                 }`,
             { type: 'CssClass' },
         );
@@ -177,7 +177,7 @@ export default function ({
                 * @namespace          sugar.style.helpers.gap
                 * @type               CssClass
                 * @platform           css
-                * @status               beta
+                * @status               stable
                 * 
                 * This class allows you to apply the column gap "${space}" styling to any HTMLElement
                 * 
@@ -196,7 +196,7 @@ export default function ({
         ).code(
             `
                 .s-gap-column.s-gap${space === 'default' ? '' : `-${space}`} {
-                    column-gap: sugar.margin(${space});
+                    column-gap: s.margin(${space});
                 }`,
             { type: 'CssClass' },
         );

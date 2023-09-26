@@ -11,10 +11,10 @@
 
 .s-form-validate + .s-form-validate-error-message {
     text-align: end;
-    color: sugar.color(error);
+    color: s.color(error);
     overflow: hidden;
     max-height: 0;
     line-height: 1;
     margin: 0;
-    animation: 0.2s error-message-appear sugar.theme(easing.default) forwards;
+    animation: 0.2s error-message-appear s.theme(easing.default) forwards;
 }

@@ -20,15 +20,15 @@ body {
 
 .s-dashboard {
     .s-layout ._column {
-        padding-block-start: sugar.padding(50);
+        padding-block-start: s.padding(50);
     }
 
     .s-layout > * > *:not(:first-child, style) {
         display: block;
-        margin-block-start: sugar.margin(30);
+        margin-block-start: s.margin(30);
     }
     .s-layout > * > * h2.s-typo--h6 {
-        padding-inline-start: sugar.padding(30);
+        padding-inline-start: s.padding(30);
         opacity: 0.6;
     }
 }

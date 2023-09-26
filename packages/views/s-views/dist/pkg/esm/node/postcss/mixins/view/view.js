@@ -3,7 +3,7 @@ import __fs from 'fs';
 import __glob from 'glob';
 /**
  * @name           view
- * @as              @sugar.view.view
+ * @as              @s.view.view
  * @namespace      node.mixin.view
  * @type           PostcssMixin
  * @interface   ./view
@@ -18,7 +18,7 @@ import __glob from 'glob';
  * @return        {Css}         The generated css
  *
  * @example        css
- * \@sugar.view(sections.hero);
+ * \@s.view(sections.hero);
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

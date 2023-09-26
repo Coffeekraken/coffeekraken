@@ -11,25 +11,25 @@ export interface postcssSugarPluginFormatTextMixinParams {}
 
 /**
  * @name           text
- * @as              @sugar.format.text
+ * @as              @s.format.text
  * @namespace      node.mixin.format
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        alpha
  *
  * This mixin allows you to scope some css that you want to apply only in text format context.
  * Your css will be scoped inside the "s-format:text" class.
  *
  * @return      {Css}         The generated css
  *
- * @snippet         @sugar.format.text
- * \@sugar.format.text {
+ * @snippet         @s.format.text
+ * \@s.format.text {
  *      $1
  * }
  *
  * @example        css
  * .my-cool-element {
- *    \@sugar.format.text {
+ *    \@s.format.text {
  *      font-size: 20px;
  *      margin-bottom: 50px;
  *    }

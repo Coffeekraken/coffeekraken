@@ -10,12 +10,12 @@ import type { ISInterfaceDefinitionProperty } from '../SInterface.js';
 import __SInterface from '../SInterface.js';
 
 /**
- * @___name            SInterfaceRenderer
- * @___namespace       node.renderers
- * @___type            Class
- * @___extends         SClass
- * @___platform        node
- * @___status          beta
+ * @name            SInterfaceRenderer
+ * @namespace       node.renderers
+ * @type            Class
+ * @extends         SClass
+ * @platform        node
+ * @status          beta
  * @private
  *
  * This class represent the base for every interface renderers.

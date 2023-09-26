@@ -7,11 +7,11 @@ exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 /**
  * @name           classes
- * @as              @sugar.cursor.classes
+ * @as              @s.cursor.classes
  * @namespace      node.mixin.cursor
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the cusros helper classes like `.s-cursor:pointer` etc...
  *
@@ -19,10 +19,10 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.cursor.classes
+ * @snippet         @s.cursor.classes
  *
  * @example        css
- * \@sugar.cursor.classes;
+ * \@s.cursor.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -81,7 +81,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/cursor
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply a specific cursor on any HTMLElement
         * 
@@ -91,7 +91,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.cursor.classes; 
+        * \\@s.cursor.classes; 
         * 
         ${cursors
         .map((cursor) => {
@@ -121,7 +121,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @namespace          sugar.style.helpers.cursor
         * @type               CssClass
         * @platform             css
-        * @status             beta
+        * @status             stable
         * 
         * This class allows you to apply a "<yellow>${cursor}</yellow>" cursor style to any HTMLElement
         * 

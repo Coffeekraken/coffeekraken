@@ -30,7 +30,6 @@
 
     &.active {
         height: auto;
-        border-bottom: sugar.margin(10) solid
-            sugar.color(complementary, --alpha 0.05);
+        border-bottom: s.margin(10) solid s.color(complementary, --alpha 0.05);
     }
 }

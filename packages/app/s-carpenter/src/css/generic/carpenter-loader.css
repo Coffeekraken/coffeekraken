@@ -41,7 +41,7 @@
     width: 1em;
     height: 1em;
     font-size: 50px;
-    background: sugar.color(complementary);
+    background: s.color(complementary);
     border-radius: 0.4em;
     position: relative;
     perspective: 1.5em;
@@ -82,13 +82,13 @@
 
 @keyframes s-carpenter-loader-color {
     0% {
-        color: sugar.color(complementary);
+        color: s.color(complementary);
     }
     50% {
-        color: sugar.color(accent);
+        color: s.color(accent);
     }
     100% {
-        color: sugar.color(complementary);
+        color: s.color(complementary);
     }
 }
 
@@ -98,14 +98,14 @@
         left: calc(50% + var(--s-carpenter-loader-blocks-gap) * 0.5);
         right: 0;
         bottom: 0;
-        background: sugar.color(accent);
+        background: s.color(accent);
     }
     12.5% {
         top: 0;
         left: calc(50% + var(--s-carpenter-loader-blocks-gap) * 0.5);
         right: 0;
         bottom: calc(50% + var(--s-carpenter-loader-blocks-gap) * 0.5);
-        background: sugar.color(accent);
+        background: s.color(accent);
     }
     25% {
     }
@@ -118,14 +118,14 @@
         left: calc(50% + var(--s-carpenter-loader-blocks-gap) * 0.5);
         right: 0;
         bottom: calc(50% + var(--s-carpenter-loader-blocks-gap) * 0.5);
-        background: sugar.color(accent);
+        background: s.color(accent);
     }
     75% {
         top: 0;
         left: 0;
         right: 0;
         bottom: calc(50% + var(--s-carpenter-loader-blocks-gap) * 0.5);
-        background: sugar.color(complementary);
+        background: s.color(complementary);
     }
     87.5% {
         top: 0;
@@ -138,7 +138,7 @@
         left: 0;
         right: calc(50% + var(--s-carpenter-loader-blocks-gap) * 0.5);
         bottom: calc(50% + var(--s-carpenter-loader-blocks-gap) * 0.5);
-        background: sugar.color(complementary);
+        background: s.color(complementary);
     }
 }
 @keyframes s-carpenter-loader-blocks-2 {
@@ -147,7 +147,7 @@
         left: 0;
         right: calc(50% + var(--s-carpenter-loader-blocks-gap) * 0.5);
         bottom: 0;
-        background: sugar.color(main);
+        background: s.color(main);
     }
     12.5% {
         top: calc(50% + var(--s-carpenter-loader-blocks-gap) * 0.5);
@@ -160,14 +160,14 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: sugar.color(accent);
+        background: s.color(accent);
     }
     37.5% {
         top: calc(50% + var(--s-carpenter-loader-blocks-gap) * 0.5);
         left: calc(50% + var(--s-carpenter-loader-blocks-gap) * 0.5);
         right: 0;
         bottom: 0;
-        background: sugar.color(accent);
+        background: s.color(accent);
     }
     50% {
     }
@@ -176,7 +176,7 @@
         left: calc(50% + var(--s-carpenter-loader-blocks-gap) * 0.5);
         right: 0;
         bottom: 0;
-        background: sugar.color(accent);
+        background: s.color(accent);
     }
     75% {
     }
@@ -185,14 +185,14 @@
         left: calc(50% + var(--s-carpenter-loader-blocks-gap) * 0.5);
         right: 0;
         bottom: 0;
-        background: sugar.color(accent);
+        background: s.color(accent);
     }
     100% {
         top: 0;
         left: calc(50% + var(--s-carpenter-loader-blocks-gap) * 0.5);
         right: 0;
         bottom: 0;
-        background: sugar.color(accent);
+        background: s.color(accent);
     }
 }
 @keyframes s-carpenter-loader-blocks-3 {
@@ -201,7 +201,7 @@
         left: 0;
         right: calc(50% + var(--s-carpenter-loader-blocks-gap) * 0.5);
         bottom: calc(50% + var(--s-carpenter-loader-blocks-gap) * 0.5);
-        background: sugar.color(complementary);
+        background: s.color(complementary);
     }
     12.5% {
     }
@@ -212,21 +212,21 @@
         left: 0;
         right: calc(50% + var(--s-carpenter-loader-blocks-gap) * 0.5);
         bottom: calc(50% + var(--s-carpenter-loader-blocks-gap) * 0.5);
-        background: sugar.color(complementary);
+        background: s.color(complementary);
     }
     50% {
         top: 0;
         left: 0;
         right: calc(50% + var(--s-carpenter-loader-blocks-gap) * 0.5);
         bottom: 0;
-        background: sugar.color(main);
+        background: s.color(main);
     }
     62.5% {
         top: calc(50% + var(--s-carpenter-loader-blocks-gap) * 0.5);
         left: 0;
         right: calc(50% + var(--s-carpenter-loader-blocks-gap) * 0.5);
         bottom: 0;
-        background: sugar.color(main);
+        background: s.color(main);
     }
     75% {
     }
@@ -237,19 +237,19 @@
         left: 0;
         right: calc(50% + var(--s-carpenter-loader-blocks-gap) * 0.5);
         bottom: 0;
-        background: sugar.color(main);
+        background: s.color(main);
     }
 }
 
 .carpenter-loader-blocks {
     --s-carpenter-loader-blocks-gap: 0.1em;
 
-    @sugar.color (accent);
+    @s.color (accent);
     position: relative;
     display: inline-block;
     width: 1em;
     height: 1em;
-    fill: sugar.color(main);
+    fill: s.color(main);
 
     ._block-1,
     ._block-2,
@@ -259,21 +259,21 @@
         border-radius: 1em;
     }
     ._block-1 {
-        background: sugar.color(accent);
+        background: s.color(accent);
         animation: s-carpenter-loader-blocks-1 1s linear infinite;
     }
     ._block-2 {
-        background: sugar.color(main);
+        background: s.color(main);
         animation: s-carpenter-loader-blocks-2 1s linear infinite;
     }
     ._block-3 {
-        background: sugar.color(complementary);
+        background: s.color(complementary);
         animation: s-carpenter-loader-blocks-3 1s linear infinite;
     }
 }
 
 .carpenter-loader {
-    margin-block-end: sugar.margin(30);
+    margin-block-end: s.margin(30);
     position: relative;
     left: 0.1em;
 
@@ -286,7 +286,7 @@
         transform-origin: 40% 55%;
 
         /* * {
-            fill: sugar.color(main);
+            fill: s.color(main);
         } */
     }
 }

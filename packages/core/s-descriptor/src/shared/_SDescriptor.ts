@@ -10,14 +10,14 @@ import __SDescriptorResult, {
 } from './SDescriptorResult.js';
 
 /**
- * @__name                SDescriptor
- * @__namespace           shared
- * @__type                Class
- * @__extends             SClass
- * @__platform            node
- * @__platform            js
- * @__status              beta
- * @__private
+ * @name                SDescriptor
+ * @namespace           shared
+ * @type                Class
+ * @extends             SClass
+ * @platform            node
+ * @platform            js
+ * @status              beta
+ * @private
  *
  * Make a description...
  *

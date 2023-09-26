@@ -20,11 +20,11 @@ export { postcssSugarPluginMediaMixinInterface as interface };
 
 /**
  * @name           init
- * @as              @sugar.init
+ * @as              @s.init
  * @namespace      node.mixin.init
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin is the one you usually call first in your css.
  * His job is to:
@@ -34,10 +34,10 @@ export { postcssSugarPluginMediaMixinInterface as interface };
  *
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  *
- * @snippet         @sugar.init
+ * @snippet         @s.init
  *
  * @example        css
- * \@sugar.init;
+ * \@s.init;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -58,12 +58,12 @@ export default function ({
     };
 
     const cssArray = [
-        '@sugar.reset;',
-        `@sugar.theme.apply(${finalParams.variant}, ${finalParams.theme});`,
-        '@sugar.font.faces;',
-        '@sugar.lnf.selection;',
-        // '@sugar.autoload;', // Check if it's a good idea or not...
-        // '@sugar.lnf.base;', called in the "@sugar.theme" mixin
+        '@s.reset;',
+        `@s.theme.apply(${finalParams.variant}, ${finalParams.theme});`,
+        '@s.font.faces;',
+        '@s.selection;',
+        // '@s.autoload;', // Check if it's a good idea or not...
+        // '@s.lnf.base;', called in the "@s.theme" mixin
     ];
 
     replaceWith(cssArray);

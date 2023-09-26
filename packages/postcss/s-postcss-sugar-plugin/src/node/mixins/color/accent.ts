@@ -14,22 +14,22 @@ export { postcssSugarPluginColorPrimaryMixinInterface as interface };
 
 /**
  * @name           accent
- * @as              @sugar.color.accent
+ * @as              @s.color.accent
  * @namespace      node.mixin.color
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin allows you to (re)map the "accent" virtual color to another like "complementary", "accent", etc...
  *
  * @param       {String}        color           The color you want to map on the accent one
  * @return      {Css}                     The generated remap css
  *
- * @snippet         @sugar.color.accent($1)
+ * @snippet         @s.color.accent($1)
  *
  * @example        css
  * .my-section {
- *      @sugar.color.accent(success);
+ *      @s.color.accent(success);
  * }
  *
  * @since       2.0.0
@@ -58,7 +58,7 @@ export default function ({
 
     const vars: string[] = [
         `
-        @sugar.color.remap(accent, ${finalParams.color});
+        @s.color.remap(accent, ${finalParams.color});
     `,
     ];
 

@@ -3,20 +3,20 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           classes
- * @as              @sugar.clearfix.classes
+ * @as              @s.clearfix.classes
  * @namespace      node.mixin.clearfix
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin allows you to generate all the clearfix helper classes like s-clearfix:micro, etc...
  *
  * @return        {Css}        The generated css
  *
- * @snippet         @sugar.clearfix.classes
+ * @snippet         @s.clearfix.classes
  *
  * @example        css
- * \@sugar.clearfix.classes;
+ * \@s.clearfix.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -71,7 +71,7 @@ export default function ({
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/clearfix
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply a clearfix on any HTMLElement
         * 
@@ -81,10 +81,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.clearfix.classes;
+        * \\@s.clearfix.classes;
         * 
         * .my-element {
-        *   \\@sugar.clearfix;
+        *   \\@s.clearfix;
         * }         
         * 
         ${clearfixes
@@ -128,7 +128,7 @@ export default function ({
                 * @namespace          sugar.style.clearfix
                 * @type               CssClass
                 * @platform         css
-                * @status           beta
+                * @status           stable
                 * 
                 * This class allows you to apply a "<yellow>${clearfixName}</yellow>" clearfix to any HTMLElement
                 * 
@@ -150,7 +150,7 @@ export default function ({
                         ? `${notStr}`
                         : `-${clearfixName}`
                 } {
-                    @sugar.clearfix(${clearfixName});
+                    @s.clearfix(${clearfixName});
                 }`,
             { type: 'CssClass' },
         );

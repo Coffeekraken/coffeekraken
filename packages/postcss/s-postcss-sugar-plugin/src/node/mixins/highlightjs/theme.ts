@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           theme
- * @as              @sugar.highlightjs.theme
+ * @as              @s.highlightjs.theme
  * @namespace      node.mixin.highlightjs
  * @type           PostcssMixin
  * @platform      postcss
@@ -13,10 +13,10 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.highlightjs.theme
+ * @snippet         @s.highlightjs.theme
  *
  * @example        css
- * \@sugar.highlightjs.theme;
+ * \@s.highlightjs.theme;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -48,54 +48,54 @@ export default function ({
     const vars: string[] = [
         `
 .hljs {
-    @sugar.color(main);
+    @s.color(main);
 
-    font-size: sugar.scalable(1rem);
+    font-size: s.scalable(1rem);
     display: block;
     overflow: hidden;
-    padding: sugar.padding(ui.code.paddingBlock) sugar.padding(ui.code.paddingInline);
-    background-color: sugar.color(current, surface);
-    border-radius: sugar.border.radius(ui.code.borderRadius);
+    padding: s.padding(ui.code.paddingBlock) s.padding(ui.code.paddingInline);
+    background-color: s.color(current, surface);
+    border-radius: s.border.radius(ui.code.borderRadius);
     line-height: 1.5 !important;
-    color: sugar.color(current, text);
+    color: s.color(current, text);
 
-    @sugar.media(mobile) {
-        padding: clamp(10px, calc(sugar.padding(ui.code.paddingBlock) * 0.5), 100px) clamp(10px, calc(sugar.padding(ui.code.paddingInline) * 0.5), 100px);
+    @s.media(mobile) {
+        padding: clamp(10px, calc(s.padding(ui.code.paddingBlock) * 0.5), 100px) clamp(10px, calc(s.padding(ui.code.paddingInline) * 0.5), 100px);
         overflow: auto !important;
         white-space: pre !important;
-        @sugar.scrollbar;
+        @s.scrollbar;
     }
 
-    .hljs-sugar-function {
-        color: sugar.color(accent, text);
-        border-bottom: 1px solid sugar.color(accent, text);
+    .hljs-s-function {
+        color: s.color(accent, text);
+        border-bottom: 1px solid s.color(accent, text);
         display: inline-block;
     }
-    .hljs-sugar-mixin {
-        color: sugar.color(error, text);
-        border-bottom: 1px solid sugar.color(error, text);
+    .hljs-s-mixin {
+        color: s.color(error, text);
+        border-bottom: 1px solid s.color(error, text);
         display: inline-block;
     }
 
     .hljs-selector-tag {
-        color: sugar.color(error, text);
+        color: s.color(error, text);
     }
 
     .hljs-selector-id {
-        color: sugar.color(info, text);
+        color: s.color(info, text);
         font-weight: bold;
     }
 
     .hljs-selector-class {
-        color: sugar.color(info, text);
+        color: s.color(info, text);
     }
 
     .hljs-selector-attr {
-        color: sugar.color(info, text);
+        color: s.color(info, text);
     }
 
     .hljs-selector-pseudo {
-        color: sugar.color(info, text);
+        color: s.color(info, text);
     }
 
     .hljs-addition {
@@ -108,53 +108,53 @@ export default function ({
 
     .hljs-built_in,
     .hljs-type {
-        color: sugar.color(info, text);
+        color: s.color(info, text);
     }
 
     .hljs-class {
-        color: sugar.color(info, text);
+        color: s.color(info, text);
     }
 
     .hljs-function {
-        color: sugar.color(info, text);
+        color: s.color(info, text);
     }
 
     .hljs-function > .hljs-title {
-        color: sugar.color(info, text);
+        color: s.color(info, text);
     }
 
     .hljs-keyword,
     .hljs-literal,
     .hljs-symbol {
-        color: sugar.color(error, text);
+        color: s.color(error, text);
     }
 
     .hljs-number {
-        color: sugar.color(accent, text);
+        color: s.color(accent, text);
     }
 
     .hljs-regexp {
-        color: sugar.color(info, text);
+        color: s.color(info, text);
     }
 
     .hljs-string {
-        color: sugar.color(accent, text);
+        color: s.color(accent, text);
     }
 
     .hljs-title {
-        color: sugar.color(info, text);
+        color: s.color(info, text);
     }
 
     .hljs-params {
-        color: sugar.color(complementary, text);
+        color: s.color(complementary, text);
     }
 
     .hljs-bullet {
-        color: sugar.color(accent, text);
+        color: s.color(accent, text);
     }
 
     .hljs-code {
-        color: sugar.color(info, text);
+        color: s.color(info, text);
     }
 
     .hljs-emphasis {
@@ -162,7 +162,7 @@ export default function ({
     }
 
     .hljs-formula {
-        color: sugar.color(info, text);
+        color: s.color(info, text);
     }
 
     .hljs-strong {
@@ -174,72 +174,72 @@ export default function ({
     }
 
     .hljs-quote {
-        color: sugar.color(current, text);
+        color: s.color(current, text);
     }
 
     .hljs-comment {
-        color: sugar.color(current, text, --alpha 0.5);
+        color: s.color(current, text, --alpha 0.5);
     }
 
     .hljs-doctag {
-        color: sugar.color(info, text);
+        color: s.color(info, text);
     }
 
     .hljs-meta,
     .hljs-meta-keyword {
-        color: sugar.color(error, text);
+        color: s.color(error, text);
     }
 
     .hljs-meta-string {
-        color: sugar.color(accent, text);
+        color: s.color(accent, text);
     }
 
     .hljs-attr {
-        color: sugar.color(info, text);
+        color: s.color(info, text);
     }
 
     .hljs-attribute {
-        color: sugar.color(complementary, text);
+        color: s.color(complementary, text);
     }
 
     .hljs-builtin-name {
-        color: sugar.color(error, text);
+        color: s.color(error, text);
     }
 
     .hljs-name {
-        color: sugar.color(error, text);
+        color: s.color(error, text);
     }
 
     .hljs-section {
-        color: sugar.color(info, text);
+        color: s.color(info, text);
     }
 
     .hljs-tag {
-        color: sugar.color(error, text);
+        color: s.color(error, text);
     }
 
     .hljs-variable {
-        color: sugar.color(complementary, text);
+        color: s.color(complementary, text);
     }
 
     .hljs-template-variable {
-        color: sugar.color(complementary, text);
+        color: s.color(complementary, text);
     }
 
     .hljs-template-tag {
-        color: sugar.color(error, text);
+        color: s.color(error, text);
     }
 
     &.css .hljs-built_in {
-        color: sugar.color(info, text);
+        color: s.color(info, text);
     }
 
     &.css .hljs-keyword {
-        color: sugar.color(error, text);
+        color: s.color(error, text);
     }
 
     &.scss .hljs-keyword {
-        color: sugar.color(error, text);
+        color: s.color(error, text);
     }
 }
   `,

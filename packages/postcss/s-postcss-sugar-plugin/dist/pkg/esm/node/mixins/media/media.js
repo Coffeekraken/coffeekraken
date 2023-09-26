@@ -13,11 +13,11 @@ class postcssSugarPluginMediaMixinInterface extends __SInterface {
 export { postcssSugarPluginMediaMixinInterface as interface };
 /**
  * @name           media
- * @as              @sugar.media
+ * @as              @s.media
  * @namespace      node.mixin.media
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin allows you to apply any media queries that are defined
  * in the config.theme.media.queries configuration stack like "tablet", "mobile", etc...
@@ -25,16 +25,16 @@ export { postcssSugarPluginMediaMixinInterface as interface };
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  * @return      {Css}         The generated css
  *
- * @snippet         @sugar.media $1
- * \@sugar.media $1 {
+ * @snippet         @s.media $1
+ * \@s.media $1 {
  *      $2
  * }
  *
  * @example        css
- * \@sugar.media >=desktop {
+ * \@s.media >=desktop {
  *      // ...
  * }
- * \@sugar.media tablet {
+ * \@s.media tablet {
  *      // ...
  * }
  *

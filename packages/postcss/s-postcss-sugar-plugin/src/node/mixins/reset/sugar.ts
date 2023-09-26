@@ -2,11 +2,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           sugar
- * @as              @sugar.reset.sugar
+ * @as              @s.reset.sugar
  * @namespace      node.mixin.reset
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin print the sugar css reset that makes:
  *
@@ -20,10 +20,10 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.reset.sugar
+ * @snippet         @s.reset.sugar
  *
  * @example        css
- * \@sugar.reset.sugar;
+ * \@s.reset.sugar;
  *
  * @see       https://github.com/nicolas-cusan/destyle.css
  * @since       2.0.0
@@ -62,7 +62,7 @@ export default function ({
         * @type               Styleguide
         * @menu           Styleguide / Resets        /styleguide/resets/sugar
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * This mixin allows you to apply the \`sugar\` reset easily.
         * 
@@ -80,7 +80,7 @@ export default function ({
         * @support      edge
         * 
         * @example        css       Simple usage
-        * \@sugar.reset.sugar;
+        * \@s.reset.sugar;
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

@@ -2,7 +2,7 @@
     ._browsers {
         display: flex;
         justify-content: space-between;
-        gap: sugar.margin(20);
+        gap: s.margin(20);
     }
 
     ._browser-svg {
@@ -12,7 +12,7 @@
 
     .ck-list_item {
         text-align: center;
-        padding: sugar.padding(30);
+        padding: s.padding(30);
     }
 
     .s-tooltip {

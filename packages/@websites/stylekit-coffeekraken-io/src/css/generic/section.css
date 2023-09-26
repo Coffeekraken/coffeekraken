@@ -1,15 +1,15 @@
 .section {
-    /* padding-block: sugar.padding(100); */
+    /* padding-block: s.padding(100); */
     display: flex;
     align-items: center;
     min-height: 100vh;
 
-    @sugar.media tablet {
-        padding-block: sugar.padding(60) !important;
-        padding-inline: sugar.padding(50);
+    @s.media tablet {
+        padding-block: s.padding(60) !important;
+        padding-inline: s.padding(50);
     }
-    @sugar.media mobile {
-        padding-block: sugar.padding(60) !important;
-        padding-inline: sugar.padding(30);
+    @s.media mobile {
+        padding-block: s.padding(60) !important;
+        padding-inline: s.padding(30);
     }
 }

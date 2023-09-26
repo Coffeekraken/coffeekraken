@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import __faker from 'faker';
 /**
  * @name          classes
- * @as          @sugar.ui.tabs.classes
+ * @as          @s.ui.tabs.classes
  * @namespace     node.mixin.ui.tabs
  * @type               PostcssMixin
  * @interface     ./classes          interface
@@ -14,10 +14,10 @@ import __faker from 'faker';
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet     @sugar.ui.tabs.classes
+ * @snippet     @s.ui.tabs.classes
  *
  * @example     css
- * \@sugar.ui.tabs.classes;
+ * \@s.ui.tabs.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -61,10 +61,10 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.ui.tabs.classes;
+        * \\@s.ui.tabs.classes;
         * 
         * .my-tabs {
-        *   \@sugar.ui.tabs;
+        *   \@s.ui.tabs;
         * }
         * 
         * @cssClass     s-tabs                  Apply the tabs lnf
@@ -149,7 +149,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             */
            `).code(`
           .s-tabs {
-            @sugar.ui.tabs($scope: bare);
+            @s.ui.tabs($scope: bare);
           }
           `, { type: 'CssClass' });
     }
@@ -169,7 +169,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             */
            `).code(`
           .s-tabs:not(.s-bare) {
-            @sugar.ui.tabs($scope: lnf);
+            @s.ui.tabs($scope: lnf);
           }
         `, { type: 'CssClass' });
     }
@@ -188,7 +188,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
       */
      `).code(`
     .s-tabs-grow {
-      @sugar.ui.tabs($grow: true, $scope: grow);
+      @s.ui.tabs($grow: true, $scope: grow);
     }
   `, { type: 'CssClass' });
     vars.comment(() => `/**
@@ -206,7 +206,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
       */
      `).code(`
     .s-tabs-fill {
-      @sugar.ui.tabs($fill: true, $scope: fill);
+      @s.ui.tabs($fill: true, $scope: fill);
     }
   `, { type: 'CssClass' });
     vars.comment(() => `/**
@@ -224,7 +224,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
       */
      `).code(`
     .s-tabs-vertical {
-      @sugar.ui.tabs($direction: vertical, $scope: 'direction');
+      @s.ui.tabs($direction: vertical, $scope: 'direction');
     }
   `, { type: 'CssClass' });
     return vars;

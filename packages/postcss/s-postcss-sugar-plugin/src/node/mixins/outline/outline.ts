@@ -18,7 +18,7 @@ export interface postcssSugarPluginStateOutlineMixinParams {
 
 /**
  * @name           outline
- * @as              @sugar.outline
+ * @as              @s.outline
  * @namespace      node.mixin.outline
  * @type           PostcssMixin
  * @platform      postcss
@@ -26,15 +26,15 @@ export interface postcssSugarPluginStateOutlineMixinParams {
  *
  * This mixin allows you to apply a nice outline on any HTMLElement.
  * This outline will be display on hover and focus by default but can be displayed
- * always by passing the `on` parameter to `always` like so `@sugar.outline(always)`
+ * always by passing the `on` parameter to `always` like so `@s.outline(always)`
  *
  * @return      {Css}         The generated css
  *
- * @snippet         @sugar.outline
+ * @snippet         @s.outline
  *
  * @example        css
  * .myCoolItem {
- *      @sugar.outline();
+ *      @s.outline();
  * }
  *
  * @since       2.0.0
@@ -60,10 +60,10 @@ export default function ({
 
         @keyframes s-outline-in {
             from {
-                outline: 0px solid sugar.color(${finalParams.color}, --alpha 0);
+                outline: 0px solid s.color(${finalParams.color}, --alpha 0);
             }
             to {
-                outline: 10px solid sugar.color(${finalParams.color}, --alpha 0.2);
+                outline: 10px solid s.color(${finalParams.color}, --alpha 0.2);
             }
         }
 

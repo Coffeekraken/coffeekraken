@@ -8,12 +8,12 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 /**
  * @name          list
- * @as            @sugar.ui.list
+ * @as            @s.ui.list
  * @namespace     node.mixin.ui.list
  * @type               PostcssMixin
  * @interface     ./list          interface
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * Apply the list style to any element
  *
@@ -21,11 +21,11 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet     @sugar.ui.list
+ * @snippet     @s.ui.list
  *
  * @example     css
  * .my-list {
- *    @sugar.ui.list;
+ *    @s.ui.list;
  * }
  *
  * @since      2.0.0
@@ -61,7 +61,7 @@ function default_1({ params, atRule, replaceWith, }) {
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
         position: relative;
-        font-size: sugar.font.size(30);
+        font-size: s.font.size(30);
 
         ${finalParams.lnf === 'ol' ? 'counter-reset: s-ol-list;' : ''}
 
@@ -82,11 +82,11 @@ function default_1({ params, atRule, replaceWith, }) {
                     position: absolute;
                     left: 0.5em;
                     transform: translateX(-50%);
-                    color: sugar.color(current);
+                    color: s.color(current);
                 }
 
                 & > *:not(i) {
-                    @sugar.color(main);
+                    @s.color(main);
                 }
             }
 

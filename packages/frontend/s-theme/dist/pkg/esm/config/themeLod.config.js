@@ -82,7 +82,7 @@ export default function (api) {
          * The "class" one let all the css in the same output file and scope each lod things (properties, rules, etc...) into
          * a "s-lod-%level" class.
          * The "file" one exports all the lod things into an external file that will be called "${source.input.filename}.lod-%level.css"
-         * You can override this method for each of your `@sugar.lod...` mixin calls.
+         * You can override this method for each of your `@s.lod...` mixin calls.
          *
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -96,8 +96,8 @@ export default function (api) {
          * @default           >=
          *
          * Specify the default action to apply if you don't specify one in your lod
-         * mixin call like ```@sugar.lod(2) {...}```. If the defaultAction is set to ">=",
-         * the above lod query will be the same as ```@sugar.lod('>=2') {...}```
+         * mixin call like ```@s.lod(2) {...}```. If the defaultAction is set to ">=",
+         * the above lod query will be the same as ```@s.lod('>=2') {...}```
          * Note that by default it is set to ">="
          *
          * @since       2.0.0

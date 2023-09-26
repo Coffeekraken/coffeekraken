@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           noise
- * @as              @sugar.filter.noise
+ * @as              @s.filter.noise
  * @namespace      node.mixin.filter
  * @type           PostcssMixin
  * @platform      postcss
@@ -12,11 +12,11 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.filter.noise
+ * @snippet         @s.filter.noise
  *
  * @example        css
  * .my-element {
- *    \@sugar.filter.noise(20);
+ *    \@s.filter.noise(20);
  * }
  *
  * @since       2.0.0
@@ -72,7 +72,7 @@ export default function ({
     const vars: string[] = [];
 
     vars.push(`
-            filter: sugar.filter.noise($frequency: ${finalParams.frequency}, $width: ${finalParams.width}, $height: ${finalParams.height})#filter;
+            filter: s.filter.noise($frequency: ${finalParams.frequency}, $width: ${finalParams.width}, $height: ${finalParams.height})#filter;
     `);
 
     return vars;

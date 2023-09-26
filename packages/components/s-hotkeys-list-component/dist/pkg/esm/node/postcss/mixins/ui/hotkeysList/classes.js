@@ -23,10 +23,10 @@ export { postcssUiHotkeysListClassesInterface as interface };
  *
  * This mixin represent the hotkeys list
  *
- * @snippet      @sugar.ui.hotkeysList.classes($1);
+ * @snippet      @s.ui.hotkeysList.classes($1);
  *
  * @example        css
- * \@sugar.ui.hotkeysList.classes;
+ * \@s.ui.hotkeysList.classes;
  *
  * @since    2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -37,7 +37,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     if (finalParams.scope.includes('bare')) {
         vars.code(`
         .s-hotkeys-list {
-            @sugar.ui.hotkeysList($scope: bare);
+            @s.ui.hotkeysList($scope: bare);
         }
     `, {
             type: 'CssClass',
@@ -58,7 +58,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`
             .s-hotkeys-list[lnf="default"]:not(.s-bare) {
-                @sugar.ui.hotkeysList($scope: lnf);
+                @s.ui.hotkeysList($scope: lnf);
             }`, {
             type: 'CssClass',
         });

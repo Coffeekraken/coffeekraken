@@ -29,11 +29,11 @@ exports.interface = postcssUiGoogleMapMarkerInterface;
  *
  * Apply the google map style to any s-google-map element
  *
- * @snippet         @sugar.ui.googleMapMarker($1);
+ * @snippet         @s.ui.googleMapMarker($1);
  *
  * @example     css
  * .s-google-map-marker {
- *    @sugar.ui.googleMapMarker;
+ *    @s.ui.googleMapMarker;
  * }
  *
  * @since      2.0.0
@@ -81,11 +81,11 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
             .s-google-map-marker_content {
-                @sugar.transition (ui.googleMapMarker.transition);
+                @s.transition (ui.googleMapMarker.transition);
             }
             .s-google-map-marker_icon {
-                color: sugar.color(current);
-                @sugar.transition (ui.googleMapMarker.transition);
+                color: s.color(current);
+                @s.transition (ui.googleMapMarker.transition);
             }
         `);
     }

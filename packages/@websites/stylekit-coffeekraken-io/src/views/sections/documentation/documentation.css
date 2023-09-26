@@ -1,33 +1,34 @@
 #documentation {
-    padding-block: sugar.padding(100);
+    padding-block-start: s.padding(100);
+    display: block;
 
     ._layout {
-        @sugar.layout ('1 2 2');
-        gap: sugar.margin(50);
+        @s.layout ('1 2 2');
+        gap: s.margin(50);
 
-        @sugar.media mobile {
-            @sugar.layout ('1 _ 2');
-            gap: sugar.margin(40);
+        @s.media mobile {
+            @s.layout ('1 _ 2');
+            gap: s.margin(40);
         }
     }
 
     ._doc {
-        @sugar.media tablet {
-            margin-inline: calc(sugar.margin(50) * -1);
+        @s.media tablet {
+            margin-inline: calc(s.margin(50) * -1);
         }
-        @sugar.media mobile {
-            margin-inline: calc(sugar.margin(30) * -1);
+        @s.media mobile {
+            margin-inline: calc(s.margin(30) * -1);
         }
 
         .s-format-text {
             h1 {
-                font-size: sugar.font.size(70);
+                font-size: s.font.size(70);
             }
             h2 {
-                font-size: sugar.font.size(60);
+                font-size: s.font.size(60);
             }
             h3 {
-                font-size: sugar.font.size(50);
+                font-size: s.font.size(50);
             }
         }
     }

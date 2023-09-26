@@ -7,7 +7,7 @@ exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 /**
  * @name          media
- * @as              @sugar.ui.media
+ * @as              @s.ui.media
  * @namespace     node.mixin.ui.media
  * @type          PostcssMixin
  * @interface       ./media
@@ -19,11 +19,11 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @param       {('bare'|'lnf')[]}        [scope=['bare','lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
- * @snippet         @sugar.ui.media
+ * @snippet         @s.ui.media
  *
  * @example       css
  * .my-element {
- *      \@sugar.ui.media();
+ *      \@s.ui.media();
  * }
  *
  * @since     2.0.0
@@ -50,7 +50,7 @@ function default_1({ params, atRule, replaceWith, }) {
     // bare
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
-            @sugar.wireframe {
+            @s.wireframe {
                 opacity: 0;
                 pointer-events: none;
                 width: 100%;

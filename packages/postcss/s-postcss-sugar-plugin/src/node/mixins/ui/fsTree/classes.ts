@@ -3,23 +3,23 @@ import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 /**
- * @___name          classes
- * @___as          @sugar.ui.fsTree.classes
- * @___namespace     node.mixin.ui.fsTree
- * @___type               PostcssMixin
- * @___interface     ./classes          interface
- * @___platform      postcss
- * @___status        beta
+ * @name          classes
+ * @as          @s.ui.fsTree.classes
+ * @namespace     node.mixin.ui.fsTree
+ * @type               PostcssMixin
+ * @interface     ./classes          interface
+ * @platform      postcss
+ * @status        beta
  *
  * Generate the fsTree classes
  *
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.fsTree.classes
+ * @snippet         @s.ui.fsTree.classes
  *
  * @example     css
- * \@sugar.ui.fsTree.classes;
+ * \@s.ui.fsTree.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -131,12 +131,12 @@ export default function ({
     vars.comment(
         () => `
       /**
-        * @___name          Fs Tree
-        * @___namespace          sugar.style.ui.fsTree
-        * @___type               Styleguide
-        * @___menu           Styleguide / UI        /styleguide/ui/fs-tree
-        * @___platform       css
-        * @___status       beta
+        * @name          Fs Tree
+        * @namespace          sugar.style.ui.fsTree
+        * @type               Styleguide
+        * @menu           Styleguide / UI        /styleguide/ui/fs-tree
+        * @platform       css
+        * @status       beta
         * 
         * These classes allows you to display a nice filesystem tree
         * 
@@ -150,10 +150,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.ui.fsTree.classes;
+        * \\@s.ui.fsTree.classes;
         * 
         * .my-fsTree {
-        *   \@sugar.ui.fsTree;
+        *   \@s.ui.fsTree;
         * }
         * 
         * @cssClass     s-fs-tree       Apply the filesystem tree lnf
@@ -183,9 +183,9 @@ export default function ({
     if (finalParams.scope.includes('bare')) {
         vars.comment(
             () => `/**
-            * @___name           s-fs-tree
-            * @___namespace          sugar.style.ui.fsTree
-            * @___type           CssClass
+            * @name           s-fs-tree
+            * @namespace          sugar.style.ui.fsTree
+            * @type           CssClass
             * 
             * This class represent an "<yellow>${__STheme.get(
                 'ui.fsTree.defaultLnf',
@@ -214,7 +214,7 @@ export default function ({
         ).code(
             `
         .s-fs-tree {
-            @sugar.ui.fsTree($scope: bare);
+            @s.ui.fsTree($scope: bare);
         }
     `,
             {
@@ -226,9 +226,9 @@ export default function ({
     if (finalParams.scope.includes('lnf')) {
         vars.comment(
             () => `/**
-                * @___name           s-fs-tree
-                * @___namespace          sugar.style.ui.fsTree
-                * @___type           CssClass
+                * @name           s-fs-tree
+                * @namespace          sugar.style.ui.fsTree
+                * @type           CssClass
                 * 
                 * This class represent an filesystem tree
                 * 
@@ -253,7 +253,7 @@ export default function ({
         ).code(
             `
             .s-fs-tree:not(.s-bare) {
-                @sugar.ui.fsTree($scope: lnf);
+                @s.ui.fsTree($scope: lnf);
             }
         `,
             {

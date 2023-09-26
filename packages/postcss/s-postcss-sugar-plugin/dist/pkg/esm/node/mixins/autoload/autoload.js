@@ -4,11 +4,11 @@ import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __filehound from 'filehound';
 import __fs from 'fs';
 /**
- * @__name          autoload
- * @__namespace     node.mixin.autoload
- * @__type          PostcssMixin
- * @__platform      postcss
- * @__status        wip
+ * @name          autoload
+ * @namespace     node.mixin.autoload
+ * @type          PostcssMixin
+ * @platform      postcss
+ * @status        wip
  *
  * This mixin allows you to autoload all the "autoload.css" files found in the
  * packages installed in the "node_modules" folder.
@@ -17,7 +17,7 @@ import __fs from 'fs';
  * @return      {Css}                   The generated css
  *
  * @example       css
- * \@sugar.autoload;
+ * \@s.autoload;
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

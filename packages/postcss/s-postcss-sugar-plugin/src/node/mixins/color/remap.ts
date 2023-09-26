@@ -19,11 +19,11 @@ export { postcssSugarPluginColorRemapMixinInterface as interface };
 
 /**
  * @name           remap
- * @as              @sugar.color.remap
+ * @as              @s.color.remap
  * @namespace      node.mixin.color
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin allows you to (re)map a color to another one like saying you want the "warning" color as the "accent" one
  *
@@ -31,11 +31,11 @@ export { postcssSugarPluginColorRemapMixinInterface as interface };
  * @param       {String}        toColor         THe color you want to override with the previous one
  * @return      {Css}                     The generated remap css
  *
- * @snippet         @sugar.color.remap($1, $2)
+ * @snippet         @s.color.remap($1, $2)
  *
  * @example        css
  * .my-section {
- *      @sugar.color.remap(warning, accent);
+ *      @s.color.remap(warning, accent);
  * }
  *
  * @since       2.0.0

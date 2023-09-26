@@ -1,20 +1,20 @@
 import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name           classes
- * @as          @sugar.link.classes
+ * @as          @s.link.classes
  * @namespace      node.mixin.link
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the height helper classes like s-link:stretch, etc...
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.link.classes
+ * @snippet         @s.link.classes
  *
  * @example        css
- * \@sugar.link.classes;
+ * \@s.link.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -35,7 +35,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/link
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows to apply some link styling utils to any HTMLElement.
         * 
@@ -45,10 +45,10 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.link.classes;
+        * \\@s.link.classes;
         * 
         * .my-element {
-        *   \\@sugar.link.stretch;
+        *   \\@s.link.stretch;
         * } 
         * 
         * @cssClass             s-link:stretch                  Stretch a link clickable area without changing his actual size and style
@@ -67,7 +67,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @namespace          sugar.style.helpers.link
         * @type             CssClass
         * @platform         css
-        * @status         beta
+        * @status         stable
         * 
         * This class allows you to apply the "<yellow>stretch</yellow>" link style to any HTMLElement
         * 
@@ -81,7 +81,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         */
     `).code(() => `
         .s-link-stretch {
-            @sugar.link.stretch;
+            @s.link.stretch;
         }
     `, { type: 'CssClass' });
     return vars;

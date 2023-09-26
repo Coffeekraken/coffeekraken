@@ -8,23 +8,23 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 /**
  * @name          transition
- * @as            sugar.transition
+ * @as            s.transition
  * @namespace     node.function.transition
  * @type          PostcssFunction
  * @platform      postcss
  * @interface       ./transition
- * @status        beta
+ * @status        stable
  *
  * This function allows you to get a transition value depending on your theme config
  *
  * @param       {String}        transition      The transition to get
  * @return      {Css}                   The corresponding css
  *
- * @snippet         sugar.transition($1)
+ * @snippet         s.transition($1)
  *
  * @example       css
  * .my-element {
- *      transition: sugar.transition(fast);
+ *      transition: s.transition(fast);
  * }
  *
  * @since     2.0.0

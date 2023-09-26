@@ -10,11 +10,11 @@ s-dashboard-frontend-checker {
     flex-direction: column;
 
     ._header {
-        padding: sugar.padding(20);
-        @sugar.border.radius (10);
+        padding: s.padding(20);
+        @s.border.radius (10);
     }
     ._score {
-        font-size: sugar.font.size(60);
+        font-size: s.font.size(60);
         font-weight: bold;
         display: flex;
         align-items: center;
@@ -25,65 +25,65 @@ s-dashboard-frontend-checker {
 
         ._score-checks-count {
             font-weight: regular;
-            font-size: sugar.font.size(30);
+            font-size: s.font.size(30);
 
             &-label {
-                margin-inline-start: sugar.margin(10);
+                margin-inline-start: s.margin(10);
                 opacity: 0.5;
             }
         }
 
         ._score-value {
-            margin-inline-end: sugar.margin(10);
-            @sugar.transition;
+            margin-inline-end: s.margin(10);
+            @s.transition;
         }
 
         ._score-high {
-            color: sugar.color(success);
+            color: s.color(success);
         }
         ._score-medium {
-            color: sugar.color(accent);
+            color: s.color(accent);
         }
         ._score-low {
-            color: sugar.color(error);
+            color: s.color(error);
         }
     }
 
     ._filters {
         display: flex;
-        @sugar.border.radius (10);
-        margin-block-start: sugar.margin(20);
-        margin-block-end: sugar.margin(20);
-        background: sugar.color(main, --alpha 0.05);
+        @s.border.radius (10);
+        margin-block-start: s.margin(20);
+        margin-block-end: s.margin(20);
+        background: s.color(main, --alpha 0.05);
 
-        @sugar.theme dark {
-            background: sugar.color(main, --alpha 0.1);
+        @s.theme dark {
+            background: s.color(main, --alpha 0.1);
         }
 
         &._filters-tabs {
             ._filter.active {
-                background-color: sugar.color(accent, --alpha 0.3) !important;
+                background-color: s.color(accent, --alpha 0.3) !important;
             }
         }
     }
     ._filter {
-        padding: sugar.padding(20) sugar.padding(20);
+        padding: s.padding(20) s.padding(20);
         flex-grow: 1;
         width: 33.3%;
         cursor: pointer;
-        @sugar.border.radius (10);
+        @s.border.radius (10);
         text-align: center;
 
         i {
             opacity: 0.3;
-            margin-inline-end: sugar.margin(10);
+            margin-inline-end: s.margin(10);
         }
         span {
             opacity: 0.3;
         }
 
         &:hover {
-            background-color: sugar.color(accent, --alpha 0.3);
+            background-color: s.color(accent, --alpha 0.3);
         }
         &.active {
             i,
@@ -95,13 +95,13 @@ s-dashboard-frontend-checker {
 
     .ck-list_item {
         i {
-            margin-inline-end: sugar.margin(10);
+            margin-inline-end: s.margin(10);
         }
     }
 
     .ck-list_item:focus-within {
-        background: sugar.color(main, --alpha 0.1);
-        color: sugar.color(main, text);
+        background: s.color(main, --alpha 0.1);
+        color: s.color(main, text);
 
         .s-badge {
             filter: grayscale(1) brightness(1);
@@ -111,39 +111,39 @@ s-dashboard-frontend-checker {
     ._level {
         width: 0.5em;
         height: 0.5em;
-        background: sugar.color(current);
+        background: s.color(current);
         border-radius: 0.5em;
-        margin-inline-end: sugar.margin(20);
+        margin-inline-end: s.margin(20);
 
         &.level--0 {
-            @sugar.color (success);
+            @s.color (success);
         }
         &.level--1 {
-            @sugar.color (warning);
+            @s.color (warning);
         }
         &.level--2 {
-            @sugar.color (error);
+            @s.color (error);
         }
     }
 
     .s-badge {
-        color: sugar.color(current, text);
+        color: s.color(current, text);
 
         &.level--0 {
-            @sugar.color (success);
+            @s.color (success);
         }
         &.level--1 {
-            @sugar.color (warning);
+            @s.color (warning);
         }
         &.level--2 {
-            @sugar.color (error);
+            @s.color (error);
         }
     }
 
     ._details {
-        @sugar.border.radius();
+        @s.border.radius();
         display: none;
-        padding-block-end: sugar.padding(20);
+        padding-block-end: s.padding(20);
     }
     .ck-list_item:focus-within ._details {
         display: block;
@@ -152,14 +152,14 @@ s-dashboard-frontend-checker {
     .s-typo--code {
         line-height: 1.5em;
         width: 100%;
-        padding: sugar.padding(20);
+        padding: s.padding(20);
         user-select: all;
-        background: sugar.color(main, background);
-        @sugar.border.radius();
+        background: s.color(main, background);
+        @s.border.radius();
     }
 
     ._more-link {
-        color: sugar.color(main, text);
+        color: s.color(main, text);
         text-decoration: underline;
     }
 

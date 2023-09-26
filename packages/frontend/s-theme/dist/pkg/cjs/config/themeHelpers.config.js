@@ -49,7 +49,7 @@ function default_1(api) {
              * @type            Number
              * @default         0.4
              *
-             * Specify the opacity of disabled items applied either using the `@sugar.disabled` mixin, of through
+             * Specify the opacity of disabled items applied either using the `@s.disabled` mixin, of through
              * the `s-disabled` helper class
              *
              * @cince       2.0.0

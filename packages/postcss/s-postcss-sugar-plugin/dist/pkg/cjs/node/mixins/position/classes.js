@@ -7,20 +7,20 @@ exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 /**
  * @name           classes
- * @as            @sugar.position.classes
+ * @as            @s.position.classes
  * @namespace      node.mixin.position
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the position helper classes like s-position:absolute, etc...
  *
  * @return        {Css}         The generated css
  *
- * @snippet     @sugar.position.classes
+ * @snippet     @s.position.classes
  *
  * @example        css
- * \@sugar.position.classes;
+ * \@s.position.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -41,7 +41,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/positions
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply some positions like \`absolute\`, \`fixed\`, etc... on any HTMLElement
         * 
@@ -51,7 +51,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.position.classes;
+        * \\@s.position.classes;
         * 
         * @cssClass       s-position:absolute       Apply the \`absolute\` position
         * @cssClass       s-position:relative       Apply the \`relative\` position

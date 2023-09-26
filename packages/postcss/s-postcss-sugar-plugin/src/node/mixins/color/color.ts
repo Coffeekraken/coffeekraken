@@ -20,11 +20,11 @@ export { postcssSugarPluginColorMixinInterface as interface };
 
 /**
  * @name           color
- * @as              @sugar.color
+ * @as              @s.color
  * @namespace      node.mixin.color
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin allows you to (re)map the "current", "accent" and "complementary" color to any other colors you want like "accent", "success, "etc...""
  * Note that is you don't specify any "accent" and "complementary" color, these once will be set to the passed "current" color.
@@ -34,11 +34,11 @@ export { postcssSugarPluginColorMixinInterface as interface };
  * @param       {String}        [complementary=null]             The new color you want for the "complementary" one
  * @return      {Css}                     The generated remap css
  *
- * @snippet         @sugar.color($1)
+ * @snippet         @s.color($1)
  *
  * @example        css
  * .my-section {
- *      @sugar.color(accent, complementary, success);
+ *      @s.color(accent, complementary, success);
  * }
  *
  * @since       2.0.0
@@ -84,14 +84,14 @@ export default function ({
 
     const vars = new CssVars();
 
-    vars.code(`@sugar.color.remap(current, ${finalParams.current})`);
+    vars.code(`@s.color.remap(current, ${finalParams.current})`);
 
     if (finalParams.accent) {
-        vars.code(`@sugar.color.remap(accent, ${finalParams.accent});`);
+        vars.code(`@s.color.remap(accent, ${finalParams.accent});`);
     }
     if (finalParams.complementary) {
         vars.code(
-            `@sugar.color.remap(complementary, ${finalParams.complementary});`,
+            `@s.color.remap(complementary, ${finalParams.complementary});`,
         );
     }
 

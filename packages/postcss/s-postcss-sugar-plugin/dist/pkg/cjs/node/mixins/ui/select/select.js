@@ -8,7 +8,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 /**
  * @name          select
- * @as              @sugar.ui.select
+ * @as              @s.ui.select
  * @namespace     node.mixin.ui.select
  * @type               PostcssMixin
  * @interface     ./select          interface
@@ -21,11 +21,11 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.select
+ * @snippet         @s.ui.select
  *
  * @example     css
  * .my-select {
- *    @sugar.ui.select;
+ *    @s.ui.select;
  * }
  *
  * @since      2.0.0
@@ -56,7 +56,7 @@ function default_1({ params, atRule, replaceWith, }) {
     const vars = [];
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
-            @sugar.ui.base(select, $scope: bare);
+            @s.ui.base(select, $scope: bare);
             position: relative;
             -webkit-appearance: none;
             appearance: none;
@@ -68,18 +68,18 @@ function default_1({ params, atRule, replaceWith, }) {
         if (finalParams.outline) {
             vars.push(`
                 &:focus:not(:hover) {
-                    @sugar.outline;
+                    @s.outline;
                 }
             `);
         }
         vars.push(`
-            @sugar.ui.base(select, $scope: lnf);
-            @sugar.shape();
+            @s.ui.base(select, $scope: lnf);
+            @s.shape();
             overflow: hidden;
 
             &.placeholder,
             &:invalid {
-                color: sugar.color(main, text, --alpha 0.3);
+                color: s.color(main, text, --alpha 0.3);
             }
 
             &[multiple] option:checked,
@@ -87,31 +87,31 @@ function default_1({ params, atRule, replaceWith, }) {
                 -moz-appearance: none;
                 -webkit-appearance: none;
                 appearance: none;
-                background: sugar.color(current, --alpha 0.5);
-                color: sugar.color(current, uiForeground);
+                background: s.color(current, --alpha 0.5);
+                color: s.color(current, uiForeground);
             }
             &[multiple]:focus option:checked,
             &[multiple]:focus option[selected] {
                 -moz-appearance: none;
                 -webkit-appearance: none;
                 appearance: none;
-                background: sugar.color(current, ui);
-                color: sugar.color(current, uiForeground);
+                background: s.color(current, ui);
+                color: s.color(current, uiForeground);
             }
 
             &:not([multiple]) {
-                padding-inline-end: calc(sugar.padding(ui.form.paddingInline) + 1.5em);
+                padding-inline-end: calc(s.padding(ui.form.paddingInline) + 1.5em);
 
-                --padding-inline: sugar.padding(ui.form.paddingInline);
+                --padding-inline: s.padding(ui.form.paddingInline);
 
                 background-repeat: no-repeat;
-                background-image: linear-gradient(45deg, transparent 50%, sugar.color(current) 50%), linear-gradient(135deg, sugar.color(current) 50%, transparent 50%);
+                background-image: linear-gradient(45deg, transparent 50%, s.color(current) 50%), linear-gradient(135deg, s.color(current) 50%, transparent 50%);
                 background-position: right calc(var(--padding-inline) + 5px) top 50%, right var(--padding-inline) top 50%;
-                background-size: sugar.scalable(5px) sugar.scalable(5px), sugar.scalable(5px) sugar.scalable(5px);
+                background-size: s.scalable(5px) s.scalable(5px), s.scalable(5px) s.scalable(5px);
             
                 [dir="rtl"] &,
                 &[dir="rtl"] {
-                    background-position: left var(--padding-inline) top 50%, left calc(var(--padding-inline) + sugar.scalable(5px)) top 50%;
+                    background-position: left var(--padding-inline) top 50%, left calc(var(--padding-inline) + s.scalable(5px)) top 50%;
                 }
             }
 
@@ -119,16 +119,16 @@ function default_1({ params, atRule, replaceWith, }) {
         switch (finalParams.lnf) {
             case 'underline':
                 vars.push(`
-                    background-color: sugar.color(current, --alpha 0);
+                    background-color: s.color(current, --alpha 0);
                     border-top: none !important;
                     border-left: none !important;
                     border-right: none !important;
-                    border-bottom: sugar.color(current, --alpha 0.3) solid sugar.border.width(ui.form.borderWidth) !important;
+                    border-bottom: s.color(current, --alpha 0.3) solid s.border.width(ui.form.borderWidth) !important;
                     padding-inline: 1ch !important;
 
                     &:hover, &:focus {
-                        border-bottom: sugar.color(current, --alpha 1) solid sugar.border.width(ui.form.borderWidth) !important;
-                        background-color: sugar.color(current, --alpha 0.1);
+                        border-bottom: s.color(current, --alpha 1) solid s.border.width(ui.form.borderWidth) !important;
+                        background-color: s.color(current, --alpha 0.1);
                     }
                 `);
                 break;

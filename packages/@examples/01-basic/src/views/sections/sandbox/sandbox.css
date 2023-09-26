@@ -1,22 +1,22 @@
 .section-sandbox {
     position: relative;
 
-    @sugar.media mobile {
-        padding-inline: sugar.padding(30);
+    @s.media mobile {
+        padding-inline: s.padding(30);
     }
 
     ._type {
-        width: sugar.container.width();
-        margin-block: sugar.margin(50);
+        width: s.container.width();
+        margin-block: s.margin(50);
     }
 
     ._title {
-        @sugar.typo (h1);
+        @s.typo (h1);
     }
     ._value {
-        background: sugar.color(main, surface);
-        padding: sugar.padding(30);
-        @sugar.border.radius;
+        background: s.color(main, surface);
+        padding: s.padding(30);
+        @s.border.radius;
     }
 
     ._video,

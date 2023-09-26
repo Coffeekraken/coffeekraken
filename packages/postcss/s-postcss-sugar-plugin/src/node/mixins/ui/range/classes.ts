@@ -4,7 +4,7 @@ import __faker from 'faker';
 
 /**
  * @name          classes
- * @as              @sugar.ui.range.classes
+ * @as              @s.ui.range.classes
  * @namespace     node.mixin.ui.range
  * @type               PostcssMixin
  * @interface     ./classes          interface
@@ -18,10 +18,10 @@ import __faker from 'faker';
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.range.classes
+ * @snippet         @s.ui.range.classes
  *
  * @example     css
- * \@sugar.ui.range.classes;
+ * \@s.ui.range.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -102,10 +102,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.ui.range.classes;
+        * \\@s.ui.range.classes;
         * 
         * .my-range {
-        *   \@sugar.ui.range;
+        *   \@s.ui.range;
         * }
         * 
         ${finalParams.lnfs
@@ -246,7 +246,7 @@ export default function ({
         ).code(
             `
         .s-range {
-            @sugar.ui.range($scope: bare);
+            @s.ui.range($scope: bare);
         }
         `,
             { type: 'CssClass' },
@@ -280,7 +280,7 @@ export default function ({
             ).code(
                 `
             .${cls}:not(.s-bare) {
-                @sugar.ui.range($lnf: ${lnf}, $scope: lnf);
+                @s.ui.range($lnf: ${lnf}, $scope: lnf);
             }
             `,
                 { type: 'CssClass' },

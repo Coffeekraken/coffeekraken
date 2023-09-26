@@ -8,7 +8,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @type          PostcssFunction
  * @platform      postcss
  * @interface       ./padding
- * @status        beta
+ * @status        stable
  *
  * This function allows you to get a padding value depending on your theme config
  *
@@ -16,11 +16,11 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {Boolean}       [scalable='theme.scalable.padding']      Whether to scale the value or not
  * @return      {Css}                   The corresponding css
  *
- * @snippet         sugar.padding($1)
+ * @snippet         s.padding($1)
  *
  * @example       css
  * .my-element {
- *      padding-top: sugar.padding(30);
+ *      padding-top: s.padding(30);
  * }
  *
  * @since     2.0.0
@@ -81,11 +81,11 @@ export default function ({
         if (`${s}`.match(/[a-zA-Z]+$/)) {
             // @ts-ignore
             if (finalParams.scalable) {
-                return `sugar.scalable(${s})`;
+                return `s.scalable(${s})`;
             }
             return `${s}`;
         } else {
-            return `calc(sugar.theme(padding.default, ${finalParams.scalable}) * ${s})`;
+            return `calc(s.theme(padding.default, ${finalParams.scalable}) * ${s})`;
         }
     });
 

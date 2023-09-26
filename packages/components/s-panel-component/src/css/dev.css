@@ -1,5 +1,5 @@
-@sugar.init();
-/* @sugar.classes; */
+@s.init();
+/* @s.classes; */
 
 .s-panel_container {
     max-width: 400px;

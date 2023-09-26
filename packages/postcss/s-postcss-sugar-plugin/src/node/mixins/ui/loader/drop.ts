@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          drop
- * @as          @sugar.ui.loader.drop
+ * @as          @s.ui.loader.drop
  * @namespace     node.mixin.ui.loader
  * @type               PostcssMixin
  * @interface     ./drop          interface
@@ -17,11 +17,11 @@ import __STheme from '@coffeekraken/s-theme';
  * @param        {String}           [easing='theme.ui.loader.easing']            The easing you want for your drop animation
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.loader.drop
+ * @snippet         @s.ui.loader.drop
  *
  * @example     css
  * .my-drop {
- *    @sugar.ui.loader.drop;
+ *    @s.ui.loader.drop;
  * }
  *
  * @since      2.0.0
@@ -77,8 +77,8 @@ export default function ({
     position: relative;
     display: inline-block;
     pointer-events: none;
-    width: sugar.scalable(1em);
-    height: sugar.scalable(1em);
+    width: s.scalable(1em);
+    height: s.scalable(1em);
     
     &:before,
     &:after {
@@ -88,9 +88,9 @@ export default function ({
         top: 50%; left: 50%;
         opacity: 0;
         transform: translate(-50%, -50%) scale(0);
-        border: sugar.scalable(0.1em) solid currentColor;
+        border: s.scalable(0.1em) solid currentColor;
         border-radius: 50%;
-        width: sugar.scalable(1em); height: sugar.scalable(1em);
+        width: s.scalable(1em); height: s.scalable(1em);
     }
     &:before {
         animation: ${finalParams.name} ${finalParams.duration} ${finalParams.easing} infinite;
@@ -113,7 +113,7 @@ export default function ({
 
     // wireframe
     vars.push(`
-        @sugar.wireframe {
+        @s.wireframe {
             &:before,
             &:after {
                 border-color: rgba(0,0,0,.5);

@@ -7,21 +7,21 @@ exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 /**
  * @name           hide
- * @as              @sugar.scrollbar.hide
+ * @as              @s.scrollbar.hide
  * @namespace      node.mixin.scrollbar
  * @type           PostcssMixin
  * @platform        css
- * @status        beta
+ * @status        stable
  *
  * This mixin allows you to hide your scrollbar
  *
  * @return        {Css}           The generated css
  *
- * @snippet         @sugar.scrollbar.hide
+ * @snippet         @s.scrollbar.hide
  *
  * @example        css
  * body {
- *    @sugar.scrollbar.hide();
+ *    @s.scrollbar.hide();
  * }
  *
  * @since       2.0.0

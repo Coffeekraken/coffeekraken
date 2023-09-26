@@ -1,14 +1,14 @@
 .tools {
     position: fixed;
-    top: sugar.margin(10);
+    top: s.margin(10);
     right: 0;
     z-index: 100;
 
-    @sugar.media <=1400 {
+    @s.media <=1400 {
         display: none;
     }
 
-    @sugar.media mobile {
+    @s.media mobile {
         display: none;
     }
 
@@ -18,8 +18,8 @@
     }
 
     ._btn {
-        padding: sugar.padding(20);
-        background: sugar.color(main, surface);
+        padding: s.padding(20);
+        background: s.color(main, surface);
         opacity: 0.3;
 
         &:hover {
@@ -29,29 +29,29 @@
 
     > * {
         display: block !important;
-        margin-block: sugar.margin(20);
-        margin-inline-end: sugar.margin(20);
+        margin-block: s.margin(20);
+        margin-inline-end: s.margin(20);
     }
 
     .tools_opensource > .s-btn {
-        color: sugar.color(main, text) !important;
+        color: s.color(main, text) !important;
     }
 
     .s-tooltip {
         width: 400px;
-        padding: sugar.padding(50);
-        background-color: sugar.color(main, surface);
+        padding: s.padding(50);
+        background-color: s.color(main, surface);
         background-position: 50% 50%;
         background-size: cover;
-        @sugar.depth (10);
+        @s.depth (10);
 
         &:after {
-            border-color: sugar.color(main, surface) transparent transparent
+            border-color: s.color(main, surface) transparent transparent
                 transparent;
         }
 
         .s-floating_arrow {
-            background: sugar.color(main, surface);
+            background: s.color(main, surface);
         }
     }
 }

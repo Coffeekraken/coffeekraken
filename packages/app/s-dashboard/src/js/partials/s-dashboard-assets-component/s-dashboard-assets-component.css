@@ -7,45 +7,45 @@
 
     ._category {
         margin-block-end: 0;
-        @sugar.transition;
+        @s.transition;
     }
     ._category:has(._details.active) {
-        margin-block-end: sugar.margin(30);
+        margin-block-end: s.margin(30);
     }
 
     ._compressed {
-        color: sugar.color(accent, text, --alpha 0.6);
-        margin-inline-end: sugar.margin(20);
+        color: s.color(accent, text, --alpha 0.6);
+        margin-inline-end: s.margin(20);
     }
 
     ._metas {
         display: flex;
-        padding: sugar.padding(20);
+        padding: s.padding(20);
         user-select: none;
         cursor: pointer;
-        @sugar.border.radius;
-        @sugar.transition fast;
+        @s.border.radius;
+        @s.transition fast;
     }
     ._category:is(:hover, :focus, :focus-within) ._metas,
     ._category:has(._details.active) ._metas {
-        padding: sugar.padding(20);
-        background: sugar.color(main, surface);
+        padding: s.padding(20);
+        background: s.color(main, surface);
     }
 
     ._label {
         flex-grow: 1;
-        color: sugar.color(accent);
-        @sugar.font.size (40);
+        color: s.color(accent);
+        @s.font.size (40);
     }
 
     ._external {
-        margin-inline-end: sugar.margin(10);
+        margin-inline-end: s.margin(10);
     }
 
     ._details {
         display: grid;
         grid-template-rows: 0fr;
-        @sugar.transition;
+        @s.transition;
 
         &.active {
             grid-template-rows: 1fr;
@@ -58,7 +58,7 @@
     }
     ._details-asset {
         display: flex;
-        padding: sugar.padding(20);
+        padding: s.padding(20);
         opacity: 0.5;
 
         &:is(:hover, :focus, :focus-within) {
@@ -67,12 +67,12 @@
     }
     ._details-label {
         flex-grow: 1;
-        @sugar.transition fast;
+        @s.transition fast;
     }
 
     ._total {
-        padding: sugar.padding(20);
-        border-top: 1px solid sugar.color(main, border);
+        padding: s.padding(20);
+        border-top: 1px solid s.color(main, border);
         display: flex;
     }
     ._total-label {

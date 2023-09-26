@@ -23,8 +23,8 @@ function default_1(api) {
          * @default           <=
          *
          * Specify the default action to apply if you don't specify one in your media
-         * mixin call like ```@sugar.media('tablet') {...}```. If the defaultAction is set to ">=",
-         * the above media will be the same as ```@sugar.media('>=tablet') {...}```
+         * mixin call like ```@s.media('tablet') {...}```. If the defaultAction is set to ">=",
+         * the above media will be the same as ```@s.media('>=tablet') {...}```
          * Note that by default it is set to "<=" which mean "desktop first"
          *
          * @since       2.0.0
@@ -54,7 +54,7 @@ function default_1(api) {
         //  *
         //  * Specify the method to use for media queries. By default it will use the @container query solution
         //  * that will refer to the "viewport" container-name.
-        //  * The easiest way to start is to use the ".s-viewport" class that is generated through the `@sugar.init` mixin
+        //  * The easiest way to start is to use the ".s-viewport" class that is generated through the `@s.init` mixin
         //  * and to wrap your whole body content into it.
         //  * This way you will be able to resize this container and keep the queries to work without resizing the window.
         //  * You can also set this to "media" if you prefer the plain old media queries.
@@ -140,4 +140,4 @@ function default_1(api) {
     };
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQTs7Ozs7Ozs7Ozs7O0dBWUc7O0FBRUgsbUJBQXlCLEdBQUc7SUFDeEIsT0FBTztRQUNIOzs7Ozs7Ozs7Ozs7OztXQWNHO1FBQ0gsYUFBYSxFQUFFLElBQUk7UUFFbkI7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxJQUFJLFlBQVk7WUFDWixPQUFPLEdBQUcsQ0FBQyxJQUFJLENBQUMsYUFBYSxLQUFLLElBQUksQ0FBQyxDQUFDLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxTQUFTLENBQUM7UUFDbEUsQ0FBQztRQUVELE1BQU07UUFDTiwrQkFBK0I7UUFDL0IsMENBQTBDO1FBQzFDLCtCQUErQjtRQUMvQixrQ0FBa0M7UUFDbEMsS0FBSztRQUNMLHVHQUF1RztRQUN2Ryx1REFBdUQ7UUFDdkQsa0hBQWtIO1FBQ2xILGtEQUFrRDtRQUNsRCxrSEFBa0g7UUFDbEgsaUZBQWlGO1FBQ2pGLEtBQUs7UUFDTCx3QkFBd0I7UUFDeEIsa0dBQWtHO1FBQ2xHLE1BQU07UUFDTix1QkFBdUI7UUFFdkIsTUFBTTtRQUNOLHNDQUFzQztRQUN0QywwQ0FBMEM7UUFDMUMsK0JBQStCO1FBQy9CLGlDQUFpQztRQUNqQyxLQUFLO1FBQ0wsK0VBQStFO1FBQy9FLEtBQUs7UUFDTCx3QkFBd0I7UUFDeEIsa0dBQWtHO1FBQ2xHLE1BQU07UUFDTiw2QkFBNkI7UUFFN0IsT0FBTyxFQUFFO1lBQ0w7Ozs7Ozs7Ozs7ZUFVRztZQUNILE1BQU0sRUFBRTtnQkFDSixRQUFRLEVBQUUsQ0FBQztnQkFDWCxRQUFRLEVBQUUsR0FBRzthQUNoQjtZQUVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxNQUFNLEVBQUU7Z0JBQ0osUUFBUSxFQUFFLEdBQUc7Z0JBQ2IsUUFBUSxFQUFFLElBQUk7YUFDakI7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFO2dCQUNMLFFBQVEsRUFBRSxJQUFJO2dCQUNkLFFBQVEsRUFBRSxJQUFJO2FBQ2pCO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRTtnQkFDRixRQUFRLEVBQUUsSUFBSTtnQkFDZCxRQUFRLEVBQUUsSUFBSTthQUNqQjtTQUNKO0tBQ0osQ0FBQztBQUNOLENBQUM7QUFwSUQsNEJBb0lDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQTs7Ozs7Ozs7Ozs7O0dBWUc7O0FBRUgsbUJBQXlCLEdBQUc7SUFDeEIsT0FBTztRQUNIOzs7Ozs7Ozs7Ozs7OztXQWNHO1FBQ0gsYUFBYSxFQUFFLElBQUk7UUFFbkI7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxJQUFJLFlBQVk7WUFDWixPQUFPLEdBQUcsQ0FBQyxJQUFJLENBQUMsYUFBYSxLQUFLLElBQUksQ0FBQyxDQUFDLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxTQUFTLENBQUM7UUFDbEUsQ0FBQztRQUVELE1BQU07UUFDTiwrQkFBK0I7UUFDL0IsMENBQTBDO1FBQzFDLCtCQUErQjtRQUMvQixrQ0FBa0M7UUFDbEMsS0FBSztRQUNMLHVHQUF1RztRQUN2Ryx1REFBdUQ7UUFDdkQsOEdBQThHO1FBQzlHLGtEQUFrRDtRQUNsRCxrSEFBa0g7UUFDbEgsaUZBQWlGO1FBQ2pGLEtBQUs7UUFDTCx3QkFBd0I7UUFDeEIsa0dBQWtHO1FBQ2xHLE1BQU07UUFDTix1QkFBdUI7UUFFdkIsTUFBTTtRQUNOLHNDQUFzQztRQUN0QywwQ0FBMEM7UUFDMUMsK0JBQStCO1FBQy9CLGlDQUFpQztRQUNqQyxLQUFLO1FBQ0wsK0VBQStFO1FBQy9FLEtBQUs7UUFDTCx3QkFBd0I7UUFDeEIsa0dBQWtHO1FBQ2xHLE1BQU07UUFDTiw2QkFBNkI7UUFFN0IsT0FBTyxFQUFFO1lBQ0w7Ozs7Ozs7Ozs7ZUFVRztZQUNILE1BQU0sRUFBRTtnQkFDSixRQUFRLEVBQUUsQ0FBQztnQkFDWCxRQUFRLEVBQUUsR0FBRzthQUNoQjtZQUVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxNQUFNLEVBQUU7Z0JBQ0osUUFBUSxFQUFFLEdBQUc7Z0JBQ2IsUUFBUSxFQUFFLElBQUk7YUFDakI7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFO2dCQUNMLFFBQVEsRUFBRSxJQUFJO2dCQUNkLFFBQVEsRUFBRSxJQUFJO2FBQ2pCO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRTtnQkFDRixRQUFRLEVBQUUsSUFBSTtnQkFDZCxRQUFRLEVBQUUsSUFBSTthQUNqQjtTQUNKO0tBQ0osQ0FBQztBQUNOLENBQUM7QUFwSUQsNEJBb0lDIn0=

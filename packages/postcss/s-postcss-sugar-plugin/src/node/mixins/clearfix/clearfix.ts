@@ -3,11 +3,11 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           clearfix
- * @as              @sugar.clearfix
+ * @as              @s.clearfix
  * @namespace      node.mixin.clearfix
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin allows you to apply a clearfix depending on your preference. Here's are the clearfix methods available:
  * - overflow (default)
@@ -18,11 +18,11 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.clearfix($1)
+ * @snippet         @s.clearfix($1)
  *
  * @example        css
  * .my-element {
- *    \@sugar.clearfix();
+ *    \@s.clearfix();
  * }
  *
  * @since       2.0.0

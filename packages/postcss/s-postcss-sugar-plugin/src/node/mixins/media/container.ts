@@ -18,34 +18,34 @@ class postcssSugarPluginMediaContainerMixinInterface extends __SInterface {
 export { postcssSugarPluginMediaContainerMixinInterface as interface };
 
 /**
- * @__name           container
- * @__as              @sugar.media.container
- * @__namespace      node.mixin.media
- * @__type           PostcssMixin
- * @__platform      postcss
- * @__status        wip
+ * @name           container
+ * @as              @s.media.container
+ * @namespace      node.mixin.media
+ * @type           PostcssMixin
+ * @platform      postcss
+ * @status        alpha
  *
  * This mixin allows you to apply a container query in your css.
  * If no containerName is passed, it will init the target itself as a the container to use for the query.
  *
- * @__param       {String}        query       The query string like ">200", "<=500", etc...
- * @__return      {Css}         The generated css
+ * @param       {String}        query       The query string like ">200", "<=500", etc...
+ * @return      {Css}         The generated css
  *
- * @__snippet         @sugar.media.container $1
- * \@sugar.media.container $1 {
+ * @snippet         @s.media.container $1
+ * \@s.media.container $1 {
  *      $2
  * }
  *
- * @__example        css
- * \@sugar.media.container >=200 {
+ * @example        css
+ * \@s.media.container >=200 {
  *      // ...
  * }
- * \@sugar.media.container <=300 {
+ * \@s.media.container <=300 {
  *      // ...
  * }
  *
- * @__since       2.0.0
- * @__author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function ({
     params,
@@ -67,7 +67,7 @@ export default function ({
 
     if (!finalParams.query) {
         throw new Error(
-            `<red>[@sugar.media]</red> You MUST provide a query in order to use the <yellow>@sugar.media</yellow> mixin...`,
+            `<red>[@s.media]</red> You MUST provide a query in order to use the <yellow>@s.media</yellow> mixin...`,
         );
     }
 

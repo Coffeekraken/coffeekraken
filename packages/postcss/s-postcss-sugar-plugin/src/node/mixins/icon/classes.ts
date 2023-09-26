@@ -8,7 +8,7 @@ import { __unquote } from '@coffeekraken/sugar/string';
 
 /**
  * @name           classes
- * @as              @sugar.icon.classes
+ * @as              @s.icon.classes
  * @namespace      node.mixin.icon
  * @type           PostcssMixin
  * @platform      postcss
@@ -25,14 +25,14 @@ import { __unquote } from '@coffeekraken/sugar/string';
  *
  * - Filesystem:
  * Here's some example of filesystem icons declarations:
- * \@sugar.icon.classes(
+ * \@s.icon.classes(
  *    fs:src/icons/vuejs.svg:vue
  *    fs:src/icons/something.svg:something
  * );
  *
  * - Font awesome (5)
  * Here's some example of font awesome icons declarations:
- * \@sugar.icon.classes(
+ * \@s.icon.classes(
  *    fa:user:user
  *    fa:heart:heart
  *    fa:fire:fire
@@ -43,15 +43,15 @@ import { __unquote } from '@coffeekraken/sugar/string';
  * @param       {String}       icons        The icons you want. Each line define a new icon
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.icon.classes($1)
- * \@sugar.icon.classes(
+ * @snippet         @s.icon.classes($1)
+ * \@s.icon.classes(
  *      fa:user:user
  *      fs:src/icons/*.svg
  *      $1
  * )
  *
  * @example        css
- * \@sugar.icon.classes(
+ * \@s.icon.classes(
  *    fa:user:user
  *    fa:heart:heart
  *    fs:src/icons/vuejs.svg:vue
@@ -209,7 +209,7 @@ export default function ({
         * @platform       css
         * @status       beta
         * 
-        * These classes represent all the icons that you have listed in your project using the @sugar.icon.classes mixin.
+        * These classes represent all the icons that you have listed in your project using the @s.icon.classes mixin.
         * By using this mixin, your icons will be accessible using the same s-icon:{name} classes
         * independently of the icon source that can be **Fontawesome** or your **Filesystem**.
         * These providers are the one that we support for now but others can be added if needed.
@@ -245,7 +245,7 @@ export default function ({
         *   </div>
         * 
         * @example      css
-        * \@sugar.icon.classes("
+        * \@s.icon.classes("
         ${iconsObjs
             .map((iconObj) => {
                 // @ts-ignore
@@ -291,9 +291,9 @@ export default function ({
                 `,
                 ).code(
                     `
-                    @sugar.lod.prevent {
+                    @s.lod.prevent {
                         .s-icon-${iconObj.as} {
-                            @sugar.icon.fa(${iconObj.name}, ${iconObj.protocol});
+                            @s.icon.fa(${iconObj.name}, ${iconObj.protocol});
                         }
                     }
               `,
@@ -325,9 +325,9 @@ export default function ({
                         `,
                 ).code(
                     `
-                        @sugar.lod.prevent {
+                        @s.lod.prevent {
                             .s-icon-${iconObj.as} {
-                                @sugar.icon.fs(${iconObj.path}, ${iconObj.as});
+                                @s.icon.fs(${iconObj.path}, ${iconObj.as});
                             }
                         }
                     `,
@@ -359,9 +359,9 @@ export default function ({
                             `,
                 ).code(
                     `
-                        @sugar.lod.prevent {
+                        @s.lod.prevent {
                             .s-icon-${iconObj.as} {
-                                @sugar.icon.sugar(${iconObj.path}, ${iconObj.as});
+                                @s.icon.sugar(${iconObj.path}, ${iconObj.as});
                             }
                         }
                         `,

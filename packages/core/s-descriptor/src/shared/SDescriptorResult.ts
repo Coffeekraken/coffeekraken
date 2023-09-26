@@ -8,13 +8,13 @@ import { __clone } from '@coffeekraken/sugar/object';
 import { __toString } from '@coffeekraken/sugar/string';
 
 /**
- * @___name                SDescriptorResult
- * @___namespace           shared
- * @___type                Class
- * @___extends             SClass
- * @___platform            node
- * @___platform            js
- * @___status              wip
+ * @name                SDescriptorResult
+ * @namespace           shared
+ * @type                Class
+ * @extends             SClass
+ * @platform            node
+ * @platform            js
+ * @status              wip
  *
  * This class is the main one that MUST be used as parent one
  * when creating any descriptor like object, string, etc...

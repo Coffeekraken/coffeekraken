@@ -45,10 +45,10 @@ export default function ({
     // bare
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
-            font-size: sugar.scalable(1rem);
+            font-size: s.scalable(1rem);
             display: inline-block;
-            padding-inline: sugar.padding(ui.${finalParams.name}.paddingInline);
-            padding-block: sugar.padding(ui.${finalParams.name}.paddingBlock);
+            padding-inline: s.padding(ui.${finalParams.name}.paddingInline);
+            padding-block: s.padding(ui.${finalParams.name}.paddingBlock);
 
 
         `);
@@ -57,26 +57,24 @@ export default function ({
     // lnf
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
-            color: sugar.color(main, text);
-            background-color: sugar.color(main, ui);
-            font-size: sugar.scalable(1rem);
-            border: sugar.color(current, --alpha 0.2) solid sugar.theme(ui.${
+            color: s.color(main, text);
+            background-color: s.color(main, ui);
+            font-size: s.scalable(1rem);
+            border: s.color(current, --alpha 0.2) solid s.theme(ui.${
                 finalParams.name
             }.borderWidth);
-            border-radius: sugar.border.radius(ui.${
-                finalParams.name
-            }.borderRadius);
-            transition: sugar.theme(ui.${finalParams.name}.transition);
-            @sugar.depth(${__STheme.get(`ui.${finalParams.name}.depth`)});
+            border-radius: s.border.radius(ui.${finalParams.name}.borderRadius);
+            transition: s.theme(ui.${finalParams.name}.transition);
+            @s.depth(${__STheme.get(`ui.${finalParams.name}.depth`)});
             cursor: auto !important;
 
             &::placeholder {
-                color: sugar.color(main, placeholder);
+                color: s.color(main, placeholder);
             }
 
             &::selection {
-                color: sugar.color(current, 100);
-                background-color: sugar.color(current);
+                color: s.color(current, 100);
+                background-color: s.color(current);
             }
 
             &:not(textarea) {
@@ -84,26 +82,26 @@ export default function ({
             }
 
             &[disabled] {
-                @sugar.disabled();
+                @s.disabled();
             }
 
-            @sugar.state.hover {
-                border: sugar.color(current, --alpha 0.3) solid 1px;
+            @s.state.hover {
+                border: s.color(current, --alpha 0.3) solid 1px;
             }
-            @sugar.state.focus {
-                border: sugar.color(current, --alpha 0.4) solid 1px;
+            @s.state.focus {
+                border: s.color(current, --alpha 0.4) solid 1px;
             }
-            @sugar.state.active {
-                border: sugar.color(current, --alpha 0.4) solid 1px;
+            @s.state.active {
+                border: s.color(current, --alpha 0.4) solid 1px;
             }
     `);
     }
 
     // wireframe
     vars.push(`
-        @sugar.wireframe {
-            @sugar.wireframe.background;
-            @sugar.wireframe.border;
+        @s.wireframe {
+            @s.wireframe.background;
+            @s.wireframe.border;
         }
     `);
 

@@ -6,23 +6,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 /**
- * @name          classes
- * @as          @sugar.ui.backdrop.classes
- * @namespace     node.mixin.ui.backdrop
- * @type          PostcssMixin
- * @interface       ./classes
- * @platform      postcss
- * @status        beta
+ * @__name          classes
+ * @__as          @s.ui.backdrop.classes
+ * @__namespace     node.mixin.ui.backdrop
+ * @__type          PostcssMixin
+ * @__interface       ./classes
+ * @__platform      postcss
+ * @__status        beta
  *
  * Generate the backdrop classes
  *
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
- * @snippet         @sugar.ui.backdrop.classes
+ * @snippet         @s.ui.backdrop.classes
  *
  * @example       css
- * \@sugar.ui.backdrop.classes();
+ * \@s.ui.backdrop.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -62,10 +62,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.ui.backdrop.classes;
+        * \\@s.ui.backdrop.classes;
         * 
         * .my-backdrop {
-        *   \@sugar.ui.backdrop;
+        *   \@s.ui.backdrop;
         * }
         * 
         * @cssClass                 s-backdrop          Apply the backdrop styling
@@ -90,7 +90,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
       */
      `).code(`
         .s-backdrop {
-            @sugar.ui.backdrop($scope: bare);
+            @s.ui.backdrop($scope: bare);
         }`, { type: 'CssClass' });
     }
     if (finalParams.scope.includes('lnf')) {
@@ -109,7 +109,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         */
        `).code(`
             .s-backdrop:not(.s-bare) {
-                @sugar.ui.backdrop($scope: lnf);
+                @s.ui.backdrop($scope: lnf);
             } `, { type: 'CssClass' });
     }
     return vars;

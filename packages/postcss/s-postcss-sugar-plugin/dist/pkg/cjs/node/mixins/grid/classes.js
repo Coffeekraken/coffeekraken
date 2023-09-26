@@ -8,20 +8,20 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 /**
  * @name           classes
- * @as              @sugar.grid.classes
+ * @as              @s.grid.classes
  * @namespace      node.mixin.grid
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        alpha
  *
  * This mixin generate all the grid helper classes like s-grid:12, etc...
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.grid.classes
+ * @snippet         @s.grid.classes
  *
  * @example        css
- * \@sugar.grid.classes;
+ * \@s.grid.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -45,7 +45,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
          * @namespace          sugar.style.helpers.grid
          * @type          CssClass
          * @platform      css
-         * @status      beta
+         * @status      alpha
          * 
          * This class represent a grid of "<yellow>${id}</yellow> columns"
          * 

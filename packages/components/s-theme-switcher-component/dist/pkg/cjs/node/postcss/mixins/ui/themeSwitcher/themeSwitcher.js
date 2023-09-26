@@ -29,11 +29,11 @@ exports.interface = postcssUiThemeSwitcherInterface;
  *
  * Apply the theme-switcher style to any s-theme-switcher element
  *
- * @snippet         @sugar.ui.themeSwitcher($1);
+ * @snippet         @s.ui.themeSwitcher($1);
  *
  * @example     css
  * .s-theme-switcher {
- *    @sugar.ui.themeSwitcher;
+ *    @s.ui.themeSwitcher;
  * }
  *
  * @since      2.0.0
@@ -56,22 +56,22 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
         vars.push(`
 
             .s-theme-switcher_dropdown-item {
-                gap: sugar.margin(30);
+                gap: s.margin(30);
 
                 &.active {
-                    @sugar.color (accent);
+                    @s.color (accent);
 
                     > .s-theme-switcher_theme-name {
-                        color: sugar.color(accent, text);
+                        color: s.color(accent, text);
                     }
                 }
 
                 .s-theme-switcher_dark-mode {
-                    gap: sugar.margin(10);
+                    gap: s.margin(10);
                 }
 
                 .s-theme-switcher_switch {
-                    @sugar.scale (0.7);
+                    @s.scale (0.7);
                 }
             }
 

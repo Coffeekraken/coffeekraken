@@ -1,16 +1,16 @@
 .ck-panel {
     display: flex;
     flex-direction: column;
-    background: sugar.color(main, background, --alpha 0.7);
-    padding: sugar.padding(30);
-    @sugar.border.radius (10);
+    background: s.color(main, background, --alpha 0.7);
+    padding: s.padding(30);
+    @s.border.radius (10);
     max-height: calc(100vh - 250px);
 
     .ck-panel_section {
         &-scrollable {
             flex-grow: 1;
             overflow-y: auto;
-            @sugar.scrollbar;
+            @s.scrollbar;
         }
     }
 }

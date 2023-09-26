@@ -1,27 +1,27 @@
 .task {
     ._header {
-        background: sugar.color(main, --lighten 20% --alpha 0.1);
-        padding: sugar.padding(20) sugar.padding(30);
+        background: s.color(main, --lighten 20% --alpha 0.1);
+        padding: s.padding(20) s.padding(30);
         backdrop-filter: blur(10px);
         user-select: none;
-        @sugar.border.radius;
-        @sugar.transition;
+        @s.border.radius;
+        @s.transition;
 
         &:hover {
-            background: sugar.color(main, --lighten 25% --alpha 0.2);
+            background: s.color(main, --lighten 25% --alpha 0.2);
         }
 
         &.running {
-            background: sugar.color(complementary, --lighten 10% --alpha 0.3);
+            background: s.color(complementary, --lighten 10% --alpha 0.3);
         }
     }
 
     ._expand {
         transform: rotateZ(180deg);
-        @sugar.transition;
+        @s.transition;
     }
     &.details {
-        /* background: sugar.color(main, --lighten 20% --alpha 0.05); */
+        /* background: s.color(main, --lighten 20% --alpha 0.05); */
 
         ._expand {
             transform: rotateZ(0);
@@ -32,7 +32,7 @@
         width: 100%;
         display: grid;
         grid-template-rows: 0fr;
-        @sugar.transition;
+        @s.transition;
 
         ._inner {
             overflow: hidden;
@@ -45,7 +45,7 @@
     }
 
     ._next {
-        padding-inline-end: sugar.padding(30);
+        padding-inline-end: s.padding(30);
 
         span {
             opacity: 0.6;
@@ -56,13 +56,13 @@
         position: relative;
         overflow-y: auto;
         max-height: 50vh;
-        @sugar.scrollbar;
+        @s.scrollbar;
     }
     ._result {
         position: relative;
 
         &:nth-child(even) ._result-inner {
-            background: sugar.color(main, --lighten 20% --alpha 0.02);
+            background: s.color(main, --lighten 20% --alpha 0.02);
         }
 
         &:before {
@@ -70,17 +70,17 @@
             display: block;
             position: absolute;
             top: 0;
-            left: sugar.margin(30);
+            left: s.margin(30);
             width: 2px;
             height: 100%;
-            background: sugar.color(main, --alpha 0.1);
+            background: s.color(main, --alpha 0.1);
         }
     }
 
     ._result-inner {
         display: flex;
         align-items: center;
-        padding: sugar.padding(20) sugar.padding(30) sugar.padding(20) sugar.padding(50);
+        padding: s.padding(20) s.padding(30) s.padding(20) s.padding(50);
         min-height: 66px;
     }
 

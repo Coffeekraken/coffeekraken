@@ -23,11 +23,11 @@ export { postcssUiDatetimePickerInterface as interface };
  *
  * Apply the datetime picker style to any s-datetime-picker element
  *
- * @snippet         @sugar.ui.codeExample($1);
+ * @snippet         @s.ui.codeExample($1);
  *
  * @example     css
  * .s-code-example {
- *    @sugar.ui.codeExample;
+ *    @s.ui.codeExample;
  * }
  *
  * @since      2.0.0
@@ -41,28 +41,28 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
         vars.push(`
 
             .s-code-example_content {
-                --paddingBlock: sugar.padding(ui.codeExample.paddingBlock);
+                --paddingBlock: s.padding(ui.codeExample.paddingBlock);
 
-                @sugar.media (mobile) {
+                @s.media (mobile) {
                     --paddingBlock: calc(var(--paddingBlock) * 0.5);
                 }
             }
 
             .s-code-example_more-bar {
-                padding-inline: sugar.padding(ui.default.paddingInline);
-                padding-block: sugar.padding(ui.default.paddingBlock);
+                padding-inline: s.padding(ui.default.paddingInline);
+                padding-block: s.padding(ui.default.paddingBlock);
             }
 
 
             .s-code-example_toolbar {
                 position: absolute;
-                right: sugar.margin(20);
-                top: sugar.margin(20);
+                right: s.margin(20);
+                top: s.margin(20);
             }
 
             [toolbar-position='nav'] .s-code-example_toolbar {
-                right: sugar.margin(20);
-                top: sugar.margin(20);
+                right: s.margin(20);
+                top: s.margin(20);
             }
 
     `);
@@ -72,34 +72,34 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
         vars.push(`
         `);
         vars.push(`
-            @sugar.color(main);
+            @s.color(main);
 
                 .s-code-example_content {
-                    transition: sugar.transition(ui.codeExample.transition);
-                    border-radius: sugar.border.radius(ui.codeExample.borderRadius);
-                    @sugar.depth (ui.codeExample.depth);
+                    transition: s.transition(ui.codeExample.transition);
+                    border-radius: s.border.radius(ui.codeExample.borderRadius);
+                    @s.depth (ui.codeExample.depth);
                 }
 
                 .s-code-example_code {
                     &:not(:has(.hljs)) {
-                        padding: sugar.padding(ui.codeExample.paddingBlock) sugar.padding(ui.codeExample.paddingInline);
+                        padding: s.padding(ui.codeExample.paddingBlock) s.padding(ui.codeExample.paddingInline);
                     }
                     .hljs {
-                        padding: sugar.padding(ui.codeExample.paddingBlock) sugar.padding(ui.codeExample.paddingInline) !important;
+                        padding: s.padding(ui.codeExample.paddingBlock) s.padding(ui.codeExample.paddingInline) !important;
                     }
                 }
 
                 .s-code-example_more-bar {
                     &:before {
-                        transition: sugar.transition(ui.codeExample.transition);
+                        transition: s.transition(ui.codeExample.transition);
 
-                        @sugar.gradient ($type: linear, $start: sugar.color(current, surface), $end: sugar.color(current, --alpha 0), $angle: 0);
+                        @s.gradient ($type: linear, $start: s.color(current, surface), $end: s.color(current, --alpha 0), $angle: 0);
                     }
                 }
 
                 .s-code-example_toolbar {
                     & > * {
-                        color: sugar.color(current);
+                        color: s.color(current);
                         font-size: 20px;
                     }
                 }
@@ -109,15 +109,15 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
     // wireframe
     vars.push(`
         .s-code-example_content {
-            @sugar.wireframe {
-                @sugar.wireframe.background;
-                @sugar.wireframe.border;    
+            @s.wireframe {
+                @s.wireframe.background;
+                @s.wireframe.border;    
             }
         }
     `);
     if (finalParams.scope.includes('theme')) {
         vars.push(`
-            @sugar.highlightjs.theme;
+            @s.highlightjs.theme;
         `);
     }
     return vars;

@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name            typo
- * @as              @sugar.typo
+ * @as              @s.typo
  * @namespace       node.mixin.typo
  * @type            PostcssMixin
  * @platform        css
@@ -14,11 +14,11 @@ import __STheme from '@coffeekraken/s-theme';
  * @param           {String}            typo            The typo you want like "h1", "p" or all the typo defined in the themeTypo.config.ts config
  * @return          {Css}                                   The generated css
  *
- * @snippet         @sugar.link.stretch
+ * @snippet         @s.link.stretch
  *
  * @example         css
  * .my-cool-element {
- *      @sugar.typo(h1);
+ *      @s.typo(h1);
  * }
  *
  * @since           2.0.0

@@ -8,18 +8,18 @@ import { __isValidCssUnitValue } from '@coffeekraken/sugar/css';
  * @type          PostcssFunction
  * @platform      postcss
  * @interface      ./family
- * @status        beta
+ * @status        stable
  *
  * This function allows you to get a font family value depending on your theme config
  *
  * @param       {String}        name      The font name to get
  * @return      {Css}                   The corresponding css
  *
- * @snippet         sugar.font.family($1)
+ * @snippet         s.font.family($1)
  *
  * @example       css
  * .my-element {
- *      font-family: sugar.font.family(code);
+ *      font-family: s.font.family(code);
  * }
  *
  * @since     2.0.0
@@ -59,5 +59,5 @@ export default function ({
         return name;
     }
 
-    return `sugar.theme(font.family.${name}.fontFamily)`;
+    return `s.theme(font.family.${name}.fontFamily)`;
 }

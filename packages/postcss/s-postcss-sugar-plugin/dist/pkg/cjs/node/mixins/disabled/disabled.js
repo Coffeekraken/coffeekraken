@@ -8,21 +8,21 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 /**
  * @name           disabled
- * @as              @sugar.disabled
+ * @as              @s.disabled
  * @namespace      node.mixin.disabled
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin allows you to apply a the disabled styling to any HTMLElement.
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.disabled
+ * @snippet         @s.disabled
  *
  * @example        css
  * .my-element {
- *    \@sugar.disabled();
+ *    \@s.disabled();
  * }
  *
  * @since       2.0.0

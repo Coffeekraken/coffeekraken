@@ -29,10 +29,10 @@ exports.interface = postcssUiSpacesSelectorClassesInterface;
  *
  * This mixin represent a spaces selector (margin, padding)
  *
- * @snippet      @sugar.ui.spacesSelector.classes($1);
+ * @snippet      @s.ui.spacesSelector.classes($1);
  *
  * @example        css
- * \@sugar.ui.spacesSelector.classes;
+ * \@s.ui.spacesSelector.classes;
  *
  * @since    2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -63,7 +63,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`.s-spaces-selector[lnf="default"]:not(.s-bare) {
-                @sugar.ui.spacesSelector($scope: lnf);
+                @s.ui.spacesSelector($scope: lnf);
             }`, {
             type: 'CssClass',
         });

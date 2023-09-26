@@ -6,20 +6,20 @@ import { __argsToString } from '@coffeekraken/sugar/cli';
 
 /**
  * @name           classes
- * @as              @sugar.gradient.classes
+ * @as              @s.gradient.classes
  * @namespace      node.mixin.gradient
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        alpha
  *
  * This mixin generate all the gradient helper classes like s-gradient:accent, etc...
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.gradient.classes
+ * @snippet         @s.gradient.classes
  *
  * @example        css
- * \@sugar.gradient.classes;
+ * \@s.gradient.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -79,7 +79,7 @@ export default function ({
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/gradients
         * @platform       css
-        * @status       beta
+        * @status       alpha
         * 
         * These classes allows you to compose some gradient on your HTMLElement and on your text
         * 
@@ -89,7 +89,7 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.gradient.classes;
+        * \\@s.gradient.classes;
         * 
         ${Object.keys(__STheme.get('color'))
             .map((color) => {
@@ -194,7 +194,7 @@ export default function ({
         ).code(
             `
           .s-gradient-${name}:not(.s-gradient-text):not(.s-gradient-radial) {
-              @sugar.gradient(
+              @s.gradient(
                   $start: sugar.color(${name}, ${__argsToString(
                 __STheme.get('gradient.defaultModifierStart') ?? {},
             )}),
@@ -236,7 +236,7 @@ export default function ({
         ).code(
             `
           .s-gradient-${name}.s-gradient-radial:not(.s-gradient-text) {
-              @sugar.gradient(
+              @s.gradient(
                   $start: sugar.color(${name}, ${__argsToString(
                 __STheme.get('gradient.defaultModifierEnd') ?? {},
             )}) ,
@@ -279,7 +279,7 @@ export default function ({
         ).code(
             `
           .s-gradient-${name}.s-gradient-text:not(.s-gradient-radial) {
-              @sugar.gradient.text(
+              @s.gradient.text(
                   $start: sugar.color(${name}, text, ${__argsToString(
                 __STheme.get('gradient.defaultTextModifierStart') ?? {},
             )}),
@@ -320,7 +320,7 @@ export default function ({
         ).code(
             `
           .s-gradient-${name}.s-gradient-text.s-gradient-radial {
-              @sugar.gradient.text(
+              @s.gradient.text(
                   $start: sugar.color(${name}, text, ${__argsToString(
                 __STheme.get('gradient.defaultTextModifierStart') ?? {},
             )}),
@@ -356,7 +356,7 @@ export default function ({
         ).code(
             `
             .s-gradient-end-${name} {
-                --s-gradient-end: sugar.color(${name});
+                --s-gradient-end: s.color(${name});
             }`,
             { type: 'CssClass' },
         );

@@ -21,7 +21,7 @@ export interface postcssSugarPluginThemeMixinParams {
 
 /**
  * @name           theme
- * @as          @sugar.theme
+ * @as          @s.theme
  * @namespace      node.mixin.theme
  * @type           PostcssMixin
  * @platform      postcss
@@ -33,14 +33,14 @@ export interface postcssSugarPluginThemeMixinParams {
  * @param       {String}            theme               The theme you want
  * @return      {Css}         The generated css
  *
- * @snippet         @sugar.theme($1)
- * \@sugar.theme $1 {
+ * @snippet         @s.theme($1)
+ * \@s.theme $1 {
  *      $2
  * }
  *
  * @example        css
  * .my-cool-element {
- *    \@sugar.theme(dark) {
+ *    \@s.theme(dark) {
  *      margin-bottom: 50px;
  *    }
  * }
@@ -69,7 +69,7 @@ export default function ({
 
     if (!atRule.nodes) {
         throw new Error(
-            `<red>[@sugar.theme]</red> The <yellow>@sugar.theme(...)</yellow> mixin MUST contain some children...`,
+            `<red>[@s.theme]</red> The <yellow>@s.theme(...)</yellow> mixin MUST contain some children...`,
         );
     }
 

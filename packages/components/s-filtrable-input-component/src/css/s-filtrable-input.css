@@ -1,5 +1,5 @@
 .s-filtrable-input {
-    font-size: sugar.scalable(1rem);
+    font-size: s.scalable(1rem);
     display: inline-flex;
     flex-direction: column;
     position: relative;

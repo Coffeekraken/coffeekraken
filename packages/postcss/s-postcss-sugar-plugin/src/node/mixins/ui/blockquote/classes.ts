@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          classes
- * @as              @sugar.blockquote.classes
+ * @as              @s.blockquote.classes
  * @namespace     node.mixin.ui.blockquote
  * @type          PostcssMixin
  * @interface       ./classes
@@ -15,10 +15,10 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
- * @snippet         @sugar.ui.blockquote.classes
+ * @snippet         @s.ui.blockquote.classes
  *
  * @example       css
- * \@sugar.ui.blockquote.classes();
+ * \@s.ui.blockquote.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -88,10 +88,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.ui.blockquote.classes;
+        * \\@s.ui.blockquote.classes;
         * 
         * .my-blockquote {
-        *   \@sugar.ui.blockquote;
+        *   \@s.ui.blockquote;
         * }
         * 
         * @cssClass         s-blockquote            Apply the blockquote styling
@@ -172,7 +172,7 @@ export default function ({
         ).code(
             `
         .s-blockquote {
-            @sugar.ui.blockquote($scope: bare);
+            @s.ui.blockquote($scope: bare);
         }`,
             { type: 'CssClass' },
         );
@@ -198,7 +198,7 @@ export default function ({
     ).code(
         `
     .s-blockquote:not(.s-bare) {
-        @sugar.ui.blockquote($scope: lnf);
+        @s.ui.blockquote($scope: lnf);
     } `,
         { type: 'CssClass' },
     );
@@ -225,11 +225,9 @@ export default function ({
        `,
         ).code(
             `
-            @sugar.format.text {
+            @s.format.text {
                 blockquote {
-                    @sugar.ui.blockquote($scope: '${finalParams.scope.join(
-                        ',',
-                    )}');
+                    @s.ui.blockquote($scope: '${finalParams.scope.join(',')}');
                 } 
             }
         `,
@@ -267,7 +265,7 @@ export default function ({
        `,
         ).code(
             `
-            @sugar.rhythm.vertical {
+            @s.rhythm.vertical {
                 blockquote, .s-blockquote {
                     ${__STheme.jsObjectToCssProperties(
                         __STheme.get('ui.default.rhythmVertical'),

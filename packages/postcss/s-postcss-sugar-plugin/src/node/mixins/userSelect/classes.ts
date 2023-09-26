@@ -4,21 +4,21 @@ import __faker from 'faker';
 
 /**
  * @name           classes
- * @as              @sugar.userSelect.classes
+ * @as              @s.userSelect.classes
  * @namespace      node.mixin.userSelect
  * @type           PostcssMixin
  * @interface   ./classes
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the user-select helper classes like ```.s-user-select:none```, etc...
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.userSelect.classes
+ * @snippet         @s.userSelect.classes
  *
  * @example        css
- * \@sugar.userSelect.classes;
+ * \@s.userSelect.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -58,7 +58,7 @@ export default function ({
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/user-select
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply some user-select style on any HTMLElement
         * 
@@ -68,7 +68,7 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.userSelect.classes;
+        * \\@s.userSelect.classes;
         * 
         * @cssClass         s-user-select:all             Apply the \`user-select\` to \`all\`
         * @cssClass         s-user-select:auto             Apply the \`user-select\` to \`auto\`
@@ -107,7 +107,7 @@ export default function ({
     * @namespace          sugar.style.helpers.userSelect
     * @type               CssClass
     * @platform             css
-    * @status             beta
+    * @status             stable
     * 
     * This class allows you to apply a "<yellow>${value}</yellow>" user-select style to any HTMLElement
     * 

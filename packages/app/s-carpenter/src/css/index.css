@@ -17,34 +17,34 @@
 @import './components/loading.css';
 @import './components/sidebar.css';
 
-@sugar.init ($variant: light);
+@s.init ($variant: light);
 
-@sugar.typo.classes;
-@sugar.margin.classes;
-@sugar.padding.classes;
-@sugar.flex.classes;
-@sugar.color.classes;
-@sugar.whitespace.classes;
+@s.typo.classes;
+@s.margin.classes;
+@s.padding.classes;
+@s.flex.classes;
+@s.color.classes;
+@s.whitespace.classes;
 
-@sugar.ui.wysiwyg.classes();
-@sugar.ui.spacesSelector.classes();
-@sugar.ui.specsEditor.classes();
-@sugar.ui.datetimePicker.classes();
-@sugar.ui.colorPicker.classes();
-@sugar.ui.input.classes();
-@sugar.ui.inputContainer.classes();
-@sugar.ui.checkbox.classes();
-@sugar.ui.button.classes();
-@sugar.ui.tabs.classes();
-@sugar.ui.label.classes();
-@sugar.ui.select.classes();
-@sugar.ui.switch.classes();
-@sugar.ui.fstree.classes ($scope: bare);
-@sugar.ui.tooltip.classes();
-@sugar.ui.loader.classes ('squareDots,spinner');
+@s.ui.wysiwyg.classes();
+@s.ui.spacesSelector.classes();
+@s.ui.specsEditor.classes();
+@s.ui.datetimePicker.classes();
+@s.ui.colorPicker.classes();
+@s.ui.input.classes();
+@s.ui.inputContainer.classes();
+@s.ui.checkbox.classes();
+@s.ui.button.classes();
+@s.ui.tabs.classes();
+@s.ui.label.classes();
+@s.ui.select.classes();
+@s.ui.switch.classes();
+@s.ui.fstree.classes ($scope: bare);
+@s.ui.tooltip.classes();
+@s.ui.loader.classes ('squareDots,spinner');
 
 .s-checkbox {
-    @sugar.color (accent);
+    @s.color (accent);
 }
 
 body {
@@ -60,7 +60,7 @@ body {
     background: transparent;
 }
 
-@sugar.icon.classes (
+@s.icon.classes (
     fab:github
     fa:circle-question:question
     fa:folder
@@ -81,29 +81,29 @@ s-carpenter-app {
     overflow: hidden;
 }
 .fa-solid {
-    color: sugar.color(main, text, --alpha 0.5);
-    /* margin-inline-end: sugar.margin(10); */
+    color: s.color(main, text, --alpha 0.5);
+    /* margin-inline-end: s.margin(10); */
 }
 .s-tooltip {
     max-width: 300px;
 }
 
 .s-tabs {
-    @sugar.ui.tabs ($scope: 'bare');
+    @s.ui.tabs ($scope: 'bare');
     width: 100%;
-    background: sugar.color(main, backgroud, --darken 45%);
+    background: s.color(main, backgroud, --darken 45%);
 
     .s-tabs_item {
-        padding: sugar.padding(ui.tabs.paddingBlock)
-            sugar.padding(ui.tabs.paddingInline);
-        background: sugar.color(accent, --alpha 0);
-        color: sugar.color(accent, foreground);
+        padding: s.padding(ui.tabs.paddingBlock)
+            s.padding(ui.tabs.paddingInline);
+        background: s.color(accent, --alpha 0);
+        color: s.color(accent, foreground);
 
         &:hover {
-            background: sugar.color(accent, --alpha 0.3);
+            background: s.color(accent, --alpha 0.3);
         }
         &.active {
-            background: sugar.color(accent, --alpha 1);
+            background: s.color(accent, --alpha 1);
         }
     }
 }

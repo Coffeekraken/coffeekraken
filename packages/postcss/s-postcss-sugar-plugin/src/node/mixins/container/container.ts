@@ -3,22 +3,22 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           container
- * @as              @sugar.container
+ * @as              @s.container
  * @namespace      node.mixin.container
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the css needed for a container depending
  * on the config.theme.container.container configuration stack
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.container($1)
+ * @snippet         @s.container($1)
  *
  * @example        css
  * .my-cool-container {
- *    \@sugar.container;
+ *    \@s.container;
  * }
  *
  * @since       2.0.0
@@ -63,7 +63,7 @@ export default function ({
 
     vars.code(
         `
-        @sugar.lod.prevent {
+        @s.lod.prevent {
             margin: 0 auto;
         }
   `,
@@ -80,10 +80,10 @@ export default function ({
     }
 
     vars.code(`
-        --s-container-max-width: sugar.theme(layout.container.${finalParams.name}, true);
-        @sugar.lod.prevent {
+        --s-container-max-width: s.theme(layout.container.${finalParams.name}, true);
+        @s.lod.prevent {
             width: 100%;
-            max-width: sugar.theme(layout.container.${finalParams.name}, true);
+            max-width: s.theme(layout.container.${finalParams.name}, true);
         }
     `);
 

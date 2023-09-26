@@ -25,7 +25,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @__example         css
  * .my-cool-element {
- *      @sugar.utils.configToCss(ui.code);
+ *      @s.utils.configToCss(ui.code);
  * }
  *
  * @__since           2.0.0

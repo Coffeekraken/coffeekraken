@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 /**
  * @name          tabs
- * @as            @sugar.ui.tabs
+ * @as            @s.ui.tabs
  * @namespace     node.mixin.ui.tabs
  * @type               PostcssMixin
  * @interface     ./tabs          interface
@@ -17,11 +17,11 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {('bare'|'lnf'|'shape')[]}      [scope=['bare','lnf','shape']]                      The scope(s) you want to generate
  * @return      {String}            The generated css
  *
- * @snippet     @sugar.ui.tabs
+ * @snippet     @s.ui.tabs
  *
  * @example     css
  * .my-tabs {
- *    @sugar.ui.tabs;
+ *    @s.ui.tabs;
  * }
  *
  * @since      2.0.0
@@ -70,13 +70,13 @@ export default function ({ params, atRule, replaceWith, }) {
     if (finalParams.outline) {
         vars.push(`
         & > *:focus:not(:hover) {
-          @sugar.outline;
+          @s.outline;
         }
       `);
     }
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
-        font-size: sugar.scalable(1rem);
+        font-size: s.scalable(1rem);
         display: inline-flex;
         align-items: center;
         flex-wrap: nowrap;
@@ -103,7 +103,7 @@ export default function ({ params, atRule, replaceWith, }) {
         vars.push(`
       ${finalParams.fill && finalParams.scope.indexOf('fill') !== -1
             ? `
-              background: sugar.color(current, surface);
+              background: s.color(current, surface);
       `
             : ''}
     `);
@@ -114,9 +114,9 @@ export default function ({ params, atRule, replaceWith, }) {
 
           & > * {
             text-align: center;
-            padding-inline: sugar.padding(ui.tabs.paddingInline);
-            padding-block: sugar.padding(ui.tabs.paddingBlock);
-            transition: sugar.theme(ui.tabs.transition);
+            padding-inline: s.padding(ui.tabs.paddingInline);
+            padding-block: s.padding(ui.tabs.paddingBlock);
+            transition: s.theme(ui.tabs.transition);
             cursor: pointer;
             display: block;      
           }
@@ -125,38 +125,38 @@ export default function ({ params, atRule, replaceWith, }) {
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
           & > * {
-            @sugar.state.active {
-              background-color: sugar.color(current);
+            @s.state.active {
+              background-color: s.color(current);
 
               &, * {
-                color: sugar.color(current, foreground);
+                color: s.color(current, foreground);
               }
             }
-            @sugar.state.hover {
-              background-color: sugar.color(current, --lighten 5);
+            @s.state.hover {
+              background-color: s.color(current, --lighten 5);
 
               &, * {
-                color: sugar.color(current, foreground);
+                color: s.color(current, foreground);
               }
             }       
           }
         `);
         vars.push(`
 
-                border-radius: var(--s-shape, sugar.border.radius(ui.tabs.borderRadius));
+                border-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius));
 
                 & > *:first-child,
                 & > template + * {
-                  border-top-left-radius: var(--s-shape, sugar.border.radius(ui.tabs.borderRadius));
-                  border-bottom-left-radius: var(--s-shape, sugar.border.radius(ui.tabs.borderRadius));
+                  border-top-left-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius));
+                  border-bottom-left-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius));
                   border-top-right-radius: 0;
                   border-bottom-right-radius: 0;
                 }
                 & > *:last-child {
                   border-top-left-radius: 0;
                   border-bottom-left-radius: 0;
-                  border-top-right-radius: var(--s-shape, sugar.border.radius(ui.tabs.borderRadius));
-                  border-bottom-right-radius: var(--s-shape, sugar.border.radius(ui.tabs.borderRadius));
+                  border-top-right-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius));
+                  border-bottom-right-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius));
                 }
 
                 [dir="rtl"] & > *:first-child,
@@ -165,23 +165,23 @@ export default function ({ params, atRule, replaceWith, }) {
                 &[dir="rtl"] > template + * {
                   border-top-left-radius: 0;
                   border-bottom-left-radius: 0;
-                  border-top-right-radius: var(--s-shape, sugar.border.radius(ui.tabs.borderRadius));
-                  border-bottom-right-radius: var(--s-shape, sugar.border.radius(ui.tabs.borderRadius));
+                  border-top-right-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius));
+                  border-bottom-right-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius));
                 }
                 [dir="rtl"] & > *:last-child,
                 &[dir="rtl"] > *:last-child {
-                  border-top-left-radius: var(--s-shape, sugar.border.radius(ui.tabs.borderRadius));
-                  border-bottom-left-radius: var(--s-shape, sugar.border.radius(ui.tabs.borderRadius));
+                  border-top-left-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius));
+                  border-bottom-left-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius));
                   border-top-right-radius: 0;
                   border-bottom-right-radius: 0;
                 }
 
                 & > *:first-child:last-child,
                 & > template + *:last-child {
-                  border-top-left-radius: var(--s-shape, sugar.border.radius(ui.tabs.borderRadius)) !important;
-                  border-bottom-left-radius: var(--s-shape, sugar.border.radius(ui.tabs.borderRadius)) !important;
-                  border-top-right-radius: var(--s-shape, sugar.border.radius(ui.tabs.borderRadius)) !important;
-                  border-bottom-right-radius: var(--s-shape, sugar.border.radius(ui.tabs.borderRadius)) !important;
+                  border-top-left-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius)) !important;
+                  border-bottom-left-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius)) !important;
+                  border-top-right-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius)) !important;
+                  border-bottom-right-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius)) !important;
                 }
               `);
     }
@@ -199,16 +199,16 @@ export default function ({ params, atRule, replaceWith, }) {
             vars.push(`
                   & > *:first-child,
                   & > template + * {
-                    border-top-left-radius: var(--s-shape, sugar.border.radius(ui.tabs.borderRadius)) !important;
+                    border-top-left-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius)) !important;
                     border-bottom-left-radius: 0 !important;
-                    border-top-right-radius: var(--s-shape, sugar.border.radius(ui.tabs.borderRadius)) !important;
+                    border-top-right-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius)) !important;
                     border-bottom-right-radius: 0 !important;
                   }
                   & > *:last-child {
                     border-top-left-radius: 0 !important;
-                    border-bottom-left-radius: var(--s-shape, sugar.border.radius(ui.tabs.borderRadius)) !important;
+                    border-bottom-left-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius)) !important;
                     border-top-right-radius: 0 !important;
-                    border-bottom-right-radius: var(--s-shape, sugar.border.radius(ui.tabs.borderRadius)) !important;
+                    border-bottom-right-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius)) !important;
                   }
                 `);
         }
@@ -216,14 +216,14 @@ export default function ({ params, atRule, replaceWith, }) {
     // wireframe
     vars.push(`
       & > * {
-        @sugar.wireframe {
-          @sugar.wireframe.border;
-          @sugar.wireframe.background;
+        @s.wireframe {
+          @s.wireframe.border;
+          @s.wireframe.background;
         }
 
         &.active {
-          @sugar.wireframe {
-            @sugar.wireframe.surface;
+          @s.wireframe {
+            @s.wireframe.surface;
           }
         }
 

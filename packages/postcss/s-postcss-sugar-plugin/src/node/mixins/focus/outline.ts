@@ -18,7 +18,7 @@ export interface postcssSugarPluginFocusOutlineMixinParams {
 
 /**
  * @name           outline
- * @as              @sugar.focus.outline
+ * @as              @s.focus.outline
  * @namespace      node.mixin.focus
  * @type           PostcssMixin
  * @platform      postcss
@@ -28,11 +28,11 @@ export interface postcssSugarPluginFocusOutlineMixinParams {
  *
  * @return      {Css}         The generated css
  *
- * @snippet         @sugar.focus.outline($1)
+ * @snippet         @s.focus.outline($1)
  *
  * @example        css
  * .myCoolItem {
- *      @sugar.focus.outline;
+ *      @s.focus.outline;
  * }
  *
  * @since       2.0.0
@@ -53,7 +53,7 @@ export default function ({
     };
 
     const vars: string[] = [
-        `@sugar.outline.when(focus, $color: ${finalParams.color});`,
+        `@s.outline.when(focus, $color: ${finalParams.color});`,
     ];
     return vars;
 }

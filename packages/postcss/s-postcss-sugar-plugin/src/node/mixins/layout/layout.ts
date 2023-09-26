@@ -2,11 +2,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           layout
- * @as              @sugar.layout
+ * @as              @s.layout
  * @namespace      node.mixin.layout
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin allows you to generate all the css needed for complex grids with multiple
  * columns and rows like:
@@ -25,11 +25,11 @@ import __SInterface from '@coffeekraken/s-interface';
  * @param       {String}        layout      The layout you want to generate
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.layout($1)
+ * @snippet         @s.layout($1)
  *
  * @example        css
  * .my-element {
- *    \@sugar.layout(
+ *    \@s.layout(
  *      1 1 1 2 2
  *      3 3 4 4 4
  *    );
@@ -245,17 +245,17 @@ export default function ({
     if (finalParams.scope.indexOf('gap') !== -1) {
         if (finalParams.gap) {
             vars.push(`
-                gap: sugar.margin(${finalParams.gap});
+                gap: s.margin(${finalParams.gap});
             `);
         }
         if (finalParams.columnGap) {
             vars.push(`
-                column-gap: sugar.margin(${finalParams.columnGap});
+                column-gap: s.margin(${finalParams.columnGap});
             `);
         }
         if (finalParams.rowGap) {
             vars.push(`
-                row-gap: sugar.margin(${finalParams.rowGap});
+                row-gap: s.margin(${finalParams.rowGap});
             `);
         }
     }

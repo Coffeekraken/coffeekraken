@@ -1,20 +1,20 @@
 import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name           classes
- * @as          @sugar.disabled.classes
+ * @as          @s.disabled.classes
  * @namespace      node.mixin.disabled
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin allows you to generate all the disabled helper classes like s-disabled
  *
  * @return        {Css}        The generated css
  *
- * @snippet         @sugar.disabled.classes
+ * @snippet         @s.disabled.classes
  *
  * @example        css
- * \@sugar.disabled.classes;
+ * \@s.disabled.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -35,7 +35,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/disabled
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply the disabled style on any HTMLElement.
         * This make sure **no pointer events** stays active as well as displaying the **not-allowed cursor**.
@@ -46,10 +46,10 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.disabled.classes;
+        * \\@s.disabled.classes;
         * 
         * .my-element {
-        *   \\@sugar.disabled;
+        *   \\@s.disabled;
         * }  
         * 
         * @cssClass                 s-disabled              Apply the disabled styling on any HTMLElement
@@ -66,7 +66,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @namespace          sugar.style.helpers.disabled
             * @type               CssClass
             * @platform         css
-            * @status           beta
+            * @status           stable
             * 
             * This class allows you to apply the disabled styling to any HTMLElement.
             * 
@@ -82,7 +82,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         `).code(`
             .s-disabled,
             [disabled] {
-                @sugar.disabled;
+                @s.disabled;
             }`, { type: 'CssClass' });
     return vars;
 }

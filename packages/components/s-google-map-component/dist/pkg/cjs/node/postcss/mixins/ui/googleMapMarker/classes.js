@@ -29,10 +29,10 @@ exports.interface = postcssUiGoogleMapMarkerClassesInterface;
  *
  * This mixin represent a google map marker
  *
- * @snippet      @sugar.ui.googleMapMarker.classes($1);
+ * @snippet      @s.ui.googleMapMarker.classes($1);
  *
  * @example        css
- * \@sugar.ui.googleMapMarker.classes;
+ * \@s.ui.googleMapMarker.classes;
  *
  * @since    2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -43,7 +43,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     if (finalParams.scope.includes('bare')) {
         vars.code(`
         .s-google-map-marker {
-            @sugar.ui.googleMapMarker($scope: bare);
+            @s.ui.googleMapMarker($scope: bare);
         }
     `, {
             type: 'CssClass',
@@ -75,7 +75,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`
             .s-google-map[lnf="default"]:not(.s-bare) .s-google-map-marker:not(.s-bare) {
-                @sugar.ui.googleMapMarker($scope: lnf);
+                @s.ui.googleMapMarker($scope: lnf);
             }`, {
             type: 'CssClass',
         });

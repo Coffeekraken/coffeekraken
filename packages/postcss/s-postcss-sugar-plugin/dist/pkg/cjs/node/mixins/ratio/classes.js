@@ -8,21 +8,21 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 /**
  * @name           classes
- * @as              @sugar.ratio.classes
+ * @as              @s.ratio.classes
  * @namespace      node.mixin.ratio
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the ratio helper classes like s-ratio:16-9, s-ratio:1, etc.
  * The generated ratios are specified in the config.theme.ratio configuration stack
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.ratio.classes
+ * @snippet         @s.ratio.classes
  *
  * @example        css
- * \@sugar.ratio.classes;
+ * \@s.ratio.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -44,7 +44,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/ratio
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply some ratio to any HTMLElement.
         * **These classes make use of the \`aspect-ratio\` css property**
@@ -55,10 +55,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.ratio.classes;
+        * \\@s.ratio.classes;
         * 
         * .my-element {
-        *   \\@sugar.ratio(16/9);
+        *   \\@s.ratio(16/9);
         * } 
         * 
         ${Object.keys(ratioObj)
@@ -88,7 +88,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
   * @namespace          sugar.style.helpers.ratio
   * @type               CssClass
   * @platform             css
-  * @status             beta
+  * @status             stable
   * 
   * This class allows you to apply a "<yellow>${ratioName}</yellow>" ratio style to any HTMLElement
   * 

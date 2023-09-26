@@ -18,7 +18,7 @@ class postcssSugarPluginAlignInterface extends s_interface_1.default {
 exports.interface = postcssSugarPluginAlignInterface;
 /**
  * @name          abs
- * @as          @sugar.align.abs
+ * @as          @s.align.abs
  * @namespace     node.mixin.align
  * @type          PostcssMixin
  * @platform      postcss
@@ -31,11 +31,11 @@ exports.interface = postcssSugarPluginAlignInterface;
  * @param       {String}        align      How to align the item like "top left", "bottom center-x", etc...
  * @return      {Css}                   The corresponding grid css
  *
- * @snippet         @sugar.align.abs($1)
+ * @snippet         @s.align.abs($1)
  *
  * @example       css
  * .my-element {
- *    \@sugar.align.abs(top right);
+ *    \@s.align.abs(top right);
  * }
  *
  * @since     2.0.0

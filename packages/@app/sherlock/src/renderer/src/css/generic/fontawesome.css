@@ -6,6 +6,6 @@
     /* top: 0.1em; */
 
     [fill] {
-        fill: sugar.color(current);
+        fill: s.color(current);
     }
 }

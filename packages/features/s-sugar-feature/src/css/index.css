@@ -1,8 +1,8 @@
-@sugar.init;
+@s.init;
 
 body {
     background: red;
-    background: sugar.color(accent);
+    background: s.color(accent);
 }
 
 .my-element {

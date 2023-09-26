@@ -9,7 +9,7 @@ const fs_1 = __importDefault(require("fs"));
 const glob_1 = __importDefault(require("glob"));
 /**
  * @name           view
- * @as              @sugar.view.view
+ * @as              @s.view.view
  * @namespace      node.mixin.view
  * @type           PostcssMixin
  * @interface   ./view
@@ -24,7 +24,7 @@ const glob_1 = __importDefault(require("glob"));
  * @return        {Css}         The generated css
  *
  * @example        css
- * \@sugar.view(sections.hero);
+ * \@s.view(sections.hero);
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

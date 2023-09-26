@@ -4,7 +4,7 @@ sherlock-response-time-result {
 .sh-response-time-result-list-widget {
     display: flex;
     flex-wrap: nowrap;
-    gap: sugar.margin(20);
+    gap: s.margin(20);
     align-items: center;
 
     ._values {
@@ -12,19 +12,19 @@ sherlock-response-time-result {
         flex-wrap: nowrap;
 
         ._value {
-            margin-inline-start: sugar.margin(10);
+            margin-inline-start: s.margin(10);
 
             &.low {
-                color: sugar.color(success, text);
+                color: s.color(success, text);
             }
             &.medium {
-                color: sugar.color(accent, text);
+                color: s.color(accent, text);
             }
             &.high {
-                color: sugar.color(error, text);
+                color: s.color(error, text);
             }
             &.error {
-                color: sugar.color(error, text);
+                color: s.color(error, text);
             }
         }
     }
@@ -33,13 +33,13 @@ sherlock-response-time-result {
         display: flex;
         flex-direction: column;
         flex-shrink: 0;
-        gap: sugar.margin(10);
+        gap: s.margin(10);
         min-width: 300px;
     }
 
     ._ping,
     ._ttfb {
-        background: sugar.color(main, --alpha 0.2);
+        background: s.color(main, --alpha 0.2);
         width: 100%;
         height: 1px;
         border-radius: 2px;
@@ -50,16 +50,16 @@ sherlock-response-time-result {
         }
 
         &.low > div {
-            background: sugar.color(success);
+            background: s.color(success);
         }
         &.medium > div {
-            background: sugar.color(accent);
+            background: s.color(accent);
         }
         &.high > div {
-            background: sugar.color(error);
+            background: s.color(error);
         }
         &.error > div {
-            background: sugar.color(error);
+            background: s.color(error);
             width: 100% !important;
         }
     }

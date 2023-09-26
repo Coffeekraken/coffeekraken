@@ -14,20 +14,20 @@ export { postcssSugarPluginBorderRadiusClassesMixinInterface as interface };
 
 /**
  * @name          classes
- * @as          @sugar.border.classes
+ * @as          @s.border.classes
  * @namespace     node.mixin.border
  * @type          PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate the borders helpers like s-radius:20, etc...
  *
  * @return      {Css}                   The generated css
  *
- * @snippet         @sugar.border.classes
+ * @snippet         @s.border.classes
  *
  * @example       css
- * \@sugar.border.classes;
+ * \@s.border.classes;
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -61,7 +61,7 @@ export default function ({
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/radius
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply border radius on any HTMLElement
         * 
@@ -71,11 +71,11 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.border.classes;
+        * \\@s.border.classes;
         * 
         * .my-element {
-        *   \\@sugar.border.radius(40);
-        *   \\@sugar.border.width(10);
+        *   \\@s.border.radius(40);
+        *   \\@s.border.width(10);
         * }         
         * 
         * @cssClass             s-radius            Apply the default border radius to any HTMLElement
@@ -112,7 +112,7 @@ export default function ({
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/border-width
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply some border width to any HTMLElement
         * 
@@ -153,7 +153,7 @@ export default function ({
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/border-color
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply some border color to any HTMLElement
         * 
@@ -206,7 +206,7 @@ export default function ({
         vars.comment(() => radiusCss).code(
             `
             .${cls} {
-                @sugar.border.radius(${radiusName});
+                @s.border.radius(${radiusName});
             }
         `,
             { type: 'CssClass' },
@@ -222,7 +222,7 @@ export default function ({
                 * @namespace          sugar.style.helpers.border
                 * @type               CssClass
                 * @platform         css
-                * @status           beta
+                * @status           stable
                 * 
                 * This class allows you to apply a "<yellow>${widthName}</yellow>" border width style to any HTMLElement
                 * 
@@ -235,7 +235,7 @@ export default function ({
         ).code(
             `
         .${clsName} {
-            @sugar.border.width(${widthName});
+            @s.border.width(${widthName});
         }`,
             { type: 'CssClass' },
         );
@@ -250,7 +250,7 @@ export default function ({
                 * @namespace          sugar.style.helpers.border
                 * @type               CssClass
                 * @platform         css
-                * @status           beta
+                * @status           stable
                 * 
                 * This class allows you to apply a "<yellow>${colorName}</yellow>" border color style to any HTMLElement
                 * 
@@ -263,7 +263,7 @@ export default function ({
         ).code(
             `
         .${clsName} {
-            border-color: sugar.color(${colorName});
+            border-color: s.color(${colorName});
         }`,
             { type: 'CssClass' },
         );

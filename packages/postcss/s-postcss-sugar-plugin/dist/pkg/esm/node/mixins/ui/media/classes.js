@@ -1,7 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name          classes
- * @as              @sugar.ui.media.classes
+ * @as              @s.ui.media.classes
  * @namespace     node.mixin.ui.media
  * @type          PostcssMixin
  * @interface     ./classes
@@ -13,10 +13,10 @@ import __SInterface from '@coffeekraken/s-interface';
  * @param       {('bare'|'lnf')[]}        [scope=['bare','lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
- * @snippet         @sugar.ui.media.classes
+ * @snippet         @s.ui.media.classes
  *
  * @example       css
- * \@sugar.ui.media.classes();
+ * \@s.ui.media.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -56,10 +56,10 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support      edge
         * 
         * @install          css
-        * \\@sugar.ui.media.classes;
+        * \\@s.ui.media.classes;
         * 
         * .my-media {
-        *   \@sugar.ui.media;
+        *   \@s.ui.media;
         * }
         * 
         * @cssClass             s-media                Apply the media style
@@ -92,7 +92,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         */
        `).code(`
           .s-media {
-            @sugar.ui.media($scope: 'bare');
+            @s.ui.media($scope: 'bare');
           }
       `, { type: 'CssClass' });
         vars.comment(() => `/**
@@ -113,11 +113,11 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
        `).code(`
           .s-media-container {
 
-            @sugar.wireframe {
-                @sugar.wireframe.image;
+            @s.wireframe {
+                @s.wireframe.image;
         
                 &:has(.s-media-map) {
-                    @sugar.wireframe.image(map);
+                    @s.wireframe.image(map);
                 }
             }
           }
@@ -140,7 +140,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`
         .s-media:not(.s-bare) {
-            @sugar.ui.media($scope: 'lnf');
+            @s.ui.media($scope: 'lnf');
         }
     `, { type: 'CssClass' });
     }

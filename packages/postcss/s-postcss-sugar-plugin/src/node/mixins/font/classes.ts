@@ -4,20 +4,20 @@ import __faker from 'faker';
 
 /**
  * @name           classes
- * @as              @sugar.font.classes
+ * @as              @s.font.classes
  * @namespace      node.mixin.font
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate font helper classes like s-font:title, s-font:20, etc...
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.font.classes
+ * @snippet         @s.font.classes
  *
  * @example        css
- * \@sugar.font.classes;
+ * \@s.font.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -85,7 +85,7 @@ export default function ({
         * @type               CssClass
         * @menu           Styleguide / Fonts        /styleguide/fonts/families
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * This class allows you to apply a font to any HTMLElement
         * 
@@ -95,11 +95,11 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.font.classes;
+        * \\@s.font.classes;
         * 
         * .my-element {
-        *   \\@sugar.font.family(title);
-        *   \\@sugar.font.size(30);
+        *   \\@s.font.family(title);
+        *   \\@s.font.size(30);
         * }  
         * 
         ${Object.keys(fontsFamiliesObj)
@@ -131,7 +131,7 @@ export default function ({
         * @type               CssClass
         * @menu           Styleguide / Fonts        /styleguide/fonts/sizes
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * This class allows you to apply a font size to any HTMLElement
         * 
@@ -170,7 +170,7 @@ export default function ({
         * @type               CssClass
         * @menu           Styleguide / Fonts        /styleguide/fonts/styles
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * This class allows you to apply a font style to any HTMLElement
         * 
@@ -205,7 +205,7 @@ export default function ({
         * @type               CssClass
         * @menu           Styleguide / Fonts        /styleguide/fonts/weights
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * This class allows you to apply a font weight to any HTMLElement
         * 
@@ -251,7 +251,7 @@ export default function ({
         * @type               CssClass
         * @menu           Styleguide / Fonts        /styleguide/fonts/stretches
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * This class allows you to apply a font stretch to any HTMLElement
         * 
@@ -292,7 +292,7 @@ export default function ({
         * @type               CssClass
         * @menu           Styleguide / Fonts        /styleguide/fonts/resets
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to **reset fonts** like \`size\`, \`family\`, etc...
         * 
@@ -319,7 +319,7 @@ export default function ({
         * @namespace          sugar.style.helpers.font
         * @type               CssClass
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * This class allows you to apply the font "<yellow>${fontName}</yellow>" to any HTMLElement
         * 
@@ -333,7 +333,7 @@ export default function ({
         ).code(
             `
 .s-font-${fontName} {
-    @sugar.font.family(${fontName});
+    @s.font.family(${fontName});
 }`,
             { type: 'CssClass' },
         );
@@ -347,7 +347,7 @@ export default function ({
   * @namespace          sugar.style.mixins.font
   * @type               CssClass
   * @platform         css
-  * @status           beta
+  * @status           stable
   * 
   * This class allows you to apply the font size "<yellow>${sizeName}</yellow>" to any HTMLElement
   * 
@@ -358,7 +358,7 @@ export default function ({
         ).code(
             `
 .s-font-${sizeName} {
-    @sugar.font.size(${sizeName});
+    @s.font.size(${sizeName});
 }`,
             { type: 'CssClass' },
         );
@@ -371,7 +371,7 @@ export default function ({
   * @namespace          sugar.style.mixins.font
   * @type               CssClass
   * @platform         css
-  * @status           beta
+  * @status           stable
   * 
   * This class allows you to reset the font size to 1rem on any HTMLElement
   * 
@@ -385,7 +385,7 @@ export default function ({
     ).code(
         `
 .s-font-reset-size {
-  font-size: sugar.scalable(1rem);
+  font-size: s.scalable(1rem);
 }`,
     );
 
@@ -395,7 +395,7 @@ export default function ({
   * @namespace          sugar.style.mixins.font
   * @type               CssClass
   * @platform         css
-  * @status           beta
+  * @status           stable
   * 
   * This class allows you to reset the font family to default on any HTMLElement
   * 
@@ -409,7 +409,7 @@ export default function ({
     ).code(
         `
 .s-font-reset-family {
-  @sugar.font.family(default);
+  @s.font.family(default);
 }`,
         { type: 'CssClass' },
     );
@@ -421,7 +421,7 @@ export default function ({
             * @namespace          sugar.style.mixins.font
             * @type               CssClass
             * @platform         css
-            * @status           beta
+            * @status           stable
             * 
             * This class allows you to apply the \`font-stretch: ${value}\` value to any HTMLElement
             * 
@@ -447,7 +447,7 @@ export default function ({
             * @namespace          sugar.style.mixins.font
             * @type               CssClass
             * @platform         css
-            * @status           beta
+            * @status           stable
             * 
             * This class allows you to apply the \`font-style: italic\` css value on any HTMLElement
             * 
@@ -472,7 +472,7 @@ export default function ({
             * @namespace          sugar.style.mixins.font
             * @type               CssClass
             * @platform         css
-            * @status           beta
+            * @status           stable
             * 
             * This class allows you to apply the \`font-style: oblique\` css value on any HTMLElement
             * 
@@ -498,7 +498,7 @@ export default function ({
             * @namespace          sugar.style.mixins.font
             * @type               CssClass
             * @platform         css
-            * @status           beta
+            * @status           stable
             * 
             * This class allows you to apply the \`font-weight: ${value.replace(
                 'weight-',

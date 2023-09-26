@@ -7,15 +7,15 @@ sherlock-service {
 
 .sh-service {
     position: relative;
-    padding: sugar.padding(50);
+    padding: s.padding(50);
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    background: sugar.color(main, background, --alpha 0.8);
+    background: s.color(main, background, --alpha 0.8);
     backdrop-filter: blur(10px);
 
     ._metas {
-        margin-block-end: sugar.margin(50);
+        margin-block-end: s.margin(50);
     }
 
     ._inner {
@@ -24,16 +24,16 @@ sherlock-service {
     }
 
     ._title {
-        @sugar.typo h1;
-        margin-block-end: sugar.margin(30);
+        @s.typo h1;
+        margin-block-end: s.margin(30);
     }
 
     ._description {
-        @sugar.typo lead;
+        @s.typo lead;
     }
 
     ._result-widget {
-        margin-inline-end: sugar.margin(30);
+        margin-inline-end: s.margin(30);
         flex-grow: 1;
 
         ._label {
@@ -48,7 +48,7 @@ sherlock-service {
         }
 
         ._separator {
-            padding-inline: sugar.padding(20);
+            padding-inline: s.padding(20);
             opacity: 0.3;
 
             &:before {
@@ -66,7 +66,7 @@ sherlock-service {
             flex-shrink: 0;
             opacity: 0;
             pointer-events: none;
-            @sugar.transition fast;
+            @s.transition fast;
 
             > div {
                 flex-shrink: 0;
@@ -85,6 +85,6 @@ sherlock-service {
     ._tools {
         display: flex;
         align-items: center;
-        gap: sugar.margin(30);
+        gap: s.margin(30);
     }
 }

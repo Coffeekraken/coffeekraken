@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name          classes
- * @as          @sugar.ui.backdrop.classes
+ * @as          @s.ui.backdrop.classes
  * @namespace     node.mixin.ui.backdrop
  * @type          PostcssMixin
  * @interface       ./classes
@@ -14,10 +14,10 @@ import __SInterface from '@coffeekraken/s-interface';
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
- * @snippet         @sugar.ui.backdrop.classes
+ * @snippet         @s.ui.backdrop.classes
  *
  * @example       css
- * \@sugar.ui.backdrop.classes();
+ * \@s.ui.backdrop.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -80,10 +80,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.ui.backdrop.classes;
+        * \\@s.ui.backdrop.classes;
         * 
         * .my-backdrop {
-        *   \@sugar.ui.backdrop;
+        *   \@s.ui.backdrop;
         * }
         * 
         * @cssClass                 s-backdrop          Apply the backdrop styling
@@ -113,7 +113,7 @@ export default function ({
         ).code(
             `
         .s-backdrop {
-            @sugar.ui.backdrop($scope: bare);
+            @s.ui.backdrop($scope: bare);
         }`,
             { type: 'CssClass' },
         );
@@ -138,7 +138,7 @@ export default function ({
         ).code(
             `
             .s-backdrop:not(.s-bare) {
-                @sugar.ui.backdrop($scope: lnf);
+                @s.ui.backdrop($scope: lnf);
             } `,
             { type: 'CssClass' },
         );

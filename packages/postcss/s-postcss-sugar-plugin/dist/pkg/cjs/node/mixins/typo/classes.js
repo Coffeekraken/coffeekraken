@@ -9,7 +9,7 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 const faker_1 = __importDefault(require("faker"));
 /**
  * @name           classes
- * @as              @sugar.typo.classes
+ * @as              @s.typo.classes
  * @namespace      node.mixin.typo
  * @type           PostcssMixin
  * @platform      postcss
@@ -20,10 +20,10 @@ const faker_1 = __importDefault(require("faker"));
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.typo.classes
+ * @snippet         @s.typo.classes
  *
  * @example        css
- * \@sugar.typo.classes;
+ * \@s.typo.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -56,7 +56,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.typo.classes;
+        * \\@s.typo.classes;
         * 
         ${Object.keys(typosObj)
         .map((typoName) => {
@@ -121,7 +121,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
            `).code(`
-        @sugar.format.text {
+        @s.format.text {
             ${typoName} {
                 ${css}
             }
@@ -145,7 +145,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
            `).code(`
-        @sugar.rhythm.vertical {
+        @s.rhythm.vertical {
             ${typoName}, .${typoName} {
                 ${s_theme_1.default.jsObjectToCssProperties((_b = typoObj.rhythmVertical) !== null && _b !== void 0 ? _b : {})}
             }

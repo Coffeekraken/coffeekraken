@@ -1,20 +1,20 @@
 /* init theme */
-@sugar.init ($variant: dark);
+@s.init ($variant: dark);
 
-@sugar.ui.button.classes;
-@sugar.ui.select.classes;
-@sugar.ui.gauge.classes;
-@sugar.ui.input.classes;
-@sugar.ui.label.classes;
-@sugar.ui.tooltip.classes;
-@sugar.ui.tabs.classes;
-@sugar.ui.avatar.classes;
-@sugar.ui.loader.classes;
+@s.ui.button.classes;
+@s.ui.select.classes;
+@s.ui.gauge.classes;
+@s.ui.input.classes;
+@s.ui.label.classes;
+@s.ui.tooltip.classes;
+@s.ui.tabs.classes;
+@s.ui.avatar.classes;
+@s.ui.loader.classes;
 
-@sugar.typo.classes;
-@sugar.font.classes;
-@sugar.shape.classes;
-@sugar.color.classes;
-@sugar.gap.classes;
-@sugar.flex.classes;
-@sugar.spacing.classes;
+@s.typo.classes;
+@s.font.classes;
+@s.shape.classes;
+@s.color.classes;
+@s.gap.classes;
+@s.flex.classes;
+@s.spacing.classes;

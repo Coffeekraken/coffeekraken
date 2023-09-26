@@ -2,11 +2,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           shape
- * @as              @sugar.shape
+ * @as              @s.shape
  * @namespace      node.mixin.shape
  * @type           PostcssMixin
  * @platform        css
- * @status        beta
+ * @status        stable
  *
  * This mixin allows you to apply a shape to any element that support it
  * by using the `border-radius: sugar.border.radius(shape)` statement like the buttons,
@@ -15,11 +15,11 @@ import __SInterface from '@coffeekraken/s-interface';
  * @param           {'square'|'pill'}           $shape      The shape you want for your item
  * @return        {Css}           The generated css
  *
- * @snippet         @sugar.shape($1)
+ * @snippet         @s.shape($1)
  *
  * @example        css
  * .btn {
- *    @sugar.shape(square);
+ *    @s.shape(square);
  * }
  *
  * @since       2.0.0
@@ -74,12 +74,12 @@ export default function ({
             break;
         case 'default':
             vars.push(`
-                --s-shape: sugar.border.radius();
+                --s-shape: s.border.radius();
             `);
             break;
         default:
             vars.push(`
-                border-radius: sugar.border.radius(shape);
+                border-radius: s.border.radius(shape);
             `);
             break;
     }

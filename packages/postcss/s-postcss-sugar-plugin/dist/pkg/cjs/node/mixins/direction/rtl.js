@@ -13,7 +13,7 @@ class postcssSugarPluginDirectionRtlMixinInterface extends s_interface_1.default
 exports.interface = postcssSugarPluginDirectionRtlMixinInterface;
 /**
  * @name           rtl
- * @as              @sugar.direction.rtl
+ * @as              @s.direction.rtl
  * @namespace      node.mixin.direction
  * @type           PostcssMixin
  * @platform      postcss
@@ -22,14 +22,14 @@ exports.interface = postcssSugarPluginDirectionRtlMixinInterface;
  * This mixin allows you to style an element when it is in an rtl scope.
  * The scope is specified like so: [dir="rtl"] &, &[dir="rtl"]
  *
- * @snippet         @sugar.direction.rtl
- * \@sugar.direction.rtl {
+ * @snippet         @s.direction.rtl
+ * \@s.direction.rtl {
  *      $1
  * }
  *
  * @example        css
  * .myCoolItem {
- *  \@sugar.direction.rtl {
+ *  \@s.direction.rtl {
  *      // ...
  *  }
  * }

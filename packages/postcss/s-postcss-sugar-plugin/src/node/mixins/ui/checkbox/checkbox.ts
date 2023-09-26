@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          checkbox
- * @as              @sugar.ui.checkbox
+ * @as              @s.ui.checkbox
  * @namespace     node.mixin.ui.form
  * @type               PostcssMixin
  * @interface     ./checkbox          interface
@@ -16,11 +16,11 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {'bare'|'lnf'}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.checkbox
+ * @snippet         @s.ui.checkbox
  *
  * @example     css
  * .my-checkbox {
- *    @sugar.ui.form;
+ *    @s.ui.form;
  * }
  *
  * @since      2.0.0
@@ -82,10 +82,10 @@ export default function ({
                 position: relative;
                 width: 1.2em;
                 height: 1.2em;
-                font-size: sugar.scalable(1rem);
+                font-size: s.scalable(1rem);
 
                 &:disabled {
-                    @sugar.disabled;
+                    @s.disabled;
                 }
             `);
             }
@@ -94,12 +94,12 @@ export default function ({
             if (finalParams.scope.indexOf('lnf') !== -1) {
                 vars.push(`
                 
-                    transition: sugar.theme(ui.form.transition);
-                    border: sugar.theme(ui.form.borderWidth) solid sugar.color(current);
+                    transition: s.theme(ui.form.transition);
+                    border: s.theme(ui.form.borderWidth) solid s.color(current);
                     background-color: transparent;
-                    transition: sugar.theme(ui.form.transition);
-                    box-shadow: 0 0 0 0 sugar.color(current, --alpha 0.2);
-                    @sugar.shape();
+                    transition: s.theme(ui.form.transition);
+                    box-shadow: 0 0 0 0 s.color(current, --alpha 0.2);
+                    @s.shape();
 
                     &:after {
                         content: '';
@@ -107,10 +107,10 @@ export default function ({
                         top: 50%; left: 50%;
                         width: 0.6em; height: 0.6em;
                         transform: translate(-50%, -50%);
-                        background: sugar.color(current);
+                        background: s.color(current);
                         opacity: 0;
-                        transition: sugar.theme(ui.form.transition);
-                        @sugar.shape();
+                        transition: s.theme(ui.form.transition);
+                        @s.shape();
                     }
                     label:hover > &:not(:disabled):after,
                     &:hover:not(:disabled):after {
@@ -121,7 +121,7 @@ export default function ({
                     }
 
                     &:focus:not(:hover):not(:active):not(:disabled) {
-                        box-shadow: 0 0 0 sugar.theme(ui.outline.borderWidth) sugar.color(current, --alpha 0.3);
+                        box-shadow: 0 0 0 s.theme(ui.outline.borderWidth) s.color(current, --alpha 0.3);
                     }
  
         `);

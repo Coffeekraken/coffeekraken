@@ -2,23 +2,23 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name          scale
- * @as              @sugar.scale
+ * @as              @s.scale
  * @namespace     node.mixin.scale
  * @type          PostcssMixin
  * @platform      postcss
  * @interface       ./scale
- * @status        beta
+ * @status        stable
  *
  * This mixin allows you to set the --s-scale variable to whatever you want
  *
  * @param       {Number}        value      The value you want for scale (0-...)
  * @return      {Css}                   The corresponding css
  *
- * @snippet         @sugar.scale($1)
+ * @snippet         @s.scale($1)
  *
  * @example       css
  * .my-element {
- *    @sugar.scale(1.2);
+ *    @s.scale(1.2);
  * }
  *
  * @since     2.0.0

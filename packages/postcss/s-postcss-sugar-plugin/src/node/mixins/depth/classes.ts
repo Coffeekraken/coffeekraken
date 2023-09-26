@@ -4,7 +4,7 @@ import { __keysFirst } from '@coffeekraken/sugar/array';
 
 /**
  * @name           classes
- * @as              @sugar.depth.classes
+ * @as              @s.depth.classes
  * @namespace      node.mixin.depth
  * @type           PostcssMixin
  * @platform      postcss
@@ -14,10 +14,10 @@ import { __keysFirst } from '@coffeekraken/sugar/array';
  *
  * @return        {Css}        The generated css
  *
- * @snippet         @sugar.depth.classes
+ * @snippet         @s.depth.classes
  *
  * @example        css
- * \@sugar.depth.classes;
+ * \@s.depth.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -72,10 +72,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.depth.classes;
+        * \\@s.depth.classes;
         * 
         * .my-element {
-        *   \\@sugar.depth(100);
+        *   \\@s.depth(100);
         * }          
         * 
         ${depthsArray
@@ -126,7 +126,7 @@ export default function ({
             `
 .s-depth${depthName === 'default' ? '' : `-${depthName}`}:not(.s-depth-text),
 .s-depth-box.s-depth-${depthName === 'default' ? '' : `-${depthName}`} {
-    @sugar.depth('${depthName}');
+    @s.depth('${depthName}');
 }`,
             { type: 'CssClass' },
         );
@@ -154,7 +154,7 @@ export default function ({
         ).code(
             `
 .s-depth-text.s-depth${depthName === 'default' ? '' : `-${depthName}`} {
-    @sugar.depth(${depthName}, $type: text);
+    @s.depth(${depthName}, $type: text);
 }`,
             { type: 'CssClass' },
         );

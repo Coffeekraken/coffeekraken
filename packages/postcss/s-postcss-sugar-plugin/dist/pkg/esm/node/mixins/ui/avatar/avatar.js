@@ -1,23 +1,23 @@
 import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name          avatar
- * @as              @sugar.ui.avatar
+ * @as              @s.ui.avatar
  * @namespace     node.mixin.ui.avatar
  * @type          PostcssMixin
  * @interface       ./avatar
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin allows you to generate the "avatar" UI component css.
  *
  * @param       {('bare'|'lnf'|'interactive'|'notifications')[]}        [scope=['bare','lnf','interactive','notifications']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
- * @snippet         @sugar.ui.avatar
+ * @snippet         @s.ui.avatar
  *
  * @example       css
  * .my-element {
- *      \@sugar.ui.avatar();
+ *      \@s.ui.avatar();
  * }
  *
  * @since     2.0.0
@@ -46,8 +46,8 @@ export default function ({ params, atRule, replaceWith, }) {
         vars.push(`
             position: relative;
             display: inline-block;
-            width: sugar.scalable(1em);
-            height: sugar.scalable(1em);
+            width: s.scalable(1em);
+            height: s.scalable(1em);
 
             img {
                 position: absolute;
@@ -63,10 +63,10 @@ export default function ({ params, atRule, replaceWith, }) {
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
             img {
-                background-color: sugar.color(current);
-                border-color: sugar.color(current);
+                background-color: s.color(current);
+                border-color: s.color(current);
                 border-style: solid;
-                border-width: sugar.theme(ui.avatar.borderWidth);
+                border-width: s.theme(ui.avatar.borderWidth);
                 border-radius: 9999px;
             }
         `);
@@ -78,7 +78,7 @@ export default function ({ params, atRule, replaceWith, }) {
         `);
         vars.push(`
             &:hover img {
-                @sugar.outline($where: element);
+                @s.outline($where: element);
                 position: absolute;
             }
         `);
@@ -92,7 +92,7 @@ export default function ({ params, atRule, replaceWith, }) {
                         content: attr(notifications);
                         position: absolute;
                         top: 0.2em; right: 0.2em;
-                        font-size: sugar.scalable(0.15em);
+                        font-size: s.scalable(0.15em);
                         min-width: 1.5em;
                         min-height: 1.5em;
                     }
@@ -103,8 +103,8 @@ export default function ({ params, atRule, replaceWith, }) {
             vars.push(`
                 &[notifications] {
                     &:after {
-                        background: sugar.color(current);
-                        color: sugar.color(current, foreground);
+                        background: s.color(current);
+                        color: s.color(current, foreground);
                         border-radius: 9999px;
                         padding: 0.33em;
                         font-weight: bold;
@@ -115,8 +115,8 @@ export default function ({ params, atRule, replaceWith, }) {
     }
     // wireframe
     vars.push(`
-        @sugar.wireframe {
-            @sugar.wireframe.image;
+        @s.wireframe {
+            @s.wireframe.image;
 
             img {
                 display: none;

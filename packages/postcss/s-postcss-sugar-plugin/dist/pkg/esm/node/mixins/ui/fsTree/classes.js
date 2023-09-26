@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 /**
  * @___name          classes
- * @___as          @sugar.ui.fsTree.classes
+ * @___as          @s.ui.fsTree.classes
  * @___namespace     node.mixin.ui.fsTree
  * @___type               PostcssMixin
  * @___interface     ./classes          interface
@@ -15,10 +15,10 @@ import __faker from 'faker';
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.fsTree.classes
+ * @snippet         @s.ui.fsTree.classes
  *
  * @example     css
- * \@sugar.ui.fsTree.classes;
+ * \@s.ui.fsTree.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -125,10 +125,10 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.ui.fsTree.classes;
+        * \\@s.ui.fsTree.classes;
         * 
         * .my-fsTree {
-        *   \@sugar.ui.fsTree;
+        *   \@s.ui.fsTree;
         * }
         * 
         * @cssClass     s-fs-tree       Apply the filesystem tree lnf
@@ -182,7 +182,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         */
        `).code(`
         .s-fs-tree {
-            @sugar.ui.fsTree($scope: bare);
+            @s.ui.fsTree($scope: bare);
         }
     `, {
             type: 'CssClass',
@@ -215,7 +215,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             */
            `).code(`
             .s-fs-tree:not(.s-bare) {
-                @sugar.ui.fsTree($scope: lnf);
+                @s.ui.fsTree($scope: lnf);
             }
         `, {
             type: 'CssClass',

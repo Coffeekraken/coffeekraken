@@ -4,7 +4,7 @@ import { __uniqid } from '@coffeekraken/sugar/string';
 
 /**
  * @name          squareDots
- * @as              @sugar.ui.loader.squareDots
+ * @as              @s.ui.loader.squareDots
  * @namespace     node.mixin.ui.loader
  * @type               PostcssMixin
  * @interface     ./squareDots          interface
@@ -18,11 +18,11 @@ import { __uniqid } from '@coffeekraken/sugar/string';
  * @param        {String}           [easing='theme.ui.loader.easing']            The easing you want for your squareDots animation
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.loader.squareDots
+ * @snippet         @s.ui.loader.squareDots
  *
  * @example     css
  * .my-squareDots {
- *    @sugar.ui.loader.squareDots;
+ *    @s.ui.loader.squareDots;
  * }
  *
  * @since      2.0.0
@@ -75,12 +75,12 @@ export default function ({
     position: relative;
     pointer-events: none;
     overflow: hidden;
-    height: sugar.scalable(1em);
-    width: sugar.scalable(1.2ch);
+    height: s.scalable(1em);
+    width: s.scalable(1.2ch);
     text-rendering: geometricPrecision;
 
     &:before {
-        font-size: sugar.scalable(1em);
+        font-size: s.scalable(1em);
         position: absolute;
         top: 0;
         left: calc(-0.225ch);
@@ -93,7 +93,7 @@ export default function ({
         animation: s-loader-square-dots-${id} ${finalParams.duration} steps(8) infinite;
     }
     &:after {
-        font-size: sugar.scalable(1em);
+        font-size: s.scalable(1em);
         white-space: nowrap;
         position: absolute;
         top: 0;
@@ -115,7 +115,7 @@ export default function ({
 
     // wireframe
     vars.push(`
-   @sugar.wireframe {
+   @s.wireframe {
        color: rgba(0,0,0,.5);
        
        &:before,
@@ -123,7 +123,7 @@ export default function ({
         color: rgba(0,0,0,.5);
        }
 
-       @sugar.theme dark {
+       @s.theme dark {
             color: rgba(255,255,255,.5);
         
         &:before,

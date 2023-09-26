@@ -7,15 +7,15 @@
     height: 100vh !important;
     background: radial-gradient(
         ellipse at top left,
-        sugar.color(main, --lighten 25 --alpha 0.1),
-        sugar.color(main, --lighten 35 --alpha 0.2)
+        s.color(main, --lighten 25 --alpha 0.1),
+        s.color(main, --lighten 35 --alpha 0.2)
     );
 
-    @sugar.theme dark {
+    @s.theme dark {
         background: radial-gradient(
             ellipse at top left,
-            sugar.color(main, --darken 25 --alpha 0.1),
-            sugar.color(main, --darken 35 --alpha 0.2)
+            s.color(main, --darken 25 --alpha 0.1),
+            s.color(main, --darken 35 --alpha 0.2)
         );
     }
 
@@ -23,7 +23,7 @@
     pointer-events: none;
     opacity: 0;
     backdrop-filter: blur(40px);
-    @sugar.transition (fast);
+    @s.transition (fast);
 
     &.active {
         pointer-events: all;

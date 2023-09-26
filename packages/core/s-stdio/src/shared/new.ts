@@ -5,15 +5,15 @@ import type { ISStdioAdapter } from './SStdioAdapter.js';
 import type { ISStdioSource } from './SStdioSource.js';
 
 /**
- * @___name            new
- * @___type            Function
+ * @name            new
+ * @type            Function
  *
  * This static method is a sugar to instanciate an stdio by specifying some sources,
  * and either a path to a SStdio class, an SStdio class directly or a pre-registered
  * stdio id like:
  * - inherit: If is in node context, will fallback to SBasicStdio, if in browser, in SConsoleStdio
  *
- * @___param       {String}        id          A unique id for your stdio instance
+ * @param       {String}        id          A unique id for your stdio instance
  * @param         {SProcess}          proc        The process to display Stdio for
  * @param           {ISStdioUi}         stdio           Specify the stdio to init
  * @param         {Object}            [settings={}]     An object of blessed settings that will be passed to the main blessed.box instance

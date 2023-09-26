@@ -3,12 +3,12 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          classes
- * @as              @sugar.ui.badge.classes
+ * @as              @s.ui.badge.classes
  * @namespace     node.mixin.ui.badge
  * @type          PostcssMixin
  * @interface       ./classes
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * Generate the badge classes
  *
@@ -17,10 +17,10 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
- * @snippet         @sugar.ui.badge.classes
+ * @snippet         @s.ui.badge.classes
  *
  * @example       css
- * \@sugar.ui.badge.classes();
+ * \@s.ui.badge.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -87,7 +87,7 @@ export default function ({
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/badges
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to display any HTMLElement as a badge
         * 
@@ -101,10 +101,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.ui.badge.classes;
+        * \\@s.ui.badge.classes;
         * 
         * .my-badge {
-        *   \@sugar.ui.badge;
+        *   \@s.ui.badge;
         * }
         * 
         ${finalParams.lnfs
@@ -176,7 +176,7 @@ export default function ({
         ).code(
             `
             .s-badge {
-                @sugar.ui.badge($scope: bare);
+                @s.ui.badge($scope: bare);
             }
         `,
             { type: 'CssClass' },
@@ -208,7 +208,7 @@ export default function ({
             .s-badge${
                 lnf === finalParams.defaultLnf ? '' : `-${lnf}`
             }:not(.s-bare) {
-                @sugar.ui.badge($lnf: ${lnf}, $scope: lnf);
+                @s.ui.badge($lnf: ${lnf}, $scope: lnf);
             }
         `,
                 { type: 'CssClass' },

@@ -29,11 +29,11 @@ exports.interface = postcssUiHotkeysListInterface;
  *
  * Apply the theme-switcher style to any s-theme-switcher element
  *
- * @snippet         @sugar.ui.hotkeysList($1);
+ * @snippet         @s.ui.hotkeysList($1);
  *
  * @example     css
  * .s-hotkeys-list {
- *    @sugar.ui.hotkeysList;
+ *    @s.ui.hotkeysList;
  * }
  *
  * @since      2.0.0

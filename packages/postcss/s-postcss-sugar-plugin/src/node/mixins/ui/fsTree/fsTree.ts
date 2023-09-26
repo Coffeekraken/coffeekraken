@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name          fsTree
- * @as              @sugar.ui.fsTree
+ * @as              @s.ui.fsTree
  * @namespace    node.mixin.ui.fsTree
  * @type               PostcssMixin
  * @interface     ./fsTree          interface
@@ -14,11 +14,11 @@ import __SInterface from '@coffeekraken/s-interface';
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.fsTree
+ * @snippet         @s.ui.fsTree
  *
  * @example     css
  * .my-fsTree {
- *    @sugar.ui.fsTree;
+ *    @s.ui.fsTree;
  * }
  *
  * @since      2.0.0
@@ -80,7 +80,7 @@ export default function ({
     //     left: calc(0.5em * var(--s-fs-tree-inline-space-ratio, 1));
     //     width: 1em;
     //     height: 1px;
-    //     background-color: sugar.color(current, border);
+    //     background-color: s.color(current, border);
     // }
 
     // &:before {
@@ -92,12 +92,12 @@ export default function ({
     //     top: 0;
     //     left: 0.5em;
     //     width: 1px; height: 100%;
-    //     background-color: sugar.color(current, border);
+    //     background-color: s.color(current, border);
     // }
 
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
-            font-size: sugar.font.size(30);
+            font-size: s.font.size(30);
             user-select: none;
 
             li > div {
@@ -118,10 +118,10 @@ export default function ({
                 position: relative;
 
                 > div {
-                    padding-inline: sugar.padding(ui.fsTree.paddingInline);
-                    padding-block: sugar.padding(ui.fsTree.paddingBlock);
+                    padding-inline: s.padding(ui.fsTree.paddingInline);
+                    padding-block: s.padding(ui.fsTree.paddingBlock);
                     text-overflow: ellipsis;
-                    @sugar.shape();
+                    @s.shape();
                 }
 
                 &:not(.s-disabled &) {
@@ -156,7 +156,7 @@ export default function ({
 
 
                 & > [tabindex]:focus:not(:hover):not(.s-disabled &) {
-                    @sugar.outline;
+                    @s.outline;
                 }
 
                 & > ul,
@@ -168,12 +168,12 @@ export default function ({
 
                     > ul > li:before,
                     > ol > li:before {
-                        background-color: sugar.color(current, --alpha 0.5);
+                        background-color: s.color(current, --alpha 0.5);
                     }
                 }
             }
 
-            @sugar.direction.rtl {
+            @s.direction.rtl {
                 ul, ol {
                     li > div {
                         &:before {
@@ -201,7 +201,7 @@ export default function ({
         vars.push(`
             li:not(.s-disabled) {
                 > div:hover {
-                    background-color: sugar.color(current, surface);
+                    background-color: s.color(current, surface);
                 }
             }
         `);

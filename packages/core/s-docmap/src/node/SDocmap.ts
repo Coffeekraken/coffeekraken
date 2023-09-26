@@ -852,9 +852,8 @@ class SDocmap extends __SClass implements ISDocmap {
                         // if the "toString" method is a custom one
                         // calling it to have the proper string value back
                         if (
-                            value?.toString
-                                .toString()
-                                .indexOf('[native code]') === -1
+                            typeof value !== 'string' &&
+                            value.toString?.() !== '[object Object]'
                         ) {
                             value = value.toString();
                         }
@@ -865,6 +864,7 @@ class SDocmap extends __SClass implements ISDocmap {
                             filterRegs.forEach((reg) => {
                                 if (value.match(reg)) {
                                     matchFilters = true;
+                                } else {
                                 }
                             });
                             if (matchFilters) {

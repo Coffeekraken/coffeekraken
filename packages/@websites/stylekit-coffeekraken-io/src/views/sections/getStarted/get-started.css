@@ -1,11 +1,11 @@
 #get-started {
     ._layout {
-        @sugar.layout ('1 1 2 2 2');
-        gap: sugar.margin(50);
+        @s.layout ('1 1 2 2 2');
+        gap: s.margin(50);
 
-        @sugar.media <=tablet {
-            @sugar.layout ('1 _ 2');
-            gap: sugar.margin(50);
+        @s.media <=tablet {
+            @s.layout ('1 _ 2');
+            gap: s.margin(50);
         }
     }
 }

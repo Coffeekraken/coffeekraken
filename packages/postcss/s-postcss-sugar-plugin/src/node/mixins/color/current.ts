@@ -14,22 +14,22 @@ export { postcssSugarPluginColorCurrentMixinInterface as interface };
 
 /**
  * @name           current
- * @as          @sugar.color.corrent
+ * @as          @s.color.corrent
  * @namespace      node.mixin.color
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin allows you to (re)map the "current" color to another one you want like "accent", "success", etc...
  *
  * @param       {String}        color           The color you want to map on another one
  * @return      {Css}                     The generated remap css
  *
- * @snippet         @sugar.color.current($1)
+ * @snippet         @s.color.current($1)
  *
  * @example        css
  * .my-section {
- *      @sugar.color.current(accent);
+ *      @s.color.current(accent);
  * }
  *
  * @since       2.0.0
@@ -58,7 +58,7 @@ export default function ({
 
     const vars = new CssVars();
     vars.code(`
-        @sugar.color.remap(current, ${finalParams.color});
+        @s.color.remap(current, ${finalParams.color});
     `);
 
     return vars;

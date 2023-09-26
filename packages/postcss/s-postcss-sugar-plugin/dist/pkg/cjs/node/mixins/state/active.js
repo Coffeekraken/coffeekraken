@@ -14,7 +14,7 @@ class postcssSugarPluginStateActiveMixinInterface extends s_interface_1.default 
 exports.interface = postcssSugarPluginStateActiveMixinInterface;
 /**
  * @name           focus
- * @as              @sugar.state.active
+ * @as              @s.state.active
  * @namespace      node.mixin.state
  * @type           PostcssMixin
  * @platform      postcss
@@ -26,14 +26,14 @@ exports.interface = postcssSugarPluginStateActiveMixinInterface;
  *
  * @return      {Css}         The generated css
  *
- * @snippet         @sugar.state.active
- * \@sugar.state.active {
+ * @snippet         @s.state.active
+ * \@s.state.active {
  *      $1
  * }
  *
  * @example        css
  * .myCoolItem {
- *  \@sugar.state.active {
+ *  \@s.state.active {
  *      // ...
  *  }
  * }

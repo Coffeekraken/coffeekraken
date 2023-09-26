@@ -8,7 +8,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @type          PostcssFunction
  * @platform      postcss
  * @interface       ./margin
- * @status        beta
+ * @status        stable
  *
  * This function allows you to get a margin value depending on your theme config
  *
@@ -16,11 +16,11 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {Boolean}       [scalable='theme.scalable.margin']      Whether to scale the value or not
  * @return      {Css}                   The corresponding css
  *
- * @snippet         sugar.margin($1)
+ * @snippet         s.margin($1)
  *
  * @example       css
  * .my-element {
- *      margin-top: sugar.margin(20);
+ *      margin-top: s.margin(20);
  * }
  *
  * @since     2.0.0
@@ -80,11 +80,11 @@ export default function ({
         if (`${s}`.match(/[a-zA-Z]+$/)) {
             // @ts-ignore
             if (finalParams.scalable) {
-                return `sugar.scalable(${s})`;
+                return `s.scalable(${s})`;
             }
             return `${s}`;
         } else {
-            return `calc(sugar.theme(margin.default, ${finalParams.scalable}) * ${s})`;
+            return `calc(s.theme(margin.default, ${finalParams.scalable}) * ${s})`;
         }
     });
 

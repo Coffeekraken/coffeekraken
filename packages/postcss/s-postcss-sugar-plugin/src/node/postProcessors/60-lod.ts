@@ -62,7 +62,7 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
             const selParts = sel.split(' '),
                 newSelParts = [];
 
-            // theme attribute (@sugar.theme)
+            // theme attribute (@s.theme)
             if (selParts[0].startsWith('[theme')) {
                 theme = selParts[0];
                 selParts.shift();
@@ -117,12 +117,12 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
             return;
         }
 
-        // support for @sugar.lod.prevent mixin
+        // support for @s.lod.prevent mixin
         if (rule.selector.match(/\.s-lod-prevent/)) {
             return;
         }
 
-        // support for @sugar.lod.filter mixin
+        // support for @s.lod.filter mixin
         const filterLevelMatch = rule.selector.match(
             /\.s-lod-filter-([0-9\-]+)/,
         );
@@ -189,7 +189,7 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
 
         //
         root.walkDecls(propertiesReg, (decl) => {
-            // already setted lod with @sugar.lod(...)
+            // already setted lod with @s.lod(...)
             if (decl.parent?.selector?.match(/\.s-lod-[0-9]{1,2}/)) {
                 return;
             }
@@ -199,7 +199,7 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
                 return;
             }
 
-            // support for @sugar.lods.prevent mixin
+            // support for @s.lods.prevent mixin
             if (decl.parent?.selector?.match(/\.s-lod-prevent/)) {
                 return;
             }
@@ -247,7 +247,7 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
 
     // clean empty rules
     root.walkRules((rule) => {
-        // support for @sugar.lods.prevent mixin
+        // support for @s.lods.prevent mixin
         // @ts-ignore
         if (rule._preventLod) {
             return;
@@ -418,7 +418,7 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
             .join(',');
     });
 
-    // // remove the @sugar.layout purposly lefted atRule
+    // // remove the @s.layout purposly lefted atRule
     // root.walkAtRules((atRule) => {
     //     if (atRule.name !== 'sugar.layout') {
     //         return;

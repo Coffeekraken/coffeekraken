@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name            stretch
- * @as              @sugar.link.stretch
+ * @as              @s.link.stretch
  * @namespace       node.mixin.link
  * @type            PostcssMixin
  * @platform        css
@@ -13,11 +13,11 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @return          {Css}                                   The generated css
  *
- * @snippet         @sugar.link.stretch
+ * @snippet         @s.link.stretch
  *
  * @example         css
  * .my-cool-element {
- *      @sugar.link.stretch;
+ *      @s.link.stretch;
  * }
  *
  * @since           2.0.0

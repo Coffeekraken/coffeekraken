@@ -1,3 +1,3 @@
 .s-input {
-    @sugar.color (accent);
+    @s.color (accent);
 }

@@ -3,7 +3,7 @@ import { __camelCase } from '@coffeekraken/sugar/string';
 
 /**
  * @name          classes
- * @as              @sugar.ui.loader.classes
+ * @as              @s.ui.loader.classes
  * @namespace     node.mixin.ui.loader
  * @type               PostcssMixin
  * @interface     ./classes          interface
@@ -15,10 +15,10 @@ import { __camelCase } from '@coffeekraken/sugar/string';
  * @param       {('spinner'|'round'|'drop'|'square-dots')}                [loaders=['spinner','round','drop','square-dots']]         The loader(s) you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.loader.classes
+ * @snippet         @s.ui.loader.classes
  *
  * @example     css
- * \@sugar.ui.loader.classes;
+ * \@s.ui.loader.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -82,10 +82,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.ui.loader.classes;
+        * \\@s.ui.loader.classes;
         * 
         * .my-loader {
-        *   \@sugar.ui.loader;
+        *   \@s.ui.loader;
         * }
         * 
         ${finalParams.loaders
@@ -146,8 +146,8 @@ export default function ({
         ).code(
             `
             .s-loader-${loaderName} {
-                @sugar.lod.prevent {
-                    @sugar.ui.loader.${__camelCase(loaderName)}();
+                @s.lod.prevent {
+                    @s.ui.loader.${__camelCase(loaderName)}();
                 }
             }
             `,

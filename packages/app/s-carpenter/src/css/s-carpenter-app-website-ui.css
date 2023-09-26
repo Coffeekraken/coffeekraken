@@ -2,17 +2,17 @@
 @import './components/website-containers.css';
 
 [s-carpenter-website-ui] {
-    @sugar.theme.apply ($variant: light);
+    @s.theme.apply ($variant: light);
 }
 
 .s-carpenter-app_error {
     display: block;
-    max-width: sugar.container.width();
-    background: sugar.color(error);
-    color: sugar.color(error, foreground);
-    padding: sugar.padding(30);
+    max-width: s.container.width();
+    background: s.color(error);
+    color: s.color(error, foreground);
+    padding: s.padding(30);
     margin: 0 auto;
-    @sugar.border.radius;
+    @s.border.radius;
 }
 
 *:has(> template[s-node]) {
@@ -31,8 +31,8 @@ template[s-node] {
         height: 100%;
         border: 0px solid transparent;
         background: none;
-        @sugar.transition;
-        @sugar.border.radius;
+        @s.transition;
+        @s.border.radius;
     }
 
     &:after {
@@ -43,18 +43,18 @@ template[s-node] {
         left: 0;
         border: 0px solid transparent;
         background: none;
-        @sugar.transition;
-        @sugar.border.radius;
+        @s.transition;
+        @s.border.radius;
     }
 }
 
 .unsaved > template[s-node] {
     &:before {
-        border: 4px solid sugar.color(accent);
+        border: 4px solid s.color(accent);
     }
     &:after {
-        background: sugar.color(accent);
-        padding: sugar.padding(20);
+        background: s.color(accent);
+        padding: s.padding(20);
         content: 'Unsaved changes';
     }
 }
@@ -67,7 +67,7 @@ template[s-node] {
 } */
 
 .s-carpenter-app_drag-preview {
-    background-color: sugar.color(complementary, --alpha 0.5);
+    background-color: s.color(complementary, --alpha 0.5);
     position: absolute;
     left: 200vw;
     pointer-events: none;
@@ -91,7 +91,7 @@ template[s-node] {
 }
 
 .s-carpenter--move .s-carpenter-app_node {
-    @sugar.transition;
+    @s.transition;
 
     &.drag {
         opacity: 0.3;
@@ -124,9 +124,9 @@ template[s-node] {
     cursor: move;
 
     &:before {
-        background: sugar.color(complementary, --alpha 0);
+        background: s.color(complementary, --alpha 0);
     }
     &:hover:before {
-        background: sugar.color(complementary, --alpha 0.2);
+        background: s.color(complementary, --alpha 0.2);
     }
 }

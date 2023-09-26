@@ -1,12 +1,12 @@
 .header {
     position: fixed;
-    top: sugar.margin(40);
+    top: s.margin(40);
     width: 100%;
     z-index: 100;
 
     ._logo {
         height: 40px;
         position: absolute;
-        left: sugar.margin(80);
+        left: s.margin(80);
     }
 }

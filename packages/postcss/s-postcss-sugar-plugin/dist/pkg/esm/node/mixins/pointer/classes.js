@@ -1,11 +1,11 @@
 import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name           classes
- * @as              @sugar.pointer.classes
+ * @as              @s.pointer.classes
  * @namespace      node.mixin.pointer
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the pointer helper classes like ```.s-pointer-events:none```, ```.s-pointer-events:all```, etc...
  *
@@ -13,10 +13,10 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.pointer.classes
+ * @snippet         @s.pointer.classes
  *
  * @example        css
- * \@sugar.pointer.classes;
+ * \@s.pointer.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -37,7 +37,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/pointer
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply some pointer attributes on any HTMLElement.
         * 
@@ -47,7 +47,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.pointer.classes;
+        * \\@s.pointer.classes;
         * 
         * @cssClass         s-pointer-events:none           Apply the pointer-events "none" attribute
         * @cssClass         s-pointer-events:all           Apply the pointer-events "all" attribute
@@ -83,7 +83,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * @namespace          sugar.style.helpers.pointer
     * @type               CssClass
     * @platform             css
-    * @status             beta
+    * @status             stable
     * 
     * This class allows you to apply a "<yellow>none</yellow>" pointer events style to any HTMLElement
     * 
@@ -101,7 +101,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * @namespace          sugar.style.helpers.pointer
     * @type               CssClass
     * @platform             css
-    * @status             beta
+    * @status             stable
     * 
     * This class allows you to apply a "<yellow>all</yellow>" pointer events style to any HTMLElement
     * 
@@ -119,7 +119,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * @namespace          sugar.style.helpers.pointer
     * @type               CssClass
     * @platform             css
-    * @status             beta
+    * @status             stable
     * 
     * This class allows you to apply a "<yellow>auto</yellow>" pointer events style to any HTMLElement
     * 
@@ -137,7 +137,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * @namespace          sugar.style.helpers.pointer
     * @type               CssClass
     * @platform             css
-    * @status             beta
+    * @status             stable
     * 
     * This class allows you to apply a "<yellow>fill</yellow>" pointer events style to any HTMLElement
     * 

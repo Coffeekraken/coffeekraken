@@ -3,13 +3,13 @@
     z-index: 20;
     bottom: 20px;
     right: 20px;
-    background: sugar.color(main, surface);
-    padding: sugar.padding(20) sugar.padding(30);
-    font-size: sugar.font.size(50);
-    @sugar.border.radius;
+    background: s.color(main, surface);
+    padding: s.padding(20) s.padding(30);
+    font-size: s.font.size(50);
+    @s.border.radius;
     opacity: 0;
     transform: translateY(50%);
-    transition: sugar.transition(fast);
+    transition: s.transition(fast);
     poiner-events: none;
 
     .scrolled & {
@@ -18,11 +18,11 @@
         transform: translateY(0);
     }
 
-    @sugar.media <=tablet {
+    @s.media <=tablet {
         display: none;
     }
 
     &:hover {
-        background: sugar.color(main, surface, --lighten 10);
+        background: s.color(main, surface, --lighten 10);
     }
 }

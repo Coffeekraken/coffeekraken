@@ -1,6 +1,6 @@
-@sugar.import ('./sugar.css');
-@sugar.import ('../views/**/*.css');
-@sugar.import ('./generic/**/*.css');
+@s.import ('./sugar.css');
+@s.import ('../views/**/*.css');
+@s.import ('./generic/**/*.css');
 
 html {
     overflow-x: hidden;
@@ -10,15 +10,16 @@ html {
 body {
     width: 100vw;
     overflow-x: hidden;
+    @s.depth (30);
 }
 
 body:not(#homepage) {
     .s-container:not(._nav .s-container, .s-panel .s-container) {
-        margin: 0 0 0 sugar.margin(80) !important;
+        margin: 0 0 0 s.margin(80) !important;
         max-width: 1500px;
         translate: 0 0 !important;
 
-        @sugar.media mobile {
+        @s.media mobile {
             margin: 0 !important;
         }
     }
@@ -38,7 +39,7 @@ body:not(#homepage) {
 }
 
 .sticky {
-    @sugar.media (>=desktop) {
+    @s.media (>=desktop) {
         position: sticky;
         top: 100px;
     }
@@ -47,7 +48,7 @@ body:not(#homepage) {
 [s-form-validate][password] {
     ._levels * {
         display: none;
-        margin-inline-end: sugar.margin(20);
+        margin-inline-end: s.margin(20);
     }
 
     &.password-weak ._levels ._weak {

@@ -30,11 +30,11 @@ export { postcssUiColorPickerInterface as interface };
  *
  * Apply the color picker style to any s-color-picker element
  *
- * @snippet         @sugar.ui.colorPicker($1);
+ * @snippet         @s.ui.colorPicker($1);
  *
  * @example     css
  * .s-color-picker {
- *    @sugar.ui.colorPicker();
+ *    @s.ui.colorPicker();
  * }
  *
  * @since      2.0.0
@@ -63,12 +63,12 @@ export default function ({
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
 
-        @sugar.media <=mobile {
+        @s.media <=mobile {
             position: unset;
         }
 
         .s-color-picker_picker {
-            @sugar.media <=mobile {
+            @s.media <=mobile {
                 position: fixed;
                 bottom: 0;
                 top: auto !important;
@@ -81,7 +81,7 @@ export default function ({
 
         &:focus-within {
             .s-color-picker_picker {
-                @sugar.media <=mobile {
+                @s.media <=mobile {
                     transform: translate(0, 0);
                 }
             }
@@ -91,28 +91,28 @@ export default function ({
         .s-color-picker_picker {
 
             .s-color-picker_shade-wrapper {
-                @sugar.media <=mobile {
+                @s.media <=mobile {
                     position: relative;
                     aspect-ratio: unset;
                 }
             }
 
             .s-color-picker_selectors {
-                gap: sugar.margin(20);
+                gap: s.margin(20);
             }
 
             .s-color-picker_btn,
             .s-color-picker_color-input {
-                padding: sugar.padding(20) sugar.padding(30);
+                padding: s.padding(20) s.padding(30);
             }
 
-            @sugar.media <=mobile {
+            @s.media <=mobile {
                 .s-color-picker_metas {
                     flex-wrap: wrap;
                 }
 
                 .s-color-picker_color {
-                    margin-block-start: sugar.margin(20);
+                    margin-block-start: s.margin(20);
                 }
 
                 .s-color-picker_formats,
@@ -128,19 +128,19 @@ export default function ({
 
             .s-color-picker_metas,
             .s-color-picker_actions {
-                padding-block-start: sugar.padding(20);
+                padding-block-start: s.padding(20);
 
-                @sugar.media <=mobile {
-                    padding-block-start: sugar.padding(30);
+                @s.media <=mobile {
+                    padding-block-start: s.padding(30);
                 }
             }
 
             .s-color-picker_eye-dropper {
-                color: sugar.color(main, text);
+                color: s.color(main, text);
             }
 
             .s-color-picker_actions {
-                gap: sugar.margin(20);
+                gap: s.margin(20);
             }
         
         }
@@ -151,21 +151,21 @@ export default function ({
     // lnf
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
-            color: sugar.color(text);
+            color: s.color(text);
         `);
 
         vars.push(`
 
                 .s-color-picker_picker {
-                    @sugar.depth (100);
-                    background: sugar.color(main, background);
-                    padding: sugar.padding(30);
+                    @s.depth (100);
+                    background: s.color(main, background);
+                    padding: s.padding(30);
                     overflow: hidden;
-                    transition: sugar.transition(fast);
+                    transition: s.transition(fast);
                     transition-property: opacity, transform;
-                    border-radius: sugar.border.radius();
+                    border-radius: s.border.radius();
 
-                    @sugar.media <=mobile {
+                    @s.media <=mobile {
                         border-radius: 0;
                         overflow: visible;
                     }
@@ -179,24 +179,24 @@ export default function ({
                 .s-color-picker_shade-wrapper,
                 .s-color-picker_hue-wrapper,
                 .s-color-picker_alpha-wrapper {
-                    border-radius: sugar.border.radius();
+                    border-radius: s.border.radius();
 
                     canvas {
-                        border-radius: sugar.border.radius();
+                        border-radius: s.border.radius();
                     }
 
                     &:after {
                         width: 20px;
                         height: 20px;
                         border-radius: 999px;
-                        border: solid 10px sugar.color(main, surface);
+                        border: solid 10px s.color(main, surface);
                         border-color: white;
                         transition: border-width 0.15s ease-in-out;
                         transition-property: border-width, width, height, transform;
-                        @sugar.depth (10);
+                        @s.depth (10);
                     }
 
-                    @sugar.media <=mobile {
+                    @s.media <=mobile {
                         &:after {
                             transition: none !important;
                         }
@@ -221,7 +221,7 @@ export default function ({
                             width: 60px;
                             height: 60px;
 
-                            @sugar.media <=mobile {
+                            @s.media <=mobile {
                                 height: 120px;
                                 width: 60px;
                                 transform: translate(-50%, calc(-100% + 30px));
@@ -248,7 +248,7 @@ export default function ({
                             width: 60px;
                             height: 60px;
 
-                            @sugar.media <=mobile {
+                            @s.media <=mobile {
                                 height: 120px;
                                 width: 60px;
                                 transform: translate(-50%, calc(-100% + 30px));
@@ -269,7 +269,7 @@ export default function ({
                             width: 60px;
                             height: 60px;
 
-                            @sugar.media <=mobile {
+                            @s.media <=mobile {
                                 height: 120px;
                                 width: 60px;
                                 transform: translate(-50%, calc(-100% + 30px));
@@ -280,33 +280,33 @@ export default function ({
 
                 .s-color-picker_formats {
                     .s-color-picker_btn {
-                        border: 1px solid sugar.color(main, border);
-                        color: sugar.color(main, text);
+                        border: 1px solid s.color(main, border);
+                        color: s.color(main, text);
                         font-size: 0.8em;
-                        @sugar.font.family (code);
+                        @s.font.family (code);
 
                         &:hover {
-                            background: sugar.color(main, ui);
+                            background: s.color(main, ui);
                         }
 
                         &:first-child {
-                            border-top-left-radius: sugar.border.radius();
-                            border-bottom-left-radius: sugar.border.radius();
+                            border-top-left-radius: s.border.radius();
+                            border-bottom-left-radius: s.border.radius();
 
-                            @sugar.media <=mobile {
+                            @s.media <=mobile {
                                 border-radius: 0;
-                                border-top-left-radius: sugar.border.radius();
-                                border-bottom-left-radius: sugar.border.radius();
+                                border-top-left-radius: s.border.radius();
+                                border-bottom-left-radius: s.border.radius();
                             }
                         }
                         &:nth-child(3) {
-                            @sugar.media <=mobile {
-                                border-top-right-radius: sugar.border.radius();
-                                border-bottom-right-radius: sugar.border.radius();
+                            @s.media <=mobile {
+                                border-top-right-radius: s.border.radius();
+                                border-bottom-right-radius: s.border.radius();
                             }
                         }
 
-                        @sugar.media >mobile {
+                        @s.media >mobile {
                             &:nth-child(2),
                             &:nth-child(3) {
                                 border-left: none;
@@ -317,17 +317,17 @@ export default function ({
                         }
 
                         &.active {
-                            background: sugar.color(main, ui);
-                            color: sugar.color(main, text);
+                            background: s.color(main, ui);
+                            color: s.color(main, text);
                         }
                     }
                 }
 
-                @sugar.media <=mobile {
+                @s.media <=mobile {
                     .s-color-picker_color-input {
                         border-top: none;
-                        border-top-left-radius: sugar.border.radius();
-                        border-bottom-left-radius: sugar.border.radius();
+                        border-top-left-radius: s.border.radius();
+                        border-bottom-left-radius: s.border.radius();
                     }
                     .s-color-picker_preview {
                     }
@@ -335,15 +335,15 @@ export default function ({
 
                 .s-color-picker_actions {
                     .s-color-picker_btn {
-                        background: sugar.color(current);
-                        color: sugar.color(current, foreground);
-                        border-radius: sugar.border.radius();
+                        background: s.color(current);
+                        color: s.color(current, foreground);
+                        border-radius: s.border.radius();
                     }
                 }
 
                 .s-color-picker_color-input {
-                    color: sugar.color(main, text);
-                    border: solid 1px sugar.color(main, border);
+                    color: s.color(main, text);
+                    border: solid 1px s.color(main, border);
                     border-right: none;
                 }
                 .s-color-picker_preview {
@@ -356,8 +356,8 @@ export default function ({
                             var(--s-color-picker-a)
                         );
                     border-left: none;
-                    border-top-right-radius: sugar.border.radius();
-                    border-bottom-right-radius: sugar.border.radius();
+                    border-top-right-radius: s.border.radius();
+                    border-bottom-right-radius: s.border.radius();
 
                     i {
                         color: white;
@@ -371,9 +371,9 @@ export default function ({
     // wireframe
     vars.push(`
         .s-color-picker_picker {
-            @sugar.wireframe {
-                @sugar.wireframe.background;
-                @sugar.wireframe.border;
+            @s.wireframe {
+                @s.wireframe.background;
+                @s.wireframe.border;
             }
         }
     `);

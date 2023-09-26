@@ -8,7 +8,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 /**
  * @name          spinner
- * @as          @sugar.ui.loader.spinner
+ * @as          @s.ui.loader.spinner
  * @namespace     node.mixin.ui.loader
  * @type               PostcssMixin
  * @interface     ./spinner          interface
@@ -22,11 +22,11 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  * @param        {String}           [easing='theme.ui.loader.easing']            The easing you want for your spinner animation
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.loader.spinner
+ * @snippet         @s.ui.loader.spinner
  *
  * @example     css
  * .my-spinner {
- *    @sugar.ui.loader.spinner;
+ *    @s.ui.loader.spinner;
  * }
  *
  * @since      2.0.0
@@ -63,8 +63,8 @@ function default_1({ params, atRule, replaceWith, }) {
     border-bottom: 0.3em solid currentColor;
     border-left: 0.3em solid rgba(0,0,0,0);
     border-radius: 50%;
-    width: sugar.scalable(1em);
-    height: sugar.scalable(1em);
+    width: s.scalable(1em);
+    height: s.scalable(1em);
     animation: ${finalParams.name} ${finalParams.duration} ${finalParams.easing} infinite;
     
     @keyframes ${finalParams.name} {
@@ -78,7 +78,7 @@ function default_1({ params, atRule, replaceWith, }) {
   `);
     // wireframe
     vars.push(`
-        @sugar.wireframe {
+        @s.wireframe {
             border-color: rgba(0,0,0,.5);
             border-bottom-color: rgba(0, 0, 0, 0);
         }

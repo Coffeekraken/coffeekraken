@@ -1,13 +1,13 @@
 import type { ISViewRendererRenderResult } from '../SViewRenderer.js';
 
 /**
- * @___name           404
- * @___namespace       s-view.pages
- * @___type            Function
- * @___platform        node
- * @___status              beta
- * @___async
- * @___private
+ * @name           404
+ * @namespace       s-view.pages
+ * @type            Function
+ * @platform        node
+ * @status              beta
+ * @async
+ * @private
  *
  * This function simply take a data object and render a clean 404 page
  *

@@ -30,10 +30,10 @@ exports.interface = postcssUiCodeExampleClassesInterface;
  *
  * This mixin represent a code example
  *
- * @snippet      @sugar.ui.codeExample.classes($1);
+ * @snippet      @s.ui.codeExample.classes($1);
  *
  * @example        css
- * \@sugar.ui.codeExample.classes;
+ * \@s.ui.codeExample.classes;
  *
  * @since    2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -44,7 +44,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     if (finalParams.scope.includes('bare')) {
         vars.code(`
         .s-code-example {
-            @sugar.ui.codeExample($scope: bare);
+            @s.ui.codeExample($scope: bare);
         }
     `, {
             type: 'CssClass',
@@ -68,7 +68,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`.s-code-example[lnf="default"]:not(.s-bare) {
-                @sugar.ui.codeExample($scope: lnf);
+                @s.ui.codeExample($scope: lnf);
             }`, {
             type: 'CssClass',
         });
@@ -76,7 +76,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     if (finalParams.scope.includes('theme')) {
         vars.code(`
             .s-code-example:not(.s-bare) {
-                @sugar.highlightjs.theme;
+                @s.highlightjs.theme;
             }
         `, {
             type: 'CssClass',
@@ -106,7 +106,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * 
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */`).code(`@sugar.rhythm.vertical {
+        */`).code(`@s.rhythm.vertical {
                 .s-code-example {
                     ${s_theme_1.default.jsObjectToCssProperties(s_theme_1.default.get('ui.codeExample.rhythmVertical'))}
                 } 

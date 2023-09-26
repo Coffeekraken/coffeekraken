@@ -1,11 +1,11 @@
 .ck-count {
     display: inline-block;
     /* width: 1.4em; */
-    padding-inline: sugar.padding(10);
+    padding-inline: s.padding(10);
     font-size: 0.8em;
     text-align: center;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    @sugar.border.radius;
+    @s.border.radius;
 }

@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           faces
- * @as              @sugar.font.faces
+ * @as              @s.font.faces
  * @namespace      node.mixin.font
  * @type           PostcssMixin
  * @platform      postcss
@@ -14,10 +14,10 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.font.faces
+ * @snippet         @s.font.faces
  *
  * @example        css
- * \@sugar.font.faces;
+ * \@s.font.faces;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

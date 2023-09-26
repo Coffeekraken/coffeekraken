@@ -1,25 +1,25 @@
 .s-specs-editor {
     &_metas {
         ._title {
-            color: sugar.color(accent, text);
+            color: s.color(accent, text);
         }
     }
 
     &_error {
-        margin-block-start: sugar.margin(20);
-        color: sugar.color(error, text);
+        margin-block-start: s.margin(20);
+        color: s.color(error, text);
     }
 
     &_root {
         display: flex;
         flex-direction: column;
-        gap: sugar.margin(40);
+        gap: s.margin(40);
     }
 
     ._help-icon {
         svg {
             opacity: 0.4;
-            @sugar.transition fast;
+            @s.transition fast;
         }
 
         &:hover svg {
@@ -28,7 +28,7 @@
     }
 
     &_label {
-        margin-block-end: sugar.margin(20);
+        margin-block-end: s.margin(20);
 
         ._title {
             opacity: 0.6;

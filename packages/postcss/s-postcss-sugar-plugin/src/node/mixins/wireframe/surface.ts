@@ -11,7 +11,7 @@ export interface postcssSugarPluginWireframesurfaceMixinParams {}
 
 /**
  * @name           surface
- * @as              @sugar.wireframe.surface
+ * @as              @s.wireframe.surface
  * @namespace      node.mixin.wireframe
  * @type           PostcssMixin
  * @platform      postcss
@@ -19,12 +19,12 @@ export interface postcssSugarPluginWireframesurfaceMixinParams {}
  *
  * This mixin gives you back the wireframe surface statement that depend on you themeWireframe config
  *
- * @snippet         @sugar.wireframe.surface
- * \@sugar.wireframe.surface;
+ * @snippet         @s.wireframe.surface
+ * \@s.wireframe.surface;
  *
  * @example        css
  * .myCoolItem {
- *  \@sugar.wireframe.surface;
+ *  \@s.wireframe.surface;
  * }
  *
  * @since       2.0.0
@@ -45,10 +45,10 @@ export default function ({
 
     const vars: string[] = [];
     vars.push(`
-        background: sugar.wireframe.surface(light);
+        background: s.wireframe.surface(light);
     
-        @sugar.theme dark {
-            background: sugar.wireframe.surface(dark);
+        @s.theme dark {
+            background: s.wireframe.surface(dark);
         }
     `);
     return vars;

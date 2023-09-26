@@ -24,11 +24,11 @@ class postcssSugarPluginMediaMixinInterface extends s_interface_1.default {
 exports.interface = postcssSugarPluginMediaMixinInterface;
 /**
  * @name           init
- * @as              @sugar.init
+ * @as              @s.init
  * @namespace      node.mixin.init
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin is the one you usually call first in your css.
  * His job is to:
@@ -38,10 +38,10 @@ exports.interface = postcssSugarPluginMediaMixinInterface;
  *
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  *
- * @snippet         @sugar.init
+ * @snippet         @s.init
  *
  * @example        css
- * \@sugar.init;
+ * \@s.init;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -49,14 +49,14 @@ exports.interface = postcssSugarPluginMediaMixinInterface;
 function default_1({ params, atRule, replaceWith, }) {
     const finalParams = Object.assign({ theme: s_theme_1.default.theme, variant: s_theme_1.default.variant }, (params !== null && params !== void 0 ? params : {}));
     const cssArray = [
-        '@sugar.reset;',
-        `@sugar.theme.apply(${finalParams.variant}, ${finalParams.theme});`,
-        '@sugar.font.faces;',
-        '@sugar.lnf.selection;',
-        // '@sugar.autoload;', // Check if it's a good idea or not...
-        // '@sugar.lnf.base;', called in the "@sugar.theme" mixin
+        '@s.reset;',
+        `@s.theme.apply(${finalParams.variant}, ${finalParams.theme});`,
+        '@s.font.faces;',
+        '@s.selection;',
+        // '@s.autoload;', // Check if it's a good idea or not...
+        // '@s.lnf.base;', called in the "@s.theme" mixin
     ];
     replaceWith(cssArray);
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUNyRCxrRkFBMEQ7QUFDMUQsb0VBQTZDO0FBRTdDLE1BQU0scUNBQXNDLFNBQVEscUJBQVk7SUFDNUQsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxPQUFPLEVBQUUsd0JBQWMsQ0FBQyxHQUFHLENBQUMsYUFBYSxDQUFDO2FBQzdDO1lBQ0QsT0FBTyxFQUFFO2dCQUNMLElBQUksRUFBRSxRQUFRO2dCQUNkLE9BQU8sRUFBRSx3QkFBYyxDQUFDLEdBQUcsQ0FBQyxlQUFlLENBQUM7YUFDL0M7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBQ2lELDBEQUFTO0FBRTNEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILG1CQUF5QixFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsR0FLZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixLQUFLLEVBQUUsaUJBQVEsQ0FBQyxLQUFLLEVBQ3JCLE9BQU8sRUFBRSxpQkFBUSxDQUFDLE9BQU8sSUFDdEIsQ0FBQyxNQUFNLGFBQU4sTUFBTSxjQUFOLE1BQU0sR0FBSSxFQUFFLENBQUMsQ0FDcEIsQ0FBQztJQUVGLE1BQU0sUUFBUSxHQUFHO1FBQ2IsZUFBZTtRQUNmLHNCQUFzQixXQUFXLENBQUMsT0FBTyxLQUFLLFdBQVcsQ0FBQyxLQUFLLElBQUk7UUFDbkUsb0JBQW9CO1FBQ3BCLHVCQUF1QjtRQUN2Qiw2REFBNkQ7UUFDN0QseURBQXlEO0tBQzVELENBQUM7SUFFRixXQUFXLENBQUMsUUFBUSxDQUFDLENBQUM7QUFDMUIsQ0FBQztBQXpCRCw0QkF5QkMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUNyRCxrRkFBMEQ7QUFDMUQsb0VBQTZDO0FBRTdDLE1BQU0scUNBQXNDLFNBQVEscUJBQVk7SUFDNUQsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxPQUFPLEVBQUUsd0JBQWMsQ0FBQyxHQUFHLENBQUMsYUFBYSxDQUFDO2FBQzdDO1lBQ0QsT0FBTyxFQUFFO2dCQUNMLElBQUksRUFBRSxRQUFRO2dCQUNkLE9BQU8sRUFBRSx3QkFBYyxDQUFDLEdBQUcsQ0FBQyxlQUFlLENBQUM7YUFDL0M7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBQ2lELDBEQUFTO0FBRTNEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILG1CQUF5QixFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsR0FLZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixLQUFLLEVBQUUsaUJBQVEsQ0FBQyxLQUFLLEVBQ3JCLE9BQU8sRUFBRSxpQkFBUSxDQUFDLE9BQU8sSUFDdEIsQ0FBQyxNQUFNLGFBQU4sTUFBTSxjQUFOLE1BQU0sR0FBSSxFQUFFLENBQUMsQ0FDcEIsQ0FBQztJQUVGLE1BQU0sUUFBUSxHQUFHO1FBQ2IsV0FBVztRQUNYLGtCQUFrQixXQUFXLENBQUMsT0FBTyxLQUFLLFdBQVcsQ0FBQyxLQUFLLElBQUk7UUFDL0QsZ0JBQWdCO1FBQ2hCLGVBQWU7UUFDZix5REFBeUQ7UUFDekQsaURBQWlEO0tBQ3BELENBQUM7SUFFRixXQUFXLENBQUMsUUFBUSxDQUFDLENBQUM7QUFDMUIsQ0FBQztBQXpCRCw0QkF5QkMifQ==

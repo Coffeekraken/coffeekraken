@@ -2,11 +2,11 @@ import __SInterface from '@coffeekraken/s-interface';
 import { __dirname } from '@coffeekraken/sugar/fs';
 /**
  * @name           reset
- * @as              @sugar.reset
+ * @as              @s.reset
  * @namespace      node.mixin.reset
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the reset css needed to standardize display
  * on all browsers.
@@ -16,10 +16,10 @@ import { __dirname } from '@coffeekraken/sugar/fs';
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.reset
+ * @snippet         @s.reset
  *
  * @example        css
- * \@sugar.reset;
+ * \@s.reset;
  *
  * @see       https://github.com/nicolas-cusan/destyle.css
  * @since       2.0.0
@@ -61,14 +61,14 @@ export default function ({ params, CssVars, atRule, replaceWith, }) {
         * @support      edge
         * 
         * @example        css
-        * \@sugar.reset;
+        * \@s.reset;
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
         `).code(`
-      @sugar.reset.destyle;
-      @sugar.reset.sugar;
+      @s.reset.destyle;
+      @s.reset.sugar;
   `);
     return vars;
 }

@@ -139,7 +139,7 @@ export default class CkSettings extends __SLitComponent {
                                   high performant systems. It can be CSS stuffs
                                   using the mixin
                                   <span class="s-typo:code"
-                                      >@sugar.lod high { ... }</span
+                                      >@s.lod high { ... }</span
                                   >
                                   or even JS components/features.
                               </p>

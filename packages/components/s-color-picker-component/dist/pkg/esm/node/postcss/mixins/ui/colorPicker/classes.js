@@ -24,10 +24,10 @@ export { postcssUiColorPickerClassesInterface as interface };
  *
  * This mixin represent a color picker
  *
- * @snippet      @sugar.ui.colorPicker.classes($1);
+ * @snippet      @s.ui.colorPicker.classes($1);
  *
  * @example        css
- * \@sugar.ui.colorPicker.classes;
+ * \@s.ui.colorPicker.classes;
  *
  * @since    2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -38,7 +38,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     if (finalParams.scope.includes('bare')) {
         vars.code(`
         .s-color-picker {
-            @sugar.ui.colorPicker($scope: bare);
+            @s.ui.colorPicker($scope: bare);
         }
     `, {
             type: 'CssClass',
@@ -58,7 +58,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`.s-color-picker[lnf="default"]:not(.s-bare) {
-                @sugar.ui.colorPicker($scope: lnf);
+                @s.ui.colorPicker($scope: lnf);
             }`, {
             type: 'CssClass',
         });
@@ -79,7 +79,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * 
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */`).code(`@sugar.rhythm.vertical {
+        */`).code(`@s.rhythm.vertical {
                 .s-color-picker[inline] {
                     ${__STheme.jsObjectToCssProperties(__STheme.get('ui.colorPicker.rhythmVertical'))}
                 } 

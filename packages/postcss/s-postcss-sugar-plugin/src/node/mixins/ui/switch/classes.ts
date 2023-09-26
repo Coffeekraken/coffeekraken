@@ -4,7 +4,7 @@ import __faker from 'faker';
 
 /**
  * @name          classes
- * @as              @sugar.ui.switch.classes
+ * @as              @s.ui.switch.classes
  * @namespace     node.mixin.ui.switch
  * @type               PostcssMixin
  * @interface     ./classes          interface
@@ -18,10 +18,10 @@ import __faker from 'faker';
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.switch.classes
+ * @snippet         @s.ui.switch.classes
  *
  * @example     css
- * \@sugar.ui.switch.classes;
+ * \@s.ui.switch.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -102,10 +102,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.ui.switch.classes;
+        * \\@s.ui.switch.classes;
         * 
         * .my-switch {
-        *   \@sugar.ui.switch;
+        *   \@s.ui.switch;
         * }
         * 
         ${finalParams.lnfs
@@ -217,7 +217,7 @@ export default function ({
         ).code(
             `
         .s-switch {
-            @sugar.ui.switch($scope: bare);
+            @s.ui.switch($scope: bare);
         }
         `,
             { type: 'CssClass' },
@@ -256,7 +256,7 @@ export default function ({
             ).code(
                 `
             .${cls.replace('\n', '-')}:not(.s-bare) {
-                @sugar.ui.switch($lnf: ${lnf}, $scope: lnf);
+                @s.ui.switch($lnf: ${lnf}, $scope: lnf);
             }
         `,
                 { type: 'CssClass' },

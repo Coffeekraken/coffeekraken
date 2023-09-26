@@ -14,7 +14,7 @@ class postcssSugarPluginStateFocusMixinInterface extends s_interface_1.default {
 exports.interface = postcssSugarPluginStateFocusMixinInterface;
 /**
  * @name           focus
- * @as              @sugar.state.focus
+ * @as              @s.state.focus
  * @namespace      node.mixin.state
  * @type           PostcssMixin
  * @platform      postcss
@@ -24,14 +24,14 @@ exports.interface = postcssSugarPluginStateFocusMixinInterface;
  * Here's the generated selector:
  * - &:focus
  *
- * @snippet         @sugar.state.focus
- * \@sugar.state.focus {
+ * @snippet         @s.state.focus
+ * \@s.state.focus {
  *      $1
  * }
  *
  * @example        css
  * .myCoolItem {
- *  \@sugar.state.focus {
+ *  \@s.state.focus {
  *      // ...
  *  }
  * }

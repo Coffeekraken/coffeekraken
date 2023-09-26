@@ -11,17 +11,17 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  * @__namespace      node.mixin.height
  * @__type           PostcssMixin
  * @__platform      postcss
- * @__status        wip
+ * @__status        alpha
  *
  * This mixin generate all the height helper classes like s-height:20, s-height:50, etc...
  * It will generate all the height defined in the config.theme.height configuration stack
  *
  * @__return        {Css}         The generated css
  *
- * @__snippet         @sugar.height.classes
+ * @__snippet         @s.height.classes
  *
  * @__example        css
- * \@sugar.height.classes;
+ * \@s.height.classes;
  *
  * @__since       2.0.0
  * @__author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -54,7 +54,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.height.classes; 
+        * \\@s.height.classes; 
         * 
         ${Object.keys(heightObj).map((height) => {
         return ` * @cssClass             s-height:${height}            Apply the \`${height}\` height`;

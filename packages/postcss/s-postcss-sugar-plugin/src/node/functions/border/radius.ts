@@ -16,11 +16,11 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {Boolean}       [scalable='theme.scalable.padding']      Whether to scale the value or not
  * @return      {Css}                   The corresponding css
  *
- * @snippet         sugar.border.radius($1)
+ * @snippet         s.border.radius($1)
  *
  * @example       css
  * .my-element {
- *    border-radius: sugar.border.radius(30);
+ *    border-radius: s.border.radius(30);
  * }
  *
  * @since     2.0.0
@@ -81,15 +81,15 @@ export default function ({
 
         // default return simply his value
         if (s === 'shape') {
-            return `var(--s-shape, sugar.theme(border.radius.default, ${finalParams.scalable}))`;
+            return `var(--s-shape, s.theme(border.radius.default, ${finalParams.scalable}))`;
         } else if (`${s}`.match(/[a-zA-Z]+$/)) {
             // @ts-ignore
             if (finalParams.scalable) {
-                return `sugar.scalable(${s})`;
+                return `s.scalable(${s})`;
             }
             return `${s}`;
         } else {
-            return `calc(sugar.theme(border.radius.default, ${finalParams.scalable}) * ${s})`;
+            return `calc(s.theme(border.radius.default, ${finalParams.scalable}) * ${s})`;
         }
     });
 

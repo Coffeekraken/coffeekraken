@@ -3,12 +3,12 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          badge
- * @as              @sugar.ui.badge
+ * @as              @s.ui.badge
  * @namespace     node.mixin.ui.badge
  * @type          PostcssMixin
  * @interface       ./badge
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin allows you to generate the "badge" UI component css.
  *
@@ -16,11 +16,11 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
- * @snippet         @sugar.ui.badge
+ * @snippet         @s.ui.badge
  *
  * @example       css
  * .my-element {
- *      \@sugar.ui.badge();
+ *      \@s.ui.badge();
  * }
  *
  * @since     2.0.0
@@ -82,16 +82,16 @@ export default function ({
 
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
-            font-size: sugar.scalable(0.75em);
-            padding-inline: sugar.padding(20);
-            padding-block: sugar.padding(10);
+            font-size: s.scalable(0.75em);
+            padding-inline: s.padding(20);
+            padding-block: s.padding(10);
             vertical-align: baseline;
             font-weight: bold;
             text-rendering: optimizeLegibility;
-            @sugar.shape();
+            @s.shape();
 
             & > * {
-                @sugar.color(main);
+                @s.color(main);
             }
 
         `);
@@ -100,7 +100,7 @@ export default function ({
             case 'outline':
                 vars.push(`
                 position: relative;
-                color: sugar.color(current);
+                color: s.color(current);
                 background: none !important;
                 text-shadow: none !important;
                 
@@ -111,16 +111,16 @@ export default function ({
                     left: 0;
                     bottom: 0;
                     right: 0;
-                    border: sugar.color(current) solid 1px;
+                    border: s.color(current) solid 1px;
                     pointer-events: none;
-                    @sugar.shape();
+                    @s.shape();
                 }
             `);
                 break;
             default:
                 vars.push(`
-                     color: sugar.color(current, foreground);
-                     background-color: sugar.color(current);
+                     color: s.color(current, foreground);
+                     background-color: s.color(current);
                 `);
                 break;
         }
@@ -128,9 +128,9 @@ export default function ({
 
     // wireframe
     vars.push(`
-        @sugar.wireframe {
-            @sugar.wireframe.background;
-            @sugar.wireframe.border;
+        @s.wireframe {
+            @s.wireframe.background;
+            @s.wireframe.border;
         }
     `);
 

@@ -7,7 +7,7 @@ exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 /**
  * @name          global
- * @as              @sugar.scale.global
+ * @as              @s.scale.global
  * @namespace     node.mixin.scale
  * @type          PostcssMixin
  * @platform      postcss
@@ -19,11 +19,11 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @param       {Number}        value      The value you want for scale (0-...)
  * @return      {Css}                   The corresponding css
  *
- * @snippet         @sugar.scale.global($1)
+ * @snippet         @s.scale.global($1)
  *
  * @example       css
  * .my-element {
- *    @sugar.scale.global(1.2);
+ *    @s.scale.global(1.2);
  * }
  *
  * @since     2.0.0

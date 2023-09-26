@@ -5,42 +5,42 @@ sherlock-sidebar {
 .sh-sidebar {
     width: 250px;
     display: flex;
-    background: sugar.color(main, background, --lighten 2% --alpha 0.5);
+    background: s.color(main, background, --lighten 2% --alpha 0.5);
     backdrop-filter: blur(10px);
     user-select: none;
 
-    border-right: 1px solid sugar.color(main, --alpha 0.2);
+    border-right: 1px solid s.color(main, --alpha 0.2);
 
     ._clients {
         width: 100%;
-        padding: sugar.padding(30);
+        padding: s.padding(30);
         display: flex;
         flex-direction: column;
-        /* gap: sugar.margin(30); */
+        /* gap: s.margin(30); */
     }
     ._client {
         width: 100%;
     }
     ._client-name {
-        padding: sugar.padding(20) sugar.padding(30);
+        padding: s.padding(20) s.padding(30);
         cursor: pointer;
-        @sugar.transition fast;
+        @s.transition fast;
         border-radius: 999px;
-        background: sugar.color(main, --alpha 0.1);
+        background: s.color(main, --alpha 0.1);
 
         &:hover {
-            background: sugar.color(main, --alpha 0.2);
+            background: s.color(main, --alpha 0.2);
         }
 
         .svg-inline--fa {
             float: right;
             transform: rotateZ(180deg);
-            @sugar.transition;
+            @s.transition;
         }
     }
     ._client.active {
         ._client-name {
-            background: sugar.color(main, --alpha 0.3);
+            background: s.color(main, --alpha 0.3);
             transform: scale(1.02);
         }
 
@@ -53,8 +53,8 @@ sherlock-sidebar {
         width: 100%;
         display: grid;
         grid-template-rows: 0fr;
-        padding: sugar.padding(20) 0;
-        @sugar.transition;
+        padding: s.padding(20) 0;
+        @s.transition;
 
         ._inner {
             overflow: hidden;
@@ -70,29 +70,29 @@ sherlock-sidebar {
         width: 100%;
     }
     ._service-name {
-        padding: sugar.padding(20) sugar.padding(30);
+        padding: s.padding(20) s.padding(30);
         cursor: pointer;
         border-radius: 999px;
-        margin-inline-start: sugar.margin(30);
-        @sugar.transition fast;
+        margin-inline-start: s.margin(30);
+        @s.transition fast;
 
         &:hover {
-            background: sugar.color(complementary, --alpha 0.5);
+            background: s.color(complementary, --alpha 0.5);
         }
 
         .svg-inline--fa {
             position: relative;
             top: 0.1em;
-            margin-inline-end: sugar.margin(10);
+            margin-inline-end: s.margin(10);
 
             [fill] {
-                fill: sugar.color(success);
+                fill: s.color(success);
             }
         }
     }
     ._service.active {
         ._service-name {
-            background: sugar.color(complementary);
+            background: s.color(complementary);
         }
     }
 }

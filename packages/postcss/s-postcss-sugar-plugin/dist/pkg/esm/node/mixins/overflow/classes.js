@@ -1,20 +1,20 @@
 import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name           classes
- * @as              @sugar.overflow.classes
+ * @as              @s.overflow.classes
  * @namespace      node.mixin.overflow
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the overflow helper classes like ```.s-overflow:hidden```, ```.s-overflow:auto```, etc...
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.overflow.classes
+ * @snippet         @s.overflow.classes
  *
  * @example        css
- * \@sugar.overflow.classes;
+ * \@s.overflow.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -35,7 +35,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/overflow
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply some overflow attributes on any HTMLElement.
         * 
@@ -45,7 +45,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.overflow.classes;
+        * \\@s.overflow.classes;
         * 
         * @cssClass         s-overflow:auto             Apply the "auto" overflow attribute
         * @cssClass         s-overflow:hidden             Apply the "hidden" overflow attribute
@@ -111,7 +111,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * @namespace          sugar.style.helpers.overflow
     * @type               CssClass
     * @platform             css
-    * @status             beta
+    * @status             stable
     * 
     * This class allows you to apply a "<yellow>auto</yellow>" overflow style to any HTMLElement
     * 
@@ -129,7 +129,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * @namespace          sugar.style.helpers.overflow
     * @type               CssClass
     * @platform             css
-    * @status             beta
+    * @status             stable
     * 
     * This class allows you to apply a "<yellow>hidden</yellow>" overflow style to any HTMLElement
     * 
@@ -147,7 +147,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * @namespace          sugar.style.helpers.overflow
     * @type               CssClass
     * @platform             css
-    * @status             beta
+    * @status             stable
     * 
     * This class allows you to apply a "<yellow>inherit</yellow>" overflow style to any HTMLElement
     * 
@@ -165,7 +165,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * @namespace          sugar.style.helpers.overflow
     * @type               CssClass
     * @platform             css
-    * @status             beta
+    * @status             stable
     * 
     * This class allows you to apply a "<yellow>initial</yellow>" overflow style to any HTMLElement
     * 
@@ -183,7 +183,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * @namespace          sugar.style.helpers.overflow
     * @type               CssClass
     * @platform             css
-    * @status             beta
+    * @status             stable
     * 
     * This class allows you to apply a "<yellow>overlay</yellow>" overflow style to any HTMLElement
     * 
@@ -201,7 +201,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * @namespace          sugar.style.helpers.overflow
     * @type               CssClass
     * @platform             css
-    * @status             beta
+    * @status             stable
     * 
     * This class allows you to apply a "<yellow>revert</yellow>" overflow style to any HTMLElement
     * 
@@ -219,7 +219,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * @namespace          sugar.style.helpers.overflow
     * @type               CssClass
     * @platform             css
-    * @status             beta
+    * @status             stable
     * 
     * This class allows you to apply a "<yellow>scroll</yellow>" overflow style to any HTMLElement
     * 
@@ -237,7 +237,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * @namespace          sugar.style.helpers.overflow
     * @type               CssClass
     * @platform             css
-    * @status             beta
+    * @status             stable
     * 
     * This class allows you to apply a "<yellow>visible</yellow>" overflow style to any HTMLElement
     * 
@@ -255,7 +255,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * @namespace          sugar.style.helpers.overflow
     * @type               CssClass
     * @platform             css
-    * @status             beta
+    * @status             stable
     * 
     * This class allows you to apply a "<yellow>unset</yellow>" overflow style to any HTMLElement
     * 

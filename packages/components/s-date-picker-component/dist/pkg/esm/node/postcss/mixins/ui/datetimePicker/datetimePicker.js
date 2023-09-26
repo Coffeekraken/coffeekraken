@@ -29,11 +29,11 @@ export { postcssUiDatetimePickerInterface as interface };
  *
  * Apply the datetime picker lnf to any s-datetime-picker element
  *
- * @snippet         @sugar.ui.datetimePicker($1);
+ * @snippet         @s.ui.datetimePicker($1);
  *
  * @example     css
  * .s-datetime-picker {
- *    @sugar.ui.datetimePicker();
+ *    @s.ui.datetimePicker();
  * }
  *
  * @since      2.0.0
@@ -46,14 +46,14 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
 
-            @sugar.media <=mobile {
+            @s.media <=mobile {
                 position: unset;
             }
 
             &:focus-within {
                 .s-datetime-picker_picker {
 
-                    @sugar.media <=mobile {
+                    @s.media <=mobile {
                         transform: translate(0, 0);
                     }
                 }
@@ -120,22 +120,22 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
             default:
                 vars.push(`
 
-                    color: sugar.color(text);
+                    color: s.color(text);
 
                     .s-datetime-picker_actions {
-                        gap: sugar.margin(20);
+                        gap: s.margin(20);
                     }
 
                     .s-datetime-picker_picker {
-                        @sugar.depth (ui.datetimePicker.depth);
-                        background: sugar.color(main, background);
-                        padding: sugar.padding(30);
+                        @s.depth (ui.datetimePicker.depth);
+                        background: s.color(main, background);
+                        padding: s.padding(30);
                         overflow: hidden;
-                        transition: sugar.transition(ui.datetimePicker.transition);
+                        transition: s.transition(ui.datetimePicker.transition);
                         transition-property: opacity, transform;
-                        border-radius: sugar.border.radius(ui.datetimePicker.borderRadius);
+                        border-radius: s.border.radius(ui.datetimePicker.borderRadius);
 
-                        @sugar.media <=mobile {
+                        @s.media <=mobile {
                             border-radius: 0;
                         }
                     }
@@ -144,21 +144,21 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
                     }
 
                     .s-datetime-picker_calendar {
-                        margin-block-end: sugar.margin(30);
-                        color: sugar.color(main, text);
+                        margin-block-end: s.margin(30);
+                        color: s.color(main, text);
                     }
 
                     .s-datetime-picker_calendar-day {
-                        padding: sugar.padding(10);
+                        padding: s.padding(10);
                         font-weight: bold;
                     }
 
                     .s-datetime-picker_calendar-item {
-                        padding: sugar.padding(10);
-                        border-radius: sugar.border.radius(ui.datetimePicker.borderRadius);
+                        padding: s.padding(10);
+                        border-radius: s.border.radius(ui.datetimePicker.borderRadius);
                         
                         &.disabled {
-                            color: sugar.color(main, text, --alpha 0.6);
+                            color: s.color(main, text, --alpha 0.6);
                             
                             &:after {
                                 content: '';
@@ -167,8 +167,8 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
                                 left: 50%;
                                 width: 60%;
                                 height: 3px;
-                                background: sugar.color(error);
-                                border-radius: sugar.border.radius(ui.datetimePicker.borderRadius);
+                                background: s.color(error);
+                                border-radius: s.border.radius(ui.datetimePicker.borderRadius);
                                 transform-origin: 50% 50%;
                                 transform: translate(-50%, -50%) rotate(-10deg);
                                 opacity: 1;
@@ -176,25 +176,25 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
                         }
 
                         &.today {
-                            background: sugar.color(current, --alpha 0.2);
+                            background: s.color(current, --alpha 0.2);
                         }
                         &.active {
-                            background: sugar.color(current);
-                            color: sugar.color(current, foreground);
+                            background: s.color(current);
+                            color: s.color(current, foreground);
                         }
 
                         &:hover {
-                            background: sugar.color(current);
-                            color: sugar.color(current, foreground);
+                            background: s.color(current);
+                            color: s.color(current, foreground);
                         }
                     }
 
                     .s-datetime-picker_date-selectors,
                     .s-datetime-picker_time-selectors {
-                        border: 1px solid sugar.color(main, border);
-                        border-radius: sugar.border.radius(ui.datetimePicker.borderRadius);
-                        margin-block-end: sugar.margin(30);
-                        background: sugar.color(main, surface);
+                        border: 1px solid s.color(main, border);
+                        border-radius: s.border.radius(ui.datetimePicker.borderRadius);
+                        margin-block-end: s.margin(30);
+                        background: s.color(main, surface);
 
                         &:before {
                             content: '';
@@ -205,7 +205,7 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
                             width: 100%;
                             height: 2px;
                             transform: translate(0, -50%);
-                            background: sugar.color(main, border);
+                            background: s.color(main, border);
                         }
                         &:after {
                             content: '';
@@ -218,13 +218,13 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
                             transform: translate(0, -50%);
                             background: linear-gradient(
                                 0,
-                                sugar.color(main, surface, --darken 5),
-                                sugar.color(main, surface, --alpha 0),
-                                sugar.color(main, surface, --alpha 0),
-                                sugar.color(main, surface, --darken 5)
+                                s.color(main, surface, --darken 5),
+                                s.color(main, surface, --alpha 0),
+                                s.color(main, surface, --alpha 0),
+                                s.color(main, surface, --darken 5)
                             );
                             pointer-events: none;
-                            border-radius: sugar.border.radius(ui.datetimePicker.borderRadius);
+                            border-radius: s.border.radius(ui.datetimePicker.borderRadius);
                         }
                     }
 
@@ -233,13 +233,13 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
                             font-size: 2em;
 
                             span {
-                                padding: 0.5em sugar.padding(30) !important;
+                                padding: 0.5em s.padding(30) !important;
                             }
                         }
                     }
 
                     .s-datetime-picker_selector {
-                        border-inline-end: 1px solid sugar.color(main, border);
+                        border-inline-end: 1px solid s.color(main, border);
 
                         &:last-child {
                             border-inline-end: none;
@@ -251,11 +251,11 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
                     }
 
                     .s-datetime-picker_selector-item {
-                        color: sugar.color(main, text);
+                        color: s.color(main, text);
                         font-weight: bold;
 
                         &.disabled {
-                            color: sugar.color(main, text, --alpha 0.15);
+                            color: s.color(main, text, --alpha 0.15);
 
                             span {
                                 position: relative;
@@ -267,8 +267,8 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
                                     left: 50%;
                                     width: 60%;
                                     height: 3px;
-                                    background: sugar.color(error);
-                                    border-radius: sugar.border-radius(ui.datetimePicker.borderRadius);
+                                    background: s.color(error);
+                                    border-radius: s.border-radius(ui.datetimePicker.borderRadius);
                                     transform-origin: 50% 50%;
                                     transform: translate(-50%, -50%) rotate(-10deg);
                                     opacity: 0.1;
@@ -277,8 +277,8 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
                         }
 
                         span {
-                            padding: 1em sugar.padding(30);
-                            background: sugar.color(main, surface);
+                            padding: 1em s.padding(30);
+                            background: s.color(main, surface);
                         }
                     }
 
@@ -289,9 +289,9 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
     // wireframe
     vars.push(`
         .s-datetime-picker_picker {
-            @sugar.wireframe {
-                @sugar.wireframe.background;
-                @sugar.wireframe.border;
+            @s.wireframe {
+                @s.wireframe.background;
+                @s.wireframe.border;
             }
         }
     `);

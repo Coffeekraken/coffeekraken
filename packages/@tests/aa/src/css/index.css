@@ -2,7 +2,7 @@
 @import './sugar.css';
 
 body {
-    background: sugar.color(main, background);
+    background: s.color(main, background);
 
     &.initial-loading .content {
         display: none;
@@ -48,18 +48,18 @@ body {
     width: 150px;
 
     svg [fill='white'] {
-        fill: sugar.color(main, --darken 10);
+        fill: s.color(main, --darken 10);
     }
     svg [fill='#FEBD0F'] {
-        fill: sugar.color(accent);
+        fill: s.color(accent);
     }
 
-    @sugar.theme (dark) {
+    @s.theme (dark) {
         svg [fill='white'] {
-            fill: sugar.color(main, text);
+            fill: s.color(main, text);
         }
         svg [fill='#FEBD0F'] {
-            fill: sugar.color(accent);
+            fill: s.color(accent);
         }
     }
 }

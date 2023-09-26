@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           apply
- * @as              @sugar.theme.apply
+ * @as              @s.theme.apply
  * @namespace      node.mixin.theme
  * @type           PostcssMixin
  * @platform      postcss
@@ -16,12 +16,12 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {Boolean}           [scope=false]           If you want to scope the theme or not
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.theme.apply($1)
+ * @snippet         @s.theme.apply($1)
  *
  * @example        css
- * \@sugar.theme.apply(light);
+ * \@s.theme.apply(light);
  * .my-cool-element {
- *    \@sugar.theme.apply(dark);
+ *    \@s.theme.apply(dark);
  * }
  *
  * @since       2.0.0
@@ -80,14 +80,14 @@ export default function ({
 
     if (finalParams.scope) {
         vars.unshift(`${selectors.join('')} body {`);
-        vars.push(`@sugar.lnf.base;`);
+        vars.push(`@s.lnf.base;`);
         vars.push('}');
     } else if (atRule.parent.type === 'root') {
         vars.unshift('body {');
-        vars.push(`@sugar.lnf.base;`);
+        vars.push(`@s.lnf.base;`);
         vars.push('}');
     } else {
-        vars.push(`@sugar.lnf.base;`);
+        vars.push(`@s.lnf.base;`);
     }
 
     return vars;

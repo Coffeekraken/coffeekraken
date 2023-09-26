@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           classes
- * @as              @sugar.until.classes
+ * @as              @s.until.classes
  * @namespace      node.mixin.until
  * @type           PostcssMixin
  * @interface    ./classes
@@ -17,10 +17,10 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.until.classes
+ * @snippet         @s.until.classes
  *
  * @example        css
- * \@sugar.until.classes;
+ * \@s.until.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -263,7 +263,7 @@ export default function ({
         `,
         ).code(
             `
-            @sugar.media(${query}) {
+            @s.media(${query}) {
                 .s-until-media.s-until-${query} {
                     display: none !important;
                 }

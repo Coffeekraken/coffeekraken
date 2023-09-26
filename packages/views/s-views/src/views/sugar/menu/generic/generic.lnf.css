@@ -8,33 +8,33 @@
     }
 
     .s-menu_link {
-        @sugar.transition fast;
+        @s.transition fast;
         display: block;
-        padding: sugar.padding(20) sugar.padding(30);
+        padding: s.padding(20) s.padding(30);
 
         &:hover {
-            background: sugar.color(main);
-            color: sugar.color(main, foreground);
-            @sugar.border.radius;
+            background: s.color(main);
+            color: s.color(main, foreground);
+            @s.border.radius;
         }
     }
 
     .s-menu_level {
-        @sugar.transition fast;
+        @s.transition fast;
     }
 
     .s-menu-level-1,
     .s-menu-level-2,
     .s-menu-level-3 {
-        @sugar.depth (100);
+        @s.depth (100);
     }
 
     .s-menu-level-1 {
-        background: sugar.color(main, background);
-        padding: sugar.padding(20);
+        background: s.color(main, background);
+        padding: s.padding(20);
         transform: translateY(-10px);
-        @sugar.transition fast;
-        @sugar.border.radius;
+        @s.transition fast;
+        @s.border.radius;
     }
 
     .s-menu-level-0 {

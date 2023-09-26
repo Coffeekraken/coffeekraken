@@ -7,11 +7,11 @@ exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 /**
  * @name           shadow
- * @as              @sugar.shadow.gradient
+ * @as              @s.shadow.gradient
  * @namespace      node.mixin.shadow
  * @type           PostcssMixin
  * @platform        css
- * @status        wip
+ * @status        alpha
  *
  * This mixin allows you to apply a linear gradient shadow to any HTMLElement.
  * Note that this mixin make use of the :before pseudo class.
@@ -27,7 +27,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  *
  * @example        css
  * .myCoolElement {
- *    @sugar.shadow.gradient(0, 10px, 10px, 0, sugar.color(accent), sugar.color(complementary));
+ *    @s.shadow.gradient(0, 10px, 10px, 0, s.color(accent), s.color(complementary));
  * }
  *
  * @since       2.0.0

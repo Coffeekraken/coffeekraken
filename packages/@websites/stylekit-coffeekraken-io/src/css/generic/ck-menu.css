@@ -1,44 +1,44 @@
 .ck-menu {
     button {
-        padding: sugar.padding(30);
-        @sugar.focus.outline (accent);
+        padding: s.padding(30);
+        @s.focus.outline (accent);
     }
     button i {
-        @sugar.transition fast;
+        @s.transition fast;
     }
 
     &:hover,
     &:focus,
     &:focus-within {
         button i {
-            color: sugar.color(accent);
+            color: s.color(accent);
         }
     }
 
     .s-dropdown {
-        background: sugar.color(accent, text);
+        background: s.color(accent, text);
     }
 
     ._packages {
-        @sugar.border.radius;
-        background: sugar.color(main, surface);
+        @s.border.radius;
+        background: s.color(main, surface);
         overflow: hidden;
     }
     ._package {
-        background: sugar.color(main, surface);
+        background: s.color(main, surface);
     }
     ._package:not(:last-child) {
-        border-bottom: 1px solid sugar.color(accent, --alpha 0.1);
+        border-bottom: 1px solid s.color(accent, --alpha 0.1);
     }
 
     ._package a {
         display: flex;
         align-items: stretch;
-        @sugar.transition fast;
+        @s.transition fast;
 
         &:hover,
         &:focus {
-            background: sugar.color(complementary, text);
+            background: s.color(complementary, text);
         }
     }
 
@@ -60,12 +60,12 @@
     }
     ._metas {
         flex-grow: 1;
-        padding: sugar.padding(30);
+        padding: s.padding(30);
         padding-inline-start: 0;
     }
     ._title {
-        margin-block-end: sugar.margin(10);
-        color: sugar.color(accent, text);
+        margin-block-end: s.margin(10);
+        color: s.color(accent, text);
     }
     ._version {
         opacity: 0.6;

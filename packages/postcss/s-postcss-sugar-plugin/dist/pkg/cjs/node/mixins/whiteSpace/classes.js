@@ -8,21 +8,21 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const faker_1 = __importDefault(require("faker"));
 /**
  * @name           classes
- * @as              @sugar.whiteSpace.classes
+ * @as              @s.whiteSpace.classes
  * @namespace      node.mixin.visibility
  * @type           PostcssMixin
  * @platform      postcss
  * @interface       ./classes
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the overflow helper classes like ```.s-visibility:hidden```, etc...
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.whiteSpace.classes
+ * @snippet         @s.whiteSpace.classes
  *
  * @example        css
- * \@sugar.visibility.classes;
+ * \@s.visibility.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -43,7 +43,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/white-space
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply some white-space style on any HTMLElement
         * 
@@ -53,7 +53,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.whiteSpace.classes;
+        * \\@s.whiteSpace.classes;
         * 
         * @cssClass         s-white-space:wrap             Apply the \`white-space\` to \`wrap\`
         * @cssClass         s-white-space:nowrap             Apply the \`white-space\` to \`nowrap\`
@@ -130,7 +130,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     * @namespace          sugar.style.helpers.whiteSpace
     * @type               CssClass
     * @platform             css
-    * @status             beta
+    * @status             stable
     * 
     * This class allows you to apply a "<yellow>${value}</yellow>" white-space style to any HTMLElement
     * 

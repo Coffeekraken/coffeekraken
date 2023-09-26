@@ -30,11 +30,11 @@ export { postcssUiGoogleMapInterface as interface };
  *
  * Apply the google map style to any s-google-map element
  *
- * @snippet         @sugar.ui.googleMap($1);
- * 
+ * @snippet         @s.ui.googleMap($1);
+ *
  * @example     css
  * .s-google-map {
- *    @sugar.ui.googleMap;
+ *    @s.ui.googleMap;
  * }
  *
  * @since      2.0.0
@@ -71,8 +71,8 @@ export default function ({
     // lnf
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
-            @sugar.border.radius(ui.googleMap.borderRadius);
-            @sugar.depth(ui.googleMap.depth);
+            @s.border.radius(ui.googleMap.borderRadius);
+            @s.depth(ui.googleMap.depth);
 
             div[style*='bottom: 0px;'] {
                 * {

@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          round
- * @as              @sugar.ui.loader.round
+ * @as              @s.ui.loader.round
  * @namespace     node.mixin.ui.loader
  * @type               PostcssMixin
  * @interface     ./round          interface
@@ -17,11 +17,11 @@ import __STheme from '@coffeekraken/s-theme';
  * @param        {String}           [easing='theme.ui.loader.easing']            The easing you want for your round animation
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.loader.round
+ * @snippet         @s.ui.loader.round
  *
  * @example     css
  * .my-round {
- *    @sugar.ui.loader.round;
+ *    @s.ui.loader.round;
  * }
  *
  * @since      2.0.0
@@ -78,8 +78,8 @@ export default function ({
     display: inline-block;
     border-radius: 50%;
     background: currentColor;
-    width: sugar.scalable(1em);
-    height: sugar.scalable(1em);
+    width: s.scalable(1em);
+    height: s.scalable(1em);
     animation: ${finalParams.name} ${finalParams.duration} ${finalParams.easing} infinite;
     
     @keyframes ${finalParams.name} {
@@ -101,7 +101,7 @@ export default function ({
 
     // wireframe
     vars.push(`
-        @sugar.wireframe {
+        @s.wireframe {
            background: rgba(0,0,0,.5);
         }
     `);

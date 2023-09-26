@@ -1,21 +1,21 @@
 import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name           classes
- * @as              @sugar.visually.classes
+ * @as              @s.visually.classes
  * @namespace      node.mixin.visually
  * @type           PostcssMixin
  * @interface       ./classes
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the overflow helper classes like ```.s-visually:hidden```, etc...
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.visually.classes
+ * @snippet         @s.visually.classes
  *
  * @example        css
- * \@sugar.visually.classes;
+ * \@s.visually.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -36,7 +36,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/visually
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply a visually style on any HTMLElement
         * 
@@ -46,10 +46,10 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.visually.classes;
+        * \\@s.visually.classes;
         * 
         * .my-element {
-        *   \\@sugar.visually.hidden;
+        *   \\@s.visually.hidden;
         * } 
         * 
         * @cssClass         s-visually:hidden             Make the element hidden in the ui
@@ -70,7 +70,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * @namespace          sugar.style.helpers.visually
     * @type               CssClass
     * @platform             css
-    * @status             beta
+    * @status             stable
     * 
     * This class allows you to apply a "<yellow>hidden</yellow>" visually style to any HTMLElement
     * 
@@ -79,7 +79,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     */
     `).code(`
     .s-visually-hidden {
-       @sugar.visually.hidden;
+       @s.visually.hidden;
     }`, { type: 'CssClass' });
     return vars;
 }

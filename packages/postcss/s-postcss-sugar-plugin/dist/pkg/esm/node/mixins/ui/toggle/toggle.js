@@ -1,7 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name          toggle
- * @as              @sugar.ui.toggle
+ * @as              @s.ui.toggle
  * @namespace     node.mixin.ui.toggle
  * @type          PostcssMixin
  * @interface       ./toggle
@@ -14,11 +14,11 @@ import __SInterface from '@coffeekraken/s-interface';
  * @param       {'burger'}                          type            The toggle type you want
  * @return      {Css}                   The corresponding css
  *
- * @snippet         @sugar.ui.toggle
+ * @snippet         @s.ui.toggle
  *
  * @example       css
  * .my-element {
- *      \@sugar.ui.toggle(burger);
+ *      \@s.ui.toggle(burger);
  * }
  *
  * @since     2.0.0
@@ -53,7 +53,7 @@ export default function ({ params, atRule, replaceWith, }) {
                 background-color: currentColor;
                 transition: all 0.3s ease-in-out;
                 transform: translateY(-0.5em);
-                @sugar.border.radius;
+                @s.border.radius;
 
                 &:before,
                 &:after {
@@ -66,7 +66,7 @@ export default function ({ params, atRule, replaceWith, }) {
                     transform: translateX(-50%);
                     transition: all 0.3s ease-in-out;
                     opacity: 1;
-                    @sugar.border.radius;
+                    @s.border.radius;
                 }
                 &:before {
                     transform-origin: 0 0;

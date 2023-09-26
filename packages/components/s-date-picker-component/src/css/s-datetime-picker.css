@@ -30,7 +30,7 @@
         pointer-events: none;
         opacity: 0;
 
-        @sugar.media <=mobile {
+        @s.media <=mobile {
             position: fixed;
             bottom: 0;
             top: auto !important;

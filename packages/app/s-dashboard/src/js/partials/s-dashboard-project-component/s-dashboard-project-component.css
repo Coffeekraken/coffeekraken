@@ -2,13 +2,13 @@
     ._details {
         display: flex;
         align-items: center;
-        margin-block-start: sugar.margin(20);
-        padding: sugar.padding(20);
+        margin-block-start: s.margin(20);
+        padding: s.padding(20);
 
-        background: sugar.color(main, background, --darken 2);
+        background: s.color(main, background, --darken 2);
 
-        @sugar.theme dark {
-            background: sugar.color(main, background, --lighten 5);
+        @s.theme dark {
+            background: s.color(main, background, --lighten 5);
         }
     }
 

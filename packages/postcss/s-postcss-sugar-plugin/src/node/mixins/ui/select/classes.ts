@@ -4,7 +4,7 @@ import __faker from 'faker';
 
 /**
  * @name          classes
- * @as          @sugar.ui.select.classes
+ * @as          @s.ui.select.classes
  * @namespace     node.mixin.ui.select
  * @type               PostcssMixin
  * @interface     ./classes          interface
@@ -18,10 +18,10 @@ import __faker from 'faker';
  * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.select.classes
+ * @snippet         @s.ui.select.classes
  *
  * @example     css
- * \@sugar.ui.form.classes;
+ * \@s.ui.form.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -101,10 +101,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.ui.select.classes;
+        * \\@s.ui.select.classes;
         * 
         * .my-select {
-        *   \@sugar.ui.select;
+        *   \@s.ui.select;
         * }
         * 
         ${finalParams.lnfs
@@ -286,7 +286,7 @@ export default function ({
         vars.code(
             () => `
                 .s-select {
-                    @sugar.ui.select($scope: bare);
+                    @s.ui.select($scope: bare);
                 }`,
             { type: 'CssClass' },
         );
@@ -320,7 +320,7 @@ export default function ({
             vars.code(
                 () => `
                 ${cls}:not(.s-bare) {
-                    @sugar.ui.select($lnf: ${lnf}, $scope: lnf);
+                    @s.ui.select($lnf: ${lnf}, $scope: lnf);
                 }`,
                 { type: 'CssClass' },
             );
@@ -351,9 +351,9 @@ export default function ({
        `,
         ).code(
             `
-            @sugar.format.text {
+            @s.format.text {
                 select {
-                    @sugar.ui.select($scope: '${finalParams.scope.join(',')}');
+                    @s.ui.select($scope: '${finalParams.scope.join(',')}');
                 } 
             }
         `,
@@ -397,7 +397,7 @@ export default function ({
        `,
         ).code(
             `
-            @sugar.rhythm.vertical {
+            @s.rhythm.vertical {
                 select, .s-select {
                     ${__STheme.jsObjectToCssProperties(
                         __STheme.get('ui.form.rhythmVertical'),

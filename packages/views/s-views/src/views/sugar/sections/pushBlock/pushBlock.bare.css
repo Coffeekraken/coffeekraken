@@ -1,9 +1,9 @@
 .s-section-push-block {
     position: relative;
-    padding: sugar.padding(90);
+    padding: s.padding(90);
 
-    @sugar.media mobile {
-        padding-inline: sugar.padding(30);
+    @s.media mobile {
+        padding-inline: s.padding(30);
     }
 
     ._bkg {
@@ -21,25 +21,25 @@
             height: 100%;
         }
 
-        @sugar.media mobile {
+        @s.media mobile {
             display: none;
         }
 
-        @sugar.lod (2) {
+        @s.lod (2) {
             display: block;
         }
     }
 
     ._layout {
-        @sugar.layout ('1 2');
+        @s.layout ('1 2');
         position: relative;
         z-index: 10;
         align-items: center;
 
-        @sugar.media mobile {
-            @sugar.layout ('2 _ 1');
-            padding-block: sugar.padding(100);
-            gap: sugar.margin(50);
+        @s.media mobile {
+            @s.layout ('2 _ 1');
+            padding-block: s.padding(100);
+            gap: s.margin(50);
         }
     }
 }

@@ -30,11 +30,11 @@ export { postcssUiSliderInterface as interface };
  *
  * Apply the slider style to any s-slider element
  *
- * @snippet         @sugar.ui.slider($1);
+ * @snippet         @s.ui.slider($1);
  *
  * @example     css
  * .s-slider {
- *    @sugar.ui.slider;
+ *    @s.ui.slider;
  * }
  *
  * @since      2.0.0
@@ -73,18 +73,18 @@ export default function ({
     }
 
     // &[behavior='default'] > .s-slider_root > .s-slider_slides-wrapper > .s-slider_slides {
-    //     @sugar.transition();
+    //     @s.transition();
     // }
 
     // lnf
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
 
-            --s-slider-space: calc(sugar.margin(30) + 1em);
+            --s-slider-space: calc(s.margin(30) + 1em);
 
             > .s-slider_root {
                 > .s-slider_slides-wrapper {
-                    @sugar.border.radius(ui.slider.borderRadius);
+                    @s.border.radius(ui.slider.borderRadius);
                 }
 
                 > .s-slider_ui {
@@ -92,32 +92,32 @@ export default function ({
                     > .s-slider_nav {
 
                         > * {
-                            background: sugar.color(current, uiForeground);
-                            transition: sugar.theme(ui.slider.transition);
+                            background: s.color(current, uiForeground);
+                            transition: s.theme(ui.slider.transition);
                         }
                     }
                 }
             }
 
             > .s-slider_root > .s-slider_ui > .s-slider_progress {
-                @sugar.border.radius(ui.slider.borderRadius);
+                @s.border.radius(ui.slider.borderRadius);
             
                 &:before {
-                    @sugar.border.radius(ui.slider.borderRadius);
-                    background: sugar.color(current, uiForeground, --alpha 0.3);
+                    @s.border.radius(ui.slider.borderRadius);
+                    background: s.color(current, uiForeground, --alpha 0.3);
                 }
 
                 > .s-slider_progress-bar {
-                    @sugar.border.radius(ui.slider.borderRadius);
-                    background: sugar.color(current, uiForeground);
-                    transition: sugar.theme(ui.slider.transition);
+                    @s.border.radius(ui.slider.borderRadius);
+                    background: s.color(current, uiForeground);
+                    transition: s.theme(ui.slider.transition);
                 }
             }
 
             > .s-slider_root > .s-slider_ui > .s-slider_controls {
                 .s-slider_controls-next,
                 .s-slider_controls-previous {
-                    transition: sugar.theme(ui.slider.transition);
+                    transition: s.theme(ui.slider.transition);
                 }
             }
 
@@ -125,7 +125,7 @@ export default function ({
             > .s-slider_root > .s-slider_ui > .s-slider_controls .s-slider_controls-previous-arrow {
                 &:before,
                 &:after {
-                    background: sugar.color(current, uiForeground);
+                    background: s.color(current, uiForeground);
                 }
             }
 
@@ -134,8 +134,8 @@ export default function ({
 
     // wireframe
     vars.push(`
-        @sugar.wireframe {
-            @sugar.wireframe.background;
+        @s.wireframe {
+            @s.wireframe.background;
 
             > .s-slider_root > .s-slider_slides-wrapper:after {
                 content: '';
@@ -144,7 +144,7 @@ export default function ({
                 top: 0; left: 0;
                 width: 100%; height: 100%;
                 pointer-events: none;
-                @sugar.wireframe.border;
+                @s.wireframe.border;
             }
 
             > .s-slider_root {

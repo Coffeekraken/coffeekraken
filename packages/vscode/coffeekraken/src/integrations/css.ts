@@ -36,7 +36,7 @@ export default function cssIntegration(docmapJson: any): void {
         }
 
         let lastPart = '';
-        let str = `@sugar.${docmapObj.id
+        let str = `@s.${docmapObj.id
                 .split('.')
                 .slice(2)
                 .filter((p) => {

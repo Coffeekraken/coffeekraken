@@ -14,7 +14,7 @@ class postcssSugarPluginStateDisabledMixinInterface extends s_interface_1.defaul
 exports.interface = postcssSugarPluginStateDisabledMixinInterface;
 /**
  * @name           disabled
- * @as              @sugar.state.disabled
+ * @as              @s.state.disabled
  * @namespace      node.mixin.state
  * @type           PostcssMixin
  * @platform      postcss
@@ -24,14 +24,14 @@ exports.interface = postcssSugarPluginStateDisabledMixinInterface;
  * Here's the generated selector:
  * - &:disabled
  *
- * @snippet         @sugar.state.disabled
- * \@sugar.state.disabled {
+ * @snippet         @s.state.disabled
+ * \@s.state.disabled {
  *      $1
  * }
  *
  * @example        css
  * .myCoolItem {
- *  \@sugar.state.disabled {
+ *  \@s.state.disabled {
  *      // ...
  *  }
  * }

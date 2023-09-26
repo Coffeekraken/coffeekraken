@@ -22,24 +22,24 @@ class postcssSugarPluginScopeExcludeMixinInterface extends s_interface_1.default
 exports.interface = postcssSugarPluginScopeExcludeMixinInterface;
 /**
  * @name           exclude
- * @as              @sugar.scope
+ * @as              @s.scope
  * @namespace      node.mixin.scope
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
  *
- * This mixin allows you to set the "scope(s)" you dont't want to all the called mixins that have a "$scope" parameter like `@sugar.ui.button`, `@sugar.ui.avatar`, etc...
+ * This mixin allows you to set the "scope(s)" you dont't want to all the called mixins that have a "$scope" parameter like `@s.ui.button`, `@s.ui.avatar`, etc...
  *
  * @return      {Css}         The generated css
  *
- * @snippet         @sugar.scope.exclude ($1) { $2 }
- * \@sugar.scope.exclude $1 {
+ * @snippet         @s.scope.exclude ($1) { $2 }
+ * \@s.scope.exclude $1 {
  *      $2
  * }
  *
  * @example        css
- * \@sugar.scope.exclude lnf {
- *      §sugar.ui.button;
+ * \@s.scope.exclude lnf {
+ *      @s.ui.button;
  *      // etc...
  * }
  *

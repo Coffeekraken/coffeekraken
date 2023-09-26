@@ -9,12 +9,12 @@ import __path from 'path';
 import __SDocblock from '../../shared/SDocblock.js';
 
 /**
- * @___name                  firstDocblockWithNamespaceInFolder
- * @___namespace           node.utils
- * @___type                  Function
- * @___async
- * @___platform            node
- * @___status              wip
+ * @name                  firstDocblockWithNamespaceInFolder
+ * @namespace           node.utils
+ * @type                  Function
+ * @async
+ * @platform            node
+ * @status              wip
  *
  * This function search in the passed folder for files containing a "@namespace" tag (and an "@name" optional one)
  * and generate a SNav instance with all these founded files as sources...

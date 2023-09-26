@@ -12,7 +12,7 @@ const chokidar_1 = __importDefault(require("chokidar"));
 const path_1 = __importDefault(require("path"));
 /**
  * @name           import
- * @as              @sugar.import
+ * @as              @s.import
  * @namespace      node.mixin.import
  * @type           PostcssMixin
  * @platform      postcss
@@ -24,11 +24,11 @@ const path_1 = __importDefault(require("path"));
  * @param         {String}        path        The file path you want to import relative to the file you're in
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.import($1)
+ * @snippet         @s.import($1)
  *
  * @example        css
- * \@sugar.import('./my-cool-file.css');
- * \@sugar.import('../views/** /*.css');
+ * \@s.import('./my-cool-file.css');
+ * \@s.import('../views/** /*.css');
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

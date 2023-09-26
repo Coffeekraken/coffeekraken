@@ -44,31 +44,31 @@
 /* .s-dropzone {
 
     &:before {
-        box-shadow: 0 0 0 0 sugar.color(accent, --alpha 0);
-        @sugar.border.radius;
-        @sugar.transition (fast);
+        box-shadow: 0 0 0 0 s.color(accent, --alpha 0);
+        @s.border.radius;
+        @s.transition (fast);
     }
 
     ._root {
-        padding: sugar.padding(30) sugar.padding(30);
-        color: sugar.color(main, text, --alpha 0.3);
-        background: sugar.color(main, surface);
-        border: 1px solid sugar.color(main, border);
-        @sugar.transition (fast);
-        @sugar.border.radius;
+        padding: s.padding(30) s.padding(30);
+        color: s.color(main, text, --alpha 0.3);
+        background: s.color(main, surface);
+        border: 1px solid s.color(main, border);
+        @s.transition (fast);
+        @s.border.radius;
     }
     
     &.drag,
     &.dragover {
         &:before {
-            box-shadow: 0 0 0 10px sugar.color(accent, --alpha 0.3);
+            box-shadow: 0 0 0 10px s.color(accent, --alpha 0.3);
         }
     }
 
     &.error {
-        border: solid 1px sugar.color(error, border);
+        border: solid 1px s.color(error, border);
     }
     &.upload {
-        border: solid 1px sugar.color(complementary, border);
+        border: solid 1px s.color(complementary, border);
     }
 } */

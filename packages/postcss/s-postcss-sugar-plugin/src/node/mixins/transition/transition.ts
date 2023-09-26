@@ -2,11 +2,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           transition
- * @as              @sugar.transition
+ * @as              @s.transition
  * @namespace      node.mixin.transition
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the needed css to apply a transition setted in
  * the config.theme.transition configuration stack like "slow", "default" and "fast"
@@ -14,10 +14,12 @@ import __SInterface from '@coffeekraken/s-interface';
  * @param           {String}        [name='default']            The transition you want to apply
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.transition($1)
+ * @snippet         @s.transition($1)
  *
  * @example        css
- * \@sugar.platform.classes;
+ * .my-cool-element {
+ *      \@s.transition(fast);
+ * }
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -40,27 +42,6 @@ export interface postcssSugarPluginTransitionMixinParams {
     name: string;
 }
 
-/**
- * @name           transition
- * @namespace      mixins.transition
- * @type           Mixin
- * @status        beta
- *
- * This mixin allows apply a transition specified in the theme config like "fast", "slow" and "slow" or others you've been defined
- *
- * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
- *
- * @example        css
- * .my-cool-element {
- *    \@sugar.transition(fast);
- * }
- *
- * @example       html
- * <h1 class="my-cool-element">Hello world</h1>
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
 export default function ({
     params,
     atRule,
@@ -74,7 +55,7 @@ export default function ({
         ...(params ?? {}),
     };
     const vars: string[] = [
-        `transition: sugar.transition(${finalParams.name}) ${
+        `transition: s.transition(${finalParams.name}) ${
             finalParams.name !== 'default' ? '!important' : ''
         };`,
     ];

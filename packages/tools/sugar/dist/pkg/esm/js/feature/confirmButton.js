@@ -20,7 +20,7 @@ import __querySelectorLive from '../dom/query/querySelectorLive.js';
  * This will maintain a property on the element itself called "needConfirmation".
  * In your "pointerup" handler, you can then check if the button has been confirmed by using
  * `e.currentTarget.needConfirmation`. You can then make whatever you need with that...
- * Note that the `@sugar.ui.button` postcss mixin support this `confirm="Confirm?" attribute visually.
+ * Note that the `@s.ui.button` postcss mixin support this `confirm="Confirm?" attribute visually.
  *
  * @todo            interface
  * @todo            doc

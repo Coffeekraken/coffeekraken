@@ -23,7 +23,7 @@ export { postcssSugarPluginBackdropInterface as interface };
 
 /**
  * @name          backdrop
- * @as              @sugar.ui.backdrop
+ * @as              @s.ui.backdrop
  * @namespace     node.mixin.backdrop
  * @type          PostcssMixin
  * @platform      postcss
@@ -34,11 +34,11 @@ export { postcssSugarPluginBackdropInterface as interface };
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
- * @snippet         @sugar.backdrop
+ * @snippet         @s.backdrop
  *
  * @example       css
  * .my-element {
- *    \@sugar.backdrop();
+ *    \@s.backdrop();
  * }
  *
  * @since     2.0.0
@@ -75,7 +75,7 @@ export default function ({
 
     if (finalParams.scope.includes('lnf')) {
         vars.code(`
-                    background: sugar.color(main, background, --alpha 0.7);
+                    background: s.color(main, background, --alpha 0.7);
                     backdrop-filter: blur(5px);
                 `);
     }

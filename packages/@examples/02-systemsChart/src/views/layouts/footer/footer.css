@@ -1,7 +1,7 @@
 .footer {
-  ._copy {
-    position: absolute;
-    bottom: sugar.margin(40);
-    right: sugar.margin(80);
-  }
+    ._copy {
+        position: absolute;
+        bottom: s.margin(40);
+        right: s.margin(80);
+    }
 }

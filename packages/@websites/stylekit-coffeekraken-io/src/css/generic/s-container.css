@@ -1,5 +1,5 @@
 .s-container {
-    @sugar.media <=1280 {
-        /* padding-inline: sugar.padding(40); */
+    @s.media <=1280 {
+        /* padding-inline: s.padding(40); */
     }
 }

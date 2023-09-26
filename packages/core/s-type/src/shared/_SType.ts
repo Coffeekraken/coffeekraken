@@ -9,13 +9,13 @@ import { __parseTypeString, __typeOf } from '@coffeekraken/sugar/type';
 import __STypeResult from './STypeResult.js';
 
 /**
- * @___name                SType
- * @___namespace           shared
- * @___type                Class
- * @___platform            node
- * @___platform            js
- * @___status              beta
- * @___private
+ * @name                SType
+ * @namespace           shared
+ * @type                Class
+ * @platform            node
+ * @platform            js
+ * @status              beta
+ * @private
  *
  * This class is the main one that MUST be used as parent one
  * when creating any type like object, string, etc...

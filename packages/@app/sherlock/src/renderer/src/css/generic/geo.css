@@ -1,8 +1,8 @@
 .geo {
     display: flex;
     flex-direction: column;
-    gap: sugar.margin(20);
-    padding: sugar.padding(20) 0;
+    gap: s.margin(20);
+    padding: s.padding(20) 0;
 
     ._item {
         display: flex;

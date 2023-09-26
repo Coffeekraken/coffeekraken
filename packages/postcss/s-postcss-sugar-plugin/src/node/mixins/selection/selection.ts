@@ -2,33 +2,44 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class postcssSugarPluginLiikAndFeelSelectionInterface extends __SInterface {
     static get _definition() {
-        return {};
+        return {
+            color: {
+                type: 'String',
+                title: 'Color',
+                description:
+                    'Specify the color of the selection you want like "accent", "complementary", etc...',
+                default: 'accent',
+            },
+        };
     }
 }
 
-export interface IPostcssSugarPluginLookAndFeelSelectionParams {}
+export interface IPostcssSugarPluginLookAndFeelSelectionParams {
+    color: string;
+}
 
 export { postcssSugarPluginLiikAndFeelSelectionInterface as interface };
 
 /**
  * @name          selection
- * @as          @sugar.lnf.selection
- * @namespace     node.mixin.lnf
+ * @as          @s.selection
+ * @namespace     node.mixin.selection
  * @type          PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
- * This mixin apply some base look and feel depending on the current theme like:
+ * This mixin allows you to apply a "selection" style to any HTMLElement.
+ * This will apply a background and text color to the selected text.
  *
  * - Selection background and text color
  *
  * @param       {String}        layout      The layout to generate
  * @return      {Css}                   The corresponding grid css
  *
- * @snippet         @sugar.lnf.selection
+ * @snippet         @s.selection($1)
  *
  * @example       css
- * \@sugar.lnf.selection;
+ * \@s.selection;
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -43,6 +54,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginLookAndFeelSelectionParams = {
+        color: 'accent',
         ...params,
     };
 
@@ -50,8 +62,8 @@ export default function ({
 
     const css = `
     ::selection {
-        color: sugar.color(accent, --darken 40);
-        background: sugar.color(accent);
+        color: s.color(${finalParams.color}, --darken 20);
+        background: s.color(${finalParams.color}, --lighten 30);
     }
   `;
 

@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          classes
- * @as              @sugar.ui.label.classes
+ * @as              @s.ui.label.classes
  * @namespace     node.mixin.ui.label
  * @type               PostcssMixin
  * @interface     ./classes          interface
@@ -17,10 +17,10 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {('bare'|'lnf'|'vr')[]}        [scope=['bare', 'lnf', 'vr']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.label.classes
+ * @snippet         @s.ui.label.classes
  *
  * @example     css
- * \@sugar.ui.input.classes;
+ * \@s.ui.input.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -97,10 +97,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.ui.label.classes;
+        * \\@s.ui.label.classes;
         * 
         * .my-label {
-        *   \@sugar.ui.label;
+        *   \@s.ui.label;
         * } 
         *
         ${finalParams.lnfs
@@ -186,7 +186,7 @@ export default function ({
         if (finalParams.scope.includes('bare')) {
             vars.code(
                 `.s-label${finalParams.defaultLnf === lnf ? '' : `-${lnf}`} {
-                @sugar.ui.label($lnf: ${lnf}, $scope: bare);
+                @s.ui.label($lnf: ${lnf}, $scope: bare);
             } 
             `,
                 {
@@ -199,7 +199,7 @@ export default function ({
             vars.code(
                 () => `
                 .${cls.replace(':', '-')}:not(.s-bare) {
-                    @sugar.ui.label($lnf: ${lnf}, $scope: lnf);
+                    @s.ui.label($lnf: ${lnf}, $scope: lnf);
                 } 
             `,
                 {
@@ -241,8 +241,8 @@ export default function ({
                 flex-shrink: 0;
             }
 
-            @sugar.media(<=mobile) {
-                @sugar.ui.label($lnf: block, $scope: bare);
+            @s.media(<=mobile) {
+                @s.ui.label($lnf: block, $scope: bare);
 
                 > * {
                     width: 100%;

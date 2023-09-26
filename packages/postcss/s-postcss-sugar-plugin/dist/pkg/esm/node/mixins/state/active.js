@@ -8,7 +8,7 @@ class postcssSugarPluginStateActiveMixinInterface extends __SInterface {
 export { postcssSugarPluginStateActiveMixinInterface as interface };
 /**
  * @name           focus
- * @as              @sugar.state.active
+ * @as              @s.state.active
  * @namespace      node.mixin.state
  * @type           PostcssMixin
  * @platform      postcss
@@ -20,14 +20,14 @@ export { postcssSugarPluginStateActiveMixinInterface as interface };
  *
  * @return      {Css}         The generated css
  *
- * @snippet         @sugar.state.active
- * \@sugar.state.active {
+ * @snippet         @s.state.active
+ * \@s.state.active {
  *      $1
  * }
  *
  * @example        css
  * .myCoolItem {
- *  \@sugar.state.active {
+ *  \@s.state.active {
  *      // ...
  *  }
  * }

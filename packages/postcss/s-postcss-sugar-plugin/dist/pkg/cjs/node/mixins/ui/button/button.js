@@ -9,12 +9,12 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 const getRoot_js_1 = __importDefault(require("../../../utils/getRoot.js"));
 /**
  * @name          button
- * @as            @sugar.ui.button
+ * @as            @s.ui.button
  * @namespace     node.mixin.ui.button
  * @type          PostcssMixin
  * @interface     ./button
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin allows you to generate the "button" UI component css.
  *
@@ -22,11 +22,11 @@ const getRoot_js_1 = __importDefault(require("../../../utils/getRoot.js"));
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
- * @snippet     @sugar.ui.button
+ * @snippet     @s.ui.button
  *
  * @example       css
  * .my-element {
- *      \@sugar.ui.button();
+ *      \@s.ui.button();
  * }
  *
  * @since     2.0.0
@@ -58,12 +58,12 @@ function default_1({ params, atRule, postcssApi, sharedData, replaceWith, }) {
     // bare
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
-          --s-btn-padding-inline: sugar.padding(ui.button.paddingInline);
-          --s-btn-padding-block: sugar.padding(ui.button.paddingBlock);
+          --s-btn-padding-inline: s.padding(ui.button.paddingInline);
+          --s-btn-padding-block: s.padding(ui.button.paddingBlock);
           
           --s-btn-confirm-width: auto;
 
-          font-size: sugar.scalable(1rem);
+          font-size: s.scalable(1rem);
           line-height: 1;
           text-decoration: none !important;
           position: relative;
@@ -73,9 +73,9 @@ function default_1({ params, atRule, postcssApi, sharedData, replaceWith, }) {
           user-select: none;
           white-space: nowrap;
           vertical-align: middle;
-          padding-inline: sugar.padding(ui.button.paddingInline);
-          padding-block: sugar.padding(ui.button.paddingBlock);
-          gap: sugar.margin(20);
+          padding-inline: s.padding(ui.button.paddingInline);
+          padding-block: s.padding(ui.button.paddingBlock);
+          gap: s.margin(20);
           align-items: center;
           justify-content: center;
 
@@ -112,7 +112,7 @@ function default_1({ params, atRule, postcssApi, sharedData, replaceWith, }) {
         switch (finalParams.lnf) {
             case 'text':
                 vars.push(`
-              padding-inline: calc(sugar.padding(ui.button.paddingInline) * 0.3);
+              padding-inline: calc(s.padding(ui.button.paddingInline) * 0.3);
               `);
                 break;
         }
@@ -120,23 +120,23 @@ function default_1({ params, atRule, postcssApi, sharedData, replaceWith, }) {
     // lnf
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
-          font-size: sugar.scalable(1rem);
+          font-size: s.scalable(1rem);
           text-decoration: none;
-          @sugar.shape;
+          @s.shape;
 
           &:after {
-            @sugar.shape;
+            @s.shape;
           }
         `);
         switch (finalParams.lnf) {
             case 'gradient':
                 vars.push(`
                     background: none !important;
-                    color: sugar.color(current, foreground) !important;
-                    transition: sugar.theme(ui.button.transition);
-                    border: sugar.color(current, border) solid sugar.theme(ui.button.borderWidth);
+                    color: s.color(current, foreground) !important;
+                    transition: s.theme(ui.button.transition);
+                    border: s.color(current, border) solid s.theme(ui.button.borderWidth);
 
-                    --borderWidth: sugar.theme(ui.button.borderWidth);
+                    --borderWidth: s.theme(ui.button.borderWidth);
 
                     & > * {
                       position: relative;
@@ -150,8 +150,8 @@ function default_1({ params, atRule, postcssApi, sharedData, replaceWith, }) {
                       left: 0;
                       width: 100%;
                       height: 100%;
-                      @sugar.gradient(sugar.color(current, gradientStart), sugar.color(current, gradientEnd), $angle: 90);
-                      transition: sugar.theme(ui.button.transition);
+                      @s.gradient(s.color(current, gradientStart), s.color(current, gradientEnd), $angle: 90);
+                      transition: s.theme(ui.button.transition);
                     }
 
                     &:after {
@@ -161,13 +161,13 @@ function default_1({ params, atRule, postcssApi, sharedData, replaceWith, }) {
                       left: 0;
                       width: 100%;
                       height: 100%;
-                      @sugar.gradient(sugar.color(current,gradientEnd), sugar.color(current, gradientStart), $angle: 90);
+                      @s.gradient(s.color(current,gradientEnd), s.color(current, gradientStart), $angle: 90);
                       opacity: 0;
-                      transition: sugar.theme(ui.button.transition);
+                      transition: s.theme(ui.button.transition);
                     }
 
                     &:hover {
-                      color: sugar.color(current, foreground) !important;
+                      color: s.color(current, foreground) !important;
 
                       &:after {
                         opacity: 1;
@@ -177,24 +177,24 @@ function default_1({ params, atRule, postcssApi, sharedData, replaceWith, }) {
                 break;
             case 'outline':
                 vars.push(`
-                background-color: sugar.color(current, --alpha 0);
-                border: sugar.color(current) solid sugar.theme(ui.button.borderWidth);
-                color: sugar.color(current) !important;
-                transition: sugar.theme(ui.button.transition);
+                background-color: s.color(current, --alpha 0);
+                border: s.color(current) solid s.theme(ui.button.borderWidth);
+                color: s.color(current) !important;
+                transition: s.theme(ui.button.transition);
 
                 &:hover {
-                  background-color: sugar.color(current);
-                  color: sugar.color(current, foreground) !important;
+                  background-color: s.color(current);
+                  color: s.color(current, foreground) !important;
                 }
               `);
                 break;
             case 'text':
                 vars.push(`
                   background: none !important;
-                  border: rgba(0,0,0,0) solid sugar.theme(ui.button.borderWidth);
-                  color: sugar.color(current) !important;
+                  border: rgba(0,0,0,0) solid s.theme(ui.button.borderWidth);
+                  color: s.color(current) !important;
                   box-shadow: none !important;
-                  transition: sugar.theme(ui.button.transition);
+                  transition: s.theme(ui.button.transition);
                 `);
                 break;
             case 'loading':
@@ -235,25 +235,25 @@ function default_1({ params, atRule, postcssApi, sharedData, replaceWith, }) {
             case 'solid':
             default:
                 vars.push(`
-                  background-color: sugar.color(current);
-                  border: sugar.color(current, border) solid sugar.theme(ui.button.borderWidth);
-                  color: sugar.color(current, foreground) !important;
-                  transition: sugar.theme(ui.button.transition);
+                  background-color: s.color(current);
+                  border: s.color(current, border) solid s.theme(ui.button.borderWidth);
+                  color: s.color(current, foreground) !important;
+                  transition: s.theme(ui.button.transition);
 
                   &:hover {
-                    background-color: sugar.color(current, --darken 6);
-                    color: sugar.color(current, foreground) !important;
+                    background-color: s.color(current, --darken 6);
+                    color: s.color(current, foreground) !important;
 
-                    @sugar.theme(dark) {
-                      background-color: sugar.color(current, --lighten 6);
+                    @s.theme(dark) {
+                      background-color: s.color(current, --lighten 6);
                     }
                   }
 
                   &:active {
-                    background-color: sugar.color(current, --darken 10);
+                    background-color: s.color(current, --darken 10);
 
-                    @sugar.theme(dark) {
-                      background-color: sugar.color(current, --lighten 10);
+                    @s.theme(dark) {
+                      background-color: s.color(current, --lighten 10);
                     }
                   }
 
@@ -270,13 +270,13 @@ function default_1({ params, atRule, postcssApi, sharedData, replaceWith, }) {
         // confirm
         vars.push(`
           &[confirm] {
-            @sugar.transition (fast);
+            @s.transition (fast);
 
             &:after {
-              background-color: sugar.color(current);
-              color: sugar.color(current, foreground) !important;
-              @sugar.transition (fast);
-              @sugar.color(error);
+              background-color: s.color(current);
+              color: s.color(current, foreground) !important;
+              @s.transition (fast);
+              @s.color(error);
             }
 
             &:hover,
@@ -284,7 +284,7 @@ function default_1({ params, atRule, postcssApi, sharedData, replaceWith, }) {
             &:focus-within {
 
               &:after {
-                color: sugar.color(current, foreground) !important;
+                color: s.color(current, foreground) !important;
               }
             }
 
@@ -293,15 +293,15 @@ function default_1({ params, atRule, postcssApi, sharedData, replaceWith, }) {
         // outline
         vars.push(`
               &:focus:not(:hover) {
-                @sugar.outline;
+                @s.outline;
               }
           `);
     }
     // wireframe
     vars.push(`
-      @sugar.wireframe {
-        @sugar.wireframe.border;
-        @sugar.wireframe.background;
+      @s.wireframe {
+        @s.wireframe.border;
+        @s.wireframe.background;
       }
     `);
     return vars;

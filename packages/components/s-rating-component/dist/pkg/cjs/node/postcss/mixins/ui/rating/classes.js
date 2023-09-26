@@ -30,10 +30,10 @@ exports.interface = postcssUiRatingClassesInterface;
  *
  * This mixin represent rating
  *
- * @snippet      @sugar.ui.rating.classes($1);
+ * @snippet      @s.ui.rating.classes($1);
  *
  * @example        css
- * \@sugar.ui.rating.classes;
+ * \@s.ui.rating.classes;
  *
  * @since    2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -44,7 +44,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     if (finalParams.scope.includes('bare')) {
         vars.code(`
         .s-rating {
-            @sugar.ui.rating($scope: bare);
+            @s.ui.rating($scope: bare);
         }
     `, {
             type: 'CssClass',
@@ -65,7 +65,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`
             .s-rating[lnf="default"]:not(.s-bare) {
-                @sugar.ui.rating($scope: lnf);
+                @s.ui.rating($scope: lnf);
             }`, {
             type: 'CssClass',
         });
@@ -87,7 +87,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * 
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */`).code(`@sugar.rhythm.vertical {
+        */`).code(`@s.rhythm.vertical {
                 .s-rating {
                     ${s_theme_1.default.jsObjectToCssProperties(s_theme_1.default.get('ui.rating.rhythmVertical'))}
                 } 

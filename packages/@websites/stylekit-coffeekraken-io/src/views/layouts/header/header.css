@@ -1,14 +1,14 @@
 #header {
     position: fixed;
-    top: sugar.margin(10);
-    left: sugar.margin(10);
+    top: s.margin(10);
+    left: s.margin(10);
     z-index: 200;
     display: flex;
     flex-direction: column;
-    background: sugar.color(main, background);
+    background: s.color(main, background);
     padding-inline: 0;
 
-    @sugar.transition;
+    @s.transition;
 
     body:has(.s-doc_explorer:focus, .s-doc_explorer:focus-within) &,
     .scrolled.scroll-down & {
@@ -17,11 +17,11 @@
     ._nav {
         ._main-link {
             display: none;
-            font-size: sugar.font.size(20);
-            @sugar.focus.outline;
+            font-size: s.font.size(20);
+            @s.focus.outline;
 
             &.active {
-                color: sugar.color(accent);
+                color: s.color(accent);
             }
         }
     }
@@ -33,13 +33,13 @@
 
     ._logo {
         flex-grow: 0;
-        background: sugar.color(main, surface);
-        padding: sugar.margin(20);
-        padding-inline-end: sugar.margin(30);
+        background: s.color(main, surface);
+        padding: s.margin(20);
+        padding-inline-end: s.margin(30);
         display: inline-block;
 
         a {
-            @sugar.focus.outline accent;
+            @s.focus.outline accent;
         }
 
         svg {
@@ -47,16 +47,16 @@
             width: 40px;
             display: inline-block;
 
-            @sugar.media mobile {
+            @s.media mobile {
                 width: 100px;
             }
         }
 
         svg .main {
-            fill: sugar.color(main, --darken 10);
+            fill: s.color(main, --darken 10);
         }
         svg .accent {
-            fill: sugar.color(accent);
+            fill: s.color(accent);
         }
     }
 }

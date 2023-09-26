@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name          classes
- * @as          @sugar.ui.toggle.classes
+ * @as          @s.ui.toggle.classes
  * @namespace     node.mixin.ui.toggle
  * @type          PostcssMixin
  * @interface       ./classes
@@ -14,10 +14,10 @@ import __SInterface from '@coffeekraken/s-interface';
  * @param       {('burger')[]}              [types=['burger']]            The toggles type you want to generate
  * @return      {Css}                   The corresponding css
  *
- * @snippet         @sugar.ui.toggle.classes
+ * @snippet         @s.ui.toggle.classes
  *
  * @example       css
- * \@sugar.ui.toggle.classes();
+ * \@s.ui.toggle.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -91,10 +91,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.ui.toggle.classes;
+        * \\@s.ui.toggle.classes;
         * 
         * .my-toggle {
-        *   \@sugar.ui.toggle;
+        *   \@s.ui.toggle;
         * }
         * 
         ${finalParams.types
@@ -157,7 +157,7 @@ export default function ({
         ).code(
             `
             .s-toggle-${type} {
-                @sugar.ui.toggle(${type});
+                @s.ui.toggle(${type});
             }
         `,
             { type: 'CssClass' },

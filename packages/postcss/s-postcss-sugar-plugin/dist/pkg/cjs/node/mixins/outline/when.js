@@ -23,7 +23,7 @@ class postcssSugarPluginStateOutlineWhenMixinInterface extends s_interface_1.def
 exports.interface = postcssSugarPluginStateOutlineWhenMixinInterface;
 /**
  * @name           when
- * @as              @sugar.outline.when
+ * @as              @s.outline.when
  * @namespace      node.mixin.outline
  * @type           PostcssMixin
  * @platform      postcss
@@ -31,15 +31,15 @@ exports.interface = postcssSugarPluginStateOutlineWhenMixinInterface;
  *
  * This mixin allows you to apply a nice outline on any HTMLElement.
  * This outline will be display on hover and focus by default but can be displayed
- * always by passing the `on` parameter to `always` like so `@sugar.outline(always)`
+ * always by passing the `on` parameter to `always` like so `@s.outline(always)`
  *
  * @return      {Css}         The generated css
  *
- * @snippet         @sugar.outline.when($1)
+ * @snippet         @s.outline.when($1)
  *
  * @example        css
  * .myCoolItem {
- *      @sugar.outline.when(focus);
+ *      @s.outline.when(focus);
  * }
  *
  * @since       2.0.0
@@ -53,7 +53,7 @@ function default_1({ params, atRule, replaceWith, }) {
             &:focus,
             &:focus-within {
                 &:not(:hover) {
-                    @sugar.outline(${finalParams.color});
+                    @s.outline(${finalParams.color});
                 }
             }
         `);
@@ -61,18 +61,18 @@ function default_1({ params, atRule, replaceWith, }) {
     if (finalParams.when.indexOf('hover') !== -1) {
         vars.push(`
                 &:hover {
-                    @sugar.outline(${finalParams.color});
+                    @s.outline(${finalParams.color});
                 }
             `);
     }
     if (finalParams.when.indexOf('always') !== -1) {
         vars.push(`
            & {
-                @sugar.outline(${finalParams.color});
+                @s.outline(${finalParams.color});
             }
         `);
     }
     return vars;
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRCxNQUFNLGdEQUFpRCxTQUFRLHFCQUFZO0lBQ3ZFLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxJQUFJLEVBQUU7Z0JBQ0YsSUFBSSxFQUFFLGVBQWU7Z0JBQ3JCLE1BQU0sRUFBRSxDQUFDLE9BQU8sRUFBRSxPQUFPLEVBQUUsUUFBUSxDQUFDO2dCQUNwQyxPQUFPLEVBQUUsQ0FBQyxPQUFPLENBQUM7YUFDckI7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsT0FBTyxFQUFFLFNBQVM7YUFDckI7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBQzRELHFFQUFTO0FBT3RFOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILG1CQUF5QixFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsR0FLZDtJQUNHLE1BQU0sV0FBVyxHQUFHLGdCQUNoQixJQUFJLEVBQUUsQ0FBQyxPQUFPLENBQUMsRUFDZixLQUFLLEVBQUUsU0FBUyxJQUNiLENBQUMsTUFBTSxhQUFOLE1BQU0sY0FBTixNQUFNLEdBQUksRUFBRSxDQUFDLENBQ3BCLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsSUFBSSxXQUFXLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUMxQyxJQUFJLENBQUMsSUFBSSxDQUFDOzs7O3FDQUltQixXQUFXLENBQUMsS0FBSzs7O1NBRzdDLENBQUMsQ0FBQztLQUNOO0lBRUQsSUFBSSxXQUFXLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUMxQyxJQUFJLENBQUMsSUFBSSxDQUFDOztxQ0FFbUIsV0FBVyxDQUFDLEtBQUs7O2FBRXpDLENBQUMsQ0FBQztLQUNWO0lBRUQsSUFBSSxXQUFXLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxRQUFRLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUMzQyxJQUFJLENBQUMsSUFBSSxDQUFDOztpQ0FFZSxXQUFXLENBQUMsS0FBSzs7U0FFekMsQ0FBQyxDQUFDO0tBQ047SUFFRCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDO0FBN0NELDRCQTZDQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRCxNQUFNLGdEQUFpRCxTQUFRLHFCQUFZO0lBQ3ZFLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxJQUFJLEVBQUU7Z0JBQ0YsSUFBSSxFQUFFLGVBQWU7Z0JBQ3JCLE1BQU0sRUFBRSxDQUFDLE9BQU8sRUFBRSxPQUFPLEVBQUUsUUFBUSxDQUFDO2dCQUNwQyxPQUFPLEVBQUUsQ0FBQyxPQUFPLENBQUM7YUFDckI7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsT0FBTyxFQUFFLFNBQVM7YUFDckI7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBQzRELHFFQUFTO0FBT3RFOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILG1CQUF5QixFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsR0FLZDtJQUNHLE1BQU0sV0FBVyxHQUFHLGdCQUNoQixJQUFJLEVBQUUsQ0FBQyxPQUFPLENBQUMsRUFDZixLQUFLLEVBQUUsU0FBUyxJQUNiLENBQUMsTUFBTSxhQUFOLE1BQU0sY0FBTixNQUFNLEdBQUksRUFBRSxDQUFDLENBQ3BCLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsSUFBSSxXQUFXLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUMxQyxJQUFJLENBQUMsSUFBSSxDQUFDOzs7O2lDQUllLFdBQVcsQ0FBQyxLQUFLOzs7U0FHekMsQ0FBQyxDQUFDO0tBQ047SUFFRCxJQUFJLFdBQVcsQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQzFDLElBQUksQ0FBQyxJQUFJLENBQUM7O2lDQUVlLFdBQVcsQ0FBQyxLQUFLOzthQUVyQyxDQUFDLENBQUM7S0FDVjtJQUVELElBQUksV0FBVyxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsUUFBUSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDM0MsSUFBSSxDQUFDLElBQUksQ0FBQzs7NkJBRVcsV0FBVyxDQUFDLEtBQUs7O1NBRXJDLENBQUMsQ0FBQztLQUNOO0lBRUQsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQztBQTdDRCw0QkE2Q0MifQ==

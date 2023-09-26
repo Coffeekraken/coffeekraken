@@ -13,18 +13,18 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  * @type          PostcssFunction
  * @platform      postcss
  * @interface     ./opacity
- * @status        beta
+ * @status        stable
  *
  * This function allows you to get an opacity value depending on your theme config
  *
  * @param       {String}        opacity      The opacity to get
  * @return      {Css}                   The corresponding css
  *
- * @snippet         sugar.opacity($1)
+ * @snippet         s.opacity($1)
  *
  * @example       css
  * .my-element {
- *      opacity: sugar.opacity(20);
+ *      opacity: s.opacity(20);
  * }
  *
  * @since     2.0.0

@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name          table
- * @as              @sugar.ui.table
+ * @as              @s.ui.table
  * @namespace     node.mixin.ui.table
  * @type               PostcssMixin
  * @interface     ./table          interface
@@ -14,11 +14,11 @@ import __SInterface from '@coffeekraken/s-interface';
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.table
+ * @snippet         @s.ui.table
  *
  * @example     css
  * .my-table {
- *    @sugar.ui.table;
+ *    @s.ui.table;
  * }
  *
  * @since      2.0.0
@@ -65,7 +65,7 @@ export default function ({
     if (finalParams.scope.includes('bare')) {
         vars.push(`
     width: 100%;
-    font-size: sugar.scalable(1rem);
+    font-size: s.scalable(1rem);
     table-layout: fixed;
     overflow-wrap: break-word;
     border-collapse: collapse;
@@ -77,10 +77,10 @@ export default function ({
         vertical-align: middle;
     }
     td, th {
-        padding-inline: sugar.padding(ui.table.paddingInline);
-         padding-block: sugar.padding(ui.table.paddingBlock);
+        padding-inline: s.padding(ui.table.paddingInline);
+         padding-block: s.padding(ui.table.paddingBlock);
 
-        @sugar.direction.rtl {
+        @s.direction.rtl {
             text-align: right;
         }
 
@@ -91,17 +91,17 @@ export default function ({
 
     if (finalParams.scope.includes('lnf')) {
         vars.push(`
-            @sugar.depth(ui.table.depth);
+            @s.depth(ui.table.depth);
             position: relative;
-            box-shadow: 0 0 0 sugar.theme(ui.table.borderWidth) sugar.color(current, border);
+            box-shadow: 0 0 0 s.theme(ui.table.borderWidth) s.color(current, border);
             overflow: hidden;
-            @sugar.shape();
+            @s.shape();
 
             &, th, td {
 
             }
             th {
-                background-color: sugar.color(current, surface);
+                background-color: s.color(current, surface);
                 font-weight: bold;
             }
             td, th {
@@ -112,13 +112,13 @@ export default function ({
 
     // wireframe
     vars.push(`
-        @sugar.wireframe {
-            @sugar.wireframe.background;
-            @sugar.wireframe.border;
+        @s.wireframe {
+            @s.wireframe.background;
+            @s.wireframe.border;
 
             > tr:nth-child(even),
             > tbody > tr:nth-child(even) {
-                @sugar.wireframe.surface;
+                @s.wireframe.surface;
             }
         }
     `);

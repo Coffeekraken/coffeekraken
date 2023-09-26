@@ -8,17 +8,17 @@ import __STheme from '@coffeekraken/s-theme';
  * @type          PostcssFunction
  * @platform      postcss
  * @interface    ./border
- * @status        beta
+ * @status        alpha
  *
  * This function allows you to get a border value for your wireframe depending on your theme config
  *
  * @return      {Css}                   The corresponding css
  *
- * @snippet         sugar.wireframe.border
+ * @snippet         s.wireframe.border
  *
  * @example       css
  * .my-element {
- *    border: sugar.wireframe.border();
+ *    border: s.wireframe.border();
  * }
  *
  * @since     2.0.0

@@ -18,7 +18,7 @@ class postcssSugarPluginFocusOutlineMixinInterface extends s_interface_1.default
 exports.interface = postcssSugarPluginFocusOutlineMixinInterface;
 /**
  * @name           outline
- * @as              @sugar.focus.outline
+ * @as              @s.focus.outline
  * @namespace      node.mixin.focus
  * @type           PostcssMixin
  * @platform      postcss
@@ -28,11 +28,11 @@ exports.interface = postcssSugarPluginFocusOutlineMixinInterface;
  *
  * @return      {Css}         The generated css
  *
- * @snippet         @sugar.focus.outline($1)
+ * @snippet         @s.focus.outline($1)
  *
  * @example        css
  * .myCoolItem {
- *      @sugar.focus.outline;
+ *      @s.focus.outline;
  * }
  *
  * @since       2.0.0
@@ -41,9 +41,9 @@ exports.interface = postcssSugarPluginFocusOutlineMixinInterface;
 function default_1({ params, atRule, replaceWith, }) {
     const finalParams = Object.assign({ color: 'current' }, (params !== null && params !== void 0 ? params : {}));
     const vars = [
-        `@sugar.outline.when(focus, $color: ${finalParams.color});`,
+        `@s.outline.when(focus, $color: ${finalParams.color});`,
     ];
     return vars;
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRCxNQUFNLDRDQUE2QyxTQUFRLHFCQUFZO0lBQ25FLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsT0FBTyxFQUFFLFNBQVM7YUFDckI7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBQ3dELGlFQUFTO0FBTWxFOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FxQkc7QUFDSCxtQkFBeUIsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcsR0FBRyxnQkFDaEIsS0FBSyxFQUFFLFNBQVMsSUFDYixDQUFDLE1BQU0sYUFBTixNQUFNLGNBQU4sTUFBTSxHQUFJLEVBQUUsQ0FBQyxDQUNwQixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWE7UUFDbkIsc0NBQXNDLFdBQVcsQ0FBQyxLQUFLLElBQUk7S0FDOUQsQ0FBQztJQUNGLE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUM7QUFsQkQsNEJBa0JDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRCxNQUFNLDRDQUE2QyxTQUFRLHFCQUFZO0lBQ25FLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsT0FBTyxFQUFFLFNBQVM7YUFDckI7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBQ3dELGlFQUFTO0FBTWxFOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FxQkc7QUFDSCxtQkFBeUIsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcsR0FBRyxnQkFDaEIsS0FBSyxFQUFFLFNBQVMsSUFDYixDQUFDLE1BQU0sYUFBTixNQUFNLGNBQU4sTUFBTSxHQUFJLEVBQUUsQ0FBQyxDQUNwQixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWE7UUFDbkIsa0NBQWtDLFdBQVcsQ0FBQyxLQUFLLElBQUk7S0FDMUQsQ0FBQztJQUNGLE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUM7QUFsQkQsNEJBa0JDIn0=

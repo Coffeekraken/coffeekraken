@@ -29,10 +29,10 @@ exports.interface = postcssUiClipboardCopyClassesInterface;
  *
  * This mixin represent a clipboard copy
  *
- * @snippet      @sugar.ui.clipboardCopy.classes($1);
+ * @snippet      @s.ui.clipboardCopy.classes($1);
  *
  * @example        css
- * \@sugar.ui.clipboardCopy.classes;
+ * \@s.ui.clipboardCopy.classes;
  *
  * @since    2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -63,7 +63,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`.s-clipboard-copy[lnf="default"]:not(.s-bare) {
-                @sugar.ui.clipboardCopy($scope: lnf);
+                @s.ui.clipboardCopy($scope: lnf);
             }`, {
             type: 'CssClass',
         });

@@ -9,7 +9,7 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 const faker_1 = __importDefault(require("faker"));
 /**
  * @name          classes
- * @as              @sugar.ui.table.classes
+ * @as              @s.ui.table.classes
  * @namespace     node.mixin.ui.table
  * @type               PostcssMixin
  * @interface     ./classes          interface
@@ -21,10 +21,10 @@ const faker_1 = __importDefault(require("faker"));
  * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.table.classes
+ * @snippet         @s.ui.table.classes
  *
  * @example     css
- * \@sugar.ui.table.classes;
+ * \@s.ui.table.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -68,10 +68,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.ui.table.classes;
+        * \\@s.ui.table.classes;
         * 
         * .my-table {
-        *   \@sugar.ui.table;
+        *   \@s.ui.table;
         * }
         * 
         * @cssClass     s-table            Apply the table lnf
@@ -232,7 +232,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         */`);
         vars.code(() => `
                 .s-table {
-                    @sugar.ui.table($scope: bare);
+                    @s.ui.table($scope: bare);
                 }`, { type: 'CssClass' });
     }
     if (finalParams.scope.includes('lnf')) {
@@ -264,7 +264,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         */`);
         vars.code(() => `
                 .s-table:not(.s-bare) {
-                    @sugar.ui.table($scope: lnf);
+                    @s.ui.table($scope: lnf);
                 }`, { type: 'CssClass' });
     }
     vars.comment(() => `/**
@@ -296,9 +296,9 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `).code(`
-        @sugar.format.text {
+        @s.format.text {
           table {
-              @sugar.ui.table;
+              @s.ui.table;
           }
         } 
     `, { type: 'CssClass' });
@@ -347,7 +347,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `).code(`
-        @sugar.rhythm.vertical {
+        @s.rhythm.vertical {
           table, .s-table {
               ${s_theme_1.default.jsObjectToCssProperties(s_theme_1.default.get('ui.table.rhythmVertical'))}
           }

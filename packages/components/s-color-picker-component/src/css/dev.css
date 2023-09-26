@@ -1,5 +1,5 @@
-@sugar.init ($variant: light);
-@sugar.classes;
+@s.init ($variant: light);
+@s.classes;
 
 .section {
     width: 100%;
@@ -21,7 +21,7 @@
     max-width: 400px;
 }
 
-@sugar.icon.classes (
+@s.icon.classes (
     fa:copy:copy
     fa:check:copied
     fa:palette:color

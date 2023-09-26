@@ -27,14 +27,14 @@ export { postcssUiClipboardCopyClassesInterface as interface };
  * @type                 PostcssMixin
  * @platform            css
  * @status              beta
- * 
+ *
  * This mixin represent a clipboard copy
  *
- * @snippet      @sugar.ui.clipboardCopy.classes($1);
+ * @snippet      @s.ui.clipboardCopy.classes($1);
  *
  * @example        css
- * \@sugar.ui.clipboardCopy.classes;
- * 
+ * \@s.ui.clipboardCopy.classes;
+ *
  * @since    2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
@@ -84,7 +84,7 @@ export default function ({
         */`,
         ).code(
             `.s-clipboard-copy[lnf="default"]:not(.s-bare) {
-                @sugar.ui.clipboardCopy($scope: lnf);
+                @s.ui.clipboardCopy($scope: lnf);
             }`,
             {
                 type: 'CssClass',

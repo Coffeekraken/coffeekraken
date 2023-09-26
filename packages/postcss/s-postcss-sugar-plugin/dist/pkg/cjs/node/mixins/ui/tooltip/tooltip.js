@@ -8,7 +8,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 /**
  * @name          tooltip
- * @as              @sugar.ui.tooltip
+ * @as              @s.ui.tooltip
  * @namespace     node.mixin.ui.tooltip
  * @type               PostcssMixin
  * @interface     ./tooltip          interface
@@ -23,11 +23,11 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.tooltip
+ * @snippet         @s.ui.tooltip
  *
  * @example     css
  * .my-tooltip {
- *    @sugar.ui.tooltip;
+ *    @s.ui.tooltip;
  * }
  *
  * @since      2.0.0
@@ -67,7 +67,7 @@ function default_1({ params, atRule, replaceWith, }) {
     const vars = [];
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
-            font-size: sugar.scalable(1rem);
+            font-size: s.scalable(1rem);
             position: absolute;
             z-index: 50;
             display: block;
@@ -103,21 +103,21 @@ function default_1({ params, atRule, replaceWith, }) {
     }
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
-          background-color: sugar.color(current);
-          color: sugar.color(current, foreground);
-          transition: sugar.theme(ui.tooltip.transition);
+          background-color: s.color(current);
+          color: s.color(current, foreground);
+          transition: s.theme(ui.tooltip.transition);
           transition-property: opacity;
-          padding-inline: sugar.padding(ui.tooltip.paddingInline);
-          padding-block: sugar.padding(ui.tooltip.paddingBlock);
-          @sugar.border.radius(ui.tooltip.borderRadius);
-          @sugar.depth(ui.tooltip.depth);
+          padding-inline: s.padding(ui.tooltip.paddingInline);
+          padding-block: s.padding(ui.tooltip.paddingBlock);
+          @s.border.radius(ui.tooltip.borderRadius);
+          @s.depth(ui.tooltip.depth);
 
             &:not([s-floating]) {
                 &:after {
                     content: " ";
                     position: absolute;
                     border-style: default;
-                    border-color: sugar.color(current) transparent transparent transparent;
+                    border-color: s.color(current) transparent transparent transparent;
                 }
             }
       `);
@@ -130,7 +130,7 @@ function default_1({ params, atRule, replaceWith, }) {
             case 'right':
                 vars.push(`  
                 top: 50%;
-                left: calc(100% + sugar.theme(ui.tooltip.arrowSize));
+                left: calc(100% + s.theme(ui.tooltip.arrowSize));
                 right: auto;    
                 bottom: auto;
                 transform: translateY(-50%);
@@ -140,8 +140,8 @@ function default_1({ params, atRule, replaceWith, }) {
                     left: auto;
                     right: 100%;
                     bottom: auto;
-                    margin-top: calc(sugar.theme(ui.tooltip.arrowSize) * -1 / 2);
-                    border-width: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                    margin-top: calc(s.theme(ui.tooltip.arrowSize) * -1 / 2);
+                    border-width: calc(s.theme(ui.tooltip.arrowSize) / 2);
                     transform: rotate(90deg);
                 }
             `);
@@ -150,7 +150,7 @@ function default_1({ params, atRule, replaceWith, }) {
             case 'left':
                 vars.push(`  
                 top: 50%;
-                right: calc(100% + sugar.theme(ui.tooltip.arrowSize));
+                right: calc(100% + s.theme(ui.tooltip.arrowSize));
                 left: auto;    
                 bottom: auto;
                 transform: translateY(-50%);
@@ -158,10 +158,10 @@ function default_1({ params, atRule, replaceWith, }) {
                 &:after {
                     top: 50%;
                     right: auto;
-                    left: calc(100% + sugar.theme(ui.tooltip.arrowSize) / 2 - 1px);
+                    left: calc(100% + s.theme(ui.tooltip.arrowSize) / 2 - 1px);
                     bottom: auto;
-                    margin-top: calc(sugar.theme(ui.tooltip.arrowSize) * -1 / 2);
-                    border-width: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                    margin-top: calc(s.theme(ui.tooltip.arrowSize) * -1 / 2);
+                    border-width: calc(s.theme(ui.tooltip.arrowSize) / 2);
                     transform: rotate(-90deg);
                 }
             `);
@@ -171,7 +171,7 @@ function default_1({ params, atRule, replaceWith, }) {
                 bottom: auto;
                 right: auto;
                 left: 50%;
-                top: calc(100% + sugar.theme(ui.tooltip.arrowSize));
+                top: calc(100% + s.theme(ui.tooltip.arrowSize));
                 transform: translateX(-50%);
 
                 &:after {
@@ -179,8 +179,8 @@ function default_1({ params, atRule, replaceWith, }) {
                     top: auto;
                     left: 50%;
                     right: auto;
-                    margin-left: calc(sugar.theme(ui.tooltip.arrowSize) * -1 / 2);
-                    border-width: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                    margin-left: calc(s.theme(ui.tooltip.arrowSize) * -1 / 2);
+                    border-width: calc(s.theme(ui.tooltip.arrowSize) / 2);
                     transform: rotate(180deg);
                 }
             `);
@@ -188,15 +188,15 @@ function default_1({ params, atRule, replaceWith, }) {
             case 'top':
             default:
                 vars.push(`  
-                bottom: calc(100% + sugar.theme(ui.tooltip.arrowSize));
+                bottom: calc(100% + s.theme(ui.tooltip.arrowSize));
                 left: 50%;
                 transform: translateX(-50%);
 
                 &:after {
                     top: 100%;
                     left: 50%;
-                    margin-left: calc(sugar.theme(ui.tooltip.arrowSize) * -1 / 2);
-                    border-width: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
+                    margin-left: calc(s.theme(ui.tooltip.arrowSize) * -1 / 2);
+                    border-width: calc(s.theme(ui.tooltip.arrowSize) / 2);
                 }
             `);
                 break;
@@ -211,7 +211,7 @@ function default_1({ params, atRule, replaceWith, }) {
                 vars.push(`  
                 &:before {
                   height: 100%;
-                  width: sugar.theme(ui.tooltip.arrowSize);
+                  width: s.theme(ui.tooltip.arrowSize);
                   right: 100%;
                   left: auto;
                   bottom: auto;
@@ -224,7 +224,7 @@ function default_1({ params, atRule, replaceWith, }) {
                 vars.push(`  
                 &:before {
                   height: 100%;
-                  width: sugar.theme(ui.tooltip.arrowSize);
+                  width: s.theme(ui.tooltip.arrowSize);
                   left: 100%;
                   right: auto;
                   bottom: auto;
@@ -236,7 +236,7 @@ function default_1({ params, atRule, replaceWith, }) {
                 vars.push(`  
                 &:before {
                   width: 100%;
-                  height: sugar.theme(ui.tooltip.arrowSize);
+                  height: s.theme(ui.tooltip.arrowSize);
                   bottom: 100%;
                   top: auto;
                   left: 0;
@@ -248,7 +248,7 @@ function default_1({ params, atRule, replaceWith, }) {
                 vars.push(`  
                 &:before {
                   width: 100%;
-                  height: sugar.theme(ui.tooltip.arrowSize);
+                  height: s.theme(ui.tooltip.arrowSize);
                   top: 100%;
                   left: 0;
                 }
@@ -258,9 +258,9 @@ function default_1({ params, atRule, replaceWith, }) {
     }
     // wireframe
     vars.push(`
-        @sugar.wireframe {
-            @sugar.wireframe.background;
-            @sugar.wireframe.border;
+        @s.wireframe {
+            @s.wireframe.background;
+            @s.wireframe.border;
         }
     `);
     return vars;

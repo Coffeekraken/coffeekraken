@@ -8,7 +8,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @type          PostcssFunction
  * @platform      postcss
  * @interface     ./size
- * @status        beta
+ * @status        stable
  *
  * This function allows you to get a border size value depending on your theme config
  *
@@ -16,11 +16,11 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {Boolean}       [scalable='theme.scalable.font']      Whether to scale the value or not
  * @return      {Css}                   The corresponding css
  *
- * @snippet         sugar.font.size($1)
+ * @snippet         s.font.size($1)
  *
  * @example       css
  * .my-element {
- *    font-size: sugar.font.size(20);
+ *    font-size: s.font.size(20);
  * }
  *
  * @since     2.0.0
@@ -75,13 +75,13 @@ export default function ({
             factor = '1';
         } else if (registeredValue !== undefined) {
             // direct value
-            factor = `sugar.theme(font.size.${s}, ${finalParams.scalable})`;
+            factor = `s.theme(font.size.${s}, ${finalParams.scalable})`;
         } else if (
             isNaN(parseFloat(s)) &&
             s.match(/[a-zA-Z0-9]+\.[a-zA-Z0-9]+/)
         ) {
             // support dotPath
-            factor = `sugar.theme(${s}, ${finalParams.scalable})`;
+            factor = `s.theme(${s}, ${finalParams.scalable})`;
         } else if (!isNaN(parseFloat(s))) {
             // support simple number
             factor = `${s}`;
@@ -91,7 +91,7 @@ export default function ({
             );
         }
         // generate css value
-        return `calc(sugar.theme(font.size.default) * ${factor})`;
+        return `calc(s.theme(font.size.default) * ${factor})`;
     });
 
     return sizes.join(' ');

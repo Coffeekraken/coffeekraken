@@ -1,6 +1,6 @@
 .s-slider {
     display: block;
-    font-size: sugar.scalable(1rem);
+    font-size: s.scalable(1rem);
     --s-slider-space: 20px;
 
     > .s-slider_root,
@@ -60,22 +60,22 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    background: sugar.color(main, background, --alpha 0.3);
-    padding: sugar.padding(50);
+    background: s.color(main, background, --alpha 0.3);
+    padding: s.padding(50);
     display: flex;
     flex-direction: column;
-    gap: sugar.margin(30);
+    gap: s.margin(30);
 }
 .s-slider_title {
-    @sugar.typo (h1);
-    color: sugar.color(accent);
+    @s.typo (h1);
+    color: s.color(accent);
 }
 .s-slider_intro {
-    @sugar.typo (lead);
+    @s.typo (lead);
     max-width: 100%;
 }
 .s-slider_text {
-    @sugar.typo (p);
+    @s.typo (p);
     max-width: 100%;
 }
 

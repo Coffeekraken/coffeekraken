@@ -6,6 +6,6 @@ sherlock-footer {
     display: flex;
     height: 30px;
     align-items: center;
-    background: sugar.color(main, background, --darken 5% --alpha 0.4);
+    background: s.color(main, background, --darken 5% --alpha 0.4);
     backdrop-filter: blur(10px);
 }

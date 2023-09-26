@@ -7,20 +7,20 @@ exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 /**
  * @name           classes
- * @as              @sugar.float.classes
+ * @as              @s.float.classes
  * @namespace      node.mixin.float
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the float helper classes like ```.s-float:left```, ```.s-float:right```, etc...
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.float.classes
+ * @snippet         @s.float.classes
  *
  * @example        css
- * \@sugar.float.classes;
+ * \@s.float.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -41,7 +41,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/float
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply some float styling into your html.
         * 
@@ -51,7 +51,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.float.classes;
+        * \\@s.float.classes;
         * 
         * @cssClass     s-float:left         Apply the left float style
         * @cssClass     s-float:right         Apply the right float style
@@ -81,7 +81,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     * @namespace          sugar.style.helpers.float
     * @type               CssClass
     * @platform             css
-    * @status             beta
+    * @status             stable
     * 
     * This class allows you to apply a "<yellow>left</yellow>" float style to any HTMLElement
     * 
@@ -99,7 +99,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     * @namespace          sugar.style.helpers.float
     * @type               CssClass
     * @platform             css
-    * @status             beta
+    * @status             stable
     * 
     * This class allows you to apply a "<yellow>right</yellow>" float style to any HTMLElement
     * 
@@ -117,7 +117,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     * @namespace          sugar.style.helpers.float
     * @type               CssClass
     * @platform             css
-    * @status             beta
+    * @status             stable
     * 
     * This class allows you to apply a "<yellow>none</yellow>" float style to any HTMLElement
     * 

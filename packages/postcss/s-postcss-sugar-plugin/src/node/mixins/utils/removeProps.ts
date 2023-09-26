@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           removeProps
- * @as              @sugar.utils.removeProps
+ * @as              @s.utils.removeProps
  * @namespace      node.mixin.utils
  * @type           PostcssMixin
  * @platform      postcss
@@ -16,14 +16,14 @@ import __SInterface from '@coffeekraken/s-interface';
  * @param           {String}              props           The properties you want to remove separated by a comma
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.utils.removeProps
- * \@sugar.utils.removeProps '$1' {
+ * @snippet         @s.utils.removeProps
+ * \@s.utils.removeProps '$1' {
  *      $2
  * }
  *
  * @example        css
- * \@sugar.utils.removeProps('^padding, left$') {
- *      \@sugar.ui.button.classes;
+ * \@s.utils.removeProps('^padding, left$') {
+ *      \@s.ui.button.classes;
  *      /* and css you want... * /
  * }
  *

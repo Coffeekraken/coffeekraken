@@ -10,7 +10,7 @@
  *
  * This function allows you to generate an array from a certain passed quantifier like "2", "<10", ">10", "9-12", etc...
  * This is useful to create arrays that are depending on user-friendly quantifier and it's used for example in the
- * s-postcss-sugar-plugin for the `@sugar.lod(>2)` mixin.
+ * s-postcss-sugar-plugin for the `@s.lod(>2)` mixin.
  *
  * @param       {String|Number}     quantifier          The quantifier to generate
  * @param       {IFromQuantifierSettings}       [settings={}]           Some settings to configure your array generation
@@ -20,7 +20,7 @@
  * @setting         {Function}      value           A function that take the current index and that MUST return the value wanted in the generated array
  *
  * @snippet         __fromQuantifier($1)
- * 
+ *
  * @example    js
  * import { __fromQuantifier } from '@coffeekraken/sugar/array'
  * __fromQuantifier(3); // => [0,1,2]

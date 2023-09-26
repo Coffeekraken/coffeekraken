@@ -2,35 +2,35 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
 /**
- * @__name            configToCss
- * @__namespace       node.mixin.utils
- * @__type            PostcssMixin
- * @__interface       ./configToCss
- * @__platform        css
- * @__status          wip
+ * @name            configToCss
+ * @namespace       node.mixin.utils
+ * @type            PostcssMixin
+ * @interface       ./configToCss
+ * @platform        css
+ * @status          wip
  *
  * This mixin allows you to pass a theme config dot path that point to an object
  * and to print out the result as css properties.
  *
- * @__feature         Support rhythmVertical property object
- * @__feature         Support camel case properties like borderRadius
- * @__feature         Support padding theme value as well as padding unit values
- * @__feature         Support margin theme value as well as margin unit values
- * @__feature         Support transition theme value as well as normal transition values
- * @__feature         Support depth theme value
- * @__feature         Support border radius theme value as well as normal border radius values
- * @__feature
+ * @feature         Support rhythmVertical property object
+ * @feature         Support camel case properties like borderRadius
+ * @feature         Support padding theme value as well as padding unit values
+ * @feature         Support margin theme value as well as margin unit values
+ * @feature         Support transition theme value as well as normal transition values
+ * @feature         Support depth theme value
+ * @feature         Support border radius theme value as well as normal border radius values
+ * @feature
  *
- * @__param           {String}            dotPath             The theme relative dot path to an object to output as css
- * @__return          {Css}                                   The generated css
+ * @param           {String}            dotPath             The theme relative dot path to an object to output as css
+ * @return          {Css}                                   The generated css
  *
- * @__example         css
+ * @example         css
  * .my-cool-element {
- *      @sugar.utils.configToCss(ui.code);
+ *      @s.utils.configToCss(ui.code);
  * }
  *
- * @__since           2.0.0
- * @__author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ * @since           2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 class postcssSugarPluginUtilsConfigToCssInterface extends __SInterface {

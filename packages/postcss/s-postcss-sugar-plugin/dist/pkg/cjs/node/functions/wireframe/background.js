@@ -13,17 +13,17 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  * @type          PostcssFunction
  * @platform      postcss
  * @interface    ./background
- * @status        beta
+ * @status        alpha
  *
  * This function allows you to get a background value for your wireframe depending on your theme config
  *
  * @return      {Css}                   The corresponding css
  *
- * @snippet         sugar.wireframe.background
+ * @snippet         s.wireframe.background
  *
  * @example       css
  * .my-element {
- *    background: sugar.wireframe.background();
+ *    background: s.wireframe.background();
  * }
  *
  * @since     2.0.0

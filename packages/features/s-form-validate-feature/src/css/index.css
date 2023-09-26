@@ -1,10 +1,10 @@
-@sugar.init;
-@sugar.classes;
+@s.init;
+@s.classes;
 
 body {
-    background: sugar.color(main, background);
+    background: s.color(main, background);
 }
 
 .s-label {
-    margin-block-end: sugar.margin(50);
+    margin-block-end: s.margin(50);
 }

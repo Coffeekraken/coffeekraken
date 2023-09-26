@@ -8,22 +8,22 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 /**
  * @name           classes
- * @as              @sugar.width.classes
+ * @as              @s.width.classes
  * @namespace      node.mixin.width
  * @type           PostcssMixin
  * @platform      postcss
  * @interface     ./classes
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the width helper classes like s-width:20, s-width:50, etc...
  * It will generate all the width defined in the config.theme.width configuration stack
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.width.classes
+ * @snippet         @s.width.classes
  *
  * @example        css
- * \@sugar.width.classes;
+ * \@s.width.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -45,7 +45,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/widths
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows to apply some width to any HTMLElement.
         * These widths are defined in the \`theme.width\` theme settings.
@@ -56,7 +56,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.width.classes;
+        * \\@s.width.classes;
         * 
         ${Object.keys(widthObj).map((width) => {
         return ` * @cssClass             s-width:${width}            Apply the \`${width}\` width`;
@@ -80,7 +80,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     * @namespace          sugar.style.helpers.width
     * @type             CssClass
     * @platform         css
-    * @status         beta
+    * @status         stable
     * 
     * This class allows you to apply the "<yellow>viewport</yellow>" width to any HTMLElement
     * 
@@ -109,7 +109,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @namespace          sugar.style.helpers.width
         * @type             CssClass
         * @platform         css
-        * @status           beta
+        * @status           stable
         * 
         * This class allows you to apply the "<yellow>${name}</yellow>" width to any HTMLElement
         * 

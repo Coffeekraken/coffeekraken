@@ -15,11 +15,11 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {String}        depth      The depth to get
  * @return      {Css}                   The corresponding css
  *
- * @snippet         sugar.depth($1)
+ * @snippet         s.depth($1)
  *
  * @example       css
  * .my-element {
- *    box-shadow: sugar.depth(20);
+ *    box-shadow: s.depth(20);
  * }
  *
  * @since     2.0.0

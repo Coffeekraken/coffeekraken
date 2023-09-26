@@ -30,11 +30,11 @@ export { postcssUiRatingInterface as interface };
  *
  * Apply the datetime picker style to any s-rating element
  *
- * @snippet         @sugar.ui.rating($1);
- * 
+ * @snippet         @s.ui.rating($1);
+ *
  * @example     css
  * .s-rating {
- *    @sugar.ui.rating;
+ *    @s.ui.rating;
  * }
  *
  * @since      2.0.0
@@ -71,7 +71,7 @@ export default function ({
         vars.push(`
 
             .s-rating_icons-wrapper {
-                font-size: sugar.scalable(1em);
+                font-size: s.scalable(1em);
 
                 i {
                     padding-inline: 5px;
@@ -79,11 +79,11 @@ export default function ({
             }
 
             .s-rating_base {
-                color: sugar.color(main);
+                color: s.color(main);
             }
             
             .s-rating_rate {
-                color: sugar.color(current);
+                color: s.color(current);
             }
 
         `);

@@ -1,15 +1,15 @@
 .breadcrumb {
     display: inline-flex;
-    gap: sugar.margin(20);
-    color: sugar.color(main, text);
+    gap: s.margin(20);
+    color: s.color(main, text);
     user-select: none;
-    padding: sugar.padding(10) sugar.padding(20);
+    padding: s.padding(10) s.padding(20);
 
     ._item {
         font-weight: bold;
 
         &:not(:last-child):after {
-            padding-inline-start: sugar.margin(20);
+            padding-inline-start: s.margin(20);
             content: '>';
             opacity: 0.3;
         }

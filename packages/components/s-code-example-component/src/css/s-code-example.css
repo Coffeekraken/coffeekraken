@@ -2,7 +2,7 @@
     display: block;
     text-align: initial;
 
-    @sugar.rhythm.vertical (ui.codeExample.rhythmVertical);
+    @s.rhythm.vertical (ui.codeExample.rhythmVertical);
 }
 
 .s-code-example {
@@ -39,7 +39,7 @@
 
 .s-code-example_content {
     position: relative;
-    /* this variable comes from the @sugar.codeExample mixin */
+    /* this variable comes from the @s.codeExample mixin */
     overflow: hidden;
 
     .s-code-example[lines] & {
@@ -103,8 +103,8 @@
 
 .s-code-example_toolbar {
     position: absolute;
-    right: sugar.margin(20);
-    top: sugar.margin(20);
+    right: s.margin(20);
+    top: s.margin(20);
 
     & > * {
         font-size: 20px;
@@ -112,6 +112,6 @@
 }
 
 [toolbar-position='nav'] .s-code-example_toolbar {
-    right: sugar.margin(20);
-    top: sugar.margin(20);
+    right: s.margin(20);
+    top: s.margin(20);
 }

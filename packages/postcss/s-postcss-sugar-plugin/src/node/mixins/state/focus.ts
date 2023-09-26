@@ -12,7 +12,7 @@ export interface postcssSugarPluginStateFocusMixinParams {}
 
 /**
  * @name           focus
- * @as              @sugar.state.focus
+ * @as              @s.state.focus
  * @namespace      node.mixin.state
  * @type           PostcssMixin
  * @platform      postcss
@@ -22,14 +22,14 @@ export interface postcssSugarPluginStateFocusMixinParams {}
  * Here's the generated selector:
  * - &:focus
  *
- * @snippet         @sugar.state.focus
- * \@sugar.state.focus {
+ * @snippet         @s.state.focus
+ * \@s.state.focus {
  *      $1
  * }
  *
  * @example        css
  * .myCoolItem {
- *  \@sugar.state.focus {
+ *  \@s.state.focus {
  *      // ...
  *  }
  * }

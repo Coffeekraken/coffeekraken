@@ -13,12 +13,12 @@
     left: calc(50% + var(--s-carpenter-viewport-offset-x, 0px));
     transform: translate(-50%, -50%);
 
-    background: sugar.color(main, background);
+    background: s.color(main, background);
     border-radius: 50%;
     animation: s-carpenter-loading-in 0.1s
         cubic-bezier(0.56, -0.005, 0.46, 1.505) forwards;
-    @sugar.transition;
-    @sugar.depth (100);
+    @s.transition;
+    @s.depth (100);
 
     width: 1em;
     height: 1em;
@@ -30,7 +30,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        @sugar.color (#fff);
+        @s.color (#fff);
         font-size: 40px;
         animation: s-carpenter-loader-color 0.5s
             cubic-bezier(0.56, -0.005, 0.46, 1.505) infinite;

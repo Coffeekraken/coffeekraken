@@ -29,11 +29,11 @@ exports.interface = postcssUiSliderInterface;
  *
  * Apply the slider style to any s-slider element
  *
- * @snippet         @sugar.ui.slider($1);
+ * @snippet         @s.ui.slider($1);
  *
  * @example     css
  * .s-slider {
- *    @sugar.ui.slider;
+ *    @s.ui.slider;
  * }
  *
  * @since      2.0.0
@@ -54,17 +54,17 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
         `);
     }
     // &[behavior='default'] > .s-slider_root > .s-slider_slides-wrapper > .s-slider_slides {
-    //     @sugar.transition();
+    //     @s.transition();
     // }
     // lnf
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
 
-            --s-slider-space: calc(sugar.margin(30) + 1em);
+            --s-slider-space: calc(s.margin(30) + 1em);
 
             > .s-slider_root {
                 > .s-slider_slides-wrapper {
-                    @sugar.border.radius(ui.slider.borderRadius);
+                    @s.border.radius(ui.slider.borderRadius);
                 }
 
                 > .s-slider_ui {
@@ -72,32 +72,32 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                     > .s-slider_nav {
 
                         > * {
-                            background: sugar.color(current, uiForeground);
-                            transition: sugar.theme(ui.slider.transition);
+                            background: s.color(current, uiForeground);
+                            transition: s.theme(ui.slider.transition);
                         }
                     }
                 }
             }
 
             > .s-slider_root > .s-slider_ui > .s-slider_progress {
-                @sugar.border.radius(ui.slider.borderRadius);
+                @s.border.radius(ui.slider.borderRadius);
             
                 &:before {
-                    @sugar.border.radius(ui.slider.borderRadius);
-                    background: sugar.color(current, uiForeground, --alpha 0.3);
+                    @s.border.radius(ui.slider.borderRadius);
+                    background: s.color(current, uiForeground, --alpha 0.3);
                 }
 
                 > .s-slider_progress-bar {
-                    @sugar.border.radius(ui.slider.borderRadius);
-                    background: sugar.color(current, uiForeground);
-                    transition: sugar.theme(ui.slider.transition);
+                    @s.border.radius(ui.slider.borderRadius);
+                    background: s.color(current, uiForeground);
+                    transition: s.theme(ui.slider.transition);
                 }
             }
 
             > .s-slider_root > .s-slider_ui > .s-slider_controls {
                 .s-slider_controls-next,
                 .s-slider_controls-previous {
-                    transition: sugar.theme(ui.slider.transition);
+                    transition: s.theme(ui.slider.transition);
                 }
             }
 
@@ -105,7 +105,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
             > .s-slider_root > .s-slider_ui > .s-slider_controls .s-slider_controls-previous-arrow {
                 &:before,
                 &:after {
-                    background: sugar.color(current, uiForeground);
+                    background: s.color(current, uiForeground);
                 }
             }
 
@@ -113,8 +113,8 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
     }
     // wireframe
     vars.push(`
-        @sugar.wireframe {
-            @sugar.wireframe.background;
+        @s.wireframe {
+            @s.wireframe.background;
 
             > .s-slider_root > .s-slider_slides-wrapper:after {
                 content: '';
@@ -123,7 +123,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                 top: 0; left: 0;
                 width: 100%; height: 100%;
                 pointer-events: none;
-                @sugar.wireframe.border;
+                @s.wireframe.border;
             }
 
             > .s-slider_root {
@@ -162,4 +162,4 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
     return vars;
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRCxNQUFNLHdCQUF5QixTQUFRLHFCQUFZO0lBQy9DLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFO29CQUNGLElBQUksRUFBRSxlQUFlO29CQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDO2lCQUN6QjtnQkFDRCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLFVBQVUsQ0FBQztnQkFDbkMsT0FBTyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxVQUFVLENBQUM7YUFDdkM7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBTW9DLDZDQUFTO0FBRTlDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQkc7QUFFSCxtQkFBeUIsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixVQUFVLEVBQ1YsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLG1CQUNiLEtBQUssRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUMsSUFDbkIsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsT0FBTztJQUNQLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDMUMsSUFBSSxDQUFDLElBQUksQ0FBQzs7S0FFYixDQUFDLENBQUM7S0FDRjtJQUVELFdBQVc7SUFDWCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLFVBQVUsQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQzlDLElBQUksQ0FBQyxJQUFJLENBQUM7U0FDVCxDQUFDLENBQUM7S0FDTjtJQUVELHlGQUF5RjtJQUN6RiwyQkFBMkI7SUFDM0IsSUFBSTtJQUVKLE1BQU07SUFDTixJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQ3pDLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztTQW1EVCxDQUFDLENBQUM7S0FDTjtJQUVELFlBQVk7SUFDWixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0tBOENULENBQUMsQ0FBQztJQUVILE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUM7QUE3SUQsNEJBNklDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRCxNQUFNLHdCQUF5QixTQUFRLHFCQUFZO0lBQy9DLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFO29CQUNGLElBQUksRUFBRSxlQUFlO29CQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDO2lCQUN6QjtnQkFDRCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLFVBQVUsQ0FBQztnQkFDbkMsT0FBTyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxVQUFVLENBQUM7YUFDdkM7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBTW9DLDZDQUFTO0FBRTlDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQkc7QUFFSCxtQkFBeUIsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixVQUFVLEVBQ1YsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLG1CQUNiLEtBQUssRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUMsSUFDbkIsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsT0FBTztJQUNQLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDMUMsSUFBSSxDQUFDLElBQUksQ0FBQzs7S0FFYixDQUFDLENBQUM7S0FDRjtJQUVELFdBQVc7SUFDWCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLFVBQVUsQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQzlDLElBQUksQ0FBQyxJQUFJLENBQUM7U0FDVCxDQUFDLENBQUM7S0FDTjtJQUVELHlGQUF5RjtJQUN6Rix1QkFBdUI7SUFDdkIsSUFBSTtJQUVKLE1BQU07SUFDTixJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQ3pDLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztTQW1EVCxDQUFDLENBQUM7S0FDTjtJQUVELFlBQVk7SUFDWixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0tBOENULENBQUMsQ0FBQztJQUVILE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUM7QUE3SUQsNEJBNklDIn0=

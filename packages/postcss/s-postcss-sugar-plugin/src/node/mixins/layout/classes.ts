@@ -4,7 +4,7 @@ import { __unique } from '@coffeekraken/sugar/array';
 
 /**
  * @name           classes
- * @as              @sugar.layout.classes
+ * @as              @s.layout.classes
  * @namespace      node.mixin.layout
  * @type           PostcssMixin
  * @platform      postcss
@@ -14,10 +14,10 @@ import { __unique } from '@coffeekraken/sugar/array';
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.layout.classes
+ * @snippet         @s.layout.classes
  *
  * @example        css
- * \@sugar.layout.classes;
+ * \@s.layout.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -83,159 +83,12 @@ export default function ({
         ).code(
             `
       .s-layout-${id} {
-        @sugar.layout(${layout}, $scope: bare);
+        @s.layout(${layout}, $scope: bare);
       }
     `,
             { type: 'CssClass' },
         );
     });
-
-    const spaces = __STheme.get('space');
-
-    Object.keys(spaces).forEach((spaceName) => {
-        const clsX = `s-layout:gap-x-${spaceName}`.replace('-default', '');
-        const clsY = `s-layout:gap-y-${spaceName}`.replace('-default', '');
-        const cls = `s-layout:gap-${spaceName}`.replace('-default', '');
-
-        vars.comment(
-            () => `
-      /**
-       * @name       ${clsX}
-       * @namespace          sugar.style.helpers.layout
-       * @type          CssClass
-       * @platform      css
-       * @status        beta
-       * 
-       * This class allows you to apply some left and right gap on your s-layout items
-       * 
-       * @example     html
-       * <div class="s-layout:123 ${clsX.replace(':', ':')}">
-       *    ${Array(3)
-           .map((idx) => {
-               return `<div>I'm the area ${idx}</div>`;
-           })
-           .join('\n')}
-       * </div>
-       * 
-       * @since     2.0.0
-       * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-       */
-      `,
-        ).code(
-            `
-      .${clsX.replace(':', '-')} > * {
-        padding-left: sugar.space(${spaceName});
-        padding-right: sugar.space(${spaceName});
-      }
-    `,
-            { type: 'CssClass' },
-        );
-
-        vars.comment(
-            () => `
-      /**
-       * @name       ${clsY}
-       * @namespace          sugar.style.helpers.layout
-       * @type          CssClass
-       * @platform      css
-       * @status        beta
-       * 
-       * This class allows you to apply some left and right gap on your s-layout items
-       * 
-       * @example     html
-       * <div class="s-layout:123 ${clsY.replace(':', ':')}">
-       *    ${Array(3)
-           .map((idx) => {
-               return `<div>I'm the area ${idx}</div>`;
-           })
-           .join('\n')}
-       * </div>
-       * 
-       * @since     2.0.0
-       * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-       */
-      `,
-        ).code(
-            `
-        .${clsY.replace(':', '-')} > * {
-        padding-top: sugar.space(${spaceName});
-        padding-bottom: sugar.space(${spaceName});
-      }
-    `,
-            { type: 'CssClass' },
-        );
-
-        vars.comment(
-            () => `
-      /**
-       * @name       ${cls}
-       * @namespace          sugar.style.helpers.layout
-       * @type          CssClass
-       * @platform      css
-       * @status      beta
-       * 
-       * This class allows you to apply some left and right gap on your s-layout items
-       * 
-       * @example     html
-       * <div class="s-layout:123 ${cls.replace(':', ':')}">
-       *    ${Array(3)
-           .map((idx) => {
-               return `<div>I'm the area ${idx}</div>`;
-           })
-           .join('\n')}
-       * </div>
-       * 
-       * @since     2.0.0
-       * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-       */
-      `,
-        ).code(
-            `
-      .${cls.replace(':', '-')} > * {
-        padding: sugar.space(${spaceName});
-      }
-    `,
-            { type: 'CssClass' },
-        );
-    });
-
-    vars.comment(
-        () => `
-     /**
-       * @name       s-layout:gap-between
-       * @namespace          sugar.style.helpers.layout
-       * @type          CssClass
-       * @platform      css
-       * @status      beta
-       * 
-       * This class allows you to specify that you want only gaps between layout items
-       * 
-       * @example     html
-       * <div class="s-layout:123 s-layout:gap-between">
-       *    ${Array(3)
-           .map((idx) => {
-               return `<div>I'm the area ${idx}</div>`;
-           })
-           .join('\n')}
-       * </div>
-       * 
-       * @since     2.0.0
-       * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-       */
-      `,
-    ).code(
-        `
-      .s-layout-gap-between > * {
-        &:first-child {
-          padding-left: 0 !important;
-        }
-        &:last-child {
-          padding-right: 0 !important;
-        }
-      }
-  `,
-        { type: 'CssClass' },
-    );
 
     // align items
     ['start', 'end', 'center', 'stretch'].forEach((align) => {

@@ -384,7 +384,7 @@ export default class SCodeExample extends __SLitComponent {
                                 : 'hljs'}">${
                                 // @ts-ignore
                                 item.highlightedCode
-                                    ? unsafeHTML(item.highlightedCode)
+                                    ? unsafeHTML(item.highlightedCode.trim())
                                     : item.code.trim()
                             }</code>
                         </pre>

@@ -2,20 +2,20 @@ import __SInterface from '@coffeekraken/s-interface';
 import __faker from 'faker';
 /**
  * @name           classes
- * @as          @sugar.display.classes
+ * @as          @s.display.classes
  * @namespace      node.mixin.display
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the display helper classes like s-display:block, etc...
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.display.classes
+ * @snippet         @s.display.classes
  *
  * @example        css
- * \@sugar.display.classes;
+ * \@s.display.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -36,7 +36,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/display
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply the some display like \`inline\`, \`inline-block\`, \`block\`, etc...
         * on any HTMLElement
@@ -47,7 +47,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.display.classes;
+        * \\@s.display.classes;
         * 
         * @cssClass                 s-display:block           Apply the display \`block\` to any HTMLElement
         * @cssClass                 s-display:inline-block           Apply the display \`inline-block\` to any HTMLElement
@@ -125,7 +125,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
        * @namespace          sugar.style.helpers.display
        * @type            CssClass
        * @platform        css
-       * @status          beta
+       * @status          stable
        * 
        * This class allows you to apply the value "<yellow>block</yellow>" to the display property on any HTMLElement
        * 
@@ -148,7 +148,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
        * @namespace          sugar.style.helpers.display
        * @type            CssClass
        * @platform           css
-       * @status               beta
+       * @status               stable
        * 
        * This class allows you to apply the value "<yellow>inline-block</yellow>" to the display property on any HTMLElement
        * 
@@ -171,7 +171,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * @namespace          sugar.style.helpers.display
          * @type            CssClass
          * @platform           css
-         * @status               beta
+         * @status               stable
          * 
          * This class allows you to apply the value "<yellow>contents</yellow>" to the display property on any HTMLElement
          * 
@@ -194,7 +194,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * @namespace          sugar.style.helpers.display
          * @type            CssClass
          * @platform           css
-         * @status               beta
+         * @status               stable
          * 
          * This class allows you to apply the value "<yellow>flex</yellow>" to the display property on any HTMLElement
          * 
@@ -217,7 +217,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
        * @namespace          sugar.style.helpers.display
        * @type            CssClass
        * @platform           css
-       * @status               beta
+       * @status               stable
        * 
        * This class allows you to apply the value "<yellow>grid</yellow>" to the display property on any HTMLElement
        * 
@@ -240,7 +240,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * @namespace          sugar.style.helpers.display
          * @type            CssClass
          * @platform           css
-         * @status               beta
+         * @status               stable
          * 
          * This class allows you to apply the value "<yellow>inline-flex</yellow>" to the display property on any HTMLElement
          * 
@@ -263,7 +263,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * @namespace          sugar.style.helpers.display
          * @type            CssClass
          * @platform           css
-         * @status               beta
+         * @status               stable
          * 
          * This class allows you to apply the value "<yellow>inline-grid</yellow>" to the display property on any HTMLElement
          * 
@@ -286,7 +286,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * @namespace          sugar.style.helpers.display
          * @type            CssClass
          * @platform           css
-         * @status               beta
+         * @status               stable
          * 
          * This class allows you to apply the value "<yellow>none</yellow>" to the display property on any HTMLElement
          * 

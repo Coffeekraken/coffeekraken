@@ -13,7 +13,7 @@ class postcssSugarPluginWireframebackgroundMixinInterface extends s_interface_1.
 exports.interface = postcssSugarPluginWireframebackgroundMixinInterface;
 /**
  * @name           background
- * @as              @sugar.wireframe.background
+ * @as              @s.wireframe.background
  * @namespace      node.mixin.wireframe
  * @type           PostcssMixin
  * @platform      postcss
@@ -21,12 +21,12 @@ exports.interface = postcssSugarPluginWireframebackgroundMixinInterface;
  *
  * This mixin gives you back the wireframe background statement that depend on you themeWireframe config
  *
- * @snippet         @sugar.wireframe.background
- * \@sugar.wireframe.background;
+ * @snippet         @s.wireframe.background
+ * \@s.wireframe.background;
  *
  * @example        css
  * .myCoolItem {
- *  \@sugar.wireframe.background;
+ *  \@s.wireframe.background;
  * }
  *
  * @since       2.0.0
@@ -36,10 +36,10 @@ function default_1({ params, atRule, replaceWith, }) {
     const finalParams = Object.assign({}, (params !== null && params !== void 0 ? params : {}));
     const vars = [];
     vars.push(`
-        background-color: sugar.wireframe.background(light);
+        background-color: s.wireframe.background(light);
 
-        @sugar.theme dark {
-            background-color: sugar.wireframe.background(dark);
+        @s.theme dark {
+            background-color: s.wireframe.background(dark);
         }
     `);
     return vars;

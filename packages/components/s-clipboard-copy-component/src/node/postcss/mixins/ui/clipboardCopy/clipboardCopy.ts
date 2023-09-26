@@ -30,11 +30,11 @@ export { postcssUiClipboardCopyInterface as interface };
  *
  * Apply the clipbord copy style to any s-clipboard-copy element
  *
- * @snippet         @sugar.ui.clipboardCopy($1);
- * 
+ * @snippet         @s.ui.clipboardCopy($1);
+ *
  * @example     css
  * .s-clipboard-copy {
- *    @sugar.ui.clipboardCopy;
+ *    @s.ui.clipboardCopy;
  * }
  *
  * @since      2.0.0
@@ -69,10 +69,10 @@ export default function ({
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
             .s-clipboard-copy_root[state='success'] {
-                color: sugar.color(success);
+                color: s.color(success);
             }
             .s-clipboard-copy_root[state='error'] {
-                color: sugar.color(error);
+                color: s.color(error);
             }
         `);
     }

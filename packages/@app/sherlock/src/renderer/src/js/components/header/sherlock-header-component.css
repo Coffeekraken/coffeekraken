@@ -6,9 +6,9 @@ sherlock-header {
     display: flex;
     height: 80px;
     align-items: center;
-    background: sugar.color(main, background, --darken 5% --alpha 0.4);
+    background: s.color(main, background, --darken 5% --alpha 0.4);
     backdrop-filter: blur(10px);
-    padding-inline: sugar.padding(30);
+    padding-inline: s.padding(30);
 
     ._spacer {
         flex-grow: 1;
@@ -25,12 +25,12 @@ sherlock-header {
 
     ._breadcrumb {
         display: flex;
-        gap: sugar.margin(20);
-        padding-inline-start: sugar.margin(30);
+        gap: s.margin(20);
+        padding-inline-start: s.margin(30);
 
         ._item:not(:last-child):after {
             content: '/';
-            margin-inline-start: sugar.margin(20);
+            margin-inline-start: s.margin(20);
             opacity: 0.3;
         }
     }
@@ -38,7 +38,7 @@ sherlock-header {
     ._user-info {
         display: flex;
         align-items: center;
-        gap: sugar.margin(20);
+        gap: s.margin(20);
         user-select: none;
         cursor: pointer;
 
@@ -48,10 +48,10 @@ sherlock-header {
     }
 
     ._title {
-        font-size: sugar.font.size(50);
+        font-size: s.font.size(50);
         position: relative;
         top: 1px;
-        margin-inline-start: sugar.margin(20);
-        color: sugar.color(accent);
+        margin-inline-start: s.margin(20);
+        color: s.color(accent);
     }
 }

@@ -4,7 +4,7 @@ import __faker from 'faker';
 
 /**
  * @name          classes
- * @as              @sugar.ui.radio.classes
+ * @as              @s.ui.radio.classes
  * @namespace     node.mixin.ui.radio
  * @type               PostcssMixin
  * @interface     ./classes          interface
@@ -18,10 +18,10 @@ import __faker from 'faker';
  * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.radio.classes
+ * @snippet         @s.ui.radio.classes
  *
  * @example     css
- * \@sugar.ui.form.classes;
+ * \@s.ui.form.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -102,10 +102,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.ui.radio.classes;
+        * \\@s.ui.radio.classes;
         * 
         * .my-radio {
-        *   \@sugar.ui.radio;
+        *   \@s.ui.radio;
         * }
         * 
         ${finalParams.lnfs
@@ -216,7 +216,7 @@ export default function ({
         ).code(
             `
             .s-radio {
-                @sugar.ui.radio($scope: bare);
+                @s.ui.radio($scope: bare);
             }
             `,
             {
@@ -258,7 +258,7 @@ export default function ({
             ).code(
                 `
             .${cls}:not(.s-bare) {
-                @sugar.ui.radio($lnf: ${lnf}, $scope: lnf);
+                @s.ui.radio($lnf: ${lnf}, $scope: lnf);
             }
             `,
                 {
@@ -290,9 +290,9 @@ export default function ({
        `,
         ).code(
             `
-            @sugar.format.text {
+            @s.format.text {
                 input[type="radio"] {
-                    @sugar.ui.radio($scope: '${finalParams.scope.join(',')}');
+                    @s.ui.radio($scope: '${finalParams.scope.join(',')}');
                 } 
             }
         `,
@@ -326,7 +326,7 @@ export default function ({
        `,
         ).code(
             `
-            @sugar.rhythm.vertical {
+            @s.rhythm.vertical {
                 input[type="radio"], .s-radio {
                     ${__STheme.jsObjectToCssProperties(
                         __STheme.get('ui.form.rhythmVertical'),

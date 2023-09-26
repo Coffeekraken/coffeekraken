@@ -2,23 +2,23 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           hidden
- * @as              @sugar.visually.hidden
+ * @as              @s.visually.hidden
  * @namespace      node.mixin.visually
  * @type           PostcssMixin
  * @interface      ./hidden
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin allows you to apply a css that make the element visually hidden but not really
  * hidden like when make use of `display: none;`.
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.visually.hidden
+ * @snippet         @s.visually.hidden
  *
  * @example        css
  * .my-element {
- *  \@sugar.visually.hidden;
+ *  \@s.visually.hidden;
  * }
  *
  * @since       2.0.0
@@ -38,7 +38,7 @@ export interface postcssSugarPluginVisuallyHiddenMixinParams {}
  * @name           transition
  * @namespace      mixins.transition
  * @type           Mixin
- * @status        beta
+ * @status        stable
  *
  * This mixin allows apply a transition specified in the theme config like "fast", "slow" and "slow" or others you've been defined
  *
@@ -46,7 +46,7 @@ export interface postcssSugarPluginVisuallyHiddenMixinParams {}
  *
  * @example        css
  * .my-cool-element {
- *    \@sugar.transition(fast);
+ *    \@s.transition(fast);
  * }
  *
  * @example       html

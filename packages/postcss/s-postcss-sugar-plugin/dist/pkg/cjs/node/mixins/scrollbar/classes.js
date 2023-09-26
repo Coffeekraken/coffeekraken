@@ -9,21 +9,21 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 const faker_1 = __importDefault(require("faker"));
 /**
  * @name           classes
- * @as              @sugar.scrollbar.classes
+ * @as              @s.scrollbar.classes
  * @namespace      node.mixin.scale
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the scale helper classes like s-scale:01, s-scale:12, etc.
  * The generated scales are specified in the config.theme.scale configuration stack
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.scrollbar.classes
+ * @snippet         @s.scrollbar.classes
  *
  * @example        css
- * \@sugar.scale.classes;
+ * \@s.scale.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -45,7 +45,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/scrollbar
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows to apply a custom scrollbar that follows your theme settings.
         * It is based on the \`theme.ui.scrollbar\` settings.
@@ -56,11 +56,11 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.scrollbar.classes;
+        * \\@s.scrollbar.classes;
         * 
         * .my-element {
-        *   \\@sugar.scrollbar.hide;
-        *   \\@sugar.scrollbar;
+        *   \\@s.scrollbar.hide;
+        *   \\@s.scrollbar;
         * } 
         * 
         * @cssClass     s-scrollbar         Apply the custom scrollbar
@@ -85,7 +85,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * @namespace          sugar.style.helpers.scrollbar
             * @type               CssClass
             * @platform             css
-            * @status             beta
+            * @status             stable
             * 
             * This class allows to apply the custom scrollbar on any HTMLElement.
             * This scrollbar is defined in the \`theme.ui.scrollbar\` settings.
@@ -100,7 +100,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             */
         `).code(`
             .s-scrollbar {
-                @sugar.scrollbar();
+                @s.scrollbar();
             }`, { type: 'CssClass' });
     return vars;
 }

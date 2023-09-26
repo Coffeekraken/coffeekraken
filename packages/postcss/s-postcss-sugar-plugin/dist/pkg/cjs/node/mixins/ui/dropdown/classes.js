@@ -7,7 +7,7 @@ exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 /**
  * @name          classes
- * @as          @sugar.ui.dropdown.classes
+ * @as          @s.ui.dropdown.classes
  * @namespace     node.mixin.ui.dropdown
  * @type               PostcssMixin
  * @interface     ./classes          interface
@@ -19,10 +19,10 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.dropdown.classes
+ * @snippet         @s.ui.dropdown.classes
  *
  * @example     css
- * \@sugar.ui.dropdown.classes;
+ * \@s.ui.dropdown.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -65,10 +65,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.ui.dropdown.classes;
+        * \\@s.ui.dropdown.classes;
         * 
         * .my-dropdown {
-        *   \@sugar.ui.dropdown;
+        *   \@s.ui.dropdown;
         * }
         * 
         * @cssClass             s-dropdown-container        The container of the dropdown that will trigger the display, hide, etc...
@@ -224,7 +224,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         */
        `).code(`
             .s-dropdown {
-                @sugar.ui.dropdown($scope: bare);
+                @s.ui.dropdown($scope: bare);
             }
             `, {
             type: 'CssClass',
@@ -254,7 +254,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         */
        `).code(`
             .s-dropdown:not(.s-bare) {
-                @sugar.ui.dropdown($scope: lnf);
+                @s.ui.dropdown($scope: lnf);
             }
             `, {
             type: 'CssClass',
@@ -284,7 +284,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
       */
      `).code(`
         .s-dropdown {
-            @sugar.ui.dropdown($position: bottom, $scope: position);
+            @s.ui.dropdown($position: bottom, $scope: position);
         }
         `, {
         type: 'CssClass',
@@ -313,7 +313,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
       */
      `).code(`
         .s-dropdown-bottom-start {
-            @sugar.ui.dropdown($position: bottom-start, $scope: position);
+            @s.ui.dropdown($position: bottom-start, $scope: position);
         }
         `, {
         type: 'CssClass',
@@ -342,7 +342,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
       */
      `).code(`
         .s-dropdown-bottom-end {
-            @sugar.ui.dropdown($position: bottom-end, $scope: position);
+            @s.ui.dropdown($position: bottom-end, $scope: position);
         }
         `, {
         type: 'CssClass',
@@ -371,7 +371,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
       */
      `).code(`
         .s-dropdown-top {
-            @sugar.ui.dropdown($position: top, $scope: position);
+            @s.ui.dropdown($position: top, $scope: position);
         }
         `, {
         type: 'CssClass',
@@ -400,7 +400,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
       */
      `).code(`
         .s-dropdown-top-start {
-            @sugar.ui.dropdown($position: top-start, $scope: position);
+            @s.ui.dropdown($position: top-start, $scope: position);
         }
         `, {
         type: 'CssClass',
@@ -429,7 +429,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
       */
      `).code(`
         .s-dropdown-top-end {
-            @sugar.ui.dropdown($position: top-end, $scope: position);
+            @s.ui.dropdown($position: top-end, $scope: position);
         }
         `, {
         type: 'CssClass',

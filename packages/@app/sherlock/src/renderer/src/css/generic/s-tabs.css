@@ -1,4 +1,4 @@
 .s-tabs {
-    background: sugar.color(main, surface);
-    @sugar.color (complementary);
+    background: s.color(main, surface);
+    @s.color (complementary);
 }

@@ -12,7 +12,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @type           PostcssFunction
  * @platform      postcss
  * @interface       ./noise
- * @status        beta
+ * @status        alpha
  *
  * This function allows you to get a noise effect image back.
  *
@@ -21,11 +21,11 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @param       {String}        [height='5000px']       The height of the noise
  * @return        {Css}         The generated css
  *
- * @snippet         sugar.filter.noise();
+ * @snippet         s.filter.noise();
  *
  * @example        css
  * .my-element {
- *    filter: sugar.filter.noise()
+ *    filter: s.filter.noise();
  * }
  *
  * @since       2.0.0

@@ -13,11 +13,11 @@ class postcssSugarPluginScopePreventMixinInterface extends s_interface_1.default
 exports.interface = postcssSugarPluginScopePreventMixinInterface;
 /**
  * @name           prevent
- * @as          @sugar.lod.prevent
+ * @as          @s.lod.prevent
  * @namespace      node.mixin.scope
  * @type           PostcssMixin
  * @platform        css
- * @status        beta
+ * @status        alpha
  *
  * This mixin allows you to mark some css as not using the "lod" feature.
  * This mean that your inside rules selectors will not be affected and will not
@@ -25,13 +25,13 @@ exports.interface = postcssSugarPluginScopePreventMixinInterface;
  *
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  *
- * @snippet         @sugar.lod.prevent
- * \@sugar.lod.prevent {
+ * @snippet         @s.lod.prevent
+ * \@s.lod.prevent {
  *      $1
  * }
  *
  * @example        css
- * \@sugar.lod.prevent() {
+ * \@s.lod.prevent() {
  *      // ...
  * }
  *

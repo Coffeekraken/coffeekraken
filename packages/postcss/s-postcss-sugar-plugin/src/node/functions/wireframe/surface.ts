@@ -8,17 +8,17 @@ import __STheme from '@coffeekraken/s-theme';
  * @type          PostcssFunction
  * @platform      postcss
  * @interface    ./surface
- * @status        beta
+ * @status        alpha
  *
  * This function allows you to get a surface value for your wireframe depending on your theme config
  *
  * @return      {Css}                   The corresponding css
  *
- * @snippet         sugar.wireframe.surface
+ * @snippet         s.wireframe.surface
  *
  * @example       css
  * .my-element {
- *    background: sugar.wireframe.surface();
+ *    background: s.wireframe.surface();
  * }
  *
  * @since     2.0.0

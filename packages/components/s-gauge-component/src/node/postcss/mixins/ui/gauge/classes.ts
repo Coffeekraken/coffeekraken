@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name          classes
- * @as              @sugar.ui.gauge.classes
+ * @as              @s.ui.gauge.classes
  * @namespace     node.mixin.ui.gauge
  * @type          PostcssMixin
  * @interface     ./classes
@@ -14,10 +14,10 @@ import __SInterface from '@coffeekraken/s-interface';
  * @param       {('bare'|'lnf')[]}        [scope=['bare','lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
- * @snippet         @sugar.ui.gauge.classes
+ * @snippet         @s.ui.gauge.classes
  *
  * @example       css
- * \@sugar.ui.gauge.classes();
+ * \@s.ui.gauge.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -80,10 +80,10 @@ export default function ({
         * @support      edge
         * 
         * @install          css
-        * \\@sugar.ui.gauge.classes;
+        * \\@s.ui.gauge.classes;
         * 
         * .my-gauge {
-        *   \@sugar.ui.gauge;
+        *   \@s.ui.gauge;
         * }
         * 
         * @cssClass             s-gauge                Apply the gauge style
@@ -116,7 +116,7 @@ export default function ({
         ).code(
             `
           .s-gauge {
-            @sugar.ui.gauge($scope: 'bare');
+            @s.ui.gauge($scope: 'bare');
           }
       `,
             { type: 'CssClass' },
@@ -141,7 +141,7 @@ export default function ({
         ).code(
             `
         .s-gauge:not(.s-bare) {
-            @sugar.ui.gauge($scope: 'lnf');
+            @s.ui.gauge($scope: 'lnf');
         }
     `,
             { type: 'CssClass' },

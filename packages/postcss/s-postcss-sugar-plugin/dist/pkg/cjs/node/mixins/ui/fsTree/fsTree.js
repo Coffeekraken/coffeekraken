@@ -7,7 +7,7 @@ exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 /**
  * @name          fsTree
- * @as              @sugar.ui.fsTree
+ * @as              @s.ui.fsTree
  * @namespace    node.mixin.ui.fsTree
  * @type               PostcssMixin
  * @interface     ./fsTree          interface
@@ -19,11 +19,11 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.fsTree
+ * @snippet         @s.ui.fsTree
  *
  * @example     css
  * .my-fsTree {
- *    @sugar.ui.fsTree;
+ *    @s.ui.fsTree;
  * }
  *
  * @since      2.0.0
@@ -62,7 +62,7 @@ function default_1({ params, atRule, atRootStart, replaceWith, }) {
     //     left: calc(0.5em * var(--s-fs-tree-inline-space-ratio, 1));
     //     width: 1em;
     //     height: 1px;
-    //     background-color: sugar.color(current, border);
+    //     background-color: s.color(current, border);
     // }
     // &:before {
     //     content: '';
@@ -73,11 +73,11 @@ function default_1({ params, atRule, atRootStart, replaceWith, }) {
     //     top: 0;
     //     left: 0.5em;
     //     width: 1px; height: 100%;
-    //     background-color: sugar.color(current, border);
+    //     background-color: s.color(current, border);
     // }
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
-            font-size: sugar.font.size(30);
+            font-size: s.font.size(30);
             user-select: none;
 
             li > div {
@@ -98,10 +98,10 @@ function default_1({ params, atRule, atRootStart, replaceWith, }) {
                 position: relative;
 
                 > div {
-                    padding-inline: sugar.padding(ui.fsTree.paddingInline);
-                    padding-block: sugar.padding(ui.fsTree.paddingBlock);
+                    padding-inline: s.padding(ui.fsTree.paddingInline);
+                    padding-block: s.padding(ui.fsTree.paddingBlock);
                     text-overflow: ellipsis;
-                    @sugar.shape();
+                    @s.shape();
                 }
 
                 &:not(.s-disabled &) {
@@ -136,7 +136,7 @@ function default_1({ params, atRule, atRootStart, replaceWith, }) {
 
 
                 & > [tabindex]:focus:not(:hover):not(.s-disabled &) {
-                    @sugar.outline;
+                    @s.outline;
                 }
 
                 & > ul,
@@ -148,12 +148,12 @@ function default_1({ params, atRule, atRootStart, replaceWith, }) {
 
                     > ul > li:before,
                     > ol > li:before {
-                        background-color: sugar.color(current, --alpha 0.5);
+                        background-color: s.color(current, --alpha 0.5);
                     }
                 }
             }
 
-            @sugar.direction.rtl {
+            @s.direction.rtl {
                 ul, ol {
                     li > div {
                         &:before {
@@ -179,7 +179,7 @@ function default_1({ params, atRule, atRootStart, replaceWith, }) {
         vars.push(`
             li:not(.s-disabled) {
                 > div:hover {
-                    background-color: sugar.color(current, surface);
+                    background-color: s.color(current, surface);
                 }
             }
         `);
@@ -187,4 +187,4 @@ function default_1({ params, atRule, atRootStart, replaceWith, }) {
     return vars;
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFFSCxNQUFNLG1DQUFvQyxTQUFRLHFCQUFZO0lBQzFELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFO29CQUNGLElBQUksRUFBRSxlQUFlO29CQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDO2lCQUN6QjtnQkFDRCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxDQUFDO2dCQUN2QixPQUFPLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxDQUFDO2FBQzNCO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQU0rQyx3REFBUztBQUV6RCxtQkFBeUIsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEVBQ1gsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLG1CQUNiLEtBQUssRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUMsSUFDbkIsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsV0FBVyxDQUFDOzs7O0tBSVgsQ0FBQyxDQUFDO0lBRUgsWUFBWTtJQUNaLG1CQUFtQjtJQUNuQixzQkFBc0I7SUFDdEIsd0JBQXdCO0lBQ3hCLDBCQUEwQjtJQUMxQixtQkFBbUI7SUFDbkIsaUJBQWlCO0lBQ2pCLGtFQUFrRTtJQUNsRSxrQkFBa0I7SUFDbEIsbUJBQW1CO0lBQ25CLHNEQUFzRDtJQUN0RCxJQUFJO0lBRUosYUFBYTtJQUNiLG1CQUFtQjtJQUNuQixzQkFBc0I7SUFDdEIsd0JBQXdCO0lBQ3hCLDBCQUEwQjtJQUMxQixtQkFBbUI7SUFDbkIsY0FBYztJQUNkLG1CQUFtQjtJQUNuQixnQ0FBZ0M7SUFDaEMsc0RBQXNEO0lBQ3RELElBQUk7SUFFSixJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQzFDLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7U0E4RlQsQ0FBQyxDQUFDO0tBQ047SUFFRCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQ3pDLElBQUksQ0FBQyxJQUFJLENBQUM7O1NBRVQsQ0FBQyxDQUFDO1FBRUgsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7O1NBTVQsQ0FBQyxDQUFDO0tBQ047SUFFRCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDO0FBbEtELDRCQWtLQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFFSCxNQUFNLG1DQUFvQyxTQUFRLHFCQUFZO0lBQzFELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFO29CQUNGLElBQUksRUFBRSxlQUFlO29CQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDO2lCQUN6QjtnQkFDRCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxDQUFDO2dCQUN2QixPQUFPLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxDQUFDO2FBQzNCO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQU0rQyx3REFBUztBQUV6RCxtQkFBeUIsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEVBQ1gsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLG1CQUNiLEtBQUssRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUMsSUFDbkIsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsV0FBVyxDQUFDOzs7O0tBSVgsQ0FBQyxDQUFDO0lBRUgsWUFBWTtJQUNaLG1CQUFtQjtJQUNuQixzQkFBc0I7SUFDdEIsd0JBQXdCO0lBQ3hCLDBCQUEwQjtJQUMxQixtQkFBbUI7SUFDbkIsaUJBQWlCO0lBQ2pCLGtFQUFrRTtJQUNsRSxrQkFBa0I7SUFDbEIsbUJBQW1CO0lBQ25CLGtEQUFrRDtJQUNsRCxJQUFJO0lBRUosYUFBYTtJQUNiLG1CQUFtQjtJQUNuQixzQkFBc0I7SUFDdEIsd0JBQXdCO0lBQ3hCLDBCQUEwQjtJQUMxQixtQkFBbUI7SUFDbkIsY0FBYztJQUNkLG1CQUFtQjtJQUNuQixnQ0FBZ0M7SUFDaEMsa0RBQWtEO0lBQ2xELElBQUk7SUFFSixJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQzFDLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7U0E4RlQsQ0FBQyxDQUFDO0tBQ047SUFFRCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQ3pDLElBQUksQ0FBQyxJQUFJLENBQUM7O1NBRVQsQ0FBQyxDQUFDO1FBRUgsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7O1NBTVQsQ0FBQyxDQUFDO0tBQ047SUFFRCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDO0FBbEtELDRCQWtLQyJ9

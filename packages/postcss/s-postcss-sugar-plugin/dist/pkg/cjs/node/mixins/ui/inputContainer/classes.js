@@ -8,7 +8,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const faker_1 = __importDefault(require("faker"));
 /**
  * @name          classes
- * @as              @sugar.ui.inputContainer.classes
+ * @as              @s.ui.inputContainer.classes
  * @namespace     node.mixin.ui.inputContainer
  * @type               PostcssMixin
  * @interface     ./classes          interface
@@ -22,10 +22,10 @@ const faker_1 = __importDefault(require("faker"));
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.inputContainer.classes
+ * @snippet         @s.ui.inputContainer.classes
  *
  * @example     css
- * \@sugar.ui.inputContainer.classes;
+ * \@s.ui.inputContainer.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -73,10 +73,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.ui.inputContainer.classes;
+        * \\@s.ui.inputContainer.classes;
         * 
         * .my-inputContainer {
-        *   \@sugar.ui.inputContainer;
+        *   \@s.ui.inputContainer;
         * }
         * 
         ${finalParams.lnfs
@@ -176,14 +176,14 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
       */
      `).code(`
         .s-input-container-group {
-            @sugar.ui.inputContainer($lnf: group, $scope: bare);
+            @s.ui.inputContainer($lnf: group, $scope: bare);
         }
         `);
     }
     if (finalParams.scope.includes('lnf')) {
         vars.code(`
         .s-input-container-group:not(.s-bare) {
-            @sugar.ui.inputContainer($lnf: group, $scope: lnf);
+            @s.ui.inputContainer($lnf: group, $scope: lnf);
         }
         `, {
             type: 'CssClass',
@@ -213,7 +213,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
       */
      `).code(`
         .s-input-container-addon {
-            @sugar.ui.inputContainer($lnf: addon, $scope: bare);
+            @s.ui.inputContainer($lnf: addon, $scope: bare);
         }
         `, {
             type: 'CssClass',
@@ -222,7 +222,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     if (finalParams.scope.includes('lnf')) {
         vars.code(`
         .s-input-container-addon:not(.s-bare) {
-            @sugar.ui.inputContainer($lnf: addon, $scope: lnf);
+            @s.ui.inputContainer($lnf: addon, $scope: lnf);
         }
         `, {
             type: 'CssClass',

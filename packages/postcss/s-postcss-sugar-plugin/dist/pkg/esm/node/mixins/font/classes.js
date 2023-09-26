@@ -3,20 +3,20 @@ import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 /**
  * @name           classes
- * @as              @sugar.font.classes
+ * @as              @s.font.classes
  * @namespace      node.mixin.font
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate font helper classes like s-font:title, s-font:20, etc...
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.font.classes
+ * @snippet         @s.font.classes
  *
  * @example        css
- * \@sugar.font.classes;
+ * \@s.font.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -60,7 +60,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @type               CssClass
         * @menu           Styleguide / Fonts        /styleguide/fonts/families
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * This class allows you to apply a font to any HTMLElement
         * 
@@ -70,11 +70,11 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.font.classes;
+        * \\@s.font.classes;
         * 
         * .my-element {
-        *   \\@sugar.font.family(title);
-        *   \\@sugar.font.size(30);
+        *   \\@s.font.family(title);
+        *   \\@s.font.size(30);
         * }  
         * 
         ${Object.keys(fontsFamiliesObj)
@@ -100,7 +100,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @type               CssClass
         * @menu           Styleguide / Fonts        /styleguide/fonts/sizes
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * This class allows you to apply a font size to any HTMLElement
         * 
@@ -133,7 +133,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @type               CssClass
         * @menu           Styleguide / Fonts        /styleguide/fonts/styles
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * This class allows you to apply a font style to any HTMLElement
         * 
@@ -164,7 +164,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @type               CssClass
         * @menu           Styleguide / Fonts        /styleguide/fonts/weights
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * This class allows you to apply a font weight to any HTMLElement
         * 
@@ -204,7 +204,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @type               CssClass
         * @menu           Styleguide / Fonts        /styleguide/fonts/stretches
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * This class allows you to apply a font stretch to any HTMLElement
         * 
@@ -239,7 +239,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @type               CssClass
         * @menu           Styleguide / Fonts        /styleguide/fonts/resets
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to **reset fonts** like \`size\`, \`family\`, etc...
         * 
@@ -263,7 +263,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @namespace          sugar.style.helpers.font
         * @type               CssClass
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * This class allows you to apply the font "<yellow>${fontName}</yellow>" to any HTMLElement
         * 
@@ -275,7 +275,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         */
        `).code(`
 .s-font-${fontName} {
-    @sugar.font.family(${fontName});
+    @s.font.family(${fontName});
 }`, { type: 'CssClass' });
     });
     Object.keys(fontSizesObj).forEach((sizeName) => {
@@ -286,7 +286,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
   * @namespace          sugar.style.mixins.font
   * @type               CssClass
   * @platform         css
-  * @status           beta
+  * @status           stable
   * 
   * This class allows you to apply the font size "<yellow>${sizeName}</yellow>" to any HTMLElement
   * 
@@ -295,7 +295,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
   */
  `).code(`
 .s-font-${sizeName} {
-    @sugar.font.size(${sizeName});
+    @s.font.size(${sizeName});
 }`, { type: 'CssClass' });
     });
     // reset
@@ -304,7 +304,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
   * @namespace          sugar.style.mixins.font
   * @type               CssClass
   * @platform         css
-  * @status           beta
+  * @status           stable
   * 
   * This class allows you to reset the font size to 1rem on any HTMLElement
   * 
@@ -316,14 +316,14 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
   */
  `).code(`
 .s-font-reset-size {
-  font-size: sugar.scalable(1rem);
+  font-size: s.scalable(1rem);
 }`);
     vars.comment(() => `/**
   * @name          s-font:reset-family
   * @namespace          sugar.style.mixins.font
   * @type               CssClass
   * @platform         css
-  * @status           beta
+  * @status           stable
   * 
   * This class allows you to reset the font family to default on any HTMLElement
   * 
@@ -335,7 +335,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
   */
  `).code(`
 .s-font-reset-family {
-  @sugar.font.family(default);
+  @s.font.family(default);
 }`, { type: 'CssClass' });
     fontStretchProps.forEach((value) => {
         vars.comment(() => `/**
@@ -343,7 +343,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @namespace          sugar.style.mixins.font
             * @type               CssClass
             * @platform         css
-            * @status           beta
+            * @status           stable
             * 
             * This class allows you to apply the \`font-stretch: ${value}\` value to any HTMLElement
             * 
@@ -363,7 +363,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @namespace          sugar.style.mixins.font
             * @type               CssClass
             * @platform         css
-            * @status           beta
+            * @status           stable
             * 
             * This class allows you to apply the \`font-style: italic\` css value on any HTMLElement
             * 
@@ -382,7 +382,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @namespace          sugar.style.mixins.font
             * @type               CssClass
             * @platform         css
-            * @status           beta
+            * @status           stable
             * 
             * This class allows you to apply the \`font-style: oblique\` css value on any HTMLElement
             * 
@@ -402,7 +402,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @namespace          sugar.style.mixins.font
             * @type               CssClass
             * @platform         css
-            * @status           beta
+            * @status           stable
             * 
             * This class allows you to apply the \`font-weight: ${value.replace('weight-', '')}\` value to any HTMLElement
             * 
@@ -419,4 +419,4 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     });
     return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBQzdDLE9BQU8sT0FBTyxNQUFNLE9BQU8sQ0FBQztBQUU1Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW1CRztBQUVILE1BQU0sc0NBQXVDLFNBQVEsWUFBWTtJQUM3RCxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPLEVBQUUsQ0FBQztJQUNkLENBQUM7Q0FDSjtBQUlELE9BQU8sRUFBRSxzQ0FBc0MsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUUvRCxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sT0FBTyxFQUNQLFdBQVcsR0FNZDtJQUNHLE1BQU0sV0FBVyxxQkFDVixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFHLElBQUksT0FBTyxFQUFFLENBQUM7SUFFM0IsTUFBTSxnQkFBZ0IsR0FBRyxRQUFRLENBQUMsR0FBRyxDQUFDLGFBQWEsQ0FBQyxFQUNoRCxZQUFZLEdBQUcsUUFBUSxDQUFDLEdBQUcsQ0FBQyxXQUFXLENBQUMsRUFDeEMsZ0JBQWdCLEdBQUc7UUFDZixpQkFBaUI7UUFDakIsaUJBQWlCO1FBQ2pCLFdBQVc7UUFDWCxnQkFBZ0I7UUFDaEIsZUFBZTtRQUNmLFVBQVU7UUFDVixnQkFBZ0I7UUFDaEIsZ0JBQWdCO0tBQ25CLEVBQ0QsZUFBZSxHQUFHO1FBQ2QsTUFBTTtRQUNOLFFBQVE7UUFDUixTQUFTO1FBQ1QsWUFBWTtRQUNaLFlBQVk7UUFDWixZQUFZO1FBQ1osWUFBWTtRQUNaLFlBQVk7UUFDWixZQUFZO1FBQ1osWUFBWTtRQUNaLFlBQVk7UUFDWixZQUFZO0tBQ2YsQ0FBQztJQUVOLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBQzdDLE9BQU8sT0FBTyxNQUFNLE9BQU8sQ0FBQztBQUU1Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW1CRztBQUVILE1BQU0sc0NBQXVDLFNBQVEsWUFBWTtJQUM3RCxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPLEVBQUUsQ0FBQztJQUNkLENBQUM7Q0FDSjtBQUlELE9BQU8sRUFBRSxzQ0FBc0MsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUUvRCxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sT0FBTyxFQUNQLFdBQVcsR0FNZDtJQUNHLE1BQU0sV0FBVyxxQkFDVixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFHLElBQUksT0FBTyxFQUFFLENBQUM7SUFFM0IsTUFBTSxnQkFBZ0IsR0FBRyxRQUFRLENBQUMsR0FBRyxDQUFDLGFBQWEsQ0FBQyxFQUNoRCxZQUFZLEdBQUcsUUFBUSxDQUFDLEdBQUcsQ0FBQyxXQUFXLENBQUMsRUFDeEMsZ0JBQWdCLEdBQUc7UUFDZixpQkFBaUI7UUFDakIsaUJBQWlCO1FBQ2pCLFdBQVc7UUFDWCxnQkFBZ0I7UUFDaEIsZUFBZTtRQUNmLFVBQVU7UUFDVixnQkFBZ0I7UUFDaEIsZ0JBQWdCO0tBQ25CLEVBQ0QsZUFBZSxHQUFHO1FBQ2QsTUFBTTtRQUNOLFFBQVE7UUFDUixTQUFTO1FBQ1QsWUFBWTtRQUNaLFlBQVk7UUFDWixZQUFZO1FBQ1osWUFBWTtRQUNaLFlBQVk7UUFDWixZQUFZO1FBQ1osWUFBWTtRQUNaLFlBQVk7UUFDWixZQUFZO0tBQ2YsQ0FBQztJQUVOLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztVQXdCSixNQUFNLENBQUMsSUFBSSxDQUFDLGdCQUFnQixDQUFDO1NBQzFCLEdBQUcsQ0FBQyxDQUFDLFFBQVEsRUFBRSxFQUFFO1FBQ2QsT0FBTywyQkFBMkIsUUFBUSxzQkFBc0IsUUFBUSw0QkFBNEIsQ0FBQztJQUN6RyxDQUFDLENBQUM7U0FDRCxJQUFJLENBQUMsS0FBSyxDQUFDOztVQUVkLE1BQU0sQ0FBQyxJQUFJLENBQUMsZ0JBQWdCLENBQUM7U0FDMUIsR0FBRyxDQUNBLENBQUMsTUFBTSxFQUFFLEVBQUUsQ0FBQztxREFDeUIsTUFBTTtpQ0FDMUIsTUFBTSxlQUFlLE9BQU8sQ0FBQyxLQUFLLENBQUMsUUFBUSxFQUFFLE1BQU0sQ0FDdkU7U0FDQSxJQUFJLENBQUMsSUFBSSxDQUFDOzs7OztLQUtsQixFQUNHLFlBQVksQ0FDZixDQUFDO0lBRUYsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7OztVQWdCSixNQUFNLENBQUMsSUFBSSxDQUFDLFlBQVksQ0FBQztTQUN0QixHQUFHLENBQUMsQ0FBQyxRQUFRLEVBQUUsRUFBRTtRQUNkLE9BQU8sa0NBQWtDLFFBQVEseUJBQXlCLFFBQVEsU0FBUyxDQUFDO0lBQ2hHLENBQUMsQ0FBQztTQUNELElBQUksQ0FBQyxJQUFJLENBQUM7OztVQUdiLE1BQU0sQ0FBQyxJQUFJLENBQUMsWUFBWSxDQUFDO1NBQ3RCLEdBQUcsQ0FDQSxDQUFDLElBQUksRUFBRSxFQUFFLENBQUM7dURBQzZCLElBQUk7dUNBQ3BCLElBQUksS0FBSyxPQUFPLENBQUMsS0FBSyxDQUFDLFFBQVEsRUFBRSxNQUFNLENBQ2pFO1NBQ0EsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7S0FLbEIsRUFDRyxZQUFZLENBQ2YsQ0FBQztJQUVGLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OzhDQW9CZ0MsT0FBTyxDQUFDLEtBQUssQ0FBQyxRQUFRLEVBQUU7Ozs7aURBSXJCLE9BQU8sQ0FBQyxLQUFLLENBQUMsUUFBUSxFQUFFOzs7Ozs7S0FNcEUsRUFDRyxZQUFZLENBQ2YsQ0FBQztJQUVGLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztVQThCSixlQUFlO1NBQ1osR0FBRyxDQUNBLENBQUMsTUFBTSxFQUFFLEVBQUUsQ0FBQzt5REFDNkIsTUFBTTt1Q0FDeEIsTUFBTSxRQUFRLE9BQU8sQ0FBQyxLQUFLLENBQUMsUUFBUSxFQUFFLE1BQU0sQ0FDdEU7U0FDQSxJQUFJLENBQUMsSUFBSSxDQUFDOzs7OztLQUtsQixFQUNHLFlBQVksQ0FDZixDQUFDO0lBRUYsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztVQXlCSixnQkFBZ0I7U0FDYixHQUFHLENBQ0EsQ0FBQyxPQUFPLEVBQUUsRUFBRSxDQUFDOzBEQUM2QixPQUFPO3VDQUMxQixPQUFPLFFBQVEsT0FBTyxDQUFDLEtBQUssQ0FBQyxRQUFRLEVBQUUsTUFBTSxDQUN2RTtTQUNBLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7O0tBS2xCLEVBQ0csWUFBWSxDQUNmLENBQUM7SUFFRixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Y0FlQSxPQUFPLENBQUMsSUFBSSxDQUFDLEtBQUssRUFBRSxvQ0FBb0MsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7OztjQUcvRSxPQUFPLENBQUMsSUFBSSxDQUFDLEtBQUssRUFBRSxzQ0FBc0MsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Ozs7O0tBSzFGLENBQ0EsQ0FBQztJQUVGLE1BQU0sQ0FBQyxJQUFJLENBQUMsZ0JBQWdCLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxRQUFRLEVBQUUsRUFBRTtRQUMvQyxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOztrQ0FFZ0IsUUFBUTs7Ozs7OzZEQU1tQixRQUFROzsyQ0FFMUIsUUFBUTs4QkFDckIsUUFBUTs7Ozs7UUFLOUIsQ0FDQyxDQUFDLElBQUksQ0FDRjtVQUNGLFFBQVE7cUJBQ0csUUFBUTtFQUMzQixFQUNVLEVBQUUsSUFBSSxFQUFFLFVBQVUsRUFBRSxDQUN2QixDQUFDO0lBQ04sQ0FBQyxDQUFDLENBQUM7SUFFSCxNQUFNLENBQUMsSUFBSSxDQUFDLFlBQVksQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLFFBQVEsRUFBRSxFQUFFO1FBQzNDLElBQUksUUFBUSxLQUFLLFNBQVM7WUFBRSxPQUFPO1FBQ25DLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7NEJBQ1UsUUFBUTs7Ozs7OzREQU13QixRQUFROzt5Q0FFM0IsUUFBUTt3QkFDekIsUUFBUTs7RUFFOUIsQ0FDTyxDQUFDLElBQUksQ0FDRjtVQUNGLFFBQVE7bUJBQ0MsUUFBUTtFQUN6QixFQUNVLEVBQUUsSUFBSSxFQUFFLFVBQVUsRUFBRSxDQUN2QixDQUFDO0lBQ04sQ0FBQyxDQUFDLENBQUM7SUFFSCxRQUFRO0lBQ1IsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7O0VBZVosQ0FDRyxDQUFDLElBQUksQ0FDRjs7O0VBR04sQ0FDRyxDQUFDO0lBRUYsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7O0VBZVosQ0FDRyxDQUFDLElBQUksQ0FDRjs7O0VBR04sRUFDTSxFQUFFLElBQUksRUFBRSxVQUFVLEVBQUUsQ0FDdkIsQ0FBQztJQUVGLGdCQUFnQixDQUFDLE9BQU8sQ0FBQyxDQUFDLEtBQUssRUFBRSxFQUFFO1FBQy9CLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7c0NBQ29CLEtBQUs7Ozs7OzttRUFNd0IsS0FBSzs7a0RBRXRCLEtBQUs7a0NBQ3JCLEtBQUs7Ozs7O1lBSzNCLENBQ0gsQ0FBQyxJQUFJLENBQ0Y7c0JBQ1UsS0FBSztnQ0FDSyxLQUFLO2NBQ3ZCLEVBQ0YsRUFBRSxJQUFJLEVBQUUsVUFBVSxFQUFFLENBQ3ZCLENBQUM7SUFDTixDQUFDLENBQUMsQ0FBQztJQUVILElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7OztZQWVGLENBQ1AsQ0FBQyxJQUFJLENBQ0Y7OztjQUdNLEVBQ04sRUFBRSxJQUFJLEVBQUUsVUFBVSxFQUFFLENBQ3ZCLENBQUM7SUFFRixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7WUFlRixDQUNQLENBQUMsSUFBSSxDQUNGOzs7Y0FHTSxFQUNOLEVBQUUsSUFBSSxFQUFFLFVBQVUsRUFBRSxDQUN2QixDQUFDO0lBRUYsZUFBZSxDQUFDLE9BQU8sQ0FBQyxDQUFDLEtBQUssRUFBRSxFQUFFO1FBQzlCLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7c0NBQ29CLEtBQUs7Ozs7OztrRUFNdUIsS0FBSyxDQUFDLE9BQU8sQ0FDL0QsU0FBUyxFQUNULEVBQUUsQ0FDTDs7cURBRXdDLEtBQUs7a0NBQ3hCLEtBQUssQ0FBQyxPQUFPLENBQy9CLFNBQVMsRUFDVCxFQUFFLENBQ0w7Ozs7O1NBS0osQ0FDQSxDQUFDLElBQUksQ0FDRjtzQkFDVSxLQUFLOytCQUNJLEtBQUssQ0FBQyxPQUFPLENBQUMsU0FBUyxFQUFFLEVBQUUsQ0FBQztjQUM3QyxFQUNGLEVBQUUsSUFBSSxFQUFFLFVBQVUsRUFBRSxDQUN2QixDQUFDO0lBQ04sQ0FBQyxDQUFDLENBQUM7SUFFSCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDIn0=

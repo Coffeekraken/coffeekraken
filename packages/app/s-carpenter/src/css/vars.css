@@ -1,13 +1,13 @@
 :root {
     --s-carpenter-sidebar-width: 230px;
-    --s-carpenter-sidebar-margin: sugar.margin(30);
+    --s-carpenter-sidebar-margin: s.margin(30);
     --s-carpenter-sidebar-bottom: var(--s-carpenter-sidebar-margin);
 
     --s-carpenter-editor-width: 500px;
-    --s-carpenter-editor-margin: sugar.margin(30);
+    --s-carpenter-editor-margin: s.margin(30);
     --s-carpenter-editor-bottom: var(--s-carpenter-editor-margin);
 
-    --s-carpenter-media-bottom: sugar.margin(30);
+    --s-carpenter-media-bottom: s.margin(30);
 
     --s-carpenter-viewport-width: 100%; /* this is overrided by the carpenter component depending on the selected media (mobile, etc...) */
     --s-carpenter-viewport-max-width: 100%;

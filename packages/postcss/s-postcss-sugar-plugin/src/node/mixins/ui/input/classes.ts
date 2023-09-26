@@ -5,7 +5,7 @@ import __faker from 'faker';
 
 /**
  * @name          classes
- * @as          @sugar.ui.input.classes
+ * @as          @s.ui.input.classes
  * @namespace     node.mixin.ui.input
  * @type               PostcssMixin
  * @interface     ./classes          interface
@@ -19,10 +19,10 @@ import __faker from 'faker';
  * @param       {('bare'|'lnf'|'vr')[]}        [scope=['bare', 'lnf', 'vr']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.input.classes
+ * @snippet         @s.ui.input.classes
  *
  * @example     css
- * \@sugar.ui.form.classes;
+ * \@s.ui.form.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -101,10 +101,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.ui.input.classes;
+        * \\@s.ui.input.classes;
         * 
         * .my-input {
-        *   \@sugar.ui.input;
+        *   \@s.ui.input;
         * }
         * 
         ${finalParams.lnfs
@@ -203,7 +203,7 @@ export default function ({
         ).code(
             `
         .s-input {
-            @sugar.ui.input($scope: bare);
+            @s.ui.input($scope: bare);
         }
         `,
             {
@@ -236,7 +236,7 @@ export default function ({
             ).code(
                 [
                     `${cls}:not(.s-bare) {`,
-                    ` @sugar.ui.input($lnf: ${lnf}, $scope: lnf);`,
+                    ` @s.ui.input($lnf: ${lnf}, $scope: lnf);`,
                     `}`,
                 ].join('\n'),
                 {

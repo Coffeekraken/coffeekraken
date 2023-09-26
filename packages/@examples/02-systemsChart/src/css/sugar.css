@@ -2,27 +2,27 @@
 * Init sugar. This will import a reset css and print the
 * needed variables
 */
-@sugar.init ($variant: 'light');
+@s.init ($variant: 'light');
 
 /**
 * Generate some utility classes like "s-tc:accent, s-mb:30", etc...
 * that depends on your theme configuration
 */
-@sugar.classes();
+@s.classes();
 
 /**
 * Generate media scoped classes to use like "@mobile s-pbe:100", etc...
 * that depends on your theme configuration
 */
-@sugar.media.classes ('mobile,tablet') {
-    /* @sugar.margin.classes(); */
-    @sugar.padding.classes();
+@s.media.classes ('mobile,tablet') {
+    /* @s.margin.classes(); */
+    @s.padding.classes();
 }
 
-/* @sugar.ui.menu.classes(); */
-@sugar.ui.slider.classes();
-@sugar.ui.googleMap.classes();
-@sugar.ui.googleMapMarker.classes();
+/* @s.ui.menu.classes(); */
+@s.ui.slider.classes();
+@s.ui.googleMap.classes();
+@s.ui.googleMapMarker.classes();
 
 /**
  * Define some icons to be used with classes like "s-icon:github", etc...
@@ -31,7 +31,7 @@
  * With glob: fs:src/icons/*
  * Without glob: fs:src/icon/my-cool-icon.svg:my-icon
  */
-@sugar.icon.classes (
+@s.icon.classes (
     fab:github
     fab:discord
     fab:twitter

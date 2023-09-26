@@ -3,20 +3,20 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           classes
- * @as              @sugar.grid.classes
+ * @as              @s.grid.classes
  * @namespace      node.mixin.grid
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        alpha
  *
  * This mixin generate all the grid helper classes like s-grid:12, etc...
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.grid.classes
+ * @snippet         @s.grid.classes
  *
  * @example        css
- * \@sugar.grid.classes;
+ * \@s.grid.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -61,7 +61,7 @@ export default function ({
          * @namespace          sugar.style.helpers.grid
          * @type          CssClass
          * @platform      css
-         * @status      beta
+         * @status      alpha
          * 
          * This class represent a grid of "<yellow>${id}</yellow> columns"
          * 

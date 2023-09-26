@@ -3,20 +3,20 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           classes
- * @as              @sugar.opacity.classes
+ * @as              @s.opacity.classes
  * @namespace      node.mixin.opacity
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the margin helper classes like s-opacity:10, s-opacity:40, etc...
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.opacity.classes
+ * @snippet         @s.opacity.classes
  *
  * @example        css
- * \@sugar.opacity.classes;
+ * \@s.opacity.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -59,7 +59,7 @@ export default function ({
     * @namespace          sugar.style.helpers.opacity
     * @type             CssClass
     * @platform             css
-    * @status               beta
+    * @status               stable
     * 
     * This class allows you to apply the "<yellow>${opacity}</yellow>" opacity style around any HTMLElement
     * 
@@ -73,7 +73,7 @@ export default function ({
         ).code(
             `
    .${opacityCls.replace(':', '-')} {
-        opacity: sugar.opacity(${opacity});
+        opacity: s.opacity(${opacity});
    }`,
             { type: 'CssClass' },
         );

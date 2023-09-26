@@ -3,20 +3,20 @@ import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 /**
  * @name           classes
- * @as          @sugar.format.classes
+ * @as          @s.format.classes
  * @namespace      node.mixin.format
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        alpha
  *
  * This mixin generate the documentation for the usage of the .s-format:... classes
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.format.classes
+ * @snippet         @s.format.classes
  *
  * @example        css
- * \@sugar.format.classes;
+ * \@s.format.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -53,7 +53,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * This class allows you to apply some formatting to pure HTMLElement that are scoped into.
         * For example, a simple \`ul\` tag will be styled as if the \`s-list:ul\` class would be applied on it
         * when it is scoped inside the \`s-format:text\` class.
-        * This feature has to be implemented using the \`@sugar.format.text\` mixin on the elements you
+        * This feature has to be implemented using the \`@s.format.text\` mixin on the elements you
         * want to support the text formatting.
         * 
         ${typoFormatElements.map((typo) => {
@@ -69,7 +69,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.format.classes;
+        * \\@s.format.classes;
         * 
         * @cssClass               s-format:text             Apply the text formatting to childs elements like \`ul\`, \`ol\`, \`p\`, \`h1\`, \`h2\`, etc... HTML tags
         * 
@@ -147,7 +147,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @status       beta
         * 
         * This class allows you to apply some margins to make space between direct childs.
-        * This feature has to be implemented using the \`@sugar.rhythm.vertical\` mixin on the elements you
+        * This feature has to be implemented using the \`@s.rhythm.vertical\` mixin on the elements you
         * want to support the rhythm vertical.
         * 
         ${typoRhythmElements.map((typo) => {

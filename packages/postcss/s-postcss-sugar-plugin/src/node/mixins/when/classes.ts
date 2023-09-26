@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           classes
- * @as              @sugar.when.classes
+ * @as              @s.when.classes
  * @namespace      node.mixin.when
  * @type           PostcssMixin
  * @interface       ./classes
@@ -18,10 +18,10 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.when.classes
+ * @snippet         @s.when.classes
  *
  * @example        css
- * \@sugar.when.classes;
+ * \@s.when.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -339,7 +339,7 @@ export default function ({
         `,
         ).code(
             `
-            @sugar.media(${query}) {
+            @s.media(${query}) {
                 .s-when-media.s-when-${query} {
                     display: unset;
                 }

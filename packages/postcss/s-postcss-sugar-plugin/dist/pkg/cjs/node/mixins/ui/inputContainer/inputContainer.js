@@ -7,7 +7,7 @@ exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 /**
  * @name          inputContainer
- * @as          @sugar.ui.inputContainer
+ * @as          @s.ui.inputContainer
  * @namespace     node.mixin.ui.inputContainer
  * @type               PostcssMixin
  * @interface       ./input
@@ -20,11 +20,11 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.inputContainer
+ * @snippet         @s.ui.inputContainer
  *
  * @example     css
  * .my-input-container {
- *    @sugar.ui.inputContainer(group);
+ *    @s.ui.inputContainer(group);
  * }
  *
  * @since      2.0.0

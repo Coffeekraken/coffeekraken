@@ -2,22 +2,22 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           truncate
- * @as              @sugar.truncate
+ * @as              @s.truncate
  * @namespace      node.mixin.truncate
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin allows you to truncate some text to a number of lines
  *
  * @param         {Number}          [lines=1]           How many lines you want to display before truncating the rest...
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.truncate($1)
+ * @snippet         @s.truncate($1)
  *
  * @example        css
  * .my-cool-element {
- *    \@sugar.truncate(2);
+ *    \@s.truncate(2);
  * }
  *
  * @since       2.0.0

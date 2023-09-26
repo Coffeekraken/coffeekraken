@@ -4,7 +4,7 @@ import __faker from 'faker';
 
 /**
  * @name          classes
- * @as              @sugar.ui.tooltip.classes
+ * @as              @s.ui.tooltip.classes
  * @namespace     node.mixin.ui.tooltip
  * @type               PostcssMixin
  * @interface     ./classes          interface
@@ -18,10 +18,10 @@ import __faker from 'faker';
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.tooltip.classes
+ * @snippet         @s.ui.tooltip.classes
  *
  * @example     css
- * \@sugar.ui.tooltip.classes;
+ * \@s.ui.tooltip.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -98,10 +98,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.ui.tooltip.classes;
+        * \\@s.ui.tooltip.classes;
         * 
         * .my-tooltip {
-        *   \@sugar.ui.tooltip;
+        *   \@s.ui.tooltip;
         * }
         * 
         * @cssClass             s-tooltip-container             Allows to hide and show your tooltip on hover (focus)
@@ -319,7 +319,7 @@ export default function ({
         vars.code(
             () => `
             .s-tooltip {
-                @sugar.ui.tooltip($scope: bare);
+                @s.ui.tooltip($scope: bare);
             }
         `,
             { type: 'CssClass' },
@@ -355,7 +355,7 @@ export default function ({
                 .s-tooltip${
                     finalParams.defaultLnf === lnf ? '' : `-${lnf}`
                 }:not(.s-bare) {
-                    @sugar.ui.tooltip($lnf: ${lnf}, $scope: lnf);
+                    @s.ui.tooltip($lnf: ${lnf}, $scope: lnf);
                 }
             `,
                 { type: 'CssClass' },
@@ -386,7 +386,7 @@ export default function ({
     vars.code(
         () => `
         .s-tooltip-interactive {
-            @sugar.ui.tooltip($interactive: true, $scope: 'interactive');
+            @s.ui.tooltip($interactive: true, $scope: 'interactive');
         }
     `,
         { type: 'CssClass' },
@@ -415,7 +415,7 @@ export default function ({
         () => `
         .s-tooltip[placement="top"],
         .s-tooltip {
-            @sugar.ui.tooltip($position: top, $scope: position);
+            @s.ui.tooltip($position: top, $scope: position);
         }
     `,
         { type: 'CssClass' },
@@ -444,7 +444,7 @@ export default function ({
         () => `
         .s-tooltip[placement="right"],
         .s-tooltip-right {
-            @sugar.ui.tooltip($position: right, $scope: position);
+            @s.ui.tooltip($position: right, $scope: position);
         }
     `,
         { type: 'CssClass' },
@@ -473,7 +473,7 @@ export default function ({
         () => `
         .s-tooltip[placement="left"],
         .s-tooltip-left {
-            @sugar.ui.tooltip($position: left, $scope: position);
+            @s.ui.tooltip($position: left, $scope: position);
         }
     `,
         { type: 'CssClass' },
@@ -502,7 +502,7 @@ export default function ({
         () => `
         .s-tooltip[placement="bottom"],
         .s-tooltip-bottom {
-            @sugar.ui.tooltip($position: bottom, $scope: position);
+            @s.ui.tooltip($position: bottom, $scope: position);
         }
     `,
         { type: 'CssClass' },

@@ -1,20 +1,20 @@
 import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name           classes
- * @as              @sugar.shrink.classes
+ * @as              @s.shrink.classes
  * @namespace      node.mixin.shrink
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all shrink helpers like s-shrink, s-shrink:1...10, etc...
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.shrink.classes
+ * @snippet         @s.shrink.classes
  *
  * @example        css
- * \@sugar.shrink.classes;
+ * \@s.shrink.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -35,7 +35,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/shrink
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply some shrink attributes on any HTMLElement
         * 
@@ -45,7 +45,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.shrink.classes;
+        * \\@s.shrink.classes;
         * 
         * @cssClass                 s-shrink             Apply the default shrink to any HTMLElement
         * ${Array.from(Array(10)).map((i) => `
@@ -67,7 +67,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @namespace          sugar.style.helpers.shrink
             * @type               CssClass
             * @platform           css
-            * @status               beta
+            * @status               stable
             * 
             * This class allows you to apply the shrink styling to any HTMLElement
             * 
@@ -90,7 +90,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                 * @namespace          sugar.style.helpers.shrink
                 * @type               CssClass
                 * @platform           css
-                * @status               beta
+                * @status               stable
                 * 
                 * This class allows you to apply the shrink "${i}" styling to any HTMLElement
                 * 

@@ -1,6 +1,6 @@
-@sugar.import ('./sugar.css');
-@sugar.import ('./generic/**/*.css');
-@sugar.import ('../js/**/*.css');
+@s.import ('./sugar.css');
+@s.import ('./generic/**/*.css');
+@s.import ('../js/**/*.css');
 
 body {
     overflow: hidden;

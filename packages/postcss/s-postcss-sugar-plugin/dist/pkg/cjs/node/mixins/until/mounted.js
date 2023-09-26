@@ -7,7 +7,7 @@ exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 /**
  * @name           mounted
- * @as              @sugar.until.mounted
+ * @as              @s.until.mounted
  * @namespace      node.mixin.until
  * @type           PostcssMixin
  * @interface   ./mounted
@@ -25,7 +25,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * .myElement {
  *      display: block;
  *
- *      @sugar.until.mounted {
+ *      @s.until.mounted {
  *          display: none;
  *      }
  * }

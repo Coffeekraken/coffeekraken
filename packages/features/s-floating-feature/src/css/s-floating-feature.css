@@ -11,7 +11,7 @@
 
     .s-floating_arrow {
         position: absolute;
-        background: sugar.color(current);
+        background: s.color(current);
         width: var(--arrow-size, 8px);
         height: var(--arrow-size, 8px);
         transform: rotate(45deg);

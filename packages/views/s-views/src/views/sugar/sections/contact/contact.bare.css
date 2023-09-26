@@ -2,11 +2,11 @@
     position: relative;
 
     ._layout {
-        @sugar.layout '1 1 2 3 3';
-        gap: sugar.margin(50);
+        @s.layout '1 1 2 3 3';
+        gap: s.margin(50);
 
-        @sugar.media mobile {
-            @sugar.layout '1 _ 2 _ 3';
+        @s.media mobile {
+            @s.layout '1 _ 2 _ 3';
 
             > *:nth-child(2) {
                 display: none;
@@ -14,37 +14,37 @@
         }
 
         &.left {
-            @sugar.layout '3 3 2 1 1';
-            gap: sugar.margin(50);
+            @s.layout '3 3 2 1 1';
+            gap: s.margin(50);
         }
     }
 
     ._metas {
-        margin-block-end: sugar.margin(40);
+        margin-block-end: s.margin(40);
     }
 
     ._address {
     }
 
     ._socials {
-        margin-block-start: sugar.margin(40);
-        font-size: sugar.font.size(50);
+        margin-block-start: s.margin(40);
+        font-size: s.font.size(50);
         display: flex;
         flex-direction: row;
-        gap: sugar.margin(20);
+        gap: s.margin(20);
 
         a {
-            @sugar.transition (fast);
+            @s.transition (fast);
 
             &:hover {
-                color: sugar.color(accent);
+                color: s.color(accent);
             }
         }
     }
 
     .s-form {
-        @sugar.media mobile {
-            margin-block-start: calc(sugar.margin(40) * -1);
+        @s.media mobile {
+            margin-block-start: calc(s.margin(40) * -1);
         }
     }
 
@@ -52,14 +52,14 @@
         width: 43vw;
         height: 300px;
 
-        @sugar.lod (2) {
-            margin-bottom: calc(sugar.padding(80) * 2 * -1);
-            top: calc(sugar.padding(80) * -1);
+        @s.lod (2) {
+            margin-bottom: calc(s.padding(80) * 2 * -1);
+            top: calc(s.padding(80) * -1);
             height: 700px;
         }
     }
 
     .s-google-map-marker {
-        @sugar.color (accent);
+        @s.color (accent);
     }
 }

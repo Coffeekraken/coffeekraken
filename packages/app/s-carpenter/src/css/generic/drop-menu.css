@@ -5,12 +5,12 @@
         position: absolute;
         top: 100%;
         left: 0;
-        background: sugar.color(main, background);
+        background: s.color(main, background);
         opacity: 0;
         pointer-events: none;
-        @sugar.transition fast;
-        @sugar.border.radius();
-        @sugar.depth (100);
+        @s.transition fast;
+        @s.border.radius();
+        @s.depth (100);
     }
 
     &:focus,
@@ -25,19 +25,19 @@
     }
 
     ._menu-item {
-        padding: sugar.padding(20) sugar.padding(30);
+        padding: s.padding(20) s.padding(30);
         white-space: nowrap;
-        @sugar.transition fast;
+        @s.transition fast;
 
         &:hover {
-            background: sugar.color(main, --alpha 0.1);
+            background: s.color(main, --alpha 0.1);
         }
         &:active {
-            background: sugar.color(main, --alpha 0.2);
+            background: s.color(main, --alpha 0.2);
         }
 
         i {
-            margin-inline-end: sugar.margin(10);
+            margin-inline-end: s.margin(10);
         }
     }
 }

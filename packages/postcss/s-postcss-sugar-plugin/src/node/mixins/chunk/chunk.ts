@@ -5,7 +5,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @namespace      node.mixin.chunk
  * @type           PostcssMixin
  * @platform      postcss
- * @status        wip
+ * @status        alpha
  *
  * This mixin allows you to mark some css to be exported as separated file.
  * You can specify the name of your chunk
@@ -14,7 +14,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return        {Css}         The generated css
  *
  * @example        css
- * \@sugar.chunk(general) {
+ * \@s.chunk(general) {
  *   body {
  *      background: red;
  *   }
@@ -65,7 +65,7 @@ export default function ({
     };
 
     if (!finalParams.id || finalParams.id === '') {
-        throw new Error(`The "@sugar.chunk" mixin MUST specify a chunk id...`);
+        throw new Error(`The "@s.chunk" mixin MUST specify a chunk id...`);
     }
 
     if (!settings.chunks) {

@@ -21,11 +21,11 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {Any}           [fallback=null]         Specify a fallback in case the variable does not resolve to any value
  * @return      {Css}                   The corresponding css
  *
- * @snippet         sugar.theme($1)
+ * @snippet         s.theme($1)
  *
  * @example       css
  * .my-element {
- *    font-family: sugar.theme(font.family.fontFamily);
+ *    font-family: s.theme(font.family.fontFamily);
  * }
  *
  * @since     2.0.0
@@ -75,7 +75,7 @@ export default function theme({
 
     if (finalParams.return === 'var') {
         if (finalParams.scalable) {
-            return `sugar.scalable(${__STheme.cssVar(
+            return `s.scalable(${__STheme.cssVar(
                 finalParams.dotPath,
                 finalParams.fallback,
             )})`;
@@ -84,7 +84,7 @@ export default function theme({
         }
     } else {
         if (finalParams.scalable) {
-            return `sugar.scalable(${__STheme.get(finalParams.dotPath)})`;
+            return `s.scalable(${__STheme.get(finalParams.dotPath)})`;
         } else {
             return __STheme.get(finalParams.dotPath);
         }

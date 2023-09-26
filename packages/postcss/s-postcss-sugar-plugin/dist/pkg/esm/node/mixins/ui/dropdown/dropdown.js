@@ -1,7 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name          dropdown
- * @as              @sugar.ui.dropdown
+ * @as              @s.ui.dropdown
  * @namespace     node.mixin.ui.dropdown
  * @type               PostcssMixin
  * @interface     ./dropdown          interface
@@ -14,11 +14,11 @@ import __SInterface from '@coffeekraken/s-interface';
  * @param       {('bare'|'lnf'|'position')[]}        [scope=['bare', 'lnf', 'position']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.dropdown
+ * @snippet         @s.ui.dropdown
  *
  * @example     css
  * .my-dropdown {
- *    @sugar.ui.dropdown;
+ *    @s.ui.dropdown;
  * }
  *
  * @since      2.0.0
@@ -56,7 +56,7 @@ export default function ({ params, atRule, replaceWith, }) {
     const vars = [];
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
-            font-size: sugar.scalable(1rem);
+            font-size: s.scalable(1rem);
           position: absolute;
           -webkit-appearance: none;
           appearance: none;
@@ -66,8 +66,8 @@ export default function ({ params, atRule, replaceWith, }) {
           cursor: auto;
           z-index: 50;
 
-            @sugar.state.disabled {
-                @sugar.disabled;
+            @s.state.disabled {
+                @s.disabled;
                 opacity: 0 !important;
             }
       `);
@@ -76,13 +76,13 @@ export default function ({ params, atRule, replaceWith, }) {
         vars.push(`
         `);
         vars.push(`
-            background-color: sugar.color(main, background);
-            border: sugar.theme(ui.dropdown.borderWidth) solid sugar.color(current, border);
-            @sugar.border.radius(ui.dropdown.borderRadius);
-            padding-inline: sugar.padding(ui.dropdown.paddingInline);
-            padding-block: sugar.padding(ui.dropdown.paddingBlock);
-            @sugar.depth(ui.dropdown.depth);
-            @sugar.transition(fast);
+            background-color: s.color(main, background);
+            border: s.theme(ui.dropdown.borderWidth) solid s.color(current, border);
+            @s.border.radius(ui.dropdown.borderRadius);
+            padding-inline: s.padding(ui.dropdown.paddingInline);
+            padding-block: s.padding(ui.dropdown.paddingBlock);
+            @s.depth(ui.dropdown.depth);
+            @s.transition(fast);
         `);
     }
     if (finalParams.scope.indexOf('position') !== -1) {
@@ -164,9 +164,9 @@ export default function ({ params, atRule, replaceWith, }) {
     }
     // wireframe
     vars.push(`
-        @sugar.wireframe {
-            @sugar.wireframe.background;
-            @sugar.wireframe.border;
+        @s.wireframe {
+            @s.wireframe.background;
+            @s.wireframe.border;
         }
     `);
     return vars;

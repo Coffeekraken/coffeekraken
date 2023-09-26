@@ -4,7 +4,7 @@ import __faker from 'faker';
 
 /**
  * @name           classes
- * @as              @sugar.typo.classes
+ * @as              @s.typo.classes
  * @namespace      node.mixin.typo
  * @type           PostcssMixin
  * @platform      postcss
@@ -15,10 +15,10 @@ import __faker from 'faker';
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.typo.classes
+ * @snippet         @s.typo.classes
  *
  * @example        css
- * \@sugar.typo.classes;
+ * \@s.typo.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -72,7 +72,7 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.typo.classes;
+        * \\@s.typo.classes;
         * 
         ${Object.keys(typosObj)
             .map((typoName) => {
@@ -149,7 +149,7 @@ export default function ({
            `,
         ).code(
             `
-        @sugar.format.text {
+        @s.format.text {
             ${typoName} {
                 ${css}
             }
@@ -179,7 +179,7 @@ export default function ({
            `,
         ).code(
             `
-        @sugar.rhythm.vertical {
+        @s.rhythm.vertical {
             ${typoName}, .${typoName} {
                 ${__STheme.jsObjectToCssProperties(
                     typoObj.rhythmVertical ?? {},

@@ -4,12 +4,12 @@ import __faker from 'faker';
 
 /**
  * @name          classes
- * @as            @sugar.ui.list.classes
+ * @as            @s.ui.list.classes
  * @namespace     node.mixin.ui.list
  * @type               PostcssMixin
  * @interface     ./classes          interface
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * Generate the list classes
  *
@@ -18,10 +18,10 @@ import __faker from 'faker';
  * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
- * @snippet         @sugar.ui.list.classes
+ * @snippet         @s.ui.list.classes
  *
  * @example     css
- * \@sugar.ui.list.classes;
+ * \@s.ui.list.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -88,7 +88,7 @@ export default function ({
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/lists
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply list lnfs to any ul, ol, dl, etc...
         * 
@@ -103,10 +103,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.ui.list.classes;
+        * \\@s.ui.list.classes;
         * 
         * .my-list {
-        *   \@sugar.ui.list;
+        *   \@s.ui.list;
         * }
         * 
         ${finalParams.lnfs
@@ -198,7 +198,7 @@ export default function ({
         ).code(
             `
         .s-list {
-            @sugar.ui.list($scope: bare);
+            @s.ui.list($scope: bare);
         }
     `,
             {
@@ -238,7 +238,7 @@ export default function ({
             .s-list${
                 finalParams.defaultLnf === lnf ? '' : `-${lnf}`
             }:not(.s-bare) {
-                @sugar.ui.list($scope: lnf);
+                @s.ui.list($scope: lnf);
             }
         `,
                 {
@@ -272,7 +272,7 @@ export default function ({
     ).code(
         `
       .s-list-ul {
-        @sugar.ui.list($lnf: ul, $scope: '${finalParams.scope.join(',')}');
+        @s.ui.list($lnf: ul, $scope: '${finalParams.scope.join(',')}');
       }
   `,
         {
@@ -304,7 +304,7 @@ export default function ({
     vars.code(
         () => `
       .s-list-icon {
-          @sugar.ui.list($lnf: icon, $scope: '${finalParams.scope.join(',')}');
+          @s.ui.list($lnf: icon, $scope: '${finalParams.scope.join(',')}');
       }`,
         {
             type: 'CssClass',
@@ -335,7 +335,7 @@ export default function ({
     ).code(
         `
       .s-list-ol {
-        @sugar.ui.list($lnf: ol, $scope: '${finalParams.scope.join(',')}');
+        @s.ui.list($lnf: ol, $scope: '${finalParams.scope.join(',')}');
       }   
   `,
         {
@@ -367,7 +367,7 @@ export default function ({
     ).code(
         `
       .s-list-dl {
-        @sugar.ui.list($lnf: dl, $scope: '${finalParams.scope.join(',')}');
+        @s.ui.list($lnf: dl, $scope: '${finalParams.scope.join(',')}');
       }   
   `,
         {
@@ -399,9 +399,9 @@ export default function ({
        `,
         ).code(
             `
-            @sugar.format.text {
+            @s.format.text {
                 ul {
-                    @sugar.ui.list($lnf: ul, $scope: '${finalParams.scope.join(
+                    @s.ui.list($lnf: ul, $scope: '${finalParams.scope.join(
                         ',',
                     )}');
                 } 
@@ -435,9 +435,9 @@ export default function ({
        `,
         ).code(
             `
-            @sugar.format.text {
+            @s.format.text {
                 ol {
-                    @sugar.ui.list($lnf: ol, $scope: '${finalParams.scope.join(
+                    @s.ui.list($lnf: ol, $scope: '${finalParams.scope.join(
                         ',',
                     )}');
                 } 
@@ -479,7 +479,7 @@ export default function ({
         */
        `,
         ).code(`
-            @sugar.rhythm.vertical {
+            @s.rhythm.vertical {
                 ul, .s-list-ul,
                 ol, .s-list-ol {
                     ${__STheme.jsObjectToCssProperties(

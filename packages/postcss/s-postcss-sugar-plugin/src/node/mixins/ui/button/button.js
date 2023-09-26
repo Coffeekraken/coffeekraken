@@ -1,14 +1,14 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
-import __getRoot from '../../../utils/getRoot';
+import __getRoot from '../../../utils/getRoot.js';
 /**
  * @name          button
- * @as            @sugar.ui.button
+ * @as            @s.ui.button
  * @namespace     node.mixin.ui.button
  * @type          PostcssMixin
  * @interface     ./button
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin allows you to generate the "button" UI component css.
  *
@@ -16,11 +16,11 @@ import __getRoot from '../../../utils/getRoot';
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
- * @snippet     @sugar.ui.button
+ * @snippet     @s.ui.button
  *
  * @example       css
  * .my-element {
- *      \@sugar.ui.button();
+ *      \@s.ui.button();
  * }
  *
  * @since     2.0.0
@@ -46,27 +46,18 @@ class postcssSugarPluginUiButtonInterface extends __SInterface {
     }
 }
 export { postcssSugarPluginUiButtonInterface as interface };
-export default function ({
-    params,
-    atRule,
-    postcssApi,
-    sharedData,
-    replaceWith,
-}) {
-    const finalParams = Object.assign(
-        { lnf: 'solid', scope: ['bare', 'lnf'] },
-        params,
-    );
+export default function ({ params, atRule, postcssApi, sharedData, replaceWith, }) {
+    const finalParams = Object.assign({ lnf: 'solid', scope: ['bare', 'lnf'] }, params);
     const vars = [];
     // bare
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
-          --s-btn-padding-inline: sugar.padding(ui.button.paddingInline);
-          --s-btn-padding-block: sugar.padding(ui.button.paddingBlock);
+          --s-btn-padding-inline: s.padding(ui.button.paddingInline);
+          --s-btn-padding-block: s.padding(ui.button.paddingBlock);
           
           --s-btn-confirm-width: auto;
 
-          font-size: sugar.scalable(1rem);
+          font-size: s.scalable(1rem);
           line-height: 1;
           text-decoration: none !important;
           position: relative;
@@ -76,9 +67,9 @@ export default function ({
           user-select: none;
           white-space: nowrap;
           vertical-align: middle;
-          padding-inline: sugar.padding(ui.button.paddingInline);
-          padding-block: sugar.padding(ui.button.paddingBlock);
-          gap: sugar.margin(20);
+          padding-inline: s.padding(ui.button.paddingInline);
+          padding-block: s.padding(ui.button.paddingBlock);
+          gap: s.margin(20);
           align-items: center;
           justify-content: center;
 
@@ -115,7 +106,7 @@ export default function ({
         switch (finalParams.lnf) {
             case 'text':
                 vars.push(`
-              padding-inline: calc(sugar.padding(ui.button.paddingInline) * 0.5);
+              padding-inline: calc(s.padding(ui.button.paddingInline) * 0.3);
               `);
                 break;
         }
@@ -123,23 +114,23 @@ export default function ({
     // lnf
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
-          font-size: sugar.scalable(1rem);
+          font-size: s.scalable(1rem);
           text-decoration: none;
-          @sugar.shape;
+          @s.shape;
 
           &:after {
-            @sugar.shape;
+            @s.shape;
           }
         `);
         switch (finalParams.lnf) {
             case 'gradient':
                 vars.push(`
                     background: none !important;
-                    color: sugar.color(current, foreground) !important;
-                    transition: sugar.theme(ui.button.transition);
-                    border: sugar.color(current, border) solid sugar.theme(ui.button.borderWidth);
+                    color: s.color(current, foreground) !important;
+                    transition: s.theme(ui.button.transition);
+                    border: s.color(current, border) solid s.theme(ui.button.borderWidth);
 
-                    --borderWidth: sugar.theme(ui.button.borderWidth);
+                    --borderWidth: s.theme(ui.button.borderWidth);
 
                     & > * {
                       position: relative;
@@ -153,8 +144,8 @@ export default function ({
                       left: 0;
                       width: 100%;
                       height: 100%;
-                      @sugar.gradient(sugar.color(current, gradientStart), sugar.color(current, gradientEnd), $angle: 90);
-                      transition: sugar.theme(ui.button.transition);
+                      @s.gradient(s.color(current, gradientStart), s.color(current, gradientEnd), $angle: 90);
+                      transition: s.theme(ui.button.transition);
                     }
 
                     &:after {
@@ -164,13 +155,13 @@ export default function ({
                       left: 0;
                       width: 100%;
                       height: 100%;
-                      @sugar.gradient(sugar.color(current,gradientEnd), sugar.color(current, gradientStart), $angle: 90);
+                      @s.gradient(s.color(current,gradientEnd), s.color(current, gradientStart), $angle: 90);
                       opacity: 0;
-                      transition: sugar.theme(ui.button.transition);
+                      transition: s.theme(ui.button.transition);
                     }
 
                     &:hover {
-                      color: sugar.color(current, foreground) !important;
+                      color: s.color(current, foreground) !important;
 
                       &:after {
                         opacity: 1;
@@ -180,30 +171,29 @@ export default function ({
                 break;
             case 'outline':
                 vars.push(`
-                background-color: sugar.color(current, --alpha 0);
-                border: sugar.color(current) solid sugar.theme(ui.button.borderWidth);
-                color: sugar.color(current) !important;
-                transition: sugar.theme(ui.button.transition);
+                background-color: s.color(current, --alpha 0);
+                border: s.color(current) solid s.theme(ui.button.borderWidth);
+                color: s.color(current) !important;
+                transition: s.theme(ui.button.transition);
 
                 &:hover {
-                  background-color: sugar.color(current);
-                  color: sugar.color(current, foreground) !important;
+                  background-color: s.color(current);
+                  color: s.color(current, foreground) !important;
                 }
               `);
                 break;
             case 'text':
                 vars.push(`
                   background: none !important;
-                  border: rgba(0,0,0,0) solid sugar.theme(ui.button.borderWidth);
-                  color: sugar.color(current) !important;
+                  border: rgba(0,0,0,0) solid s.theme(ui.button.borderWidth);
+                  color: s.color(current) !important;
                   box-shadow: none !important;
-                  transition: sugar.theme(ui.button.transition);
+                  transition: s.theme(ui.button.transition);
                 `);
                 break;
             case 'loading':
                 const root = __getRoot(atRule);
-                root.append(
-                    postcssApi.parse(`
+                root.append(postcssApi.parse(`
                       @keyframes s-btn-loading {
                         from {
                             transform: rotate(0deg);
@@ -212,8 +202,7 @@ export default function ({
                             transform: rotate(360deg);
                         }
                     }
-                  `),
-                );
+                  `));
                 vars.push(`
                   position: relative;
                   pointer-events: none !important;
@@ -240,27 +229,28 @@ export default function ({
             case 'solid':
             default:
                 vars.push(`
-                  background-color: sugar.color(current);
-                  border: sugar.color(current, border) solid sugar.theme(ui.button.borderWidth);
-                  color: sugar.color(current, foreground) !important;
-                  transition: sugar.theme(ui.button.transition);
+                  background-color: s.color(current);
+                  border: s.color(current, border) solid s.theme(ui.button.borderWidth);
+                  color: s.color(current, foreground) !important;
+                  transition: s.theme(ui.button.transition);
 
                   &:hover {
-                    background-color: sugar.color(current, --darken 6);
-                    color: sugar.color(current, foreground) !important;
+                    background-color: s.color(current, --darken 6);
+                    color: s.color(current, foreground) !important;
 
-                    @sugar.theme(dark) {
-                      background-color: sugar.color(current, --lighten 6);
+                    @s.theme(dark) {
+                      background-color: s.color(current, --lighten 6);
                     }
                   }
 
                   &:active {
-                    background-color: sugar.color(current, --darken 10);
+                    background-color: s.color(current, --darken 10);
 
-                    @sugar.theme(dark) {
-                      background-color: sugar.color(current, --lighten 10);
+                    @s.theme(dark) {
+                      background-color: s.color(current, --lighten 10);
                     }
                   }
+
         `);
                 break;
         }
@@ -274,13 +264,13 @@ export default function ({
         // confirm
         vars.push(`
           &[confirm] {
-            @sugar.transition (fast);
+            @s.transition (fast);
 
             &:after {
-              background-color: sugar.color(current);
-              color: sugar.color(current, foreground) !important;
-              @sugar.transition (fast);
-              @sugar.color(error);
+              background-color: s.color(current);
+              color: s.color(current, foreground) !important;
+              @s.transition (fast);
+              @s.color(error);
             }
 
             &:hover,
@@ -288,7 +278,7 @@ export default function ({
             &:focus-within {
 
               &:after {
-                color: sugar.color(current, foreground) !important;
+                color: s.color(current, foreground) !important;
               }
             }
 
@@ -297,17 +287,17 @@ export default function ({
         // outline
         vars.push(`
               &:focus:not(:hover) {
-                @sugar.outline;
+                @s.outline;
               }
           `);
     }
     // wireframe
     vars.push(`
-      @sugar.wireframe {
-        @sugar.wireframe.border;
-        @sugar.wireframe.background;
+      @s.wireframe {
+        @s.wireframe.border;
+        @s.wireframe.background;
       }
     `);
     return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBQzdDLE9BQU8sU0FBUyxNQUFNLHdCQUF3QixDQUFDO0FBRS9DOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFFSCxNQUFNLG1DQUFvQyxTQUFRLFlBQVk7SUFDMUQsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILEdBQUcsRUFBRTtnQkFDRCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxNQUFNLEVBQUUsQ0FBQyxPQUFPLEVBQUUsVUFBVSxFQUFFLFNBQVMsRUFBRSxNQUFNLEVBQUUsU0FBUyxDQUFDO2dCQUMzRCxPQUFPLEVBQUUsUUFBUSxDQUFDLEdBQUcsQ0FBQyxzQkFBc0IsQ0FBQzthQUNoRDtZQUNELEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUU7b0JBQ0YsSUFBSSxFQUFFLGVBQWU7b0JBQ3JCLFVBQVUsRUFBRSxDQUFDLEdBQUcsRUFBRSxHQUFHLENBQUM7aUJBQ3pCO2dCQUNELE1BQU0sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUM7Z0JBQ3ZCLE9BQU8sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUM7YUFDM0I7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBT0QsT0FBTyxFQUFFLG1DQUFtQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRTVELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixVQUFVLEVBQ1YsVUFBVSxFQUNWLFdBQVcsR0FPZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixHQUFHLEVBQUUsT0FBTyxFQUNaLEtBQUssRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUMsSUFDbkIsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsT0FBTztJQUNQLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDMUMsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0tBbURiLENBQUMsQ0FBQztRQUVDLFFBQVEsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUNyQixLQUFLLE1BQU07Z0JBQ1AsSUFBSSxDQUFDLElBQUksQ0FBQzs7ZUFFWCxDQUFDLENBQUM7Z0JBQ0QsTUFBTTtTQUNiO0tBQ0o7SUFFRCxNQUFNO0lBQ04sSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUN6QyxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7OztTQVFULENBQUMsQ0FBQztRQUVILFFBQVEsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUNyQixLQUFLLFVBQVU7Z0JBQ1gsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztpQkEyQ1QsQ0FBQyxDQUFDO2dCQUVILE1BQU07WUFDVixLQUFLLFNBQVM7Z0JBQ1YsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7OztlQVVYLENBQUMsQ0FBQztnQkFDRCxNQUFNO1lBQ1YsS0FBSyxNQUFNO2dCQUNQLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7OztpQkFNVCxDQUFDLENBQUM7Z0JBQ0gsTUFBTTtZQUNWLEtBQUssU0FBUztnQkFDVixNQUFNLElBQUksR0FBRyxTQUFTLENBQUMsTUFBTSxDQUFDLENBQUM7Z0JBQy9CLElBQUksQ0FBQyxNQUFNLENBQ1AsVUFBVSxDQUFDLEtBQUssQ0FBQzs7Ozs7Ozs7O21CQVNsQixDQUFDLENBQ0gsQ0FBQztnQkFFRixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7aUJBcUJULENBQUMsQ0FBQztnQkFDSCxNQUFNO1lBQ1YsS0FBSyxPQUFPLENBQUM7WUFDYjtnQkFDSSxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O1NBc0JqQixDQUFDLENBQUM7Z0JBQ0ssTUFBTTtTQUNiO1FBRUQsV0FBVztRQUNYLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7O1NBS1QsQ0FBQyxDQUFDO1FBRUgsVUFBVTtRQUNWLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztTQXFCVCxDQUFDLENBQUM7UUFFSCxVQUFVO1FBQ1YsSUFBSSxDQUFDLElBQUksQ0FBQzs7OztXQUlQLENBQUMsQ0FBQztLQUNSO0lBRUQsWUFBWTtJQUNaLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7O0tBS1QsQ0FBQyxDQUFDO0lBRUgsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBQzdDLE9BQU8sU0FBUyxNQUFNLDJCQUEyQixDQUFDO0FBRWxEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFFSCxNQUFNLG1DQUFvQyxTQUFRLFlBQVk7SUFDMUQsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILEdBQUcsRUFBRTtnQkFDRCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxNQUFNLEVBQUUsQ0FBQyxPQUFPLEVBQUUsVUFBVSxFQUFFLFNBQVMsRUFBRSxNQUFNLEVBQUUsU0FBUyxDQUFDO2dCQUMzRCxPQUFPLEVBQUUsUUFBUSxDQUFDLEdBQUcsQ0FBQyxzQkFBc0IsQ0FBQzthQUNoRDtZQUNELEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUU7b0JBQ0YsSUFBSSxFQUFFLGVBQWU7b0JBQ3JCLFVBQVUsRUFBRSxDQUFDLEdBQUcsRUFBRSxHQUFHLENBQUM7aUJBQ3pCO2dCQUNELE1BQU0sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUM7Z0JBQ3ZCLE9BQU8sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUM7YUFDM0I7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBT0QsT0FBTyxFQUFFLG1DQUFtQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRTVELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixVQUFVLEVBQ1YsVUFBVSxFQUNWLFdBQVcsR0FPZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixHQUFHLEVBQUUsT0FBTyxFQUNaLEtBQUssRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUMsSUFDbkIsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsT0FBTztJQUNQLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDMUMsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0tBbURiLENBQUMsQ0FBQztRQUVDLFFBQVEsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUNyQixLQUFLLE1BQU07Z0JBQ1AsSUFBSSxDQUFDLElBQUksQ0FBQzs7ZUFFWCxDQUFDLENBQUM7Z0JBQ0QsTUFBTTtTQUNiO0tBQ0o7SUFFRCxNQUFNO0lBQ04sSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUN6QyxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7OztTQVFULENBQUMsQ0FBQztRQUVILFFBQVEsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUNyQixLQUFLLFVBQVU7Z0JBQ1gsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztpQkEyQ1QsQ0FBQyxDQUFDO2dCQUVILE1BQU07WUFDVixLQUFLLFNBQVM7Z0JBQ1YsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7OztlQVVYLENBQUMsQ0FBQztnQkFDRCxNQUFNO1lBQ1YsS0FBSyxNQUFNO2dCQUNQLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7OztpQkFNVCxDQUFDLENBQUM7Z0JBQ0gsTUFBTTtZQUNWLEtBQUssU0FBUztnQkFDVixNQUFNLElBQUksR0FBRyxTQUFTLENBQUMsTUFBTSxDQUFDLENBQUM7Z0JBQy9CLElBQUksQ0FBQyxNQUFNLENBQ1AsVUFBVSxDQUFDLEtBQUssQ0FBQzs7Ozs7Ozs7O21CQVNsQixDQUFDLENBQ0gsQ0FBQztnQkFFRixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7aUJBcUJULENBQUMsQ0FBQztnQkFDSCxNQUFNO1lBQ1YsS0FBSyxPQUFPLENBQUM7WUFDYjtnQkFDSSxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztTQXVCakIsQ0FBQyxDQUFDO2dCQUNLLE1BQU07U0FDYjtRQUVELFdBQVc7UUFDWCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7OztTQUtULENBQUMsQ0FBQztRQUVILFVBQVU7UUFDVixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7U0FxQlQsQ0FBQyxDQUFDO1FBRUgsVUFBVTtRQUNWLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7V0FJUCxDQUFDLENBQUM7S0FDUjtJQUVELFlBQVk7SUFDWixJQUFJLENBQUMsSUFBSSxDQUFDOzs7OztLQUtULENBQUMsQ0FBQztJQUVILE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==

@@ -12,7 +12,7 @@ export interface postcssSugarPluginStateHoverMixinParams {}
 
 /**
  * @name           hover
- * @as              @sugar.state.hover
+ * @as              @s.state.hover
  * @namespace      node.mixin.state
  * @type           PostcssMixin
  * @platform      postcss
@@ -22,14 +22,14 @@ export interface postcssSugarPluginStateHoverMixinParams {}
  * Here's the generated selector:
  * - &:hover
  *
- * @snippet         @sugar.state.hover
- * \@sugar.state.hover {
+ * @snippet         @s.state.hover
+ * \@s.state.hover {
  *      $1
  * }
  *
  * @example        css
  * .myCoolItem {
- *  \@sugar.state.hover {
+ *  \@s.state.hover {
  *      // ...
  *  }
  * }

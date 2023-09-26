@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           mounted
- * @as              @sugar.until.mounted
+ * @as              @s.until.mounted
  * @namespace      node.mixin.until
  * @type           PostcssMixin
  * @interface   ./mounted
@@ -20,7 +20,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * .myElement {
  *      display: block;
  *
- *      @sugar.until.mounted {
+ *      @s.until.mounted {
  *          display: none;
  *      }
  * }

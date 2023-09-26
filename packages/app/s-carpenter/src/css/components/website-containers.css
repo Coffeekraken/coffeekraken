@@ -5,7 +5,7 @@
     transition: var(--s-container-transition) !important;
 
     &.drag-over {
-        background: sugar.color(accent, --alpha 0.1);
+        background: s.color(accent, --alpha 0.1);
     }
 
     > * {
@@ -50,19 +50,19 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: sugar.color(main, --alpha 0.1);
+            color: s.color(main, --alpha 0.1);
             position: absolute;
             top: calc(100% + 50px);
             left: 50%;
             width: calc(100% - 40px);
             height: 0;
-            max-width: sugar.container.width();
+            max-width: s.container.width();
             transform: translateX(-50%);
-            border: 0px dashed sugar.color(main, border);
-            background: sugar.color(main, --alpha 0.1);
+            border: 0px dashed s.color(main, border);
+            background: s.color(main, --alpha 0.1);
             overflow: hidden;
             transition: var(--s-container-transition), color 0.1s ease-out;
-            @sugar.font.size (40);
+            @s.font.size (40);
 
             [s-container] & {
                 width: 100%;
@@ -72,29 +72,29 @@
 
     .s-carpenter-app_add-component-container {
         background-color: transparent !important;
-        @sugar.border.radius (30);
-        @sugar.depth (100);
-        @sugar.transition;
+        @s.border.radius (30);
+        @s.depth (100);
+        @s.transition;
     }
 
     .s-carpenter-app-add-component {
-        @sugar.ui.filtrableInput();
+        @s.ui.filtrableInput();
         min-width: 350px;
 
         ._group {
-            @sugar.ui.inputcontainer ($lnf: group);
+            @s.ui.inputcontainer ($lnf: group);
 
             ._icon {
                 display: flex;
-                padding: sugar.padding(30);
+                padding: s.padding(30);
                 justify-content: center;
                 align-items: center;
                 aspect-ratio: 1;
-                background: sugar.color(complementary, --lighten 20);
-                @sugar.border.radius;
+                background: s.color(complementary, --lighten 20);
+                @s.border.radius;
 
                 i {
-                    color: sugar.color(complementary, foreground);
+                    color: s.color(complementary, foreground);
                 }
             }
         }
@@ -104,7 +104,7 @@
             white-space: nowrap;
             display: flex;
             align-items: center;
-            gap: sugar.margin(30);
+            gap: s.margin(30);
 
             ._preview {
                 width: 150px;
@@ -126,16 +126,16 @@
                     opacity: 0.3;
 
                     [fill] {
-                        fill: sugar.color(complementary);
+                        fill: s.color(complementary);
                     }
                     [stroke] {
-                        stroke: sugar.color(complementary);
+                        stroke: s.color(complementary);
                     }
                 }
             }
 
             ._icon {
-                padding-block: sugar.padding(10);
+                padding-block: s.padding(10);
 
                 svg {
                     width: 60px !important;
@@ -143,10 +143,10 @@
                     opacity: 0.3;
 
                     [fill] {
-                        fill: sugar.color(complementary);
+                        fill: s.color(complementary);
                     }
                     [stroke] {
-                        stroke: sugar.color(complementary);
+                        stroke: s.color(complementary);
                     }
                 }
             }
@@ -156,11 +156,11 @@
         }
 
         ._title {
-            margin-block-end: sugar.margin(10);
+            margin-block-end: s.margin(10);
         }
 
         ._description {
-            font-size: sugar.font.size(20);
+            font-size: s.font.size(20);
             opacity: 0.5;
         }
 
@@ -193,18 +193,18 @@ body:not(.s-carpenter--insert) .s-carpenter-app_website-add-component {
             display: flex;
             align-items: center;
             justify-content: center;
-            color: sugar.color(main, text, --alpha 0.4);
+            color: s.color(main, text, --alpha 0.4);
             position: absolute;
             top: 50px;
             left: 50%;
             width: calc(100% - 40px);
             height: 100px;
-            max-width: sugar.container.width();
+            max-width: s.container.width();
             transform: translateX(-50%);
-            border: 1px dashed sugar.color(main, border);
-            background: sugar.color(main, --alpha 0.1);
-            @sugar.font.size (40);
-            @sugar.transition;
+            border: 1px dashed s.color(main, border);
+            background: s.color(main, --alpha 0.1);
+            @s.font.size (40);
+            @s.transition;
 
             [s-container] & {
                 width: 100%;
@@ -218,9 +218,9 @@ body:not(.s-carpenter--insert) .s-carpenter-app_website-add-component {
 
     > * > template[s-node] + template {
         &:after {
-            color: sugar.color(main, text, --alpha 0.4);
+            color: s.color(main, text, --alpha 0.4);
             height: 100px;
-            border: 1px dashed sugar.color(main, border);
+            border: 1px dashed s.color(main, border);
             transition: var(--s-container-transition), color 0.1s ease-out 0.2s;
         }
     }

@@ -19,7 +19,7 @@ class postcssSugarPluginRhythmVerticalMixinInterface extends s_interface_1.defau
 exports.interface = postcssSugarPluginRhythmVerticalMixinInterface;
 /**
  * @name           vertical
- * @as              @sugar.rhythm.vertical
+ * @as              @s.rhythm.vertical
  * @namespace      node.mixin.rhythm
  * @type           PostcssMixin
  * @platform      postcss
@@ -30,21 +30,21 @@ exports.interface = postcssSugarPluginRhythmVerticalMixinInterface;
  *
  * @return      {Css}         The generated css
  *
- * @snippet         @sugar.rhythm.vertical
- * \@sugar.rhythm.vertical {
+ * @snippet         @s.rhythm.vertical
+ * \@s.rhythm.vertical {
  *      $1
  * }
  *
  * @example        css          Custom styling
  * .my-cool-element {
- *    \@sugar.rhythm.vertical {
+ *    \@s.rhythm.vertical {
  *      margin-bottom: 50px;
  *    }
  * }
  *
  * @example         css         Theme dot path
  * .my-cool-element {
- *    @sugar.rhythm.vertical(ui.codeExample.rhythmVertical);
+ *    @s.rhythm.vertical(ui.codeExample.rhythmVertical);
  * }
  *
  * @example       html

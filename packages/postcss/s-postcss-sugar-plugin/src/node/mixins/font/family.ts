@@ -4,11 +4,11 @@ import { __dashCase } from '@coffeekraken/sugar/string';
 
 /**
  * @name           family
- * @as              @sugar.font.family
+ * @as              @s.font.family
  * @namespace      node.mixin.font
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate the css needed to apply a particular font in your css.
  * The font parameter accept any defined font family from the
@@ -16,11 +16,11 @@ import { __dashCase } from '@coffeekraken/sugar/string';
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.font.family($1)
+ * @snippet         @s.font.family($1)
  *
  * @example        css
  * .my-cool-element {
- *    \@sugar.font.family(title);
+ *    \@s.font.family(title);
  * }
  *
  * @since       2.0.0

@@ -7,20 +7,20 @@ exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 /**
  * @name           classes
- * @as              @sugar.shape.classes
+ * @as              @s.shape.classes
  * @namespace      node.mixin.shape
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * This mixin generate all the shape helper classes like s-shape:default, s-shape:square and s-shape:pill
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.shape.classes
+ * @snippet         @s.shape.classes
  *
  * @example        css
- * \@sugar.shape.classes;
+ * \@s.shape.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -41,10 +41,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/shape
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply a shape to any elements that support it using the
-        * \`border-radius: sugar.border.radius(shape);\` statement.
+        * \`border-radius: s.border.radius(shape);\` statement.
         * 
         * @support          chromium
         * @support          firefox
@@ -52,7 +52,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@sugar.shape.classes;
+        * \\@s.shape.classes;
         * 
         * @cssClass                 s-shape:default             Apply the default shape (default border radius)
         * @cssClass                 s-shape:square              Apply the square shape
@@ -72,10 +72,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
 * @namespace          sugar.style.helpers.shape
 * @type             CssClass
 * @platform             css
-* @status               beta
+* @status               stable
 * 
 * These classes allows you to apply a shape to any elements that support it using the
-* \`border-radius: sugar.border.radius(shape);\` statement.
+* \`border-radius: s.border.radius(shape);\` statement.
 * 
 * @example        html              Shape on buttons
 * <a class="s-btn s-color:accent s-shape:default">Default shape</a>
@@ -85,17 +85,17 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
 */
 `).code(`
 .s-shape-default {
-    @sugar.shape(default);
+    @s.shape(default);
 }`, { type: 'CssClass' });
     vars.comment(() => `/**
 * @name            s-shape:square
 * @namespace          sugar.style.helpers.shape
 * @type             CssClass
 * @platform             css
-* @status               beta
+* @status               stable
 * 
 * These classes allows you to apply a shape to any elements that support it using the
-* \`border-radius: sugar.border.radius(shape);\` statement.
+* \`border-radius: s.border.radius(shape);\` statement.
 * 
 * @example        html              Shape on buttons
 * <a class="s-btn s-color:accent s-shape:square">Default shape</a>
@@ -105,17 +105,17 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
 */
 `).code(`
 .s-shape-square {
-    @sugar.shape(square);
+    @s.shape(square);
 }`, { type: 'CssClass' });
     vars.comment(() => `/**
 * @name            s-shape:pill
 * @namespace          sugar.style.helpers.shape
 * @type             CssClass
 * @platform             css
-* @status               beta
+* @status               stable
 * 
 * These classes allows you to apply a shape to any elements that support it using the
-* \`border-radius: sugar.border.radius(shape);\` statement.
+* \`border-radius: s.border.radius(shape);\` statement.
 * 
 * @example        html              Shape on buttons
 * <a class="s-btn s-color:accent s-shape:pill">Default shape</a>
@@ -125,7 +125,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
 */
 `).code(`
 .s-shape-pill {
-    @sugar.shape(pill);
+    @s.shape(pill);
 }`, { type: 'CssClass' });
     return vars;
 }

@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 /**
  * @name          width
- * @as            sugar.border.width
+ * @as            s.border.width
  * @namespace     node.function.border
  * @type          PostcssFunction
  * @platform      postcss

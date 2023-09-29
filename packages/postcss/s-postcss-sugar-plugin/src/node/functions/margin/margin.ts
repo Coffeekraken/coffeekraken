@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          margin
- * @as          sugar.margin
+ * @as          s.margin
  * @namespace     node.function.margin
  * @type          PostcssFunction
  * @platform      postcss

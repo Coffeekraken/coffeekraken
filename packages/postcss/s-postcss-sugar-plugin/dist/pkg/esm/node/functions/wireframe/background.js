@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 /**
  * @name          background
- * @as          sugar.wireframe.background
+ * @as          s.wireframe.background
  * @namespace     node.function.wireframe
  * @type          PostcssFunction
  * @platform      postcss

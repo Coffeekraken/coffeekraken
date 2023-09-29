@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import { __isValidCssUnitValue } from '@coffeekraken/sugar/css';
 /**
  * @name          family
- * @as              sugar.font.family
+ * @as              s.font.family
  * @namespace     node.function.font
  * @type          PostcssFunction
  * @platform      postcss

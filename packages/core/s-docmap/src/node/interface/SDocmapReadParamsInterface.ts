@@ -33,6 +33,7 @@ class SDocmapReadParamsInterface extends __SInterface {
                     'Specify if you want to read also the dependencies packages docmap files or not',
                 type: 'Boolean',
                 default: true,
+                alias: 'd',
             },
             sort: {
                 description:

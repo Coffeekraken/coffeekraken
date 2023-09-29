@@ -3,6 +3,31 @@
     "extends": [],
     "generated": {
         "map": {
+            "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPluginConfig": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPluginConfig",
+                "name": "postcssSugarPluginConfig",
+                "as": "PostCSS Sugar plugin config",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Config"
+                        }
+                    ],
+                    "raw": "Config"
+                },
+                "description": "Specify the @coffeekraken/s-postcss-sugar-plugin available configurations",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.config",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "postcssSugarPlugin.config.ts",
+                "extension": "config",
+                "relPath": "src/config/postcssSugarPlugin.config.ts"
+            },
             "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.outDir": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.outDir",
                 "name": "outDir",
@@ -187,6 +212,42 @@
                 "relPath": "src/config/postcssSugarPlugin.config.ts",
                 "children": {}
             },
+            "@coffeekraken.s-postcss-sugar-plugin.doc.README": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.doc.README",
+                "name": "README",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/README.md.twig",
+                "children": {}
+            },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.classes",
                 "name": "classes",
@@ -276,7 +337,7 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.function.color.color": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.color.color",
                 "name": "color",
-                "as": "sugar.color",
+                "as": "s.color",
                 "type": {
                     "types": [
                         {
@@ -410,7 +471,7 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.function.font.family": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.font.family",
                 "name": "family",
-                "as": "sugar.font.family",
+                "as": "s.font.family",
                 "type": {
                     "types": [
                         {
@@ -495,7 +556,7 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.function.font.size": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.font.size",
                 "name": "size",
-                "as": "sugar.font.size",
+                "as": "s.font.size",
                 "type": {
                     "types": [
                         {
@@ -605,7 +666,7 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.function.margin.margin": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.margin.margin",
                 "name": "margin",
-                "as": "sugar.margin",
+                "as": "s.margin",
                 "type": {
                     "types": [
                         {
@@ -729,7 +790,7 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.function.opacity.opacity": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.opacity.opacity",
                 "name": "opacity",
-                "as": "sugar.opacity",
+                "as": "s.opacity",
                 "type": {
                     "types": [
                         {
@@ -827,7 +888,7 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.function.padding.padding": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.padding.padding",
                 "name": "padding",
-                "as": "sugar.padding",
+                "as": "s.padding",
                 "type": {
                     "types": [
                         {
@@ -5398,9 +5459,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "button.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/button/button.ts",
+                "filename": "button.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/button/button.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.button.classes": {

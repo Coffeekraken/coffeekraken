@@ -139,6 +139,7 @@ export interface ISDocmapMenuObj {
 export interface ISDocmapSearchParams {
     slug: string;
     namespace: string;
+    dependencies: boolean;
     type: string;
     id: string;
 }
@@ -329,6 +330,7 @@ class SDocmap extends __SClass implements ISDocmap {
             const loadJson = async (
                 packageNameOrPath,
                 type: 'npm' | 'composer' = 'npm',
+                isDependency = false,
             ) => {
                 let currentPathDocmapJsonPath,
                     potentialPackageDocmapJsonPath = __path.resolve(
@@ -371,12 +373,15 @@ class SDocmap extends __SClass implements ISDocmap {
                 const packageMetas = __packageMetasSync(packageRootPath);
                 Object.keys(docmapJson.map).forEach((namespace) => {
                     if (docmapJson.map[namespace]) {
+                        docmapJson.map[namespace].isDependency = isDependency;
                         docmapJson.map[namespace].package = packageMetas;
                     }
                 });
                 Object.keys(docmapJson.generated?.map ?? []).forEach(
                     (namespace) => {
                         if (docmapJson.generated.map[namespace]) {
+                            docmapJson.generated.map[namespace].isDependency =
+                                isDependency;
                             docmapJson.generated.map[namespace].package =
                                 packageMetas;
                         }
@@ -439,7 +444,7 @@ class SDocmap extends __SClass implements ISDocmap {
                 for (let [depName, depVersion] of Object.entries(
                     packageJsonDeps,
                 )) {
-                    await loadJson(depName, 'npm');
+                    await loadJson(depName, 'npm', true);
                 }
             }
 
@@ -454,7 +459,7 @@ class SDocmap extends __SClass implements ISDocmap {
                 for (let [depName, depVersion] of Object.entries(
                     composerJsonDeps,
                 )) {
-                    await loadJson(depName, 'composer');
+                    await loadJson(depName, 'composer', true);
                 }
             }
 

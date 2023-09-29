@@ -7,7 +7,6 @@ import __getRoot from '../../../utils/getRoot.js';
  * @as            @s.ui.button
  * @namespace     node.mixin.ui.button
  * @type          PostcssMixin
- * @interface     ./button
  * @platform      postcss
  * @status        stable
  *

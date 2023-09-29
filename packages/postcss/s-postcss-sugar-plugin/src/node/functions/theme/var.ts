@@ -5,7 +5,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          var
- * @as          sugar.theme.var
+ * @as          s.theme.var
  * @namespace     node.function.theme
  * @type          PostcssFunction
  * @platform      postcss

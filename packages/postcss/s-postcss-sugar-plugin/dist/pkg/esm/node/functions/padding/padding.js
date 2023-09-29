@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 /**
  * @name          padding
- * @as          sugar.padding
+ * @as          s.padding
  * @namespace     node.function.padding
  * @type          PostcssFunction
  * @platform      postcss

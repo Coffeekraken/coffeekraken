@@ -3,7 +3,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 /**
  * @name          theme
- * @as          sugar.theme
+ * @as          s.theme
  * @namespace     node.function.theme
  * @type          PostcssFunction
  * @platform      postcss

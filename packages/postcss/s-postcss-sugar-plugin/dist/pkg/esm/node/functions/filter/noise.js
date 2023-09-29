@@ -1,7 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name           noise
- * @as            sugar.filter.noise
+ * @as            s.filter.noise
  * @namespace      node.function.filter
  * @type           PostcssFunction
  * @platform      postcss

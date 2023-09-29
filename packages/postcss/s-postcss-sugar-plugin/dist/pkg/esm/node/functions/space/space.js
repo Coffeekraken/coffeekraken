@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 /**
  * @name          space
- * @as          sugar.space
+ * @as          s.space
  * @namespace     node.function.space
  * @type          PostcssFunction
  * @platform      postcss

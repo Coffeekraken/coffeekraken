@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          size
- * @as              sugar.font.size
+ * @as              s.font.size
  * @namespace     node.function.font
  * @type          PostcssFunction
  * @platform      postcss

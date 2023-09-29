@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 /**
  * @name          offsize
- * @as          sugar.offsize
+ * @as          s.offsize
  * @namespace     node.function.offsize
  * @type          PostcssFunction
  * @platform      postcss

@@ -81,7 +81,6 @@ body:has(.s-doc-fullscreen) {
     max-width: 100vw;
     /* width: 90vw; */
     display: flex;
-    background: s.color(main, surface, --alpha 0.3);
     position: relative;
     /* left: 50%;
     transform: translateX(-50%); */
@@ -92,8 +91,7 @@ body:has(.s-doc-fullscreen) {
         display: block;
     }
 
-    &_search-input,
-    [tabindex]:not([tabindex='-1']) {
+    &_search-input {
         @s.focus.outline accent;
     }
 
@@ -132,7 +130,7 @@ body:has(.s-doc-fullscreen) {
         position: fixed;
         bottom: s.margin(30);
         right: s.margin(30);
-        background: s.color(main, surface);
+        /* background: s.color(main, surface); */
         padding: s.padding(30);
         z-index: 100;
         @s.border.radius;
@@ -148,7 +146,6 @@ body:has(.s-doc-fullscreen) {
 
         > div {
             padding: s.padding(30) !important;
-            background: s.color(main, surface, --alpha 0);
             @s.transition fast;
 
             > i {
@@ -168,8 +165,6 @@ body:has(.s-doc-fullscreen) {
         }
         &:active > div,
         &.active > div {
-            background: s.color(main, surface);
-
             > i {
                 color: s.color(complementary, --lighten 20);
             }
@@ -239,6 +234,7 @@ body:has(.s-doc-fullscreen) {
         padding: s.padding(30) s.padding(30);
         background: s.color(main, ui);
         border-bottom: 1px solid s.color(main, border);
+        @s.shape;
     }
 
     &_content {
@@ -292,7 +288,6 @@ body:has(.s-doc-fullscreen) {
         padding: s.padding(30);
         background: s.color(main, surface);
         @s.transition;
-        @s.focus.outline accent;
 
         &:hover {
             background: s.color(main, surface);

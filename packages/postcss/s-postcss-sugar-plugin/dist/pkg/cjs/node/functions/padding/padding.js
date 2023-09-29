@@ -8,7 +8,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 /**
  * @name          padding
- * @as          sugar.padding
+ * @as          s.padding
  * @namespace     node.function.padding
  * @type          PostcssFunction
  * @platform      postcss

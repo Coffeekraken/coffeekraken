@@ -10,7 +10,7 @@ const path_1 = __importDefault(require("path"));
  * @namespace               config
  * @type                    Config
  * @plateform               node
- * @status                  beta
+ * @status                  stable
  *
  * Specify the @coffeekraken/s-postcss-sugar-plugin available configurations
  *

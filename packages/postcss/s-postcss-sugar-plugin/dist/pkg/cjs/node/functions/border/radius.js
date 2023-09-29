@@ -8,7 +8,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 /**
  * @name          radius
- * @as            sugar.border.radius
+ * @as            s.border.radius
  * @namespace     node.function.border
  * @type          PostcssFunction
  * @platform      postcss

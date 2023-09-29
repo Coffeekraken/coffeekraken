@@ -2,8 +2,8 @@
     "map": {},
     "generated": {
         "map": {
-            "@website.stylekit-coffeekraken-io.doc.Overview": {
-                "id": "@website.stylekit-coffeekraken-io.doc.Overview",
+            "@website.sugarcss-coffeekraken-io.doc.Overview": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.Overview",
                 "name": "Overview",
                 "type": {
                     "types": [
@@ -26,7 +26,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -39,8 +39,8 @@
                 "relPath": "src/doc/00-getStarted/00-overview.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.Get-Started": {
-                "id": "@website.stylekit-coffeekraken-io.doc.Get-Started",
+            "@website.sugarcss-coffeekraken-io.doc.Get-Started": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.Get-Started",
                 "name": "Get Started",
                 "type": {
                     "types": [
@@ -63,7 +63,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -76,8 +76,8 @@
                 "relPath": "src/doc/00-getStarted/01-getStarted.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.First-project": {
-                "id": "@website.stylekit-coffeekraken-io.doc.First-project",
+            "@website.sugarcss-coffeekraken-io.doc.First-project": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.First-project",
                 "name": "First project",
                 "type": {
                     "types": [
@@ -100,7 +100,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -113,8 +113,8 @@
                 "relPath": "src/doc/00-getStarted/02-firstProject.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.css.Languages": {
-                "id": "@website.stylekit-coffeekraken-io.doc.css.Languages",
+            "@website.sugarcss-coffeekraken-io.doc.css.Languages": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.css.Languages",
                 "name": "Languages",
                 "type": {
                     "types": [
@@ -137,7 +137,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.css",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.css",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -150,8 +150,8 @@
                 "relPath": "src/doc/01-css/01-languages.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.css.Pleasant-syntax": {
-                "id": "@website.stylekit-coffeekraken-io.doc.css.Pleasant-syntax",
+            "@website.sugarcss-coffeekraken-io.doc.css.Pleasant-syntax": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.css.Pleasant-syntax",
                 "name": "Pleasant syntax",
                 "type": {
                     "types": [
@@ -174,7 +174,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.css",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.css",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -187,8 +187,8 @@
                 "relPath": "src/doc/01-css/02-syntax.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.css.Classes": {
-                "id": "@website.stylekit-coffeekraken-io.doc.css.Classes",
+            "@website.sugarcss-coffeekraken-io.doc.css.Classes": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.css.Classes",
                 "name": "Classes",
                 "type": {
                     "types": [
@@ -211,7 +211,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.css",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.css",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -224,8 +224,8 @@
                 "relPath": "src/doc/01-css/03-classes.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.css.Mixins": {
-                "id": "@website.stylekit-coffeekraken-io.doc.css.Mixins",
+            "@website.sugarcss-coffeekraken-io.doc.css.Mixins": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.css.Mixins",
                 "name": "Mixins",
                 "type": {
                     "types": [
@@ -248,7 +248,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.css",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.css",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -261,8 +261,8 @@
                 "relPath": "src/doc/01-css/04-mixins.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.css.Functions": {
-                "id": "@website.stylekit-coffeekraken-io.doc.css.Functions",
+            "@website.sugarcss-coffeekraken-io.doc.css.Functions": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.css.Functions",
                 "name": "Functions",
                 "type": {
                     "types": [
@@ -285,7 +285,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.css",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.css",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -298,8 +298,8 @@
                 "relPath": "src/doc/01-css/05-functions.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.css.Colors": {
-                "id": "@website.stylekit-coffeekraken-io.doc.css.Colors",
+            "@website.sugarcss-coffeekraken-io.doc.css.Colors": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.css.Colors",
                 "name": "Colors",
                 "type": {
                     "types": [
@@ -322,7 +322,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.css",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.css",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -335,8 +335,8 @@
                 "relPath": "src/doc/01-css/06-colors.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.css.Theming": {
-                "id": "@website.stylekit-coffeekraken-io.doc.css.Theming",
+            "@website.sugarcss-coffeekraken-io.doc.css.Theming": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.css.Theming",
                 "name": "Theming",
                 "type": {
                     "types": [
@@ -359,7 +359,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.css",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.css",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -372,8 +372,8 @@
                 "relPath": "src/doc/01-css/07-theming.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.css.Typography": {
-                "id": "@website.stylekit-coffeekraken-io.doc.css.Typography",
+            "@website.sugarcss-coffeekraken-io.doc.css.Typography": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.css.Typography",
                 "name": "Typography",
                 "type": {
                     "types": [
@@ -396,7 +396,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.css",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.css",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -409,8 +409,8 @@
                 "relPath": "src/doc/01-css/08-typography.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.css.Icons": {
-                "id": "@website.stylekit-coffeekraken-io.doc.css.Icons",
+            "@website.sugarcss-coffeekraken-io.doc.css.Icons": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.css.Icons",
                 "name": "Icons",
                 "type": {
                     "types": [
@@ -433,7 +433,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.css",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.css",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -446,8 +446,8 @@
                 "relPath": "src/doc/01-css/09-icons.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.css.UI": {
-                "id": "@website.stylekit-coffeekraken-io.doc.css.UI",
+            "@website.sugarcss-coffeekraken-io.doc.css.UI": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.css.UI",
                 "name": "UI",
                 "type": {
                     "types": [
@@ -470,7 +470,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.css",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.css",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -483,8 +483,8 @@
                 "relPath": "src/doc/01-css/10-ui.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.css.Layout": {
-                "id": "@website.stylekit-coffeekraken-io.doc.css.Layout",
+            "@website.sugarcss-coffeekraken-io.doc.css.Layout": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.css.Layout",
                 "name": "Layout",
                 "type": {
                     "types": [
@@ -507,7 +507,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.css",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.css",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -520,8 +520,8 @@
                 "relPath": "src/doc/01-css/11-layout.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.css.Responsive": {
-                "id": "@website.stylekit-coffeekraken-io.doc.css.Responsive",
+            "@website.sugarcss-coffeekraken-io.doc.css.Responsive": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.css.Responsive",
                 "name": "Responsive",
                 "type": {
                     "types": [
@@ -544,7 +544,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.css",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.css",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -557,8 +557,8 @@
                 "relPath": "src/doc/01-css/12-responsive.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.css.Build": {
-                "id": "@website.stylekit-coffeekraken-io.doc.css.Build",
+            "@website.sugarcss-coffeekraken-io.doc.css.Build": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.css.Build",
                 "name": "Build",
                 "type": {
                     "types": [
@@ -581,7 +581,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.css",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.css",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -594,8 +594,8 @@
                 "relPath": "src/doc/01-css/13-build.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.css.Scopes": {
-                "id": "@website.stylekit-coffeekraken-io.doc.css.Scopes",
+            "@website.sugarcss-coffeekraken-io.doc.css.Scopes": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.css.Scopes",
                 "name": "Scopes",
                 "type": {
                     "types": [
@@ -618,7 +618,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.css",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.css",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -631,8 +631,8 @@
                 "relPath": "src/doc/01-css/14-scopes.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.css.z-index": {
-                "id": "@website.stylekit-coffeekraken-io.doc.css.z-index",
+            "@website.sugarcss-coffeekraken-io.doc.css.z-index": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.css.z-index",
                 "name": "z-index",
                 "type": {
                     "types": [
@@ -655,7 +655,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.css",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.css",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -668,8 +668,8 @@
                 "relPath": "src/doc/01-css/15-zindex.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.js.Supported-languages": {
-                "id": "@website.stylekit-coffeekraken-io.doc.js.Supported-languages",
+            "@website.sugarcss-coffeekraken-io.doc.js.Supported-languages": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.js.Supported-languages",
                 "name": "Supported languages",
                 "type": {
                     "types": [
@@ -692,7 +692,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.js",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.js",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -705,8 +705,8 @@
                 "relPath": "src/doc/02-js/01-languages.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.js.Sugar-toolkit": {
-                "id": "@website.stylekit-coffeekraken-io.doc.js.Sugar-toolkit",
+            "@website.sugarcss-coffeekraken-io.doc.js.Sugar-toolkit": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.js.Sugar-toolkit",
                 "name": "Sugar toolkit",
                 "type": {
                     "types": [
@@ -729,7 +729,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.js",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.js",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -742,8 +742,8 @@
                 "relPath": "src/doc/02-js/02-sugar.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.js.Packages": {
-                "id": "@website.stylekit-coffeekraken-io.doc.js.Packages",
+            "@website.sugarcss-coffeekraken-io.doc.js.Packages": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.js.Packages",
                 "name": "Packages",
                 "type": {
                     "types": [
@@ -766,7 +766,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.js",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.js",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -779,8 +779,8 @@
                 "relPath": "src/doc/02-js/03-packages.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.js.Build": {
-                "id": "@website.stylekit-coffeekraken-io.doc.js.Build",
+            "@website.sugarcss-coffeekraken-io.doc.js.Build": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.js.Build",
                 "name": "Build",
                 "type": {
                     "types": [
@@ -803,7 +803,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.js",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.js",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -816,8 +816,8 @@
                 "relPath": "src/doc/02-js/04-build.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.components.Overview": {
-                "id": "@website.stylekit-coffeekraken-io.doc.components.Overview",
+            "@website.sugarcss-coffeekraken-io.doc.components.Overview": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.components.Overview",
                 "name": "Overview",
                 "type": {
                     "types": [
@@ -840,7 +840,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.components",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.components",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -853,8 +853,8 @@
                 "relPath": "src/doc/03-components/01-overview.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.components.Fully-customizable": {
-                "id": "@website.stylekit-coffeekraken-io.doc.components.Fully-customizable",
+            "@website.sugarcss-coffeekraken-io.doc.components.Fully-customizable": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.components.Fully-customizable",
                 "name": "Fully customizable",
                 "type": {
                     "types": [
@@ -877,7 +877,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.components",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.components",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -890,8 +890,8 @@
                 "relPath": "src/doc/03-components/02-customizable.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.components.Official-components": {
-                "id": "@website.stylekit-coffeekraken-io.doc.components.Official-components",
+            "@website.sugarcss-coffeekraken-io.doc.components.Official-components": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.components.Official-components",
                 "name": "Official components",
                 "type": {
                     "types": [
@@ -914,7 +914,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.components",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.components",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -927,8 +927,8 @@
                 "relPath": "src/doc/03-components/03-official.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.components.Create-your-own": {
-                "id": "@website.stylekit-coffeekraken-io.doc.components.Create-your-own",
+            "@website.sugarcss-coffeekraken-io.doc.components.Create-your-own": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.components.Create-your-own",
                 "name": "Create your own",
                 "type": {
                     "types": [
@@ -951,7 +951,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.components",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.components",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -964,8 +964,8 @@
                 "relPath": "src/doc/03-components/04-create.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.components.Responsive": {
-                "id": "@website.stylekit-coffeekraken-io.doc.components.Responsive",
+            "@website.sugarcss-coffeekraken-io.doc.components.Responsive": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.components.Responsive",
                 "name": "Responsive",
                 "type": {
                     "types": [
@@ -988,7 +988,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.components",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.components",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -1001,8 +1001,8 @@
                 "relPath": "src/doc/03-components/05-responsive.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.components.Scopes": {
-                "id": "@website.stylekit-coffeekraken-io.doc.components.Scopes",
+            "@website.sugarcss-coffeekraken-io.doc.components.Scopes": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.components.Scopes",
                 "name": "Scopes",
                 "type": {
                     "types": [
@@ -1025,7 +1025,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.components",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.components",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -1038,8 +1038,8 @@
                 "relPath": "src/doc/03-components/06-scopes.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.images.Overview": {
-                "id": "@website.stylekit-coffeekraken-io.doc.images.Overview",
+            "@website.sugarcss-coffeekraken-io.doc.images.Overview": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.images.Overview",
                 "name": "Overview",
                 "type": {
                     "types": [
@@ -1062,7 +1062,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.images",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.images",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -1075,8 +1075,8 @@
                 "relPath": "src/doc/04-images/01-overview.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.images.Supported-formats": {
-                "id": "@website.stylekit-coffeekraken-io.doc.images.Supported-formats",
+            "@website.sugarcss-coffeekraken-io.doc.images.Supported-formats": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.images.Supported-formats",
                 "name": "Supported formats",
                 "type": {
                     "types": [
@@ -1099,7 +1099,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.images",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.images",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -1112,8 +1112,8 @@
                 "relPath": "src/doc/04-images/02-formats.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.images.Build": {
-                "id": "@website.stylekit-coffeekraken-io.doc.images.Build",
+            "@website.sugarcss-coffeekraken-io.doc.images.Build": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.images.Build",
                 "name": "Build",
                 "type": {
                     "types": [
@@ -1136,7 +1136,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.images",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.images",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -1149,8 +1149,8 @@
                 "relPath": "src/doc/04-images/03-build.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.images.Configuration": {
-                "id": "@website.stylekit-coffeekraken-io.doc.images.Configuration",
+            "@website.sugarcss-coffeekraken-io.doc.images.Configuration": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.images.Configuration",
                 "name": "Configuration",
                 "type": {
                     "types": [
@@ -1173,7 +1173,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.images",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.images",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -1186,8 +1186,8 @@
                 "relPath": "src/doc/04-images/04-config.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.routing.Overview": {
-                "id": "@website.stylekit-coffeekraken-io.doc.routing.Overview",
+            "@website.sugarcss-coffeekraken-io.doc.routing.Overview": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.routing.Overview",
                 "name": "Overview",
                 "type": {
                     "types": [
@@ -1210,7 +1210,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.routing",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.routing",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -1223,8 +1223,8 @@
                 "relPath": "src/doc/05-routing/01-overview.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.routing.Views": {
-                "id": "@website.stylekit-coffeekraken-io.doc.routing.Views",
+            "@website.sugarcss-coffeekraken-io.doc.routing.Views": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.routing.Views",
                 "name": "Views",
                 "type": {
                     "types": [
@@ -1247,7 +1247,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.routing",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.routing",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -1260,8 +1260,8 @@
                 "relPath": "src/doc/05-routing/02-views.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.routing.Parameters": {
-                "id": "@website.stylekit-coffeekraken-io.doc.routing.Parameters",
+            "@website.sugarcss-coffeekraken-io.doc.routing.Parameters": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.routing.Parameters",
                 "name": "Parameters",
                 "type": {
                     "types": [
@@ -1284,7 +1284,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.routing",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.routing",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -1297,8 +1297,8 @@
                 "relPath": "src/doc/05-routing/03-parameters.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.routing.Data": {
-                "id": "@website.stylekit-coffeekraken-io.doc.routing.Data",
+            "@website.sugarcss-coffeekraken-io.doc.routing.Data": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.routing.Data",
                 "name": "Data",
                 "type": {
                     "types": [
@@ -1321,7 +1321,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.routing",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.routing",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -1334,8 +1334,8 @@
                 "relPath": "src/doc/05-routing/04-data.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.servers.Overview": {
-                "id": "@website.stylekit-coffeekraken-io.doc.servers.Overview",
+            "@website.sugarcss-coffeekraken-io.doc.servers.Overview": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.servers.Overview",
                 "name": "Overview",
                 "type": {
                     "types": [
@@ -1358,7 +1358,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.servers",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.servers",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -1371,8 +1371,8 @@
                 "relPath": "src/doc/06-servers/01-overview.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.servers.Modules": {
-                "id": "@website.stylekit-coffeekraken-io.doc.servers.Modules",
+            "@website.sugarcss-coffeekraken-io.doc.servers.Modules": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.servers.Modules",
                 "name": "Modules",
                 "type": {
                     "types": [
@@ -1395,7 +1395,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.servers",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.servers",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -1408,8 +1408,8 @@
                 "relPath": "src/doc/06-servers/02-modules.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.servers.Handlers": {
-                "id": "@website.stylekit-coffeekraken-io.doc.servers.Handlers",
+            "@website.sugarcss-coffeekraken-io.doc.servers.Handlers": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.servers.Handlers",
                 "name": "Handlers",
                 "type": {
                     "types": [
@@ -1432,7 +1432,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.servers",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.servers",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -1445,8 +1445,8 @@
                 "relPath": "src/doc/06-servers/03-handlers.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.servers.Middlewares": {
-                "id": "@website.stylekit-coffeekraken-io.doc.servers.Middlewares",
+            "@website.sugarcss-coffeekraken-io.doc.servers.Middlewares": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.servers.Middlewares",
                 "name": "Middlewares",
                 "type": {
                     "types": [
@@ -1469,7 +1469,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.servers",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.servers",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -1482,8 +1482,8 @@
                 "relPath": "src/doc/06-servers/04-middleware.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.servers.Routes": {
-                "id": "@website.stylekit-coffeekraken-io.doc.servers.Routes",
+            "@website.sugarcss-coffeekraken-io.doc.servers.Routes": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.servers.Routes",
                 "name": "Routes",
                 "type": {
                     "types": [
@@ -1506,7 +1506,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.servers",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.servers",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -1519,8 +1519,8 @@
                 "relPath": "src/doc/06-servers/05-routes.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.servers.Configuration": {
-                "id": "@website.stylekit-coffeekraken-io.doc.servers.Configuration",
+            "@website.sugarcss-coffeekraken-io.doc.servers.Configuration": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.servers.Configuration",
                 "name": "Configuration",
                 "type": {
                     "types": [
@@ -1543,7 +1543,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.servers",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.servers",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -1556,8 +1556,8 @@
                 "relPath": "src/doc/06-servers/07-configuration.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.specfiles.Overview": {
-                "id": "@website.stylekit-coffeekraken-io.doc.specfiles.Overview",
+            "@website.sugarcss-coffeekraken-io.doc.specfiles.Overview": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.specfiles.Overview",
                 "name": "Overview",
                 "type": {
                     "types": [
@@ -1580,7 +1580,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.specfiles",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.specfiles",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -1593,8 +1593,8 @@
                 "relPath": "src/doc/07-specFiles/01-overview.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.specFiles.Frontspec": {
-                "id": "@website.stylekit-coffeekraken-io.doc.specFiles.Frontspec",
+            "@website.sugarcss-coffeekraken-io.doc.specFiles.Frontspec": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.specFiles.Frontspec",
                 "name": "Frontspec",
                 "type": {
                     "types": [
@@ -1617,7 +1617,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.specFiles",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.specFiles",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -1630,8 +1630,8 @@
                 "relPath": "src/doc/07-specFiles/02-frontspec.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.specFiles.Viewspec": {
-                "id": "@website.stylekit-coffeekraken-io.doc.specFiles.Viewspec",
+            "@website.sugarcss-coffeekraken-io.doc.specFiles.Viewspec": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.specFiles.Viewspec",
                 "name": "Viewspec",
                 "type": {
                     "types": [
@@ -1654,7 +1654,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.specFiles",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.specFiles",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -1667,8 +1667,8 @@
                 "relPath": "src/doc/07-specFiles/03-viewspec.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.config.Overview": {
-                "id": "@website.stylekit-coffeekraken-io.doc.config.Overview",
+            "@website.sugarcss-coffeekraken-io.doc.config.Overview": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.config.Overview",
                 "name": "Overview",
                 "type": {
                     "types": [
@@ -1691,7 +1691,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.config",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.config",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -1704,8 +1704,8 @@
                 "relPath": "src/doc/08-config/01-overview.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.config.Built-in-configs": {
-                "id": "@website.stylekit-coffeekraken-io.doc.config.Built-in-configs",
+            "@website.sugarcss-coffeekraken-io.doc.config.Built-in-configs": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.config.Built-in-configs",
                 "name": "Built-in configs",
                 "type": {
                     "types": [
@@ -1728,7 +1728,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.config",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.config",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -1741,8 +1741,8 @@
                 "relPath": "src/doc/08-config/02-builtin.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.config.Override-configs": {
-                "id": "@website.stylekit-coffeekraken-io.doc.config.Override-configs",
+            "@website.sugarcss-coffeekraken-io.doc.config.Override-configs": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.config.Override-configs",
                 "name": "Override configs",
                 "type": {
                     "types": [
@@ -1765,7 +1765,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.config",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.config",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -1778,8 +1778,8 @@
                 "relPath": "src/doc/08-config/03-override.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.config.Register-new-config-files": {
-                "id": "@website.stylekit-coffeekraken-io.doc.config.Register-new-config-files",
+            "@website.sugarcss-coffeekraken-io.doc.config.Register-new-config-files": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.config.Register-new-config-files",
                 "name": "Register new config files",
                 "type": {
                     "types": [
@@ -1802,7 +1802,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.config",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.config",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -1815,8 +1815,8 @@
                 "relPath": "src/doc/08-config/04-registerNewConfigFiles.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.config.Configuration-explorer": {
-                "id": "@website.stylekit-coffeekraken-io.doc.config.Configuration-explorer",
+            "@website.sugarcss-coffeekraken-io.doc.config.Configuration-explorer": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.config.Configuration-explorer",
                 "name": "Configuration explorer",
                 "type": {
                     "types": [
@@ -1839,7 +1839,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.config",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.config",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -1852,8 +1852,8 @@
                 "relPath": "src/doc/08-config/05-explorer.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.docmap.Overview": {
-                "id": "@website.stylekit-coffeekraken-io.doc.docmap.Overview",
+            "@website.sugarcss-coffeekraken-io.doc.docmap.Overview": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.docmap.Overview",
                 "name": "Overview",
                 "type": {
                     "types": [
@@ -1876,7 +1876,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.docmap",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.docmap",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -1888,8 +1888,8 @@
                 "extension": "md",
                 "relPath": "src/doc/09-docmap/01-overview.md.twig"
             },
-            "@website.stylekit-coffeekraken-io.js.array.unique": {
-                "id": "@website.stylekit-coffeekraken-io.js.array.unique",
+            "@website.sugarcss-coffeekraken-io.js.array.unique": {
+                "id": "@website.sugarcss-coffeekraken-io.js.array.unique",
                 "name": "unique",
                 "type": {
                     "types": [
@@ -1938,7 +1938,7 @@
                     }
                 ],
                 "description": "This function will return a filtered array without any duplicated",
-                "namespace": "@website.stylekit-coffeekraken-io.js.array",
+                "namespace": "@website.sugarcss-coffeekraken-io.js.array",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -1951,8 +1951,8 @@
                 "relPath": "src/doc/09-docmap/01-overview.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.docmap.Writing-documentation": {
-                "id": "@website.stylekit-coffeekraken-io.doc.docmap.Writing-documentation",
+            "@website.sugarcss-coffeekraken-io.doc.docmap.Writing-documentation": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.docmap.Writing-documentation",
                 "name": "Writing documentation",
                 "type": {
                     "types": [
@@ -1975,7 +1975,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.docmap",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.docmap",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -1988,8 +1988,8 @@
                 "relPath": "src/doc/09-docmap/02-writing.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.docmap.Build": {
-                "id": "@website.stylekit-coffeekraken-io.doc.docmap.Build",
+            "@website.sugarcss-coffeekraken-io.doc.docmap.Build": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.docmap.Build",
                 "name": "Build",
                 "type": {
                     "types": [
@@ -2012,7 +2012,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.docmap",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.docmap",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -2025,8 +2025,8 @@
                 "relPath": "src/doc/09-docmap/03-build.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.docmap.API": {
-                "id": "@website.stylekit-coffeekraken-io.doc.docmap.API",
+            "@website.sugarcss-coffeekraken-io.doc.docmap.API": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.docmap.API",
                 "name": "API",
                 "type": {
                     "types": [
@@ -2049,7 +2049,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.docmap",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.docmap",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -2062,8 +2062,8 @@
                 "relPath": "src/doc/09-docmap/04-api.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.docmap.Configuration": {
-                "id": "@website.stylekit-coffeekraken-io.doc.docmap.Configuration",
+            "@website.sugarcss-coffeekraken-io.doc.docmap.Configuration": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.docmap.Configuration",
                 "name": "Configuration",
                 "type": {
                     "types": [
@@ -2086,7 +2086,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.docmap",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.docmap",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -2099,8 +2099,8 @@
                 "relPath": "src/doc/09-docmap/04-configuration.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.cli.Overview": {
-                "id": "@website.stylekit-coffeekraken-io.doc.cli.Overview",
+            "@website.sugarcss-coffeekraken-io.doc.cli.Overview": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.cli.Overview",
                 "name": "Overview",
                 "type": {
                     "types": [
@@ -2123,7 +2123,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.cli",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.cli",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -2136,8 +2136,8 @@
                 "relPath": "src/doc/10-cli/01-overview.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.cli.Extend-the-CLI": {
-                "id": "@website.stylekit-coffeekraken-io.doc.cli.Extend-the-CLI",
+            "@website.sugarcss-coffeekraken-io.doc.cli.Extend-the-CLI": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.cli.Extend-the-CLI",
                 "name": "Extend the CLI",
                 "type": {
                     "types": [
@@ -2160,7 +2160,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.cli",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.cli",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -2173,8 +2173,8 @@
                 "relPath": "src/doc/10-cli/02-extends.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.recipes.What-are-recipes": {
-                "id": "@website.stylekit-coffeekraken-io.doc.recipes.What-are-recipes",
+            "@website.sugarcss-coffeekraken-io.doc.recipes.What-are-recipes": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.recipes.What-are-recipes",
                 "name": "What are recipes?",
                 "type": {
                     "types": [
@@ -2197,7 +2197,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.recipes",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.recipes",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -2210,8 +2210,8 @@
                 "relPath": "src/doc/11-recipes/01-whatAreRecipes.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.recipes.Built-in-recipes": {
-                "id": "@website.stylekit-coffeekraken-io.doc.recipes.Built-in-recipes",
+            "@website.sugarcss-coffeekraken-io.doc.recipes.Built-in-recipes": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.recipes.Built-in-recipes",
                 "name": "Built-in recipes",
                 "type": {
                     "types": [
@@ -2234,7 +2234,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.recipes",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.recipes",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -2247,8 +2247,8 @@
                 "relPath": "src/doc/11-recipes/02-builtInRecipes.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.recipes.Create-your-recipe": {
-                "id": "@website.stylekit-coffeekraken-io.doc.recipes.Create-your-recipe",
+            "@website.sugarcss-coffeekraken-io.doc.recipes.Create-your-recipe": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.recipes.Create-your-recipe",
                 "name": "Create your recipe",
                 "type": {
                     "types": [
@@ -2271,7 +2271,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.recipes",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.recipes",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -2284,8 +2284,8 @@
                 "relPath": "src/doc/11-recipes/03-createYourRecipe.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.recipes.Built-in-actions": {
-                "id": "@website.stylekit-coffeekraken-io.doc.recipes.Built-in-actions",
+            "@website.sugarcss-coffeekraken-io.doc.recipes.Built-in-actions": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.recipes.Built-in-actions",
                 "name": "Built-in actions",
                 "type": {
                     "types": [
@@ -2308,7 +2308,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.recipes",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.recipes",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -2321,8 +2321,8 @@
                 "relPath": "src/doc/11-recipes/04-builtInActions.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.contribute.Overview": {
-                "id": "@website.stylekit-coffeekraken-io.doc.contribute.Overview",
+            "@website.sugarcss-coffeekraken-io.doc.contribute.Overview": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.contribute.Overview",
                 "name": "Overview",
                 "type": {
                     "types": [
@@ -2345,7 +2345,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.contribute",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.contribute",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -2358,8 +2358,8 @@
                 "relPath": "src/doc/12-contribute/00-overview.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.contribute.Git": {
-                "id": "@website.stylekit-coffeekraken-io.doc.contribute.Git",
+            "@website.sugarcss-coffeekraken-io.doc.contribute.Git": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.contribute.Git",
                 "name": "Git",
                 "type": {
                     "types": [
@@ -2382,7 +2382,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.contribute",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.contribute",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -2395,8 +2395,8 @@
                 "relPath": "src/doc/12-contribute/01-git.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.doc.dependencies.Overview": {
-                "id": "@website.stylekit-coffeekraken-io.doc.dependencies.Overview",
+            "@website.sugarcss-coffeekraken-io.doc.dependencies.Overview": {
+                "id": "@website.sugarcss-coffeekraken-io.doc.dependencies.Overview",
                 "name": "Overview",
                 "type": {
                     "types": [
@@ -2419,7 +2419,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@website.stylekit-coffeekraken-io.doc.dependencies",
+                "namespace": "@website.sugarcss-coffeekraken-io.doc.dependencies",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -2432,8 +2432,8 @@
                 "relPath": "src/doc/13-dependencies/00-overview.md.twig",
                 "children": {}
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.resets.Destyle-reset": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.resets.Destyle-reset",
+            "@website.sugarcss-coffeekraken-io.sugar.style.resets.Destyle-reset": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.resets.Destyle-reset",
                 "name": "Destyle reset",
                 "type": {
                     "types": [
@@ -2457,7 +2457,7 @@
                     }
                 ],
                 "description": "These mixins allows you to apply the `destyle` reset easily.",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.resets",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.resets",
                 "status": "stable",
                 "example": [],
                 "since": "2.0.0",
@@ -2470,8 +2470,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.resets.Sugar-reset": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.resets.Sugar-reset",
+            "@website.sugarcss-coffeekraken-io.sugar.style.resets.Sugar-reset": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.resets.Sugar-reset",
                 "name": "Sugar reset",
                 "type": {
                     "types": [
@@ -2495,7 +2495,7 @@
                     }
                 ],
                 "description": "This mixin allows you to apply the `sugar` reset easily.",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.resets",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.resets",
                 "status": "stable",
                 "example": [],
                 "since": "2.0.0",
@@ -2508,8 +2508,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.ui.badge.Badge": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.ui.badge.Badge",
+            "@website.sugarcss-coffeekraken-io.sugar.style.ui.badge.Badge": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.badge.Badge",
                 "name": "Badge",
                 "type": {
                     "types": [
@@ -2533,7 +2533,7 @@
                     }
                 ],
                 "description": "These classes allows you to display any HTMLElement as a badge",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.ui.badge",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.badge",
                 "status": "stable",
                 "example": [
                     {
@@ -2567,8 +2567,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.ui.button.Buttons": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.ui.button.Buttons",
+            "@website.sugarcss-coffeekraken-io.sugar.style.ui.button.Buttons": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.button.Buttons",
                 "name": "Buttons",
                 "type": {
                     "types": [
@@ -2592,7 +2592,7 @@
                     }
                 ],
                 "description": "These classes allows you to display any HTMLElement as a button",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.ui.button",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.button",
                 "status": "stable",
                 "example": [
                     {
@@ -2636,8 +2636,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.disabled.Disabled": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.disabled.Disabled",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.disabled.Disabled": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.disabled.Disabled",
                 "name": "Disabled",
                 "type": {
                     "types": [
@@ -2661,7 +2661,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply the disabled style on any HTMLElement.\nThis make sure *no pointer events** stays active as well as displaying the **not-allowed cursor**.",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.disabled",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.disabled",
                 "status": "stable",
                 "example": [
                     {
@@ -2680,8 +2680,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.color.Colors": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.color.Colors",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.color.Colors": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.color.Colors",
                 "name": "Colors",
                 "type": {
                     "types": [
@@ -2705,18 +2705,18 @@
                     }
                 ],
                 "description": "These classes allows you to set text and background colors easily to any HTMLElement",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.color",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.color",
                 "status": "stable",
                 "example": [
                     {
                         "language": "html",
                         "title": "Text color",
-                        "code": "<h4 class=\"s-typo:h4 s-mbe:20\">current</h4>\n<div class=\"s-tc:current s-mb:30\">Steve Keeling</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">main</h4>\n<div class=\"s-tc:main s-mb:30\">Mr. Whitney Schmitt</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">accent</h4>\n<div class=\"s-tc:accent s-mb:30\">Ray Padberg Jr.</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">complementary</h4>\n<div class=\"s-tc:complementary s-mb:30\">Mrs. Johnnie Kunze</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">success</h4>\n<div class=\"s-tc:success s-mb:30\">Ms. Mitchell Kuhic</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">warning</h4>\n<div class=\"s-tc:warning s-mb:30\">Sadie Lockman Jr.</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">error</h4>\n<div class=\"s-tc:error s-mb:30\">Drew Batz</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">info</h4>\n<div class=\"s-tc:info s-mb:30\">Lindsay Thiel III</div>"
+                        "code": "<h4 class=\"s-typo:h4 s-mbe:20\">current</h4>\n<div class=\"s-tc:current s-mb:30\">Mr. Evelyn Batz</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">main</h4>\n<div class=\"s-tc:main s-mb:30\">Josh Jast</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">accent</h4>\n<div class=\"s-tc:accent s-mb:30\">Howard Padberg</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">complementary</h4>\n<div class=\"s-tc:complementary s-mb:30\">Miss Mae Bailey</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">success</h4>\n<div class=\"s-tc:success s-mb:30\">Donald Koepp</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">warning</h4>\n<div class=\"s-tc:warning s-mb:30\">Luther Orn</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">error</h4>\n<div class=\"s-tc:error s-mb:30\">Alison Lind</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">info</h4>\n<div class=\"s-tc:info s-mb:30\">Vincent Vandervort</div>"
                     },
                     {
                         "language": "html",
                         "title": "Background color",
-                        "code": "<h4 class=\"s-typo:h4 s-mbe:20\">current</h4>\n<div class=\"s-bg:current s-p:10 s-mb:30 s-radius\">Mindy Denesik</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">main</h4>\n<div class=\"s-bg:main s-p:10 s-mb:30 s-radius\">Rick Reichel</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">accent</h4>\n<div class=\"s-bg:accent s-p:10 s-mb:30 s-radius\">Jake Ondricka</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">complementary</h4>\n<div class=\"s-bg:complementary s-p:10 s-mb:30 s-radius\">Molly Koss</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">success</h4>\n<div class=\"s-bg:success s-p:10 s-mb:30 s-radius\">Joe Gleason</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">warning</h4>\n<div class=\"s-bg:warning s-p:10 s-mb:30 s-radius\">Lorenzo Konopelski</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">error</h4>\n<div class=\"s-bg:error s-p:10 s-mb:30 s-radius\">Dr. Darrel Roob</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">info</h4>\n<div class=\"s-bg:info s-p:10 s-mb:30 s-radius\">Anna Larkin</div>"
+                        "code": "<h4 class=\"s-typo:h4 s-mbe:20\">current</h4>\n<div class=\"s-bg:current s-p:10 s-mb:30 s-radius\">Janis McDermott</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">main</h4>\n<div class=\"s-bg:main s-p:10 s-mb:30 s-radius\">Ken Haley</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">accent</h4>\n<div class=\"s-bg:accent s-p:10 s-mb:30 s-radius\">Willie Hermann</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">complementary</h4>\n<div class=\"s-bg:complementary s-p:10 s-mb:30 s-radius\">Lois Hirthe</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">success</h4>\n<div class=\"s-bg:success s-p:10 s-mb:30 s-radius\">Rene Keebler</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">warning</h4>\n<div class=\"s-bg:warning s-p:10 s-mb:30 s-radius\">Omar Waters</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">error</h4>\n<div class=\"s-bg:error s-p:10 s-mb:30 s-radius\">Georgia Feest</div>\n<h4 class=\"s-typo:h4 s-mbe:20\">info</h4>\n<div class=\"s-bg:info s-p:10 s-mb:30 s-radius\">Geoffrey Rice</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -2729,8 +2729,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.margin.Margin": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.margin.Margin",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.margin.Margin": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.margin.Margin",
                 "name": "Margin",
                 "type": {
                     "types": [
@@ -2754,23 +2754,23 @@
                     }
                 ],
                 "description": "These classes allows you to apply margins to any HTMLElement",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.margin",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.margin",
                 "status": "stable",
                 "example": [
                     {
                         "language": "html",
                         "title": "Inline",
-                        "code": "<p class=\"s-bg:accent s-radius s-p:30 s-mbe:20\">Ginger VonRueden</p>\n  <p class=\"s-bg:complementary s-radius s-mi:50 s-mbe:20 s-p:30\">Curtis Predovic</p>\n  <p class=\"s-bg:main s-mie:100 s-radius s-mbe:20 s-p:30\">Katherine Weber</p>\n  <p class=\"s-bg:error s-mie:30 s-radius s-p:30\">Lois Hudson</p>"
+                        "code": "<p class=\"s-bg:accent s-radius s-p:30 s-mbe:20\">Laverne Prosacco</p>\n  <p class=\"s-bg:complementary s-radius s-mi:50 s-mbe:20 s-p:30\">June Kemmer</p>\n  <p class=\"s-bg:main s-mie:100 s-radius s-mbe:20 s-p:30\">Anna Walker MD</p>\n  <p class=\"s-bg:error s-mie:30 s-radius s-p:30\">Kristen Bogan</p>"
                     },
                     {
                         "language": "html",
                         "title": "Block",
-                        "code": "<div class=\"s-bg:accent s-radius s-mbe:40 s-p:30 s-text:center\">Jaime Green</div>\n  <div class=\"s-bg:complementary s-radius s-mbe:20 s-p:30 s-text:center\">Tracy Schroeder</div>\n  <div class=\"s-bg:main s-radius s-mbe:50 s-p:30 s-text:center\">Phyllis Prosacco</div>\n  <div class=\"s-bg:error s-radius s-p:30 s-text:center\">Johnnie Gerhold Jr.</div>"
+                        "code": "<div class=\"s-bg:accent s-radius s-mbe:40 s-p:30 s-text:center\">Lester Schuster</div>\n  <div class=\"s-bg:complementary s-radius s-mbe:20 s-p:30 s-text:center\">Elvira Hahn DDS</div>\n  <div class=\"s-bg:main s-radius s-mbe:50 s-p:30 s-text:center\">Bernard Kutch</div>\n  <div class=\"s-bg:error s-radius s-p:30 s-text:center\">Ms. Silvia Anderson</div>"
                     },
                     {
                         "language": "html",
                         "title": "RTL",
-                        "code": "<div dir=\"rtl\">\n  <p class=\"s-bg:accent s-radius s-p:30 s-mbe:20\">Tasha O'Conner</p>\n  <p class=\"s-bg:complementary s-radius s-mi:50 s-mbe:20 s-p:30\">Tracy Huels</p>\n  <p class=\"s-bg:main s-radius s-mie:100 s-mbe:20 s-p:30\">Dr. Jared Parker</p>\n  <p class=\"s-bg:error s-radius s-mie:30 s-p:30\">Mr. Salvatore Kris</p>\n</div>"
+                        "code": "<div dir=\"rtl\">\n  <p class=\"s-bg:accent s-radius s-p:30 s-mbe:20\">Tina Miller</p>\n  <p class=\"s-bg:complementary s-radius s-mi:50 s-mbe:20 s-p:30\">Ashley Hirthe</p>\n  <p class=\"s-bg:main s-radius s-mie:100 s-mbe:20 s-p:30\">Barry VonRueden</p>\n  <p class=\"s-bg:error s-radius s-mie:30 s-p:30\">Crystal Runolfsson</p>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -2783,8 +2783,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.padding.Padding": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.padding.Padding",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.padding.Padding": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.padding.Padding",
                 "name": "Padding",
                 "type": {
                     "types": [
@@ -2808,23 +2808,23 @@
                     }
                 ],
                 "description": "These classes allows you to apply padding to any HTMLElement",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.padding",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.padding",
                 "status": "stable",
                 "example": [
                     {
                         "language": "html",
                         "title": "Inline",
-                        "code": "<p class=\"s-bg:accent s-radius s-pi:30 s-pb:30 s-mbe:20\">Wade Harber</p>\n  <p class=\"s-bg:complementary s-radius s-pis:50 s-pb:30 s-mbe:20\">Jan Reilly</p>\n  <p class=\"s-bg:main s-radius s-pis:80 s-pb:30 s-mbe:20\">Sandy Osinski</p>\n  <p class=\"s-bg:error s-radius s-pis:100 s-pb:30 s-mbe:20\">Erica Durgan</p>"
+                        "code": "<p class=\"s-bg:accent s-radius s-pi:30 s-pb:30 s-mbe:20\">Loretta McClure III</p>\n  <p class=\"s-bg:complementary s-radius s-pis:50 s-pb:30 s-mbe:20\">Betty Tremblay</p>\n  <p class=\"s-bg:main s-radius s-pis:80 s-pb:30 s-mbe:20\">Yolanda Kuvalis</p>\n  <p class=\"s-bg:error s-radius s-pis:100 s-pb:30 s-mbe:20\">Lora Turcotte</p>"
                     },
                     {
                         "language": "html",
                         "title": "Block",
-                        "code": "<div class=\"s-bg:accent s-radius s-pbs:30 s-pbe:40 s-text:center s-mbe:20\">Lila Cummings</div>\n  <div class=\"s-bg:complementary s-radius s-pb:30 s-text:center s-mbe:20\">Betsy Rice</div>\n  <div class=\"s-bg:main s-radius s-pbs:50 s-pbe:30 s-text:center s-mbe:20\">Bernice Baumbach</div>\n  <div class=\"s-bg:error s-radius s-pbs:100 s-pbe:60 s-text:center s-mbe:20\">Eula Brekke</div>"
+                        "code": "<div class=\"s-bg:accent s-radius s-pbs:30 s-pbe:40 s-text:center s-mbe:20\">Emma Lynch</div>\n  <div class=\"s-bg:complementary s-radius s-pb:30 s-text:center s-mbe:20\">Katrina O'Connell</div>\n  <div class=\"s-bg:main s-radius s-pbs:50 s-pbe:30 s-text:center s-mbe:20\">Mr. Martin Rempel</div>\n  <div class=\"s-bg:error s-radius s-pbs:100 s-pbe:60 s-text:center s-mbe:20\">Ray Mann</div>"
                     },
                     {
                         "language": "html",
                         "title": "RTL",
-                        "code": "<div dir=\"rtl\">\n  <p class=\"s-bg:accent s-radius s-pi:30 s-pb:30 s-mbe:20\">Raul Hirthe</p>\n  <p class=\"s-bg:complementary s-radius s-pis:50 s-pb:30 s-mbe:20\">Elizabeth Hoeger</p>\n  <p class=\"s-bg:main s-radius s-pis:80 s-pb:30 s-mbe:20\">Nathaniel Monahan</p>\n  <p class=\"s-bg:error s-radius s-pis:100 s-pb:30 s-mbe:20\">Jeffrey Koch</p>\n</div>"
+                        "code": "<div dir=\"rtl\">\n  <p class=\"s-bg:accent s-radius s-pi:30 s-pb:30 s-mbe:20\">Sonja Sipes</p>\n  <p class=\"s-bg:complementary s-radius s-pis:50 s-pb:30 s-mbe:20\">Peggy Bednar</p>\n  <p class=\"s-bg:main s-radius s-pis:80 s-pb:30 s-mbe:20\">Mack Mueller</p>\n  <p class=\"s-bg:error s-radius s-pis:100 s-pb:30 s-mbe:20\">Franklin Barrows DDS</p>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -2837,8 +2837,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.ui.avatar.Avatar": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.ui.avatar.Avatar",
+            "@website.sugarcss-coffeekraken-io.sugar.style.ui.avatar.Avatar": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.avatar.Avatar",
                 "name": "Avatar",
                 "type": {
                     "types": [
@@ -2862,23 +2862,23 @@
                     }
                 ],
                 "description": "These classes allows to apply some avatar style around any image.",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.ui.avatar",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.avatar",
                 "status": "stable",
                 "example": [
                     {
                         "language": "html",
                         "title": "Default",
-                        "code": "<div class=\"s-flex s-gap:20 s-font:70\">\n  <div class=\"s-avatar\">\n      <img src=\"https://i.pravatar.cc/300?v=5526\" />\n  </div>\n      <div class=\"s-avatar s-color:accent\">\n      <img src=\"https://i.pravatar.cc/300?v=19049\" />\n  </div>\n  <div class=\"s-avatar s-color:complementary\">\n      <img src=\"https://i.pravatar.cc/300?v=73930\" />\n  </div>\n  <div class=\"s-avatar s-color:info\">\n      <img src=\"https://i.pravatar.cc/300?v=31662\" />\n  </div>\n  <div class=\"s-avatar s-color:success\">\n      <img src=\"https://i.pravatar.cc/300?v=27443\" />\n  </div>\n  <div class=\"s-avatar s-color:error\">\n     <img src=\"https://i.pravatar.cc/300?v=73604\" />\n  </div>\n</div>"
+                        "code": "<div class=\"s-flex s-gap:20 s-font:70\">\n  <div class=\"s-avatar\">\n      <img src=\"https://i.pravatar.cc/300?v=5672\" />\n  </div>\n      <div class=\"s-avatar s-color:accent\">\n      <img src=\"https://i.pravatar.cc/300?v=98583\" />\n  </div>\n  <div class=\"s-avatar s-color:complementary\">\n      <img src=\"https://i.pravatar.cc/300?v=1344\" />\n  </div>\n  <div class=\"s-avatar s-color:info\">\n      <img src=\"https://i.pravatar.cc/300?v=4458\" />\n  </div>\n  <div class=\"s-avatar s-color:success\">\n      <img src=\"https://i.pravatar.cc/300?v=47848\" />\n  </div>\n  <div class=\"s-avatar s-color:error\">\n     <img src=\"https://i.pravatar.cc/300?v=76256\" />\n  </div>\n</div>"
                     },
                     {
                         "language": "html",
                         "title": "Notifications",
-                        "code": "<div class=\"s-flex s-gap:20 s-font:70\">\n  <div class=\"s-avatar notifications=\"10\">\n     <img src=\"https://i.pravatar.cc/300?v=59134\" />\n  </div>\n  <div class=\"s-avatar s-color:accent\" notifications=\"10\">\n      <img src=\"https://i.pravatar.cc/300?v=35476\" />\n  </div>\n  <div class=\"s-avatar s-color:complementary\" notifications=\"10\">\n      <img src=\"https://i.pravatar.cc/300?v=93469\" />\n  </div>\n  <div class=\"s-avatar s-color:info\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=15312\" />\n  </div>\n  <div class=\"s-avatar s-color:success\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=74641\" />\n  </div>\n  <div class=\"s-avatar s-color:error\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=15369\" />\n  </div>\n</div>"
+                        "code": "<div class=\"s-flex s-gap:20 s-font:70\">\n  <div class=\"s-avatar notifications=\"10\">\n     <img src=\"https://i.pravatar.cc/300?v=23777\" />\n  </div>\n  <div class=\"s-avatar s-color:accent\" notifications=\"10\">\n      <img src=\"https://i.pravatar.cc/300?v=26799\" />\n  </div>\n  <div class=\"s-avatar s-color:complementary\" notifications=\"10\">\n      <img src=\"https://i.pravatar.cc/300?v=96930\" />\n  </div>\n  <div class=\"s-avatar s-color:info\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=78316\" />\n  </div>\n  <div class=\"s-avatar s-color:success\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=40271\" />\n  </div>\n  <div class=\"s-avatar s-color:error\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=15572\" />\n  </div>\n</div>"
                     },
                     {
                         "language": "html",
                         "title": "Interactive",
-                        "code": "<div class=\"s-flex s-gap:20 s-font:70\">\n  <div class=\"s-avatar:interactive\">\n       <img src=\"https://i.pravatar.cc/300?v=61599\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:accent\">\n      <img src=\"https://i.pravatar.cc/300?v=450\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:complementary\">\n      <img src=\"https://i.pravatar.cc/300?v=18973\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:info\">\n      <img src=\"https://i.pravatar.cc/300?v=46970\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:success\">\n      <img src=\"https://i.pravatar.cc/300?v=12778\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:error\">\n      <img src=\"https://i.pravatar.cc/300?v=66393\" />\n  </div>\n</div>"
+                        "code": "<div class=\"s-flex s-gap:20 s-font:70\">\n  <div class=\"s-avatar:interactive\">\n       <img src=\"https://i.pravatar.cc/300?v=12050\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:accent\">\n      <img src=\"https://i.pravatar.cc/300?v=82864\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:complementary\">\n      <img src=\"https://i.pravatar.cc/300?v=18191\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:info\">\n      <img src=\"https://i.pravatar.cc/300?v=68323\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:success\">\n      <img src=\"https://i.pravatar.cc/300?v=10468\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:error\">\n      <img src=\"https://i.pravatar.cc/300?v=95784\" />\n  </div>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -2891,8 +2891,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.ui.list.List": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.ui.list.List",
+            "@website.sugarcss-coffeekraken-io.sugar.style.ui.list.List": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.list.List",
                 "name": "List",
                 "type": {
                     "types": [
@@ -2916,38 +2916,38 @@
                     }
                 ],
                 "description": "These classes allows you to apply list lnfs to any ul, ol, dl, etc...",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.ui.list",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.list",
                 "status": "stable",
                 "example": [
                     {
                         "language": "html",
                         "title": "dl lnf <span class=\"s-badge:outline s-scale:05\">default</span>",
-                        "code": "<ul class=\"s-list:dl \">\n    <li>Chief Functionality Officer Bernadette Adams</li>\n    <li>Dynamic Tactics Agent Lula Lueilwitz</li>\n    <li>Central Group Architect Sadie Jacobson</li>\n  </ul>"
+                        "code": "<ul class=\"s-list:dl \">\n    <li>Product Applications Specialist Raul Williamson</li>\n    <li>Principal Communications Associate Tabitha Krajcik</li>\n    <li>International Integration Officer Steve Goyette</li>\n  </ul>"
                     },
                     {
                         "language": "html",
                         "title": "ul lnf",
-                        "code": "<ul class=\"s-list:ul \">\n    <li>Legacy Security Technician Rudolph Lang</li>\n    <li>Global Intranet Technician Edwin Fisher</li>\n    <li>Dynamic Solutions Representative Brian Predovic</li>\n  </ul>"
+                        "code": "<ul class=\"s-list:ul \">\n    <li>Corporate Research Executive Ethel Johns IV</li>\n    <li>Senior Operations Architect Trevor Goodwin</li>\n    <li>Product Configuration Designer Harold Brown</li>\n  </ul>"
                     },
                     {
                         "language": "html",
                         "title": "ol lnf",
-                        "code": "<ul class=\"s-list:ol s-color:accent s-scale:15\">\n    <li>Dynamic Directives Architect Betty Boyle</li>\n    <li>Central Interactions Executive Winifred Lockman</li>\n    <li>Human Interactions Administrator Ann Skiles</li>\n  </ul>"
+                        "code": "<ul class=\"s-list:ol s-color:accent s-scale:15\">\n    <li>Internal Configuration Orchestrator Geraldine Kovacek MD</li>\n    <li>Legacy Applications Developer Dr. Harold Windler</li>\n    <li>International Paradigm Facilitator Thelma Bogan</li>\n  </ul>"
                     },
                     {
                         "language": "html",
                         "title": "icon lnf",
-                        "code": "<ul class=\"s-list:icon \">\n    <li><i class=\"s-icon:user\"></i>Legacy Implementation Executive Bradley Upton IV</li>\n    <li><i class=\"s-icon:heart s-color:accent\"></i>Dynamic Marketing Architect Jim Cole</li>\n    <li><i class=\"s-icon:fire s-color:error\"></i>Internal Accounts Technician Alberta Lakin</li>\n  </ul>"
+                        "code": "<ul class=\"s-list:icon \">\n    <li><i class=\"s-icon:user\"></i>National Program Administrator Bernadette Bosco</li>\n    <li><i class=\"s-icon:heart s-color:accent\"></i>Global Security Administrator Hannah Braun V</li>\n    <li><i class=\"s-icon:fire s-color:error\"></i>Regional Mobility Producer Karl Johnston</li>\n  </ul>"
                     },
                     {
                         "language": "html",
                         "title": "RTL Support",
-                        "code": "<div dir=\"rtl\">\n  <ul class=\"s-list:ul s-color:accent s-mbe:30\">\n    <li>Corporate Markets Assistant Erica Durgan</li>\n    <li>Corporate Applications Executive Andrea Hodkiewicz</li>\n  </ul>\n  <ul class=\"s-list:ol s-color:accent s-mbe:30\">\n    <li>Dynamic Program Executive Penny Gulgowski</li>\n    <li>Senior Infrastructure Representative Erma Larson V</li>\n  </ul>\n  <ul class=\"s-list:icon s-color:accent s-mbe:30\">\n    <li><i class=\"s-icon:user\"></i> Internal Security Assistant Marco Kunde</li>\n    <li><i class=\"s-icon:heart s-color:error\"></i> Legacy Interactions Producer Amber Koelpin</li>\n  </ul>\n</div>"
+                        "code": "<div dir=\"rtl\">\n  <ul class=\"s-list:ul s-color:accent s-mbe:30\">\n    <li>Human Mobility Agent Antoinette Macejkovic</li>\n    <li>Legacy Communications Specialist Marlon Nolan</li>\n  </ul>\n  <ul class=\"s-list:ol s-color:accent s-mbe:30\">\n    <li>Principal Security Producer Thomas Mitchell</li>\n    <li>Lead Branding Planner Gregg Vandervort</li>\n  </ul>\n  <ul class=\"s-list:icon s-color:accent s-mbe:30\">\n    <li><i class=\"s-icon:user\"></i> Senior Metrics Director Edwin Douglas PhD</li>\n    <li><i class=\"s-icon:heart s-color:error\"></i> Customer Group Engineer Tracey Hagenes</li>\n  </ul>\n</div>"
                     },
                     {
                         "language": "html",
                         "title": "Colors (none-exhaustive)",
-                        "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>Global Quality Liaison Lisa Conn</li>\n    <li class=\"s-color:complementary\">Internal Branding Analyst Byron Hayes</li>\n    <li class=\"s-color:error\">Legacy Factors Architect Shannon Durgan</li>\n  </ul>"
+                        "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>Direct Program Manager Robert Kunze</li>\n    <li class=\"s-color:complementary\">Regional Assurance Producer Sheri Brakus</li>\n    <li class=\"s-color:error\">Chief Solutions Specialist Miss Kellie Schimmel</li>\n  </ul>"
                     }
                 ],
                 "since": "2.0.0",
@@ -2960,8 +2960,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.clearfix.Clearfix": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.clearfix.Clearfix",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.clearfix.Clearfix": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.clearfix.Clearfix",
                 "name": "Clearfix",
                 "type": {
                     "types": [
@@ -2985,7 +2985,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply a clearfix on any HTMLElement",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.clearfix",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.clearfix",
                 "status": "stable",
                 "example": [
                     {
@@ -3019,8 +3019,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.cursor.Cursor": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.cursor.Cursor",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.cursor.Cursor": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.cursor.Cursor",
                 "name": "Cursor",
                 "type": {
                     "types": [
@@ -3044,7 +3044,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply a specific cursor on any HTMLElement",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.cursor",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.cursor",
                 "status": "stable",
                 "example": [
                     {
@@ -3062,8 +3062,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.link.Link": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.link.Link",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.link.Link": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.link.Link",
                 "name": "Link",
                 "type": {
                     "types": [
@@ -3087,7 +3087,7 @@
                     }
                 ],
                 "description": "These classes allows to apply some link styling utils to any HTMLElement.",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.link",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.link",
                 "status": "stable",
                 "example": [
                     {
@@ -3106,8 +3106,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.gap.Gap": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.gap.Gap",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.gap.Gap": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.gap.Gap",
                 "name": "Gap",
                 "type": {
                     "types": [
@@ -3131,7 +3131,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply some gap attributes on any HTMLElement and with",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.gap",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.gap",
                 "status": "stable",
                 "example": [
                     {
@@ -3155,8 +3155,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.text.Text": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.text.Text",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.text.Text": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.text.Text",
                 "name": "Text",
                 "type": {
                     "types": [
@@ -3180,23 +3180,23 @@
                     }
                 ],
                 "description": "These classes allows to apply some text styling like `text-align: left`, `text-align: right`, `text-decoration: underline`, etc...\ndirectly inside your HTML.",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.text",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.text",
                 "status": "stable",
                 "example": [
                     {
                         "language": "html",
                         "title": "Aligns",
-                        "code": "<div class=\"s-text:left s-bg:main s-p:20 s-mbe:30 s-radius\">\n      (left) Constance Crona\n  </div>\n  <div class=\"s-text:right s-bg:main s-p:20 s-mbe:30 s-radius\">\n      (right) Alicia Reinger\n  </div>\n  <div class=\"s-text:center s-bg:main s-p:20 s-mbe:30 s-radius\">\n      (center) Dixie Purdy\n  </div>\n  <div class=\"s-text:start s-bg:main s-p:20 s-mbe:30 s-radius\">\n      (start) Shirley Walsh DDS\n  </div>\n  <div class=\"s-text:end s-bg:main s-p:20 s-mbe:30 s-radius\">\n      (end) Emmett Rath\n  </div>"
+                        "code": "<div class=\"s-text:left s-bg:main s-p:20 s-mbe:30 s-radius\">\n      (left) Kellie Ryan DVM\n  </div>\n  <div class=\"s-text:right s-bg:main s-p:20 s-mbe:30 s-radius\">\n      (right) Mrs. Arturo Bruen\n  </div>\n  <div class=\"s-text:center s-bg:main s-p:20 s-mbe:30 s-radius\">\n      (center) Dr. Cedric Hammes\n  </div>\n  <div class=\"s-text:start s-bg:main s-p:20 s-mbe:30 s-radius\">\n      (start) Peggy Padberg\n  </div>\n  <div class=\"s-text:end s-bg:main s-p:20 s-mbe:30 s-radius\">\n      (end) Terrence Cormier\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Decorations",
-                        "code": "<div class=\"s-text:overline s-bg:main s-p:20 s-mbe:30 s-radius\">\n      (overline) Kathryn Moen\n  </div>\n  <div class=\"s-text:underline s-bg:main s-p:20 s-mbe:30 s-radius\">\n      (underline) Lois Bailey\n  </div>\n  <div class=\"s-text:line-through s-bg:main s-p:20 s-mbe:30 s-radius\">\n      (line-through) Ramona Keeling\n  </div>"
+                        "code": "<div class=\"s-text:overline s-bg:main s-p:20 s-mbe:30 s-radius\">\n      (overline) Guadalupe McDermott\n  </div>\n  <div class=\"s-text:underline s-bg:main s-p:20 s-mbe:30 s-radius\">\n      (underline) Lorena Carter MD\n  </div>\n  <div class=\"s-text:line-through s-bg:main s-p:20 s-mbe:30 s-radius\">\n      (line-through) Rolando Lindgren\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Transforms",
-                        "code": "<div class=\"s-text:lowercase s-bg:main s-p:20 s-mbe:30 s-radius\">\n      (lowercase) Fannie Langosh\n  </div>\n  <div class=\"s-text:uppercase s-bg:main s-p:20 s-mbe:30 s-radius\">\n      (uppercase) Joan Torp\n  </div>\n  <div class=\"s-text:capitalize s-bg:main s-p:20 s-mbe:30 s-radius\">\n      (capitalize) Charlene Feest Sr.\n  </div>"
+                        "code": "<div class=\"s-text:lowercase s-bg:main s-p:20 s-mbe:30 s-radius\">\n      (lowercase) Ian Crona Jr.\n  </div>\n  <div class=\"s-text:uppercase s-bg:main s-p:20 s-mbe:30 s-radius\">\n      (uppercase) Alberto Lubowitz\n  </div>\n  <div class=\"s-text:capitalize s-bg:main s-p:20 s-mbe:30 s-radius\">\n      (capitalize) Miss Elmer Blanda\n  </div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -3209,8 +3209,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.flex.Flex": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.flex.Flex",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.flex.Flex": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.flex.Flex",
                 "name": "Flex",
                 "type": {
                     "types": [
@@ -3234,28 +3234,28 @@
                     }
                 ],
                 "description": "These classes allows you to apply some flex attributes on any HTMLElement and with\nthat you can *create some layouts directly in your HTML**.",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.flex",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.flex",
                 "status": "stable",
                 "example": [
                     {
                         "language": "html",
                         "title": "Simple grid",
-                        "code": "<div class=\"s-flex:row:wrap s-radius\">\n    <div class=\"s-bg:main s-width:50 s-p:30\">Freda Ward</div>\n    <div class=\"s-bg:accent s-width:50 s-p:30\">Mrs. Kelvin Okuneva</div>\n    <div class=\"s-bg:complementary s-width:50 s-p:30\">Darlene DuBuque</div>\n    <div class=\"s-bg:info s-width:50 s-p:30\">Wesley Moore</div>\n  </div>"
+                        "code": "<div class=\"s-flex:row:wrap s-radius\">\n    <div class=\"s-bg:main s-width:50 s-p:30\">Cory Davis</div>\n    <div class=\"s-bg:accent s-width:50 s-p:30\">Jennie Bashirian</div>\n    <div class=\"s-bg:complementary s-width:50 s-p:30\">Annette Raynor</div>\n    <div class=\"s-bg:info s-width:50 s-p:30\">Shannon Goyette I</div>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Grow",
-                        "code": "<div class=\"s-flex:row:nowrap s-radius\">\n    <div class=\"s-grow s-bg:main s-p:30\">Trevor Trantow</div>\n    <div class=\"s-bg:accent s-p:30\">Leroy Jacobi</div>\n    <div class=\"s-bg:complementary s-p:30\">Donna Sporer MD</div>\n  </div>"
+                        "code": "<div class=\"s-flex:row:nowrap s-radius\">\n    <div class=\"s-grow s-bg:main s-p:30\">Raul Terry</div>\n    <div class=\"s-bg:accent s-p:30\">Sophie Hane</div>\n    <div class=\"s-bg:complementary s-p:30\">Mr. Loretta Bosco</div>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Orders",
-                        "code": "<div class=\"s-flex:row:nowrap s-radius\">\n    <div class=\"s-order:3 s-bg:main s-p:30\">Danny Stracke</div>\n    <div class=\"s-bg:accent s-p:30\">Isaac Corwin Sr.</div>\n    <div class=\"s-bg:complementary s-p:30\">Bridget Dooley</div>\n  </div>"
+                        "code": "<div class=\"s-flex:row:nowrap s-radius\">\n    <div class=\"s-order:3 s-bg:main s-p:30\">Desiree Walter</div>\n    <div class=\"s-bg:accent s-p:30\">Melody Turcotte</div>\n    <div class=\"s-bg:complementary s-p:30\">Mr. Tasha Mayer</div>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Aligns",
-                        "code": "<div class=\"s-flex:row:nowrap:align-end s-radius\">\n    <div class=\"s-bg:main s-p:30\">Denise Boyer MD</div>\n    <div class=\"s-bg:accent s-p:30\">Denise Gerhold<br />Renee Grimes<br />Sandra McGlynn<br />Glenn Heaney<br />Brenda Steuber III</div>\n    <div class=\"s-bg:complementary s-p:30\">Marguerite Murray</div>\n  </div>"
+                        "code": "<div class=\"s-flex:row:nowrap:align-end s-radius\">\n    <div class=\"s-bg:main s-p:30\">Kristina Buckridge</div>\n    <div class=\"s-bg:accent s-p:30\">Ted Braun<br />Norma Runolfsdottir<br />Mr. Lamar Cormier<br />Ruby Will II<br />Rosie Johns</div>\n    <div class=\"s-bg:complementary s-p:30\">Wendy Corkery</div>\n  </div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -3268,8 +3268,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.fit.Fit-Sizes": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.fit.Fit-Sizes",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.fit.Fit-Sizes": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.fit.Fit-Sizes",
                 "name": "Fit Sizes",
                 "type": {
                     "types": [
@@ -3293,7 +3293,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply a fit size on any HTMLElement.\nOn image and video, uses `object-fit` property, on all others,\nsimply fill the element using an absolute position, top: 0, left: 0 and width/height: 100%.",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.fit",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.fit",
                 "status": "stable",
                 "example": [
                     {
@@ -3332,8 +3332,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.float.Float": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.float.Float",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.float.Float": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.float.Float",
                 "name": "Float",
                 "type": {
                     "types": [
@@ -3357,7 +3357,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply some float styling into your html.",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.float",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.float",
                 "status": "stable",
                 "example": [
                     {
@@ -3386,8 +3386,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.ratio.Ratio": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.ratio.Ratio",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.ratio.Ratio": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.ratio.Ratio",
                 "name": "Ratio",
                 "type": {
                     "types": [
@@ -3411,7 +3411,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply some ratio to any HTMLElement.\n*These classes make use of the `aspect-ratio` css property**",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.ratio",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.ratio",
                 "status": "stable",
                 "example": [
                     {
@@ -3475,8 +3475,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.scale.Scale": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.scale.Scale",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.scale.Scale": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.scale.Scale",
                 "name": "Scale",
                 "type": {
                     "types": [
@@ -3500,12 +3500,12 @@
                     }
                 ],
                 "description": "These classes allows to apply a scale to any supported UI elements.\nThis scale does not use the transform property but increase actual values like `padding`,\n`margin`, etc... In fact, all the properties setted with the `sugar.scallable` function.\nIt's usually a good practice to set the `font-size` of your UI element to `s.scalable(1rem)`\nand then to set inner values using `em` unit.",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.scale",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.scale",
                 "status": "stable",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- 10 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 10</h3>\n  <div class=\"s-scale:10\">\n      <a class=\"s-btn\">Ruth Goyette</a>\n  </div>\n</div>\n\n<!-- 11 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 11</h3>\n  <div class=\"s-scale:11\">\n      <a class=\"s-btn\">Mrs. Betty Watsica</a>\n  </div>\n</div>\n\n<!-- 12 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 12</h3>\n  <div class=\"s-scale:12\">\n      <a class=\"s-btn\">Jennie Russel</a>\n  </div>\n</div>\n\n<!-- 13 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 13</h3>\n  <div class=\"s-scale:13\">\n      <a class=\"s-btn\">Jimmy Bartell</a>\n  </div>\n</div>\n\n<!-- 14 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 14</h3>\n  <div class=\"s-scale:14\">\n      <a class=\"s-btn\">Erika Moen Sr.</a>\n  </div>\n</div>\n\n<!-- 15 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 15</h3>\n  <div class=\"s-scale:15\">\n      <a class=\"s-btn\">Lela Padberg</a>\n  </div>\n</div>\n\n<!-- 16 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 16</h3>\n  <div class=\"s-scale:16\">\n      <a class=\"s-btn\">Dorothy Kerluke</a>\n  </div>\n</div>\n\n<!-- 17 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 17</h3>\n  <div class=\"s-scale:17\">\n      <a class=\"s-btn\">Gertrude Ward</a>\n  </div>\n</div>\n\n<!-- 18 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 18</h3>\n  <div class=\"s-scale:18\">\n      <a class=\"s-btn\">Robert Frami</a>\n  </div>\n</div>\n\n<!-- 19 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 19</h3>\n  <div class=\"s-scale:19\">\n      <a class=\"s-btn\">Alison Anderson</a>\n  </div>\n</div>\n\n<!-- 20 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 20</h3>\n  <div class=\"s-scale:20\">\n      <a class=\"s-btn\">Alison Block MD</a>\n  </div>\n</div>\n\n<!-- default scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale default</h3>\n  <div class=\"s-scale:default\">\n      <a class=\"s-btn\">Darin McLaughlin</a>\n  </div>\n</div>\n\n<!-- 01 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 01</h3>\n  <div class=\"s-scale:01\">\n      <a class=\"s-btn\">Blake Lebsack</a>\n  </div>\n</div>\n\n<!-- 02 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 02</h3>\n  <div class=\"s-scale:02\">\n      <a class=\"s-btn\">Allison Connelly</a>\n  </div>\n</div>\n\n<!-- 03 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 03</h3>\n  <div class=\"s-scale:03\">\n      <a class=\"s-btn\">Delores Bednar</a>\n  </div>\n</div>\n\n<!-- 04 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 04</h3>\n  <div class=\"s-scale:04\">\n      <a class=\"s-btn\">Lynn Abbott</a>\n  </div>\n</div>\n\n<!-- 05 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 05</h3>\n  <div class=\"s-scale:05\">\n      <a class=\"s-btn\">Marian Jenkins</a>\n  </div>\n</div>\n\n<!-- 06 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 06</h3>\n  <div class=\"s-scale:06\">\n      <a class=\"s-btn\">Mr. Lynne Kulas</a>\n  </div>\n</div>\n\n<!-- 07 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 07</h3>\n  <div class=\"s-scale:07\">\n      <a class=\"s-btn\">Sheryl Luettgen</a>\n  </div>\n</div>\n\n<!-- 08 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 08</h3>\n  <div class=\"s-scale:08\">\n      <a class=\"s-btn\">April Gorczany</a>\n  </div>\n</div>\n\n<!-- 09 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 09</h3>\n  <div class=\"s-scale:09\">\n      <a class=\"s-btn\">Terence Purdy</a>\n  </div>\n</div>"
+                        "code": "<!-- 10 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 10</h3>\n  <div class=\"s-scale:10\">\n      <a class=\"s-btn\">Hilda Schneider I</a>\n  </div>\n</div>\n\n<!-- 11 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 11</h3>\n  <div class=\"s-scale:11\">\n      <a class=\"s-btn\">David McGlynn</a>\n  </div>\n</div>\n\n<!-- 12 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 12</h3>\n  <div class=\"s-scale:12\">\n      <a class=\"s-btn\">Miss Sheri Bashirian</a>\n  </div>\n</div>\n\n<!-- 13 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 13</h3>\n  <div class=\"s-scale:13\">\n      <a class=\"s-btn\">Lyle Deckow</a>\n  </div>\n</div>\n\n<!-- 14 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 14</h3>\n  <div class=\"s-scale:14\">\n      <a class=\"s-btn\">Rebecca Prohaska</a>\n  </div>\n</div>\n\n<!-- 15 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 15</h3>\n  <div class=\"s-scale:15\">\n      <a class=\"s-btn\">Stewart Hettinger</a>\n  </div>\n</div>\n\n<!-- 16 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 16</h3>\n  <div class=\"s-scale:16\">\n      <a class=\"s-btn\">Alfonso Dietrich</a>\n  </div>\n</div>\n\n<!-- 17 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 17</h3>\n  <div class=\"s-scale:17\">\n      <a class=\"s-btn\">Willard Stoltenberg</a>\n  </div>\n</div>\n\n<!-- 18 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 18</h3>\n  <div class=\"s-scale:18\">\n      <a class=\"s-btn\">Kerry Bahringer</a>\n  </div>\n</div>\n\n<!-- 19 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 19</h3>\n  <div class=\"s-scale:19\">\n      <a class=\"s-btn\">Lonnie Robel</a>\n  </div>\n</div>\n\n<!-- 20 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 20</h3>\n  <div class=\"s-scale:20\">\n      <a class=\"s-btn\">Miss Tracey Cruickshank</a>\n  </div>\n</div>\n\n<!-- default scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale default</h3>\n  <div class=\"s-scale:default\">\n      <a class=\"s-btn\">Tonya Gorczany</a>\n  </div>\n</div>\n\n<!-- 01 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 01</h3>\n  <div class=\"s-scale:01\">\n      <a class=\"s-btn\">Eva O'Kon V</a>\n  </div>\n</div>\n\n<!-- 02 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 02</h3>\n  <div class=\"s-scale:02\">\n      <a class=\"s-btn\">Antoinette Padberg V</a>\n  </div>\n</div>\n\n<!-- 03 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 03</h3>\n  <div class=\"s-scale:03\">\n      <a class=\"s-btn\">Constance Towne III</a>\n  </div>\n</div>\n\n<!-- 04 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 04</h3>\n  <div class=\"s-scale:04\">\n      <a class=\"s-btn\">Grace Dibbert</a>\n  </div>\n</div>\n\n<!-- 05 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 05</h3>\n  <div class=\"s-scale:05\">\n      <a class=\"s-btn\">Kristine Hermann Sr.</a>\n  </div>\n</div>\n\n<!-- 06 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 06</h3>\n  <div class=\"s-scale:06\">\n      <a class=\"s-btn\">Guillermo Mueller</a>\n  </div>\n</div>\n\n<!-- 07 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 07</h3>\n  <div class=\"s-scale:07\">\n      <a class=\"s-btn\">Mindy Spinka</a>\n  </div>\n</div>\n\n<!-- 08 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 08</h3>\n  <div class=\"s-scale:08\">\n      <a class=\"s-btn\">Sonia Kiehn</a>\n  </div>\n</div>\n\n<!-- 09 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 09</h3>\n  <div class=\"s-scale:09\">\n      <a class=\"s-btn\">Denise Upton</a>\n  </div>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -3518,8 +3518,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.Radius": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.Radius",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.Radius": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.Radius",
                 "name": "Radius",
                 "type": {
                     "types": [
@@ -3543,7 +3543,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply border radius on any HTMLElement",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers",
                 "status": "stable",
                 "example": [
                     {
@@ -3562,8 +3562,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.Border-width": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.Border-width",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.Border-width": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.Border-width",
                 "name": "Border width",
                 "type": {
                     "types": [
@@ -3587,7 +3587,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply some border width to any HTMLElement",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers",
                 "status": "stable",
                 "example": [
                     {
@@ -3606,8 +3606,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.border.Border-color": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.border.Border-color",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.border.Border-color": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.border.Border-color",
                 "name": "Border color",
                 "type": {
                     "types": [
@@ -3631,7 +3631,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply some border color to any HTMLElement",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.border",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.border",
                 "status": "stable",
                 "example": [
                     {
@@ -3650,8 +3650,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.display.Display": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.display.Display",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.display.Display": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.display.Display",
                 "name": "Display",
                 "type": {
                     "types": [
@@ -3675,48 +3675,48 @@
                     }
                 ],
                 "description": "These classes allows you to apply the some display like `inline`, `inline-block`, `block`, etc...\non any HTMLElement",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.display",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.display",
                 "status": "stable",
                 "example": [
                     {
                         "language": "html",
                         "title": "Block",
-                        "code": "<div class=\"s-display:block\">\n    <p class=\"s-typo:p\">Lori Collier MD</p>\n    <p class=\"s-typo:p\">Tim Adams</p>\n    <p class=\"s-typo:p\">Al Little</p>\n  </div>"
+                        "code": "<div class=\"s-display:block\">\n    <p class=\"s-typo:p\">Miss Latoya Ruecker</p>\n    <p class=\"s-typo:p\">Julius Cruickshank</p>\n    <p class=\"s-typo:p\">Abel Schmidt</p>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Inline-block",
-                        "code": "<div class=\"s-display:inline-block\">\n    <p class=\"s-typo:p\">Miss Nathaniel Roberts</p>\n    <p class=\"s-typo:p\">Vivian Walsh</p>\n    <p class=\"s-typo:p\">Enrique Monahan IV</p>\n  </div>"
+                        "code": "<div class=\"s-display:inline-block\">\n    <p class=\"s-typo:p\">Marcus Morissette</p>\n    <p class=\"s-typo:p\">Judy Braun</p>\n    <p class=\"s-typo:p\">Carl Treutel</p>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Contents",
-                        "code": "<div class=\"s-display:contents\">\n    <p class=\"s-typo:p\">Robert Grant</p>\n    <p class=\"s-typo:p\">Norman VonRueden</p>\n    <p class=\"s-typo:p\">Fannie Reilly</p>\n  </div>"
+                        "code": "<div class=\"s-display:contents\">\n    <p class=\"s-typo:p\">Rafael Herzog</p>\n    <p class=\"s-typo:p\">Mr. Merle Ullrich</p>\n    <p class=\"s-typo:p\">Bryant Erdman</p>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Flex",
-                        "code": "<div class=\"s-display:flex\">\n    <p class=\"s-typo:p\">Earl Hackett</p>\n    <p class=\"s-typo:p\">Leland Schiller</p>\n    <p class=\"s-typo:p\">Tony Kilback</p>\n  </div>"
+                        "code": "<div class=\"s-display:flex\">\n    <p class=\"s-typo:p\">Marie Cartwright</p>\n    <p class=\"s-typo:p\">Tommy O'Reilly</p>\n    <p class=\"s-typo:p\">Luke Jakubowski</p>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Grid",
-                        "code": "<div class=\"s-display:grid\">\n    <p class=\"s-typo:p\">Roman Heller</p>\n    <p class=\"s-typo:p\">Essie Ondricka</p>\n    <p class=\"s-typo:p\">Peter Schneider</p>\n  </div>"
+                        "code": "<div class=\"s-display:grid\">\n    <p class=\"s-typo:p\">Cameron Mertz</p>\n    <p class=\"s-typo:p\">Terrell Toy</p>\n    <p class=\"s-typo:p\">Amber Pfeffer</p>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Inline-flex",
-                        "code": "<div class=\"s-display:inline-flex\">\n    <p class=\"s-typo:p\">Pauline Bins Jr.</p>\n    <p class=\"s-typo:p\">Gerald Hilll</p>\n    <p class=\"s-typo:p\">Dr. Kathy Schaden</p>\n  </div>"
+                        "code": "<div class=\"s-display:inline-flex\">\n    <p class=\"s-typo:p\">Melissa Volkman</p>\n    <p class=\"s-typo:p\">Raul Mann</p>\n    <p class=\"s-typo:p\">Todd Purdy</p>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Inline-grid",
-                        "code": "<div class=\"s-display:inline-grid\">\n    <p class=\"s-typo:p\">Norma Wiegand</p>\n    <p class=\"s-typo:p\">Mr. Tasha Schamberger</p>\n    <p class=\"s-typo:p\">Stephen Roberts</p>\n  </div>"
+                        "code": "<div class=\"s-display:inline-grid\">\n    <p class=\"s-typo:p\">Erika Leannon</p>\n    <p class=\"s-typo:p\">Rochelle Kutch</p>\n    <p class=\"s-typo:p\">Susan Dickens</p>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "None",
-                        "code": "<div class=\"s-display:none\">\n    <p class=\"s-typo:p\">Wayne Jakubowski</p>\n    <p class=\"s-typo:p\">Lloyd Brown</p>\n    <p class=\"s-typo:p\">Bruce Muller</p>\n  </div>"
+                        "code": "<div class=\"s-display:none\">\n    <p class=\"s-typo:p\">Allen Lind</p>\n    <p class=\"s-typo:p\">Jerome Kilback II</p>\n    <p class=\"s-typo:p\">Sharon Daugherty</p>\n  </div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -3729,8 +3729,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.overflow.Overflow": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.overflow.Overflow",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.overflow.Overflow": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.overflow.Overflow",
                 "name": "Overflow",
                 "type": {
                     "types": [
@@ -3754,7 +3754,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply some overflow attributes on any HTMLElement.",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.overflow",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.overflow",
                 "status": "stable",
                 "example": [
                     {
@@ -3813,8 +3813,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.position.Positions": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.position.Positions",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.position.Positions": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.position.Positions",
                 "name": "Positions",
                 "type": {
                     "types": [
@@ -3838,7 +3838,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply some positions like `absolute`, `fixed`, etc... on any HTMLElement",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.position",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.position",
                 "status": "stable",
                 "example": [
                     {
@@ -3872,8 +3872,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.pointer.Pointer": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.pointer.Pointer",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.pointer.Pointer": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.pointer.Pointer",
                 "name": "Pointer",
                 "type": {
                     "types": [
@@ -3897,7 +3897,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply some pointer attributes on any HTMLElement.",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.pointer",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.pointer",
                 "status": "stable",
                 "example": [
                     {
@@ -3931,8 +3931,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.transition.Transitions": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.transition.Transitions",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.transition.Transitions": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.transition.Transitions",
                 "name": "Transitions",
                 "type": {
                     "types": [
@@ -3956,23 +3956,23 @@
                     }
                 ],
                 "description": "These classes allows to apply some transitions on any HTMLElement.\nThese transitions are defined in the `theme.transition` theme settings.",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.transition",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.transition",
                 "status": "stable",
                 "example": [
                     {
                         "language": "html",
                         "title": "slow",
-                        "code": "<div class=\"s-bg:main-surface s-radius:30\" id=\"s-transition-s-087500e3-1b2d-4326-961f-10bdadad7338\">\n     <div class=\"s-transition:slow s-ratio:1 s-bg:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-087500e3-1b2d-4326-961f-10bdadad7338 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-087500e3-1b2d-4326-961f-10bdadad7338:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+                        "code": "<div class=\"s-bg:main-surface s-radius:30\" id=\"s-transition-s-5b87ca62-b9f0-4375-9dfc-10f2aa0bdcf4\">\n     <div class=\"s-transition:slow s-ratio:1 s-bg:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-5b87ca62-b9f0-4375-9dfc-10f2aa0bdcf4 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-5b87ca62-b9f0-4375-9dfc-10f2aa0bdcf4:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "default",
-                        "code": "<div class=\"s-bg:main-surface s-radius:30\" id=\"s-transition-s-6cf253be-520e-460d-8569-cb58babdf917\">\n     <div class=\"s-transition s-ratio:1 s-bg:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-6cf253be-520e-460d-8569-cb58babdf917 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-6cf253be-520e-460d-8569-cb58babdf917:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+                        "code": "<div class=\"s-bg:main-surface s-radius:30\" id=\"s-transition-s-c8f78c26-d55f-4b3a-a25f-61be20f568f0\">\n     <div class=\"s-transition s-ratio:1 s-bg:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-c8f78c26-d55f-4b3a-a25f-61be20f568f0 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-c8f78c26-d55f-4b3a-a25f-61be20f568f0:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "fast",
-                        "code": "<div class=\"s-bg:main-surface s-radius:30\" id=\"s-transition-s-6c10a87d-cca4-49a1-8753-f0c27f04fcbf\">\n     <div class=\"s-transition:fast s-ratio:1 s-bg:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-6c10a87d-cca4-49a1-8753-f0c27f04fcbf > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-6c10a87d-cca4-49a1-8753-f0c27f04fcbf:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+                        "code": "<div class=\"s-bg:main-surface s-radius:30\" id=\"s-transition-s-83c05272-7839-42bc-aa50-0572bf72c235\">\n     <div class=\"s-transition:fast s-ratio:1 s-bg:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-83c05272-7839-42bc-aa50-0572bf72c235 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-83c05272-7839-42bc-aa50-0572bf72c235:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -3985,8 +3985,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.order.Order": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.order.Order",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.order.Order": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.order.Order",
                 "name": "Order",
                 "type": {
                     "types": [
@@ -4010,7 +4010,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply some order attributes on any HTMLElement.",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.order",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.order",
                 "status": "stable",
                 "example": [
                     {
@@ -4029,8 +4029,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.spacing.Spacing": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.spacing.Spacing",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.spacing.Spacing": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.spacing.Spacing",
                 "name": "Spacing",
                 "type": {
                     "types": [
@@ -4054,13 +4054,13 @@
                     }
                 ],
                 "description": "These classes allows you to apply spacing to any HTMLElement container",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.spacing",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.spacing",
                 "status": "stable",
                 "example": [
                     {
                         "language": "html",
                         "title": "Vertical spacing",
-                        "code": "<div class=\"s-spacing:40\">\n  <h1 class=\"s-typo:h1\">Hello world</h1>\n  <p class=\"s-typo:lead\">Oliver Cremin</p>\n  <p class=\"s-typo:p\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis egestas non tortor sed aliquet. Fusce finibus erat at leo scelerisque, a lobortis purus pretium. Aliquam ornare leo id mi imperdiet.</p>\n  <a class=\"s-btn s-color:accent\">Simple Cta</a>\n</div>"
+                        "code": "<div class=\"s-spacing:40\">\n  <h1 class=\"s-typo:h1\">Hello world</h1>\n  <p class=\"s-typo:lead\">Gustavo Treutel</p>\n  <p class=\"s-typo:p\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis egestas non tortor sed aliquet. Fusce finibus erat at leo scelerisque, a lobortis purus pretium. Aliquam ornare leo id mi imperdiet.</p>\n  <a class=\"s-btn s-color:accent\">Simple Cta</a>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -4073,8 +4073,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.userSelect.User-select": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.userSelect.User-select",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.userSelect.User-select": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.userSelect.User-select",
                 "name": "User select",
                 "type": {
                     "types": [
@@ -4098,28 +4098,28 @@
                     }
                 ],
                 "description": "These classes allows you to apply some user-select style on any HTMLElement",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.userSelect",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.userSelect",
                 "status": "stable",
                 "example": [
                     {
                         "language": "html",
                         "title": "All",
-                        "code": "<p class=\"s-user-select:all\">\n      Aliquid nostrum quos dolores nulla ea cum temporibus qui modi. Ipsam et magnam ea unde. Aut qui eum illum explicabo et laudantium quam aut inventore. Ut et non eligendi sed ut veritatis.\n  </p>"
+                        "code": "<p class=\"s-user-select:all\">\n      Et magnam ut eveniet consequatur ratione hic veniam. Est sapiente suscipit illo magni dicta ratione dolores fugit. Cupiditate in tenetur quidem libero aut sunt voluptates. Autem distinctio aperiam aperiam et qui iure dolore et. Eum quidem autem ipsum nobis. Asperiores dolor totam et aut non cum qui qui.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "auto",
-                        "code": "<p class=\"s-user-select:auto\">\n      Hic omnis et voluptatem cumque. Consequatur voluptas illum ad ut cupiditate sapiente qui. Hic fugiat aut illo quam.\n  </p>"
+                        "code": "<p class=\"s-user-select:auto\">\n      Voluptas sint ut quis et cum esse porro. Repellendus laboriosam dolores autem assumenda. Accusantium veniam rerum.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "none",
-                        "code": "<p class=\"s-user-select:none\">\n      Molestiae enim velit pariatur voluptate voluptas dolorem commodi labore. Illo rem enim rerum molestiae et dolor. Sint maxime sequi quisquam. Enim id omnis architecto maxime deleniti expedita fuga sunt debitis. Omnis error est aspernatur quod.\n  </p>"
+                        "code": "<p class=\"s-user-select:none\">\n      Veniam deserunt qui quasi optio. Ad at delectus consequuntur neque neque. Dignissimos ratione eius consectetur vero. Cum consequatur voluptate animi cumque optio quia. Quam rerum maiores quam veniam aperiam. Tenetur recusandae sed perferendis.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "text",
-                        "code": "<p class=\"s-user-select:text\">\n      In voluptatem odit sed esse. Aut quo perspiciatis dolorum. Animi vero autem ipsam. Qui maxime repellat ipsam quia sed quia non culpa. Autem et voluptatem optio aut est dicta sit sed ea.\n  </p>"
+                        "code": "<p class=\"s-user-select:text\">\n      Omnis reprehenderit dolores. Deserunt ut et qui illo saepe quasi quo. Id sit sunt. Error vitae possimus laboriosam. Illum nam iusto voluptas qui laborum suscipit.\n  </p>"
                     }
                 ],
                 "since": "2.0.0",
@@ -4132,8 +4132,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.visibility.Visibility": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.visibility.Visibility",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.visibility.Visibility": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.visibility.Visibility",
                 "name": "Visibility",
                 "type": {
                     "types": [
@@ -4157,7 +4157,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply a visibility style on any HTMLElement",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.visibility",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.visibility",
                 "status": "stable",
                 "example": [
                     {
@@ -4176,8 +4176,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.visually.Visually": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.visually.Visually",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.visually.Visually": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.visually.Visually",
                 "name": "Visually",
                 "type": {
                     "types": [
@@ -4201,7 +4201,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply a visually style on any HTMLElement",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.visually",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.visually",
                 "status": "stable",
                 "example": [
                     {
@@ -4220,8 +4220,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.truncate.Truncate": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.truncate.Truncate",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.truncate.Truncate": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.truncate.Truncate",
                 "name": "Truncate",
                 "type": {
                     "types": [
@@ -4245,58 +4245,58 @@
                     }
                 ],
                 "description": "These classes allows you to **truncate texts to a number of lines** on any HTMLElement",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.truncate",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.truncate",
                 "status": "stable",
                 "example": [
                     {
                         "language": "html",
                         "title": "1 line",
-                        "code": "<p class=\"s-typo:p s-truncate:1\">Ex incidunt aut totam eos fugit ut reiciendis.<br />Consequatur et quo ea repudiandae non reprehenderit reiciendis.<br />Autem nemo qui rerum.<br />Debitis officiis distinctio qui debitis fugit.<br />Delectus qui aut et vel tenetur eveniet non.<br />Perferendis in temporibus voluptates aliquam laboriosam hic.<br />Sit ut ea in illum cum.<br />Hic sunt praesentium non consequatur corrupti sint.<br />Sunt ut facere quod voluptate voluptas.<br />Vero qui repellat placeat voluptatem et.<br />Mollitia ipsa sed molestias eum quae.<br />Ex dolore eos cumque odit ut.<br />Consequatur qui eum repudiandae atque.<br />Quia similique perferendis.<br />Modi libero consequatur non laudantium consectetur eum.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:1\">Tempore asperiores eum quidem corporis sunt impedit incidunt.<br />Tempora ut dolore enim accusantium et.<br />Est deserunt magnam quibusdam optio dolore qui quae magni.<br />Odit sit voluptatem.<br />Architecto sed excepturi illo ipsum eveniet est perspiciatis.<br />Doloribus sunt omnis soluta a eveniet deserunt.<br />Sit architecto officiis facilis quia non earum laborum.<br />Ad et eligendi neque et odit temporibus.<br />Omnis illum est nostrum officiis omnis dolorum quisquam quod incidunt.<br />Sed voluptas in rerum atque hic numquam voluptatem aspernatur et.<br />Magni labore qui necessitatibus.<br />Temporibus harum est quidem sed magni quia.<br />Dolorem et dicta error beatae nihil expedita enim quia atque.<br />Aut perspiciatis et.<br />Totam ipsam accusamus aut.</p>"
                     },
                     {
                         "language": "html",
                         "title": "2 line",
-                        "code": "<p class=\"s-typo:p s-truncate:2\">Est velit omnis ea sunt et sed voluptatem.<br />Qui laboriosam ut sint et quas beatae ratione saepe sit.<br />Magni aut et aliquam maxime ut nobis.<br />Deserunt facilis itaque suscipit.<br />Dignissimos sed ratione vitae sed.<br />Facere tenetur vel maiores neque amet inventore corrupti voluptatem ipsum.<br />Ipsam a corporis ipsum blanditiis praesentium eos rem dolores voluptatem.<br />Impedit perspiciatis cumque sit qui quas esse nam voluptate.<br />Aut architecto et quia qui dolores et adipisci in blanditiis.<br />Et minus voluptatem.<br />Minus possimus voluptates hic.<br />Officia optio eaque vitae.<br />Sed veritatis qui optio sit porro.<br />Maxime fuga rerum eaque officiis vel sequi.<br />Aliquam qui ducimus repellat facilis architecto aut aut deserunt odio.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:2\">Quia odit consequatur dicta qui veniam nihil nulla nihil dolore.<br />Molestiae laborum in voluptas mollitia.<br />Quis aut numquam ut nobis odio aut voluptatum.<br />Similique corrupti ea est eligendi veritatis aliquam.<br />Consequatur recusandae itaque nihil similique velit aut et qui.<br />Omnis velit provident et asperiores.<br />Harum et optio ab.<br />Repellat officiis corporis.<br />Iusto et consequatur laudantium quisquam nisi natus beatae.<br />Autem quod provident.<br />Cumque dolores odio et.<br />Sint dicta culpa voluptas et sit.<br />Consequatur voluptate sed fugit necessitatibus.<br />Rerum provident magnam aut sed esse natus ut quisquam.<br />Sapiente nesciunt explicabo dicta quis aspernatur numquam hic iure quia.</p>"
                     },
                     {
                         "language": "html",
                         "title": "3 lines",
-                        "code": "<p class=\"s-typo:p s-truncate:3\">Laborum officiis quo.<br />Molestias vitae aperiam id autem.<br />Id ut et iste consequuntur sit quod consequatur et voluptatum.<br />Aut ex accusantium.<br />Blanditiis veniam distinctio sunt.<br />Voluptate quia neque voluptas ad consectetur.<br />Necessitatibus sit quia ipsa voluptas inventore commodi adipisci quas.<br />Vel voluptatem ea eaque nulla molestias nam non illum.<br />Quod qui quod iste architecto doloribus recusandae.<br />Deleniti facere facilis explicabo voluptatem totam qui culpa odit sint.<br />Nulla veniam sit ut eum placeat eum dolorem.<br />Dolore exercitationem sapiente consequatur eos maiores sit laborum placeat.<br />Nam ut sunt aut eveniet est est.<br />Quia quo repudiandae fugiat.<br />Amet dicta accusantium deleniti.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:3\">Doloribus alias consequatur dolore blanditiis est.<br />Quasi est dolores distinctio quia et rerum voluptas.<br />Qui neque ut consequuntur ea iste qui distinctio ad dolor.<br />Enim dolore dolores in dolore.<br />Ipsum ut quia enim quos et aliquam magni neque.<br />Quae ad dolor recusandae dolor ratione neque ipsam commodi reiciendis.<br />Ducimus voluptatem eaque doloremque sunt autem odio.<br />Temporibus aut exercitationem quasi qui ratione aut cumque quisquam.<br />Ipsam aperiam autem ut est non.<br />Saepe quia iusto quia at illum aut.<br />Facilis est assumenda corrupti neque aliquam facere non.<br />Dolores autem et nam perspiciatis.<br />Officia asperiores et sunt.<br />Placeat velit mollitia accusamus nihil consequatur.<br />Rerum est laboriosam itaque et laborum.</p>"
                     },
                     {
                         "language": "html",
                         "title": "4 lines",
-                        "code": "<p class=\"s-typo:p s-truncate:4\">Libero illo veniam.<br />Quia ex ut perspiciatis velit nostrum et ipsam hic sed.<br />Fugit repellat consequatur.<br />Eum enim odio dolorum quis facere rerum dolores.<br />Corporis ut perspiciatis ea neque debitis porro molestiae hic eum.<br />Est necessitatibus temporibus dignissimos sequi est repellendus non alias quod.<br />Consequuntur enim ut pariatur doloribus libero.<br />Dolor suscipit aut ut accusamus sunt.<br />Maxime illo iure sapiente reprehenderit alias.<br />Omnis autem harum non temporibus quia aliquid reprehenderit.<br />Maiores sequi a qui provident rerum reiciendis nihil dolorem accusantium.<br />Aliquam eveniet sunt vel quae ut id veritatis.<br />Occaecati et esse unde voluptates qui.<br />Eligendi quam eum dolor.<br />Ratione quis dolor eos tempore dicta qui sed et.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:4\">Ullam vel dolorem molestias omnis optio facere ut neque.<br />Aut sed ut rerum nesciunt labore.<br />Libero facilis quod et dolores qui eligendi.<br />Quaerat quia ut est.<br />Laboriosam ullam numquam dolorem nam repellendus amet autem est.<br />Voluptas est et nobis eos molestiae.<br />Aspernatur officiis eius dolor ex consequatur.<br />Ullam ut in est officiis ex omnis et repudiandae unde.<br />Illum ut aliquam unde ut.<br />Blanditiis sint quasi blanditiis rerum ad accusantium et fugit ipsa.<br />Iusto et non qui.<br />Voluptatem fugiat nesciunt et.<br />Sint necessitatibus possimus quo officiis qui ea ut neque facere.<br />Et nesciunt voluptatibus ea et quisquam saepe fuga.<br />Voluptatem in consectetur eveniet hic veniam et eius aspernatur quibusdam.</p>"
                     },
                     {
                         "language": "html",
                         "title": "5 lines",
-                        "code": "<p class=\"s-typo:p s-truncate:5\">Animi dolores amet debitis.<br />Placeat hic voluptatem.<br />Voluptas impedit omnis non et quam.<br />Eos rerum voluptatem libero possimus qui illum blanditiis aut ab.<br />Et cupiditate nostrum molestiae eius quae natus ex.<br />Fugit nihil vero et.<br />Et quidem neque beatae molestiae a.<br />Inventore dolore nostrum ut ipsa unde.<br />Pariatur omnis aut modi blanditiis modi architecto cumque ut.<br />Autem quia aut natus nam.<br />Non et quidem quo doloribus fuga soluta laudantium aperiam.<br />Quas et sequi ratione mollitia eius explicabo tempore.<br />Doloribus consequatur illo placeat soluta doloremque cum deserunt ipsam rerum.<br />Sed maxime vel.<br />Dolore deleniti numquam iure accusantium.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:5\">Consequuntur perferendis reprehenderit optio ea.<br />Sint reprehenderit omnis maiores ut non.<br />Et consequuntur suscipit recusandae in doloribus officia doloremque.<br />Esse eius et.<br />Est modi quibusdam.<br />Cumque sit incidunt aut et.<br />Eligendi ullam commodi debitis ab minima dolorem illo.<br />Ut debitis alias vero sed beatae omnis similique.<br />Quidem repudiandae voluptas qui neque qui eum id.<br />Sequi tempore et sint.<br />Numquam dolorum praesentium at at eius culpa sunt.<br />Ducimus doloremque sequi laboriosam qui.<br />Pariatur nostrum voluptates ab similique at et.<br />Sunt officiis praesentium non non occaecati quam.<br />Quasi quo neque sit facere aut ea repellat.</p>"
                     },
                     {
                         "language": "html",
                         "title": "6 lines",
-                        "code": "<p class=\"s-typo:p s-truncate:6\">Voluptatem sapiente autem delectus ad facilis adipisci.<br />Sit autem fugiat quia quasi sed incidunt voluptatem animi earum.<br />Itaque quaerat pariatur neque totam laborum repellat dolores dolorem.<br />Aut necessitatibus dolores beatae ut minus modi inventore in.<br />Repudiandae consequatur ipsa.<br />Aliquid sunt ipsa aut qui eum perspiciatis quo cum vero.<br />Asperiores voluptas provident reiciendis quis iure possimus rem.<br />Ducimus vitae aspernatur.<br />Omnis rem maxime non.<br />Sapiente recusandae tempora laboriosam non.<br />Voluptate illum non architecto dolore quos et rem rerum.<br />Ipsam repellendus cupiditate quia tempore.<br />Officia vel saepe aliquam voluptate perspiciatis.<br />Vero tempore harum.<br />Quis non numquam.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:6\">Culpa maxime quis quis ipsum quas quis facilis est.<br />Est quod illum dicta nihil et unde vitae magni.<br />Velit cupiditate quia autem tempore.<br />Fuga fugit quis ut ratione dolorum.<br />Dignissimos et saepe possimus similique neque.<br />Et voluptatibus modi delectus voluptas repellendus nulla aspernatur sint iure.<br />Dolor assumenda animi placeat consequatur quasi.<br />Recusandae fugiat sed rem occaecati soluta quo et est hic.<br />Sunt molestiae quo vitae ad.<br />Assumenda minima non qui repellendus doloremque rem.<br />Deleniti quae ut suscipit aspernatur.<br />Ut ut inventore aut vel non.<br />Quis eos accusamus laudantium quod perspiciatis sit minima.<br />Voluptatibus nulla quae perferendis quo quisquam ut quidem dolores qui.<br />Quas quo dolorem voluptatem illum ut ducimus recusandae dolore officiis.</p>"
                     },
                     {
                         "language": "html",
                         "title": "7 lines",
-                        "code": "<p class=\"s-typo:p s-truncate:7\">In reiciendis quis consequatur nihil doloremque numquam ipsam.<br />Incidunt nihil possimus quas est voluptates sint ex.<br />Est consequatur et officia repellendus et perspiciatis quia cumque.<br />Eius dolore rem ea occaecati ut eaque.<br />Voluptatem est eveniet autem pariatur quis.<br />Aut ea quidem totam molestiae pariatur.<br />Dolorem facere dolorem temporibus.<br />Aperiam ut iure.<br />Fugit est laboriosam autem occaecati autem et maiores.<br />Animi vitae cum ipsum.<br />Vitae est et nihil.<br />Consequatur magni asperiores est qui.<br />Animi rem minima officiis ut.<br />Quia nam accusamus inventore error quos ad natus.<br />Animi quia incidunt sit.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:7\">Fugiat nesciunt nihil corrupti.<br />Repellat magnam sed nisi blanditiis sequi est dolore eveniet quia.<br />Doloribus tempora voluptatem doloribus voluptate eius.<br />Qui quaerat labore dolores error architecto.<br />Sit nulla qui sed quod ullam suscipit dolore.<br />Debitis eos veritatis.<br />Sed blanditiis non quia odio error.<br />Ratione et odio quia ipsum pariatur est aut consequuntur autem.<br />Voluptatum eius exercitationem vitae ipsum eos expedita molestias.<br />Qui repudiandae saepe autem ipsa dolor consequuntur.<br />Qui veniam nisi molestiae illum dicta necessitatibus qui.<br />Possimus nam repudiandae necessitatibus quod totam rerum hic culpa.<br />Magnam et sapiente adipisci aut maiores numquam incidunt.<br />Voluptates beatae nobis.<br />Voluptas voluptas reprehenderit ipsam rerum officiis sequi magnam rerum.</p>"
                     },
                     {
                         "language": "html",
                         "title": "8 lines",
-                        "code": "<p class=\"s-typo:p s-truncate:8\">Facere porro eaque voluptatibus.<br />Rerum enim porro laudantium provident voluptas voluptatem illo.<br />Dolore eaque pariatur cumque tempora.<br />Velit assumenda et nulla ipsa quisquam.<br />Minima quis in laborum maiores.<br />Eos omnis deserunt et.<br />Porro qui sint recusandae suscipit eos odio sit.<br />Recusandae veritatis eaque ut alias.<br />Aut sequi iure autem illum velit molestias incidunt.<br />A sed optio iure.<br />Fuga sed quia eos qui aspernatur.<br />Alias a qui autem est enim.<br />Quis velit omnis illum minus.<br />Tempora asperiores vel accusamus qui voluptatem laborum sequi.<br />Nisi unde veniam dolorem occaecati dolor.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:8\">Aut hic qui assumenda ipsam ipsum eaque.<br />Ut mollitia nemo illum laborum.<br />Sunt id culpa fugit earum mollitia quam.<br />Velit doloremque quia delectus voluptatibus.<br />Voluptatibus dolorum est magni cum error.<br />Eligendi veniam rerum facere.<br />Eius magnam dolorem dicta tempora.<br />Error ratione rerum modi consequatur velit corrupti inventore.<br />Est ipsa exercitationem quidem et ut odio sequi.<br />Voluptate quasi architecto eius autem minus vero omnis voluptas dolor.<br />Rerum facilis quae doloribus illo aut non distinctio.<br />Veritatis ut voluptas dicta est omnis sit voluptas consequatur quia.<br />Consectetur reprehenderit et sit nisi voluptas saepe.<br />Molestias corrupti sit voluptatem iure aspernatur velit officiis voluptatem autem.<br />Et eum quas saepe.</p>"
                     },
                     {
                         "language": "html",
                         "title": "9 lines",
-                        "code": "<p class=\"s-typo:p s-truncate:9\">Eos architecto et quae et qui accusantium rerum laboriosam dicta.<br />At dolor molestiae quae nihil nostrum aut autem sint.<br />Nihil labore voluptatem quae voluptas officiis optio totam.<br />Tempora ea iste ducimus natus animi ipsa molestias.<br />Earum nisi ut praesentium iste rerum dolore minima.<br />Excepturi nesciunt qui provident voluptates veniam.<br />Labore qui a dolore soluta dolores et.<br />Perspiciatis quisquam corporis officia.<br />Dolore eos ducimus velit.<br />Animi velit ut qui corporis ab repellendus error.<br />Nulla aut consequatur laboriosam reprehenderit.<br />Cum laudantium omnis et a aspernatur iure in.<br />Saepe natus repellat.<br />Qui reiciendis optio.<br />Occaecati eligendi ad quam neque reiciendis ut.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:9\">Quidem perferendis quas sunt sit dolorem et corrupti fuga.<br />Laboriosam voluptatum sint laudantium in nulla vel sunt soluta et.<br />Mollitia cum aut.<br />Sunt explicabo pariatur atque velit nihil eius.<br />Harum magni repudiandae sit quaerat non.<br />Rerum non ex vel omnis maiores ut amet.<br />Sunt veritatis eos dolores in fuga.<br />Magni eum vel sunt minus enim in illum eos.<br />Maxime blanditiis aspernatur laudantium eos delectus eos.<br />Explicabo reprehenderit tempora quo.<br />Ut qui cum.<br />Mollitia illo nisi culpa.<br />Provident quis aut voluptatem velit nostrum provident.<br />Quidem aut ducimus eius non.<br />Quibusdam consequuntur repellendus ex numquam.</p>"
                     },
                     {
                         "language": "html",
                         "title": "10 lines",
-                        "code": "<p class=\"s-typo:p s-truncate:10\">Voluptate dolores autem dicta.<br />Vitae quasi quibusdam dolor.<br />Sapiente et id voluptatem maiores earum est.<br />Soluta est voluptatum id nobis dolores optio sed molestiae odio.<br />Vel quo nisi accusamus vel quam assumenda est.<br />Sed expedita sed inventore maxime dignissimos.<br />Voluptatem in molestiae et.<br />Facere et dolorem ipsa suscipit.<br />Ut explicabo suscipit.<br />Iusto quia omnis qui quos quaerat aperiam porro quia.<br />Illo nam rem nemo.<br />Consequuntur vitae quia qui optio.<br />Doloribus illum assumenda.<br />Blanditiis asperiores quia ex non.<br />Non adipisci esse sequi aspernatur unde explicabo nisi.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:10\">Ex numquam quaerat dolorum aliquam cum id consectetur.<br />Consequuntur inventore nihil.<br />Ducimus nulla eius numquam sequi temporibus dolores.<br />Autem laborum ea qui illo officiis harum numquam.<br />Quo hic in adipisci.<br />Dolor soluta sed facilis nihil.<br />Et vel dolores perferendis.<br />Quis architecto quis maxime id aut inventore numquam voluptatem.<br />Deleniti alias dolorem magnam neque non ad voluptates.<br />Nihil omnis quidem quia sint voluptatem numquam impedit repellendus.<br />Officiis perferendis quidem quod quis debitis.<br />Laborum minus iusto animi eius ut pariatur suscipit.<br />Ea laboriosam non hic.<br />Et ea ipsa.<br />Dolores asperiores animi fugiat quam voluptatum.</p>"
                     }
                 ],
                 "since": "2.0.0",
@@ -4309,8 +4309,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.shape.Shape": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.shape.Shape",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.shape.Shape": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.shape.Shape",
                 "name": "Shape",
                 "type": {
                     "types": [
@@ -4334,7 +4334,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply a shape to any elements that support it using the\n`border-radius: s.border.radius(shape);` statement.",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.shape",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.shape",
                 "status": "stable",
                 "example": [
                     {
@@ -4353,8 +4353,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.width.Widths": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.width.Widths",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.width.Widths": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.width.Widths",
                 "name": "Widths",
                 "type": {
                     "types": [
@@ -4378,7 +4378,7 @@
                     }
                 ],
                 "description": "These classes allows to apply some width to any HTMLElement.\nThese widths are defined in the `theme.width` theme settings.",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.width",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.width",
                 "status": "stable",
                 "example": [
                     {
@@ -4447,8 +4447,8 @@
                 "extension": "css",
                 "relPath": "dist/css/index.css"
             },
-            "@website.stylekit-coffeekraken-io.sugar.style.helpers.whiteSpace.White-space": {
-                "id": "@website.stylekit-coffeekraken-io.sugar.style.helpers.whiteSpace.White-space",
+            "@website.sugarcss-coffeekraken-io.sugar.style.helpers.whiteSpace.White-space": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.whiteSpace.White-space",
                 "name": "White space",
                 "type": {
                     "types": [
@@ -4472,53 +4472,53 @@
                     }
                 ],
                 "description": "These classes allows you to apply some white-space style on any HTMLElement",
-                "namespace": "@website.stylekit-coffeekraken-io.sugar.style.helpers.whiteSpace",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.whiteSpace",
                 "status": "stable",
                 "example": [
                     {
                         "language": "html",
                         "title": "Wrap",
-                        "code": "<p class=\"s-white-space:wrap\">\n      Praesentium fugit non et esse et. Ea similique cumque et magni reiciendis nihil quis. Aperiam sit nulla voluptatibus alias qui architecto aperiam. Nulla deleniti nemo consectetur laudantium porro. Modi quia nisi.\n  </p>"
+                        "code": "<p class=\"s-white-space:wrap\">\n      Illum voluptatem id rerum est quia est molestiae consequuntur. Itaque qui ad sint cum. Incidunt explicabo eaque. Occaecati sed iusto ratione eum aut. Cum ipsum rerum culpa dolorem. Tempora sequi atque aut consequatur et accusamus id repellat ipsum.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "Nowrap",
-                        "code": "<p class=\"s-white-space:nowrap\">\n      Sint dolorem a et perferendis in aut ea voluptatum quidem. Saepe voluptas veritatis perferendis ullam rerum repellendus. Ea ratione molestiae eligendi et adipisci. Totam doloremque autem qui. Aliquam excepturi rerum enim. Cupiditate vel praesentium eos veritatis dolorem nostrum nemo.\n  </p>"
+                        "code": "<p class=\"s-white-space:nowrap\">\n      Qui laborum tempora et dolorum. Deserunt sit neque rerum. Voluptates facere nam iure.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "Break spaces",
-                        "code": "<p class=\"s-white-space:break-spaces\">\n      Quis sequi quo ut qui saepe. Doloribus cum asperiores quos quam doloribus a et ut. Labore commodi sint illum suscipit officia quaerat porro id quod. Recusandae necessitatibus officiis non nam.\n  </p>"
+                        "code": "<p class=\"s-white-space:break-spaces\">\n      Aliquid amet minus. Nesciunt voluptatum inventore sed. Magni dolores ea. Est quos perspiciatis omnis repudiandae consectetur non veniam provident molestiae. Accusamus harum eligendi quidem enim consequatur reprehenderit ab quibusdam aperiam. Perspiciatis porro sit minus non consequatur ea.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "Normal",
-                        "code": "<p class=\"s-white-space:normal\">\n      Dolores rerum quo quaerat consectetur dolorum quaerat. Impedit minus cum ratione. Eos sed et dolorum iure qui cupiditate eaque aliquid. Molestiae perferendis dolore ipsam maiores. Accusantium nam mollitia qui error doloribus fuga culpa.\n  </p>"
+                        "code": "<p class=\"s-white-space:normal\">\n      Nihil asperiores beatae consequatur est ducimus eos. In porro fugit. Et amet suscipit illum sed eius. Praesentium nisi quasi aut quae et. Commodi consectetur eius minus nulla quidem dolore. Nisi aut dolores ea iure dignissimos delectus.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "Pre",
-                        "code": "<p class=\"s-white-space:pre\">\n      Quasi sit maxime excepturi maxime ratione illum. Porro nam eligendi quia. Hic qui quas atque commodi unde omnis quo cum laboriosam. Nisi voluptatem qui in enim voluptatem ut cumque. Consequuntur tenetur sint quia nulla.\n  </p>"
+                        "code": "<p class=\"s-white-space:pre\">\n      Incidunt inventore quia iste iusto qui atque molestiae. Corporis neque mollitia consequuntur. Error consequatur totam itaque. Quidem itaque aperiam exercitationem aliquam ratione ut exercitationem corrupti.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "Pre-line",
-                        "code": "<p class=\"s-white-space:pre-line\">\n      Voluptatem laborum doloremque in laborum id. Dolore saepe commodi quo excepturi laboriosam voluptates. Molestiae iste deserunt. Illo iure in minima similique quo quia explicabo facilis.\n  </p>"
+                        "code": "<p class=\"s-white-space:pre-line\">\n      Et eos aliquid qui expedita incidunt nulla in nemo rerum. Optio laborum corrupti necessitatibus dolores reiciendis. Vel et voluptatum quasi odit. Est sint itaque vitae sequi quam maiores laborum. Debitis ut nesciunt explicabo deleniti ut id ut corrupti vitae.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "Pre-wrap",
-                        "code": "<p class=\"s-white-space:pre-wrap\">\n      Consequuntur qui velit quisquam est provident deleniti. Qui ratione voluptas quis officia. Quae qui dolores quo sequi. Ut et id.\n  </p>"
+                        "code": "<p class=\"s-white-space:pre-wrap\">\n      Est rerum dolorem commodi sint a repudiandae cum. Architecto ut quaerat dolor. Odit magnam sit laborum non. Nesciunt vel ea.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "Revert",
-                        "code": "<p class=\"s-white-space:revert\">\n      Provident ipsum corrupti deleniti. Est reiciendis natus ipsam voluptatem sit aliquid sunt eos. Nihil reiciendis incidunt officiis natus laboriosam est. Et numquam velit.\n  </p>"
+                        "code": "<p class=\"s-white-space:revert\">\n      Rerum natus molestias dolor quam et enim eligendi nemo. Nesciunt id excepturi. Quibusdam nulla similique veritatis molestias adipisci.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "Unset",
-                        "code": "<p class=\"s-white-space:unset\">\n      Nihil quia voluptatum hic dolore maxime perspiciatis animi aut dolores. Velit et ipsam nam et. Voluptate nemo aut enim non eaque consectetur quaerat non ut.\n  </p>"
+                        "code": "<p class=\"s-white-space:unset\">\n      Velit illo excepturi aut. Amet vel et hic velit sint ut. Tenetur repellat sapiente voluptatum quisquam. Accusamus molestiae distinctio placeat vel. Est eaque illum consequuntur. Qui itaque ea animi animi.\n  </p>"
                     }
                 ],
                 "since": "2.0.0",

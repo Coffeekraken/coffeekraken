@@ -8,7 +8,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const css_1 = require("@coffeekraken/sugar/css");
 /**
  * @name          family
- * @as              sugar.font.family
+ * @as              s.font.family
  * @namespace     node.function.font
  * @type          PostcssFunction
  * @platform      postcss

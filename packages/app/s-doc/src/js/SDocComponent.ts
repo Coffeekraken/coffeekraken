@@ -154,6 +154,8 @@ export default class SDocComponent extends __SLitComponent {
     }
 
     async _loadItem(itemObj): Promise<void> {
+        console.log('IT', itemObj);
+
         // request the item if needed
         if (!itemObj.cache) {
             // set the item loading state

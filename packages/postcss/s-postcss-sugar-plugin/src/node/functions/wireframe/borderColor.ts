@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          borderColor
- * @as              sugar.wireframe.borderColor
+ * @as              s.wireframe.borderColor
  * @namespace     node.function.wireframe
  * @type          PostcssFunction
  * @platform      postcss

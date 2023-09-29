@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          opacity
- * @as          sugar.opacity
+ * @as          s.opacity
  * @namespace     node.function.opacity
  * @type          PostcssFunction
  * @platform      postcss

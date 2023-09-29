@@ -21,7 +21,7 @@ import __fs from 'fs';
  * @todo      tests
  *
  * @snippet         __packageMetasSync($1)
- * 
+ *
  * @example     js
  * import { __packageMetasSync } from '@coffeekraken/sugar/package';
  * __packageMetasSync();
@@ -31,6 +31,7 @@ import __fs from 'fs';
  */
 
 export interface IPackageMetas {
+    type: 'npm' | 'composer';
     name: string;
     description: string;
     version: string;
@@ -76,6 +77,15 @@ export default function __packageMetasSync(
                     finalMetas[field] = json[field];
                     foundFieldsCount++;
                 }
+            }
+
+            // handle the "type" field
+            if (source === 'composer.json') {
+                finalMetas.type = 'composer';
+            } else if (source === 'package.json') {
+                finalMetas.type = 'npm';
+            } else {
+                finalMetas.type = 'unknown';
             }
         }
     }

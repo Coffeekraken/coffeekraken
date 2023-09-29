@@ -9,7 +9,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 /**
  * @name          color
- * @as            sugar.color
+ * @as            s.color
  * @namespace     node.function.color
  * @type          PostcssFunction
  * @platform      postcss

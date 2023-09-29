@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          radius
- * @as            sugar.border.radius
+ * @as            s.border.radius
  * @namespace     node.function.border
  * @type          PostcssFunction
  * @platform      postcss

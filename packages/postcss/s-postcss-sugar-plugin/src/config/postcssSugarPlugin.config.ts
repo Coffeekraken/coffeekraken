@@ -6,7 +6,7 @@ import __path from 'path';
  * @namespace               config
  * @type                    Config
  * @plateform               node
- * @status                  beta
+ * @status                  stable
  *
  * Specify the @coffeekraken/s-postcss-sugar-plugin available configurations
  *

@@ -8,7 +8,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 /**
  * @name          background
- * @as          sugar.wireframe.background
+ * @as          s.wireframe.background
  * @namespace     node.function.wireframe
  * @type          PostcssFunction
  * @platform      postcss

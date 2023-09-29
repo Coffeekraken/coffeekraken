@@ -8,7 +8,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 /**
  * @name          space
- * @as          sugar.space
+ * @as          s.space
  * @namespace     node.function.space
  * @type          PostcssFunction
  * @platform      postcss

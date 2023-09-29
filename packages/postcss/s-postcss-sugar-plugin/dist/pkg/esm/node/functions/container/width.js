@@ -2,7 +2,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name          maxWidth
- * @as              sugar.container.width
+ * @as              s.container.width
  * @namespace     node.function.color
  * @type          PostcssFunction
  * @platform      postcss

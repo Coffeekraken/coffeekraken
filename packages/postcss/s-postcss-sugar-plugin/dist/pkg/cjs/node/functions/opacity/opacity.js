@@ -8,7 +8,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 /**
  * @name          opacity
- * @as          sugar.opacity
+ * @as          s.opacity
  * @namespace     node.function.opacity
  * @type          PostcssFunction
  * @platform      postcss

@@ -1,0 +1,65 @@
+{
+    "name": "@website/sugarcss-coffeekraken-io",
+    "title": "Coffeekraken SugarCSS",
+    "version": "2.0.0-beta.1",
+    "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+    "keywords": [
+        "coffeekraken",
+        "coffee",
+        "kraken",
+        "sugar",
+        "postcss",
+        "styleguide",
+        "color",
+        "margin",
+        "padding",
+        "ui"
+    ],
+    "type": "module",
+    "private": true,
+    "scripts": {
+        "dev": "sugar kitchen.run dev & npm run doc.serve",
+        "build": "sugar kitchen.run build --target production",
+        "preview": "sugar kitchen.run preview",
+        "static": "npm run preview & sleep 5 && npm run static.build && npm run static.serve",
+        "static.serve": "sugar staticServer.start",
+        "static.build": "sugar static.build --clean --env production --target production",
+        "doc.serve": "sugar doc.serve",
+        "deploy": "echo 'Simply push in the master branch to deploy'",
+        "server.ssh": "ssh root@194.233.173.214"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://olivierbossel.com"
+    },
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/s-code-example-component": "^2.0.0-beta.1",
+        "@coffeekraken/s-dashboard": "^2.0.0-beta.1",
+        "@coffeekraken/s-doc": "^2.0.0-beta.1",
+        "@coffeekraken/s-theme": "^2.0.0-beta.1",
+        "@coffeekraken/s-filtrable-input-component": "^2.0.0-beta.1",
+        "@coffeekraken/s-front": "^2.0.0-beta.1",
+        "@coffeekraken/s-lit-component": "^2.0.0-beta.1",
+        "@coffeekraken/s-pack-essentials": "^2.0.0-beta.1",
+        "@coffeekraken/s-postcss-sugar-plugin": "^2.0.0-beta.1",
+        "@coffeekraken/s-static-builder": "^2.0.0-beta.1",
+        "@coffeekraken/sugar": "^2.0.0-beta.1"
+    },
+    "exports": {
+        "./shared/*": {
+            "require": "./dist/pkg/cjs/shared/*.js",
+            "import": "./dist/pkg/esm/shared/*.js"
+        },
+        "./node/*": {
+            "require": "./dist/pkg/cjs/node/*.js",
+            "import": "./dist/pkg/esm/node/*.js"
+        },
+        "./js/*": {
+            "require": "./dist/pkg/cjs/js/*.js",
+            "import": "./dist/pkg/esm/js/*.js"
+        }
+    },
+    "homepage": "https://coffeekraken.io"
+}

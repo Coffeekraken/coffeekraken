@@ -9,7 +9,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 /**
  * @name          depth
- * @as            sugar.depth
+ * @as            s.depth
  * @namespace     node.function.depth
  * @type          PostcssFunction
  * @platform      postcss

@@ -33,10 +33,10 @@ export { postcssSugarPluginMediaMixinInterface as interface };
  * }
  *
  * @example        css
- * \@s.media >=desktop {
+ * @s.media >=desktop {
  *      // ...
  * }
- * \@s.media tablet {
+ * @s.media tablet {
  *      // ...
  * }
  *

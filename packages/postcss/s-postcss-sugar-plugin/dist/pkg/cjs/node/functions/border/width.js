@@ -8,7 +8,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 /**
  * @name          width
- * @as            sugar.border.width
+ * @as            s.border.width
  * @namespace     node.function.border
  * @type          PostcssFunction
  * @platform      postcss

@@ -8,7 +8,7 @@ exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 /**
  * @name          maxWidth
- * @as              sugar.container.width
+ * @as              s.container.width
  * @namespace     node.function.color
  * @type          PostcssFunction
  * @platform      postcss

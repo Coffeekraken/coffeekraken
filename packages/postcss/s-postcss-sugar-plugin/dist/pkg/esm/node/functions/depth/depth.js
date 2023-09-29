@@ -3,7 +3,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 /**
  * @name          depth
- * @as            sugar.depth
+ * @as            s.depth
  * @namespace     node.function.depth
  * @type          PostcssFunction
  * @platform      postcss

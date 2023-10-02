@@ -4,6 +4,9 @@
        <loc>/</loc>
    </url>
   <url>
+<loc>http://localhost:9191/api/doc</loc>
+  </url>
+  <url>
 <loc>http://localhost:9191/api/doc/item/@coffeekraken.s-postcss-sugar-plugin.doc.README</loc>
   </url>
   <url>
@@ -344,114 +347,6 @@
   </url>
   <url>
 <loc>http://localhost:9191/api/doc/item/@coffeekraken.s-postcss-sugar-plugin.node.function.transition.transition</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.theme</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeBase</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeBorder</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeClassmap</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeColor</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeColorSchemaDark</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeColorSchemaLight</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeDefault</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeDefaultDark</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeDefaultLight</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeDepth</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeEasing</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeFont</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeGradient</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeHeight</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeHelpers</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeLayout</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeLod</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeMargin</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeMedia</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themetOffsize</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeOpacity</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themePadding</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themePartytown</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeRatio</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeScalable</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeScale</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeScroll</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeSize</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeSpace</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeTiming</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeTransition</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeTypo</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeUi</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeWidth</loc>
-  </url>
-  <url>
-<loc>http://localhost:9191/api/doc/item/@coffeekraken.s-theme.config.themeWireframe</loc>
   </url>
   <url>
 <loc>http://localhost:9191/api/doc/item/@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPluginConfig</loc>

@@ -1,0 +1,128 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.disabled.Disabled",
+    "name": "Disabled",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "Helpers"
+        ],
+        "slug": "/styleguide/helpers/disabled"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows you to apply the disabled style on any HTMLElement.\nThis make sure *no pointer events** stays active as well as displaying the **not-allowed cursor**.",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.disabled",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "title": "Disabled",
+            "code": "<input type=\"text\" class=\"s-input s-disabled\" placeholder=\"I'm disabled\" />"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.css",
+    "extension": "css",
+    "relPath": "dist/css/index.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Disabled",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.disabled",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "Helpers"
+                ],
+                "slug": "/styleguide/helpers/disabled"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows you to apply the disabled style on any HTMLElement.\nThis make sure *no pointer events** stays active as well as displaying the **not-allowed cursor**.",
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.disabled.classes;\n\n.my-element {\n  \\@s.disabled;\n}"
+                }
+            ],
+            "cssClass": {
+                "s-disabled": {
+                    "name": "s-disabled",
+                    "description": "Apply the disabled styling on any HTMLElement"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "title": "Disabled",
+                    "code": "<input type=\"text\" class=\"s-input s-disabled\" placeholder=\"I'm disabled\" />"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Disabled\n* @namespace          sugar.style.helpers.disabled\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/disabled\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply the disabled style on any HTMLElement.\n* This make sure **no pointer events** stays active as well as displaying the **not-allowed cursor**.\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.disabled.classes;\n*\n* .my-element {\n*   \\@s.disabled;\n* }\n*\n* @cssClass                 s-disabled              Apply the disabled styling on any HTMLElement\n*\n* @example        html      Disabled\n* <input type=\"text\" class=\"s-input s-disabled\" placeholder=\"I'm disabled\" />\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.disabled.Disabled"
+        }
+    ]
+}

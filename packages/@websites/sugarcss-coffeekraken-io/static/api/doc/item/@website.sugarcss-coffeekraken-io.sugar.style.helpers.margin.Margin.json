@@ -1,0 +1,481 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.margin.Margin",
+    "name": "Margin",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "Helpers"
+        ],
+        "slug": "/styleguide/helpers/margin"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows you to apply margins to any HTMLElement",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.margin",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "title": "Inline",
+            "code": "<p class=\"s-bg:accent s-radius s-p:30 s-mbe:20\">Roderick Kohler</p>\n  <p class=\"s-bg:complementary s-radius s-mi:50 s-mbe:20 s-p:30\">Candice Stanton</p>\n  <p class=\"s-bg:main s-mie:100 s-radius s-mbe:20 s-p:30\">Marcella Bechtelar</p>\n  <p class=\"s-bg:error s-mie:30 s-radius s-p:30\">Kelley Considine</p>"
+        },
+        {
+            "language": "html",
+            "title": "Block",
+            "code": "<div class=\"s-bg:accent s-radius s-mbe:40 s-p:30 s-text:center\">Omar Bechtelar</div>\n  <div class=\"s-bg:complementary s-radius s-mbe:20 s-p:30 s-text:center\">Leigh Jones</div>\n  <div class=\"s-bg:main s-radius s-mbe:50 s-p:30 s-text:center\">Cynthia Denesik PhD</div>\n  <div class=\"s-bg:error s-radius s-p:30 s-text:center\">Gerardo Mills</div>"
+        },
+        {
+            "language": "html",
+            "title": "RTL",
+            "code": "<div dir=\"rtl\">\n  <p class=\"s-bg:accent s-radius s-p:30 s-mbe:20\">Mamie Williamson</p>\n  <p class=\"s-bg:complementary s-radius s-mi:50 s-mbe:20 s-p:30\">Judith Kuhlman</p>\n  <p class=\"s-bg:main s-radius s-mie:100 s-mbe:20 s-p:30\">Cameron Schaefer</p>\n  <p class=\"s-bg:error s-radius s-mie:30 s-p:30\">Beverly Keeling</p>\n</div>"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.css",
+    "extension": "css",
+    "relPath": "dist/css/index.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Margin",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.margin",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "Helpers"
+                ],
+                "slug": "/styleguide/helpers/margin"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows you to apply margins to any HTMLElement",
+            "feature": [],
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.margin.classes;"
+                }
+            ],
+            "cssClass": {
+                "s-m-0": {
+                    "name": "s-m:0",
+                    "description": "Apply the `0` space all around"
+                },
+                "s-mb-0": {
+                    "name": "s-mb:-0",
+                    "description": "Apply the `0` negative block start and end space"
+                },
+                "s-mbs-0": {
+                    "name": "s-mbs:-0",
+                    "description": "Apply the `0` negative block start space"
+                },
+                "s-mbe-0": {
+                    "name": "s-mbe:-0",
+                    "description": "Apply the `0` negative block end space"
+                },
+                "s-mi-0": {
+                    "name": "s-mi:-0",
+                    "description": "Apply the `0` negative inline start and end space"
+                },
+                "s-mis-0": {
+                    "name": "s-mis:-0",
+                    "description": "Apply the `0` negative inline start space"
+                },
+                "s-mie-0": {
+                    "name": "s-mie:-0",
+                    "description": "Apply the `0` negative inline end space"
+                },
+                "s-m-10": {
+                    "name": "s-m:10",
+                    "description": "Apply the `10` space all around"
+                },
+                "s-mb-10": {
+                    "name": "s-mb:-10",
+                    "description": "Apply the `10` negative block start and end space"
+                },
+                "s-mbs-10": {
+                    "name": "s-mbs:-10",
+                    "description": "Apply the `10` negative block start space"
+                },
+                "s-mbe-10": {
+                    "name": "s-mbe:-10",
+                    "description": "Apply the `10` negative block end space"
+                },
+                "s-mi-10": {
+                    "name": "s-mi:-10",
+                    "description": "Apply the `10` negative inline start and end space"
+                },
+                "s-mis-10": {
+                    "name": "s-mis:-10",
+                    "description": "Apply the `10` negative inline start space"
+                },
+                "s-mie-10": {
+                    "name": "s-mie:-10",
+                    "description": "Apply the `10` negative inline end space"
+                },
+                "s-m-20": {
+                    "name": "s-m:20",
+                    "description": "Apply the `20` space all around"
+                },
+                "s-mb-20": {
+                    "name": "s-mb:-20",
+                    "description": "Apply the `20` negative block start and end space"
+                },
+                "s-mbs-20": {
+                    "name": "s-mbs:-20",
+                    "description": "Apply the `20` negative block start space"
+                },
+                "s-mbe-20": {
+                    "name": "s-mbe:-20",
+                    "description": "Apply the `20` negative block end space"
+                },
+                "s-mi-20": {
+                    "name": "s-mi:-20",
+                    "description": "Apply the `20` negative inline start and end space"
+                },
+                "s-mis-20": {
+                    "name": "s-mis:-20",
+                    "description": "Apply the `20` negative inline start space"
+                },
+                "s-mie-20": {
+                    "name": "s-mie:-20",
+                    "description": "Apply the `20` negative inline end space"
+                },
+                "s-m-30": {
+                    "name": "s-m:30",
+                    "description": "Apply the `30` space all around"
+                },
+                "s-mb-30": {
+                    "name": "s-mb:-30",
+                    "description": "Apply the `30` negative block start and end space"
+                },
+                "s-mbs-30": {
+                    "name": "s-mbs:-30",
+                    "description": "Apply the `30` negative block start space"
+                },
+                "s-mbe-30": {
+                    "name": "s-mbe:-30",
+                    "description": "Apply the `30` negative block end space"
+                },
+                "s-mi-30": {
+                    "name": "s-mi:-30",
+                    "description": "Apply the `30` negative inline start and end space"
+                },
+                "s-mis-30": {
+                    "name": "s-mis:-30",
+                    "description": "Apply the `30` negative inline start space"
+                },
+                "s-mie-30": {
+                    "name": "s-mie:-30",
+                    "description": "Apply the `30` negative inline end space"
+                },
+                "s-m-40": {
+                    "name": "s-m:40",
+                    "description": "Apply the `40` space all around"
+                },
+                "s-mb-40": {
+                    "name": "s-mb:-40",
+                    "description": "Apply the `40` negative block start and end space"
+                },
+                "s-mbs-40": {
+                    "name": "s-mbs:-40",
+                    "description": "Apply the `40` negative block start space"
+                },
+                "s-mbe-40": {
+                    "name": "s-mbe:-40",
+                    "description": "Apply the `40` negative block end space"
+                },
+                "s-mi-40": {
+                    "name": "s-mi:-40",
+                    "description": "Apply the `40` negative inline start and end space"
+                },
+                "s-mis-40": {
+                    "name": "s-mis:-40",
+                    "description": "Apply the `40` negative inline start space"
+                },
+                "s-mie-40": {
+                    "name": "s-mie:-40",
+                    "description": "Apply the `40` negative inline end space"
+                },
+                "s-m-50": {
+                    "name": "s-m:50",
+                    "description": "Apply the `50` space all around"
+                },
+                "s-mb-50": {
+                    "name": "s-mb:-50",
+                    "description": "Apply the `50` negative block start and end space"
+                },
+                "s-mbs-50": {
+                    "name": "s-mbs:-50",
+                    "description": "Apply the `50` negative block start space"
+                },
+                "s-mbe-50": {
+                    "name": "s-mbe:-50",
+                    "description": "Apply the `50` negative block end space"
+                },
+                "s-mi-50": {
+                    "name": "s-mi:-50",
+                    "description": "Apply the `50` negative inline start and end space"
+                },
+                "s-mis-50": {
+                    "name": "s-mis:-50",
+                    "description": "Apply the `50` negative inline start space"
+                },
+                "s-mie-50": {
+                    "name": "s-mie:-50",
+                    "description": "Apply the `50` negative inline end space"
+                },
+                "s-m-60": {
+                    "name": "s-m:60",
+                    "description": "Apply the `60` space all around"
+                },
+                "s-mb-60": {
+                    "name": "s-mb:-60",
+                    "description": "Apply the `60` negative block start and end space"
+                },
+                "s-mbs-60": {
+                    "name": "s-mbs:-60",
+                    "description": "Apply the `60` negative block start space"
+                },
+                "s-mbe-60": {
+                    "name": "s-mbe:-60",
+                    "description": "Apply the `60` negative block end space"
+                },
+                "s-mi-60": {
+                    "name": "s-mi:-60",
+                    "description": "Apply the `60` negative inline start and end space"
+                },
+                "s-mis-60": {
+                    "name": "s-mis:-60",
+                    "description": "Apply the `60` negative inline start space"
+                },
+                "s-mie-60": {
+                    "name": "s-mie:-60",
+                    "description": "Apply the `60` negative inline end space"
+                },
+                "s-m-70": {
+                    "name": "s-m:70",
+                    "description": "Apply the `70` space all around"
+                },
+                "s-mb-70": {
+                    "name": "s-mb:-70",
+                    "description": "Apply the `70` negative block start and end space"
+                },
+                "s-mbs-70": {
+                    "name": "s-mbs:-70",
+                    "description": "Apply the `70` negative block start space"
+                },
+                "s-mbe-70": {
+                    "name": "s-mbe:-70",
+                    "description": "Apply the `70` negative block end space"
+                },
+                "s-mi-70": {
+                    "name": "s-mi:-70",
+                    "description": "Apply the `70` negative inline start and end space"
+                },
+                "s-mis-70": {
+                    "name": "s-mis:-70",
+                    "description": "Apply the `70` negative inline start space"
+                },
+                "s-mie-70": {
+                    "name": "s-mie:-70",
+                    "description": "Apply the `70` negative inline end space"
+                },
+                "s-m-80": {
+                    "name": "s-m:80",
+                    "description": "Apply the `80` space all around"
+                },
+                "s-mb-80": {
+                    "name": "s-mb:-80",
+                    "description": "Apply the `80` negative block start and end space"
+                },
+                "s-mbs-80": {
+                    "name": "s-mbs:-80",
+                    "description": "Apply the `80` negative block start space"
+                },
+                "s-mbe-80": {
+                    "name": "s-mbe:-80",
+                    "description": "Apply the `80` negative block end space"
+                },
+                "s-mi-80": {
+                    "name": "s-mi:-80",
+                    "description": "Apply the `80` negative inline start and end space"
+                },
+                "s-mis-80": {
+                    "name": "s-mis:-80",
+                    "description": "Apply the `80` negative inline start space"
+                },
+                "s-mie-80": {
+                    "name": "s-mie:-80",
+                    "description": "Apply the `80` negative inline end space"
+                },
+                "s-m-90": {
+                    "name": "s-m:90",
+                    "description": "Apply the `90` space all around"
+                },
+                "s-mb-90": {
+                    "name": "s-mb:-90",
+                    "description": "Apply the `90` negative block start and end space"
+                },
+                "s-mbs-90": {
+                    "name": "s-mbs:-90",
+                    "description": "Apply the `90` negative block start space"
+                },
+                "s-mbe-90": {
+                    "name": "s-mbe:-90",
+                    "description": "Apply the `90` negative block end space"
+                },
+                "s-mi-90": {
+                    "name": "s-mi:-90",
+                    "description": "Apply the `90` negative inline start and end space"
+                },
+                "s-mis-90": {
+                    "name": "s-mis:-90",
+                    "description": "Apply the `90` negative inline start space"
+                },
+                "s-mie-90": {
+                    "name": "s-mie:-90",
+                    "description": "Apply the `90` negative inline end space"
+                },
+                "s-m-100": {
+                    "name": "s-m:100",
+                    "description": "Apply the `100` space all around"
+                },
+                "s-mb-100": {
+                    "name": "s-mb:-100",
+                    "description": "Apply the `100` negative block start and end space"
+                },
+                "s-mbs-100": {
+                    "name": "s-mbs:-100",
+                    "description": "Apply the `100` negative block start space"
+                },
+                "s-mbe-100": {
+                    "name": "s-mbe:-100",
+                    "description": "Apply the `100` negative block end space"
+                },
+                "s-mi-100": {
+                    "name": "s-mi:-100",
+                    "description": "Apply the `100` negative inline start and end space"
+                },
+                "s-mis-100": {
+                    "name": "s-mis:-100",
+                    "description": "Apply the `100` negative inline start space"
+                },
+                "s-mie-100": {
+                    "name": "s-mie:-100",
+                    "description": "Apply the `100` negative inline end space"
+                },
+                "s-m-auto": {
+                    "name": "s-m:auto",
+                    "description": "Apply the `auto` space all around"
+                },
+                "s-mb-auto": {
+                    "name": "s-mb:auto",
+                    "description": "Apply the `auto` block start and end space"
+                },
+                "s-mbs-auto": {
+                    "name": "s-mbs:auto",
+                    "description": "Apply the `auto` block start space"
+                },
+                "s-mbe-auto": {
+                    "name": "s-mbe:auto",
+                    "description": "Apply the `auto` block end space"
+                },
+                "s-mi-auto": {
+                    "name": "s-mi:auto",
+                    "description": "Apply the `auto` inline start and end space"
+                },
+                "s-mis-auto": {
+                    "name": "s-mis:auto",
+                    "description": "Apply the `auto` inline start space"
+                },
+                "s-mie-auto": {
+                    "name": "s-mie:auto",
+                    "description": "Apply the `auto` inline end space"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "title": "Inline",
+                    "code": "<p class=\"s-bg:accent s-radius s-p:30 s-mbe:20\">Ms. Jeffery Lind</p>\n  <p class=\"s-bg:complementary s-radius s-mi:50 s-mbe:20 s-p:30\">Jessie Rowe</p>\n  <p class=\"s-bg:main s-mie:100 s-radius s-mbe:20 s-p:30\">Maxine Shanahan PhD</p>\n  <p class=\"s-bg:error s-mie:30 s-radius s-p:30\">Estelle Langosh</p>"
+                },
+                {
+                    "language": "html",
+                    "title": "Block",
+                    "code": "<div class=\"s-bg:accent s-radius s-mbe:40 s-p:30 s-text:center\">Nancy Jerde</div>\n  <div class=\"s-bg:complementary s-radius s-mbe:20 s-p:30 s-text:center\">Ora Gerhold</div>\n  <div class=\"s-bg:main s-radius s-mbe:50 s-p:30 s-text:center\">Krista Johnson</div>\n  <div class=\"s-bg:error s-radius s-p:30 s-text:center\">Randal Gulgowski</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "RTL",
+                    "code": "<div dir=\"rtl\">\n  <p class=\"s-bg:accent s-radius s-p:30 s-mbe:20\">Adam Schaefer</p>\n  <p class=\"s-bg:complementary s-radius s-mi:50 s-mbe:20 s-p:30\">Ada Feil</p>\n  <p class=\"s-bg:main s-radius s-mie:100 s-mbe:20 s-p:30\">Sue Lesch</p>\n  <p class=\"s-bg:error s-radius s-mie:30 s-p:30\">Kathleen Borer</p>\n</div>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Margin\n* @namespace          sugar.style.helpers.margin\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/margin\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply margins to any HTMLElement\n*\n* @feature          Support for RTL by using margin-{inline|block}-...\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.margin.classes;\n*\n* @cssClass     s-m:0        Apply the `0` space all around\n* @cssClass     s-mb:0        Apply the `0` block start and end space\n* @cssClass     s-mbs:0        Apply the `0` block start space\n* @cssClass     s-mbe:0        Apply the `0` block end space\n* @cssClass     s-mi:0        Apply the `0` inline start and end space\n* @cssClass     s-mis:0        Apply the `0` inline start space\n* @cssClass     s-mie:0        Apply the `0` inline end space\n* @cssClass     s-mb:-0        Apply the `0` negative block start and end space\n* @cssClass     s-mbs:-0        Apply the `0` negative block start space\n* @cssClass     s-mbe:-0        Apply the `0` negative block end space\n* @cssClass     s-mi:-0        Apply the `0` negative inline start and end space\n* @cssClass     s-mis:-0        Apply the `0` negative inline start space\n* @cssClass     s-mie:-0        Apply the `0` negative inline end space\n* @cssClass     s-m:10        Apply the `10` space all around\n* @cssClass     s-mb:10        Apply the `10` block start and end space\n* @cssClass     s-mbs:10        Apply the `10` block start space\n* @cssClass     s-mbe:10        Apply the `10` block end space\n* @cssClass     s-mi:10        Apply the `10` inline start and end space\n* @cssClass     s-mis:10        Apply the `10` inline start space\n* @cssClass     s-mie:10        Apply the `10` inline end space\n* @cssClass     s-mb:-10        Apply the `10` negative block start and end space\n* @cssClass     s-mbs:-10        Apply the `10` negative block start space\n* @cssClass     s-mbe:-10        Apply the `10` negative block end space\n* @cssClass     s-mi:-10        Apply the `10` negative inline start and end space\n* @cssClass     s-mis:-10        Apply the `10` negative inline start space\n* @cssClass     s-mie:-10        Apply the `10` negative inline end space\n* @cssClass     s-m:20        Apply the `20` space all around\n* @cssClass     s-mb:20        Apply the `20` block start and end space\n* @cssClass     s-mbs:20        Apply the `20` block start space\n* @cssClass     s-mbe:20        Apply the `20` block end space\n* @cssClass     s-mi:20        Apply the `20` inline start and end space\n* @cssClass     s-mis:20        Apply the `20` inline start space\n* @cssClass     s-mie:20        Apply the `20` inline end space\n* @cssClass     s-mb:-20        Apply the `20` negative block start and end space\n* @cssClass     s-mbs:-20        Apply the `20` negative block start space\n* @cssClass     s-mbe:-20        Apply the `20` negative block end space\n* @cssClass     s-mi:-20        Apply the `20` negative inline start and end space\n* @cssClass     s-mis:-20        Apply the `20` negative inline start space\n* @cssClass     s-mie:-20        Apply the `20` negative inline end space\n* @cssClass     s-m:30        Apply the `30` space all around\n* @cssClass     s-mb:30        Apply the `30` block start and end space\n* @cssClass     s-mbs:30        Apply the `30` block start space\n* @cssClass     s-mbe:30        Apply the `30` block end space\n* @cssClass     s-mi:30        Apply the `30` inline start and end space\n* @cssClass     s-mis:30        Apply the `30` inline start space\n* @cssClass     s-mie:30        Apply the `30` inline end space\n* @cssClass     s-mb:-30        Apply the `30` negative block start and end space\n* @cssClass     s-mbs:-30        Apply the `30` negative block start space\n* @cssClass     s-mbe:-30        Apply the `30` negative block end space\n* @cssClass     s-mi:-30        Apply the `30` negative inline start and end space\n* @cssClass     s-mis:-30        Apply the `30` negative inline start space\n* @cssClass     s-mie:-30        Apply the `30` negative inline end space\n* @cssClass     s-m:40        Apply the `40` space all around\n* @cssClass     s-mb:40        Apply the `40` block start and end space\n* @cssClass     s-mbs:40        Apply the `40` block start space\n* @cssClass     s-mbe:40        Apply the `40` block end space\n* @cssClass     s-mi:40        Apply the `40` inline start and end space\n* @cssClass     s-mis:40        Apply the `40` inline start space\n* @cssClass     s-mie:40        Apply the `40` inline end space\n* @cssClass     s-mb:-40        Apply the `40` negative block start and end space\n* @cssClass     s-mbs:-40        Apply the `40` negative block start space\n* @cssClass     s-mbe:-40        Apply the `40` negative block end space\n* @cssClass     s-mi:-40        Apply the `40` negative inline start and end space\n* @cssClass     s-mis:-40        Apply the `40` negative inline start space\n* @cssClass     s-mie:-40        Apply the `40` negative inline end space\n* @cssClass     s-m:50        Apply the `50` space all around\n* @cssClass     s-mb:50        Apply the `50` block start and end space\n* @cssClass     s-mbs:50        Apply the `50` block start space\n* @cssClass     s-mbe:50        Apply the `50` block end space\n* @cssClass     s-mi:50        Apply the `50` inline start and end space\n* @cssClass     s-mis:50        Apply the `50` inline start space\n* @cssClass     s-mie:50        Apply the `50` inline end space\n* @cssClass     s-mb:-50        Apply the `50` negative block start and end space\n* @cssClass     s-mbs:-50        Apply the `50` negative block start space\n* @cssClass     s-mbe:-50        Apply the `50` negative block end space\n* @cssClass     s-mi:-50        Apply the `50` negative inline start and end space\n* @cssClass     s-mis:-50        Apply the `50` negative inline start space\n* @cssClass     s-mie:-50        Apply the `50` negative inline end space\n* @cssClass     s-m:60        Apply the `60` space all around\n* @cssClass     s-mb:60        Apply the `60` block start and end space\n* @cssClass     s-mbs:60        Apply the `60` block start space\n* @cssClass     s-mbe:60        Apply the `60` block end space\n* @cssClass     s-mi:60        Apply the `60` inline start and end space\n* @cssClass     s-mis:60        Apply the `60` inline start space\n* @cssClass     s-mie:60        Apply the `60` inline end space\n* @cssClass     s-mb:-60        Apply the `60` negative block start and end space\n* @cssClass     s-mbs:-60        Apply the `60` negative block start space\n* @cssClass     s-mbe:-60        Apply the `60` negative block end space\n* @cssClass     s-mi:-60        Apply the `60` negative inline start and end space\n* @cssClass     s-mis:-60        Apply the `60` negative inline start space\n* @cssClass     s-mie:-60        Apply the `60` negative inline end space\n* @cssClass     s-m:70        Apply the `70` space all around\n* @cssClass     s-mb:70        Apply the `70` block start and end space\n* @cssClass     s-mbs:70        Apply the `70` block start space\n* @cssClass     s-mbe:70        Apply the `70` block end space\n* @cssClass     s-mi:70        Apply the `70` inline start and end space\n* @cssClass     s-mis:70        Apply the `70` inline start space\n* @cssClass     s-mie:70        Apply the `70` inline end space\n* @cssClass     s-mb:-70        Apply the `70` negative block start and end space\n* @cssClass     s-mbs:-70        Apply the `70` negative block start space\n* @cssClass     s-mbe:-70        Apply the `70` negative block end space\n* @cssClass     s-mi:-70        Apply the `70` negative inline start and end space\n* @cssClass     s-mis:-70        Apply the `70` negative inline start space\n* @cssClass     s-mie:-70        Apply the `70` negative inline end space\n* @cssClass     s-m:80        Apply the `80` space all around\n* @cssClass     s-mb:80        Apply the `80` block start and end space\n* @cssClass     s-mbs:80        Apply the `80` block start space\n* @cssClass     s-mbe:80        Apply the `80` block end space\n* @cssClass     s-mi:80        Apply the `80` inline start and end space\n* @cssClass     s-mis:80        Apply the `80` inline start space\n* @cssClass     s-mie:80        Apply the `80` inline end space\n* @cssClass     s-mb:-80        Apply the `80` negative block start and end space\n* @cssClass     s-mbs:-80        Apply the `80` negative block start space\n* @cssClass     s-mbe:-80        Apply the `80` negative block end space\n* @cssClass     s-mi:-80        Apply the `80` negative inline start and end space\n* @cssClass     s-mis:-80        Apply the `80` negative inline start space\n* @cssClass     s-mie:-80        Apply the `80` negative inline end space\n* @cssClass     s-m:90        Apply the `90` space all around\n* @cssClass     s-mb:90        Apply the `90` block start and end space\n* @cssClass     s-mbs:90        Apply the `90` block start space\n* @cssClass     s-mbe:90        Apply the `90` block end space\n* @cssClass     s-mi:90        Apply the `90` inline start and end space\n* @cssClass     s-mis:90        Apply the `90` inline start space\n* @cssClass     s-mie:90        Apply the `90` inline end space\n* @cssClass     s-mb:-90        Apply the `90` negative block start and end space\n* @cssClass     s-mbs:-90        Apply the `90` negative block start space\n* @cssClass     s-mbe:-90        Apply the `90` negative block end space\n* @cssClass     s-mi:-90        Apply the `90` negative inline start and end space\n* @cssClass     s-mis:-90        Apply the `90` negative inline start space\n* @cssClass     s-mie:-90        Apply the `90` negative inline end space\n* @cssClass     s-m:100        Apply the `100` space all around\n* @cssClass     s-mb:100        Apply the `100` block start and end space\n* @cssClass     s-mbs:100        Apply the `100` block start space\n* @cssClass     s-mbe:100        Apply the `100` block end space\n* @cssClass     s-mi:100        Apply the `100` inline start and end space\n* @cssClass     s-mis:100        Apply the `100` inline start space\n* @cssClass     s-mie:100        Apply the `100` inline end space\n* @cssClass     s-mb:-100        Apply the `100` negative block start and end space\n* @cssClass     s-mbs:-100        Apply the `100` negative block start space\n* @cssClass     s-mbe:-100        Apply the `100` negative block end space\n* @cssClass     s-mi:-100        Apply the `100` negative inline start and end space\n* @cssClass     s-mis:-100        Apply the `100` negative inline start space\n* @cssClass     s-mie:-100        Apply the `100` negative inline end space\n* @cssClass                s-m:auto            Apply the `auto` space all around\n* @cssClass                s-mb:auto          Apply the `auto` block start and end space\n* @cssClass                s-mbs:auto          Apply the `auto` block start space\n* @cssClass                s-mbe:auto          Apply the `auto` block end space\n* @cssClass                s-mi:auto          Apply the `auto` inline start and end space\n* @cssClass                s-mis:auto          Apply the `auto` inline start space\n* @cssClass                s-mie:auto          Apply the `auto` inline end space\n*\n*\n* @example        html               Inline\n*   <p class=\"s-bg:accent s-radius s-p:30 s-mbe:20\">Ms. Jeffery Lind</p>\n*   <p class=\"s-bg:complementary s-radius s-mi:50 s-mbe:20 s-p:30\">Jessie Rowe</p>\n*   <p class=\"s-bg:main s-mie:100 s-radius s-mbe:20 s-p:30\">Maxine Shanahan PhD</p>\n*   <p class=\"s-bg:error s-mie:30 s-radius s-p:30\">Estelle Langosh</p>\n*\n* @example            html                Block\n*   <div class=\"s-bg:accent s-radius s-mbe:40 s-p:30 s-text:center\">Nancy Jerde</div>\n*   <div class=\"s-bg:complementary s-radius s-mbe:20 s-p:30 s-text:center\">Ora Gerhold</div>\n*   <div class=\"s-bg:main s-radius s-mbe:50 s-p:30 s-text:center\">Krista Johnson</div>\n*   <div class=\"s-bg:error s-radius s-p:30 s-text:center\">Randal Gulgowski</div>\n*\n* @example            html                RTL\n* <div dir=\"rtl\">\n*   <p class=\"s-bg:accent s-radius s-p:30 s-mbe:20\">Adam Schaefer</p>\n*   <p class=\"s-bg:complementary s-radius s-mi:50 s-mbe:20 s-p:30\">Ada Feil</p>\n*   <p class=\"s-bg:main s-radius s-mie:100 s-mbe:20 s-p:30\">Sue Lesch</p>\n*   <p class=\"s-bg:error s-radius s-mie:30 s-p:30\">Kathleen Borer</p>\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.margin.Margin"
+        }
+    ]
+}

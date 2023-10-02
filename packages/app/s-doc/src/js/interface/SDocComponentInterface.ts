@@ -29,6 +29,12 @@ export default class SDocComponentInterface extends __SInterface {
                 description: 'Specify the doc endpoints url',
                 default: __SSugarConfig.get('doc.endpoints'),
             },
+            fetchExtension: {
+                type: 'string',
+                description:
+                    'Specify an extension to add at the end of the fetch url like "json"',
+                default: '',
+            },
             loaderSvg: {
                 type: 'String',
                 description: 'Specify an svg to use as the loader',

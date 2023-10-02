@@ -28,7 +28,9 @@ export interface ISDocComponentStatus {
     fullscreen: boolean;
 }
 
-export interface ISDocComponentProps {}
+export interface ISDocComponentProps {
+    fetchExtension: string;
+}
 
 /**
  * @name                SDocComponent
@@ -110,7 +112,14 @@ export default class SDocComponent extends __SLitComponent {
         this._registerShortcuts();
 
         // load the categories
-        const request = await fetch(this.props.endpoints.base, {}),
+        const request = await fetch(
+                `${this.props.endpoints.base}${
+                    this.props.fetchExtension
+                        ? `.${this.props.fetchExtension}`
+                        : ''
+                }`,
+                {},
+            ),
             categories = await request.json();
         this._categories = categories;
 
@@ -154,8 +163,6 @@ export default class SDocComponent extends __SLitComponent {
     }
 
     async _loadItem(itemObj): Promise<void> {
-        console.log('IT', itemObj);
-
         // request the item if needed
         if (!itemObj.cache) {
             // set the item loading state
@@ -166,7 +173,11 @@ export default class SDocComponent extends __SLitComponent {
             const request = await fetch(
                     `${
                         this.props.endpoints.base
-                    }${this.props.endpoints.item.replace(':id', itemObj.id)}`,
+                    }${this.props.endpoints.item.replace(':id', itemObj.id)}${
+                        this.props.fetchExtension
+                            ? `.${this.props.fetchExtension}`
+                            : ''
+                    }`,
                 ),
                 item = await request.json();
 
@@ -194,7 +205,10 @@ export default class SDocComponent extends __SLitComponent {
         });
     }
 
-    async _loadItems(category: any, loadFirstItem = false): Promise<void> {
+    async _loadCategoryItems(
+        category: any,
+        loadFirstItem = false,
+    ): Promise<void> {
         if (category._loading) {
             return;
         }
@@ -202,7 +216,11 @@ export default class SDocComponent extends __SLitComponent {
         this._status.loading = true;
 
         const request = await fetch(
-                `${this.props.endpoints.base}${this.props.endpoints.items}`,
+                `${this.props.endpoints.base}${this.props.endpoints.items}${
+                    this.props.fetchExtension
+                        ? `.${this.props.fetchExtension}`
+                        : ''
+                }`,
                 {
                     method: 'POST',
                     headers: {
@@ -618,9 +636,9 @@ export default class SDocComponent extends __SLitComponent {
                     const categoryObj = categories[categoryId];
                     if (!categoryObj.items && !categoryObj.children) {
                         if (!this._firstCategory) {
-                            this._loadItems(categoryObj, true);
+                            this._loadCategoryItems(categoryObj, true);
                         } else {
-                            this._loadItems(categoryObj);
+                            this._loadCategoryItems(categoryObj);
                         }
                     }
                     if (!this._firstCategory) {

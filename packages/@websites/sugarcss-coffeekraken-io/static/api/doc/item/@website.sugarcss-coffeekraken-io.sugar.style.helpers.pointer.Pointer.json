@@ -1,0 +1,170 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.pointer.Pointer",
+    "name": "Pointer",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "Helpers"
+        ],
+        "slug": "/styleguide/helpers/pointer"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows you to apply some pointer attributes on any HTMLElement.",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.pointer",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "title": "None",
+            "code": "<div class=\"s-pointer-events:none\">\n  I'm in an \"none\" pointer-events container\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "all",
+            "code": "<div class=\"s-pointer-events:all\">\n  I'm in an \"all\" pointer-events container\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "Auto",
+            "code": "<div class=\"s-pointer-events:auto\">\n  I'm in an \"auto\" pointer-events container\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "Fill",
+            "code": "<div class=\"s-pointer-events:fill\">\n  I'm in an \"fill\" pointer-events container\n</div>"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.css",
+    "extension": "css",
+    "relPath": "dist/css/index.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Pointer",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.pointer",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "Helpers"
+                ],
+                "slug": "/styleguide/helpers/pointer"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows you to apply some pointer attributes on any HTMLElement.",
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.pointer.classes;"
+                }
+            ],
+            "cssClass": {
+                "s-pointer-events-none": {
+                    "name": "s-pointer-events:none",
+                    "description": "Apply the pointer-events \"none\" attribute"
+                },
+                "s-pointer-events-all": {
+                    "name": "s-pointer-events:all",
+                    "description": "Apply the pointer-events \"all\" attribute"
+                },
+                "s-pointer-events-auto": {
+                    "name": "s-pointer-events:auto",
+                    "description": "Apply the pointer-events \"auto\" attribute"
+                },
+                "s-pointer-events-fill": {
+                    "name": "s-pointer-events:fill",
+                    "description": "Apply the pointer-events \"fill\" attribute"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "title": "None",
+                    "code": "<div class=\"s-pointer-events:none\">\n  I'm in an \"none\" pointer-events container\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "all",
+                    "code": "<div class=\"s-pointer-events:all\">\n  I'm in an \"all\" pointer-events container\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "Auto",
+                    "code": "<div class=\"s-pointer-events:auto\">\n  I'm in an \"auto\" pointer-events container\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "Fill",
+                    "code": "<div class=\"s-pointer-events:fill\">\n  I'm in an \"fill\" pointer-events container\n</div>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Pointer\n* @namespace          sugar.style.helpers.pointer\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/pointer\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply some pointer attributes on any HTMLElement.\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.pointer.classes;\n*\n* @cssClass         s-pointer-events:none           Apply the pointer-events \"none\" attribute\n* @cssClass         s-pointer-events:all           Apply the pointer-events \"all\" attribute\n* @cssClass         s-pointer-events:auto           Apply the pointer-events \"auto\" attribute\n* @cssClass         s-pointer-events:fill           Apply the pointer-events \"fill\" attribute\n*\n* @example        html          None\n* <div class=\"s-pointer-events:none\">\n*   I'm in an \"none\" pointer-events container\n* </div>\n*\n* @example        html          all\n* <div class=\"s-pointer-events:all\">\n*   I'm in an \"all\" pointer-events container\n* </div>\n*\n* @example        html          Auto\n* <div class=\"s-pointer-events:auto\">\n*   I'm in an \"auto\" pointer-events container\n* </div>\n*\n* @example        html          Fill\n* <div class=\"s-pointer-events:fill\">\n*   I'm in an \"fill\" pointer-events container\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.pointer.Pointer"
+        }
+    ]
+}

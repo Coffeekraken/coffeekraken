@@ -53,11 +53,13 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
     __SDocComponentDefine({
         mountWhen: 'direct',
         endpoints: {
-            base:
-                document.location.hostname !== 'postcss.coffeekraken.io'
-                    ? 'http://localhost:9191/api/doc'
-                    : '/api/doc',
+            base: document.location.origin.includes(':5173')
+                ? 'http://localhost:9191/api/doc'
+                : '/api/doc',
         },
+        fetchExtension: document.location.origin.includes(':5173')
+            ? ''
+            : 'json',
         icons: {
             file: '<i class="s-icon:file"></i>',
             search: '<i class="s-icon:search"></i>',

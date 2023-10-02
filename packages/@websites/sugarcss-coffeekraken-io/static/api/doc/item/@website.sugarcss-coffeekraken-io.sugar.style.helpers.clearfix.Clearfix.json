@@ -1,0 +1,170 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.clearfix.Clearfix",
+    "name": "Clearfix",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "Helpers"
+        ],
+        "slug": "/styleguide/helpers/clearfix"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows you to apply a clearfix on any HTMLElement",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.clearfix",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "title": "overflow",
+            "code": "<div class=\"s-clearfix s-bg:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
+        },
+        {
+            "language": "html",
+            "title": "facebook",
+            "code": "<div class=\"s-clearfix:facebook s-bg:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
+        },
+        {
+            "language": "html",
+            "title": "micro",
+            "code": "<div class=\"s-clearfix:micro s-bg:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
+        },
+        {
+            "language": "html",
+            "title": "after",
+            "code": "<div class=\"s-clearfix:after s-bg:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.css",
+    "extension": "css",
+    "relPath": "dist/css/index.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Clearfix",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.clearfix",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "Helpers"
+                ],
+                "slug": "/styleguide/helpers/clearfix"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows you to apply a clearfix on any HTMLElement",
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.clearfix.classes;\n\n.my-element {\n  \\@s.clearfix;\n}"
+                }
+            ],
+            "cssClass": {
+                "s-clearfixs-clearfix": {
+                    "name": "s-clearfixs-clearfix",
+                    "description": "Apply the overflow clearfix"
+                },
+                "s-clearfixs-clearfix-facebook": {
+                    "name": "s-clearfixs-clearfix:facebook",
+                    "description": "Apply the facebook clearfix"
+                },
+                "s-clearfixs-clearfix-micro": {
+                    "name": "s-clearfixs-clearfix:micro",
+                    "description": "Apply the micro clearfix"
+                },
+                "s-clearfixs-clearfix-after": {
+                    "name": "s-clearfixs-clearfix:after",
+                    "description": "Apply the after clearfix"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "title": "overflow",
+                    "code": "<div class=\"s-clearfix s-bg:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
+                },
+                {
+                    "language": "html",
+                    "title": "facebook",
+                    "code": "<div class=\"s-clearfix:facebook s-bg:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
+                },
+                {
+                    "language": "html",
+                    "title": "micro",
+                    "code": "<div class=\"s-clearfix:micro s-bg:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
+                },
+                {
+                    "language": "html",
+                    "title": "after",
+                    "code": "<div class=\"s-clearfix:after s-bg:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Clearfix\n* @namespace          sugar.style.helpers.clearfix\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/clearfix\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply a clearfix on any HTMLElement\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.clearfix.classes;\n*\n* .my-element {\n*   \\@s.clearfix;\n* }\n*\n* @cssClass     s-clearfixs-clearfix            Apply the overflow clearfix\n* @cssClass     s-clearfixs-clearfix:facebook            Apply the facebook clearfix\n* @cssClass     s-clearfixs-clearfix:micro            Apply the micro clearfix\n* @cssClass     s-clearfixs-clearfix:after            Apply the after clearfix\n*\n* @example        html         overflow\n*   <div class=\"s-clearfix s-bg:ui\">\n*       <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n*   </div>\n*\n* @example        html         facebook\n*   <div class=\"s-clearfix:facebook s-bg:ui\">\n*       <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n*   </div>\n*\n* @example        html         micro\n*   <div class=\"s-clearfix:micro s-bg:ui\">\n*       <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n*   </div>\n*\n* @example        html         after\n*   <div class=\"s-clearfix:after s-bg:ui\">\n*       <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n*   </div>\n*\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.clearfix.Clearfix"
+        }
+    ]
+}

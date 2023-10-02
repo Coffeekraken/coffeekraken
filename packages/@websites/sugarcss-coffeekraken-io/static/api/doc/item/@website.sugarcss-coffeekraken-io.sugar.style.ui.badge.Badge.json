@@ -1,0 +1,167 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.badge.Badge",
+    "name": "Badge",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "UI"
+        ],
+        "slug": "/styleguide/ui/badges"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows you to display any HTMLElement as a badge",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.badge",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "title": "solid",
+            "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-badge\">Say hello!</a>\n  <a class=\"s-badge s-color:accent\">Say hello!</a>\n  <a class=\"s-badge s-color:complementary\">Say hello!</a>\n  <a class=\"s-badge s-color:error\">Say hello!</a>\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "outline",
+            "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-badge:outline\">Say hello!</a>\n  <a class=\"s-badge:outline s-color:accent\">Say hello!</a>\n  <a class=\"s-badge:outline s-color:complementary\">Say hello!</a>\n  <a class=\"s-badge:outline s-color:error\">Say hello!</a>\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "Shapes",
+            "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-badge\">Say hello!</a>\n  <a class=\"s-badge s-shape:pill\">Say hello!</a>\n  <a class=\"s-badge s-shape:square\">Say hello!</a>\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "Scales",
+            "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-badge s-scale:05\">Say hello!</a>\n  <a class=\"s-badge s-scale:1\">Say hello!</a>\n  <a class=\"s-badge s-scale:12\">Say hello!</a>\n  <a class=\"s-badge s-scale:15\">Say hello!</a>\n  <a class=\"s-badge s-scale:20\">Say hello!</a>\n</div>"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.css",
+    "extension": "css",
+    "relPath": "dist/css/index.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Badge",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.badge",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "UI"
+                ],
+                "slug": "/styleguide/ui/badges"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows you to display any HTMLElement as a badge",
+            "feature": [
+                "Support for shaping through the `s-shape:...` class",
+                "Support for scaling through the `s-scale:...` class",
+                "Support for colorizing through the `s-color:...` class"
+            ],
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.ui.badge.classes;\n\n.my-badge {\n  @s.ui.badge;\n}"
+                }
+            ],
+            "cssClass": {
+                "s-badge": {
+                    "name": "s-badge",
+                    "description": "Apply the solid badge style"
+                },
+                "s-badge-outline": {
+                    "name": "s-badge:outline",
+                    "description": "Apply the outline badge style"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "title": "solid",
+                    "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-badge\">Say hello!</a>\n  <a class=\"s-badge s-color:accent\">Say hello!</a>\n  <a class=\"s-badge s-color:complementary\">Say hello!</a>\n  <a class=\"s-badge s-color:error\">Say hello!</a>\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "outline",
+                    "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-badge:outline\">Say hello!</a>\n  <a class=\"s-badge:outline s-color:accent\">Say hello!</a>\n  <a class=\"s-badge:outline s-color:complementary\">Say hello!</a>\n  <a class=\"s-badge:outline s-color:error\">Say hello!</a>\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "Shapes",
+                    "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-badge\">Say hello!</a>\n  <a class=\"s-badge s-shape:pill\">Say hello!</a>\n  <a class=\"s-badge s-shape:square\">Say hello!</a>\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "Scales",
+                    "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-badge s-scale:05\">Say hello!</a>\n  <a class=\"s-badge s-scale:1\">Say hello!</a>\n  <a class=\"s-badge s-scale:12\">Say hello!</a>\n  <a class=\"s-badge s-scale:15\">Say hello!</a>\n  <a class=\"s-badge s-scale:20\">Say hello!</a>\n</div>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Badge\n* @namespace          sugar.style.ui.badge\n* @type               Styleguide\n* @menu           Styleguide / UI        /styleguide/ui/badges\n* @platform       css\n* @status       stable\n*\n* These classes allows you to display any HTMLElement as a badge\n*\n* @feature          Support for shaping through the `s-shape:...` class\n* @feature          Support for scaling through the `s-scale:...` class\n* @feature          Support for colorizing through the `s-color:...` class\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.ui.badge.classes;\n*\n* .my-badge {\n*   @s.ui.badge;\n* }\n*\n* @cssClass     s-badge           Apply the solid badge style\n* @cssClass     s-badge:outline           Apply the outline badge style\n*\n* @example        html       solid\n* <div class=\"s-flex:align-center:wrap s-gap:20\">\n*   <a class=\"s-badge\">Say hello!</a>\n*   <a class=\"s-badge s-color:accent\">Say hello!</a>\n*   <a class=\"s-badge s-color:complementary\">Say hello!</a>\n*   <a class=\"s-badge s-color:error\">Say hello!</a>\n* </div>\n*\n* @example        html       outline\n* <div class=\"s-flex:align-center:wrap s-gap:20\">\n*   <a class=\"s-badge:outline\">Say hello!</a>\n*   <a class=\"s-badge:outline s-color:accent\">Say hello!</a>\n*   <a class=\"s-badge:outline s-color:complementary\">Say hello!</a>\n*   <a class=\"s-badge:outline s-color:error\">Say hello!</a>\n* </div>\n*\n*\n* @example          html        Shapes\n* <div class=\"s-flex:align-center:wrap s-gap:20\">\n*   <a class=\"s-badge\">Say hello!</a>\n*   <a class=\"s-badge s-shape:pill\">Say hello!</a>\n*   <a class=\"s-badge s-shape:square\">Say hello!</a>\n* </div>\n*\n* @example        html       Scales\n* <div class=\"s-flex:align-center:wrap s-gap:20\">\n*   <a class=\"s-badge s-scale:05\">Say hello!</a>\n*   <a class=\"s-badge s-scale:1\">Say hello!</a>\n*   <a class=\"s-badge s-scale:12\">Say hello!</a>\n*   <a class=\"s-badge s-scale:15\">Say hello!</a>\n*   <a class=\"s-badge s-scale:20\">Say hello!</a>\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.badge.Badge"
+        }
+    ]
+}

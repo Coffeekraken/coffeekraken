@@ -1,0 +1,301 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.gap.Gap",
+    "name": "Gap",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "Helpers"
+        ],
+        "slug": "/styleguide/helpers/gap"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows you to apply some gap attributes on any HTMLElement and with",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.gap",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "title": "Simple flex grid",
+            "code": "<div class=\"s-flex s-gap:40\">\n  <div class=\"s-ratio:16-9 s-grow s-radius s-p:30 s-bg:main\">1</div>\n  <div class=\"s-ratio:16-9 s-grow s-radius s-p:30 s-bg:main\">2</div>\n  <div class=\"s-ratio:16-9 s-grow s-radius s-p:30 s-bg:main\">3</div>\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "Simple grid",
+            "code": "<div class=\"s-grid:3 s-gap:40\">\n  <div class=\"s-ratio:16-9 s-bg:main s-radius s-p:30\">1</div>\n  <div class=\"s-ratio:16-9 s-bg:main s-radius s-p:30\">2</div>\n  <div class=\"s-ratio:16-9 s-bg:main s-radius s-p:30\">3</div>\n</div>"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.css",
+    "extension": "css",
+    "relPath": "dist/css/index.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Gap",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.gap",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "Helpers"
+                ],
+                "slug": "/styleguide/helpers/gap"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows you to apply some gap attributes on any HTMLElement and with",
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.gap.classes;"
+                }
+            ],
+            "cssClass": {
+                "s-gap": {
+                    "name": "s-gap",
+                    "description": "Apply the default gap to any HTMLElement"
+                },
+                "s-gap-row": {
+                    "name": "s-gap:row",
+                    "description": "Apply the default row gap to any HTMLElement"
+                },
+                "s-gap-column": {
+                    "name": "s-gap:column",
+                    "description": "Apply the default column gap to any HTMLElement"
+                },
+                "s-gap-default": {
+                    "name": "s-gap:default",
+                    "description": "Apply the default gap to any HTMLElement"
+                },
+                "s-gap-row-default": {
+                    "name": "s-gap:row:default",
+                    "description": "Apply the default row gap to any HTMLElement"
+                },
+                "s-gap-column-default": {
+                    "name": "s-gap:column:default",
+                    "description": "Apply the default column gap to any HTMLElement",
+                    "content": ","
+                },
+                "s-gap-0": {
+                    "name": "s-gap:0",
+                    "description": "Apply the 0 gap to any HTMLElement"
+                },
+                "s-gap-row-0": {
+                    "name": "s-gap:row:0",
+                    "description": "Apply the 0 row gap to any HTMLElement"
+                },
+                "s-gap-column-0": {
+                    "name": "s-gap:column:0",
+                    "description": "Apply the 0 column gap to any HTMLElement",
+                    "content": ","
+                },
+                "s-gap-10": {
+                    "name": "s-gap:10",
+                    "description": "Apply the 10 gap to any HTMLElement"
+                },
+                "s-gap-row-10": {
+                    "name": "s-gap:row:10",
+                    "description": "Apply the 10 row gap to any HTMLElement"
+                },
+                "s-gap-column-10": {
+                    "name": "s-gap:column:10",
+                    "description": "Apply the 10 column gap to any HTMLElement",
+                    "content": ","
+                },
+                "s-gap-20": {
+                    "name": "s-gap:20",
+                    "description": "Apply the 20 gap to any HTMLElement"
+                },
+                "s-gap-row-20": {
+                    "name": "s-gap:row:20",
+                    "description": "Apply the 20 row gap to any HTMLElement"
+                },
+                "s-gap-column-20": {
+                    "name": "s-gap:column:20",
+                    "description": "Apply the 20 column gap to any HTMLElement",
+                    "content": ","
+                },
+                "s-gap-30": {
+                    "name": "s-gap:30",
+                    "description": "Apply the 30 gap to any HTMLElement"
+                },
+                "s-gap-row-30": {
+                    "name": "s-gap:row:30",
+                    "description": "Apply the 30 row gap to any HTMLElement"
+                },
+                "s-gap-column-30": {
+                    "name": "s-gap:column:30",
+                    "description": "Apply the 30 column gap to any HTMLElement",
+                    "content": ","
+                },
+                "s-gap-40": {
+                    "name": "s-gap:40",
+                    "description": "Apply the 40 gap to any HTMLElement"
+                },
+                "s-gap-row-40": {
+                    "name": "s-gap:row:40",
+                    "description": "Apply the 40 row gap to any HTMLElement"
+                },
+                "s-gap-column-40": {
+                    "name": "s-gap:column:40",
+                    "description": "Apply the 40 column gap to any HTMLElement",
+                    "content": ","
+                },
+                "s-gap-50": {
+                    "name": "s-gap:50",
+                    "description": "Apply the 50 gap to any HTMLElement"
+                },
+                "s-gap-row-50": {
+                    "name": "s-gap:row:50",
+                    "description": "Apply the 50 row gap to any HTMLElement"
+                },
+                "s-gap-column-50": {
+                    "name": "s-gap:column:50",
+                    "description": "Apply the 50 column gap to any HTMLElement",
+                    "content": ","
+                },
+                "s-gap-60": {
+                    "name": "s-gap:60",
+                    "description": "Apply the 60 gap to any HTMLElement"
+                },
+                "s-gap-row-60": {
+                    "name": "s-gap:row:60",
+                    "description": "Apply the 60 row gap to any HTMLElement"
+                },
+                "s-gap-column-60": {
+                    "name": "s-gap:column:60",
+                    "description": "Apply the 60 column gap to any HTMLElement",
+                    "content": ","
+                },
+                "s-gap-70": {
+                    "name": "s-gap:70",
+                    "description": "Apply the 70 gap to any HTMLElement"
+                },
+                "s-gap-row-70": {
+                    "name": "s-gap:row:70",
+                    "description": "Apply the 70 row gap to any HTMLElement"
+                },
+                "s-gap-column-70": {
+                    "name": "s-gap:column:70",
+                    "description": "Apply the 70 column gap to any HTMLElement",
+                    "content": ","
+                },
+                "s-gap-80": {
+                    "name": "s-gap:80",
+                    "description": "Apply the 80 gap to any HTMLElement"
+                },
+                "s-gap-row-80": {
+                    "name": "s-gap:row:80",
+                    "description": "Apply the 80 row gap to any HTMLElement"
+                },
+                "s-gap-column-80": {
+                    "name": "s-gap:column:80",
+                    "description": "Apply the 80 column gap to any HTMLElement",
+                    "content": ","
+                },
+                "s-gap-90": {
+                    "name": "s-gap:90",
+                    "description": "Apply the 90 gap to any HTMLElement"
+                },
+                "s-gap-row-90": {
+                    "name": "s-gap:row:90",
+                    "description": "Apply the 90 row gap to any HTMLElement"
+                },
+                "s-gap-column-90": {
+                    "name": "s-gap:column:90",
+                    "description": "Apply the 90 column gap to any HTMLElement",
+                    "content": ","
+                },
+                "s-gap-100": {
+                    "name": "s-gap:100",
+                    "description": "Apply the 100 gap to any HTMLElement"
+                },
+                "s-gap-row-100": {
+                    "name": "s-gap:row:100",
+                    "description": "Apply the 100 row gap to any HTMLElement"
+                },
+                "s-gap-column-100": {
+                    "name": "s-gap:column:100",
+                    "description": "Apply the 100 column gap to any HTMLElement"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "title": "Simple flex grid",
+                    "code": "<div class=\"s-flex s-gap:40\">\n  <div class=\"s-ratio:16-9 s-grow s-radius s-p:30 s-bg:main\">1</div>\n  <div class=\"s-ratio:16-9 s-grow s-radius s-p:30 s-bg:main\">2</div>\n  <div class=\"s-ratio:16-9 s-grow s-radius s-p:30 s-bg:main\">3</div>\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "Simple grid",
+                    "code": "<div class=\"s-grid:3 s-gap:40\">\n  <div class=\"s-ratio:16-9 s-bg:main s-radius s-p:30\">1</div>\n  <div class=\"s-ratio:16-9 s-bg:main s-radius s-p:30\">2</div>\n  <div class=\"s-ratio:16-9 s-bg:main s-radius s-p:30\">3</div>\n</div>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Gap\n* @namespace          sugar.style.helpers.gap\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/gap\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply some gap attributes on any HTMLElement and with\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.gap.classes;\n*\n* @cssClass                 s-gap              Apply the default gap to any HTMLElement\n* @cssClass                s-gap:row          Apply the default row gap to any HTMLElement\n* @cssClass                s-gap:column          Apply the default column gap to any HTMLElement\n* @cssClass                s-gap:default          Apply the default gap to any HTMLElement\n* @cssClass                s-gap:row:default          Apply the default row gap to any HTMLElement\n* @cssClass                s-gap:column:default          Apply the default column gap to any HTMLElement\n,\n* @cssClass                s-gap:0          Apply the 0 gap to any HTMLElement\n* @cssClass                s-gap:row:0          Apply the 0 row gap to any HTMLElement\n* @cssClass                s-gap:column:0          Apply the 0 column gap to any HTMLElement\n,\n* @cssClass                s-gap:10          Apply the 10 gap to any HTMLElement\n* @cssClass                s-gap:row:10          Apply the 10 row gap to any HTMLElement\n* @cssClass                s-gap:column:10          Apply the 10 column gap to any HTMLElement\n,\n* @cssClass                s-gap:20          Apply the 20 gap to any HTMLElement\n* @cssClass                s-gap:row:20          Apply the 20 row gap to any HTMLElement\n* @cssClass                s-gap:column:20          Apply the 20 column gap to any HTMLElement\n,\n* @cssClass                s-gap:30          Apply the 30 gap to any HTMLElement\n* @cssClass                s-gap:row:30          Apply the 30 row gap to any HTMLElement\n* @cssClass                s-gap:column:30          Apply the 30 column gap to any HTMLElement\n,\n* @cssClass                s-gap:40          Apply the 40 gap to any HTMLElement\n* @cssClass                s-gap:row:40          Apply the 40 row gap to any HTMLElement\n* @cssClass                s-gap:column:40          Apply the 40 column gap to any HTMLElement\n,\n* @cssClass                s-gap:50          Apply the 50 gap to any HTMLElement\n* @cssClass                s-gap:row:50          Apply the 50 row gap to any HTMLElement\n* @cssClass                s-gap:column:50          Apply the 50 column gap to any HTMLElement\n,\n* @cssClass                s-gap:60          Apply the 60 gap to any HTMLElement\n* @cssClass                s-gap:row:60          Apply the 60 row gap to any HTMLElement\n* @cssClass                s-gap:column:60          Apply the 60 column gap to any HTMLElement\n,\n* @cssClass                s-gap:70          Apply the 70 gap to any HTMLElement\n* @cssClass                s-gap:row:70          Apply the 70 row gap to any HTMLElement\n* @cssClass                s-gap:column:70          Apply the 70 column gap to any HTMLElement\n,\n* @cssClass                s-gap:80          Apply the 80 gap to any HTMLElement\n* @cssClass                s-gap:row:80          Apply the 80 row gap to any HTMLElement\n* @cssClass                s-gap:column:80          Apply the 80 column gap to any HTMLElement\n,\n* @cssClass                s-gap:90          Apply the 90 gap to any HTMLElement\n* @cssClass                s-gap:row:90          Apply the 90 row gap to any HTMLElement\n* @cssClass                s-gap:column:90          Apply the 90 column gap to any HTMLElement\n,\n* @cssClass                s-gap:100          Apply the 100 gap to any HTMLElement\n* @cssClass                s-gap:row:100          Apply the 100 row gap to any HTMLElement\n* @cssClass                s-gap:column:100          Apply the 100 column gap to any HTMLElement\n*\n* @example        html          Simple flex grid\n* <div class=\"s-flex s-gap:40\">\n*   <div class=\"s-ratio:16-9 s-grow s-radius s-p:30 s-bg:main\">1</div>\n*   <div class=\"s-ratio:16-9 s-grow s-radius s-p:30 s-bg:main\">2</div>\n*   <div class=\"s-ratio:16-9 s-grow s-radius s-p:30 s-bg:main\">3</div>\n* </div>\n*\n* @example        html          Simple grid\n* <div class=\"s-grid:3 s-gap:40\">\n*   <div class=\"s-ratio:16-9 s-bg:main s-radius s-p:30\">1</div>\n*   <div class=\"s-ratio:16-9 s-bg:main s-radius s-p:30\">2</div>\n*   <div class=\"s-ratio:16-9 s-bg:main s-radius s-p:30\">3</div>\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.gap.Gap"
+        }
+    ]
+}

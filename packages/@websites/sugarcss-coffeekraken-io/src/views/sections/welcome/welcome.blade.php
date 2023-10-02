@@ -1,10 +1,10 @@
 <section class="section" id="homepage-welcome" viewport-aware>
 
-    <pre>
+    {{-- <pre>
         @php
         print_r(\SViews\specs\readViewSpec('sugar.views.sections.hero'));
         @endphp
-    </pre>
+    </pre> --}}
 
     <div class="s-container section">
 

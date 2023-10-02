@@ -1,0 +1,184 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.fit.Fit-Sizes",
+    "name": "Fit Sizes",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "Helpers"
+        ],
+        "slug": "/styleguide/helpers/fit-sizes"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows you to apply a fit size on any HTMLElement.\nOn image and video, uses `object-fit` property, on all others,\nsimply fill the element using an absolute position, top: 0, left: 0 and width/height: 100%.",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.fit",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "title": "fill",
+            "code": "<div class=\"s-ratio:16-9 s-bg:ui\">\n      <img class=\"s-fit:fill s-radius\" src=\"https://picsum.photos/1000/1000\" />\n  </div>"
+        },
+        {
+            "language": "html",
+            "title": "cover",
+            "code": "<div class=\"s-ratio:16-9 s-bg:ui\">\n      <img class=\"s-fit:cover s-radius\" src=\"https://picsum.photos/1000/1000\" />\n  </div>"
+        },
+        {
+            "language": "html",
+            "title": "contain",
+            "code": "<div class=\"s-ratio:16-9 s-bg:ui\">\n      <img class=\"s-fit:contain s-radius\" src=\"https://picsum.photos/1000/1000\" />\n  </div>"
+        },
+        {
+            "language": "html",
+            "title": "none",
+            "code": "<div class=\"s-ratio:16-9 s-bg:ui\">\n      <img class=\"s-fit:none s-radius\" src=\"https://picsum.photos/1000/1000\" />\n  </div>"
+        },
+        {
+            "language": "html",
+            "title": "abs",
+            "code": "<div class=\"s-ratio:16-9 s-bg:ui\">\n      <img class=\"s-fit:abs s-radius\" src=\"https://picsum.photos/1000/1000\" />\n  </div>"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.css",
+    "extension": "css",
+    "relPath": "dist/css/index.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Fit Sizes",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.fit",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "Helpers"
+                ],
+                "slug": "/styleguide/helpers/fit-sizes"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows you to apply a fit size on any HTMLElement.\nOn image and video, uses `object-fit` property, on all others,\nsimply fill the element using an absolute position, top: 0, left: 0 and width/height: 100%.",
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.fit.classes;\n\n.my-element {\n  \\@s.fit(fill);\n}"
+                }
+            ],
+            "cssClass": {
+                "s-fit-fill": {
+                    "name": "s-fit:fill",
+                    "description": "Apply the fill fit size"
+                },
+                "s-fit-cover": {
+                    "name": "s-fit:cover",
+                    "description": "Apply the cover fit size"
+                },
+                "s-fit-contain": {
+                    "name": "s-fit:contain",
+                    "description": "Apply the contain fit size"
+                },
+                "s-fit-none": {
+                    "name": "s-fit:none",
+                    "description": "Apply the none fit size"
+                },
+                "s-fit-abs": {
+                    "name": "s-fit:abs",
+                    "description": "Apply the abs fit size"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "title": "fill",
+                    "code": "<div class=\"s-ratio:16-9 s-bg:ui\">\n      <img class=\"s-fit:fill s-radius\" src=\"https://picsum.photos/1000/1000\" />\n  </div>"
+                },
+                {
+                    "language": "html",
+                    "title": "cover",
+                    "code": "<div class=\"s-ratio:16-9 s-bg:ui\">\n      <img class=\"s-fit:cover s-radius\" src=\"https://picsum.photos/1000/1000\" />\n  </div>"
+                },
+                {
+                    "language": "html",
+                    "title": "contain",
+                    "code": "<div class=\"s-ratio:16-9 s-bg:ui\">\n      <img class=\"s-fit:contain s-radius\" src=\"https://picsum.photos/1000/1000\" />\n  </div>"
+                },
+                {
+                    "language": "html",
+                    "title": "none",
+                    "code": "<div class=\"s-ratio:16-9 s-bg:ui\">\n      <img class=\"s-fit:none s-radius\" src=\"https://picsum.photos/1000/1000\" />\n  </div>"
+                },
+                {
+                    "language": "html",
+                    "title": "abs",
+                    "code": "<div class=\"s-ratio:16-9 s-bg:ui\">\n      <img class=\"s-fit:abs s-radius\" src=\"https://picsum.photos/1000/1000\" />\n  </div>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Fit Sizes\n* @namespace          sugar.style.helpers.fit\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/fit-sizes\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply a fit size on any HTMLElement.\n* On image and video, uses `object-fit` property, on all others,\n* simply fill the element using an absolute position, top: 0, left: 0 and width/height: 100%.\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.fit.classes;\n*\n* .my-element {\n*   \\@s.fit(fill);\n* }\n*\n* @cssClass     s-fit:fill       Apply the fill fit size\n* @cssClass     s-fit:cover       Apply the cover fit size\n* @cssClass     s-fit:contain       Apply the contain fit size\n* @cssClass     s-fit:none       Apply the none fit size\n* @cssClass     s-fit:abs       Apply the abs fit size\n*\n* @example         html        fill\n*   <div class=\"s-ratio:16-9 s-bg:ui\">\n*       <img class=\"s-fit:fill s-radius\" src=\"https://picsum.photos/1000/1000\" />\n*   </div>\n*\n* @example         html        cover\n*   <div class=\"s-ratio:16-9 s-bg:ui\">\n*       <img class=\"s-fit:cover s-radius\" src=\"https://picsum.photos/1000/1000\" />\n*   </div>\n*\n* @example         html        contain\n*   <div class=\"s-ratio:16-9 s-bg:ui\">\n*       <img class=\"s-fit:contain s-radius\" src=\"https://picsum.photos/1000/1000\" />\n*   </div>\n*\n* @example         html        none\n*   <div class=\"s-ratio:16-9 s-bg:ui\">\n*       <img class=\"s-fit:none s-radius\" src=\"https://picsum.photos/1000/1000\" />\n*   </div>\n*\n* @example         html        abs\n*   <div class=\"s-ratio:16-9 s-bg:ui\">\n*       <img class=\"s-fit:abs s-radius\" src=\"https://picsum.photos/1000/1000\" />\n*   </div>\n*\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.fit.Fit-Sizes"
+        }
+    ]
+}

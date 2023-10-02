@@ -1,0 +1,162 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.Border-width",
+    "name": "Border width",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "Helpers"
+        ],
+        "slug": "/styleguide/helpers/border-width"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows you to apply some border width to any HTMLElement",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "title": "Border width",
+            "code": "<div class=\"s-flex:wrap s-gap:20\">\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:0\">\n    0\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:10\">\n    10\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:20\">\n    20\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:30\">\n    30\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:40\">\n    40\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:50\">\n    50\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:60\">\n    60\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:70\">\n    70\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:80\">\n    80\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:90\">\n    90\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:100\">\n    100\n  </div>\n</div>"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.css",
+    "extension": "css",
+    "relPath": "dist/css/index.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Border width",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "Helpers"
+                ],
+                "slug": "/styleguide/helpers/border-width"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows you to apply some border width to any HTMLElement",
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "cssClass": {
+                "s-border-0": {
+                    "name": "s-border:0",
+                    "description": "Apply the border width 0 to any HTMLElement"
+                },
+                "s-border-10": {
+                    "name": "s-border:10",
+                    "description": "Apply the border width 10 to any HTMLElement"
+                },
+                "s-border-20": {
+                    "name": "s-border:20",
+                    "description": "Apply the border width 20 to any HTMLElement"
+                },
+                "s-border-30": {
+                    "name": "s-border:30",
+                    "description": "Apply the border width 30 to any HTMLElement"
+                },
+                "s-border-40": {
+                    "name": "s-border:40",
+                    "description": "Apply the border width 40 to any HTMLElement"
+                },
+                "s-border-50": {
+                    "name": "s-border:50",
+                    "description": "Apply the border width 50 to any HTMLElement"
+                },
+                "s-border-60": {
+                    "name": "s-border:60",
+                    "description": "Apply the border width 60 to any HTMLElement"
+                },
+                "s-border-70": {
+                    "name": "s-border:70",
+                    "description": "Apply the border width 70 to any HTMLElement"
+                },
+                "s-border-80": {
+                    "name": "s-border:80",
+                    "description": "Apply the border width 80 to any HTMLElement"
+                },
+                "s-border-90": {
+                    "name": "s-border:90",
+                    "description": "Apply the border width 90 to any HTMLElement"
+                },
+                "s-border-100": {
+                    "name": "s-border:100",
+                    "description": "Apply the border width 100 to any HTMLElement"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "title": "Border width",
+                    "code": "<div class=\"s-flex:wrap s-gap:20\">\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:0\">\n    0\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:10\">\n    10\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:20\">\n    20\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:30\">\n    30\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:40\">\n    40\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:50\">\n    50\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:60\">\n    60\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:70\">\n    70\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:80\">\n    80\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:90\">\n    90\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:100\">\n    100\n  </div>\n</div>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Border width\n* @namespace          sugar.style.helpers\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/border-width\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply some border width to any HTMLElement\n*\n* @support      chromium\n* @support      firefox\n* @support      safari\n* @support      edge\n*\n* @cssClass      s-border:0      Apply the border width 0 to any HTMLElement\n* @cssClass      s-border:10      Apply the border width 10 to any HTMLElement\n* @cssClass      s-border:20      Apply the border width 20 to any HTMLElement\n* @cssClass      s-border:30      Apply the border width 30 to any HTMLElement\n* @cssClass      s-border:40      Apply the border width 40 to any HTMLElement\n* @cssClass      s-border:50      Apply the border width 50 to any HTMLElement\n* @cssClass      s-border:60      Apply the border width 60 to any HTMLElement\n* @cssClass      s-border:70      Apply the border width 70 to any HTMLElement\n* @cssClass      s-border:80      Apply the border width 80 to any HTMLElement\n* @cssClass      s-border:90      Apply the border width 90 to any HTMLElement\n* @cssClass      s-border:100      Apply the border width 100 to any HTMLElement\n*\n* @example             html         Border width\n* <div class=\"s-flex:wrap s-gap:20\">\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:0\">\n*     0\n*   </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:10\">\n*     10\n*   </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:20\">\n*     20\n*   </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:30\">\n*     30\n*   </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:40\">\n*     40\n*   </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:50\">\n*     50\n*   </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:60\">\n*     60\n*   </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:70\">\n*     70\n*   </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:80\">\n*     80\n*   </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:90\">\n*     90\n*   </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:100\">\n*     100\n*   </div>\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.Border-width"
+        }
+    ]
+}

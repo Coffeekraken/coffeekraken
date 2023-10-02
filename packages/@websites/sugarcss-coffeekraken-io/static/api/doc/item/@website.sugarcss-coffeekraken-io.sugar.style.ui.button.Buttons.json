@@ -1,0 +1,205 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.button.Buttons",
+    "name": "Buttons",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "UI"
+        ],
+        "slug": "/styleguide/ui/button"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows you to display any HTMLElement as a button",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.button",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "title": "solid lnf",
+            "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-btn:\">Click me!</button>\n  <a class=\"s-btn: s-color:accent\">Click me!</a>\n  <a class=\"s-btn: s-color:complementary\">Click me!</a>\n  <a class=\"s-btn: s-color:info\">Click me!</a>\n  <a class=\"s-btn: s-color:error\">Click me!</a>\n  <a disabled class=\"s-btn:\">Click me!</a>\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "outline lnf",
+            "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-btn::outline\">Click me!</button>\n  <a class=\"s-btn::outline s-color:accent\">Click me!</a>\n  <a class=\"s-btn::outline s-color:complementary\">Click me!</a>\n  <a class=\"s-btn::outline s-color:info\">Click me!</a>\n  <a class=\"s-btn::outline s-color:error\">Click me!</a>\n  <a disabled class=\"s-btn::outline\">Click me!</a>\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "text lnf",
+            "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-btn::text\">Click me!</button>\n  <a class=\"s-btn::text s-color:accent\">Click me!</a>\n  <a class=\"s-btn::text s-color:complementary\">Click me!</a>\n  <a class=\"s-btn::text s-color:info\">Click me!</a>\n  <a class=\"s-btn::text s-color:error\">Click me!</a>\n  <a disabled class=\"s-btn::text\">Click me!</a>\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "loading lnf",
+            "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-btn::loading\">Click me!</button>\n  <a class=\"s-btn::loading s-color:accent\">Click me!</a>\n  <a class=\"s-btn::loading s-color:complementary\">Click me!</a>\n  <a class=\"s-btn::loading s-color:info\">Click me!</a>\n  <a class=\"s-btn::loading s-color:error\">Click me!</a>\n  <a disabled class=\"s-btn::loading\">Click me!</a>\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "Shapes",
+            "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-btn\">Click me!</a>\n  <a class=\"s-btn s-shape:pill\">Click me!</a>\n  <a class=\"s-btn s-shape:square\">Click me!</a>\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "Scales",
+            "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-btn s-scale:07\">Click me!</a>\n  <a class=\"s-btn s-scale:1\">Click me!</a>\n  <a class=\"s-btn s-scale:13\">Click me!</a>\n  <a class=\"s-btn s-scale:16\">Click me!</a>\n</div>"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.css",
+    "extension": "css",
+    "relPath": "dist/css/index.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Buttons",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.button",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "UI"
+                ],
+                "slug": "/styleguide/ui/button"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows you to display any HTMLElement as a button",
+            "feature": [
+                "Support for shaping through the `s-shape:...` class",
+                "Support for vertical rhythm through the `s-rhythm:vertical` class",
+                "Support for text formatting through the `s-format:text` class",
+                "Support for scaling through the `s-scale:...` class",
+                "Support for colorizing through the `s-color:...` class"
+            ],
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.ui.button.classes;\n\n.my-button {\n  @s.ui.button;\n}"
+                }
+            ],
+            "cssClass": {
+                "s-btn": {
+                    "name": "s-btn",
+                    "description": "Apply the solid button lnf"
+                },
+                "s-btn-outline": {
+                    "name": "s-btn:outline",
+                    "description": "Apply the outline button lnf"
+                },
+                "s-btn-text": {
+                    "name": "s-btn:text",
+                    "description": "Apply the text button lnf"
+                },
+                "s-btn-loading": {
+                    "name": "s-btn:loading",
+                    "description": "Apply the loading button lnf"
+                },
+                "s-format-text-button": {
+                    "name": "s-format:text button",
+                    "description": "Apply the button style on button tags inside the s-format:text scope"
+                },
+                "s-rhythm-vertical": {
+                    "name": "s-rhythm:vertical",
+                    "description": "Apply the default vertical rhythm on scoped button(s)"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "title": "solid lnf",
+                    "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-btn:\">Click me!</button>\n  <a class=\"s-btn: s-color:accent\">Click me!</a>\n  <a class=\"s-btn: s-color:complementary\">Click me!</a>\n  <a class=\"s-btn: s-color:info\">Click me!</a>\n  <a class=\"s-btn: s-color:error\">Click me!</a>\n  <a disabled class=\"s-btn:\">Click me!</a>\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "outline lnf",
+                    "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-btn::outline\">Click me!</button>\n  <a class=\"s-btn::outline s-color:accent\">Click me!</a>\n  <a class=\"s-btn::outline s-color:complementary\">Click me!</a>\n  <a class=\"s-btn::outline s-color:info\">Click me!</a>\n  <a class=\"s-btn::outline s-color:error\">Click me!</a>\n  <a disabled class=\"s-btn::outline\">Click me!</a>\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "text lnf",
+                    "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-btn::text\">Click me!</button>\n  <a class=\"s-btn::text s-color:accent\">Click me!</a>\n  <a class=\"s-btn::text s-color:complementary\">Click me!</a>\n  <a class=\"s-btn::text s-color:info\">Click me!</a>\n  <a class=\"s-btn::text s-color:error\">Click me!</a>\n  <a disabled class=\"s-btn::text\">Click me!</a>\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "loading lnf",
+                    "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-btn::loading\">Click me!</button>\n  <a class=\"s-btn::loading s-color:accent\">Click me!</a>\n  <a class=\"s-btn::loading s-color:complementary\">Click me!</a>\n  <a class=\"s-btn::loading s-color:info\">Click me!</a>\n  <a class=\"s-btn::loading s-color:error\">Click me!</a>\n  <a disabled class=\"s-btn::loading\">Click me!</a>\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "Shapes",
+                    "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-btn\">Click me!</a>\n  <a class=\"s-btn s-shape:pill\">Click me!</a>\n  <a class=\"s-btn s-shape:square\">Click me!</a>\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "Scales",
+                    "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-btn s-scale:07\">Click me!</a>\n  <a class=\"s-btn s-scale:1\">Click me!</a>\n  <a class=\"s-btn s-scale:13\">Click me!</a>\n  <a class=\"s-btn s-scale:16\">Click me!</a>\n</div>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Buttons\n* @namespace          sugar.style.ui.button\n* @type               Styleguide\n* @menu           Styleguide / UI        /styleguide/ui/button\n* @platform       css\n* @status       stable\n*\n* These classes allows you to display any HTMLElement as a button\n*\n* @feature          Support for shaping through the `s-shape:...` class\n* @feature          Support for vertical rhythm through the `s-rhythm:vertical` class\n* @feature          Support for text formatting through the `s-format:text` class\n* @feature          Support for scaling through the `s-scale:...` class\n* @feature          Support for colorizing through the `s-color:...` class\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.ui.button.classes;\n*\n* .my-button {\n*   @s.ui.button;\n* }\n*\n* @cssClass     s-btn           Apply the solid button lnf\n* @cssClass     s-btn:outline           Apply the outline button lnf\n* @cssClass     s-btn:text           Apply the text button lnf\n* @cssClass     s-btn:loading           Apply the loading button lnf\n* @cssClass            s-format:text button             Apply the button style on button tags inside the s-format:text scope\n* @cssClass            s-rhythm:vertical              Apply the default vertical rhythm on scoped button(s)\n*\n* @example        html       solid lnf\n* <div class=\"s-flex:align-center:wrap s-gap:20\">\n*   <a class=\"s-btn:\">Click me!</button>\n*   <a class=\"s-btn: s-color:accent\">Click me!</a>\n*   <a class=\"s-btn: s-color:complementary\">Click me!</a>\n*   <a class=\"s-btn: s-color:info\">Click me!</a>\n*   <a class=\"s-btn: s-color:error\">Click me!</a>\n*   <a disabled class=\"s-btn:\">Click me!</a>\n* </div>\n*\n* @example        html       outline lnf\n* <div class=\"s-flex:align-center:wrap s-gap:20\">\n*   <a class=\"s-btn::outline\">Click me!</button>\n*   <a class=\"s-btn::outline s-color:accent\">Click me!</a>\n*   <a class=\"s-btn::outline s-color:complementary\">Click me!</a>\n*   <a class=\"s-btn::outline s-color:info\">Click me!</a>\n*   <a class=\"s-btn::outline s-color:error\">Click me!</a>\n*   <a disabled class=\"s-btn::outline\">Click me!</a>\n* </div>\n*\n* @example        html       text lnf\n* <div class=\"s-flex:align-center:wrap s-gap:20\">\n*   <a class=\"s-btn::text\">Click me!</button>\n*   <a class=\"s-btn::text s-color:accent\">Click me!</a>\n*   <a class=\"s-btn::text s-color:complementary\">Click me!</a>\n*   <a class=\"s-btn::text s-color:info\">Click me!</a>\n*   <a class=\"s-btn::text s-color:error\">Click me!</a>\n*   <a disabled class=\"s-btn::text\">Click me!</a>\n* </div>\n*\n* @example        html       loading lnf\n* <div class=\"s-flex:align-center:wrap s-gap:20\">\n*   <a class=\"s-btn::loading\">Click me!</button>\n*   <a class=\"s-btn::loading s-color:accent\">Click me!</a>\n*   <a class=\"s-btn::loading s-color:complementary\">Click me!</a>\n*   <a class=\"s-btn::loading s-color:info\">Click me!</a>\n*   <a class=\"s-btn::loading s-color:error\">Click me!</a>\n*   <a disabled class=\"s-btn::loading\">Click me!</a>\n* </div>\n*\n*\n* @example       html       Shapes\n* <div class=\"s-flex:align-center:wrap s-gap:20\">\n*   <a class=\"s-btn\">Click me!</a>\n*   <a class=\"s-btn s-shape:pill\">Click me!</a>\n*   <a class=\"s-btn s-shape:square\">Click me!</a>\n* </div>\n*\n* @example       html       Scales\n* <div class=\"s-flex:align-center:wrap s-gap:20\">\n*   <a class=\"s-btn s-scale:07\">Click me!</a>\n*   <a class=\"s-btn s-scale:1\">Click me!</a>\n*   <a class=\"s-btn s-scale:13\">Click me!</a>\n*   <a class=\"s-btn s-scale:16\">Click me!</a>\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.button.Buttons"
+        }
+    ]
+}

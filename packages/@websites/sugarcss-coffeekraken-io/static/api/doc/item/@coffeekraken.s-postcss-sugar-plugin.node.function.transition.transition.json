@@ -1,0 +1,189 @@
+{
+    "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.transition.transition",
+    "name": "transition",
+    "as": "s.transition",
+    "type": {
+        "types": [
+            {
+                "type": "PostcssFunction"
+            }
+        ],
+        "raw": "PostcssFunction"
+    },
+    "param": {
+        "transition": {
+            "name": "transition",
+            "type": {
+                "types": [
+                    {
+                        "type": "String"
+                    }
+                ],
+                "raw": "String"
+            },
+            "description": "The transition to get",
+            "defaultStr": ""
+        }
+    },
+    "return": {
+        "type": {
+            "types": [
+                {
+                    "type": "Css"
+                }
+            ],
+            "raw": "Css"
+        },
+        "description": "The corresponding css"
+    },
+    "platform": [
+        {
+            "name": "postcss",
+            "description": ""
+        }
+    ],
+    "description": "This function allows you to get a transition value depending on your theme config",
+    "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.function.transition",
+    "status": "stable",
+    "snippet": {
+        "label": "s.transition($1)"
+    },
+    "example": [
+        {
+            "language": "css",
+            "code": ".my-element {\n     transition: s.transition(fast);\n}"
+        }
+    ],
+    "interface": {
+        "name": "postcssSugarPluginTransitionFunctionInterface",
+        "description": "",
+        "definition": {
+            "name": {
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "values": [
+                    "slow",
+                    "default",
+                    "fast"
+                ],
+                "default": "default",
+                "required": true
+            }
+        }
+    },
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "transition.ts",
+    "extension": "ts",
+    "relPath": "src/node/functions/transition/transition.ts",
+    "children": {},
+    "isDependency": true,
+    "package": {
+        "name": "@coffeekraken/s-postcss-sugar-plugin",
+        "description": "Postcss Coffeekraken plugin that gives you access to a ton of sugar like \"@sugar.when.dark\", \"@sugar.classes\", etc... mixins as well as functions like \"sugar.padding\", \"sugar.color\", etc... All of these makes uses of your theme configuration defined using the @coffeekraken/s-sugar-config system.",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/node_modules/@coffeekraken/s-postcss-sugar-plugin/src/node/functions/transition/transition.ts",
+    "docblocks": [
+        {
+            "name": "transition",
+            "as": "s.transition",
+            "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.function.transition",
+            "type": {
+                "types": [
+                    {
+                        "type": "PostcssFunction"
+                    }
+                ],
+                "raw": "PostcssFunction"
+            },
+            "platform": [
+                {
+                    "name": "postcss",
+                    "description": ""
+                }
+            ],
+            "interface": {
+                "name": "postcssSugarPluginTransitionFunctionInterface",
+                "description": "",
+                "definition": {
+                    "name": {
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "values": [
+                            "slow",
+                            "default",
+                            "fast"
+                        ],
+                        "default": "default",
+                        "required": true
+                    }
+                }
+            },
+            "status": "stable",
+            "description": "This function allows you to get a transition value depending on your theme config",
+            "param": {
+                "transition": {
+                    "name": "transition",
+                    "type": {
+                        "types": [
+                            {
+                                "type": "String"
+                            }
+                        ],
+                        "raw": "String"
+                    },
+                    "description": "The transition to get",
+                    "defaultStr": ""
+                }
+            },
+            "return": {
+                "type": {
+                    "types": [
+                        {
+                            "type": "Css"
+                        }
+                    ],
+                    "raw": "Css"
+                },
+                "description": "The corresponding css"
+            },
+            "snippet": {
+                "label": "s.transition($1)"
+            },
+            "example": [
+                {
+                    "language": "css",
+                    "code": ".my-element {\n     transition: s.transition(fast);\n}"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          transition\n* @as            s.transition\n* @namespace     node.function.transition\n* @type          PostcssFunction\n* @platform      postcss\n* @interface       ./transition\n* @status        stable\n*\n* This function allows you to get a transition value depending on your theme config\n*\n* @param       {String}        transition      The transition to get\n* @return      {Css}                   The corresponding css\n*\n* @snippet         s.transition($1)\n*\n* @example       css\n* .my-element {\n*      transition: s.transition(fast);\n* }\n*\n* @since     2.0.0\n* @author \t                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.transition.transition"
+        }
+    ]
+}

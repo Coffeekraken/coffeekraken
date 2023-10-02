@@ -1,0 +1,150 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.border.Border-color",
+    "name": "Border color",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "Helpers"
+        ],
+        "slug": "/styleguide/helpers/border-color"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows you to apply some border color to any HTMLElement",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.border",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "title": "Border color",
+            "code": "<div class=\"s-flex:wrap s-gap:20\">\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:current:20\">\n    current\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:main:20\">\n    main\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:accent:20\">\n    accent\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:complementary:20\">\n    complementary\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:success:20\">\n    success\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:warning:20\">\n    warning\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:error:20\">\n    error\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:info:20\">\n    info\n  </div>\n</div>"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.css",
+    "extension": "css",
+    "relPath": "dist/css/index.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Border color",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.border",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "Helpers"
+                ],
+                "slug": "/styleguide/helpers/border-color"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows you to apply some border color to any HTMLElement",
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "cssClass": {
+                "s-border-current": {
+                    "name": "s-border:current",
+                    "description": "Apply the border color current to any HTMLElement"
+                },
+                "s-border-main": {
+                    "name": "s-border:main",
+                    "description": "Apply the border color main to any HTMLElement"
+                },
+                "s-border-accent": {
+                    "name": "s-border:accent",
+                    "description": "Apply the border color accent to any HTMLElement"
+                },
+                "s-border-complementary": {
+                    "name": "s-border:complementary",
+                    "description": "Apply the border color complementary to any HTMLElement"
+                },
+                "s-border-success": {
+                    "name": "s-border:success",
+                    "description": "Apply the border color success to any HTMLElement"
+                },
+                "s-border-warning": {
+                    "name": "s-border:warning",
+                    "description": "Apply the border color warning to any HTMLElement"
+                },
+                "s-border-error": {
+                    "name": "s-border:error",
+                    "description": "Apply the border color error to any HTMLElement"
+                },
+                "s-border-info": {
+                    "name": "s-border:info",
+                    "description": "Apply the border color info to any HTMLElement"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "title": "Border color",
+                    "code": "<div class=\"s-flex:wrap s-gap:20\">\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:current:20\">\n    current\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:main:20\">\n    main\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:accent:20\">\n    accent\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:complementary:20\">\n    complementary\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:success:20\">\n    success\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:warning:20\">\n    warning\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:error:20\">\n    error\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:info:20\">\n    info\n  </div>\n</div>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Border color\n* @namespace          sugar.style.helpers.border\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/border-color\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply some border color to any HTMLElement\n*\n* @support      chromium\n* @support      firefox\n* @support      safari\n* @support      edge\n*\n* @cssClass      s-border:current      Apply the border color current to any HTMLElement\n* @cssClass      s-border:main      Apply the border color main to any HTMLElement\n* @cssClass      s-border:accent      Apply the border color accent to any HTMLElement\n* @cssClass      s-border:complementary      Apply the border color complementary to any HTMLElement\n* @cssClass      s-border:success      Apply the border color success to any HTMLElement\n* @cssClass      s-border:warning      Apply the border color warning to any HTMLElement\n* @cssClass      s-border:error      Apply the border color error to any HTMLElement\n* @cssClass      s-border:info      Apply the border color info to any HTMLElement\n*\n* @example             html         Border color\n* <div class=\"s-flex:wrap s-gap:20\">\n* <div class=\"s-width:20 s-flex:center s-ratio:1 s-border:current:20\">\n*     current\n*   </div>\n* <div class=\"s-width:20 s-flex:center s-ratio:1 s-border:main:20\">\n*     main\n*   </div>\n* <div class=\"s-width:20 s-flex:center s-ratio:1 s-border:accent:20\">\n*     accent\n*   </div>\n* <div class=\"s-width:20 s-flex:center s-ratio:1 s-border:complementary:20\">\n*     complementary\n*   </div>\n* <div class=\"s-width:20 s-flex:center s-ratio:1 s-border:success:20\">\n*     success\n*   </div>\n* <div class=\"s-width:20 s-flex:center s-ratio:1 s-border:warning:20\">\n*     warning\n*   </div>\n* <div class=\"s-width:20 s-flex:center s-ratio:1 s-border:error:20\">\n*     error\n*   </div>\n* <div class=\"s-width:20 s-flex:center s-ratio:1 s-border:info:20\">\n*     info\n*   </div>\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.border.Border-color"
+        }
+    ]
+}

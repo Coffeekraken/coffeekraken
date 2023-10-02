@@ -1096,19 +1096,19 @@
                 *   <span class="s-tooltip-container">
                 *       <a class="s-btn s-mie:20">Hover me!</a>
                 *       <div class="s-white-space:nowrap s-tooltip s-color:accent" s-floating>
-                *           Corporate Solutions Producer Norma Johnson III
+                *           National Optimization Developer Nichole Huel
                 *       </div>
                 *   </span>
                 *   <span class="s-tooltip-container">
                 *       <a class="s-btn s-mie:20">Hover me!</a>
                 *       <div class="s-white-space:nowrap s-tooltip s-color:complementary" s-floating>
-                *           Investor Division Producer Abel White DVM
+                *           Dynamic Integration Coordinator Susan Koch
                 *       </div>
                 *   </span>
                 *   <span class="s-tooltip-container">
                 *       <a class="s-btn s-mie:20">Hover me!</a>
                 *       <div class="s-white-space:nowrap s-tooltip s-color:info" s-floating>
-                *           International Communications Specialist Samuel Kutch
+                *           National Assurance Orchestrator Kathy Streich
                 *       </div>
                 *   </span>
             
@@ -1117,25 +1117,25 @@
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20">Block start (default)</a>
         *       <div class="s-tooltip s-white-space:nowrap s-color:accent">
-        *           Central Response Specialist Malcolm Hamill
+        *           Forward Brand Director Duane Cassin
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20">Inline end</a>
         *       <div class="s-tooltip:right s-white-space:nowrap s-color:accent">
-        *           National Solutions Consultant Leon Yundt
+        *           Future Paradigm Architect Carol Hagenes
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20">Block end</a>
         *       <div class="s-tooltip:bottom s-white-space:nowrap s-color:accent">
-        *           Internal Quality Coordinator Chad Kuhlman
+        *           Senior Integration Manager Dan Goyette II
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20">Inline start</a>
         *       <div class="s-tooltip:left s-white-space:nowrap s-color:accent">
-        *           Product Brand Designer Dana White
+        *           Central Accounts Architect Kim Boyle
         *       </div>
         *   </span>
         * 
@@ -1143,25 +1143,25 @@
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20">Accent</a>
         *       <div class="s-tooltip s-white-space:nowrap s-color:accent" s-floating>
-        *           International Paradigm Representative Wilma Kunde
+        *           Customer Implementation Director Jonathon Ferry
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20">Complementary</a>
         *       <div class="s-tooltip s-white-space:nowrap s-color:complementary" s-floating>
-        *           Dynamic Markets Supervisor Bryant Weimann
+        *           Regional Intranet Engineer Miss Alexis Hahn
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20">Error</a>
         *       <div class="s-tooltip s-white-space:nowrap s-color:error" s-floating>
-        *           International Functionality Planner Mr. Paul Stamm
+        *           Customer Accountability Designer Andy Harvey
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20">Info</a>
         *       <div class="s-tooltip s-white-space:nowrap s-color:info" s-floating>
-        *           International Directives Administrator Sean Little
+        *           Senior Directives Administrator Stacy Champlin
         *       </div>
         *   </span>
         * 
@@ -1883,58 +1883,58 @@ opacity: 0 !important;
         * 
         * @example        html       Default
         *   <ul class="s-tabs s-color:accent">
-        *     <li tabindex="0" active>Eleanor Johns</li>
-        *     <li tabindex="0">Floyd Bogisich</li>
-        *     <li tabindex="0">Bertha Weber</li>
+        *     <li tabindex="0" active>Harold Lehner</li>
+        *     <li tabindex="0">Emma Becker</li>
+        *     <li tabindex="0">Ted Nader</li>
         *   </ul>
         * 
         * @example        html       Grow
         *   <ul class="s-tabs:grow">
-        *     <li tabindex="0" active>Micheal Bahringer</li>
-        *     <li tabindex="0">Jonathan Botsford</li>
-        *     <li tabindex="0">Cindy Leannon</li>
+        *     <li tabindex="0" active>Dr. Alexander Stokes</li>
+        *     <li tabindex="0">Martin McDermott</li>
+        *     <li tabindex="0">Dawn Conn</li>
         *   </ul>
         * 
         * @example        html       Fill
         *   <ul class="s-tabs:fill">
-        *     <li tabindex="0" active>Dorothy Wilkinson</li>
-        *     <li tabindex="0">Jeremiah Kuhn</li>
-        *     <li tabindex="0">Ted Shields</li>
+        *     <li tabindex="0" active>Miranda Zieme</li>
+        *     <li tabindex="0">Ruby Yost</li>
+        *     <li tabindex="0">Christy Blanda</li>
         *   </ul>
         * 
         * @example        html       Shapes
         *   <ul class="s-tabs s-shape:square s-mbe:30">
-        *     <li tabindex="0" active>Rebecca Schoen</li>
-        *     <li tabindex="0">Clyde Pollich</li>
-        *     <li tabindex="0">Leslie Ortiz</li>
+        *     <li tabindex="0" active>Kim Jast</li>
+        *     <li tabindex="0">Fernando Cronin</li>
+        *     <li tabindex="0">Eva Considine</li>
         *   </ul>
         * <ul class="s-tabs s-shape:pill">
-        *     <li tabindex="0" active>Dennis Langworth</li>
-        *     <li tabindex="0">Neil Purdy</li>
-        *     <li tabindex="0">Steven Labadie</li>
+        *     <li tabindex="0" active>Austin Beer</li>
+        *     <li tabindex="0">Abraham Dibbert</li>
+        *     <li tabindex="0">Lee Waters</li>
         *   </ul>
         * 
         * @example      html        RTL
         * <div dir="rtl">
         *   <ul class="s-tabs">
-        *     <li class="s-color:accent" tabindex="0" active>Dianna Waters</li>
-        *     <li class="s-color:complementary" tabindex="0">Margie Herzog</li>
-        *     <li tabindex="0">Angie Wolf</li>
+        *     <li class="s-color:accent" tabindex="0" active>Greg Kirlin I</li>
+        *     <li class="s-color:complementary" tabindex="0">Bernadette Kozey</li>
+        *     <li tabindex="0">Garrett Lockman</li>
         *   </ul>
         * </div>
         * 
         * @example      html        Vertical
         *   <ul class="s-tabs:vertical s-color:complementary">
-        *     <li tabindex="0" active>Lucia Steuber</li>
-        *     <li tabindex="0">Joseph Crona Sr.</li>
-        *     <li tabindex="0">Gail Morissette</li>
+        *     <li tabindex="0" active>Duane Ankunding</li>
+        *     <li tabindex="0">Malcolm Hills</li>
+        *     <li tabindex="0">Lowell Swift</li>
         *   </ul>
         * 
         * @example      html        Scales
         *   <ul class="s-tabs:grow s-scale:13 s-color:accent">
-        *     <li tabindex="0" active>Felicia Doyle</li>
-        *     <li tabindex="0">William Morissette</li>
-        *     <li tabindex="0">Morris Stokes</li>
+        *     <li tabindex="0" active>Michelle Kozey</li>
+        *     <li tabindex="0">Gary Ernser</li>
+        *     <li tabindex="0">Nettie Pollich</li>
         *   </ul>
         *
         * @since      2.0.0
@@ -3544,207 +3544,207 @@ background-color: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-
         *
           * @example        html        h1
             *   <h1 class="s-typo:h1">
-            *       Dr. Leo Schuster
+            *       Blanca Altenwerth
             *   </h1>
             * 
  * @example        html        h2
             *   <h2 class="s-typo:h2">
-            *       Mr. Lauren Shields
+            *       Ray Beier
             *   </h2>
             * 
  * @example        html        h3
             *   <h3 class="s-typo:h3">
-            *       Sherry Gottlieb
+            *       Stella Corkery
             *   </h3>
             * 
  * @example        html        h4
             *   <h4 class="s-typo:h4">
-            *       Evan Wehner
+            *       William Kris
             *   </h4>
             * 
  * @example        html        h5
             *   <h5 class="s-typo:h5">
-            *       Mr. Eduardo Rau
+            *       Miss Gordon VonRueden
             *   </h5>
             * 
  * @example        html        h6
             *   <h6 class="s-typo:h6">
-            *       Herman Kassulke Jr.
+            *       Joyce Osinski Jr.
             *   </h6>
             * 
  * @example        html        p
             *   <p class="s-typo:p">
-            *       Sherman Littel
+            *       Louis Prohaska
             *   </p>
             * 
  * @example        html        lead
             *   <lead class="s-typo:lead">
-            *       Rudolph Marks
+            *       Claudia Lueilwitz PhD
             *   </lead>
             * 
  * @example        html        hr
             *   <hr class="s-typo:hr">
-            *       Olivia Bergstrom
+            *       Ms. Betty Pfannerstill
             *   </hr>
             * 
  * @example        html        pre:not([class])
             *   <pre:not([class]) class="s-typo:pre:not([class])">
-            *       Stephanie Haag
+            *       Darrel Berge
             *   </pre:not([class])>
             * 
  * @example        html        code:not(pre > code)
             *   <code:not(pre > code) class="s-typo:code:not(pre > code)">
-            *       Beatrice Lebsack
+            *       Rick Koss
             *   </code:not(pre > code)>
             * 
  * @example        html        blockquote
             *   <blockquote class="s-typo:blockquote">
-            *       Jody Morissette
+            *       Whitney Gerhold
             *   </blockquote>
             * 
  * @example        html        a
             *   <a class="s-typo:a">
-            *       Miss Wendell Gorczany
+            *       Carla Boyer
             *   </a>
             * 
  * @example        html        quote
             *   <quote class="s-typo:quote">
-            *       Clark Ritchie
+            *       Abraham Hilpert
             *   </quote>
             * 
  * @example        html        bold
             *   <bold class="s-typo:bold">
-            *       Erma Glover
+            *       Mr. Sammy Rau
             *   </bold>
             * 
  * @example        html        italic
             *   <italic class="s-typo:italic">
-            *       Yolanda Turcotte
+            *       Elvira King
             *   </italic>
             * 
  * @example        html        large
             *   <large class="s-typo:large">
-            *       Hazel Friesen
+            *       Dr. Brenda Nienow
             *   </large>
             * 
  * @example        html        larger
             *   <larger class="s-typo:larger">
-            *       Ms. Yolanda Zieme
+            *       Kenneth Tromp
             *   </larger>
             * 
  * @example        html        largest
             *   <largest class="s-typo:largest">
-            *       Lowell Schmitt
+            *       Roosevelt Tillman
             *   </largest>
             * 
  * @example        html        small
             *   <small class="s-typo:small">
-            *       Sam Hoeger
+            *       Bertha Zieme MD
             *   </small>
             * 
  * @example        html        smaller
             *   <smaller class="s-typo:smaller">
-            *       Miss Marco Torp
+            *       Janis Reynolds V
             *   </smaller>
             * 
  * @example        html        smallest
             *   <smallest class="s-typo:smallest">
-            *       Nina Kling
+            *       Ms. Patricia Smith
             *   </smallest>
             * 
  * @example        html        mark
             *   <mark class="s-typo:mark">
-            *       Mrs. Dean Bogisich
+            *       Kayla Koss
             *   </mark>
             * 
  * @example        html        del
             *   <del class="s-typo:del">
-            *       Tabitha Bernhard
+            *       Frances Koepp
             *   </del>
             * 
  * @example        html        ins
             *   <ins class="s-typo:ins">
-            *       Florence Haag
+            *       Kristen Gleichner
             *   </ins>
             * 
  * @example        html        sub
             *   <sub class="s-typo:sub">
-            *       Terri Sawayn
+            *       Miss Randy Douglas
             *   </sub>
             * 
  * @example        html        sup
             *   <sup class="s-typo:sup">
-            *       Ian Wintheiser
+            *       Erika Hessel
             *   </sup>
             * 
  * @example        html        main
             *   <main class="s-typo:main">
-            *       Bradford Hoeger
+            *       Bobbie Block DDS
             *   </main>
             * 
  * @example        html        mainGradient
             *   <mainGradient class="s-typo:mainGradient">
-            *       Evan Bernier
+            *       Penny Spencer
             *   </mainGradient>
             * 
  * @example        html        accent
             *   <accent class="s-typo:accent">
-            *       Rachael Brakus
+            *       Erick Turner
             *   </accent>
             * 
  * @example        html        accentGradient
             *   <accentGradient class="s-typo:accentGradient">
-            *       Geoffrey Koch Jr.
+            *       Harold Kulas
             *   </accentGradient>
             * 
  * @example        html        complementary
             *   <complementary class="s-typo:complementary">
-            *       Miss Sabrina Goodwin
+            *       Oliver Walter
             *   </complementary>
             * 
  * @example        html        complementaryGradient
             *   <complementaryGradient class="s-typo:complementaryGradient">
-            *       Leigh Daniel
+            *       Lorraine Hilpert
             *   </complementaryGradient>
             * 
  * @example        html        success
             *   <success class="s-typo:success">
-            *       Daniel Kuphal Jr.
+            *       Marianne Brakus
             *   </success>
             * 
  * @example        html        successGradient
             *   <successGradient class="s-typo:successGradient">
-            *       Johnny Ritchie IV
+            *       Rosie Douglas
             *   </successGradient>
             * 
  * @example        html        warning
             *   <warning class="s-typo:warning">
-            *       Mr. Ella Hickle
+            *       Dwight Hintz
             *   </warning>
             * 
  * @example        html        warningGradient
             *   <warningGradient class="s-typo:warningGradient">
-            *       Dolores Schuppe DDS
+            *       Ben Effertz
             *   </warningGradient>
             * 
  * @example        html        error
             *   <error class="s-typo:error">
-            *       Moses Schiller
+            *       Josephine Waelchi
             *   </error>
             * 
  * @example        html        errorGradient
             *   <errorGradient class="s-typo:errorGradient">
-            *       Mr. Marion Leffler
+            *       Phil Kuhic
             *   </errorGradient>
             * 
  * @example        html        info
             *   <info class="s-typo:info">
-            *       Tom Schultz
+            *       Wilma Roberts
             *   </info>
             * 
  * @example        html        infoGradient
             *   <infoGradient class="s-typo:infoGradient">
-            *       Curtis Witting
+            *       Randolph Vandervort
             *   </infoGradient>
             * 
         * 
@@ -4776,23 +4776,23 @@ background-image: linear-gradient(90deg, #00ffff 0%, #1affff 100%);
         *
         * 
         * @example        html               Inline
-        *   <p class="s-bg:accent s-radius s-p:30 s-mbe:20">Roderick Kohler</p>
-        *   <p class="s-bg:complementary s-radius s-mi:50 s-mbe:20 s-p:30">Candice Stanton</p>
-        *   <p class="s-bg:main s-mie:100 s-radius s-mbe:20 s-p:30">Marcella Bechtelar</p>
-        *   <p class="s-bg:error s-mie:30 s-radius s-p:30">Kelley Considine</p>
+        *   <p class="s-bg:accent s-radius s-p:30 s-mbe:20">Ms. Jeffery Lind</p>
+        *   <p class="s-bg:complementary s-radius s-mi:50 s-mbe:20 s-p:30">Jessie Rowe</p>
+        *   <p class="s-bg:main s-mie:100 s-radius s-mbe:20 s-p:30">Maxine Shanahan PhD</p>
+        *   <p class="s-bg:error s-mie:30 s-radius s-p:30">Estelle Langosh</p>
         * 
         * @example            html                Block
-        *   <div class="s-bg:accent s-radius s-mbe:40 s-p:30 s-text:center">Omar Bechtelar</div>
-        *   <div class="s-bg:complementary s-radius s-mbe:20 s-p:30 s-text:center">Leigh Jones</div>
-        *   <div class="s-bg:main s-radius s-mbe:50 s-p:30 s-text:center">Cynthia Denesik PhD</div>
-        *   <div class="s-bg:error s-radius s-p:30 s-text:center">Gerardo Mills</div>
+        *   <div class="s-bg:accent s-radius s-mbe:40 s-p:30 s-text:center">Nancy Jerde</div>
+        *   <div class="s-bg:complementary s-radius s-mbe:20 s-p:30 s-text:center">Ora Gerhold</div>
+        *   <div class="s-bg:main s-radius s-mbe:50 s-p:30 s-text:center">Krista Johnson</div>
+        *   <div class="s-bg:error s-radius s-p:30 s-text:center">Randal Gulgowski</div>
         * 
         * @example            html                RTL
         * <div dir="rtl">
-        *   <p class="s-bg:accent s-radius s-p:30 s-mbe:20">Mamie Williamson</p>
-        *   <p class="s-bg:complementary s-radius s-mi:50 s-mbe:20 s-p:30">Judith Kuhlman</p>
-        *   <p class="s-bg:main s-radius s-mie:100 s-mbe:20 s-p:30">Cameron Schaefer</p>
-        *   <p class="s-bg:error s-radius s-mie:30 s-p:30">Beverly Keeling</p>
+        *   <p class="s-bg:accent s-radius s-p:30 s-mbe:20">Adam Schaefer</p>
+        *   <p class="s-bg:complementary s-radius s-mi:50 s-mbe:20 s-p:30">Ada Feil</p>
+        *   <p class="s-bg:main s-radius s-mie:100 s-mbe:20 s-p:30">Sue Lesch</p>
+        *   <p class="s-bg:error s-radius s-mie:30 s-p:30">Kathleen Borer</p>
         * </div>
         * 
         * @since      2.0.0
@@ -5364,23 +5364,23 @@ background-image: linear-gradient(90deg, #00ffff 0%, #1affff 100%);
         *
         * 
         * @example        html          Inline
-        *   <p class="s-bg:accent s-radius s-pi:30 s-pb:30 s-mbe:20">Eduardo Wunsch</p>
-        *   <p class="s-bg:complementary s-radius s-pis:50 s-pb:30 s-mbe:20">Lila Heathcote</p>
-        *   <p class="s-bg:main s-radius s-pis:80 s-pb:30 s-mbe:20">Dave Lind</p>
-        *   <p class="s-bg:error s-radius s-pis:100 s-pb:30 s-mbe:20">Simon Gleichner</p>
+        *   <p class="s-bg:accent s-radius s-pi:30 s-pb:30 s-mbe:20">Wm Kuhlman</p>
+        *   <p class="s-bg:complementary s-radius s-pis:50 s-pb:30 s-mbe:20">Winston Johnston</p>
+        *   <p class="s-bg:main s-radius s-pis:80 s-pb:30 s-mbe:20">Renee Nienow</p>
+        *   <p class="s-bg:error s-radius s-pis:100 s-pb:30 s-mbe:20">Mamie Wiza I</p>
         * 
         * @example            html                Block
-        *   <div class="s-bg:accent s-radius s-pbs:30 s-pbe:40 s-text:center s-mbe:20">Francis Sanford</div>
-        *   <div class="s-bg:complementary s-radius s-pb:30 s-text:center s-mbe:20">Terrance Murphy</div>
-        *   <div class="s-bg:main s-radius s-pbs:50 s-pbe:30 s-text:center s-mbe:20">Roderick Collins</div>
-        *   <div class="s-bg:error s-radius s-pbs:100 s-pbe:60 s-text:center s-mbe:20">Joan Nitzsche</div>
+        *   <div class="s-bg:accent s-radius s-pbs:30 s-pbe:40 s-text:center s-mbe:20">Jeannie Jacobs PhD</div>
+        *   <div class="s-bg:complementary s-radius s-pb:30 s-text:center s-mbe:20">Leon Rogahn</div>
+        *   <div class="s-bg:main s-radius s-pbs:50 s-pbe:30 s-text:center s-mbe:20">Dr. Marcella Keebler</div>
+        *   <div class="s-bg:error s-radius s-pbs:100 s-pbe:60 s-text:center s-mbe:20">Ervin Rosenbaum</div>
         * 
         * @example       html          RTL
         * <div dir="rtl">
-        *   <p class="s-bg:accent s-radius s-pi:30 s-pb:30 s-mbe:20">Angelo Langworth</p>
-        *   <p class="s-bg:complementary s-radius s-pis:50 s-pb:30 s-mbe:20">Tracy Tillman</p>
-        *   <p class="s-bg:main s-radius s-pis:80 s-pb:30 s-mbe:20">Loretta Nolan</p>
-        *   <p class="s-bg:error s-radius s-pis:100 s-pb:30 s-mbe:20">Tracy Cummerata</p>
+        *   <p class="s-bg:accent s-radius s-pi:30 s-pb:30 s-mbe:20">Frankie Greenfelder V</p>
+        *   <p class="s-bg:complementary s-radius s-pis:50 s-pb:30 s-mbe:20">Jill Bartoletti</p>
+        *   <p class="s-bg:main s-radius s-pis:80 s-pb:30 s-mbe:20">Andres Ledner</p>
+        *   <p class="s-bg:error s-radius s-pis:100 s-pb:30 s-mbe:20">Johnny Harvey</p>
         * </div>
         * 
         * @since      2.0.0
@@ -5785,66 +5785,66 @@ background-image: linear-gradient(90deg, #00ffff 0%, #1affff 100%);
         * @example        html         Default
         * <div class="s-flex:align-center:wrap s-gap:20 s-font:70">
         *   <div class="s-avatar">
-        *       <img src="https://i.pravatar.cc/300?v=99373" />
+        *       <img src="https://i.pravatar.cc/300?v=9224" />
         *   </div>
         *       <div class="s-avatar s-color:accent">
-        *       <img src="https://i.pravatar.cc/300?v=72264" />
+        *       <img src="https://i.pravatar.cc/300?v=34366" />
         *   </div>
         *   <div class="s-avatar s-color:complementary">
-        *       <img src="https://i.pravatar.cc/300?v=73029" />
+        *       <img src="https://i.pravatar.cc/300?v=1536" />
         *   </div>
         *   <div class="s-avatar s-color:info">
-        *       <img src="https://i.pravatar.cc/300?v=66035" />
+        *       <img src="https://i.pravatar.cc/300?v=62622" />
         *   </div>
         *   <div class="s-avatar s-color:success">
-        *       <img src="https://i.pravatar.cc/300?v=9027" />
+        *       <img src="https://i.pravatar.cc/300?v=77481" />
         *   </div>
         *   <div class="s-avatar s-color:error">
-        *      <img src="https://i.pravatar.cc/300?v=94397" />
+        *      <img src="https://i.pravatar.cc/300?v=78034" />
         *   </div>
         * </div>
         * 
         * @example       html         Notifications
         * <div class="s-flex:wrap:align-center s-gap:20 s-font:70">
         *   <div class="s-avatar notifications="10">
-        *      <img src="https://i.pravatar.cc/300?v=49944" />
+        *      <img src="https://i.pravatar.cc/300?v=6890" />
         *   </div>
         *   <div class="s-avatar s-color:accent" notifications="10">
-        *       <img src="https://i.pravatar.cc/300?v=2893" />
+        *       <img src="https://i.pravatar.cc/300?v=36936" />
         *   </div>
         *   <div class="s-avatar s-color:complementary" notifications="10">
-        *       <img src="https://i.pravatar.cc/300?v=1929" />
+        *       <img src="https://i.pravatar.cc/300?v=12017" />
         *   </div>
         *   <div class="s-avatar s-color:info" notifications>
-        *       <img src="https://i.pravatar.cc/300?v=51453" />
+        *       <img src="https://i.pravatar.cc/300?v=56115" />
         *   </div>
         *   <div class="s-avatar s-color:success" notifications>
-        *       <img src="https://i.pravatar.cc/300?v=74684" />
+        *       <img src="https://i.pravatar.cc/300?v=66996" />
         *   </div>
         *   <div class="s-avatar s-color:error" notifications>
-        *       <img src="https://i.pravatar.cc/300?v=74388" />
+        *       <img src="https://i.pravatar.cc/300?v=67399" />
         *   </div>
         * </div>
         * 
         * @example       html         Interactive
         * <div class="s-flex:wrap:align-center s-gap:20 s-font:70">
         *   <div class="s-avatar:interactive">
-        *        <img src="https://i.pravatar.cc/300?v=57084" />
+        *        <img src="https://i.pravatar.cc/300?v=7896" />
         *   </div>
         *   <div class="s-avatar:interactive s-color:accent">
-        *       <img src="https://i.pravatar.cc/300?v=15420" />
+        *       <img src="https://i.pravatar.cc/300?v=61720" />
         *   </div>
         *   <div class="s-avatar:interactive s-color:complementary">
-        *       <img src="https://i.pravatar.cc/300?v=45944" />
+        *       <img src="https://i.pravatar.cc/300?v=58597" />
         *   </div>
         *   <div class="s-avatar:interactive s-color:info">
-        *       <img src="https://i.pravatar.cc/300?v=91894" />
+        *       <img src="https://i.pravatar.cc/300?v=17531" />
         *   </div>
         *   <div class="s-avatar:interactive s-color:success">
-        *       <img src="https://i.pravatar.cc/300?v=94895" />
+        *       <img src="https://i.pravatar.cc/300?v=16364" />
         *   </div>
         *   <div class="s-avatar:interactive s-color:error">
-        *       <img src="https://i.pravatar.cc/300?v=7759" />
+        *       <img src="https://i.pravatar.cc/300?v=33497" />
         *   </div>
         * </div>
         * 
@@ -6356,37 +6356,37 @@ background-image: linear-gradient(90deg, #00ffff 0%, #1affff 100%);
             *       <li class="active">
             *           <div>
             *               <i class="s-icon:folder-open"></i>
-            *               <span tabindex="0">Enrique Anderson</span>
+            *               <span tabindex="0">Barbara Zboncak</span>
             *           </div>
             *           <ul>
             *               <li>
             *                   <div>
             *                       <i class="s-icon:file"></i>
-            *                       <a tabindex="0">Dr. Jimmie Hessel</a>
+            *                       <a tabindex="0">Stacy Keebler</a>
             *                   </div>
             *               </li>
             *               <li class="active">
             *                   <div>
             *                       <i class="s-icon:folder-open"></i>
-            *                       <span tabindex="0">Dorothy Hahn</span>
+            *                       <span tabindex="0">Santiago Klein</span>
             *                   </div>
                                 <ul>
                     *               <li>
                     *                   <div>
                     *                       <i class="s-icon:file-pdf"></i>
-                    *                       <a tabindex="0">Vernon Heathcote</a>
+                    *                       <a tabindex="0">Rachel Moore</a>
                     *                   </div>
                     *               </li>
                     *               <li>
                     *                  <div>
                     *                       <i class="s-icon:file-code"></i>
-                    *                       <a tabindex="0">Tamara Kilback</a>
+                    *                       <a tabindex="0">Ed Rosenbaum</a>
                     *                  </div>
                     *               </li>
                     *              <li>
                     *                   <div>
                     *                       <i class="s-icon:file-image"></i>
-                    *                       <a tabindex="0">Elbert Turcotte</a>
+                    *                       <a tabindex="0">Lynette Schultz</a>
                     *                   </div>
                     *               </li>
                     *           </ul>
@@ -6394,20 +6394,20 @@ background-image: linear-gradient(90deg, #00ffff 0%, #1affff 100%);
             *              <li>
             *                   <div>
             *                       <i class="s-icon:file-archive"></i>
-            *                       <a tabindex="0">Sammy Parisian</a>
+            *                       <a tabindex="0">Geraldine Cronin</a>
             *                   </div>
             *               </li>
             *           </ul>
             *           <li class="s-disabled">
             *               <div>
         *                       <i class="s-icon:file"></i>
-        *                       <a tabindex="0">Mr. Geneva Gottlieb</a>
+        *                       <a tabindex="0">Jerald Schuppe</a>
         *                  </div>
         *               </li>
             *           <li>
             *               <div>
         *                       <i class="s-icon:file-code"></i>
-        *                       <a tabindex="0">Elisa Gulgowski</a>
+        *                       <a tabindex="0">Rafael Dach</a>
         *                 </div>
         *               </li>
             *       </li>
@@ -6420,37 +6420,37 @@ background-image: linear-gradient(90deg, #00ffff 0%, #1affff 100%);
             *       <li class="active">
             *           <div>
             *               <i class="s-icon:folder-open"></i>
-            *               <span tabindex="0">Glenda Gleichner</span>
+            *               <span tabindex="0">Paula Conroy</span>
             *           </div>
             *           <ul>
             *               <li>
             *                   <div>
             *                       <i class="s-icon:file"></i>
-            *                       <a tabindex="0">Willis Considine</a>
+            *                       <a tabindex="0">Eddie Konopelski</a>
             *                   </div>
             *               </li>
             *               <li class="active">
             *                   <div>
             *                       <i class="s-icon:folder-open"></i>
-            *                       <span tabindex="0">Miguel Reichel</span>
+            *                       <span tabindex="0">Felix Mertz</span>
             *                   </div>
                                 <ul>
                     *               <li>
                     *                   <div>
                     *                       <i class="s-icon:file-pdf"></i>
-                    *                       <a tabindex="0">Kathryn Daniel</a>
+                    *                       <a tabindex="0">Wendy Schinner</a>
                     *                   </div>
                     *               </li>
                     *               <li>
                     *                  <div>
                     *                       <i class="s-icon:file-code"></i>
-                    *                       <a tabindex="0">Karl Nitzsche</a>
+                    *                       <a tabindex="0">Monica Kovacek</a>
                     *                  </div>
                     *               </li>
                     *              <li>
                     *                   <div>
                     *                       <i class="s-icon:file-image"></i>
-                    *                       <a tabindex="0">Geoffrey Cruickshank</a>
+                    *                       <a tabindex="0">Kristen Schaden</a>
                     *                   </div>
                     *               </li>
                     *           </ul>
@@ -6458,20 +6458,20 @@ background-image: linear-gradient(90deg, #00ffff 0%, #1affff 100%);
             *              <li>
             *                   <div>
             *                       <i class="s-icon:file-archive"></i>
-            *                       <a tabindex="0">Angelina Schamberger Sr.</a>
+            *                       <a tabindex="0">Dr. Trevor Sporer</a>
             *                   </div>
             *               </li>
             *           </ul>
             *           <li class="s-disabled">
             *               <div>
         *                       <i class="s-icon:file"></i>
-        *                       <a tabindex="0">Frederick Robel</a>
+        *                       <a tabindex="0">Dan Carroll</a>
         *                  </div>
         *               </li>
             *           <li>
             *               <div>
         *                       <i class="s-icon:file-code"></i>
-        *                       <a tabindex="0">Chester Durgan</a>
+        *                       <a tabindex="0">Malcolm Denesik</a>
         *                 </div>
         *               </li>
             *       </li>
@@ -6483,37 +6483,37 @@ background-image: linear-gradient(90deg, #00ffff 0%, #1affff 100%);
             *       <li class="active">
             *           <div>
             *               <i class="s-icon:folder-open"></i>
-            *               <span tabindex="0">Ignacio Torphy V</span>
+            *               <span tabindex="0">Patty Lakin</span>
             *           </div>
             *           <ul>
             *               <li>
             *                   <div>
             *                       <i class="s-icon:file"></i>
-            *                       <a tabindex="0">Kristi Feest DVM</a>
+            *                       <a tabindex="0">Dwight Murray</a>
             *                   </div>
             *               </li>
             *               <li class="active">
             *                   <div>
             *                       <i class="s-icon:folder-open"></i>
-            *                       <span tabindex="0">Gail Volkman</span>
+            *                       <span tabindex="0">Ernestine Lowe IV</span>
             *                   </div>
                                 <ul>
                     *               <li>
                     *                   <div>
                     *                       <i class="s-icon:file-pdf"></i>
-                    *                       <a tabindex="0">Nelson Kulas</a>
+                    *                       <a tabindex="0">Elmer Armstrong</a>
                     *                   </div>
                     *               </li>
                     *               <li>
                     *                  <div>
                     *                       <i class="s-icon:file-code"></i>
-                    *                       <a tabindex="0">Ismael Hammes</a>
+                    *                       <a tabindex="0">Tammy Metz</a>
                     *                  </div>
                     *               </li>
                     *              <li>
                     *                   <div>
                     *                       <i class="s-icon:file-image"></i>
-                    *                       <a tabindex="0">Whitney Anderson</a>
+                    *                       <a tabindex="0">Kenneth Osinski</a>
                     *                   </div>
                     *               </li>
                     *           </ul>
@@ -6521,20 +6521,20 @@ background-image: linear-gradient(90deg, #00ffff 0%, #1affff 100%);
             *              <li>
             *                   <div>
             *                       <i class="s-icon:file-archive"></i>
-            *                       <a tabindex="0">Mrs. Florence Collins</a>
+            *                       <a tabindex="0">Stacey Ritchie I</a>
             *                   </div>
             *               </li>
             *           </ul>
             *           <li class="s-disabled">
             *               <div>
         *                       <i class="s-icon:file"></i>
-        *                       <a tabindex="0">Matthew Brekke</a>
+        *                       <a tabindex="0">Harold Bergnaum II</a>
         *                  </div>
         *               </li>
             *           <li>
             *               <div>
         *                       <i class="s-icon:file-code"></i>
-        *                       <a tabindex="0">Dr. Kevin Pfannerstill</a>
+        *                       <a tabindex="0">Janis Rau</a>
         *                 </div>
         *               </li>
             *       </li>
@@ -6548,37 +6548,37 @@ background-image: linear-gradient(90deg, #00ffff 0%, #1affff 100%);
             *       <li class="active">
             *           <div>
             *               <i class="s-icon:folder-open"></i>
-            *               <span tabindex="0">Raymond Paucek</span>
+            *               <span tabindex="0">Dianna Jenkins</span>
             *           </div>
             *           <ul>
             *               <li>
             *                   <div>
             *                       <i class="s-icon:file"></i>
-            *                       <a tabindex="0">Alma McClure</a>
+            *                       <a tabindex="0">Matthew Fadel DDS</a>
             *                   </div>
             *               </li>
             *               <li class="active">
             *                   <div>
             *                       <i class="s-icon:folder-open"></i>
-            *                       <span tabindex="0">Gloria Stiedemann</span>
+            *                       <span tabindex="0">Viola Strosin</span>
             *                   </div>
                                 <ul>
                     *               <li>
                     *                   <div>
                     *                       <i class="s-icon:file-pdf"></i>
-                    *                       <a tabindex="0">Jeffrey Luettgen</a>
+                    *                       <a tabindex="0">Dr. Cameron Schumm</a>
                     *                   </div>
                     *               </li>
                     *               <li>
                     *                  <div>
                     *                       <i class="s-icon:file-code"></i>
-                    *                       <a tabindex="0">Renee Walter</a>
+                    *                       <a tabindex="0">Lydia Erdman</a>
                     *                  </div>
                     *               </li>
                     *              <li>
                     *                   <div>
                     *                       <i class="s-icon:file-image"></i>
-                    *                       <a tabindex="0">Darryl Langosh</a>
+                    *                       <a tabindex="0">Courtney Lynch</a>
                     *                   </div>
                     *               </li>
                     *           </ul>
@@ -6586,20 +6586,20 @@ background-image: linear-gradient(90deg, #00ffff 0%, #1affff 100%);
             *              <li>
             *                   <div>
             *                       <i class="s-icon:file-archive"></i>
-            *                       <a tabindex="0">Pamela O'Kon DDS</a>
+            *                       <a tabindex="0">Jean Schultz III</a>
             *                   </div>
             *               </li>
             *           </ul>
             *           <li class="s-disabled">
             *               <div>
         *                       <i class="s-icon:file"></i>
-        *                       <a tabindex="0">Josephine Willms</a>
+        *                       <a tabindex="0">Darin Greenfelder</a>
         *                  </div>
         *               </li>
             *           <li>
             *               <div>
         *                       <i class="s-icon:file-code"></i>
-        *                       <a tabindex="0">Pedro Rodriguez</a>
+        *                       <a tabindex="0">Sarah Fay</a>
         *                 </div>
         *               </li>
             *       </li>
@@ -6621,14 +6621,14 @@ background-image: linear-gradient(90deg, #00ffff 0%, #1affff 100%);
             * @example        html
             * <ul class="s-fs-tree">
             *       <li>
-            *          <i class="s-icon:folder"></i> Mr. Dewey Durgan
+            *          <i class="s-icon:folder"></i> Genevieve Wintheiser
             *          <ul>
-            *               <li><i class="s-icon:file"></i> Bradley McGlynn</li>
-            *               <li><i class="s-icon:file"></i> Casey Rath I</li>
-            *              <li><i class="s-icon:file"></i> Mrs. Tracy Will</li>
+            *               <li><i class="s-icon:file"></i> Phil Veum</li>
+            *               <li><i class="s-icon:file"></i> Doug Greenfelder</li>
+            *              <li><i class="s-icon:file"></i> Doris Boyle</li>
             *           </ul>
-            *           <li><i class="s-icon:file"></i> Aubrey Jacobi Sr.</li>
-            *           <li><i class="s-icon:file"></i> Katrina Sipes</li>
+            *           <li><i class="s-icon:file"></i> Adam Brekke</li>
+            *           <li><i class="s-icon:file"></i> Gary Dickens</li>
             *       </li>
             *   </ul>
             * 
@@ -6706,14 +6706,14 @@ background-image: linear-gradient(90deg, #00ffff 0%, #1affff 100%);
                 * @example        html
                 * <ul class="s-fs-tree">
                 *       <li>
-                *          <i class="s-icon:folder"></i> Sheldon Dare
+                *          <i class="s-icon:folder"></i> Kelley Padberg
                 *          <ul>
-                *               <li><i class="s-icon:file"></i> Forrest Gerhold I</li>
-                *               <li><i class="s-icon:file"></i> Carlos Heller</li>
-                *              <li><i class="s-icon:file"></i> Joan Ratke</li>
+                *               <li><i class="s-icon:file"></i> Mrs. Sheri Runolfsdottir</li>
+                *               <li><i class="s-icon:file"></i> Arturo Upton</li>
+                *              <li><i class="s-icon:file"></i> Kara Zboncak</li>
                 *           </ul>
-                *           <li><i class="s-icon:file"></i> Vanessa Conroy</li>
-                *           <li><i class="s-icon:file"></i> Ms. Carol Koss</li>
+                *           <li><i class="s-icon:file"></i> Terence Hackett</li>
+                *           <li><i class="s-icon:file"></i> Lee Senger PhD</li>
                 *       </li>
                 *   </ul>
                 * 
@@ -6752,7 +6752,7 @@ background-image: linear-gradient(90deg, #00ffff 0%, #1affff 100%);
         * 
          * @example        html       solid lnf
             *   <label class="s-label:responsive s-mbe:30">
-            *       <span>Percy Lubowitz</span>
+            *       <span>Lucia Hettinger</span>
             *       <input type="text" placeholder="Type something!" class="s-input:solid s-width:40" />
             *  </label>
             *   <label class="s-label:responsive s-mbe:30">
@@ -6767,7 +6767,7 @@ background-image: linear-gradient(90deg, #00ffff 0%, #1affff 100%);
             * 
  * @example        html       underline lnf
             *   <label class="s-label:responsive s-mbe:30">
-            *       <span>Abel Connelly</span>
+            *       <span>Juan Bauch</span>
             *       <input type="text" placeholder="Type something!" class="s-input:underline s-width:40" />
             *  </label>
             *   <label class="s-label:responsive s-mbe:30">
@@ -6783,29 +6783,29 @@ background-image: linear-gradient(90deg, #00ffff 0%, #1affff 100%);
         *
          * @example        html       Shapes
             *   <label class="s-label:responsive s-mbe:30">
-            *       <span>Robin Beer Sr.</span>
+            *       <span>Hector Stark</span>
             *       <input type="text" placeholder="Type something!" class="s-input:solid s-shape:default s-width:40" />
             *  </label>
             *   <label class="s-label:responsive s-mbe:30">
-            *       <span>Marjorie Mosciski</span>
+            *       <span>Bernice McDermott II</span>
             *       <input type="text" placeholder="Type something!" class="s-input:solid s-shape:square s-width:40" />
             *  </label>
             * <label class="s-label:responsive s-mbe:30">
-            *       <span>Jody Hand</span>
+            *       <span>Stewart Kreiger</span>
             *       <input type="text" placeholder="Type something!" class="s-input:solid s-shape:pill s-width:40" />
             *  </label>
             * 
  * @example        html       Shapes
             *   <label class="s-label:responsive s-mbe:30">
-            *       <span>Rene McKenzie</span>
+            *       <span>Ian Weissnat</span>
             *       <input type="text" placeholder="Type something!" class="s-input:underline s-shape:default s-width:40" />
             *  </label>
             *   <label class="s-label:responsive s-mbe:30">
-            *       <span>Dennis Leffler</span>
+            *       <span>Courtney Streich</span>
             *       <input type="text" placeholder="Type something!" class="s-input:underline s-shape:square s-width:40" />
             *  </label>
             * <label class="s-label:responsive s-mbe:30">
-            *       <span>Russell Zboncak V</span>
+            *       <span>Sergio Stroman</span>
             *       <input type="text" placeholder="Type something!" class="s-input:underline s-shape:pill s-width:40" />
             *  </label>
             * 
@@ -6813,25 +6813,25 @@ background-image: linear-gradient(90deg, #00ffff 0%, #1affff 100%);
         * @example        html       Colors (non-exhaustive)
          
             *   <label class="s-label:responsive s-mbe:30">
-            *       <span>Ron Runte</span>
+            *       <span>Bryan Fadel</span>
             *       <input type="text" placeholder="Type something!" class="s-input s-color:main s-width:40" />
             *   </label>
             * 
  
             *   <label class="s-label:responsive s-mbe:30">
-            *       <span>Clara Blanda III</span>
+            *       <span>Raymond Fahey</span>
             *       <input type="text" placeholder="Type something!" class="s-input s-color:accent s-width:40" />
             *   </label>
             * 
  
             *   <label class="s-label:responsive s-mbe:30">
-            *       <span>Juanita Rice</span>
+            *       <span>Mack Christiansen</span>
             *       <input type="text" placeholder="Type something!" class="s-input s-color:complementary s-width:40" />
             *   </label>
             * 
  
             *   <label class="s-label:responsive s-mbe:30">
-            *       <span>Bobbie Murphy</span>
+            *       <span>Elena McClure</span>
             *       <input type="text" placeholder="Type something!" class="s-input s-color:error s-width:40" />
             *   </label>
             * 
@@ -6839,25 +6839,25 @@ background-image: linear-gradient(90deg, #00ffff 0%, #1affff 100%);
         * @example        html       Scales (non-exhaustive)
          
             *   <label class="s-label:responsive s-mbe:30">
-            *       <span>Leticia O'Conner</span>
+            *       <span>Johanna Kirlin</span>
             *       <input type="text" placeholder="Type something!" class="s-input s-scale:07 s-width:40" />
             *   </label>
             * 
  
             *   <label class="s-label:responsive s-mbe:30">
-            *       <span>Crystal Green</span>
+            *       <span>Doris Hessel IV</span>
             *       <input type="text" placeholder="Type something!" class="s-input s-scale:10 s-width:40" />
             *   </label>
             * 
  
             *   <label class="s-label:responsive s-mbe:30">
-            *       <span>Kate Bailey</span>
+            *       <span>Alvin Conn</span>
             *       <input type="text" placeholder="Type something!" class="s-input s-scale:13 s-width:40" />
             *   </label>
             * 
  
             *   <label class="s-label:responsive s-mbe:30">
-            *       <span>Jimmy Bartoletti</span>
+            *       <span>Darrel Lesch</span>
             *       <input type="text" placeholder="Type something!" class="s-input s-scale:16 s-width:40" />
             *   </label>
             * 
@@ -7007,7 +7007,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         * 
         * @example    html          Group
         * <label class="s-label:responsive s-mbe:30">
-        *      <span>Dr. Lila Smith</span>
+        *      <span>Marion Wilkinson</span>
         *      <div class="s-input-container:group s-width:50">
         *           <input type="text" placeholder="Keywords..." class="s-input" />
         *           <button class="s-btn s-color:accent">Search!</button>
@@ -7016,7 +7016,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         * 
         * @example    html          Group (rtl)
         * <label dir="rtl" class="s-label:responsive s-mbe:30">
-        *      <span>Connie Hudson</span>
+        *      <span>Thomas Ledner I</span>
         *      <div class="s-input-container:group s-width:50">
         *           <input type="text" placeholder="Keywords..." class="s-input" />
         *           <button class="s-btn s-color:accent">Search!</button>
@@ -7025,7 +7025,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         * 
         * @example    html          Addon
         * <label class="s-label:responsive s-mbe:30">
-        *      <span>Dr. Marlene Ritchie</span>
+        *      <span>Kerry Rolfson</span>
         *      <div class="s-input-container:addon s-width:50">
         *           <input type="text" placeholder="Keywords..." class="s-input" />
         *           <div>
@@ -7036,7 +7036,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         * 
         * @example    html          Addon (rtl)
         * <label dir="rtl" class="s-label:responsive s-mbe:30">
-        *      <span>Gwen Hermiston</span>
+        *      <span>Hazel Runolfsdottir</span>
         *      <div class="s-input-container:addon s-width:50">
         *           <input type="text" placeholder="Keywords..." class="s-input" />
         *           <div>
@@ -7047,7 +7047,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         * 
         * @example    html          Addon + group
         * <label class="s-label:responsive s-mbe:30">
-        *    <span>Naomi Cummings</span>
+        *    <span>Doris Schultz</span>
         *    <div class="s-input-container:group s-width:50">
         *       <div class="s-input-container:addon">
         *          <input type="text" placeholder="Keywords..." class="s-input" />
@@ -7061,7 +7061,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         * 
         * @example    html          Addon + group (rtl)
         * <label dir="rtl" class="s-label:responsive s-mbe:30">
-        *    <span>Arthur Mraz</span>
+        *    <span>Chad Lebsack DDS</span>
         *    <div class="s-input-container:group s-width:50">
         *       <div class="s-input-container:addon">
         *          <input type="text" placeholder="Keywords..." class="s-input" />
@@ -7454,54 +7454,54 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         * 
          * @example        html       dl
             *   <ul class="s-list:dl ">
-            *     <li>Regional Accountability Orchestrator Desiree Goodwin</li>
-            *     <li>Investor Quality Consultant Arlene Predovic</li>
-            *     <li>Investor Research Orchestrator Taylor Dicki</li>
+            *     <li>Regional Creative Manager Evan Dare</li>
+            *     <li>Investor Program Agent Opal Weimann</li>
+            *     <li>Product Functionality Analyst Ashley Swift</li>
             *   </ul>
             * 
  * @example        html       ul
             *   <ul class="s-list:ul ">
-            *     <li>Legacy Accounts Agent Verna McGlynn</li>
-            *     <li>Principal Accounts Director Angelo Hamill</li>
-            *     <li>Senior Brand Producer Allen Feest</li>
+            *     <li>Internal Web Planner Johnnie Nienow</li>
+            *     <li>Future Usability Developer Keith Sanford</li>
+            *     <li>Human Division Executive Ms. Danielle Sipes</li>
             *   </ul>
             * 
  * @example        html       ol
             *   <ul class="s-list:ol s-color:accent">
-            *     <li>Human Configuration Agent Jean Rohan Sr.</li>
-            *     <li>Forward Optimization Developer Heather Robel</li>
-            *     <li>Regional Program Director Laurie Runolfsson</li>
+            *     <li>Corporate Metrics Coordinator Fernando Mueller</li>
+            *     <li>Investor Communications Manager Joshua Howell</li>
+            *     <li>Regional Applications Technician Angelo Kshlerin</li>
             *   </ul>
             * 
  * @example        html       icon
             *   <ul class="s-list:icon ">
-            *     <li><i class="s-icon:user"></i>Product Metrics Coordinator Roderick Parker</li>
-            *     <li><i class="s-icon:heart s-color:accent"></i>Chief Interactions Engineer Jeremy Vandervort</li>
-            *     <li><i class="s-icon:fire s-color:error"></i>Principal Integration Manager Noah White DDS</li>
+            *     <li><i class="s-icon:user"></i>Direct Implementation Coordinator Ginger Weissnat</li>
+            *     <li><i class="s-icon:heart s-color:accent"></i>Forward Communications Technician Irene Wilderman</li>
+            *     <li><i class="s-icon:fire s-color:error"></i>Direct Implementation Producer Tonya Kutch</li>
             *   </ul>
             * 
         *
         * @example        html          RTL Support
         * <div dir="rtl">
         *   <ul class="s-list:ul s-color:accent s-mbe:30">
-        *     <li>Chief Configuration Designer Salvador Ernser</li>
-        *     <li>Internal Functionality Officer Javier Metz</li>
+        *     <li>Customer Functionality Agent Todd Klein</li>
+        *     <li>National Communications Consultant Ryan Lynch</li>
         *   </ul>
         *   <ul class="s-list:ol s-color:accent s-mbe:30">
-        *     <li>National Metrics Strategist Tracy Krajcik</li>
-        *     <li>Principal Applications Executive Violet Rolfson</li>
+        *     <li>Global Mobility Analyst Jeremy Heidenreich</li>
+        *     <li>Regional Integration Strategist Rosie Prohaska II</li>
         *   </ul>
         *   <ul class="s-list:icon s-color:accent s-mbe:30">
-        *     <li><i class="s-icon:user"></i> Central Infrastructure Specialist Julius Skiles</li>
-        *     <li><i class="s-icon:heart s-color:error"></i> Chief Interactions Representative Amy Jenkins PhD</li>
+        *     <li><i class="s-icon:user"></i> Investor Research Producer Candice Carroll</li>
+        *     <li><i class="s-icon:heart s-color:error"></i> National Implementation Administrator Timmy Armstrong Sr.</li>
         *   </ul>
         * </div>
         * 
         * @example          html         Colors (none-exhaustive)
         *   <ul class="s-list:ol s-color:accent">
-        *     <li>International Integration Consultant Krista Koss</li>
-        *     <li class="s-color:complementary">Dynamic Creative Manager Muriel Olson</li>
-        *     <li class="s-color:error">Future Creative Administrator Pamela Harvey</li>
+        *     <li>Corporate Assurance Associate Sadie Kertzmann</li>
+        *     <li class="s-color:complementary">International Division Liaison Catherine Kuhn</li>
+        *     <li class="s-color:error">District Response Manager Wesley Dach</li>
         *   </ul>
         * 
         * @since      2.0.0
@@ -8323,7 +8323,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         content: "⠁⠈⠀⠀⠀⠠⠄⠂";
         z-index: 1;
         text-indent: 0;
-        animation: s-loader-square-dots-s-43854270-6390-473b-8fd4-0673de115f95 1s steps(8) infinite;
+        animation: s-loader-square-dots-s-7f0e7ea2-2140-46db-aa6f-cb6062a36274 1s steps(8) infinite;
     }.s-loader-square-dots:after {
         font-size: calc(1em * var(--s-scale, 1) * var(--s-scale-global, 1));
         white-space: nowrap;
@@ -8335,8 +8335,8 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         display: block;
         text-indent: 0;
         clip-path: polygon(0 0, 1ch 0, 1ch 100%, 0 100%);
-        animation: s-loader-square-dots-s-43854270-6390-473b-8fd4-0673de115f95 1s steps(8) infinite;
-    }@keyframes s-loader-square-dots-s-43854270-6390-473b-8fd4-0673de115f95 {
+        animation: s-loader-square-dots-s-7f0e7ea2-2140-46db-aa6f-cb6062a36274 1s steps(8) infinite;
+    }@keyframes s-loader-square-dots-s-7f0e7ea2-2140-46db-aa6f-cb6062a36274 {
         to {
             text-indent: -9.8ch;
         }
@@ -8379,7 +8379,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         * 
         * @example        html         Default
         * <figure class="s-media-container">
-        *   <img class="s-media" src="https://picsum.photos/1600/900?v=62853" />
+        *   <img class="s-media" src="https://picsum.photos/1600/900?v=40847" />
         * </figure>
         * 
         * @since      2.0.0
@@ -8461,7 +8461,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         * 
          * @example        html       solid lnf
             *   <label class="s-mbe:30 s-label">
-            *     <span>Forward Program Director Terence Aufderhar</span>
+            *     <span>Corporate Creative Associate Kimberly Weissnat</span>
             *     <input type="radio" checked class="s-radio" name="radio-lnf-solid" value="hello 1" checked />
             *   </label>
             *   <label class="s-mbe:30 s-label">
@@ -8472,29 +8472,29 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         *
         * @example        html          Shapes
         *   <label class="s-mbe:30 s-label">
-        *     <span>Central Implementation Assistant Howard Bogan</span>
+        *     <span>District Applications Director Bernadette Hahn</span>
         *     <input type="radio" checked class="s-radio s-shape:default" name="radio-style-color" value="hello 1" checked />
         * </label>
         * <label class="s-mbe:30 s-label">
-        *     <span>Direct Research Manager Miss Marsha Bosco</span>
+        *     <span>Corporate Division Associate Matt Bayer</span>
         *     <input type="radio" checked class="s-radio s-shape:square" name="radio-style-color" value="hello 1" checked />
         * </label>
         * <label class="s-mbe:30 s-label">
-        *     <span>Future Factors Consultant Delbert Gibson</span>
+        *     <span>National Security Developer Mark Hamill</span>
         *     <input type="radio" checked class="s-radio s-shape:pill" name="radio-style-color" value="hello 1" checked />
         * </label>
         * 
         * @example        html          Colors (none-exhaustive)
         *   <label class="s-mbe:30 s-label">
-        *     <span>Investor Functionality Officer Harold Fisher</span>
+        *     <span>Legacy Operations Strategist Edward Dibbert</span>
         *     <input type="radio" checked class="s-radio" name="radio-style-color" value="hello 1" checked />
         *   </label>
         *   <label class="s-mbe:30 s-label">
-        *     <span>Lead Tactics Assistant Mr. Joel Blick</span>
+        *     <span>Regional Data Manager Joe DuBuque</span>
         *     <input type="radio" class="s-radio s-color:accent" name="radio-style-color" value="hello 2" />
         *   </label>
         *   <label class="s-mbe:30 s-label">
-        *     <span>Lead Data Orchestrator Brent Little Jr.</span>
+        *     <span>Senior Applications Producer Maurice Stokes</span>
         *     <input type="radio" class="s-radio s-color:complementary" name="radio-style-color" value="hello 3" />
         *   </label>
         *   <label class="s-mbe:30 s-label">
@@ -8505,26 +8505,26 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         * @example        html          RTL
         * <div dir="rtl">
         *   <label class="s-mbe:30 s-label">
-        *     <span>Investor Intranet Designer Herman Rau</span>
+        *     <span>Chief Division Planner Todd Haag</span>
         *     <input type="radio" checked class="s-radio s-color:accent" name="radio-style-ltr" value="hello 1" checked />
         *   </label>
         * </div>
         * 
         * @example        html          Scales
         *   <label class="s-mbe:30 s-label s-scale:07">
-        *     <span>Lead Identity Executive Carolyn Hayes</span>
+        *     <span>Forward Paradigm Manager Gilberto Hoppe</span>
         *     <input type="radio" checked class="s-radio s-color:accent" name="radio-style-scale" value="hello 1" checked />
         *   </label>
         *   <label class="s-mbe:30 s-label">
-        *     <span>Future Assurance Manager Dr. Caroline Strosin</span>
+        *     <span>Investor Intranet Producer Pauline Schmeler</span>
         *     <input type="radio" class="s-radio s-color:accent" name="radio-style-scale" value="hello 2" />
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale:13">
-        *     <span>Human Security Strategist Miss Lorraine Runolfsdottir</span>
+        *     <span>National Factors Associate Charlotte Huels Jr.</span>
         *     <input type="radio" class="s-radio s-color:accent" name="radio-style-scale" value="hello 3" />
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale:16">
-        *     <span>Central Division Architect Pam McLaughlin</span>
+        *     <span>Corporate Factors Associate Marlene Jast</span>
         *     <input type="radio" class="s-radio s-color:accent" name="radio-style-scale" value="hello 3" />
         *   </label>
         * 
@@ -8646,15 +8646,15 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         * 
          * @example        html       solid
             *   <label class="s-mbe:30 s-label:responsive">
-            *     <span>Global Division Representative Hattie Altenwerth</span>
+            *     <span>Corporate Metrics Designer Glen Ruecker</span>
             *     <input type="range" class="s-range" min="0" max="100" step="10" />
             *   </label>
             *   <label class="s-mbe:30 s-label:responsive">
-            *     <span>International Paradigm Analyst Dustin Gislason</span>
+            *     <span>Legacy Brand Associate Mrs. Yvette Auer</span>
             *     <input type="range" class="s-range s-color:accent" min="0" max="100" step="10" />
             *   </label>
             *   <label class="s-mbe:30 s-label:responsive">
-            *     <span>Legacy Optimization Officer Stella Brakus</span>
+            *     <span>Future Directives Representative Kerry Jones</span>
             *     <input type="range" class="s-range s-color:complementary" min="0" max="100" step="10" />
             *   </label>
             *   <label class="s-mbe:30 s-label:responsive">
@@ -8666,51 +8666,51 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         * @example        html          Shapes
         *   <label class="s-mbe:30 s-label:responsive">
         *     <input type="range" class="s-range s-shape:default" min="0" max="100" step="10" />
-        *     <span>Future Operations Producer Enrique Adams</span>
+        *     <span>Global Marketing Architect Jody Powlowski</span>
         * </label>
         * <label class="s-mbe:30 s-label:responsive">
         *     <input type="range" class="s-range s-shape:square" min="0" max="100" step="10" />
-        *     <span>Global Security Supervisor Shelly Wolf</span>
+        *     <span>Customer Mobility Analyst Jermaine Kassulke III</span>
         * </label>
         * <label class="s-mbe:30 s-label:responsive">
         *     <input type="range" class="s-range s-shape:pill" min="0" max="100" step="10" />
-        *     <span>Internal Brand Producer Erin Hackett</span>
+        *     <span>Internal Creative Representative Wilfred Little</span>
         * </label>
         * 
         * @example        html          Colors (none-exclusive)
         *   <label class="s-mbe:30 s-label:responsive">
         *     <input type="range" class="s-range" min="0" max="100" step="10" />
-        *     <span>Product Security Executive Leland Gorczany</span>
+        *     <span>Direct Program Planner Miss Cory Kuhn</span>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
         *     <input type="range" class="s-range s-color:accent" min="0" max="100" step="10" />
-        *     <span>Future Creative Representative Donna Zieme</span>
+        *     <span>Human Accountability Planner Trevor Cruickshank</span>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
         *     <input type="range" class="s-range s-color:complementary" min="0" max="100" step="10" />
-        *     <span>Dynamic Group Liaison Sylvester Hilpert</span>
+        *     <span>Human Brand Developer Dominick Adams</span>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
         *     <input type="range" class="s-range s-color:error" disabled min="0" max="100" step="10" />
-        *     <span>Corporate Brand Agent Helen Schimmel</span>
+        *     <span>Dynamic Metrics Technician Miss Steve Shields</span>
         *   </label>
         * 
         * @example      html        RTL
         * <div dir="rtl">
         *   <label class="s-mbe:30 s-label:responsive">
-        *     <span>Future Creative Orchestrator Miss Kurt Johnston</span>
+        *     <span>Dynamic Identity Associate Olivia Wilderman</span>
         *     <input type="range" class="s-range" min="0" max="100" step="10" />
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
-        *     <span>National Communications Specialist Gwendolyn Reichel</span>
+        *     <span>Forward Assurance Liaison Minnie Johns</span>
         *     <input type="range" class="s-range s-color:accent" min="0" max="100" step="10" />
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
-        *     <span>Corporate Division Agent Pamela Rice Sr.</span>
+        *     <span>Regional Metrics Manager Dr. Micheal Walter</span>
         *     <input type="range" class="s-range s-color:complementary" min="0" max="100" step="10" />
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
-        *     <span>Principal Brand Director Lydia Balistreri</span>
+        *     <span>Principal Quality Supervisor Wilfred Graham Sr.</span>
         *     <input type="range" class="s-range s-color:error" disabled min="0" max="100" step="10" />
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
@@ -8722,19 +8722,19 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         * @example        html          Scales
         *   <label class="s-mbe:30 s-label:responsive">
         *     <input type="range" class="s-range s-scale:08" min="0" max="100" step="10" />
-        *     <span>Regional Group Designer Rudolph Kertzmann</span>
+        *     <span>Global Operations Officer Jodi Littel</span>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
         *     <input type="range" class="s-range" min="0" max="100" step="10" />
-        *     <span>Senior Paradigm Associate Cynthia D'Amore</span>
+        *     <span>Principal Group Director Jonathan Brakus</span>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
         *     <input type="range" class="s-range s-scale:12" min="0" max="100" step="10" />
-        *     <span>Senior Applications Liaison Roosevelt Ankunding</span>
+        *     <span>Principal Functionality Supervisor Cesar Jones MD</span>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
         *     <input type="range" class="s-range s-scale:14" min="0" max="100" step="10" />
-        *     <span>Chief Data Assistant Rachael Nitzsche</span>
+        *     <span>Dynamic Brand Executive Eva Breitenberg DVM</span>
         *   </label>
         * 
         * @since      2.0.0
@@ -9039,154 +9039,154 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         * 
          * @example        html       solid lnf
             *   <label class="s-mbe:30 s-label:responsive">
-            *     <span>Principal Usability Engineer David Heller</span>
+            *     <span>Future Metrics Facilitator Julie Ryan</span>
             *     <select class="s-select s-width:40" name="select-lnf-solid">
-            *       <option value="value1">Krystal Bartell</option>
-            *       <option value="value2">Minnie Greenfelder</option>
-            *       <option value="value3">Mrs. Irving Kautzer</option>
+            *       <option value="value1">Glenda Roob</option>
+            *       <option value="value2">Robyn Collier</option>
+            *       <option value="value3">Sylvester Spencer</option>
             *     </select>
             *   </label>
             *   <label class="s-mbe:30 s-label:responsive">
             *     <span>I'm disabled</span>
             *     <select disabled class="s-select s-width:40" name="select-lnf-solid">
-            *       <option value="value1">Alexis Herman Sr.</option>
-            *       <option value="value2">Jane Waelchi</option>
-            *       <option value="value3">Gina Koepp</option>
+            *       <option value="value1">Natasha Ondricka</option>
+            *       <option value="value2">Julio Volkman</option>
+            *       <option value="value3">Mr. Lorene Weber</option>
             *     </select>
             *   </label>
             * 
  * @example        html       underline lnf
             *   <label class="s-mbe:30 s-label:responsive">
-            *     <span>Central Communications Technician Randy Corkery</span>
+            *     <span>Central Configuration Executive Eddie Mante</span>
             *     <select class="s-select:underline s-width:40" name="select-lnf-underline">
-            *       <option value="value1">Edward Osinski</option>
-            *       <option value="value2">Eva Kihn</option>
-            *       <option value="value3">Mrs. Janis Baumbach</option>
+            *       <option value="value1">Kayla O'Hara</option>
+            *       <option value="value2">Edna Reichel</option>
+            *       <option value="value3">Betty Turcotte</option>
             *     </select>
             *   </label>
             *   <label class="s-mbe:30 s-label:responsive">
             *     <span>I'm disabled</span>
             *     <select disabled class="s-select:underline s-width:40" name="select-lnf-underline">
-            *       <option value="value1">Tami Batz</option>
-            *       <option value="value2">Harvey Smitham</option>
-            *       <option value="value3">Mr. Clayton Tremblay</option>
+            *       <option value="value1">Raul Conn</option>
+            *       <option value="value2">Sammy Collins Jr.</option>
+            *       <option value="value3">Paul Kuvalis</option>
             *     </select>
             *   </label>
             * 
         * 
         * @example      html            Shapes
         *   <label class="s-mbe:30 s-label:responsive">
-        *     <span>Senior Accountability Liaison Guy Pagac</span>
+        *     <span>Legacy Applications Strategist Vera Dickinson</span>
         *     <select class="s-select s-shape:default s-width:40" name="select-color-accent">
-        *       <option value="value1">Mr. Willis Wilkinson</option>
-        *       <option value="value2">Chester Hauck</option>
-        *       <option value="value3">Ms. Tonya West</option>
+        *       <option value="value1">Harriet Wintheiser</option>
+        *       <option value="value2">Sally Lubowitz</option>
+        *       <option value="value3">Lindsay Walter</option>
         *     </select>
         * </label>
         * <label class="s-mbe:30 s-label:responsive">
-        *     <span>Central Data Planner Franklin Kihn</span>
+        *     <span>Human Communications Administrator Lori Murazik</span>
         *     <select class="s-select s-shape:square s-width:40" name="select-color-accent">
-        *       <option value="value1">Dr. Bob Brown</option>
-        *       <option value="value2">Ernestine Welch</option>
-        *       <option value="value3">Jake Breitenberg</option>
+        *       <option value="value1">Theresa Price V</option>
+        *       <option value="value2">Miss Kendra Kerluke</option>
+        *       <option value="value3">Adrienne Spinka</option>
         *     </select>
         * </label>
         * <label class="s-mbe:30 s-label:responsive">
-        *     <span>Investor Intranet Developer Nicolas Price</span>
+        *     <span>Forward Factors Liaison Tanya Kshlerin PhD</span>
         *     <select class="s-select s-shape:pill s-width:40" name="select-color-accent">
-        *       <option value="value1">Marlene Bins MD</option>
-        *       <option value="value2">Edith Prohaska</option>
-        *       <option value="value3">Nick Bednar</option>
+        *       <option value="value1">Eunice Rice</option>
+        *       <option value="value2">Nicolas Durgan PhD</option>
+        *       <option value="value3">June MacGyver</option>
         *     </select>
         * </label>
         * 
         * @example      html            Colors (none-exhaustive)
         *   <label class="s-mbe:30 s-label:responsive">
-        *     <span>Human Solutions Manager Eric Brakus DDS</span>
+        *     <span>Dynamic Solutions Administrator Agnes Pfannerstill</span>
         *     <select class="s-select s-width:40" name="select-color-accent">
-        *       <option value="value1">Joan Abshire</option>
-        *       <option value="value2">Angelica Orn</option>
-        *       <option value="value3">Alma Kunze</option>
+        *       <option value="value1">Della Lang</option>
+        *       <option value="value2">Mrs. Celia Swaniawski</option>
+        *       <option value="value3">Erika Schuppe</option>
         *     </select>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
-        *     <span>Direct Metrics Planner Margarita Tillman</span>
+        *     <span>District Data Director Jim Willms</span>
         *     <select class="s-select s-color:accent s-width:40" name="select-color-complementary">
-        *       <option value="value1">Saul McDermott</option>
-        *       <option value="value2">Boyd Russel</option>
-        *       <option value="value3">Laurence Romaguera</option>
+        *       <option value="value1">Marcia Hickle Jr.</option>
+        *       <option value="value2">Roy Cassin</option>
+        *       <option value="value3">Raquel Huels</option>
         *     </select>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
-        *     <span>Internal Response Developer Janis Heathcote Jr.</span>
+        *     <span>Corporate Assurance Strategist Perry Torphy V</span>
         *     <select class="s-select s-color:complementary s-width:40" name="select-color-error">
-        *       <option value="value1">Charlotte Leannon</option>
-        *       <option value="value2">Dr. Norma Gleichner</option>
-        *       <option value="value3">Mrs. Rita Hamill</option>
+        *       <option value="value1">Boyd Little</option>
+        *       <option value="value2">Ryan D'Amore</option>
+        *       <option value="value3">Miss Howard Carter</option>
         *     </select>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
-        *     <span>Corporate Factors Liaison Sadie Bailey</span>
+        *     <span>Investor Markets Producer Ms. Diana Yost</span>
         *     <select class="s-select s-color:error s-width:40" name="select-color-error" disabled>
-        *       <option value="value1">Fred Halvorson</option>
-        *       <option value="value2">Arlene Crona</option>
-        *       <option value="value3">Myron Kreiger</option>
+        *       <option value="value1">Roman Ruecker</option>
+        *       <option value="value2">Alvin Weber I</option>
+        *       <option value="value3">Eula Kemmer</option>
         *     </select>
         *   </label>
         * 
         * @example      html            Multiple
         *   <label class="s-mbe:30 s-label:responsive">
-        *     <span>Senior Accountability Planner Spencer Johns</span>
+        *     <span>District Marketing Analyst Elaine Cronin</span>
         *     <select class="s-select s-color:accent s-width:40" multiple name="select-color-accent">
-        *       <option value="value1">Wilbert Ruecker</option>
-        *       <option value="value2">Lana Considine</option>
-        *       <option value="value3">Mack Stamm</option>
+        *       <option value="value1">Ryan Mann</option>
+        *       <option value="value2">Lorena Barton</option>
+        *       <option value="value3">Anita Murazik</option>
         *     </select>
         *   </label>
         * 
         * @example          html            RTL
         * <div dir="rtl">
         *   <label class="s-mbe:30 s-label:responsive">
-        *     <span>Regional Security Facilitator Lela Kunde</span>
+        *     <span>Senior Mobility Designer Nellie Moore</span>
         *     <select class="s-select s-color:accent s-width:40" name="select-color-accent">
-        *       <option value="value1">Dr. Jessie Quitzon</option>
-        *       <option value="value2">Michele Howe</option>
-        *       <option value="value3">Mrs. Darrin Hoppe</option>
+        *       <option value="value1">Timmy Willms</option>
+        *       <option value="value2">Susie Kub</option>
+        *       <option value="value3">Faith Berge</option>
         *     </select>
         *   </label>
         * </div>
         * 
         * @example          html           Scales
         *   <label class="s-mbe:30 s-label:responsive s-scale:07">
-        *     <span>Direct Data Developer Nichole Fritsch</span>
+        *     <span>Lead Marketing Architect Verna Kemmer</span>
         *     <select class="s-select s-color:accent s-width:40" name="select-color-accent">
-        *       <option value="value1">Israel Jaskolski</option>
-        *       <option value="value2">Mrs. Ollie Watsica</option>
-        *       <option value="value3">Kellie Dibbert</option>
+        *       <option value="value1">Virginia Kutch</option>
+        *       <option value="value2">Jon Wilderman</option>
+        *       <option value="value3">Douglas Gislason</option>
         *     </select>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
-        *     <span>Lead Marketing Supervisor Alexander Rodriguez</span>
+        *     <span>Forward Group Producer Ms. Kayla Morar</span>
         *     <select class="s-select s-color:accent s-width:40" name="select-color-accent">
-        *       <option value="value1">Rose Mitchell</option>
-        *       <option value="value2">Shelly King</option>
-        *       <option value="value3">Ms. Carrie Kulas</option>
+        *       <option value="value1">Gloria Lockman</option>
+        *       <option value="value2">Sonya Little</option>
+        *       <option value="value3">Vicki Rempel</option>
         *     </select>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive s-scale:13">
-        *     <span>Central Branding Executive Kathy Wehner</span>
+        *     <span>District Quality Executive Clarence Goodwin</span>
         *     <select class="s-select s-color:accent s-width:40" name="select-color-accent">
-        *       <option value="value1">Rufus Stroman</option>
-        *       <option value="value2">Cheryl Anderson</option>
-        *       <option value="value3">Bonnie Mann</option>
+        *       <option value="value1">Santiago Rogahn</option>
+        *       <option value="value2">Beth Moen</option>
+        *       <option value="value3">Ron Gleichner</option>
         *     </select>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive s-scale:16">
-        *     <span>Legacy Infrastructure Coordinator Mr. Eugene Sporer</span>
+        *     <span>Principal Web Agent Mandy Leffler</span>
         *     <select class="s-select s-color:accent s-width:40" name="select-color-accent">
-        *       <option value="value1">Gerald Stracke</option>
-        *       <option value="value2">Jonathan Durgan</option>
-        *       <option value="value3">Kendra Aufderhar</option>
+        *       <option value="value1">Jay Krajcik</option>
+        *       <option value="value2">Taylor Moen</option>
+        *       <option value="value3">Terry Wisoky</option>
         *     </select>
         *   </label>
         * 
@@ -9499,7 +9499,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         * 
          * @example        html       solid lnf
             *   <label class="s-mbe:30 s-label">
-            *     <span>Lead Accountability Coordinator Lora Skiles</span>
+            *     <span>Forward Accountability Consultant Dr. Freddie Fadel</span>
             *     <input type="checkbox" class="s-switch" />
             *   </label>
                 <label class="s-mbe:30 s-label">
@@ -9510,22 +9510,22 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         *
         * @example      html            Shapes
         *   <label class="s-mbe:30 s-label">
-        *     <span>Principal Paradigm Executive Julie Kuhic</span>
+        *     <span>Customer Branding Administrator Mr. Dan McGlynn</span>
         *     <input type="checkbox" class="s-switch s-shape:default" />
         *   </label>
         * <label class="s-mbe:30 s-label">
-        *     <span>Future Usability Coordinator Ben Raynor</span>
+        *     <span>District Operations Specialist Patsy Schulist I</span>
         *     <input type="checkbox" class="s-switch s-shape:square" />
         *   </label>
         * <label class="s-mbe:30 s-label">
-        *     <span>Human Quality Orchestrator Nina Hilll</span>
+        *     <span>International Accountability Director Sharon Weimann</span>
         *     <input type="checkbox" class="s-switch s-shape:pill" />
         *   </label>
         *
         * @example      html            RTL Support
         * <div dir="rtl">
         *   <label class="s-mbe:30 s-label">
-        *     <span>Forward Markets Facilitator Emilio Rowe</span>
+        *     <span>Direct Markets Liaison Iris Balistreri</span>
         *     <input type="checkbox" class="s-switch" />
         *   </label>
         * </div>
@@ -9533,44 +9533,44 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         * @example      html            Colors (non-exhauustive)
         
         *   <label class="s-mbe:30 s-label s-color:main">
-        *     <span>Global Applications Coordinator Ms. Kim Roberts</span>
+        *     <span>Dynamic Program Planner Judy Halvorson</span>
         *     <input type="checkbox" class="s-switch" />
         *   </label>
         
 
         *   <label class="s-mbe:30 s-label s-color:accent">
-        *     <span>Product Applications Administrator Pat VonRueden</span>
+        *     <span>Customer Data Liaison Glenda Pfannerstill</span>
         *     <input type="checkbox" class="s-switch" />
         *   </label>
         
 
         *   <label class="s-mbe:30 s-label s-color:complementary">
-        *     <span>Chief Operations Facilitator Arlene Schimmel</span>
+        *     <span>Dynamic Group Manager Jon Gislason</span>
         *     <input type="checkbox" class="s-switch" />
         *   </label>
         
 
         *   <label class="s-mbe:30 s-label s-color:error">
-        *     <span>Forward Markets Manager Marguerite O'Conner</span>
+        *     <span>Dynamic Creative Designer Ms. Dwight Wilderman</span>
         *     <input type="checkbox" class="s-switch" />
         *   </label>
         
         * 
         * @example      html            Scales
         *   <label class="s-mbe:30 s-label s-scale:05">
-        *     <span>Senior Usability Strategist Roman Hudson</span>
+        *     <span>Human Program Director Ervin Hand</span>
         *     <input type="checkbox" class="s-switch" />
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale:10">
-        *     <span>Future Assurance Supervisor Miss Lisa Green</span>
+        *     <span>Senior Communications Officer Melody Hoppe</span>
         *     <input type="checkbox" class="s-switch" />
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale:15">
-        *     <span>Investor Accountability Orchestrator Geraldine Murazik</span>
+        *     <span>Human Infrastructure Orchestrator Mrs. Earnest Hansen</span>
         *     <input type="checkbox" class="s-switch" />
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale:20">
-        *     <span>Senior Usability Administrator Jeremy Tremblay</span>
+        *     <span>Dynamic Data Planner Mrs. Estelle O'Hara</span>
         *     <input type="checkbox" class="s-switch" />
         *   </label>
         * 
@@ -9735,19 +9735,19 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         * @example        html       Default
         *   <table class="s-table s-mbe:30">
         *       <tr>
-        *           <th>Miss Henrietta Streich</th>
-        *           <th>Joshua Mante V</th>
-        *           <th>Jaime Turner</th>
+        *           <th>Martin Runolfsson I</th>
+        *           <th>Mrs. Beatrice Upton</th>
+        *           <th>Olive Kunde</th>
         *       </tr>
         *       <tr>
-        *           <td>Frances Hills Jr.</td>
-        *           <td>Arnold Hills DVM</td>
-        *           <td>Ismael Koepp</td>
+        *           <td>Clyde Kautzer</td>
+        *           <td>Miss Kenneth Daniel</td>
+        *           <td>Jose Huel V</td>
         *       </tr>
         *       <tr>
-        *           <td>Melanie Kirlin MD</td>
-        *           <td>Preston Hudson</td>
-        *           <td>Mr. Desiree Kertzmann</td>
+        *           <td>Lillian Rippin</td>
+        *           <td>Justin Renner</td>
+        *           <td>Kristine Harris</td>
         *       </tr>
         *   </table>
         *
@@ -9755,19 +9755,19 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         * <div dir="rtl">
         *   <table class="s-table">
         *       <tr>
-        *           <th>Mrs. Brett Mosciski</th>
-        *           <th>Ramiro Zemlak Jr.</th>
-        *           <th>Dr. Nellie Zemlak</th>
+        *           <th>Bradford Sauer</th>
+        *           <th>Mr. Stacy Morar</th>
+        *           <th>Evelyn Gutkowski</th>
         *       </tr>
         *       <tr>
-        *           <td>Lowell McGlynn</td>
-        *           <td>Lila Prosacco</td>
-        *           <td>Brad Schneider I</td>
+        *           <td>Ms. Marvin Wolf</td>
+        *           <td>Laurence Williamson</td>
+        *           <td>Jamie Okuneva</td>
         *       </tr>
         *       <tr>
-        *           <td>Jennie Marquardt PhD</td>
-        *           <td>Lucille Wintheiser</td>
-        *           <td>Juana Thompson IV</td>
+        *           <td>Violet Denesik</td>
+        *           <td>Emily Halvorson</td>
+        *           <td>Ramona Thompson</td>
         *       </tr>
         *   </table>
         * </div>
@@ -9775,37 +9775,37 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         * @example      html        Shapes
         *   <table class="s-table s-shape:square s-mbe:30">
         *       <tr>
-        *           <th>Vincent Krajcik</th>
-        *           <th>Jamie Marks</th>
-        *           <th>Salvador Vandervort</th>
+        *           <th>Gabriel Haag</th>
+        *           <th>Maureen Bayer</th>
+        *           <th>Constance Sanford</th>
         *       </tr>
         *       <tr>
-        *           <td>Flora Lubowitz</td>
-        *           <td>Terrance Rogahn</td>
-        *           <td>Thomas VonRueden</td>
+        *           <td>Devin Schmeler</td>
+        *           <td>Roberta Renner</td>
+        *           <td>Elisa Grant</td>
         *       </tr>
         *       <tr>
-        *           <td>Annie O'Hara</td>
-        *           <td>Louise Fadel</td>
-        *           <td>Mercedes Wunsch</td>
+        *           <td>Pat Hilll</td>
+        *           <td>Darryl Goyette</td>
+        *           <td>Garrett Hoppe</td>
         *       </tr>
         *   </table>
         * 
         * <table class="s-table s-shape:pill">
        *       <tr>
-       *           <th>Juan Halvorson</th>
-       *           <th>Lola Hagenes</th>
-       *           <th>Brooke Gusikowski</th>
+       *           <th>Juanita Boyle</th>
+       *           <th>Gerardo Willms</th>
+       *           <th>Dominick Ritchie</th>
        *       </tr>
        *       <tr>
-       *           <td>Todd Haag</td>
-       *           <td>Mr. Jeanette Hudson</td>
-       *           <td>Leon Cartwright</td>
+       *           <td>Leo Beatty</td>
+       *           <td>Lori Blanda</td>
+       *           <td>Charlene Schimmel</td>
        *       </tr>
        *       <tr>
-       *           <td>Renee Koelpin</td>
-       *           <td>Kelly West</td>
-       *           <td>Jeffery Dickinson</td>
+       *           <td>Katherine Thiel V</td>
+       *           <td>Jamie Romaguera</td>
+       *           <td>April Wilkinson</td>
        *       </tr>
        *   </table>
         * 
@@ -9813,76 +9813,76 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         
         *   <table class="s-table s-scale:07 s-mbe:30">
         *       <tr>
-        *           <th>Rebecca Block</th>
-        *           <th>Walter Tillman</th>
-        *           <th>Chris Kunze I</th>
+        *           <th>Joseph Keebler</th>
+        *           <th>Tina Bailey</th>
+        *           <th>Johnnie Roberts</th>
         *       </tr>
         *       <tr>
-        *           <td>Randall Gleichner</td>
-        *           <td>Floyd Mohr</td>
-        *           <td>Zachary Auer</td>
+        *           <td>Krista Sawayn</td>
+        *           <td>Timmy Torp</td>
+        *           <td>Dr. Lela Feil</td>
         *       </tr>
         *       <tr>
-        *           <td>Sylvia Sporer</td>
-        *           <td>Mr. Isaac Satterfield</td>
-        *           <td>Arturo Mayer</td>
+        *           <td>Antonio Leffler</td>
+        *           <td>Mrs. Shawn Strosin</td>
+        *           <td>Marvin Torp</td>
         *       </tr>
         *   </table>
         
 
         *   <table class="s-table s-scale:1 s-mbe:30">
         *       <tr>
-        *           <th>Mathew Bashirian</th>
-        *           <th>Ramon Collier</th>
-        *           <th>Billy Braun</th>
+        *           <th>Leland Kling</th>
+        *           <th>Maxine Wiegand</th>
+        *           <th>Terrence Wolff</th>
         *       </tr>
         *       <tr>
-        *           <td>Dan Daniel III</td>
-        *           <td>Ed Blick</td>
-        *           <td>Estelle Bartell</td>
+        *           <td>Alonzo Nicolas</td>
+        *           <td>Harvey Erdman</td>
+        *           <td>Matthew Batz</td>
         *       </tr>
         *       <tr>
-        *           <td>Alvin Hammes</td>
-        *           <td>Sadie Kuhlman</td>
-        *           <td>Lena Thompson</td>
+        *           <td>Irma Feeney</td>
+        *           <td>Gregg Considine</td>
+        *           <td>Rita Howe</td>
         *       </tr>
         *   </table>
         
 
         *   <table class="s-table s-scale:13 s-mbe:30">
         *       <tr>
-        *           <th>Dawn Rogahn</th>
-        *           <th>Karla Barrows</th>
-        *           <th>Dr. Cecilia Larson</th>
+        *           <th>Shari Bergnaum</th>
+        *           <th>Toby Corwin</th>
+        *           <th>Antoinette Boehm</th>
         *       </tr>
         *       <tr>
-        *           <td>Kerry Maggio</td>
-        *           <td>Sophie Howell</td>
-        *           <td>Marty McClure</td>
+        *           <td>Frederick Corkery</td>
+        *           <td>Santiago Watsica</td>
+        *           <td>Javier Buckridge</td>
         *       </tr>
         *       <tr>
-        *           <td>Julie Blick</td>
-        *           <td>Shane Kulas</td>
-        *           <td>Clifford Flatley Jr.</td>
+        *           <td>Nadine Nikolaus</td>
+        *           <td>Mercedes Murazik</td>
+        *           <td>Dr. Jeannie Keeling</td>
         *       </tr>
         *   </table>
         
 
         *   <table class="s-table s-scale:16 s-mbe:30">
         *       <tr>
-        *           <th>Miranda Bahringer</th>
-        *           <th>Jenny Weimann</th>
-        *           <th>Dr. Matthew Gleichner</th>
+        *           <th>Ella Dare</th>
+        *           <th>Olivia Will</th>
+        *           <th>Stacey Hirthe</th>
         *       </tr>
         *       <tr>
-        *           <td>Garrett Reynolds</td>
-        *           <td>Naomi Strosin</td>
-        *           <td>Martin Schaden</td>
+        *           <td>Brenda Homenick</td>
+        *           <td>Hazel Walter V</td>
+        *           <td>Ollie Conroy</td>
         *       </tr>
         *       <tr>
-        *           <td>Gregory Von</td>
-        *           <td>Mr. Emilio Towne</td>
-        *           <td>Ms. Vickie Wiza</td>
+        *           <td>Luther Corwin</td>
+        *           <td>Ted Lind</td>
+        *           <td>Roberto Smitham</td>
         *       </tr>
         *   </table>
         
@@ -9891,76 +9891,76 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         
         *   <table class="s-table s-color:main s-mbe:30">
         *       <tr>
-        *           <th>Georgia Lang</th>
-        *           <th>Dora Miller</th>
-        *           <th>Enrique Haley</th>
+        *           <th>Derek Kiehn</th>
+        *           <th>Mary Schaefer</th>
+        *           <th>Drew Swaniawski</th>
         *       </tr>
         *       <tr>
-        *           <td>Joanne Sporer</td>
-        *           <td>Leticia Bogisich</td>
-        *           <td>Dorothy Mills</td>
+        *           <td>Edward Bode</td>
+        *           <td>Judy Gibson</td>
+        *           <td>Mr. Marion Jakubowski</td>
         *       </tr>
         *       <tr>
-        *           <td>Ernestine Grimes</td>
-        *           <td>Christie Sporer</td>
-        *           <td>Lorene Kunze</td>
+        *           <td>Laurie Pacocha</td>
+        *           <td>Philip McLaughlin</td>
+        *           <td>Vickie Wisoky</td>
         *       </tr>
         *   </table>
         
 
         *   <table class="s-table s-color:accent s-mbe:30">
         *       <tr>
-        *           <th>Yolanda Spinka</th>
-        *           <th>Calvin D'Amore</th>
-        *           <th>Trevor Franecki</th>
+        *           <th>Maria Mraz</th>
+        *           <th>Jose Krajcik</th>
+        *           <th>Mattie Zulauf</th>
         *       </tr>
         *       <tr>
-        *           <td>Tanya Swaniawski MD</td>
-        *           <td>Wade Schmeler PhD</td>
-        *           <td>Hope Leannon</td>
+        *           <td>Vera Konopelski</td>
+        *           <td>Kerry Macejkovic</td>
+        *           <td>Carroll Koch</td>
         *       </tr>
         *       <tr>
-        *           <td>Preston Willms</td>
-        *           <td>Marian Kiehn</td>
-        *           <td>Carlton Armstrong</td>
+        *           <td>Chelsea Grimes</td>
+        *           <td>Julius Hagenes</td>
+        *           <td>Frank Flatley</td>
         *       </tr>
         *   </table>
         
 
         *   <table class="s-table s-color:complementary s-mbe:30">
         *       <tr>
-        *           <th>Vincent Grimes</th>
-        *           <th>Clyde Goodwin</th>
-        *           <th>Francisco Osinski</th>
+        *           <th>Nelson Prosacco</th>
+        *           <th>Ella Osinski</th>
+        *           <th>Tara Kub</th>
         *       </tr>
         *       <tr>
-        *           <td>Miss Jordan Miller</td>
-        *           <td>Ms. Ralph Barton</td>
-        *           <td>Mr. Bernadette Schmidt</td>
+        *           <td>Calvin Effertz</td>
+        *           <td>Ben Romaguera</td>
+        *           <td>Mrs. Toni Okuneva</td>
         *       </tr>
         *       <tr>
-        *           <td>Miss Irma Ortiz</td>
-        *           <td>Jamie Reilly</td>
-        *           <td>Mr. Stephanie Becker</td>
+        *           <td>Tara Gerlach</td>
+        *           <td>Clifton Hand</td>
+        *           <td>Jody Goldner</td>
         *       </tr>
         *   </table>
         
 
         *   <table class="s-table s-color:error s-mbe:30">
         *       <tr>
-        *           <th>Kari Ledner</th>
-        *           <th>Miss Jorge Luettgen</th>
-        *           <th>Leticia Hammes</th>
+        *           <th>Philip Hodkiewicz</th>
+        *           <th>Miguel Bayer</th>
+        *           <th>Tony Heathcote</th>
         *       </tr>
         *       <tr>
-        *           <td>Lionel Schneider</td>
-        *           <td>Maurice McClure</td>
-        *           <td>Mattie Kub</td>
+        *           <td>Rene Kunde</td>
+        *           <td>Grant Steuber</td>
+        *           <td>Alma Osinski</td>
         *       </tr>
         *       <tr>
-        *           <td>Paulette Beahan</td>
-        *           <td>Leroy Daugherty</td>
-        *           <td>Jane Donnelly</td>
+        *           <td>Ann Stroman DVM</td>
+        *           <td>Lucas Feil PhD</td>
+        *           <td>Ms. Rachel Moen</td>
         *       </tr>
         *   </table>
         
@@ -11159,41 +11159,41 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         * 
         * @example        html          Aligns
         *   <div class="s-text:left s-bg:main s-p:20 s-mbe:30 s-radius">
-        *       (left) Eva Rolfson
+        *       (left) Tomas Baumbach
         *   </div>
         *   <div class="s-text:right s-bg:main s-p:20 s-mbe:30 s-radius">
-        *       (right) Anna Schmeler
+        *       (right) Otis Koelpin III
         *   </div>
         *   <div class="s-text:center s-bg:main s-p:20 s-mbe:30 s-radius">
-        *       (center) Calvin Huels II
+        *       (center) Ms. Wilfred Keeling
         *   </div>
         *   <div class="s-text:start s-bg:main s-p:20 s-mbe:30 s-radius">
-        *       (start) Gerard Bartell
+        *       (start) Betsy Brakus
         *   </div>
         *   <div class="s-text:end s-bg:main s-p:20 s-mbe:30 s-radius">
-        *       (end) Kathleen Auer
+        *       (end) Harry Von
         *   </div>
         * 
         * @example        html          Decorations
         *   <div class="s-text:overline s-bg:main s-p:20 s-mbe:30 s-radius">
-        *       (overline) Ms. Minnie Bednar
+        *       (overline) Jorge Schmidt
         *   </div>
         *   <div class="s-text:underline s-bg:main s-p:20 s-mbe:30 s-radius">
-        *       (underline) Paul Towne
+        *       (underline) Tonya Schmidt
         *   </div>
         *   <div class="s-text:line-through s-bg:main s-p:20 s-mbe:30 s-radius">
-        *       (line-through) Louis Mertz
+        *       (line-through) Sarah Brekke
         *   </div>
         * 
         * @example        html          Transforms
         *   <div class="s-text:lowercase s-bg:main s-p:20 s-mbe:30 s-radius">
-        *       (lowercase) Victor Ebert
+        *       (lowercase) Dwayne Huel
         *   </div>
         *   <div class="s-text:uppercase s-bg:main s-p:20 s-mbe:30 s-radius">
-        *       (uppercase) Kimberly Schumm V
+        *       (uppercase) Natasha Sipes
         *   </div>
         *   <div class="s-text:capitalize s-bg:main s-p:20 s-mbe:30 s-radius">
-        *       (capitalize) Lucille Adams
+        *       (capitalize) Mathew Murazik
         *   </div>
         * 
         * 
@@ -11540,31 +11540,31 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         * 
         * @example        html          Simple grid
         *   <div class="s-flex:row:wrap">
-        *     <div class="s-bg:main s-width:50 s-p:30">Hope Lang</div>
-        *     <div class="s-bg:accent s-width:50 s-p:30">Tina Von</div>
-        *     <div class="s-bg:complementary s-width:50 s-p:30">Laura Block</div>
-        *     <div class="s-bg:info s-width:50 s-p:30">Miss Seth Witting</div>
+        *     <div class="s-bg:main s-width:50 s-p:30">Miss Vivian Yost</div>
+        *     <div class="s-bg:accent s-width:50 s-p:30">Randy Emard</div>
+        *     <div class="s-bg:complementary s-width:50 s-p:30">Dr. Jorge Trantow</div>
+        *     <div class="s-bg:info s-width:50 s-p:30">Kurt Morar</div>
         *   </div>
         * 
         * @example        html          Grow
         *   <div class="s-flex:row">
-        *     <div class="s-grow s-bg:main s-p:30">Mattie Feil</div>
-        *     <div class="s-bg:accent s-p:30">Nadine Bergstrom</div>
-        *     <div class="s-bg:complementary s-p:30">Mike Fritsch</div>
+        *     <div class="s-grow s-bg:main s-p:30">Bobby Reinger</div>
+        *     <div class="s-bg:accent s-p:30">Ramiro Gutkowski</div>
+        *     <div class="s-bg:complementary s-p:30">Abraham Doyle</div>
         *   </div>
         * 
         * @example      html          Orders
         *   <div class="s-flex:row">
-        *     <div class="s-order:3 s-bg:main s-p:30">Mr. Sonja Haley</div>
-        *     <div class="s-bg:accent s-p:30">Lucas Wilkinson</div>
-        *     <div class="s-bg:complementary s-p:30">Paul Marks</div>
+        *     <div class="s-order:3 s-bg:main s-p:30">Alexandra Dooley</div>
+        *     <div class="s-bg:accent s-p:30">Theodore Abernathy</div>
+        *     <div class="s-bg:complementary s-p:30">Donnie Kautzer</div>
         *   </div>
         * 
         * @example          html            Aligns
         *   <div class="s-flex:row:align-end">
-        *     <div class="s-bg:main s-p:30">Anna Graham</div>
-        *     <div class="s-bg:accent s-p:30">Olga Hagenes<br />Shane Koss<br />Samantha Shanahan DVM<br />Darrel Durgan<br />Darrell Blanda</div>
-        *     <div class="s-bg:complementary s-p:30">Luther Stracke</div>
+        *     <div class="s-bg:main s-p:30">Cathy Connelly</div>
+        *     <div class="s-bg:accent s-p:30">Taylor Rogahn<br />Leslie Littel<br />Lynette Schuppe<br />Melody Metz<br />June Rempel DVM</div>
+        *     <div class="s-bg:complementary s-p:30">Deanna Runolfsson</div>
         *   </div>
         * 
         * @since      2.0.0
@@ -11986,7 +11986,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale 10</h3>
             *   <div class="s-scale:10">
-            *       <a class="s-btn">Garrett Kuhlman IV</a>
+            *       <a class="s-btn">Herman Dare</a>
             *   </div>
             * </div>
             * 
@@ -11994,7 +11994,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale 11</h3>
             *   <div class="s-scale:11">
-            *       <a class="s-btn">Laurence Olson</a>
+            *       <a class="s-btn">Anthony Stamm</a>
             *   </div>
             * </div>
             * 
@@ -12002,7 +12002,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale 12</h3>
             *   <div class="s-scale:12">
-            *       <a class="s-btn">Miss Brad Feeney</a>
+            *       <a class="s-btn">Laurence Parisian</a>
             *   </div>
             * </div>
             * 
@@ -12010,7 +12010,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale 13</h3>
             *   <div class="s-scale:13">
-            *       <a class="s-btn">Dr. Kelly Wilkinson</a>
+            *       <a class="s-btn">Doris Rau</a>
             *   </div>
             * </div>
             * 
@@ -12018,7 +12018,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale 14</h3>
             *   <div class="s-scale:14">
-            *       <a class="s-btn">Wade Mueller</a>
+            *       <a class="s-btn">Neal Pouros</a>
             *   </div>
             * </div>
             * 
@@ -12026,7 +12026,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale 15</h3>
             *   <div class="s-scale:15">
-            *       <a class="s-btn">Monica Kassulke</a>
+            *       <a class="s-btn">Ryan Torphy</a>
             *   </div>
             * </div>
             * 
@@ -12034,7 +12034,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale 16</h3>
             *   <div class="s-scale:16">
-            *       <a class="s-btn">Bessie Jacobson</a>
+            *       <a class="s-btn">Edwin Rath</a>
             *   </div>
             * </div>
             * 
@@ -12042,7 +12042,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale 17</h3>
             *   <div class="s-scale:17">
-            *       <a class="s-btn">Meghan Blanda</a>
+            *       <a class="s-btn">Rickey Rempel I</a>
             *   </div>
             * </div>
             * 
@@ -12050,7 +12050,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale 18</h3>
             *   <div class="s-scale:18">
-            *       <a class="s-btn">Levi Jaskolski</a>
+            *       <a class="s-btn">Sophia Nicolas</a>
             *   </div>
             * </div>
             * 
@@ -12058,7 +12058,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale 19</h3>
             *   <div class="s-scale:19">
-            *       <a class="s-btn">Francisco Bauch</a>
+            *       <a class="s-btn">Roberto Cassin</a>
             *   </div>
             * </div>
             * 
@@ -12066,7 +12066,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale 20</h3>
             *   <div class="s-scale:20">
-            *       <a class="s-btn">Stephen Grady</a>
+            *       <a class="s-btn">Loretta Kohler</a>
             *   </div>
             * </div>
             * 
@@ -12074,7 +12074,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale default</h3>
             *   <div class="s-scale:default">
-            *       <a class="s-btn">Ms. Casey Spinka</a>
+            *       <a class="s-btn">Elaine Feil</a>
             *   </div>
             * </div>
             * 
@@ -12082,7 +12082,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale 01</h3>
             *   <div class="s-scale:01">
-            *       <a class="s-btn">Luke Flatley</a>
+            *       <a class="s-btn">Shannon Hegmann</a>
             *   </div>
             * </div>
             * 
@@ -12090,7 +12090,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale 02</h3>
             *   <div class="s-scale:02">
-            *       <a class="s-btn">Elsa Lang</a>
+            *       <a class="s-btn">Levi Trantow</a>
             *   </div>
             * </div>
             * 
@@ -12098,7 +12098,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale 03</h3>
             *   <div class="s-scale:03">
-            *       <a class="s-btn">Jeremiah Kertzmann PhD</a>
+            *       <a class="s-btn">Pamela Gaylord</a>
             *   </div>
             * </div>
             * 
@@ -12106,7 +12106,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale 04</h3>
             *   <div class="s-scale:04">
-            *       <a class="s-btn">Ervin Shanahan</a>
+            *       <a class="s-btn">Angie Labadie</a>
             *   </div>
             * </div>
             * 
@@ -12114,7 +12114,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale 05</h3>
             *   <div class="s-scale:05">
-            *       <a class="s-btn">Brent Ankunding DVM</a>
+            *       <a class="s-btn">Francisco Frami</a>
             *   </div>
             * </div>
             * 
@@ -12122,7 +12122,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale 06</h3>
             *   <div class="s-scale:06">
-            *       <a class="s-btn">Rodolfo Gerlach</a>
+            *       <a class="s-btn">Rachael Daugherty</a>
             *   </div>
             * </div>
             * 
@@ -12130,7 +12130,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale 07</h3>
             *   <div class="s-scale:07">
-            *       <a class="s-btn">Seth Halvorson</a>
+            *       <a class="s-btn">Lucas Hane</a>
             *   </div>
             * </div>
             * 
@@ -12138,7 +12138,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale 08</h3>
             *   <div class="s-scale:08">
-            *       <a class="s-btn">Daisy Boyle</a>
+            *       <a class="s-btn">Miss Kerry Welch</a>
             *   </div>
             * </div>
             * 
@@ -12146,7 +12146,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale 09</h3>
             *   <div class="s-scale:09">
-            *       <a class="s-btn">Mrs. Tyler Macejkovic</a>
+            *       <a class="s-btn">Luis Friesen</a>
             *   </div>
             * </div>
             * 
@@ -12505,58 +12505,58 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         * 
         * @example    html      Block
         *   <div class="s-display:block">
-        *     <p class="s-typo:p">Kim Renner</p>
-        *     <p class="s-typo:p">Nellie Toy</p>
-        *     <p class="s-typo:p">Rebecca Steuber</p>
+        *     <p class="s-typo:p">Dave Nikolaus Sr.</p>
+        *     <p class="s-typo:p">Kathleen Schmitt PhD</p>
+        *     <p class="s-typo:p">Mr. Tyrone Stehr</p>
         *   </div>
         * 
         * @example    html      Inline-block
         *   <div class="s-display:inline-block">
-        *     <p class="s-typo:p">Kenny Durgan</p>
-        *     <p class="s-typo:p">Jean Wolff</p>
-        *     <p class="s-typo:p">Noel Orn</p>
+        *     <p class="s-typo:p">April Rempel</p>
+        *     <p class="s-typo:p">Krista Bosco</p>
+        *     <p class="s-typo:p">Gordon Christiansen</p>
         *   </div>
         * 
         * @example   html      Contents
         *   <div class="s-display:contents">
-        *     <p class="s-typo:p">Philip Haag</p>
-        *     <p class="s-typo:p">Terri Kohler III</p>
-        *     <p class="s-typo:p">Reginald Green</p>
+        *     <p class="s-typo:p">Jaime Christiansen</p>
+        *     <p class="s-typo:p">Lucy Moore</p>
+        *     <p class="s-typo:p">Evelyn Durgan</p>
         *   </div>
         * 
         * @example          html      Flex 
         *   <div class="s-display:flex">
-        *     <p class="s-typo:p">Raul Crona</p>
-        *     <p class="s-typo:p">Nelson Willms</p>
-        *     <p class="s-typo:p">Jonathon Mills</p>
+        *     <p class="s-typo:p">Kelly Strosin</p>
+        *     <p class="s-typo:p">Marcos Kassulke V</p>
+        *     <p class="s-typo:p">Emmett Bailey</p>
         *   </div>
         * 
         * @example          html      Grid
         *   <div class="s-display:grid">
-        *     <p class="s-typo:p">Rudolph Gottlieb</p>
-        *     <p class="s-typo:p">Annie Lesch</p>
-        *     <p class="s-typo:p">Naomi Walsh IV</p>
+        *     <p class="s-typo:p">Bennie Ziemann</p>
+        *     <p class="s-typo:p">Alonzo Skiles Sr.</p>
+        *     <p class="s-typo:p">Stacey Roberts</p>
         *   </div>
         * 
         * @example          html      Inline-flex
         *   <div class="s-display:inline-flex">
-        *     <p class="s-typo:p">Tammy Reichel</p>
-        *     <p class="s-typo:p">Matt Wolff</p>
-        *     <p class="s-typo:p">Ramon Mosciski</p>
+        *     <p class="s-typo:p">Elijah Jast</p>
+        *     <p class="s-typo:p">Ruth Morissette</p>
+        *     <p class="s-typo:p">Dustin Sauer</p>
         *   </div>
         * 
         * @example         html      Inline-grid
         *   <div class="s-display:inline-grid">
-        *     <p class="s-typo:p">Aubrey Lemke II</p>
-        *     <p class="s-typo:p">Brett Ernser</p>
-        *     <p class="s-typo:p">Jaime Konopelski II</p>
+        *     <p class="s-typo:p">Anthony Beer</p>
+        *     <p class="s-typo:p">Kathryn Gutmann</p>
+        *     <p class="s-typo:p">Ann Barrows</p>
         *   </div>
         * 
         * @example     html      None
         *   <div class="s-display:none">
-        *     <p class="s-typo:p">Robin Torphy</p>
-        *     <p class="s-typo:p">Elijah Jast</p>
-        *     <p class="s-typo:p">Isabel Watsica</p>
+        *     <p class="s-typo:p">Jay Sawayn</p>
+        *     <p class="s-typo:p">Kristina Blanda</p>
+        *     <p class="s-typo:p">Traci Koch</p>
         *   </div>
         * 
         * @since      2.0.0
@@ -12842,29 +12842,29 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         * 
         
                 * @example          html        slow
-                *   <div class="s-bg:main-surface s-radius:30" id="s-transition-s-6705834a-9713-4b94-9891-464bf923a1e3">
+                *   <div class="s-bg:main-surface s-radius:30" id="s-transition-s-a85c18c2-60d1-4935-a403-7acb0556572d">
                 *      <div class="s-transition:slow s-ratio:1 s-bg:accent s-radius:30"></div>
                 *       <style>
-                *           #s-transition-s-6705834a-9713-4b94-9891-464bf923a1e3 > div { position: relative; left: 0; width: 100px; }
-                *           #s-transition-s-6705834a-9713-4b94-9891-464bf923a1e3:hover > div { left: calc(100% - 100px); )  }
+                *           #s-transition-s-a85c18c2-60d1-4935-a403-7acb0556572d > div { position: relative; left: 0; width: 100px; }
+                *           #s-transition-s-a85c18c2-60d1-4935-a403-7acb0556572d:hover > div { left: calc(100% - 100px); )  }
                 *       </style>
                 *   </div>
 
                 * @example          html        default
-                *   <div class="s-bg:main-surface s-radius:30" id="s-transition-s-0f6784b6-f83b-4a56-8036-53284ee762ee">
+                *   <div class="s-bg:main-surface s-radius:30" id="s-transition-s-5ddcd192-84f4-4e97-b12a-ee3d4622141f">
                 *      <div class="s-transition s-ratio:1 s-bg:accent s-radius:30"></div>
                 *       <style>
-                *           #s-transition-s-0f6784b6-f83b-4a56-8036-53284ee762ee > div { position: relative; left: 0; width: 100px; }
-                *           #s-transition-s-0f6784b6-f83b-4a56-8036-53284ee762ee:hover > div { left: calc(100% - 100px); )  }
+                *           #s-transition-s-5ddcd192-84f4-4e97-b12a-ee3d4622141f > div { position: relative; left: 0; width: 100px; }
+                *           #s-transition-s-5ddcd192-84f4-4e97-b12a-ee3d4622141f:hover > div { left: calc(100% - 100px); )  }
                 *       </style>
                 *   </div>
 
                 * @example          html        fast
-                *   <div class="s-bg:main-surface s-radius:30" id="s-transition-s-4257fdad-ae9e-4154-9017-58512b9d87b6">
+                *   <div class="s-bg:main-surface s-radius:30" id="s-transition-s-511a587c-686e-47bb-a848-b6ea34ea9110">
                 *      <div class="s-transition:fast s-ratio:1 s-bg:accent s-radius:30"></div>
                 *       <style>
-                *           #s-transition-s-4257fdad-ae9e-4154-9017-58512b9d87b6 > div { position: relative; left: 0; width: 100px; }
-                *           #s-transition-s-4257fdad-ae9e-4154-9017-58512b9d87b6:hover > div { left: calc(100% - 100px); )  }
+                *           #s-transition-s-511a587c-686e-47bb-a848-b6ea34ea9110 > div { position: relative; left: 0; width: 100px; }
+                *           #s-transition-s-511a587c-686e-47bb-a848-b6ea34ea9110:hover > div { left: calc(100% - 100px); )  }
                 *       </style>
                 *   </div>
         * 
@@ -13686,7 +13686,7 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         * @example        html          Vertical spacing
         * <div class="s-spacing:40">
         *   <h1 class="s-typo:h1">Hello world</h1>
-        *   <p class="s-typo:lead">Leigh Doyle</p>
+        *   <p class="s-typo:lead">Darren Hane</p>
         *   <p class="s-typo:p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis egestas non tortor sed aliquet. Fusce finibus erat at leo scelerisque, a lobortis purus pretium. Aliquam ornare leo id mi imperdiet.</p>
         *   <a class="s-btn s-color:accent">Simple Cta</a>
         * </div>
@@ -13962,22 +13962,22 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         * 
         * @example        html          All
         *   <p class="s-user-select:all">
-        *       Qui sapiente quae aut dolorem adipisci harum. Neque et ut dolorem sed velit. In cupiditate maiores iusto nobis quas est. Itaque voluptates dolorem accusantium optio omnis dolorem omnis.
+        *       Harum vitae non quia qui. Illo qui sequi sint. Eum vel non. Facilis doloremque animi sit ut perferendis magnam consequatur. Sint molestiae molestiae.
         *   </p>
         * 
         * @example      html            auto
         *   <p class="s-user-select:auto">
-        *       Et aut dolores quaerat ratione porro. Nam recusandae vero quidem dignissimos qui culpa incidunt. Facilis sit eaque.
+        *       Rerum ab quos aut recusandae corrupti explicabo ad. Quae nostrum reprehenderit sit sed alias sed. Fugiat aut dolores ducimus quidem id quibusdam quos. Quibusdam excepturi ducimus minima repellat nihil sapiente libero. Incidunt nobis amet neque molestias dolore sequi aut est.
         *   </p>
         * 
         * @example          html            none
         *   <p class="s-user-select:none">
-        *       Pariatur repellat asperiores. Ut non quas cum. Quas est rem sequi impedit labore dolor qui. Vitae quibusdam eos consequatur laborum itaque error consequatur labore.
+        *       Sit et vero. Velit beatae doloremque labore repudiandae sed dolorum est id rerum. Sunt deserunt accusamus maiores omnis non ut praesentium. At assumenda consequuntur.
         *   </p>
         * 
         * @example          html                text
         *   <p class="s-user-select:text">
-        *       Magnam voluptates odio quis blanditiis nemo est nihil. Quod expedita magnam accusantium. Architecto ratione sapiente dignissimos quo voluptatibus facere dicta sapiente. Fugit ipsam commodi praesentium provident non eligendi ea. Illum culpa ipsa facilis. Qui blanditiis dolores voluptatem recusandae hic.
+        *       Vel quibusdam quia est sapiente qui. Ipsum ad repellat nihil maxime ut consequatur sint nemo repellat. Blanditiis quasi assumenda ullam necessitatibus recusandae expedita. Eos consequatur cum eius quisquam et.
         *   </p>
         * 
         * @since      2.0.0
@@ -14091,34 +14091,34 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
          * @cssClass        s-truncate:1         Truncate the container to 1 line(s), * @cssClass        s-truncate:2         Truncate the container to 2 line(s), * @cssClass        s-truncate:3         Truncate the container to 3 line(s), * @cssClass        s-truncate:4         Truncate the container to 4 line(s), * @cssClass        s-truncate:5         Truncate the container to 5 line(s), * @cssClass        s-truncate:6         Truncate the container to 6 line(s), * @cssClass        s-truncate:7         Truncate the container to 7 line(s), * @cssClass        s-truncate:8         Truncate the container to 8 line(s), * @cssClass        s-truncate:9         Truncate the container to 9 line(s), * @cssClass        s-truncate:10         Truncate the container to 10 line(s)
         *
          * @example          html        1 line
-            *   <p class="s-typo:p s-truncate:1">Facilis dolore autem aut asperiores.<br />Commodi odit ipsum ipsa exercitationem et adipisci.<br />Velit velit maiores.<br />Sunt nostrum porro officia quibusdam dolorum.<br />Eos itaque eveniet.<br />Quidem aliquid autem suscipit delectus.<br />Est cumque vitae natus pariatur veritatis atque optio ut est.<br />Aut neque distinctio rerum illum vel nulla in eius.<br />Corporis voluptatum et et voluptate incidunt possimus.<br />Cum a non quisquam architecto est delectus sunt id qui.<br />Aut nam doloribus est eligendi sapiente.<br />Autem a omnis qui.<br />Adipisci dolorem odit ea dolor reprehenderit amet dolorum omnis.<br />Omnis animi soluta impedit repudiandae veniam porro voluptatem est.<br />Aut vitae in dicta autem.</p>
+            *   <p class="s-typo:p s-truncate:1">Qui aut saepe voluptate.<br />Illo sunt tempora.<br />Nostrum est ipsa minima asperiores est alias quibusdam illo.<br />Animi qui aperiam voluptas consectetur praesentium quisquam cupiditate.<br />Velit suscipit maxime similique pariatur sapiente ut quisquam et.<br />Dolores et et dolorem et.<br />Nihil et temporibus omnis.<br />Ullam occaecati et beatae a dolores vel.<br />Officia nulla velit veritatis voluptate.<br />Velit quasi voluptas voluptatem ipsum asperiores quaerat aut aliquid.<br />Minima possimus eum occaecati.<br />Velit aliquid qui omnis itaque.<br />Voluptatem cum dolorem.<br />Sit dignissimos velit repudiandae suscipit et perspiciatis similique.<br />Labore vero aliquam et rerum ut nisi ratione.</p>
             * 
  * @example          html        2 line
-            *   <p class="s-typo:p s-truncate:2">Iusto odio qui quaerat tenetur.<br />Reiciendis perferendis illo rerum quaerat amet numquam inventore.<br />Amet dolores et vero atque voluptas.<br />Earum cupiditate enim aliquam at.<br />Alias deleniti fuga possimus.<br />Commodi omnis inventore qui eum.<br />Velit explicabo ut incidunt magni fugiat.<br />Est eligendi atque veniam deleniti et.<br />Quaerat aut non harum optio quam maxime.<br />Nihil aut accusamus sint rem.<br />Corrupti aut libero est doloremque quasi.<br />Consequatur voluptatum sint vel incidunt qui unde.<br />Sed ut qui facilis eveniet veritatis saepe laborum facilis.<br />Modi eos aut ut beatae.<br />Autem incidunt atque vel at.</p>
+            *   <p class="s-typo:p s-truncate:2">Dolor sed inventore sit optio quisquam dignissimos.<br />Distinctio esse quod aliquid magnam iure quibusdam.<br />Fugit dolore eum quasi optio dolor odit.<br />Architecto modi voluptatem rem excepturi quisquam.<br />Praesentium ipsa officiis sit.<br />Distinctio distinctio perferendis sint aut nostrum quia consequatur possimus.<br />Quia qui nulla at nobis.<br />Ipsa in earum iusto consequatur.<br />Similique pariatur sunt labore nemo et sequi nam dolor.<br />Omnis quis assumenda repellendus omnis fuga.<br />Sunt commodi labore omnis ut facere cupiditate.<br />Eum sint voluptates.<br />Necessitatibus mollitia beatae consequuntur nihil dolor omnis.<br />Nesciunt autem non id ipsam dolorum.<br />Autem animi omnis consectetur alias magni iusto.</p>
             * 
  * @example          html        3 lines
-            *   <p class="s-typo:p s-truncate:3">Rerum hic sed nihil facere.<br />Delectus eaque eum nesciunt laboriosam error tempora sit.<br />Esse natus assumenda aliquid dolore enim perferendis quidem.<br />Et sed est.<br />Sit accusamus quaerat voluptate cumque.<br />Ducimus deleniti est magnam non aliquam debitis beatae.<br />Ad rerum culpa et.<br />Corporis iure quasi minima perspiciatis id et ut et.<br />Nobis sint enim eum odit recusandae praesentium accusamus ea.<br />Pariatur fugiat laborum.<br />Sed quia sed mollitia aperiam voluptatem voluptatem qui esse eveniet.<br />Reprehenderit rerum consequatur cum ullam maxime sed sed.<br />Ratione laboriosam autem ex rerum quidem quo.<br />Est eligendi libero.<br />Dolor quibusdam aut ut esse qui et suscipit.</p>
+            *   <p class="s-typo:p s-truncate:3">Cum sunt totam dolorem illum quisquam cum.<br />Autem aut soluta aut laborum.<br />Tempora harum voluptatem quidem nostrum ad at possimus.<br />Ullam sit qui.<br />Corrupti ratione tenetur in consequatur vitae ea ipsam.<br />Ut a sed illum qui provident id.<br />Eligendi et aut quia nostrum minus vero.<br />Possimus earum aut natus quibusdam et natus.<br />Quo repellat quia nemo magni consequatur eos.<br />Sit fugit sed eligendi.<br />Exercitationem rerum enim quia qui laborum dolor consectetur eaque.<br />Pariatur esse hic.<br />Est omnis odio.<br />A ipsum et ut incidunt aut.<br />Dolores quis quos non temporibus aut ut.</p>
             * 
  * @example          html        4 lines
-            *   <p class="s-typo:p s-truncate:4">Nisi laborum voluptate recusandae.<br />Est sed officia quia.<br />Cumque sapiente nemo.<br />Earum iure et nesciunt asperiores iste sed voluptatem facere saepe.<br />Cupiditate facere minima voluptates.<br />Reprehenderit quidem excepturi.<br />Rerum tenetur aliquam quae.<br />Sequi alias error quis dolores qui quidem veritatis natus.<br />Adipisci voluptas hic odio voluptatum voluptatem.<br />Excepturi culpa reprehenderit quis culpa iusto et ullam dolor nihil.<br />Neque voluptate architecto et est molestias quae.<br />Quis dignissimos optio quisquam omnis doloribus qui qui blanditiis reprehenderit.<br />Autem magnam aliquid quisquam voluptate possimus.<br />Sit laborum eos.<br />Id commodi a magni tempore quam.</p>
+            *   <p class="s-typo:p s-truncate:4">Rerum excepturi et et voluptas.<br />Molestias excepturi est tenetur et consequatur qui facilis repellat.<br />Beatae voluptates vitae pariatur in consectetur sed quidem rerum.<br />Consequatur ab necessitatibus sit consequatur.<br />Facere magni optio.<br />Aut ea sit cupiditate numquam.<br />Sint debitis sunt doloribus suscipit.<br />Est vel vero.<br />Sed numquam odit vitae adipisci quisquam a dolor.<br />Optio dolores sit iure.<br />Nam minima voluptatem excepturi eos qui molestiae velit necessitatibus.<br />Quia molestiae cumque aut ullam quia neque quia impedit.<br />Illo sed rerum et quod aliquid id.<br />Impedit eos sed aut at.<br />Tempora qui ipsam ipsam fugit et commodi.</p>
             * 
  * @example          html        5 lines
-            *   <p class="s-typo:p s-truncate:5">Et voluptate deleniti libero dolorem.<br />Quidem nihil provident ut est excepturi maiores aut sint.<br />Aperiam voluptatem sit non aspernatur sed doloremque aliquid et saepe.<br />Voluptatem delectus accusantium repudiandae voluptate inventore.<br />Est voluptas quam.<br />Officia provident quos inventore.<br />Non expedita qui tempora consequatur cumque ratione autem.<br />Itaque occaecati laudantium.<br />Incidunt aliquam autem aut officiis id non aliquid neque.<br />Culpa quis laudantium assumenda consectetur assumenda deserunt expedita omnis aspernatur.<br />Eaque id et.<br />At atque sint.<br />Saepe nihil exercitationem est.<br />Veniam eos consequuntur rerum non ut adipisci.<br />Reiciendis soluta ullam iusto sed numquam ducimus distinctio.</p>
+            *   <p class="s-typo:p s-truncate:5">Saepe ab perspiciatis est vel ratione id dolores sint voluptatem.<br />Quae ea et fuga.<br />Id qui ducimus est at veritatis corrupti.<br />Odio ut sit asperiores et.<br />Incidunt molestias cumque voluptatem odit nemo enim tempore.<br />Est voluptate at totam animi illo consequatur.<br />Fuga harum dolor autem reiciendis aut enim aliquam fuga eum.<br />Rerum facilis quisquam officiis ipsa aut nemo saepe unde.<br />In reprehenderit quibusdam molestias et non sit omnis.<br />Voluptatem corrupti assumenda.<br />Delectus quia aut quas ut.<br />Sint adipisci ea facere id illo.<br />Laboriosam non non sunt animi dolorem.<br />Sint ut voluptatem dolores aut soluta.<br />Eum error consequatur eos.</p>
             * 
  * @example          html        6 lines
-            *   <p class="s-typo:p s-truncate:6">Qui minima quam quae voluptas sint hic dicta tempore.<br />Natus possimus ut laboriosam.<br />Suscipit quia a tenetur qui cum fugiat reprehenderit earum.<br />Adipisci amet sequi illo necessitatibus.<br />Voluptas saepe explicabo exercitationem sed voluptate quia voluptate consectetur.<br />Occaecati fugiat placeat quidem non error omnis rem.<br />Quam maiores ab officiis architecto blanditiis.<br />Debitis veniam quidem rerum libero odit.<br />Cumque odio quam quidem in.<br />Aliquid hic eum.<br />Velit ex sit labore quibusdam veniam quasi cum.<br />Et libero voluptas.<br />Quia adipisci sed voluptas perferendis error.<br />Nulla non voluptate quia officia non.<br />Ex consequatur est amet molestiae mollitia eos.</p>
+            *   <p class="s-typo:p s-truncate:6">Esse rerum vero unde vitae tempore nisi.<br />Quod veritatis voluptatibus praesentium sunt rem.<br />Voluptas a sapiente animi ut eum in voluptatem.<br />Aliquid odit similique hic explicabo iusto quasi.<br />Quo culpa quasi iure placeat qui nihil.<br />Nihil qui ex ipsum ab dolores enim consequuntur.<br />Voluptatem cum vero at quia quam ipsa saepe qui.<br />Velit consequuntur qui.<br />Asperiores rem vel velit delectus.<br />Dolor beatae sed mollitia earum dolor similique libero atque.<br />Perferendis quo tempore sit quia.<br />Tenetur eos nihil sequi culpa iure libero ut eius.<br />Eum dolorem sapiente iusto quia optio.<br />Expedita ipsum voluptatibus voluptas porro.<br />Quia et cumque.</p>
             * 
  * @example          html        7 lines
-            *   <p class="s-typo:p s-truncate:7">Animi rerum est saepe expedita ab.<br />Quis similique eligendi accusantium.<br />Debitis ducimus assumenda pariatur itaque at quas ut.<br />Molestias quaerat veritatis aliquid nemo laboriosam qui.<br />Rem qui consectetur consequatur ut reiciendis.<br />Ratione quisquam eius praesentium aut exercitationem dolorem reprehenderit odit ut.<br />Saepe ut ex explicabo doloribus eligendi.<br />Error est maiores enim laboriosam maxime molestias.<br />Quo autem et ut rerum consequuntur quo odio.<br />Culpa voluptatem consectetur.<br />Rerum perferendis facilis dicta voluptate quia eaque velit alias ut.<br />Ratione aut explicabo.<br />Reiciendis quisquam neque aut.<br />Et reprehenderit eligendi voluptas molestiae.<br />Repudiandae neque ea itaque laboriosam.</p>
+            *   <p class="s-typo:p s-truncate:7">Est voluptas pariatur doloribus doloremque.<br />Et quia et atque in mollitia laborum enim ut.<br />Et est praesentium dolorem tempora repellat molestiae et atque error.<br />Aut molestiae adipisci consequuntur totam quasi.<br />Animi et ipsam voluptatem architecto est culpa.<br />Quisquam corrupti porro iusto id eos libero illo mollitia.<br />Maxime optio molestiae ut delectus.<br />Eum consequatur ipsum dolorem placeat temporibus eum et fugiat.<br />Ut eaque amet.<br />Sapiente laudantium sit.<br />Id sunt voluptatem.<br />Sapiente est et error voluptatem.<br />Nobis rem error fugiat harum omnis.<br />Assumenda fugiat fugit omnis illo.<br />Aliquid aut fugit et.</p>
             * 
  * @example          html        8 lines
-            *   <p class="s-typo:p s-truncate:8">Odit inventore totam corrupti vitae.<br />Impedit omnis labore aut impedit.<br />Et dolores et.<br />Quia eos voluptatem sunt.<br />Dolores laborum eum qui eligendi.<br />Perferendis quam facere ab recusandae reiciendis.<br />Consequuntur voluptate illum quae recusandae nobis et eum magnam voluptas.<br />Sint itaque omnis officia aut explicabo dolore ex in et.<br />Fugiat molestias voluptates eius dolorem fuga tempora aspernatur vitae.<br />Asperiores corrupti repellendus ut dolores porro ab et nemo est.<br />Quo occaecati enim provident nemo in ipsam aut provident.<br />Quibusdam et et.<br />Porro eum laborum quo libero.<br />Adipisci minima dicta ut voluptas.<br />Nisi omnis sint.</p>
+            *   <p class="s-typo:p s-truncate:8">Officiis facere quae sit vitae corporis.<br />Illo earum ea omnis.<br />Dignissimos illo ipsum.<br />Sit possimus praesentium fuga consequatur amet.<br />Explicabo sequi qui vel saepe.<br />Officiis ut sed molestiae quia est perspiciatis.<br />Voluptatem delectus vel laudantium.<br />Minima quo porro et tenetur aut reiciendis.<br />Enim facere consequatur.<br />Ea similique ea sint laudantium aperiam animi aut.<br />Ut blanditiis unde rerum deserunt a ut modi sequi dolor.<br />Recusandae non vel atque commodi cumque est natus quidem.<br />Alias fugiat iusto neque minus sapiente hic cupiditate natus et.<br />Commodi quis quae magnam qui vel.<br />Aut sint nam ab.</p>
             * 
  * @example          html        9 lines
-            *   <p class="s-typo:p s-truncate:9">Rem voluptas occaecati explicabo ducimus asperiores illum sit tempore.<br />Quis optio eveniet saepe.<br />Voluptas minima est ducimus esse omnis.<br />Quidem vel asperiores.<br />Nemo magnam laborum impedit asperiores et ut.<br />Ut minus quasi odio.<br />Voluptatem qui molestiae temporibus ab vero laboriosam odio qui accusantium.<br />Distinctio hic quam modi.<br />Illum atque necessitatibus.<br />Quasi aut laboriosam nam eius adipisci facere iste fugit nesciunt.<br />Culpa accusamus omnis id dolores molestias ex nihil.<br />Expedita rerum sed voluptatum ut molestiae amet sapiente repellat et.<br />Esse unde quidem nisi dolor qui.<br />Dolorem modi optio veritatis quis sequi.<br />Eum pariatur facilis in est.</p>
+            *   <p class="s-typo:p s-truncate:9">Temporibus reiciendis repellendus et illo nam dolore alias placeat quam.<br />Quam voluptas autem dolor a amet.<br />Aut omnis sint pariatur non et voluptatem ut qui at.<br />Ratione dicta voluptatem labore.<br />Et est perspiciatis quod libero placeat.<br />Pariatur numquam in est voluptatum minus.<br />Minus ut architecto reiciendis doloribus illo est officia id.<br />Et totam et qui praesentium itaque impedit omnis repudiandae omnis.<br />Reiciendis numquam et iusto.<br />Voluptates ea repellendus veniam ut numquam libero.<br />Et excepturi reprehenderit vel.<br />Pariatur molestiae recusandae porro consectetur veniam quisquam illo quibusdam repellat.<br />Doloremque dolorem excepturi eius iusto mollitia aut unde.<br />Quia iusto accusantium repudiandae nam harum laborum.<br />Et distinctio est itaque.</p>
             * 
  * @example          html        10 lines
-            *   <p class="s-typo:p s-truncate:10">Expedita laboriosam quae aut nemo itaque ex corrupti.<br />Et commodi aperiam id temporibus natus aut.<br />Aut qui quisquam veritatis doloremque natus aperiam.<br />Ex expedita nihil.<br />Tempore delectus quisquam vitae totam quibusdam.<br />Cupiditate numquam neque possimus.<br />Ipsum odio sed debitis.<br />Voluptate tempora impedit ad ipsa.<br />Incidunt aperiam in aut.<br />Tempora consequatur autem explicabo non aliquid maxime quae eveniet vitae.<br />Eveniet eligendi rerum consequatur.<br />Occaecati ipsa voluptates dolorum optio nobis aspernatur vitae.<br />Ex sapiente maiores vel deserunt.<br />Unde praesentium hic temporibus quia quidem sed modi.<br />Veritatis reiciendis eligendi animi adipisci ipsum dolor.</p>
+            *   <p class="s-typo:p s-truncate:10">Quia quibusdam quasi possimus.<br />Saepe et qui.<br />Provident eos rerum voluptas numquam.<br />Eos voluptatum quia enim officia reiciendis rerum.<br />Perferendis rerum et aperiam ut dignissimos pariatur ut.<br />Hic inventore ullam id laborum.<br />Magni quidem et dolores rerum.<br />Perferendis nemo et sequi deleniti illo dignissimos.<br />Fuga ea eveniet est est autem eligendi ut autem velit.<br />Assumenda unde blanditiis hic.<br />Et ut totam neque modi enim laborum ipsa.<br />Quibusdam dolores non maxime et ex qui consequatur.<br />Voluptatem officia alias aliquam rerum error.<br />Soluta quis esse aut distinctio placeat fugit.<br />Consequuntur facere sit eos qui distinctio.</p>
             * 
         * 
         * @since      2.0.0
@@ -14367,47 +14367,47 @@ border: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),
         * 
         * @example        html          Wrap
         *   <p class="s-white-space:wrap">
-        *       Nulla est consequatur possimus. Nulla autem numquam facilis odio id temporibus quasi vitae sapiente. Velit et aliquid aliquid suscipit et nostrum rerum harum in. Nisi eos optio molestias voluptatem quia. Cupiditate enim corrupti aut illo ipsum.
+        *       Et nemo magni et omnis. Iusto a et. Assumenda ipsam ex unde ipsum officia. Quos ullam aliquam odio eum temporibus vel dignissimos et. Qui saepe est sed.
         *   </p>
         * 
         * @example      html            Nowrap
         *   <p class="s-white-space:nowrap">
-        *       Labore officiis eaque est velit dolor quisquam nulla autem exercitationem. Totam voluptate quia illum quae omnis modi doloremque neque. Consequatur labore sed sit rerum laboriosam tempore facilis.
+        *       Et et sunt dolores aperiam omnis aut quidem. At quibusdam et. Qui est ex voluptatem nam architecto tenetur dolorem et voluptatem. Et qui maxime voluptas modi. Et quibusdam quia impedit nesciunt. Soluta harum cumque veritatis adipisci.
         *   </p>
         * 
         * @example          html            Break spaces
         *   <p class="s-white-space:break-spaces">
-        *       A libero facilis qui sapiente. Sequi nemo magnam et dignissimos iusto et. Id molestiae totam eius est et qui quos dolores.
+        *       Quo alias sed fugiat qui in nemo provident quibusdam quam. Sint saepe alias minus quidem sed veritatis. Doloremque mollitia in iusto itaque illum sit cupiditate ut odit.
         *   </p>
         * 
         * @example          html                Normal
         *   <p class="s-white-space:normal">
-        *       Veniam quisquam reiciendis iusto aut odit. Illo officiis voluptatem est quam sapiente. Incidunt inventore earum error quo molestiae consequatur laudantium.
+        *       Impedit ut aut non labore assumenda culpa reprehenderit sed et. Sint soluta eum incidunt et cumque laudantium. Quod et magni vero quod et et voluptatem.
         *   </p>
         * 
         * @example      html            Pre
         *   <p class="s-white-space:pre">
-        *       Est nostrum et quia beatae deserunt autem. Consectetur voluptas sed. Accusamus architecto sit nemo adipisci. Et ut expedita sed numquam et et odit natus. Ex vel nostrum et dolore veniam officiis eos labore consequatur.
+        *       Maxime vel nisi dolorem. Voluptatum esse voluptatem sit vitae. Est aut hic et dolore qui placeat. Velit qui tempore consequuntur et deserunt ut. Dolor error quo rerum eos aut cum et et. Perferendis impedit harum occaecati dolorem.
         *   </p>
         * 
         * @example      html            Pre-line
         *   <p class="s-white-space:pre-line">
-        *       Ut dolores eveniet blanditiis tenetur omnis error occaecati omnis. Unde nostrum a neque labore sunt ea. Officiis sint amet autem optio vitae occaecati.
+        *       Odio fugit sunt corporis aut quas ratione at dolor natus. Sed unde repellat. Autem assumenda iure totam dolorem qui voluptatem. Incidunt quo possimus. Architecto voluptatibus accusantium.
         *   </p>
         * 
         * @example      html            Pre-wrap
         *   <p class="s-white-space:pre-wrap">
-        *       Dolores voluptatem cumque quia veritatis voluptates ipsa dolor qui. Reprehenderit id sint praesentium aliquam fugiat quia nemo commodi animi. Quidem unde tempora voluptatem occaecati inventore aspernatur neque corrupti ut. Recusandae sed at quidem eligendi eum nostrum in debitis voluptatem. Laboriosam debitis ut dolor error praesentium repudiandae molestias in.
+        *       Est omnis vel sunt. Quaerat cum optio aspernatur est similique totam. Eveniet voluptas doloremque et a esse omnis et neque. Similique ex et laudantium ipsum libero nulla facilis. Sed omnis est labore quos aliquam tempore in.
         *   </p>
         * 
         * @example          html            Revert
         *   <p class="s-white-space:revert">
-        *       Dicta eius quod voluptas ut. Dolor sunt voluptas. Fugit accusantium ipsum. Est illo quis. Enim libero recusandae et eaque velit.
+        *       Reiciendis odio numquam magnam consectetur doloremque labore vitae. Aliquid ratione aut quod consequatur qui earum eum sit dolorum. Ut qui et sit molestias corrupti sit molestiae. Ab illo et sunt incidunt est accusantium repellendus.
         *   </p>
         * 
         * @example          html                Unset
         *   <p class="s-white-space:unset">
-        *       Et magnam voluptatum dicta alias reiciendis quo pariatur. Pariatur voluptatibus laboriosam sunt ea occaecati dolores repudiandae. Voluptatem eum voluptas deleniti qui qui id reprehenderit voluptatem doloremque. Facilis dolorem ratione aliquid quia odit.
+        *       Exercitationem quis id. Voluptas earum voluptate et ea et architecto dolorum possimus. Facilis ut sequi nesciunt ducimus aut aspernatur alias quam eum. Quasi sit dolor ducimus temporibus enim ad deleniti rem inventore.
         *   </p>
         * 
         * @since      2.0.0
@@ -19746,6 +19746,7 @@ body:has(.s-doc_explorer:focus, .s-doc_explorer:focus-within) #header, .scrolled
 }
 #documentation {
     padding-block-start: calc(calc(var(--s-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 20);
+    padding-block-end: calc(calc(var(--s-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 10);
     display: block;
 }
 #documentation ._layout > *:nth-child(2) {

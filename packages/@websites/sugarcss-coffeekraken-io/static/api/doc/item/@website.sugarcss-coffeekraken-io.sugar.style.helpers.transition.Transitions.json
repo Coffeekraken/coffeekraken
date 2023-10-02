@@ -1,0 +1,156 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.transition.Transitions",
+    "name": "Transitions",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "Helpers"
+        ],
+        "slug": "/styleguide/helpers/transition"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows to apply some transitions on any HTMLElement.\nThese transitions are defined in the `theme.transition` theme settings.",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.transition",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "title": "slow",
+            "code": "<div class=\"s-bg:main-surface s-radius:30\" id=\"s-transition-s-6705834a-9713-4b94-9891-464bf923a1e3\">\n     <div class=\"s-transition:slow s-ratio:1 s-bg:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-6705834a-9713-4b94-9891-464bf923a1e3 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-6705834a-9713-4b94-9891-464bf923a1e3:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+        },
+        {
+            "language": "html",
+            "title": "default",
+            "code": "<div class=\"s-bg:main-surface s-radius:30\" id=\"s-transition-s-0f6784b6-f83b-4a56-8036-53284ee762ee\">\n     <div class=\"s-transition s-ratio:1 s-bg:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-0f6784b6-f83b-4a56-8036-53284ee762ee > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-0f6784b6-f83b-4a56-8036-53284ee762ee:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+        },
+        {
+            "language": "html",
+            "title": "fast",
+            "code": "<div class=\"s-bg:main-surface s-radius:30\" id=\"s-transition-s-4257fdad-ae9e-4154-9017-58512b9d87b6\">\n     <div class=\"s-transition:fast s-ratio:1 s-bg:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-4257fdad-ae9e-4154-9017-58512b9d87b6 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-4257fdad-ae9e-4154-9017-58512b9d87b6:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.css",
+    "extension": "css",
+    "relPath": "dist/css/index.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Transitions",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.transition",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "Helpers"
+                ],
+                "slug": "/styleguide/helpers/transition"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows to apply some transitions on any HTMLElement.\nThese transitions are defined in the `theme.transition` theme settings.",
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.transition.classes;"
+                }
+            ],
+            "cssClass": {
+                "s-transition-slow": {
+                    "name": "s-transition:slow",
+                    "description": "Apply the `slow` transition,"
+                },
+                "s-transition": {
+                    "name": "s-transition",
+                    "description": "Apply the `default` transition,"
+                },
+                "s-transition-fast": {
+                    "name": "s-transition:fast",
+                    "description": "Apply the `fast` transition"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "title": "slow",
+                    "code": "<div class=\"s-bg:main-surface s-radius:30\" id=\"s-transition-s-a85c18c2-60d1-4935-a403-7acb0556572d\">\n     <div class=\"s-transition:slow s-ratio:1 s-bg:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-a85c18c2-60d1-4935-a403-7acb0556572d > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-a85c18c2-60d1-4935-a403-7acb0556572d:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+                },
+                {
+                    "language": "html",
+                    "title": "default",
+                    "code": "<div class=\"s-bg:main-surface s-radius:30\" id=\"s-transition-s-5ddcd192-84f4-4e97-b12a-ee3d4622141f\">\n     <div class=\"s-transition s-ratio:1 s-bg:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-5ddcd192-84f4-4e97-b12a-ee3d4622141f > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-5ddcd192-84f4-4e97-b12a-ee3d4622141f:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+                },
+                {
+                    "language": "html",
+                    "title": "fast",
+                    "code": "<div class=\"s-bg:main-surface s-radius:30\" id=\"s-transition-s-511a587c-686e-47bb-a848-b6ea34ea9110\">\n     <div class=\"s-transition:fast s-ratio:1 s-bg:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-511a587c-686e-47bb-a848-b6ea34ea9110 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-511a587c-686e-47bb-a848-b6ea34ea9110:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Transitions\n* @namespace          sugar.style.helpers.transition\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/transition\n* @platform       css\n* @status       stable\n*\n* These classes allows to apply some transitions on any HTMLElement.\n* These transitions are defined in the `theme.transition` theme settings.\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.transition.classes;\n*\n* @cssClass             s-transition:slow            Apply the `slow` transition,\n* @cssClass             s-transition            Apply the `default` transition,\n* @cssClass             s-transition:fast            Apply the `fast` transition\n*\n* @example          html        slow\n*   <div class=\"s-bg:main-surface s-radius:30\" id=\"s-transition-s-a85c18c2-60d1-4935-a403-7acb0556572d\">\n*      <div class=\"s-transition:slow s-ratio:1 s-bg:accent s-radius:30\"></div>\n*       <style>\n*           #s-transition-s-a85c18c2-60d1-4935-a403-7acb0556572d > div { position: relative; left: 0; width: 100px; }\n*           #s-transition-s-a85c18c2-60d1-4935-a403-7acb0556572d:hover > div { left: calc(100% - 100px); )  }\n*       </style>\n*   </div>\n* @example          html        default\n*   <div class=\"s-bg:main-surface s-radius:30\" id=\"s-transition-s-5ddcd192-84f4-4e97-b12a-ee3d4622141f\">\n*      <div class=\"s-transition s-ratio:1 s-bg:accent s-radius:30\"></div>\n*       <style>\n*           #s-transition-s-5ddcd192-84f4-4e97-b12a-ee3d4622141f > div { position: relative; left: 0; width: 100px; }\n*           #s-transition-s-5ddcd192-84f4-4e97-b12a-ee3d4622141f:hover > div { left: calc(100% - 100px); )  }\n*       </style>\n*   </div>\n* @example          html        fast\n*   <div class=\"s-bg:main-surface s-radius:30\" id=\"s-transition-s-511a587c-686e-47bb-a848-b6ea34ea9110\">\n*      <div class=\"s-transition:fast s-ratio:1 s-bg:accent s-radius:30\"></div>\n*       <style>\n*           #s-transition-s-511a587c-686e-47bb-a848-b6ea34ea9110 > div { position: relative; left: 0; width: 100px; }\n*           #s-transition-s-511a587c-686e-47bb-a848-b6ea34ea9110:hover > div { left: calc(100% - 100px); )  }\n*       </style>\n*   </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.transition.Transitions"
+        }
+    ]
+}

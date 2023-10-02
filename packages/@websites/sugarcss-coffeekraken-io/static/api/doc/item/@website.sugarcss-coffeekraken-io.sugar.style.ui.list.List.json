@@ -1,0 +1,196 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.list.List",
+    "name": "List",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "UI"
+        ],
+        "slug": "/styleguide/ui/lists"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows you to apply list lnfs to any ul, ol, dl, etc...",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.list",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "title": "dl",
+            "code": "<ul class=\"s-list:dl \">\n    <li>Regional Accountability Orchestrator Desiree Goodwin</li>\n    <li>Investor Quality Consultant Arlene Predovic</li>\n    <li>Investor Research Orchestrator Taylor Dicki</li>\n  </ul>"
+        },
+        {
+            "language": "html",
+            "title": "ul",
+            "code": "<ul class=\"s-list:ul \">\n    <li>Legacy Accounts Agent Verna McGlynn</li>\n    <li>Principal Accounts Director Angelo Hamill</li>\n    <li>Senior Brand Producer Allen Feest</li>\n  </ul>"
+        },
+        {
+            "language": "html",
+            "title": "ol",
+            "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>Human Configuration Agent Jean Rohan Sr.</li>\n    <li>Forward Optimization Developer Heather Robel</li>\n    <li>Regional Program Director Laurie Runolfsson</li>\n  </ul>"
+        },
+        {
+            "language": "html",
+            "title": "icon",
+            "code": "<ul class=\"s-list:icon \">\n    <li><i class=\"s-icon:user\"></i>Product Metrics Coordinator Roderick Parker</li>\n    <li><i class=\"s-icon:heart s-color:accent\"></i>Chief Interactions Engineer Jeremy Vandervort</li>\n    <li><i class=\"s-icon:fire s-color:error\"></i>Principal Integration Manager Noah White DDS</li>\n  </ul>"
+        },
+        {
+            "language": "html",
+            "title": "RTL Support",
+            "code": "<div dir=\"rtl\">\n  <ul class=\"s-list:ul s-color:accent s-mbe:30\">\n    <li>Chief Configuration Designer Salvador Ernser</li>\n    <li>Internal Functionality Officer Javier Metz</li>\n  </ul>\n  <ul class=\"s-list:ol s-color:accent s-mbe:30\">\n    <li>National Metrics Strategist Tracy Krajcik</li>\n    <li>Principal Applications Executive Violet Rolfson</li>\n  </ul>\n  <ul class=\"s-list:icon s-color:accent s-mbe:30\">\n    <li><i class=\"s-icon:user\"></i> Central Infrastructure Specialist Julius Skiles</li>\n    <li><i class=\"s-icon:heart s-color:error\"></i> Chief Interactions Representative Amy Jenkins PhD</li>\n  </ul>\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "Colors (none-exhaustive)",
+            "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>International Integration Consultant Krista Koss</li>\n    <li class=\"s-color:complementary\">Dynamic Creative Manager Muriel Olson</li>\n    <li class=\"s-color:error\">Future Creative Administrator Pamela Harvey</li>\n  </ul>"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.css",
+    "extension": "css",
+    "relPath": "dist/css/index.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "List",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.list",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "UI"
+                ],
+                "slug": "/styleguide/ui/lists"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows you to apply list lnfs to any ul, ol, dl, etc...",
+            "feature": [
+                "Support for vertical rhythm through the `s-rhythm:vertical` class",
+                "Support for text formatting through the `s-format:text` class",
+                "Support for scaling through the `s-scale:...` class",
+                "Support for colorizing through the `s-color:...` class"
+            ],
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.ui.list.classes;\n\n.my-list {\n  @s.ui.list;\n}"
+                }
+            ],
+            "cssClass": {
+                "s-list": {
+                    "name": "s-list",
+                    "description": "Apply the dl list lnf"
+                },
+                "s-list-ul": {
+                    "name": "s-list:ul",
+                    "description": "Apply the ul list lnf"
+                },
+                "s-list-ol": {
+                    "name": "s-list:ol",
+                    "description": "Apply the ol list lnf"
+                },
+                "s-list-icon": {
+                    "name": "s-list:icon",
+                    "description": "Apply the icon list lnf"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "title": "dl",
+                    "code": "<ul class=\"s-list:dl \">\n    <li>Regional Creative Manager Evan Dare</li>\n    <li>Investor Program Agent Opal Weimann</li>\n    <li>Product Functionality Analyst Ashley Swift</li>\n  </ul>"
+                },
+                {
+                    "language": "html",
+                    "title": "ul",
+                    "code": "<ul class=\"s-list:ul \">\n    <li>Internal Web Planner Johnnie Nienow</li>\n    <li>Future Usability Developer Keith Sanford</li>\n    <li>Human Division Executive Ms. Danielle Sipes</li>\n  </ul>"
+                },
+                {
+                    "language": "html",
+                    "title": "ol",
+                    "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>Corporate Metrics Coordinator Fernando Mueller</li>\n    <li>Investor Communications Manager Joshua Howell</li>\n    <li>Regional Applications Technician Angelo Kshlerin</li>\n  </ul>"
+                },
+                {
+                    "language": "html",
+                    "title": "icon",
+                    "code": "<ul class=\"s-list:icon \">\n    <li><i class=\"s-icon:user\"></i>Direct Implementation Coordinator Ginger Weissnat</li>\n    <li><i class=\"s-icon:heart s-color:accent\"></i>Forward Communications Technician Irene Wilderman</li>\n    <li><i class=\"s-icon:fire s-color:error\"></i>Direct Implementation Producer Tonya Kutch</li>\n  </ul>"
+                },
+                {
+                    "language": "html",
+                    "title": "RTL Support",
+                    "code": "<div dir=\"rtl\">\n  <ul class=\"s-list:ul s-color:accent s-mbe:30\">\n    <li>Customer Functionality Agent Todd Klein</li>\n    <li>National Communications Consultant Ryan Lynch</li>\n  </ul>\n  <ul class=\"s-list:ol s-color:accent s-mbe:30\">\n    <li>Global Mobility Analyst Jeremy Heidenreich</li>\n    <li>Regional Integration Strategist Rosie Prohaska II</li>\n  </ul>\n  <ul class=\"s-list:icon s-color:accent s-mbe:30\">\n    <li><i class=\"s-icon:user\"></i> Investor Research Producer Candice Carroll</li>\n    <li><i class=\"s-icon:heart s-color:error\"></i> National Implementation Administrator Timmy Armstrong Sr.</li>\n  </ul>\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "Colors (none-exhaustive)",
+                    "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>Corporate Assurance Associate Sadie Kertzmann</li>\n    <li class=\"s-color:complementary\">International Division Liaison Catherine Kuhn</li>\n    <li class=\"s-color:error\">District Response Manager Wesley Dach</li>\n  </ul>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          List\n* @namespace          sugar.style.ui.list\n* @type               Styleguide\n* @menu           Styleguide / UI        /styleguide/ui/lists\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply list lnfs to any ul, ol, dl, etc...\n*\n* @feature          Support for vertical rhythm through the `s-rhythm:vertical` class\n* @feature          Support for text formatting through the `s-format:text` class\n* @feature          Support for scaling through the `s-scale:...` class\n* @feature          Support for colorizing through the `s-color:...` class\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.ui.list.classes;\n*\n* .my-list {\n*   @s.ui.list;\n* }\n*\n* @cssClass     s-list           Apply the dl list lnf\n* @cssClass     s-list:ul           Apply the ul list lnf\n* @cssClass     s-list:ol           Apply the ol list lnf\n* @cssClass     s-list:icon           Apply the icon list lnf\n*\n* @example        html       dl\n*   <ul class=\"s-list:dl \">\n*     <li>Regional Creative Manager Evan Dare</li>\n*     <li>Investor Program Agent Opal Weimann</li>\n*     <li>Product Functionality Analyst Ashley Swift</li>\n*   </ul>\n*\n* @example        html       ul\n*   <ul class=\"s-list:ul \">\n*     <li>Internal Web Planner Johnnie Nienow</li>\n*     <li>Future Usability Developer Keith Sanford</li>\n*     <li>Human Division Executive Ms. Danielle Sipes</li>\n*   </ul>\n*\n* @example        html       ol\n*   <ul class=\"s-list:ol s-color:accent\">\n*     <li>Corporate Metrics Coordinator Fernando Mueller</li>\n*     <li>Investor Communications Manager Joshua Howell</li>\n*     <li>Regional Applications Technician Angelo Kshlerin</li>\n*   </ul>\n*\n* @example        html       icon\n*   <ul class=\"s-list:icon \">\n*     <li><i class=\"s-icon:user\"></i>Direct Implementation Coordinator Ginger Weissnat</li>\n*     <li><i class=\"s-icon:heart s-color:accent\"></i>Forward Communications Technician Irene Wilderman</li>\n*     <li><i class=\"s-icon:fire s-color:error\"></i>Direct Implementation Producer Tonya Kutch</li>\n*   </ul>\n*\n*\n* @example        html          RTL Support\n* <div dir=\"rtl\">\n*   <ul class=\"s-list:ul s-color:accent s-mbe:30\">\n*     <li>Customer Functionality Agent Todd Klein</li>\n*     <li>National Communications Consultant Ryan Lynch</li>\n*   </ul>\n*   <ul class=\"s-list:ol s-color:accent s-mbe:30\">\n*     <li>Global Mobility Analyst Jeremy Heidenreich</li>\n*     <li>Regional Integration Strategist Rosie Prohaska II</li>\n*   </ul>\n*   <ul class=\"s-list:icon s-color:accent s-mbe:30\">\n*     <li><i class=\"s-icon:user\"></i> Investor Research Producer Candice Carroll</li>\n*     <li><i class=\"s-icon:heart s-color:error\"></i> National Implementation Administrator Timmy Armstrong Sr.</li>\n*   </ul>\n* </div>\n*\n* @example          html         Colors (none-exhaustive)\n*   <ul class=\"s-list:ol s-color:accent\">\n*     <li>Corporate Assurance Associate Sadie Kertzmann</li>\n*     <li class=\"s-color:complementary\">International Division Liaison Catherine Kuhn</li>\n*     <li class=\"s-color:error\">District Response Manager Wesley Dach</li>\n*   </ul>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.list.List"
+        }
+    ]
+}

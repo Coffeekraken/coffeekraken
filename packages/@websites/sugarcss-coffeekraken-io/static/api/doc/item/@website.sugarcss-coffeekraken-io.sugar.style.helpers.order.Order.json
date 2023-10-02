@@ -1,0 +1,204 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.order.Order",
+    "name": "Order",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "Helpers"
+        ],
+        "slug": "/styleguide/helpers/order"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows you to apply some order attributes on any HTMLElement.",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.order",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "title": "Simple order",
+            "code": "<div class=\"s-flex s-gap:40\">\n  <div class=\"s-order:3 s-p:30 s-ratio:16-9 s-grow s-bg:main s-radius\">1</div>\n  <div class=\"s-order:1 s-p:30 s-ratio:16-9 s-grow s-bg:main s-radius\">2</div>\n  <div class=\"s-order:2 s-p:30 s-ratio:16-9 s-grow s-bg:main s-radius\">3</div>\n</div>"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.css",
+    "extension": "css",
+    "relPath": "dist/css/index.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Order",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.order",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "Helpers"
+                ],
+                "slug": "/styleguide/helpers/order"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows you to apply some order attributes on any HTMLElement.",
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.order.classes;"
+                }
+            ],
+            "cssClass": {
+                "s-order-0": {
+                    "name": "s-order-0",
+                    "description": "Apply the order 0"
+                },
+                "s-order-1": {
+                    "name": "s-order-1",
+                    "description": "Apply the order 1"
+                },
+                "s-order-2": {
+                    "name": "s-order-2",
+                    "description": "Apply the order 2"
+                },
+                "s-order-3": {
+                    "name": "s-order-3",
+                    "description": "Apply the order 3"
+                },
+                "s-order-4": {
+                    "name": "s-order-4",
+                    "description": "Apply the order 4"
+                },
+                "s-order-5": {
+                    "name": "s-order-5",
+                    "description": "Apply the order 5"
+                },
+                "s-order-6": {
+                    "name": "s-order-6",
+                    "description": "Apply the order 6"
+                },
+                "s-order-7": {
+                    "name": "s-order-7",
+                    "description": "Apply the order 7"
+                },
+                "s-order-8": {
+                    "name": "s-order-8",
+                    "description": "Apply the order 8"
+                },
+                "s-order-9": {
+                    "name": "s-order-9",
+                    "description": "Apply the order 9"
+                },
+                "s-order-10": {
+                    "name": "s-order-10",
+                    "description": "Apply the order 10"
+                },
+                "s-order-11": {
+                    "name": "s-order-11",
+                    "description": "Apply the order 11"
+                },
+                "s-order-12": {
+                    "name": "s-order-12",
+                    "description": "Apply the order 12"
+                },
+                "s-order-13": {
+                    "name": "s-order-13",
+                    "description": "Apply the order 13"
+                },
+                "s-order-14": {
+                    "name": "s-order-14",
+                    "description": "Apply the order 14"
+                },
+                "s-order-15": {
+                    "name": "s-order-15",
+                    "description": "Apply the order 15"
+                },
+                "s-order-16": {
+                    "name": "s-order-16",
+                    "description": "Apply the order 16"
+                },
+                "s-order-17": {
+                    "name": "s-order-17",
+                    "description": "Apply the order 17"
+                },
+                "s-order-18": {
+                    "name": "s-order-18",
+                    "description": "Apply the order 18"
+                },
+                "s-order-19": {
+                    "name": "s-order-19",
+                    "description": "Apply the order 19"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "title": "Simple order",
+                    "code": "<div class=\"s-flex s-gap:40\">\n  <div class=\"s-order:3 s-p:30 s-ratio:16-9 s-grow s-bg:main s-radius\">1</div>\n  <div class=\"s-order:1 s-p:30 s-ratio:16-9 s-grow s-bg:main s-radius\">2</div>\n  <div class=\"s-order:2 s-p:30 s-ratio:16-9 s-grow s-bg:main s-radius\">3</div>\n</div>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Order\n* @namespace          sugar.style.helpers.order\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/order\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply some order attributes on any HTMLElement.\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.order.classes;\n*\n* @cssClass             s-order-0        Apply the order 0\n* @cssClass             s-order-1        Apply the order 1\n* @cssClass             s-order-2        Apply the order 2\n* @cssClass             s-order-3        Apply the order 3\n* @cssClass             s-order-4        Apply the order 4\n* @cssClass             s-order-5        Apply the order 5\n* @cssClass             s-order-6        Apply the order 6\n* @cssClass             s-order-7        Apply the order 7\n* @cssClass             s-order-8        Apply the order 8\n* @cssClass             s-order-9        Apply the order 9\n* @cssClass             s-order-10        Apply the order 10\n* @cssClass             s-order-11        Apply the order 11\n* @cssClass             s-order-12        Apply the order 12\n* @cssClass             s-order-13        Apply the order 13\n* @cssClass             s-order-14        Apply the order 14\n* @cssClass             s-order-15        Apply the order 15\n* @cssClass             s-order-16        Apply the order 16\n* @cssClass             s-order-17        Apply the order 17\n* @cssClass             s-order-18        Apply the order 18\n* @cssClass             s-order-19        Apply the order 19\n*\n* @example        html          Simple order\n* <div class=\"s-flex s-gap:40\">\n*   <div class=\"s-order:3 s-p:30 s-ratio:16-9 s-grow s-bg:main s-radius\">1</div>\n*   <div class=\"s-order:1 s-p:30 s-ratio:16-9 s-grow s-bg:main s-radius\">2</div>\n*   <div class=\"s-order:2 s-p:30 s-ratio:16-9 s-grow s-bg:main s-radius\">3</div>\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.order.Order"
+        }
+    ]
+}

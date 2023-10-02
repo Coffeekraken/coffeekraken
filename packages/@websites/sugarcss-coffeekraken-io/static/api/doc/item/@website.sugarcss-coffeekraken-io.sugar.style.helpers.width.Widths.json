@@ -1,0 +1,168 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.width.Widths",
+    "name": "Widths",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "Helpers"
+        ],
+        "slug": "/styleguide/helpers/widths"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows to apply some width to any HTMLElement.\nThese widths are defined in the `theme.width` theme settings.",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.width",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "title": "Widths",
+            "code": "<div class=\"s-flex:column s-gap:20\">\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:0 s-text:center s-bg:accent s-p:30 s-radius:30\">0%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:10 s-text:center s-bg:accent s-p:30 s-radius:30\">10%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:20 s-text:center s-bg:accent s-p:30 s-radius:30\">20%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:30 s-text:center s-bg:accent s-p:30 s-radius:30\">30%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:40 s-text:center s-bg:accent s-p:30 s-radius:30\">40%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:50 s-text:center s-bg:accent s-p:30 s-radius:30\">50%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:60 s-text:center s-bg:accent s-p:30 s-radius:30\">60%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:70 s-text:center s-bg:accent s-p:30 s-radius:30\">70%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:80 s-text:center s-bg:accent s-p:30 s-radius:30\">80%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:90 s-text:center s-bg:accent s-p:30 s-radius:30\">90%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:100 s-text:center s-bg:accent s-p:30 s-radius:30\">100%</div>\n  </div>\n</div>"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.css",
+    "extension": "css",
+    "relPath": "dist/css/index.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Widths",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.width",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "Helpers"
+                ],
+                "slug": "/styleguide/helpers/widths"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows to apply some width to any HTMLElement.\nThese widths are defined in the `theme.width` theme settings.",
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.width.classes;"
+                }
+            ],
+            "cssClass": {
+                "s-width-0": {
+                    "name": "s-width:0",
+                    "description": "Apply the `0` width,"
+                },
+                "s-width-10": {
+                    "name": "s-width:10",
+                    "description": "Apply the `10` width,"
+                },
+                "s-width-20": {
+                    "name": "s-width:20",
+                    "description": "Apply the `20` width,"
+                },
+                "s-width-30": {
+                    "name": "s-width:30",
+                    "description": "Apply the `30` width,"
+                },
+                "s-width-40": {
+                    "name": "s-width:40",
+                    "description": "Apply the `40` width,"
+                },
+                "s-width-50": {
+                    "name": "s-width:50",
+                    "description": "Apply the `50` width,"
+                },
+                "s-width-60": {
+                    "name": "s-width:60",
+                    "description": "Apply the `60` width,"
+                },
+                "s-width-70": {
+                    "name": "s-width:70",
+                    "description": "Apply the `70` width,"
+                },
+                "s-width-80": {
+                    "name": "s-width:80",
+                    "description": "Apply the `80` width,"
+                },
+                "s-width-90": {
+                    "name": "s-width:90",
+                    "description": "Apply the `90` width,"
+                },
+                "s-width-100": {
+                    "name": "s-width:100",
+                    "description": "Apply the `100` width"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "title": "Widths",
+                    "code": "<div class=\"s-flex:column s-gap:20\">\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:0 s-text:center s-bg:accent s-p:30 s-radius:30\">0%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:10 s-text:center s-bg:accent s-p:30 s-radius:30\">10%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:20 s-text:center s-bg:accent s-p:30 s-radius:30\">20%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:30 s-text:center s-bg:accent s-p:30 s-radius:30\">30%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:40 s-text:center s-bg:accent s-p:30 s-radius:30\">40%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:50 s-text:center s-bg:accent s-p:30 s-radius:30\">50%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:60 s-text:center s-bg:accent s-p:30 s-radius:30\">60%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:70 s-text:center s-bg:accent s-p:30 s-radius:30\">70%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:80 s-text:center s-bg:accent s-p:30 s-radius:30\">80%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:90 s-text:center s-bg:accent s-p:30 s-radius:30\">90%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:100 s-text:center s-bg:accent s-p:30 s-radius:30\">100%</div>\n  </div>\n</div>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Widths\n* @namespace          sugar.style.helpers.width\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/widths\n* @platform       css\n* @status       stable\n*\n* These classes allows to apply some width to any HTMLElement.\n* These widths are defined in the `theme.width` theme settings.\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.width.classes;\n*\n* @cssClass             s-width:0            Apply the `0` width,\n* @cssClass             s-width:10            Apply the `10` width,\n* @cssClass             s-width:20            Apply the `20` width,\n* @cssClass             s-width:30            Apply the `30` width,\n* @cssClass             s-width:40            Apply the `40` width,\n* @cssClass             s-width:50            Apply the `50` width,\n* @cssClass             s-width:60            Apply the `60` width,\n* @cssClass             s-width:70            Apply the `70` width,\n* @cssClass             s-width:80            Apply the `80` width,\n* @cssClass             s-width:90            Apply the `90` width,\n* @cssClass             s-width:100            Apply the `100` width\n*\n* @example         html        Widths\n* <div class=\"s-flex:column s-gap:20\">\n*   <div>\n*      <div style=\"overflow:hidden\" class=\"s-width:0 s-text:center s-bg:accent s-p:30 s-radius:30\">0%</div>\n*   </div>\n*   <div>\n*      <div style=\"overflow:hidden\" class=\"s-width:10 s-text:center s-bg:accent s-p:30 s-radius:30\">10%</div>\n*   </div>\n*   <div>\n*      <div style=\"overflow:hidden\" class=\"s-width:20 s-text:center s-bg:accent s-p:30 s-radius:30\">20%</div>\n*   </div>\n*   <div>\n*      <div style=\"overflow:hidden\" class=\"s-width:30 s-text:center s-bg:accent s-p:30 s-radius:30\">30%</div>\n*   </div>\n*   <div>\n*      <div style=\"overflow:hidden\" class=\"s-width:40 s-text:center s-bg:accent s-p:30 s-radius:30\">40%</div>\n*   </div>\n*   <div>\n*      <div style=\"overflow:hidden\" class=\"s-width:50 s-text:center s-bg:accent s-p:30 s-radius:30\">50%</div>\n*   </div>\n*   <div>\n*      <div style=\"overflow:hidden\" class=\"s-width:60 s-text:center s-bg:accent s-p:30 s-radius:30\">60%</div>\n*   </div>\n*   <div>\n*      <div style=\"overflow:hidden\" class=\"s-width:70 s-text:center s-bg:accent s-p:30 s-radius:30\">70%</div>\n*   </div>\n*   <div>\n*      <div style=\"overflow:hidden\" class=\"s-width:80 s-text:center s-bg:accent s-p:30 s-radius:30\">80%</div>\n*   </div>\n*   <div>\n*      <div style=\"overflow:hidden\" class=\"s-width:90 s-text:center s-bg:accent s-p:30 s-radius:30\">90%</div>\n*   </div>\n*   <div>\n*      <div style=\"overflow:hidden\" class=\"s-width:100 s-text:center s-bg:accent s-p:30 s-radius:30\">100%</div>\n*   </div>\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.width.Widths"
+        }
+    ]
+}

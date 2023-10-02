@@ -18,7 +18,11 @@ const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config")
 function sitemap() {
     return new s_promise_1.default(({ resolve, reject, emit }) => __awaiter(this, void 0, void 0, function* () {
         var _a, _b;
-        const items = [];
+        const items = [
+            {
+                loc: 'http://localhost:9191/api/doc',
+            },
+        ];
         const docmapInstance = new s_docmap_1.default();
         const docConfig = s_sugar_config_1.default.get('doc');
         for (let [categoryId, categoryObj] of Object.entries(docConfig.categories)) {
@@ -27,38 +31,12 @@ function sitemap() {
                 continue;
             for (let [id, itemObj] of Object.entries(searchResult.items)) {
                 items.push({
-                    loc: `http://localhost:${docConfig.server.port}/api/doc/${itemObj.id}`,
+                    loc: `http://localhost:${docConfig.server.port}/api/doc/item/${itemObj.id}`,
                 });
             }
         }
-        // const hashesByPath = {};
-        // const docmapInstance = new __SDocmap();
-        // const docmapJson = await docmapInstance.read();
-        // for (let [namespace, docmapObj] of Object.entries(docmapJson.map)) {
-        //     // @ts-ignore
-        //     let hash = hashesByPath[docmapObj.path];
-        //     if (!hash) {
-        //         // @ts-ignore
-        //         if (!__fs.existsSync(docmapObj.path)) {
-        //             console.warn(
-        //                 `<red>[sitemap]</red> The file "<cyan>${docmapObj.path}</cyan>" has been skipped cause it does not exists...`,
-        //             );
-        //         } else {
-        //             // @ts-ignore
-        //             hash = __fileHashSync(docmapObj.path);
-        //             // save in stack
-        //             // @ts-ignore
-        //             hashesByPath[docmapObj.path] = hash;
-        //         }
-        //     }
-        //     items.push({
-        //         loc: `/api/${namespace}`,
-        //         // @ts-ignore
-        //         integrity: hash,
-        //     });
-        // }
         resolve(items);
     }));
 }
 exports.default = sitemap;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsc0VBQStDO0FBQy9DLHdFQUFpRDtBQUVqRCxrRkFBMEQ7QUFFMUQsU0FBd0IsT0FBTztJQUMzQixPQUFPLElBQUksbUJBQVUsQ0FBQyxDQUFPLEVBQUUsT0FBTyxFQUFFLE1BQU0sRUFBRSxJQUFJLEVBQUUsRUFBRSxFQUFFOztRQUN0RCxNQUFNLEtBQUssR0FBRyxFQUFFLENBQUM7UUFFakIsTUFBTSxjQUFjLEdBQUcsSUFBSSxrQkFBUyxFQUFFLENBQUM7UUFFdkMsTUFBTSxTQUFTLEdBQUcsd0JBQWMsQ0FBQyxHQUFHLENBQUMsS0FBSyxDQUFDLENBQUM7UUFFNUMsS0FBSyxJQUFJLENBQUMsVUFBVSxFQUFFLFdBQVcsQ0FBQyxJQUFJLE1BQU0sQ0FBQyxPQUFPLENBQ2hELFNBQVMsQ0FBQyxVQUFVLENBQ3ZCLEVBQUU7WUFDQyxNQUFNLFlBQVksR0FBRyxNQUFNLGNBQWMsQ0FBQyxNQUFNLENBQzVDLE1BQUEsV0FBVyxDQUFDLE9BQU8sbUNBQUksRUFBRSxDQUM1QixDQUFDO1lBRUYsSUFBSSxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsTUFBQSxZQUFZLENBQUMsS0FBSyxtQ0FBSSxFQUFFLENBQUMsQ0FBQyxNQUFNO2dCQUFFLFNBQVM7WUFFNUQsS0FBSyxJQUFJLENBQUMsRUFBRSxFQUFFLE9BQU8sQ0FBQyxJQUFJLE1BQU0sQ0FBQyxPQUFPLENBQUMsWUFBWSxDQUFDLEtBQUssQ0FBQyxFQUFFO2dCQUMxRCxLQUFLLENBQUMsSUFBSSxDQUFDO29CQUNQLEdBQUcsRUFBRSxvQkFBb0IsU0FBUyxDQUFDLE1BQU0sQ0FBQyxJQUFJLFlBQVksT0FBTyxDQUFDLEVBQUUsRUFBRTtpQkFDekUsQ0FBQyxDQUFDO2FBQ047U0FDSjtRQUVELDJCQUEyQjtRQUUzQiwwQ0FBMEM7UUFDMUMsa0RBQWtEO1FBRWxELHVFQUF1RTtRQUN2RSxvQkFBb0I7UUFDcEIsK0NBQStDO1FBQy9DLG1CQUFtQjtRQUNuQix3QkFBd0I7UUFDeEIsa0RBQWtEO1FBQ2xELDRCQUE0QjtRQUM1QixpSUFBaUk7UUFDakksaUJBQWlCO1FBQ2pCLG1CQUFtQjtRQUNuQiw0QkFBNEI7UUFDNUIscURBQXFEO1FBQ3JELCtCQUErQjtRQUMvQiw0QkFBNEI7UUFDNUIsbURBQW1EO1FBQ25ELFlBQVk7UUFDWixRQUFRO1FBRVIsbUJBQW1CO1FBQ25CLG9DQUFvQztRQUNwQyx3QkFBd0I7UUFDeEIsMkJBQTJCO1FBQzNCLFVBQVU7UUFDVixJQUFJO1FBRUosT0FBTyxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBQ25CLENBQUMsQ0FBQSxDQUFDLENBQUM7QUFDUCxDQUFDO0FBeERELDBCQXdEQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsc0VBQStDO0FBQy9DLHdFQUFpRDtBQUVqRCxrRkFBMEQ7QUFFMUQsU0FBd0IsT0FBTztJQUMzQixPQUFPLElBQUksbUJBQVUsQ0FBQyxDQUFPLEVBQUUsT0FBTyxFQUFFLE1BQU0sRUFBRSxJQUFJLEVBQUUsRUFBRSxFQUFFOztRQUN0RCxNQUFNLEtBQUssR0FBRztZQUNWO2dCQUNJLEdBQUcsRUFBRSwrQkFBK0I7YUFDdkM7U0FDSixDQUFDO1FBRUYsTUFBTSxjQUFjLEdBQUcsSUFBSSxrQkFBUyxFQUFFLENBQUM7UUFFdkMsTUFBTSxTQUFTLEdBQUcsd0JBQWMsQ0FBQyxHQUFHLENBQUMsS0FBSyxDQUFDLENBQUM7UUFFNUMsS0FBSyxJQUFJLENBQUMsVUFBVSxFQUFFLFdBQVcsQ0FBQyxJQUFJLE1BQU0sQ0FBQyxPQUFPLENBQ2hELFNBQVMsQ0FBQyxVQUFVLENBQ3ZCLEVBQUU7WUFDQyxNQUFNLFlBQVksR0FBRyxNQUFNLGNBQWMsQ0FBQyxNQUFNLENBQzVDLE1BQUEsV0FBVyxDQUFDLE9BQU8sbUNBQUksRUFBRSxDQUM1QixDQUFDO1lBRUYsSUFBSSxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsTUFBQSxZQUFZLENBQUMsS0FBSyxtQ0FBSSxFQUFFLENBQUMsQ0FBQyxNQUFNO2dCQUFFLFNBQVM7WUFFNUQsS0FBSyxJQUFJLENBQUMsRUFBRSxFQUFFLE9BQU8sQ0FBQyxJQUFJLE1BQU0sQ0FBQyxPQUFPLENBQUMsWUFBWSxDQUFDLEtBQUssQ0FBQyxFQUFFO2dCQUMxRCxLQUFLLENBQUMsSUFBSSxDQUFDO29CQUNQLEdBQUcsRUFBRSxvQkFBb0IsU0FBUyxDQUFDLE1BQU0sQ0FBQyxJQUFJLGlCQUFpQixPQUFPLENBQUMsRUFBRSxFQUFFO2lCQUM5RSxDQUFDLENBQUM7YUFDTjtTQUNKO1FBRUQsT0FBTyxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBQ25CLENBQUMsQ0FBQSxDQUFDLENBQUM7QUFDUCxDQUFDO0FBOUJELDBCQThCQyJ9

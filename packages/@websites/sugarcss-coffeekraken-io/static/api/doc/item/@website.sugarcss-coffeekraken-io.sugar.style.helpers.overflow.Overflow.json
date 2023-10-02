@@ -1,0 +1,240 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.overflow.Overflow",
+    "name": "Overflow",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "Helpers"
+        ],
+        "slug": "/styleguide/helpers/overflow"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows you to apply some overflow attributes on any HTMLElement.",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.overflow",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "title": "Auto",
+            "code": "<div class=\"s-overflow:auto\">\n  I'm in an \"auto\" overflow container\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "Hidden",
+            "code": "<div class=\"s-overflow:hidden\">\n  I'm in an \"hidden\" overflow container\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "Inherit",
+            "code": "<div class=\"s-overflow:inherit\">\n  I'm in an \"inherit\" overflow container\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "Initial",
+            "code": "<div class=\"s-overflow:initial\">\n  I'm in an \"initial\" overflow container\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "Overlay",
+            "code": "<div class=\"s-overflow:overlay\">\n  I'm in an \"overlay\" overflow container\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "Revert",
+            "code": "<div class=\"s-overflow:revert\">\n  I'm in an \"revert\" overflow container\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "Scroll",
+            "code": "<div class=\"s-overflow:scroll\">\n  I'm in an \"scroll\" overflow container\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "Visible",
+            "code": "<div class=\"s-overflow:visible\">\n  I'm in an \"visible\" overflow container\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "Unset",
+            "code": "<div class=\"s-overflow:unset\">\n  I'm in an \"unset\" overflow container\n</div>"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.css",
+    "extension": "css",
+    "relPath": "dist/css/index.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Overflow",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.overflow",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "Helpers"
+                ],
+                "slug": "/styleguide/helpers/overflow"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows you to apply some overflow attributes on any HTMLElement.",
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.overflow.classes;"
+                }
+            ],
+            "cssClass": {
+                "s-overflow-auto": {
+                    "name": "s-overflow:auto",
+                    "description": "Apply the \"auto\" overflow attribute"
+                },
+                "s-overflow-hidden": {
+                    "name": "s-overflow:hidden",
+                    "description": "Apply the \"hidden\" overflow attribute"
+                },
+                "s-overflow-inherit": {
+                    "name": "s-overflow:inherit",
+                    "description": "Apply the \"inherit\" overflow attribute"
+                },
+                "s-overflow-initial": {
+                    "name": "s-overflow:initial",
+                    "description": "Apply the \"initial\" overflow attribute"
+                },
+                "s-overflow-overlay": {
+                    "name": "s-overflow:overlay",
+                    "description": "Apply the \"overlay\" overflow attribute"
+                },
+                "s-overflow-revert": {
+                    "name": "s-overflow:revert",
+                    "description": "Apply the \"revert\" overflow attribute"
+                },
+                "s-overflow-scroll": {
+                    "name": "s-overflow:scroll",
+                    "description": "Apply the \"scroll\" overflow attribute"
+                },
+                "s-overflow-visible": {
+                    "name": "s-overflow:visible",
+                    "description": "Apply the \"visible\" overflow attribute"
+                },
+                "s-overflow-unset": {
+                    "name": "s-overflow:unset",
+                    "description": "Apply the \"unset\" overflow attribute"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "title": "Auto",
+                    "code": "<div class=\"s-overflow:auto\">\n  I'm in an \"auto\" overflow container\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "Hidden",
+                    "code": "<div class=\"s-overflow:hidden\">\n  I'm in an \"hidden\" overflow container\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "Inherit",
+                    "code": "<div class=\"s-overflow:inherit\">\n  I'm in an \"inherit\" overflow container\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "Initial",
+                    "code": "<div class=\"s-overflow:initial\">\n  I'm in an \"initial\" overflow container\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "Overlay",
+                    "code": "<div class=\"s-overflow:overlay\">\n  I'm in an \"overlay\" overflow container\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "Revert",
+                    "code": "<div class=\"s-overflow:revert\">\n  I'm in an \"revert\" overflow container\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "Scroll",
+                    "code": "<div class=\"s-overflow:scroll\">\n  I'm in an \"scroll\" overflow container\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "Visible",
+                    "code": "<div class=\"s-overflow:visible\">\n  I'm in an \"visible\" overflow container\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "Unset",
+                    "code": "<div class=\"s-overflow:unset\">\n  I'm in an \"unset\" overflow container\n</div>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Overflow\n* @namespace          sugar.style.helpers.overflow\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/overflow\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply some overflow attributes on any HTMLElement.\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.overflow.classes;\n*\n* @cssClass         s-overflow:auto             Apply the \"auto\" overflow attribute\n* @cssClass         s-overflow:hidden             Apply the \"hidden\" overflow attribute\n* @cssClass         s-overflow:inherit             Apply the \"inherit\" overflow attribute\n* @cssClass         s-overflow:initial             Apply the \"initial\" overflow attribute\n* @cssClass         s-overflow:overlay             Apply the \"overlay\" overflow attribute\n* @cssClass         s-overflow:revert             Apply the \"revert\" overflow attribute\n* @cssClass         s-overflow:scroll             Apply the \"scroll\" overflow attribute\n* @cssClass         s-overflow:visible             Apply the \"visible\" overflow attribute\n* @cssClass         s-overflow:unset             Apply the \"unset\" overflow attribute\n*\n* @example        html          Auto\n* <div class=\"s-overflow:auto\">\n*   I'm in an \"auto\" overflow container\n* </div>\n*\n* @example        html          Hidden\n* <div class=\"s-overflow:hidden\">\n*   I'm in an \"hidden\" overflow container\n* </div>\n*\n* @example        html          Inherit\n* <div class=\"s-overflow:inherit\">\n*   I'm in an \"inherit\" overflow container\n* </div>\n*\n* @example        html          Initial\n* <div class=\"s-overflow:initial\">\n*   I'm in an \"initial\" overflow container\n* </div>\n*\n* @example        html          Overlay\n* <div class=\"s-overflow:overlay\">\n*   I'm in an \"overlay\" overflow container\n* </div>\n*\n* @example        html          Revert\n* <div class=\"s-overflow:revert\">\n*   I'm in an \"revert\" overflow container\n* </div>\n*\n* @example        html          Scroll\n* <div class=\"s-overflow:scroll\">\n*   I'm in an \"scroll\" overflow container\n* </div>\n*\n* @example        html          Visible\n* <div class=\"s-overflow:visible\">\n*   I'm in an \"visible\" overflow container\n* </div>\n*\n* @example        html          Unset\n* <div class=\"s-overflow:unset\">\n*   I'm in an \"unset\" overflow container\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.overflow.Overflow"
+        }
+    ]
+}

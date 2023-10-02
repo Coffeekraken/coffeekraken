@@ -1,0 +1,132 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.visually.Visually",
+    "name": "Visually",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "Helpers"
+        ],
+        "slug": "/styleguide/helpers/visually"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows you to apply a visually style on any HTMLElement",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.visually",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "title": "Visually",
+            "code": "<div class=\"s-bg:main-surface s-radius s-p:30\">\n  <div style=\"height: 100px\" class=\"s-bg:accent s-radius s-p:30\">I'm visible</div>\n  <div style=\"height: 100px\" class=\"s-visually:hidden s-bg:complementary s-radius s-p:30\">I'm hidden</div>\n</div>"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.css",
+    "extension": "css",
+    "relPath": "dist/css/index.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Visually",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.visually",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "Helpers"
+                ],
+                "slug": "/styleguide/helpers/visually"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows you to apply a visually style on any HTMLElement",
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.visually.classes;\n\n.my-element {\n  \\@s.visually.hidden;\n}"
+                }
+            ],
+            "cssClass": {
+                "s-visually-hidden": {
+                    "name": "s-visually:hidden",
+                    "description": "Make the element hidden in the ui"
+                },
+                "s-visually-visible": {
+                    "name": "s-visually:visible",
+                    "description": "Make the element visible in the ui"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "title": "Visually",
+                    "code": "<div class=\"s-bg:main-surface s-radius s-p:30\">\n  <div style=\"height: 100px\" class=\"s-bg:accent s-radius s-p:30\">I'm visible</div>\n  <div style=\"height: 100px\" class=\"s-visually:hidden s-bg:complementary s-radius s-p:30\">I'm hidden</div>\n</div>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Visually\n* @namespace          sugar.style.helpers.visually\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/visually\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply a visually style on any HTMLElement\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.visually.classes;\n*\n* .my-element {\n*   \\@s.visually.hidden;\n* }\n*\n* @cssClass         s-visually:hidden             Make the element hidden in the ui\n* @cssClass         s-visually:visible            Make the element visible in the ui\n*\n* @example        html             Visually\n* <div class=\"s-bg:main-surface s-radius s-p:30\">\n*   <div style=\"height: 100px\" class=\"s-bg:accent s-radius s-p:30\">I'm visible</div>\n*   <div style=\"height: 100px\" class=\"s-visually:hidden s-bg:complementary s-radius s-p:30\">I'm hidden</div>\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.visually.Visually"
+        }
+    ]
+}

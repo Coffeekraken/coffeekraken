@@ -1,0 +1,205 @@
+{
+    "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.opacity.opacity",
+    "name": "opacity",
+    "as": "s.opacity",
+    "type": {
+        "types": [
+            {
+                "type": "PostcssFunction"
+            }
+        ],
+        "raw": "PostcssFunction"
+    },
+    "param": {
+        "opacity": {
+            "name": "opacity",
+            "type": {
+                "types": [
+                    {
+                        "type": "String"
+                    }
+                ],
+                "raw": "String"
+            },
+            "description": "The opacity to get",
+            "defaultStr": ""
+        }
+    },
+    "return": {
+        "type": {
+            "types": [
+                {
+                    "type": "Css"
+                }
+            ],
+            "raw": "Css"
+        },
+        "description": "The corresponding css"
+    },
+    "platform": [
+        {
+            "name": "postcss",
+            "description": ""
+        }
+    ],
+    "description": "This function allows you to get an opacity value depending on your theme config",
+    "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.function.opacity",
+    "status": "stable",
+    "snippet": {
+        "label": "s.opacity($1)"
+    },
+    "example": [
+        {
+            "language": "css",
+            "code": ".my-element {\n     opacity: s.opacity(20);\n}"
+        }
+    ],
+    "interface": {
+        "name": "postcssSugarPluginOpacityFunctionInterface",
+        "description": "",
+        "definition": {
+            "opacity": {
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "values": [
+                    "0",
+                    "10",
+                    "20",
+                    "30",
+                    "40",
+                    "50",
+                    "60",
+                    "70",
+                    "80",
+                    "90",
+                    "100"
+                ],
+                "default": "100",
+                "required": true
+            }
+        }
+    },
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "opacity.ts",
+    "extension": "ts",
+    "relPath": "src/node/functions/opacity/opacity.ts",
+    "children": {},
+    "isDependency": true,
+    "package": {
+        "name": "@coffeekraken/s-postcss-sugar-plugin",
+        "description": "Postcss Coffeekraken plugin that gives you access to a ton of sugar like \"@sugar.when.dark\", \"@sugar.classes\", etc... mixins as well as functions like \"sugar.padding\", \"sugar.color\", etc... All of these makes uses of your theme configuration defined using the @coffeekraken/s-sugar-config system.",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/node_modules/@coffeekraken/s-postcss-sugar-plugin/src/node/functions/opacity/opacity.ts",
+    "docblocks": [
+        {
+            "name": "opacity",
+            "as": "s.opacity",
+            "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.function.opacity",
+            "type": {
+                "types": [
+                    {
+                        "type": "PostcssFunction"
+                    }
+                ],
+                "raw": "PostcssFunction"
+            },
+            "platform": [
+                {
+                    "name": "postcss",
+                    "description": ""
+                }
+            ],
+            "interface": {
+                "name": "postcssSugarPluginOpacityFunctionInterface",
+                "description": "",
+                "definition": {
+                    "opacity": {
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "values": [
+                            "0",
+                            "10",
+                            "20",
+                            "30",
+                            "40",
+                            "50",
+                            "60",
+                            "70",
+                            "80",
+                            "90",
+                            "100"
+                        ],
+                        "default": "100",
+                        "required": true
+                    }
+                }
+            },
+            "status": "stable",
+            "description": "This function allows you to get an opacity value depending on your theme config",
+            "param": {
+                "opacity": {
+                    "name": "opacity",
+                    "type": {
+                        "types": [
+                            {
+                                "type": "String"
+                            }
+                        ],
+                        "raw": "String"
+                    },
+                    "description": "The opacity to get",
+                    "defaultStr": ""
+                }
+            },
+            "return": {
+                "type": {
+                    "types": [
+                        {
+                            "type": "Css"
+                        }
+                    ],
+                    "raw": "Css"
+                },
+                "description": "The corresponding css"
+            },
+            "snippet": {
+                "label": "s.opacity($1)"
+            },
+            "example": [
+                {
+                    "language": "css",
+                    "code": ".my-element {\n     opacity: s.opacity(20);\n}"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          opacity\n* @as          s.opacity\n* @namespace     node.function.opacity\n* @type          PostcssFunction\n* @platform      postcss\n* @interface     ./opacity\n* @status        stable\n*\n* This function allows you to get an opacity value depending on your theme config\n*\n* @param       {String}        opacity      The opacity to get\n* @return      {Css}                   The corresponding css\n*\n* @snippet         s.opacity($1)\n*\n* @example       css\n* .my-element {\n*      opacity: s.opacity(20);\n* }\n*\n* @since     2.0.0\n* @author \t                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.opacity.opacity"
+        }
+    ]
+}

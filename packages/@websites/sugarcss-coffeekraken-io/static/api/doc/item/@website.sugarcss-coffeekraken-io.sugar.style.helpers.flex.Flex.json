@@ -1,0 +1,258 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.flex.Flex",
+    "name": "Flex",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "Helpers"
+        ],
+        "slug": "/styleguide/helpers/flexbox"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows you to apply some flex attributes on any HTMLElement and with\nthat you can *create some layouts directly in your HTML**.",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.flex",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "title": "Simple grid",
+            "code": "<div class=\"s-flex:row:wrap\">\n    <div class=\"s-bg:main s-width:50 s-p:30\">Hope Lang</div>\n    <div class=\"s-bg:accent s-width:50 s-p:30\">Tina Von</div>\n    <div class=\"s-bg:complementary s-width:50 s-p:30\">Laura Block</div>\n    <div class=\"s-bg:info s-width:50 s-p:30\">Miss Seth Witting</div>\n  </div>"
+        },
+        {
+            "language": "html",
+            "title": "Grow",
+            "code": "<div class=\"s-flex:row\">\n    <div class=\"s-grow s-bg:main s-p:30\">Mattie Feil</div>\n    <div class=\"s-bg:accent s-p:30\">Nadine Bergstrom</div>\n    <div class=\"s-bg:complementary s-p:30\">Mike Fritsch</div>\n  </div>"
+        },
+        {
+            "language": "html",
+            "title": "Orders",
+            "code": "<div class=\"s-flex:row\">\n    <div class=\"s-order:3 s-bg:main s-p:30\">Mr. Sonja Haley</div>\n    <div class=\"s-bg:accent s-p:30\">Lucas Wilkinson</div>\n    <div class=\"s-bg:complementary s-p:30\">Paul Marks</div>\n  </div>"
+        },
+        {
+            "language": "html",
+            "title": "Aligns",
+            "code": "<div class=\"s-flex:row:align-end\">\n    <div class=\"s-bg:main s-p:30\">Anna Graham</div>\n    <div class=\"s-bg:accent s-p:30\">Olga Hagenes<br />Shane Koss<br />Samantha Shanahan DVM<br />Darrel Durgan<br />Darrell Blanda</div>\n    <div class=\"s-bg:complementary s-p:30\">Luther Stracke</div>\n  </div>"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.css",
+    "extension": "css",
+    "relPath": "dist/css/index.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Flex",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.flex",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "Helpers"
+                ],
+                "slug": "/styleguide/helpers/flexbox"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows you to apply some flex attributes on any HTMLElement and with\nthat you can *create some layouts directly in your HTML**.",
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.flex.classes;"
+                }
+            ],
+            "cssClass": {
+                "s-flex": {
+                    "name": "s-flex",
+                    "description": "Apply a display \"flex\" on any HTMLElement"
+                },
+                "s-flex-row": {
+                    "name": "s-flex:row",
+                    "description": "Apply the flex direction to \"row\""
+                },
+                "s-flex-row-reverse": {
+                    "name": "s-flex:row-reverse",
+                    "description": "Apply the flex direction to \"row-reverse\""
+                },
+                "s-flex-column": {
+                    "name": "s-flex:column",
+                    "description": "Apply the flex direction to \"column\""
+                },
+                "s-flex-column-reverse": {
+                    "name": "s-flex:column-reverse",
+                    "description": "Apply the flex direction to \"column-reverse\""
+                },
+                "s-flex-nowrap": {
+                    "name": "s-flex:nowrap",
+                    "description": "Apply the wrap property to \"nowrap\""
+                },
+                "s-flex-wrap": {
+                    "name": "s-flex:wrap",
+                    "description": "Apply the wrap property to \"wrap\""
+                },
+                "s-flex-wrap-reverse": {
+                    "name": "s-flex:wrap-reverse",
+                    "description": "Apply the wrap property to \"wrap-reverse\""
+                },
+                "s-flex-center": {
+                    "name": "s-flex:center",
+                    "description": "Apply the align-items AND the justify-content property to \"center\""
+                },
+                "s-flex-start": {
+                    "name": "s-flex-start",
+                    "description": "Apply the align-items AND the justify-content property to \"start\""
+                },
+                "s-flex-end": {
+                    "name": "s-flex-end",
+                    "description": "Apply the align-items AND the justify-content property to \"end\""
+                },
+                "s-flex-justify-start": {
+                    "name": "s-flex:justify-start",
+                    "description": "Apply the justify-content property to \"start\""
+                },
+                "s-flex-justify-flex-start": {
+                    "name": "s-flex:justify-flex-start",
+                    "description": "Apply the justify-content property to \"flex-start\""
+                },
+                "s-flex-justify-end": {
+                    "name": "s-flex:justify-end",
+                    "description": "Apply the justify-content property to \"end\""
+                },
+                "s-flex-justify-flex-end": {
+                    "name": "s-flex:justify-flex-end",
+                    "description": "Apply the justify-content property to \"flex-end\""
+                },
+                "s-flex-justify-center": {
+                    "name": "s-flex:justify-center",
+                    "description": "Apply the justify-content property to \"center\""
+                },
+                "s-flex-justify-space-between": {
+                    "name": "s-flex:justify-space-between",
+                    "description": "Apply the justify-content property to \"space-between\""
+                },
+                "s-flex-justify-space-around": {
+                    "name": "s-flex:justify-space-around",
+                    "description": "Apply the justify-content property to \"space-around\""
+                },
+                "s-flex-justify-space-evenly": {
+                    "name": "s-flex:justify-space-evenly",
+                    "description": "Apply the justify-content property to \"space-evenly\""
+                },
+                "s-flex-justify-stretch": {
+                    "name": "s-flex:justify-stretch",
+                    "description": "Apply the justify-content property to \"stretch\""
+                },
+                "s-flex-align-start": {
+                    "name": "s-flex:align-start",
+                    "description": "Apply the align-items property to \"start\""
+                },
+                "s-flex-align-flex-start": {
+                    "name": "s-flex:align-flex-start",
+                    "description": "Apply the align-items property to \"flex-start\""
+                },
+                "s-flex-align-end": {
+                    "name": "s-flex:align-end",
+                    "description": "Apply the align-items property to \"end\""
+                },
+                "s-flex-align-flex-end": {
+                    "name": "s-flex:align-flex-end",
+                    "description": "Apply the align-items property to \"flex-end\""
+                },
+                "s-flex-align-center": {
+                    "name": "s-flex:align-center",
+                    "description": "Apply the align-items property to \"center\""
+                },
+                "s-flex-align-baseline": {
+                    "name": "s-flex:align-baseline",
+                    "description": "Apply the align-items property to \"baseline\""
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "title": "Simple grid",
+                    "code": "<div class=\"s-flex:row:wrap\">\n    <div class=\"s-bg:main s-width:50 s-p:30\">Miss Vivian Yost</div>\n    <div class=\"s-bg:accent s-width:50 s-p:30\">Randy Emard</div>\n    <div class=\"s-bg:complementary s-width:50 s-p:30\">Dr. Jorge Trantow</div>\n    <div class=\"s-bg:info s-width:50 s-p:30\">Kurt Morar</div>\n  </div>"
+                },
+                {
+                    "language": "html",
+                    "title": "Grow",
+                    "code": "<div class=\"s-flex:row\">\n    <div class=\"s-grow s-bg:main s-p:30\">Bobby Reinger</div>\n    <div class=\"s-bg:accent s-p:30\">Ramiro Gutkowski</div>\n    <div class=\"s-bg:complementary s-p:30\">Abraham Doyle</div>\n  </div>"
+                },
+                {
+                    "language": "html",
+                    "title": "Orders",
+                    "code": "<div class=\"s-flex:row\">\n    <div class=\"s-order:3 s-bg:main s-p:30\">Alexandra Dooley</div>\n    <div class=\"s-bg:accent s-p:30\">Theodore Abernathy</div>\n    <div class=\"s-bg:complementary s-p:30\">Donnie Kautzer</div>\n  </div>"
+                },
+                {
+                    "language": "html",
+                    "title": "Aligns",
+                    "code": "<div class=\"s-flex:row:align-end\">\n    <div class=\"s-bg:main s-p:30\">Cathy Connelly</div>\n    <div class=\"s-bg:accent s-p:30\">Taylor Rogahn<br />Leslie Littel<br />Lynette Schuppe<br />Melody Metz<br />June Rempel DVM</div>\n    <div class=\"s-bg:complementary s-p:30\">Deanna Runolfsson</div>\n  </div>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Flex\n* @namespace          sugar.style.helpers.flex\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/flexbox\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply some flex attributes on any HTMLElement and with\n* that you can **create some layouts directly in your HTML**.\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.flex.classes;\n*\n* @cssClass                 s-flex              Apply a display \"flex\" on any HTMLElement\n* @cssClass                 s-flex:row          Apply the flex direction to \"row\"\n* @cssClass                 s-flex:row-reverse          Apply the flex direction to \"row-reverse\"\n* @cssClass                 s-flex:column          Apply the flex direction to \"column\"\n* @cssClass                 s-flex:column-reverse          Apply the flex direction to \"column-reverse\"\n* @cssClass                 s-flex:nowrap             Apply the wrap property to \"nowrap\"\n* @cssClass                 s-flex:wrap             Apply the wrap property to \"wrap\"\n* @cssClass                 s-flex:wrap-reverse             Apply the wrap property to \"wrap-reverse\"\n* @cssClass                 s-flex:center                   Apply the align-items AND the justify-content property to \"center\"\n* @cssClass                 s-flex-start                  Apply the align-items AND the justify-content property to \"start\"\n* @cssClass                 s-flex-end                  Apply the align-items AND the justify-content property to \"end\"\n* @cssClass                 s-flex:justify-start             Apply the justify-content property to \"start\"\n* @cssClass                 s-flex:justify-flex-start             Apply the justify-content property to \"flex-start\"\n* @cssClass                 s-flex:justify-end             Apply the justify-content property to \"end\"\n* @cssClass                 s-flex:justify-flex-end             Apply the justify-content property to \"flex-end\"\n* @cssClass                 s-flex:justify-center             Apply the justify-content property to \"center\"\n* @cssClass                 s-flex:justify-space-between             Apply the justify-content property to \"space-between\"\n* @cssClass                 s-flex:justify-space-around             Apply the justify-content property to \"space-around\"\n* @cssClass                 s-flex:justify-space-evenly             Apply the justify-content property to \"space-evenly\"\n* @cssClass                 s-flex:justify-stretch             Apply the justify-content property to \"stretch\"\n* @cssClass                 s-flex:align-start             Apply the align-items property to \"start\"\n* @cssClass                 s-flex:align-flex-start             Apply the align-items property to \"flex-start\"\n* @cssClass                 s-flex:align-end             Apply the align-items property to \"end\"\n* @cssClass                 s-flex:align-flex-end             Apply the align-items property to \"flex-end\"\n* @cssClass                 s-flex:align-center             Apply the align-items property to \"center\"\n* @cssClass                 s-flex:align-baseline             Apply the align-items property to \"baseline\"\n*\n* @example        html          Simple grid\n*   <div class=\"s-flex:row:wrap\">\n*     <div class=\"s-bg:main s-width:50 s-p:30\">Miss Vivian Yost</div>\n*     <div class=\"s-bg:accent s-width:50 s-p:30\">Randy Emard</div>\n*     <div class=\"s-bg:complementary s-width:50 s-p:30\">Dr. Jorge Trantow</div>\n*     <div class=\"s-bg:info s-width:50 s-p:30\">Kurt Morar</div>\n*   </div>\n*\n* @example        html          Grow\n*   <div class=\"s-flex:row\">\n*     <div class=\"s-grow s-bg:main s-p:30\">Bobby Reinger</div>\n*     <div class=\"s-bg:accent s-p:30\">Ramiro Gutkowski</div>\n*     <div class=\"s-bg:complementary s-p:30\">Abraham Doyle</div>\n*   </div>\n*\n* @example      html          Orders\n*   <div class=\"s-flex:row\">\n*     <div class=\"s-order:3 s-bg:main s-p:30\">Alexandra Dooley</div>\n*     <div class=\"s-bg:accent s-p:30\">Theodore Abernathy</div>\n*     <div class=\"s-bg:complementary s-p:30\">Donnie Kautzer</div>\n*   </div>\n*\n* @example          html            Aligns\n*   <div class=\"s-flex:row:align-end\">\n*     <div class=\"s-bg:main s-p:30\">Cathy Connelly</div>\n*     <div class=\"s-bg:accent s-p:30\">Taylor Rogahn<br />Leslie Littel<br />Lynette Schuppe<br />Melody Metz<br />June Rempel DVM</div>\n*     <div class=\"s-bg:complementary s-p:30\">Deanna Runolfsson</div>\n*   </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.flex.Flex"
+        }
+    ]
+}

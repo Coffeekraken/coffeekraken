@@ -1,0 +1,152 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.avatar.Avatar",
+    "name": "Avatar",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "UI"
+        ],
+        "slug": "/styleguide/ui/avatar"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows to apply some avatar style around any image.",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.avatar",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "title": "Default",
+            "code": "<div class=\"s-flex:align-center:wrap s-gap:20 s-font:70\">\n  <div class=\"s-avatar\">\n      <img src=\"https://i.pravatar.cc/300?v=99373\" />\n  </div>\n      <div class=\"s-avatar s-color:accent\">\n      <img src=\"https://i.pravatar.cc/300?v=72264\" />\n  </div>\n  <div class=\"s-avatar s-color:complementary\">\n      <img src=\"https://i.pravatar.cc/300?v=73029\" />\n  </div>\n  <div class=\"s-avatar s-color:info\">\n      <img src=\"https://i.pravatar.cc/300?v=66035\" />\n  </div>\n  <div class=\"s-avatar s-color:success\">\n      <img src=\"https://i.pravatar.cc/300?v=9027\" />\n  </div>\n  <div class=\"s-avatar s-color:error\">\n     <img src=\"https://i.pravatar.cc/300?v=94397\" />\n  </div>\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "Notifications",
+            "code": "<div class=\"s-flex:wrap:align-center s-gap:20 s-font:70\">\n  <div class=\"s-avatar notifications=\"10\">\n     <img src=\"https://i.pravatar.cc/300?v=49944\" />\n  </div>\n  <div class=\"s-avatar s-color:accent\" notifications=\"10\">\n      <img src=\"https://i.pravatar.cc/300?v=2893\" />\n  </div>\n  <div class=\"s-avatar s-color:complementary\" notifications=\"10\">\n      <img src=\"https://i.pravatar.cc/300?v=1929\" />\n  </div>\n  <div class=\"s-avatar s-color:info\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=51453\" />\n  </div>\n  <div class=\"s-avatar s-color:success\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=74684\" />\n  </div>\n  <div class=\"s-avatar s-color:error\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=74388\" />\n  </div>\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "Interactive",
+            "code": "<div class=\"s-flex:wrap:align-center s-gap:20 s-font:70\">\n  <div class=\"s-avatar:interactive\">\n       <img src=\"https://i.pravatar.cc/300?v=57084\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:accent\">\n      <img src=\"https://i.pravatar.cc/300?v=15420\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:complementary\">\n      <img src=\"https://i.pravatar.cc/300?v=45944\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:info\">\n      <img src=\"https://i.pravatar.cc/300?v=91894\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:success\">\n      <img src=\"https://i.pravatar.cc/300?v=94895\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:error\">\n      <img src=\"https://i.pravatar.cc/300?v=7759\" />\n  </div>\n</div>"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.css",
+    "extension": "css",
+    "relPath": "dist/css/index.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Avatar",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.avatar",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "UI"
+                ],
+                "slug": "/styleguide/ui/avatar"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows to apply some avatar style around any image.",
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.ui.avatar.classes;\n\n.my-avatar {\n  @s.ui.avatar;\n}"
+                }
+            ],
+            "cssClass": {
+                "s-avatar": {
+                    "name": "s-avatar",
+                    "description": "Apply the avatar style"
+                },
+                "s-avatar-interactive": {
+                    "name": "s-avatar:interactive",
+                    "description": "Specify that this avatar is interactive"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "title": "Default",
+                    "code": "<div class=\"s-flex:align-center:wrap s-gap:20 s-font:70\">\n  <div class=\"s-avatar\">\n      <img src=\"https://i.pravatar.cc/300?v=9224\" />\n  </div>\n      <div class=\"s-avatar s-color:accent\">\n      <img src=\"https://i.pravatar.cc/300?v=34366\" />\n  </div>\n  <div class=\"s-avatar s-color:complementary\">\n      <img src=\"https://i.pravatar.cc/300?v=1536\" />\n  </div>\n  <div class=\"s-avatar s-color:info\">\n      <img src=\"https://i.pravatar.cc/300?v=62622\" />\n  </div>\n  <div class=\"s-avatar s-color:success\">\n      <img src=\"https://i.pravatar.cc/300?v=77481\" />\n  </div>\n  <div class=\"s-avatar s-color:error\">\n     <img src=\"https://i.pravatar.cc/300?v=78034\" />\n  </div>\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "Notifications",
+                    "code": "<div class=\"s-flex:wrap:align-center s-gap:20 s-font:70\">\n  <div class=\"s-avatar notifications=\"10\">\n     <img src=\"https://i.pravatar.cc/300?v=6890\" />\n  </div>\n  <div class=\"s-avatar s-color:accent\" notifications=\"10\">\n      <img src=\"https://i.pravatar.cc/300?v=36936\" />\n  </div>\n  <div class=\"s-avatar s-color:complementary\" notifications=\"10\">\n      <img src=\"https://i.pravatar.cc/300?v=12017\" />\n  </div>\n  <div class=\"s-avatar s-color:info\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=56115\" />\n  </div>\n  <div class=\"s-avatar s-color:success\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=66996\" />\n  </div>\n  <div class=\"s-avatar s-color:error\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=67399\" />\n  </div>\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "Interactive",
+                    "code": "<div class=\"s-flex:wrap:align-center s-gap:20 s-font:70\">\n  <div class=\"s-avatar:interactive\">\n       <img src=\"https://i.pravatar.cc/300?v=7896\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:accent\">\n      <img src=\"https://i.pravatar.cc/300?v=61720\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:complementary\">\n      <img src=\"https://i.pravatar.cc/300?v=58597\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:info\">\n      <img src=\"https://i.pravatar.cc/300?v=17531\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:success\">\n      <img src=\"https://i.pravatar.cc/300?v=16364\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:error\">\n      <img src=\"https://i.pravatar.cc/300?v=33497\" />\n  </div>\n</div>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Avatar\n* @namespace          sugar.style.ui.avatar\n* @type               Styleguide\n* @menu           Styleguide / UI        /styleguide/ui/avatar\n* @platform       css\n* @status       stable\n*\n* These classes allows to apply some avatar style around any image.\n*\n* @support      chromium\n* @support      firefox\n* @support      safari\n* @support      edge\n*\n* @install          css\n* \\@s.ui.avatar.classes;\n*\n* .my-avatar {\n*   @s.ui.avatar;\n* }\n*\n* @cssClass             s-avatar                Apply the avatar style\n* @cssClass             s-avatar:interactive            Specify that this avatar is interactive\n*\n* @example        html         Default\n* <div class=\"s-flex:align-center:wrap s-gap:20 s-font:70\">\n*   <div class=\"s-avatar\">\n*       <img src=\"https://i.pravatar.cc/300?v=9224\" />\n*   </div>\n*       <div class=\"s-avatar s-color:accent\">\n*       <img src=\"https://i.pravatar.cc/300?v=34366\" />\n*   </div>\n*   <div class=\"s-avatar s-color:complementary\">\n*       <img src=\"https://i.pravatar.cc/300?v=1536\" />\n*   </div>\n*   <div class=\"s-avatar s-color:info\">\n*       <img src=\"https://i.pravatar.cc/300?v=62622\" />\n*   </div>\n*   <div class=\"s-avatar s-color:success\">\n*       <img src=\"https://i.pravatar.cc/300?v=77481\" />\n*   </div>\n*   <div class=\"s-avatar s-color:error\">\n*      <img src=\"https://i.pravatar.cc/300?v=78034\" />\n*   </div>\n* </div>\n*\n* @example       html         Notifications\n* <div class=\"s-flex:wrap:align-center s-gap:20 s-font:70\">\n*   <div class=\"s-avatar notifications=\"10\">\n*      <img src=\"https://i.pravatar.cc/300?v=6890\" />\n*   </div>\n*   <div class=\"s-avatar s-color:accent\" notifications=\"10\">\n*       <img src=\"https://i.pravatar.cc/300?v=36936\" />\n*   </div>\n*   <div class=\"s-avatar s-color:complementary\" notifications=\"10\">\n*       <img src=\"https://i.pravatar.cc/300?v=12017\" />\n*   </div>\n*   <div class=\"s-avatar s-color:info\" notifications>\n*       <img src=\"https://i.pravatar.cc/300?v=56115\" />\n*   </div>\n*   <div class=\"s-avatar s-color:success\" notifications>\n*       <img src=\"https://i.pravatar.cc/300?v=66996\" />\n*   </div>\n*   <div class=\"s-avatar s-color:error\" notifications>\n*       <img src=\"https://i.pravatar.cc/300?v=67399\" />\n*   </div>\n* </div>\n*\n* @example       html         Interactive\n* <div class=\"s-flex:wrap:align-center s-gap:20 s-font:70\">\n*   <div class=\"s-avatar:interactive\">\n*        <img src=\"https://i.pravatar.cc/300?v=7896\" />\n*   </div>\n*   <div class=\"s-avatar:interactive s-color:accent\">\n*       <img src=\"https://i.pravatar.cc/300?v=61720\" />\n*   </div>\n*   <div class=\"s-avatar:interactive s-color:complementary\">\n*       <img src=\"https://i.pravatar.cc/300?v=58597\" />\n*   </div>\n*   <div class=\"s-avatar:interactive s-color:info\">\n*       <img src=\"https://i.pravatar.cc/300?v=17531\" />\n*   </div>\n*   <div class=\"s-avatar:interactive s-color:success\">\n*       <img src=\"https://i.pravatar.cc/300?v=16364\" />\n*   </div>\n*   <div class=\"s-avatar:interactive s-color:error\">\n*       <img src=\"https://i.pravatar.cc/300?v=33497\" />\n*   </div>\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.avatar.Avatar"
+        }
+    ]
+}

@@ -1,0 +1,113 @@
+{
+    "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.spacing.classes",
+    "name": "classes",
+    "as": "@s.spacing.classes",
+    "type": {
+        "types": [
+            {
+                "type": "PostcssMixin"
+            }
+        ],
+        "raw": "PostcssMixin"
+    },
+    "return": {
+        "type": {
+            "types": [
+                {
+                    "type": "Css"
+                }
+            ],
+            "raw": "Css"
+        },
+        "description": "The generated css"
+    },
+    "platform": [
+        {
+            "name": "postcss",
+            "description": ""
+        }
+    ],
+    "description": "This mixin generate all the spacing helper classes like s-p:10, s-pie:40, etc...",
+    "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.spacing",
+    "status": "stable",
+    "snippet": {
+        "label": "@s.spacing.classes"
+    },
+    "example": [
+        {
+            "language": "css",
+            "code": "@s.spacing.classes;"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "classes.ts",
+    "extension": "ts",
+    "relPath": "src/node/mixins/spacing/classes.ts",
+    "children": {},
+    "isDependency": true,
+    "package": {
+        "name": "@coffeekraken/s-postcss-sugar-plugin",
+        "description": "Postcss Coffeekraken plugin that gives you access to a ton of sugar like \"@sugar.when.dark\", \"@sugar.classes\", etc... mixins as well as functions like \"sugar.padding\", \"sugar.color\", etc... All of these makes uses of your theme configuration defined using the @coffeekraken/s-sugar-config system.",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/node_modules/@coffeekraken/s-postcss-sugar-plugin/src/node/mixins/spacing/classes.ts",
+    "docblocks": [
+        {
+            "name": "classes",
+            "as": "@s.spacing.classes",
+            "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.spacing",
+            "type": {
+                "types": [
+                    {
+                        "type": "PostcssMixin"
+                    }
+                ],
+                "raw": "PostcssMixin"
+            },
+            "platform": [
+                {
+                    "name": "postcss",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "This mixin generate all the spacing helper classes like s-p:10, s-pie:40, etc...",
+            "return": {
+                "type": {
+                    "types": [
+                        {
+                            "type": "Css"
+                        }
+                    ],
+                    "raw": "Css"
+                },
+                "description": "The generated css"
+            },
+            "snippet": {
+                "label": "@s.spacing.classes"
+            },
+            "example": [
+                {
+                    "language": "css",
+                    "code": "@s.spacing.classes;"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name           classes\n* @as              @s.spacing.classes\n* @namespace      node.mixin.spacing\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin generate all the spacing helper classes like s-p:10, s-pie:40, etc...\n*\n* @return        {Css}         The generated css\n*\n* @snippet         @s.spacing.classes\n*\n* @example        css\n* \\@s.spacing.classes;\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.spacing.classes"
+        }
+    ]
+}

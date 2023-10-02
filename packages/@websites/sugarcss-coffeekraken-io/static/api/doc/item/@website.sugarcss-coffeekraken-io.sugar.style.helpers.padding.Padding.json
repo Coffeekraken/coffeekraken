@@ -1,0 +1,453 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.padding.Padding",
+    "name": "Padding",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "Helpers"
+        ],
+        "slug": "/styleguide/helpers/padding"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows you to apply padding to any HTMLElement",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.padding",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "title": "Inline",
+            "code": "<p class=\"s-bg:accent s-radius s-pi:30 s-pb:30 s-mbe:20\">Eduardo Wunsch</p>\n  <p class=\"s-bg:complementary s-radius s-pis:50 s-pb:30 s-mbe:20\">Lila Heathcote</p>\n  <p class=\"s-bg:main s-radius s-pis:80 s-pb:30 s-mbe:20\">Dave Lind</p>\n  <p class=\"s-bg:error s-radius s-pis:100 s-pb:30 s-mbe:20\">Simon Gleichner</p>"
+        },
+        {
+            "language": "html",
+            "title": "Block",
+            "code": "<div class=\"s-bg:accent s-radius s-pbs:30 s-pbe:40 s-text:center s-mbe:20\">Francis Sanford</div>\n  <div class=\"s-bg:complementary s-radius s-pb:30 s-text:center s-mbe:20\">Terrance Murphy</div>\n  <div class=\"s-bg:main s-radius s-pbs:50 s-pbe:30 s-text:center s-mbe:20\">Roderick Collins</div>\n  <div class=\"s-bg:error s-radius s-pbs:100 s-pbe:60 s-text:center s-mbe:20\">Joan Nitzsche</div>"
+        },
+        {
+            "language": "html",
+            "title": "RTL",
+            "code": "<div dir=\"rtl\">\n  <p class=\"s-bg:accent s-radius s-pi:30 s-pb:30 s-mbe:20\">Angelo Langworth</p>\n  <p class=\"s-bg:complementary s-radius s-pis:50 s-pb:30 s-mbe:20\">Tracy Tillman</p>\n  <p class=\"s-bg:main s-radius s-pis:80 s-pb:30 s-mbe:20\">Loretta Nolan</p>\n  <p class=\"s-bg:error s-radius s-pis:100 s-pb:30 s-mbe:20\">Tracy Cummerata</p>\n</div>"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.css",
+    "extension": "css",
+    "relPath": "dist/css/index.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Padding",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.padding",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "Helpers"
+                ],
+                "slug": "/styleguide/helpers/padding"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows you to apply padding to any HTMLElement",
+            "feature": [],
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.padding.classes;"
+                }
+            ],
+            "cssClass": {
+                "s-p-0": {
+                    "name": "s-p:0",
+                    "description": "Apply the `0` padding all around"
+                },
+                "s-pb-0": {
+                    "name": "s-pb:-0",
+                    "description": "Apply the `0` negative block start and end padding"
+                },
+                "s-pbs-0": {
+                    "name": "s-pbs:-0",
+                    "description": "Apply the `0` negative block start padding"
+                },
+                "s-pbe-0": {
+                    "name": "s-pbe:-0",
+                    "description": "Apply the `0` negative block end padding"
+                },
+                "s-pi-0": {
+                    "name": "s-pi:-0",
+                    "description": "Apply the `0` negative inline start and end padding"
+                },
+                "s-pis-0": {
+                    "name": "s-pis:-0",
+                    "description": "Apply the `0` negative inline start padding"
+                },
+                "s-pie-0": {
+                    "name": "s-pie:-0",
+                    "description": "Apply the `0` negative inline end padding"
+                },
+                "s-p-10": {
+                    "name": "s-p:10",
+                    "description": "Apply the `10` padding all around"
+                },
+                "s-pb-10": {
+                    "name": "s-pb:-10",
+                    "description": "Apply the `10` negative block start and end padding"
+                },
+                "s-pbs-10": {
+                    "name": "s-pbs:-10",
+                    "description": "Apply the `10` negative block start padding"
+                },
+                "s-pbe-10": {
+                    "name": "s-pbe:-10",
+                    "description": "Apply the `10` negative block end padding"
+                },
+                "s-pi-10": {
+                    "name": "s-pi:-10",
+                    "description": "Apply the `10` negative inline start and end padding"
+                },
+                "s-pis-10": {
+                    "name": "s-pis:-10",
+                    "description": "Apply the `10` negative inline start padding"
+                },
+                "s-pie-10": {
+                    "name": "s-pie:-10",
+                    "description": "Apply the `10` negative inline end padding"
+                },
+                "s-p-20": {
+                    "name": "s-p:20",
+                    "description": "Apply the `20` padding all around"
+                },
+                "s-pb-20": {
+                    "name": "s-pb:-20",
+                    "description": "Apply the `20` negative block start and end padding"
+                },
+                "s-pbs-20": {
+                    "name": "s-pbs:-20",
+                    "description": "Apply the `20` negative block start padding"
+                },
+                "s-pbe-20": {
+                    "name": "s-pbe:-20",
+                    "description": "Apply the `20` negative block end padding"
+                },
+                "s-pi-20": {
+                    "name": "s-pi:-20",
+                    "description": "Apply the `20` negative inline start and end padding"
+                },
+                "s-pis-20": {
+                    "name": "s-pis:-20",
+                    "description": "Apply the `20` negative inline start padding"
+                },
+                "s-pie-20": {
+                    "name": "s-pie:-20",
+                    "description": "Apply the `20` negative inline end padding"
+                },
+                "s-p-30": {
+                    "name": "s-p:30",
+                    "description": "Apply the `30` padding all around"
+                },
+                "s-pb-30": {
+                    "name": "s-pb:-30",
+                    "description": "Apply the `30` negative block start and end padding"
+                },
+                "s-pbs-30": {
+                    "name": "s-pbs:-30",
+                    "description": "Apply the `30` negative block start padding"
+                },
+                "s-pbe-30": {
+                    "name": "s-pbe:-30",
+                    "description": "Apply the `30` negative block end padding"
+                },
+                "s-pi-30": {
+                    "name": "s-pi:-30",
+                    "description": "Apply the `30` negative inline start and end padding"
+                },
+                "s-pis-30": {
+                    "name": "s-pis:-30",
+                    "description": "Apply the `30` negative inline start padding"
+                },
+                "s-pie-30": {
+                    "name": "s-pie:-30",
+                    "description": "Apply the `30` negative inline end padding"
+                },
+                "s-p-40": {
+                    "name": "s-p:40",
+                    "description": "Apply the `40` padding all around"
+                },
+                "s-pb-40": {
+                    "name": "s-pb:-40",
+                    "description": "Apply the `40` negative block start and end padding"
+                },
+                "s-pbs-40": {
+                    "name": "s-pbs:-40",
+                    "description": "Apply the `40` negative block start padding"
+                },
+                "s-pbe-40": {
+                    "name": "s-pbe:-40",
+                    "description": "Apply the `40` negative block end padding"
+                },
+                "s-pi-40": {
+                    "name": "s-pi:-40",
+                    "description": "Apply the `40` negative inline start and end padding"
+                },
+                "s-pis-40": {
+                    "name": "s-pis:-40",
+                    "description": "Apply the `40` negative inline start padding"
+                },
+                "s-pie-40": {
+                    "name": "s-pie:-40",
+                    "description": "Apply the `40` negative inline end padding"
+                },
+                "s-p-50": {
+                    "name": "s-p:50",
+                    "description": "Apply the `50` padding all around"
+                },
+                "s-pb-50": {
+                    "name": "s-pb:-50",
+                    "description": "Apply the `50` negative block start and end padding"
+                },
+                "s-pbs-50": {
+                    "name": "s-pbs:-50",
+                    "description": "Apply the `50` negative block start padding"
+                },
+                "s-pbe-50": {
+                    "name": "s-pbe:-50",
+                    "description": "Apply the `50` negative block end padding"
+                },
+                "s-pi-50": {
+                    "name": "s-pi:-50",
+                    "description": "Apply the `50` negative inline start and end padding"
+                },
+                "s-pis-50": {
+                    "name": "s-pis:-50",
+                    "description": "Apply the `50` negative inline start padding"
+                },
+                "s-pie-50": {
+                    "name": "s-pie:-50",
+                    "description": "Apply the `50` negative inline end padding"
+                },
+                "s-p-60": {
+                    "name": "s-p:60",
+                    "description": "Apply the `60` padding all around"
+                },
+                "s-pb-60": {
+                    "name": "s-pb:-60",
+                    "description": "Apply the `60` negative block start and end padding"
+                },
+                "s-pbs-60": {
+                    "name": "s-pbs:-60",
+                    "description": "Apply the `60` negative block start padding"
+                },
+                "s-pbe-60": {
+                    "name": "s-pbe:-60",
+                    "description": "Apply the `60` negative block end padding"
+                },
+                "s-pi-60": {
+                    "name": "s-pi:-60",
+                    "description": "Apply the `60` negative inline start and end padding"
+                },
+                "s-pis-60": {
+                    "name": "s-pis:-60",
+                    "description": "Apply the `60` negative inline start padding"
+                },
+                "s-pie-60": {
+                    "name": "s-pie:-60",
+                    "description": "Apply the `60` negative inline end padding"
+                },
+                "s-p-70": {
+                    "name": "s-p:70",
+                    "description": "Apply the `70` padding all around"
+                },
+                "s-pb-70": {
+                    "name": "s-pb:-70",
+                    "description": "Apply the `70` negative block start and end padding"
+                },
+                "s-pbs-70": {
+                    "name": "s-pbs:-70",
+                    "description": "Apply the `70` negative block start padding"
+                },
+                "s-pbe-70": {
+                    "name": "s-pbe:-70",
+                    "description": "Apply the `70` negative block end padding"
+                },
+                "s-pi-70": {
+                    "name": "s-pi:-70",
+                    "description": "Apply the `70` negative inline start and end padding"
+                },
+                "s-pis-70": {
+                    "name": "s-pis:-70",
+                    "description": "Apply the `70` negative inline start padding"
+                },
+                "s-pie-70": {
+                    "name": "s-pie:-70",
+                    "description": "Apply the `70` negative inline end padding"
+                },
+                "s-p-80": {
+                    "name": "s-p:80",
+                    "description": "Apply the `80` padding all around"
+                },
+                "s-pb-80": {
+                    "name": "s-pb:-80",
+                    "description": "Apply the `80` negative block start and end padding"
+                },
+                "s-pbs-80": {
+                    "name": "s-pbs:-80",
+                    "description": "Apply the `80` negative block start padding"
+                },
+                "s-pbe-80": {
+                    "name": "s-pbe:-80",
+                    "description": "Apply the `80` negative block end padding"
+                },
+                "s-pi-80": {
+                    "name": "s-pi:-80",
+                    "description": "Apply the `80` negative inline start and end padding"
+                },
+                "s-pis-80": {
+                    "name": "s-pis:-80",
+                    "description": "Apply the `80` negative inline start padding"
+                },
+                "s-pie-80": {
+                    "name": "s-pie:-80",
+                    "description": "Apply the `80` negative inline end padding"
+                },
+                "s-p-90": {
+                    "name": "s-p:90",
+                    "description": "Apply the `90` padding all around"
+                },
+                "s-pb-90": {
+                    "name": "s-pb:-90",
+                    "description": "Apply the `90` negative block start and end padding"
+                },
+                "s-pbs-90": {
+                    "name": "s-pbs:-90",
+                    "description": "Apply the `90` negative block start padding"
+                },
+                "s-pbe-90": {
+                    "name": "s-pbe:-90",
+                    "description": "Apply the `90` negative block end padding"
+                },
+                "s-pi-90": {
+                    "name": "s-pi:-90",
+                    "description": "Apply the `90` negative inline start and end padding"
+                },
+                "s-pis-90": {
+                    "name": "s-pis:-90",
+                    "description": "Apply the `90` negative inline start padding"
+                },
+                "s-pie-90": {
+                    "name": "s-pie:-90",
+                    "description": "Apply the `90` negative inline end padding"
+                },
+                "s-p-100": {
+                    "name": "s-p:100",
+                    "description": "Apply the `100` padding all around"
+                },
+                "s-pb-100": {
+                    "name": "s-pb:-100",
+                    "description": "Apply the `100` negative block start and end padding"
+                },
+                "s-pbs-100": {
+                    "name": "s-pbs:-100",
+                    "description": "Apply the `100` negative block start padding"
+                },
+                "s-pbe-100": {
+                    "name": "s-pbe:-100",
+                    "description": "Apply the `100` negative block end padding"
+                },
+                "s-pi-100": {
+                    "name": "s-pi:-100",
+                    "description": "Apply the `100` negative inline start and end padding"
+                },
+                "s-pis-100": {
+                    "name": "s-pis:-100",
+                    "description": "Apply the `100` negative inline start padding"
+                },
+                "s-pie-100": {
+                    "name": "s-pie:-100",
+                    "description": "Apply the `100` negative inline end padding"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "title": "Inline",
+                    "code": "<p class=\"s-bg:accent s-radius s-pi:30 s-pb:30 s-mbe:20\">Wm Kuhlman</p>\n  <p class=\"s-bg:complementary s-radius s-pis:50 s-pb:30 s-mbe:20\">Winston Johnston</p>\n  <p class=\"s-bg:main s-radius s-pis:80 s-pb:30 s-mbe:20\">Renee Nienow</p>\n  <p class=\"s-bg:error s-radius s-pis:100 s-pb:30 s-mbe:20\">Mamie Wiza I</p>"
+                },
+                {
+                    "language": "html",
+                    "title": "Block",
+                    "code": "<div class=\"s-bg:accent s-radius s-pbs:30 s-pbe:40 s-text:center s-mbe:20\">Jeannie Jacobs PhD</div>\n  <div class=\"s-bg:complementary s-radius s-pb:30 s-text:center s-mbe:20\">Leon Rogahn</div>\n  <div class=\"s-bg:main s-radius s-pbs:50 s-pbe:30 s-text:center s-mbe:20\">Dr. Marcella Keebler</div>\n  <div class=\"s-bg:error s-radius s-pbs:100 s-pbe:60 s-text:center s-mbe:20\">Ervin Rosenbaum</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "RTL",
+                    "code": "<div dir=\"rtl\">\n  <p class=\"s-bg:accent s-radius s-pi:30 s-pb:30 s-mbe:20\">Frankie Greenfelder V</p>\n  <p class=\"s-bg:complementary s-radius s-pis:50 s-pb:30 s-mbe:20\">Jill Bartoletti</p>\n  <p class=\"s-bg:main s-radius s-pis:80 s-pb:30 s-mbe:20\">Andres Ledner</p>\n  <p class=\"s-bg:error s-radius s-pis:100 s-pb:30 s-mbe:20\">Johnny Harvey</p>\n</div>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Padding\n* @namespace          sugar.style.helpers.padding\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/padding\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply padding to any HTMLElement\n*\n* @feature          Support for RTL by using padding-{inline|block}-...\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.padding.classes;\n*\n* @cssClass     s-p:0        Apply the `0` padding all around\n* @cssClass     s-pb:0        Apply the `0` block start and end padding\n* @cssClass     s-pbs:0        Apply the `0` block start padding\n* @cssClass     s-pbe:0        Apply the `0` block end padding\n* @cssClass     s-pi:0        Apply the `0` inline start and end padding\n* @cssClass     s-pis:0        Apply the `0` inline start padding\n* @cssClass     s-pie:0        Apply the `0` inline end padding\n* @cssClass     s-pb:-0        Apply the `0` negative block start and end padding\n* @cssClass     s-pbs:-0        Apply the `0` negative block start padding\n* @cssClass     s-pbe:-0        Apply the `0` negative block end padding\n* @cssClass     s-pi:-0        Apply the `0` negative inline start and end padding\n* @cssClass     s-pis:-0        Apply the `0` negative inline start padding\n* @cssClass     s-pie:-0        Apply the `0` negative inline end padding\n* @cssClass     s-p:10        Apply the `10` padding all around\n* @cssClass     s-pb:10        Apply the `10` block start and end padding\n* @cssClass     s-pbs:10        Apply the `10` block start padding\n* @cssClass     s-pbe:10        Apply the `10` block end padding\n* @cssClass     s-pi:10        Apply the `10` inline start and end padding\n* @cssClass     s-pis:10        Apply the `10` inline start padding\n* @cssClass     s-pie:10        Apply the `10` inline end padding\n* @cssClass     s-pb:-10        Apply the `10` negative block start and end padding\n* @cssClass     s-pbs:-10        Apply the `10` negative block start padding\n* @cssClass     s-pbe:-10        Apply the `10` negative block end padding\n* @cssClass     s-pi:-10        Apply the `10` negative inline start and end padding\n* @cssClass     s-pis:-10        Apply the `10` negative inline start padding\n* @cssClass     s-pie:-10        Apply the `10` negative inline end padding\n* @cssClass     s-p:20        Apply the `20` padding all around\n* @cssClass     s-pb:20        Apply the `20` block start and end padding\n* @cssClass     s-pbs:20        Apply the `20` block start padding\n* @cssClass     s-pbe:20        Apply the `20` block end padding\n* @cssClass     s-pi:20        Apply the `20` inline start and end padding\n* @cssClass     s-pis:20        Apply the `20` inline start padding\n* @cssClass     s-pie:20        Apply the `20` inline end padding\n* @cssClass     s-pb:-20        Apply the `20` negative block start and end padding\n* @cssClass     s-pbs:-20        Apply the `20` negative block start padding\n* @cssClass     s-pbe:-20        Apply the `20` negative block end padding\n* @cssClass     s-pi:-20        Apply the `20` negative inline start and end padding\n* @cssClass     s-pis:-20        Apply the `20` negative inline start padding\n* @cssClass     s-pie:-20        Apply the `20` negative inline end padding\n* @cssClass     s-p:30        Apply the `30` padding all around\n* @cssClass     s-pb:30        Apply the `30` block start and end padding\n* @cssClass     s-pbs:30        Apply the `30` block start padding\n* @cssClass     s-pbe:30        Apply the `30` block end padding\n* @cssClass     s-pi:30        Apply the `30` inline start and end padding\n* @cssClass     s-pis:30        Apply the `30` inline start padding\n* @cssClass     s-pie:30        Apply the `30` inline end padding\n* @cssClass     s-pb:-30        Apply the `30` negative block start and end padding\n* @cssClass     s-pbs:-30        Apply the `30` negative block start padding\n* @cssClass     s-pbe:-30        Apply the `30` negative block end padding\n* @cssClass     s-pi:-30        Apply the `30` negative inline start and end padding\n* @cssClass     s-pis:-30        Apply the `30` negative inline start padding\n* @cssClass     s-pie:-30        Apply the `30` negative inline end padding\n* @cssClass     s-p:40        Apply the `40` padding all around\n* @cssClass     s-pb:40        Apply the `40` block start and end padding\n* @cssClass     s-pbs:40        Apply the `40` block start padding\n* @cssClass     s-pbe:40        Apply the `40` block end padding\n* @cssClass     s-pi:40        Apply the `40` inline start and end padding\n* @cssClass     s-pis:40        Apply the `40` inline start padding\n* @cssClass     s-pie:40        Apply the `40` inline end padding\n* @cssClass     s-pb:-40        Apply the `40` negative block start and end padding\n* @cssClass     s-pbs:-40        Apply the `40` negative block start padding\n* @cssClass     s-pbe:-40        Apply the `40` negative block end padding\n* @cssClass     s-pi:-40        Apply the `40` negative inline start and end padding\n* @cssClass     s-pis:-40        Apply the `40` negative inline start padding\n* @cssClass     s-pie:-40        Apply the `40` negative inline end padding\n* @cssClass     s-p:50        Apply the `50` padding all around\n* @cssClass     s-pb:50        Apply the `50` block start and end padding\n* @cssClass     s-pbs:50        Apply the `50` block start padding\n* @cssClass     s-pbe:50        Apply the `50` block end padding\n* @cssClass     s-pi:50        Apply the `50` inline start and end padding\n* @cssClass     s-pis:50        Apply the `50` inline start padding\n* @cssClass     s-pie:50        Apply the `50` inline end padding\n* @cssClass     s-pb:-50        Apply the `50` negative block start and end padding\n* @cssClass     s-pbs:-50        Apply the `50` negative block start padding\n* @cssClass     s-pbe:-50        Apply the `50` negative block end padding\n* @cssClass     s-pi:-50        Apply the `50` negative inline start and end padding\n* @cssClass     s-pis:-50        Apply the `50` negative inline start padding\n* @cssClass     s-pie:-50        Apply the `50` negative inline end padding\n* @cssClass     s-p:60        Apply the `60` padding all around\n* @cssClass     s-pb:60        Apply the `60` block start and end padding\n* @cssClass     s-pbs:60        Apply the `60` block start padding\n* @cssClass     s-pbe:60        Apply the `60` block end padding\n* @cssClass     s-pi:60        Apply the `60` inline start and end padding\n* @cssClass     s-pis:60        Apply the `60` inline start padding\n* @cssClass     s-pie:60        Apply the `60` inline end padding\n* @cssClass     s-pb:-60        Apply the `60` negative block start and end padding\n* @cssClass     s-pbs:-60        Apply the `60` negative block start padding\n* @cssClass     s-pbe:-60        Apply the `60` negative block end padding\n* @cssClass     s-pi:-60        Apply the `60` negative inline start and end padding\n* @cssClass     s-pis:-60        Apply the `60` negative inline start padding\n* @cssClass     s-pie:-60        Apply the `60` negative inline end padding\n* @cssClass     s-p:70        Apply the `70` padding all around\n* @cssClass     s-pb:70        Apply the `70` block start and end padding\n* @cssClass     s-pbs:70        Apply the `70` block start padding\n* @cssClass     s-pbe:70        Apply the `70` block end padding\n* @cssClass     s-pi:70        Apply the `70` inline start and end padding\n* @cssClass     s-pis:70        Apply the `70` inline start padding\n* @cssClass     s-pie:70        Apply the `70` inline end padding\n* @cssClass     s-pb:-70        Apply the `70` negative block start and end padding\n* @cssClass     s-pbs:-70        Apply the `70` negative block start padding\n* @cssClass     s-pbe:-70        Apply the `70` negative block end padding\n* @cssClass     s-pi:-70        Apply the `70` negative inline start and end padding\n* @cssClass     s-pis:-70        Apply the `70` negative inline start padding\n* @cssClass     s-pie:-70        Apply the `70` negative inline end padding\n* @cssClass     s-p:80        Apply the `80` padding all around\n* @cssClass     s-pb:80        Apply the `80` block start and end padding\n* @cssClass     s-pbs:80        Apply the `80` block start padding\n* @cssClass     s-pbe:80        Apply the `80` block end padding\n* @cssClass     s-pi:80        Apply the `80` inline start and end padding\n* @cssClass     s-pis:80        Apply the `80` inline start padding\n* @cssClass     s-pie:80        Apply the `80` inline end padding\n* @cssClass     s-pb:-80        Apply the `80` negative block start and end padding\n* @cssClass     s-pbs:-80        Apply the `80` negative block start padding\n* @cssClass     s-pbe:-80        Apply the `80` negative block end padding\n* @cssClass     s-pi:-80        Apply the `80` negative inline start and end padding\n* @cssClass     s-pis:-80        Apply the `80` negative inline start padding\n* @cssClass     s-pie:-80        Apply the `80` negative inline end padding\n* @cssClass     s-p:90        Apply the `90` padding all around\n* @cssClass     s-pb:90        Apply the `90` block start and end padding\n* @cssClass     s-pbs:90        Apply the `90` block start padding\n* @cssClass     s-pbe:90        Apply the `90` block end padding\n* @cssClass     s-pi:90        Apply the `90` inline start and end padding\n* @cssClass     s-pis:90        Apply the `90` inline start padding\n* @cssClass     s-pie:90        Apply the `90` inline end padding\n* @cssClass     s-pb:-90        Apply the `90` negative block start and end padding\n* @cssClass     s-pbs:-90        Apply the `90` negative block start padding\n* @cssClass     s-pbe:-90        Apply the `90` negative block end padding\n* @cssClass     s-pi:-90        Apply the `90` negative inline start and end padding\n* @cssClass     s-pis:-90        Apply the `90` negative inline start padding\n* @cssClass     s-pie:-90        Apply the `90` negative inline end padding\n* @cssClass     s-p:100        Apply the `100` padding all around\n* @cssClass     s-pb:100        Apply the `100` block start and end padding\n* @cssClass     s-pbs:100        Apply the `100` block start padding\n* @cssClass     s-pbe:100        Apply the `100` block end padding\n* @cssClass     s-pi:100        Apply the `100` inline start and end padding\n* @cssClass     s-pis:100        Apply the `100` inline start padding\n* @cssClass     s-pie:100        Apply the `100` inline end padding\n* @cssClass     s-pb:-100        Apply the `100` negative block start and end padding\n* @cssClass     s-pbs:-100        Apply the `100` negative block start padding\n* @cssClass     s-pbe:-100        Apply the `100` negative block end padding\n* @cssClass     s-pi:-100        Apply the `100` negative inline start and end padding\n* @cssClass     s-pis:-100        Apply the `100` negative inline start padding\n* @cssClass     s-pie:-100        Apply the `100` negative inline end padding\n*\n*\n* @example        html          Inline\n*   <p class=\"s-bg:accent s-radius s-pi:30 s-pb:30 s-mbe:20\">Wm Kuhlman</p>\n*   <p class=\"s-bg:complementary s-radius s-pis:50 s-pb:30 s-mbe:20\">Winston Johnston</p>\n*   <p class=\"s-bg:main s-radius s-pis:80 s-pb:30 s-mbe:20\">Renee Nienow</p>\n*   <p class=\"s-bg:error s-radius s-pis:100 s-pb:30 s-mbe:20\">Mamie Wiza I</p>\n*\n* @example            html                Block\n*   <div class=\"s-bg:accent s-radius s-pbs:30 s-pbe:40 s-text:center s-mbe:20\">Jeannie Jacobs PhD</div>\n*   <div class=\"s-bg:complementary s-radius s-pb:30 s-text:center s-mbe:20\">Leon Rogahn</div>\n*   <div class=\"s-bg:main s-radius s-pbs:50 s-pbe:30 s-text:center s-mbe:20\">Dr. Marcella Keebler</div>\n*   <div class=\"s-bg:error s-radius s-pbs:100 s-pbe:60 s-text:center s-mbe:20\">Ervin Rosenbaum</div>\n*\n* @example       html          RTL\n* <div dir=\"rtl\">\n*   <p class=\"s-bg:accent s-radius s-pi:30 s-pb:30 s-mbe:20\">Frankie Greenfelder V</p>\n*   <p class=\"s-bg:complementary s-radius s-pis:50 s-pb:30 s-mbe:20\">Jill Bartoletti</p>\n*   <p class=\"s-bg:main s-radius s-pis:80 s-pb:30 s-mbe:20\">Andres Ledner</p>\n*   <p class=\"s-bg:error s-radius s-pis:100 s-pb:30 s-mbe:20\">Johnny Harvey</p>\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.padding.Padding"
+        }
+    ]
+}

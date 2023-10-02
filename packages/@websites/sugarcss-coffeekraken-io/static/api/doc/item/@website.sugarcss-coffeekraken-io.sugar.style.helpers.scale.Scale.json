@@ -1,0 +1,206 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.scale.Scale",
+    "name": "Scale",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "Tools"
+        ],
+        "slug": "/styleguide/tools/scale"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows to apply a scale to any supported UI elements.\nThis scale does not use the transform property but increase actual values like `padding`,\n`margin`, etc... In fact, all the properties setted with the `sugar.scallable` function.\nIt's usually a good practice to set the `font-size` of your UI element to `s.scalable(1rem)`\nand then to set inner values using `em` unit.",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.scale",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "code": "<!-- 10 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 10</h3>\n  <div class=\"s-scale:10\">\n      <a class=\"s-btn\">Garrett Kuhlman IV</a>\n  </div>\n</div>\n\n<!-- 11 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 11</h3>\n  <div class=\"s-scale:11\">\n      <a class=\"s-btn\">Laurence Olson</a>\n  </div>\n</div>\n\n<!-- 12 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 12</h3>\n  <div class=\"s-scale:12\">\n      <a class=\"s-btn\">Miss Brad Feeney</a>\n  </div>\n</div>\n\n<!-- 13 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 13</h3>\n  <div class=\"s-scale:13\">\n      <a class=\"s-btn\">Dr. Kelly Wilkinson</a>\n  </div>\n</div>\n\n<!-- 14 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 14</h3>\n  <div class=\"s-scale:14\">\n      <a class=\"s-btn\">Wade Mueller</a>\n  </div>\n</div>\n\n<!-- 15 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 15</h3>\n  <div class=\"s-scale:15\">\n      <a class=\"s-btn\">Monica Kassulke</a>\n  </div>\n</div>\n\n<!-- 16 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 16</h3>\n  <div class=\"s-scale:16\">\n      <a class=\"s-btn\">Bessie Jacobson</a>\n  </div>\n</div>\n\n<!-- 17 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 17</h3>\n  <div class=\"s-scale:17\">\n      <a class=\"s-btn\">Meghan Blanda</a>\n  </div>\n</div>\n\n<!-- 18 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 18</h3>\n  <div class=\"s-scale:18\">\n      <a class=\"s-btn\">Levi Jaskolski</a>\n  </div>\n</div>\n\n<!-- 19 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 19</h3>\n  <div class=\"s-scale:19\">\n      <a class=\"s-btn\">Francisco Bauch</a>\n  </div>\n</div>\n\n<!-- 20 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 20</h3>\n  <div class=\"s-scale:20\">\n      <a class=\"s-btn\">Stephen Grady</a>\n  </div>\n</div>\n\n<!-- default scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale default</h3>\n  <div class=\"s-scale:default\">\n      <a class=\"s-btn\">Ms. Casey Spinka</a>\n  </div>\n</div>\n\n<!-- 01 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 01</h3>\n  <div class=\"s-scale:01\">\n      <a class=\"s-btn\">Luke Flatley</a>\n  </div>\n</div>\n\n<!-- 02 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 02</h3>\n  <div class=\"s-scale:02\">\n      <a class=\"s-btn\">Elsa Lang</a>\n  </div>\n</div>\n\n<!-- 03 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 03</h3>\n  <div class=\"s-scale:03\">\n      <a class=\"s-btn\">Jeremiah Kertzmann PhD</a>\n  </div>\n</div>\n\n<!-- 04 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 04</h3>\n  <div class=\"s-scale:04\">\n      <a class=\"s-btn\">Ervin Shanahan</a>\n  </div>\n</div>\n\n<!-- 05 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 05</h3>\n  <div class=\"s-scale:05\">\n      <a class=\"s-btn\">Brent Ankunding DVM</a>\n  </div>\n</div>\n\n<!-- 06 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 06</h3>\n  <div class=\"s-scale:06\">\n      <a class=\"s-btn\">Rodolfo Gerlach</a>\n  </div>\n</div>\n\n<!-- 07 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 07</h3>\n  <div class=\"s-scale:07\">\n      <a class=\"s-btn\">Seth Halvorson</a>\n  </div>\n</div>\n\n<!-- 08 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 08</h3>\n  <div class=\"s-scale:08\">\n      <a class=\"s-btn\">Daisy Boyle</a>\n  </div>\n</div>\n\n<!-- 09 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 09</h3>\n  <div class=\"s-scale:09\">\n      <a class=\"s-btn\">Mrs. Tyler Macejkovic</a>\n  </div>\n</div>"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.css",
+    "extension": "css",
+    "relPath": "dist/css/index.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Scale",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.scale",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "Tools"
+                ],
+                "slug": "/styleguide/tools/scale"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows to apply a scale to any supported UI elements.\nThis scale does not use the transform property but increase actual values like `padding`,\n`margin`, etc... In fact, all the properties setted with the `sugar.scallable` function.\nIt's usually a good practice to set the `font-size` of your UI element to `s.scalable(1rem)`\nand then to set inner values using `em` unit.",
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.scale.classes;"
+                }
+            ],
+            "cssClass": {
+                "s-scale-10": {
+                    "name": "s-scale:10",
+                    "description": "Apply the 10 scale"
+                },
+                "s-scale-11": {
+                    "name": "s-scale:11",
+                    "description": "Apply the 11 scale"
+                },
+                "s-scale-12": {
+                    "name": "s-scale:12",
+                    "description": "Apply the 12 scale"
+                },
+                "s-scale-13": {
+                    "name": "s-scale:13",
+                    "description": "Apply the 13 scale"
+                },
+                "s-scale-14": {
+                    "name": "s-scale:14",
+                    "description": "Apply the 14 scale"
+                },
+                "s-scale-15": {
+                    "name": "s-scale:15",
+                    "description": "Apply the 15 scale"
+                },
+                "s-scale-16": {
+                    "name": "s-scale:16",
+                    "description": "Apply the 16 scale"
+                },
+                "s-scale-17": {
+                    "name": "s-scale:17",
+                    "description": "Apply the 17 scale"
+                },
+                "s-scale-18": {
+                    "name": "s-scale:18",
+                    "description": "Apply the 18 scale"
+                },
+                "s-scale-19": {
+                    "name": "s-scale:19",
+                    "description": "Apply the 19 scale"
+                },
+                "s-scale-20": {
+                    "name": "s-scale:20",
+                    "description": "Apply the 20 scale"
+                },
+                "s-scale-default": {
+                    "name": "s-scale:default",
+                    "description": "Apply the default scale"
+                },
+                "s-scale-01": {
+                    "name": "s-scale:01",
+                    "description": "Apply the 01 scale"
+                },
+                "s-scale-02": {
+                    "name": "s-scale:02",
+                    "description": "Apply the 02 scale"
+                },
+                "s-scale-03": {
+                    "name": "s-scale:03",
+                    "description": "Apply the 03 scale"
+                },
+                "s-scale-04": {
+                    "name": "s-scale:04",
+                    "description": "Apply the 04 scale"
+                },
+                "s-scale-05": {
+                    "name": "s-scale:05",
+                    "description": "Apply the 05 scale"
+                },
+                "s-scale-06": {
+                    "name": "s-scale:06",
+                    "description": "Apply the 06 scale"
+                },
+                "s-scale-07": {
+                    "name": "s-scale:07",
+                    "description": "Apply the 07 scale"
+                },
+                "s-scale-08": {
+                    "name": "s-scale:08",
+                    "description": "Apply the 08 scale"
+                },
+                "s-scale-09": {
+                    "name": "s-scale:09",
+                    "description": "Apply the 09 scale"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "code": "<!-- 10 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 10</h3>\n  <div class=\"s-scale:10\">\n      <a class=\"s-btn\">Herman Dare</a>\n  </div>\n</div>\n\n<!-- 11 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 11</h3>\n  <div class=\"s-scale:11\">\n      <a class=\"s-btn\">Anthony Stamm</a>\n  </div>\n</div>\n\n<!-- 12 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 12</h3>\n  <div class=\"s-scale:12\">\n      <a class=\"s-btn\">Laurence Parisian</a>\n  </div>\n</div>\n\n<!-- 13 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 13</h3>\n  <div class=\"s-scale:13\">\n      <a class=\"s-btn\">Doris Rau</a>\n  </div>\n</div>\n\n<!-- 14 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 14</h3>\n  <div class=\"s-scale:14\">\n      <a class=\"s-btn\">Neal Pouros</a>\n  </div>\n</div>\n\n<!-- 15 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 15</h3>\n  <div class=\"s-scale:15\">\n      <a class=\"s-btn\">Ryan Torphy</a>\n  </div>\n</div>\n\n<!-- 16 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 16</h3>\n  <div class=\"s-scale:16\">\n      <a class=\"s-btn\">Edwin Rath</a>\n  </div>\n</div>\n\n<!-- 17 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 17</h3>\n  <div class=\"s-scale:17\">\n      <a class=\"s-btn\">Rickey Rempel I</a>\n  </div>\n</div>\n\n<!-- 18 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 18</h3>\n  <div class=\"s-scale:18\">\n      <a class=\"s-btn\">Sophia Nicolas</a>\n  </div>\n</div>\n\n<!-- 19 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 19</h3>\n  <div class=\"s-scale:19\">\n      <a class=\"s-btn\">Roberto Cassin</a>\n  </div>\n</div>\n\n<!-- 20 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 20</h3>\n  <div class=\"s-scale:20\">\n      <a class=\"s-btn\">Loretta Kohler</a>\n  </div>\n</div>\n\n<!-- default scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale default</h3>\n  <div class=\"s-scale:default\">\n      <a class=\"s-btn\">Elaine Feil</a>\n  </div>\n</div>\n\n<!-- 01 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 01</h3>\n  <div class=\"s-scale:01\">\n      <a class=\"s-btn\">Shannon Hegmann</a>\n  </div>\n</div>\n\n<!-- 02 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 02</h3>\n  <div class=\"s-scale:02\">\n      <a class=\"s-btn\">Levi Trantow</a>\n  </div>\n</div>\n\n<!-- 03 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 03</h3>\n  <div class=\"s-scale:03\">\n      <a class=\"s-btn\">Pamela Gaylord</a>\n  </div>\n</div>\n\n<!-- 04 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 04</h3>\n  <div class=\"s-scale:04\">\n      <a class=\"s-btn\">Angie Labadie</a>\n  </div>\n</div>\n\n<!-- 05 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 05</h3>\n  <div class=\"s-scale:05\">\n      <a class=\"s-btn\">Francisco Frami</a>\n  </div>\n</div>\n\n<!-- 06 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 06</h3>\n  <div class=\"s-scale:06\">\n      <a class=\"s-btn\">Rachael Daugherty</a>\n  </div>\n</div>\n\n<!-- 07 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 07</h3>\n  <div class=\"s-scale:07\">\n      <a class=\"s-btn\">Lucas Hane</a>\n  </div>\n</div>\n\n<!-- 08 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 08</h3>\n  <div class=\"s-scale:08\">\n      <a class=\"s-btn\">Miss Kerry Welch</a>\n  </div>\n</div>\n\n<!-- 09 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 09</h3>\n  <div class=\"s-scale:09\">\n      <a class=\"s-btn\">Luis Friesen</a>\n  </div>\n</div>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Scale\n* @namespace          sugar.style.helpers.scale\n* @type               Styleguide\n* @menu           Styleguide / Tools        /styleguide/tools/scale\n* @platform       css\n* @status       stable\n*\n* These classes allows to apply a scale to any supported UI elements.\n* This scale does not use the transform property but increase actual values like `padding`,\n* `margin`, etc... In fact, all the properties setted with the `sugar.scallable` function.\n* It's usually a good practice to set the `font-size` of your UI element to `s.scalable(1rem)`\n* and then to set inner values using `em` unit.\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.scale.classes;\n*\n* @cssClass     s-scale:10             Apply the 10 scale\n* @cssClass     s-scale:11             Apply the 11 scale\n* @cssClass     s-scale:12             Apply the 12 scale\n* @cssClass     s-scale:13             Apply the 13 scale\n* @cssClass     s-scale:14             Apply the 14 scale\n* @cssClass     s-scale:15             Apply the 15 scale\n* @cssClass     s-scale:16             Apply the 16 scale\n* @cssClass     s-scale:17             Apply the 17 scale\n* @cssClass     s-scale:18             Apply the 18 scale\n* @cssClass     s-scale:19             Apply the 19 scale\n* @cssClass     s-scale:20             Apply the 20 scale\n* @cssClass     s-scale:default             Apply the default scale\n* @cssClass     s-scale:01             Apply the 01 scale\n* @cssClass     s-scale:02             Apply the 02 scale\n* @cssClass     s-scale:03             Apply the 03 scale\n* @cssClass     s-scale:04             Apply the 04 scale\n* @cssClass     s-scale:05             Apply the 05 scale\n* @cssClass     s-scale:06             Apply the 06 scale\n* @cssClass     s-scale:07             Apply the 07 scale\n* @cssClass     s-scale:08             Apply the 08 scale\n* @cssClass     s-scale:09             Apply the 09 scale\n*\n* @example        html\n* <!-- 10 scale -->\n* <div class=\"s-mbe:50\">\n*   <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 10</h3>\n*   <div class=\"s-scale:10\">\n*       <a class=\"s-btn\">Herman Dare</a>\n*   </div>\n* </div>\n*\n* <!-- 11 scale -->\n* <div class=\"s-mbe:50\">\n*   <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 11</h3>\n*   <div class=\"s-scale:11\">\n*       <a class=\"s-btn\">Anthony Stamm</a>\n*   </div>\n* </div>\n*\n* <!-- 12 scale -->\n* <div class=\"s-mbe:50\">\n*   <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 12</h3>\n*   <div class=\"s-scale:12\">\n*       <a class=\"s-btn\">Laurence Parisian</a>\n*   </div>\n* </div>\n*\n* <!-- 13 scale -->\n* <div class=\"s-mbe:50\">\n*   <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 13</h3>\n*   <div class=\"s-scale:13\">\n*       <a class=\"s-btn\">Doris Rau</a>\n*   </div>\n* </div>\n*\n* <!-- 14 scale -->\n* <div class=\"s-mbe:50\">\n*   <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 14</h3>\n*   <div class=\"s-scale:14\">\n*       <a class=\"s-btn\">Neal Pouros</a>\n*   </div>\n* </div>\n*\n* <!-- 15 scale -->\n* <div class=\"s-mbe:50\">\n*   <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 15</h3>\n*   <div class=\"s-scale:15\">\n*       <a class=\"s-btn\">Ryan Torphy</a>\n*   </div>\n* </div>\n*\n* <!-- 16 scale -->\n* <div class=\"s-mbe:50\">\n*   <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 16</h3>\n*   <div class=\"s-scale:16\">\n*       <a class=\"s-btn\">Edwin Rath</a>\n*   </div>\n* </div>\n*\n* <!-- 17 scale -->\n* <div class=\"s-mbe:50\">\n*   <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 17</h3>\n*   <div class=\"s-scale:17\">\n*       <a class=\"s-btn\">Rickey Rempel I</a>\n*   </div>\n* </div>\n*\n* <!-- 18 scale -->\n* <div class=\"s-mbe:50\">\n*   <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 18</h3>\n*   <div class=\"s-scale:18\">\n*       <a class=\"s-btn\">Sophia Nicolas</a>\n*   </div>\n* </div>\n*\n* <!-- 19 scale -->\n* <div class=\"s-mbe:50\">\n*   <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 19</h3>\n*   <div class=\"s-scale:19\">\n*       <a class=\"s-btn\">Roberto Cassin</a>\n*   </div>\n* </div>\n*\n* <!-- 20 scale -->\n* <div class=\"s-mbe:50\">\n*   <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 20</h3>\n*   <div class=\"s-scale:20\">\n*       <a class=\"s-btn\">Loretta Kohler</a>\n*   </div>\n* </div>\n*\n* <!-- default scale -->\n* <div class=\"s-mbe:50\">\n*   <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale default</h3>\n*   <div class=\"s-scale:default\">\n*       <a class=\"s-btn\">Elaine Feil</a>\n*   </div>\n* </div>\n*\n* <!-- 01 scale -->\n* <div class=\"s-mbe:50\">\n*   <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 01</h3>\n*   <div class=\"s-scale:01\">\n*       <a class=\"s-btn\">Shannon Hegmann</a>\n*   </div>\n* </div>\n*\n* <!-- 02 scale -->\n* <div class=\"s-mbe:50\">\n*   <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 02</h3>\n*   <div class=\"s-scale:02\">\n*       <a class=\"s-btn\">Levi Trantow</a>\n*   </div>\n* </div>\n*\n* <!-- 03 scale -->\n* <div class=\"s-mbe:50\">\n*   <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 03</h3>\n*   <div class=\"s-scale:03\">\n*       <a class=\"s-btn\">Pamela Gaylord</a>\n*   </div>\n* </div>\n*\n* <!-- 04 scale -->\n* <div class=\"s-mbe:50\">\n*   <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 04</h3>\n*   <div class=\"s-scale:04\">\n*       <a class=\"s-btn\">Angie Labadie</a>\n*   </div>\n* </div>\n*\n* <!-- 05 scale -->\n* <div class=\"s-mbe:50\">\n*   <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 05</h3>\n*   <div class=\"s-scale:05\">\n*       <a class=\"s-btn\">Francisco Frami</a>\n*   </div>\n* </div>\n*\n* <!-- 06 scale -->\n* <div class=\"s-mbe:50\">\n*   <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 06</h3>\n*   <div class=\"s-scale:06\">\n*       <a class=\"s-btn\">Rachael Daugherty</a>\n*   </div>\n* </div>\n*\n* <!-- 07 scale -->\n* <div class=\"s-mbe:50\">\n*   <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 07</h3>\n*   <div class=\"s-scale:07\">\n*       <a class=\"s-btn\">Lucas Hane</a>\n*   </div>\n* </div>\n*\n* <!-- 08 scale -->\n* <div class=\"s-mbe:50\">\n*   <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 08</h3>\n*   <div class=\"s-scale:08\">\n*       <a class=\"s-btn\">Miss Kerry Welch</a>\n*   </div>\n* </div>\n*\n* <!-- 09 scale -->\n* <div class=\"s-mbe:50\">\n*   <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 09</h3>\n*   <div class=\"s-scale:09\">\n*       <a class=\"s-btn\">Luis Friesen</a>\n*   </div>\n* </div>\n*\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.scale.Scale"
+        }
+    ]
+}

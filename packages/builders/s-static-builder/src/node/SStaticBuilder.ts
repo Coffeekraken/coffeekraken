@@ -266,13 +266,24 @@ export default class SStaticBuilder extends __SBuilder {
                         ? url.lastmod[0]
                         : url.lastmod;
 
+                let parsedUrl;
+                try {
+                    parsedUrl = new URL(urlLoc);
+                } catch (e) {
+                    parsedUrl = new URL(`${params.host}${urlLoc}`);
+                }
+
                 // generating the output path for the current file
                 let outPath = `${params.outDir}/${
-                        urlLoc === '/' ? 'index' : urlLoc
+                        urlLoc === '/' ? 'index' : parsedUrl.pathname
                     }.html`.replace(/\/{2,20}/gm, '/'),
                     cacheOutPath = `${cacheBuildDir}/${
-                        urlLoc === '/' ? 'index' : urlLoc
+                        urlLoc === '/' ? 'index' : parsedUrl.pathname
                     }.html`.replace(/\/{2,20}/gm, '/');
+
+                // remove the origin from the outPath
+                outPath = outPath.replace(parsedUrl.origin, '');
+                cacheOutPath = cacheOutPath.replace(parsedUrl.origin, '');
 
                 console.log({
                     clear: __SLog.isTypeEnabled(__SLog.TYPE_VERBOSE)
@@ -327,24 +338,10 @@ export default class SStaticBuilder extends __SBuilder {
                 genDuration = new __SDuration();
 
                 let res,
-                    tries = 0;
+                    tries = 0,
+                    path;
 
-                function castResponse(res) {
-                    let json;
-                    if (!res.data) {
-                        return {
-                            status: 404,
-                        };
-                    }
-                    try {
-                        json = JSON.parse(res.data);
-                        return json;
-                    } catch (e) {
-                        return res.data;
-                    }
-                }
-
-                while (typeof res !== 'string' && tries < params.requestRetry) {
+                while (res?.status !== 200 && tries < params.requestRetry) {
                     if (res && res.status === 404) {
                         break;
                     }
@@ -361,17 +358,20 @@ export default class SStaticBuilder extends __SBuilder {
 
                     if (params.useFrontendServer) {
                         const reqPromise = frontendServer.request(urlLoc, {});
-                        res = castResponse(await reqPromise);
+                        res = await reqPromise;
                     } else {
+                        path = url.pathname;
+
                         const request = new __SRequest({
-                            url: `${params.host}${urlLoc}`,
+                            url: `${parsedUrl.toString()}`,
                             timeout: params.requestTimeout,
                         });
-                        res = castResponse(await request.send());
+                        const response = await request.send();
+                        res = response;
                     }
                 }
 
-                let isErrors = typeof res !== 'string';
+                let isErrors = res.status !== 200;
                 if (isErrors) {
                     if (!errors.includes(urlLoc)) {
                         errors.push(urlLoc);
@@ -406,8 +406,14 @@ export default class SStaticBuilder extends __SBuilder {
 
                 // @ts-ignore
                 if (!isErrors) {
-                    __writeFileSync(cacheOutPath, res);
-                    __writeFileSync(outPath, res);
+                    let dataToWrite = res.data;
+                    if (typeof dataToWrite === 'object') {
+                        dataToWrite = JSON.stringify(dataToWrite, null, 4);
+                        cacheOutPath = cacheOutPath.replace(/\.html$/, '.json');
+                        outPath = outPath.replace(/\.html$/, '.json');
+                    }
+                    __writeFileSync(cacheOutPath, dataToWrite);
+                    __writeFileSync(outPath, dataToWrite);
 
                     // saving the integrity
                     if (urlIntegrity) {

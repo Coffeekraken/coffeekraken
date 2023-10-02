@@ -1,0 +1,128 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.link.Link",
+    "name": "Link",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "Helpers"
+        ],
+        "slug": "/styleguide/helpers/link"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows to apply some link styling utils to any HTMLElement.",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.link",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "title": "Stretch",
+            "code": "<div class=\"s-position:relative s-bg:main s-radius s-p:50\">\n  <a href=\"#\" class=\"s-link:stretch s-bg:accent s-radius s-p:20\">I'm a stretched link!</a>\n</div>"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.css",
+    "extension": "css",
+    "relPath": "dist/css/index.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Link",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.link",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "Helpers"
+                ],
+                "slug": "/styleguide/helpers/link"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows to apply some link styling utils to any HTMLElement.",
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.link.classes;\n\n.my-element {\n  \\@s.link.stretch;\n}"
+                }
+            ],
+            "cssClass": {
+                "s-link-stretch": {
+                    "name": "s-link:stretch",
+                    "description": "Stretch a link clickable area without changing his actual size and style"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "title": "Stretch",
+                    "code": "<div class=\"s-position:relative s-bg:main s-radius s-p:50\">\n  <a href=\"#\" class=\"s-link:stretch s-bg:accent s-radius s-p:20\">I'm a stretched link!</a>\n</div>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Link\n* @namespace          sugar.style.helpers.link\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/link\n* @platform       css\n* @status       stable\n*\n* These classes allows to apply some link styling utils to any HTMLElement.\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.link.classes;\n*\n* .my-element {\n*   \\@s.link.stretch;\n* }\n*\n* @cssClass             s-link:stretch                  Stretch a link clickable area without changing his actual size and style\n*\n* @example          html            Stretch\n* <div class=\"s-position:relative s-bg:main s-radius s-p:50\">\n*   <a href=\"#\" class=\"s-link:stretch s-bg:accent s-radius s-p:20\">I'm a stretched link!</a>\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.link.Link"
+        }
+    ]
+}

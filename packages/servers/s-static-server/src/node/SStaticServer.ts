@@ -104,7 +104,6 @@ export default class SStaticServer extends __SClass {
                 __packageRootDir(),
                 finalParams.rootDir,
             );
-            _console.log('rela', relativeRootDir);
             this._express.use(__express.static(relativeRootDir));
 
             if (!(await __isPortFree(finalParams.port))) {

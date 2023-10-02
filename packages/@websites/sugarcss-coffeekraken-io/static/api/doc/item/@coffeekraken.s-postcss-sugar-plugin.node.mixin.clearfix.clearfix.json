@@ -1,0 +1,113 @@
+{
+    "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.clearfix.clearfix",
+    "name": "clearfix",
+    "as": "@s.clearfix",
+    "type": {
+        "types": [
+            {
+                "type": "PostcssMixin"
+            }
+        ],
+        "raw": "PostcssMixin"
+    },
+    "return": {
+        "type": {
+            "types": [
+                {
+                    "type": "Css"
+                }
+            ],
+            "raw": "Css"
+        },
+        "description": "The generated css"
+    },
+    "platform": [
+        {
+            "name": "postcss",
+            "description": ""
+        }
+    ],
+    "description": "This mixin allows you to apply a clearfix depending on your preference. Here's are the clearfix methods available:\n- overflow (default)\n- facebook\n- float\n- micro\n- after",
+    "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.clearfix",
+    "status": "stable",
+    "snippet": {
+        "label": "@s.clearfix($1)"
+    },
+    "example": [
+        {
+            "language": "css",
+            "code": ".my-element {\n   @s.clearfix();\n}"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "clearfix.ts",
+    "extension": "ts",
+    "relPath": "src/node/mixins/clearfix/clearfix.ts",
+    "children": {},
+    "isDependency": true,
+    "package": {
+        "name": "@coffeekraken/s-postcss-sugar-plugin",
+        "description": "Postcss Coffeekraken plugin that gives you access to a ton of sugar like \"@sugar.when.dark\", \"@sugar.classes\", etc... mixins as well as functions like \"sugar.padding\", \"sugar.color\", etc... All of these makes uses of your theme configuration defined using the @coffeekraken/s-sugar-config system.",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/node_modules/@coffeekraken/s-postcss-sugar-plugin/src/node/mixins/clearfix/clearfix.ts",
+    "docblocks": [
+        {
+            "name": "clearfix",
+            "as": "@s.clearfix",
+            "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.clearfix",
+            "type": {
+                "types": [
+                    {
+                        "type": "PostcssMixin"
+                    }
+                ],
+                "raw": "PostcssMixin"
+            },
+            "platform": [
+                {
+                    "name": "postcss",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "This mixin allows you to apply a clearfix depending on your preference. Here's are the clearfix methods available:\n- overflow (default)\n- facebook\n- float\n- micro\n- after",
+            "return": {
+                "type": {
+                    "types": [
+                        {
+                            "type": "Css"
+                        }
+                    ],
+                    "raw": "Css"
+                },
+                "description": "The generated css"
+            },
+            "snippet": {
+                "label": "@s.clearfix($1)"
+            },
+            "example": [
+                {
+                    "language": "css",
+                    "code": ".my-element {\n   @s.clearfix();\n}"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name           clearfix\n* @as              @s.clearfix\n* @namespace      node.mixin.clearfix\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin allows you to apply a clearfix depending on your preference. Here's are the clearfix methods available:\n* - overflow (default)\n* - facebook\n* - float\n* - micro\n* - after\n*\n* @return        {Css}         The generated css\n*\n* @snippet         @s.clearfix($1)\n*\n* @example        css\n* .my-element {\n*    \\@s.clearfix();\n* }\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.clearfix.clearfix"
+        }
+    ]
+}

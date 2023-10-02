@@ -1,0 +1,245 @@
+{
+    "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.avatar.avatar",
+    "name": "avatar",
+    "as": "@s.ui.avatar",
+    "type": {
+        "types": [
+            {
+                "type": "PostcssMixin"
+            }
+        ],
+        "raw": "PostcssMixin"
+    },
+    "param": {
+        "scope": {
+            "name": "scope",
+            "type": {
+                "types": [
+                    {
+                        "type": "array",
+                        "of": [
+                            {
+                                "type": "string",
+                                "value": "bare"
+                            },
+                            {
+                                "type": "string",
+                                "value": "lnf"
+                            },
+                            {
+                                "type": "string",
+                                "value": "interactive"
+                            },
+                            {
+                                "type": "string",
+                                "value": "notifications"
+                            }
+                        ]
+                    }
+                ],
+                "raw": "('bare'|'lnf'|'interactive'|'notifications')[]"
+            },
+            "description": "The scope you want to generate",
+            "default": [
+                "bare",
+                "lnf",
+                "interactive",
+                "notifications"
+            ],
+            "defaultStr": "['bare','lnf','interactive','notifications']"
+        }
+    },
+    "return": {
+        "type": {
+            "types": [
+                {
+                    "type": "Css"
+                }
+            ],
+            "raw": "Css"
+        },
+        "description": "The corresponding css"
+    },
+    "platform": [
+        {
+            "name": "postcss",
+            "description": ""
+        }
+    ],
+    "description": "This mixin allows you to generate the \"avatar\" UI component css.",
+    "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.avatar",
+    "status": "stable",
+    "snippet": {
+        "label": "@s.ui.avatar"
+    },
+    "example": [
+        {
+            "language": "css",
+            "code": ".my-element {\n     @s.ui.avatar();\n}"
+        }
+    ],
+    "interface": {
+        "name": "postcssSugarPluginUiAvatarInterface",
+        "description": "",
+        "definition": {
+            "scope": {
+                "type": {
+                    "type": "Array<String>",
+                    "splitChars": [
+                        ",",
+                        " "
+                    ]
+                },
+                "values": [
+                    "bare",
+                    "lnf",
+                    "interactive",
+                    "notifications"
+                ],
+                "default": [
+                    "bare",
+                    "lnf",
+                    "interactive",
+                    "notifications"
+                ]
+            }
+        }
+    },
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "avatar.ts",
+    "extension": "ts",
+    "relPath": "src/node/mixins/ui/avatar/avatar.ts",
+    "children": {},
+    "isDependency": true,
+    "package": {
+        "name": "@coffeekraken/s-postcss-sugar-plugin",
+        "description": "Postcss Coffeekraken plugin that gives you access to a ton of sugar like \"@sugar.when.dark\", \"@sugar.classes\", etc... mixins as well as functions like \"sugar.padding\", \"sugar.color\", etc... All of these makes uses of your theme configuration defined using the @coffeekraken/s-sugar-config system.",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/node_modules/@coffeekraken/s-postcss-sugar-plugin/src/node/mixins/ui/avatar/avatar.ts",
+    "docblocks": [
+        {
+            "name": "avatar",
+            "as": "@s.ui.avatar",
+            "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.avatar",
+            "type": {
+                "types": [
+                    {
+                        "type": "PostcssMixin"
+                    }
+                ],
+                "raw": "PostcssMixin"
+            },
+            "interface": {
+                "name": "postcssSugarPluginUiAvatarInterface",
+                "description": "",
+                "definition": {
+                    "scope": {
+                        "type": {
+                            "type": "Array<String>",
+                            "splitChars": [
+                                ",",
+                                " "
+                            ]
+                        },
+                        "values": [
+                            "bare",
+                            "lnf",
+                            "interactive",
+                            "notifications"
+                        ],
+                        "default": [
+                            "bare",
+                            "lnf",
+                            "interactive",
+                            "notifications"
+                        ]
+                    }
+                }
+            },
+            "platform": [
+                {
+                    "name": "postcss",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "This mixin allows you to generate the \"avatar\" UI component css.",
+            "param": {
+                "scope": {
+                    "name": "scope",
+                    "type": {
+                        "types": [
+                            {
+                                "type": "array",
+                                "of": [
+                                    {
+                                        "type": "string",
+                                        "value": "bare"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "value": "lnf"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "value": "interactive"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "value": "notifications"
+                                    }
+                                ]
+                            }
+                        ],
+                        "raw": "('bare'|'lnf'|'interactive'|'notifications')[]"
+                    },
+                    "description": "The scope you want to generate",
+                    "default": [
+                        "bare",
+                        "lnf",
+                        "interactive",
+                        "notifications"
+                    ],
+                    "defaultStr": "['bare','lnf','interactive','notifications']"
+                }
+            },
+            "return": {
+                "type": {
+                    "types": [
+                        {
+                            "type": "Css"
+                        }
+                    ],
+                    "raw": "Css"
+                },
+                "description": "The corresponding css"
+            },
+            "snippet": {
+                "label": "@s.ui.avatar"
+            },
+            "example": [
+                {
+                    "language": "css",
+                    "code": ".my-element {\n     @s.ui.avatar();\n}"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          avatar\n* @as              @s.ui.avatar\n* @namespace     node.mixin.ui.avatar\n* @type          PostcssMixin\n* @interface       ./avatar\n* @platform      postcss\n* @status        stable\n*\n* This mixin allows you to generate the \"avatar\" UI component css.\n*\n* @param       {('bare'|'lnf'|'interactive'|'notifications')[]}        [scope=['bare','lnf','interactive','notifications']]      The scope you want to generate\n* @return      {Css}                   The corresponding css\n*\n* @snippet         @s.ui.avatar\n*\n* @example       css\n* .my-element {\n*      \\@s.ui.avatar();\n* }\n*\n* @since     2.0.0\n* @author \t                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.avatar.avatar"
+        }
+    ]
+}

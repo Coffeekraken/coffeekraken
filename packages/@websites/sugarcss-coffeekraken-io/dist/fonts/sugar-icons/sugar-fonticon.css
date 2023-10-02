@@ -7,7 +7,7 @@ url("/dist/fonts/sugar-icons/sugar-fonticon.woff2?1c9d40ead662e943ad53f20c4aceb3
 url("/dist/fonts/sugar-icons/sugar-fonticon.woff?1c9d40ead662e943ad53f20c4aceb30e") format("woff");
 }
 
-.s-icon--logo-coffeekraken-sugar:before,.s-icon--logo-opensource:before,.s-icon--logo-postcss:before,.s-icon--ui-menu-grid-solid:before {
+.s-icon-logo-coffeekraken-sugar:before,.s-icon-logo-opensource:before,.s-icon-logo-postcss:before,.s-icon-ui-menu-grid-solid:before {
 position: relative;
 
     font-family: sugar-fonticon !important;
@@ -32,7 +32,7 @@ position: relative;
 .s-icon--ui-menu-grid-solid:before {
     content: "\f104";
 }
-.s-icon--logo-coffeekraken-sugar,.s-icon--logo-opensource,.s-icon--logo-postcss,.s-icon--ui-menu-grid-solid {
+.s-icon-logo-coffeekraken-sugar,.s-icon-logo-opensource,.s-icon-logo-postcss,.s-icon-ui-menu-grid-solid {
 display: inline-block;
 line-height: 1;
 width: 1em;

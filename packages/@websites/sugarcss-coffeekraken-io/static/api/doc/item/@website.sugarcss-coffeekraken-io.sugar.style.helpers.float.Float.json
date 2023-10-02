@@ -1,0 +1,156 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.float.Float",
+    "name": "Float",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "Helpers"
+        ],
+        "slug": "/styleguide/helpers/float"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows you to apply some float styling into your html.",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.float",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "title": "Left",
+            "code": "<div class=\"s-bg:accent s-clearfix  s-p:30 s-radius\">\n    <div class=\"s-float:left\">I'm a cool float left element</div>\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "Right",
+            "code": "<div class=\"s-bg:complementary s-clearfix s-p:30 s-radius\">\n    <div class=\"s-float:right\">I'm a cool float right element</div>\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "None",
+            "code": "<div class=\"s-bg:error s-p:30 s-radius\">\n    <div class=\"s-float:none\">I'm a cool float none element</div>\n</div>"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.css",
+    "extension": "css",
+    "relPath": "dist/css/index.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Float",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.float",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "Helpers"
+                ],
+                "slug": "/styleguide/helpers/float"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows you to apply some float styling into your html.",
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.float.classes;"
+                }
+            ],
+            "cssClass": {
+                "s-float-left": {
+                    "name": "s-float:left",
+                    "description": "Apply the left float style"
+                },
+                "s-float-right": {
+                    "name": "s-float:right",
+                    "description": "Apply the right float style"
+                },
+                "s-float-none": {
+                    "name": "s-float:none",
+                    "description": "Apply the none float style"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "title": "Left",
+                    "code": "<div class=\"s-bg:accent s-clearfix  s-p:30 s-radius\">\n    <div class=\"s-float:left\">I'm a cool float left element</div>\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "Right",
+                    "code": "<div class=\"s-bg:complementary s-clearfix s-p:30 s-radius\">\n    <div class=\"s-float:right\">I'm a cool float right element</div>\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "None",
+                    "code": "<div class=\"s-bg:error s-p:30 s-radius\">\n    <div class=\"s-float:none\">I'm a cool float none element</div>\n</div>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Float\n* @namespace          sugar.style.helpers.float\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/float\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply some float styling into your html.\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.float.classes;\n*\n* @cssClass     s-float:left         Apply the left float style\n* @cssClass     s-float:right         Apply the right float style\n* @cssClass     s-float:none         Apply the none float style\n*\n* @example        html              Left\n* <div class=\"s-bg:accent s-clearfix  s-p:30 s-radius\">\n*     <div class=\"s-float:left\">I'm a cool float left element</div>\n* </div>\n*\n* @example      html                Right\n* <div class=\"s-bg:complementary s-clearfix s-p:30 s-radius\">\n*     <div class=\"s-float:right\">I'm a cool float right element</div>\n* </div>\n*\n* @example      html                None\n* <div class=\"s-bg:error s-p:30 s-radius\">\n*     <div class=\"s-float:none\">I'm a cool float none element</div>\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.float.Float"
+        }
+    ]
+}

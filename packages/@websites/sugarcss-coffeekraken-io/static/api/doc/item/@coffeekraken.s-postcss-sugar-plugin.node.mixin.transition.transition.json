@@ -1,0 +1,145 @@
+{
+    "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.transition.transition",
+    "name": "transition",
+    "as": "@s.transition",
+    "type": {
+        "types": [
+            {
+                "type": "PostcssMixin"
+            }
+        ],
+        "raw": "PostcssMixin"
+    },
+    "param": {
+        "name": {
+            "name": "name",
+            "type": {
+                "types": [
+                    {
+                        "type": "String"
+                    }
+                ],
+                "raw": "String"
+            },
+            "description": "The transition you want to apply",
+            "default": "default",
+            "defaultStr": "'default'"
+        }
+    },
+    "return": {
+        "type": {
+            "types": [
+                {
+                    "type": "Css"
+                }
+            ],
+            "raw": "Css"
+        },
+        "description": "The generated css"
+    },
+    "platform": [
+        {
+            "name": "postcss",
+            "description": ""
+        }
+    ],
+    "description": "This mixin generate all the needed css to apply a transition setted in\nthe config.theme.transition configuration stack like \"slow\", \"default\" and \"fast\"",
+    "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.transition",
+    "status": "stable",
+    "snippet": {
+        "label": "@s.transition($1)"
+    },
+    "example": [
+        {
+            "language": "css",
+            "code": ".my-cool-element {\n     @s.transition(fast);\n}"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "transition.ts",
+    "extension": "ts",
+    "relPath": "src/node/mixins/transition/transition.ts",
+    "children": {},
+    "isDependency": true,
+    "package": {
+        "name": "@coffeekraken/s-postcss-sugar-plugin",
+        "description": "Postcss Coffeekraken plugin that gives you access to a ton of sugar like \"@sugar.when.dark\", \"@sugar.classes\", etc... mixins as well as functions like \"sugar.padding\", \"sugar.color\", etc... All of these makes uses of your theme configuration defined using the @coffeekraken/s-sugar-config system.",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/node_modules/@coffeekraken/s-postcss-sugar-plugin/src/node/mixins/transition/transition.ts",
+    "docblocks": [
+        {
+            "name": "transition",
+            "as": "@s.transition",
+            "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.transition",
+            "type": {
+                "types": [
+                    {
+                        "type": "PostcssMixin"
+                    }
+                ],
+                "raw": "PostcssMixin"
+            },
+            "platform": [
+                {
+                    "name": "postcss",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "This mixin generate all the needed css to apply a transition setted in\nthe config.theme.transition configuration stack like \"slow\", \"default\" and \"fast\"",
+            "param": {
+                "name": {
+                    "name": "name",
+                    "type": {
+                        "types": [
+                            {
+                                "type": "String"
+                            }
+                        ],
+                        "raw": "String"
+                    },
+                    "description": "The transition you want to apply",
+                    "default": "default",
+                    "defaultStr": "'default'"
+                }
+            },
+            "return": {
+                "type": {
+                    "types": [
+                        {
+                            "type": "Css"
+                        }
+                    ],
+                    "raw": "Css"
+                },
+                "description": "The generated css"
+            },
+            "snippet": {
+                "label": "@s.transition($1)"
+            },
+            "example": [
+                {
+                    "language": "css",
+                    "code": ".my-cool-element {\n     @s.transition(fast);\n}"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name           transition\n* @as              @s.transition\n* @namespace      node.mixin.transition\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin generate all the needed css to apply a transition setted in\n* the config.theme.transition configuration stack like \"slow\", \"default\" and \"fast\"\n*\n* @param           {String}        [name='default']            The transition you want to apply\n* @return        {Css}         The generated css\n*\n* @snippet         @s.transition($1)\n*\n* @example        css\n* .my-cool-element {\n*      \\@s.transition(fast);\n* }\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.transition.transition"
+        }
+    ]
+}

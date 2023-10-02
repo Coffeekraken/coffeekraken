@@ -1,0 +1,266 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.cursor.Cursor",
+    "name": "Cursor",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "Helpers"
+        ],
+        "slug": "/styleguide/helpers/cursor"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows you to apply a specific cursor on any HTMLElement",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.cursor",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "code": "<div class=\"s-flex:wrap s-gap:20\">\n  <div class=\"s-cursor:auto s-flex:center s-width:20 s-radius s-ratio:16-9\">\nauto\n  </div>\n\n  <div class=\"s-cursor:default s-flex:center s-width:20 s-radius s-ratio:16-9\">\ndefault\n  </div>\n\n  <div class=\"s-cursor:none s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnone\n  </div>\n\n  <div class=\"s-cursor:context-menu s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncontext-menu\n  </div>\n\n  <div class=\"s-cursor:help s-flex:center s-width:20 s-radius s-ratio:16-9\">\nhelp\n  </div>\n\n  <div class=\"s-cursor:pointer s-flex:center s-width:20 s-radius s-ratio:16-9\">\npointer\n  </div>\n\n  <div class=\"s-cursor:progress s-flex:center s-width:20 s-radius s-ratio:16-9\">\nprogress\n  </div>\n\n  <div class=\"s-cursor:wait s-flex:center s-width:20 s-radius s-ratio:16-9\">\nwait\n  </div>\n\n  <div class=\"s-cursor:cell s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncell\n  </div>\n\n  <div class=\"s-cursor:crosshair s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncrosshair\n  </div>\n\n  <div class=\"s-cursor:text s-flex:center s-width:20 s-radius s-ratio:16-9\">\ntext\n  </div>\n\n  <div class=\"s-cursor:vertical-text s-flex:center s-width:20 s-radius s-ratio:16-9\">\nvertical-text\n  </div>\n\n  <div class=\"s-cursor:alias s-flex:center s-width:20 s-radius s-ratio:16-9\">\nalias\n  </div>\n\n  <div class=\"s-cursor:copy s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncopy\n  </div>\n\n  <div class=\"s-cursor:move s-flex:center s-width:20 s-radius s-ratio:16-9\">\nmove\n  </div>\n\n  <div class=\"s-cursor:no-drop s-flex:center s-width:20 s-radius s-ratio:16-9\">\nno-drop\n  </div>\n\n  <div class=\"s-cursor:not-allowed s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnot-allowed\n  </div>\n\n  <div class=\"s-cursor:e-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\ne-resize\n  </div>\n\n  <div class=\"s-cursor:n-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nn-resize\n  </div>\n\n  <div class=\"s-cursor:ne-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nne-resize\n  </div>\n\n  <div class=\"s-cursor:nw-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnw-resize\n  </div>\n\n  <div class=\"s-cursor:s-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\ns-resize\n  </div>\n\n  <div class=\"s-cursor:se-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nse-resize\n  </div>\n\n  <div class=\"s-cursor:sw-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nsw-resize\n  </div>\n\n  <div class=\"s-cursor:w-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nw-resize\n  </div>\n\n  <div class=\"s-cursor:ew-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\new-resize\n  </div>\n\n  <div class=\"s-cursor:ns-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nns-resize\n  </div>\n\n  <div class=\"s-cursor:nesw-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnesw-resize\n  </div>\n\n  <div class=\"s-cursor:nwse-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnwse-resize\n  </div>\n\n  <div class=\"s-cursor:col-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncol-resize\n  </div>\n\n  <div class=\"s-cursor:row-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nrow-resize\n  </div>\n\n  <div class=\"s-cursor:all-scroll s-flex:center s-width:20 s-radius s-ratio:16-9\">\nall-scroll\n  </div>\n\n  <div class=\"s-cursor:zoom-in s-flex:center s-width:20 s-radius s-ratio:16-9\">\nzoom-in\n  </div>\n\n  <div class=\"s-cursor:zoom-out s-flex:center s-width:20 s-radius s-ratio:16-9\">\nzoom-out\n  </div>\n\n  <div class=\"s-cursor:grab s-flex:center s-width:20 s-radius s-ratio:16-9\">\ngrab\n  </div>\n\n  <div class=\"s-cursor:grabbing s-flex:center s-width:20 s-radius s-ratio:16-9\">\ngrabbing\n  </div>\n\n</div>"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.css",
+    "extension": "css",
+    "relPath": "dist/css/index.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Cursor",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.cursor",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "Helpers"
+                ],
+                "slug": "/styleguide/helpers/cursor"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows you to apply a specific cursor on any HTMLElement",
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.cursor.classes;"
+                }
+            ],
+            "cssClass": {
+                "s-cursor-auto": {
+                    "name": "s-cursor:auto",
+                    "description": "Apply the auto cursor"
+                },
+                "s-cursor-default": {
+                    "name": "s-cursor:default",
+                    "description": "Apply the default cursor"
+                },
+                "s-cursor-none": {
+                    "name": "s-cursor:none",
+                    "description": "Apply the none cursor"
+                },
+                "s-cursor-context-menu": {
+                    "name": "s-cursor:context-menu",
+                    "description": "Apply the context-menu cursor"
+                },
+                "s-cursor-help": {
+                    "name": "s-cursor:help",
+                    "description": "Apply the help cursor"
+                },
+                "s-cursor-pointer": {
+                    "name": "s-cursor:pointer",
+                    "description": "Apply the pointer cursor"
+                },
+                "s-cursor-progress": {
+                    "name": "s-cursor:progress",
+                    "description": "Apply the progress cursor"
+                },
+                "s-cursor-wait": {
+                    "name": "s-cursor:wait",
+                    "description": "Apply the wait cursor"
+                },
+                "s-cursor-cell": {
+                    "name": "s-cursor:cell",
+                    "description": "Apply the cell cursor"
+                },
+                "s-cursor-crosshair": {
+                    "name": "s-cursor:crosshair",
+                    "description": "Apply the crosshair cursor"
+                },
+                "s-cursor-text": {
+                    "name": "s-cursor:text",
+                    "description": "Apply the text cursor"
+                },
+                "s-cursor-vertical-text": {
+                    "name": "s-cursor:vertical-text",
+                    "description": "Apply the vertical-text cursor"
+                },
+                "s-cursor-alias": {
+                    "name": "s-cursor:alias",
+                    "description": "Apply the alias cursor"
+                },
+                "s-cursor-copy": {
+                    "name": "s-cursor:copy",
+                    "description": "Apply the copy cursor"
+                },
+                "s-cursor-move": {
+                    "name": "s-cursor:move",
+                    "description": "Apply the move cursor"
+                },
+                "s-cursor-no-drop": {
+                    "name": "s-cursor:no-drop",
+                    "description": "Apply the no-drop cursor"
+                },
+                "s-cursor-not-allowed": {
+                    "name": "s-cursor:not-allowed",
+                    "description": "Apply the not-allowed cursor"
+                },
+                "s-cursor-e-resize": {
+                    "name": "s-cursor:e-resize",
+                    "description": "Apply the e-resize cursor"
+                },
+                "s-cursor-n-resize": {
+                    "name": "s-cursor:n-resize",
+                    "description": "Apply the n-resize cursor"
+                },
+                "s-cursor-ne-resize": {
+                    "name": "s-cursor:ne-resize",
+                    "description": "Apply the ne-resize cursor"
+                },
+                "s-cursor-nw-resize": {
+                    "name": "s-cursor:nw-resize",
+                    "description": "Apply the nw-resize cursor"
+                },
+                "s-cursor-s-resize": {
+                    "name": "s-cursor:s-resize",
+                    "description": "Apply the s-resize cursor"
+                },
+                "s-cursor-se-resize": {
+                    "name": "s-cursor:se-resize",
+                    "description": "Apply the se-resize cursor"
+                },
+                "s-cursor-sw-resize": {
+                    "name": "s-cursor:sw-resize",
+                    "description": "Apply the sw-resize cursor"
+                },
+                "s-cursor-w-resize": {
+                    "name": "s-cursor:w-resize",
+                    "description": "Apply the w-resize cursor"
+                },
+                "s-cursor-ew-resize": {
+                    "name": "s-cursor:ew-resize",
+                    "description": "Apply the ew-resize cursor"
+                },
+                "s-cursor-ns-resize": {
+                    "name": "s-cursor:ns-resize",
+                    "description": "Apply the ns-resize cursor"
+                },
+                "s-cursor-nesw-resize": {
+                    "name": "s-cursor:nesw-resize",
+                    "description": "Apply the nesw-resize cursor"
+                },
+                "s-cursor-nwse-resize": {
+                    "name": "s-cursor:nwse-resize",
+                    "description": "Apply the nwse-resize cursor"
+                },
+                "s-cursor-col-resize": {
+                    "name": "s-cursor:col-resize",
+                    "description": "Apply the col-resize cursor"
+                },
+                "s-cursor-row-resize": {
+                    "name": "s-cursor:row-resize",
+                    "description": "Apply the row-resize cursor"
+                },
+                "s-cursor-all-scroll": {
+                    "name": "s-cursor:all-scroll",
+                    "description": "Apply the all-scroll cursor"
+                },
+                "s-cursor-zoom-in": {
+                    "name": "s-cursor:zoom-in",
+                    "description": "Apply the zoom-in cursor"
+                },
+                "s-cursor-zoom-out": {
+                    "name": "s-cursor:zoom-out",
+                    "description": "Apply the zoom-out cursor"
+                },
+                "s-cursor-grab": {
+                    "name": "s-cursor:grab",
+                    "description": "Apply the grab cursor"
+                },
+                "s-cursor-grabbing": {
+                    "name": "s-cursor:grabbing",
+                    "description": "Apply the grabbing cursor"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "code": "<div class=\"s-flex:wrap s-gap:20\">\n  <div class=\"s-cursor:auto s-flex:center s-width:20 s-radius s-ratio:16-9\">\nauto\n  </div>\n\n  <div class=\"s-cursor:default s-flex:center s-width:20 s-radius s-ratio:16-9\">\ndefault\n  </div>\n\n  <div class=\"s-cursor:none s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnone\n  </div>\n\n  <div class=\"s-cursor:context-menu s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncontext-menu\n  </div>\n\n  <div class=\"s-cursor:help s-flex:center s-width:20 s-radius s-ratio:16-9\">\nhelp\n  </div>\n\n  <div class=\"s-cursor:pointer s-flex:center s-width:20 s-radius s-ratio:16-9\">\npointer\n  </div>\n\n  <div class=\"s-cursor:progress s-flex:center s-width:20 s-radius s-ratio:16-9\">\nprogress\n  </div>\n\n  <div class=\"s-cursor:wait s-flex:center s-width:20 s-radius s-ratio:16-9\">\nwait\n  </div>\n\n  <div class=\"s-cursor:cell s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncell\n  </div>\n\n  <div class=\"s-cursor:crosshair s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncrosshair\n  </div>\n\n  <div class=\"s-cursor:text s-flex:center s-width:20 s-radius s-ratio:16-9\">\ntext\n  </div>\n\n  <div class=\"s-cursor:vertical-text s-flex:center s-width:20 s-radius s-ratio:16-9\">\nvertical-text\n  </div>\n\n  <div class=\"s-cursor:alias s-flex:center s-width:20 s-radius s-ratio:16-9\">\nalias\n  </div>\n\n  <div class=\"s-cursor:copy s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncopy\n  </div>\n\n  <div class=\"s-cursor:move s-flex:center s-width:20 s-radius s-ratio:16-9\">\nmove\n  </div>\n\n  <div class=\"s-cursor:no-drop s-flex:center s-width:20 s-radius s-ratio:16-9\">\nno-drop\n  </div>\n\n  <div class=\"s-cursor:not-allowed s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnot-allowed\n  </div>\n\n  <div class=\"s-cursor:e-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\ne-resize\n  </div>\n\n  <div class=\"s-cursor:n-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nn-resize\n  </div>\n\n  <div class=\"s-cursor:ne-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nne-resize\n  </div>\n\n  <div class=\"s-cursor:nw-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnw-resize\n  </div>\n\n  <div class=\"s-cursor:s-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\ns-resize\n  </div>\n\n  <div class=\"s-cursor:se-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nse-resize\n  </div>\n\n  <div class=\"s-cursor:sw-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nsw-resize\n  </div>\n\n  <div class=\"s-cursor:w-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nw-resize\n  </div>\n\n  <div class=\"s-cursor:ew-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\new-resize\n  </div>\n\n  <div class=\"s-cursor:ns-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nns-resize\n  </div>\n\n  <div class=\"s-cursor:nesw-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnesw-resize\n  </div>\n\n  <div class=\"s-cursor:nwse-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnwse-resize\n  </div>\n\n  <div class=\"s-cursor:col-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncol-resize\n  </div>\n\n  <div class=\"s-cursor:row-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nrow-resize\n  </div>\n\n  <div class=\"s-cursor:all-scroll s-flex:center s-width:20 s-radius s-ratio:16-9\">\nall-scroll\n  </div>\n\n  <div class=\"s-cursor:zoom-in s-flex:center s-width:20 s-radius s-ratio:16-9\">\nzoom-in\n  </div>\n\n  <div class=\"s-cursor:zoom-out s-flex:center s-width:20 s-radius s-ratio:16-9\">\nzoom-out\n  </div>\n\n  <div class=\"s-cursor:grab s-flex:center s-width:20 s-radius s-ratio:16-9\">\ngrab\n  </div>\n\n  <div class=\"s-cursor:grabbing s-flex:center s-width:20 s-radius s-ratio:16-9\">\ngrabbing\n  </div>\n\n</div>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Cursor\n* @namespace          sugar.style.helpers.cursor\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/cursor\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply a specific cursor on any HTMLElement\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.cursor.classes;\n*\n* @cssClass     s-cursor:auto            Apply the auto cursor\n* @cssClass     s-cursor:default            Apply the default cursor\n* @cssClass     s-cursor:none            Apply the none cursor\n* @cssClass     s-cursor:context-menu            Apply the context-menu cursor\n* @cssClass     s-cursor:help            Apply the help cursor\n* @cssClass     s-cursor:pointer            Apply the pointer cursor\n* @cssClass     s-cursor:progress            Apply the progress cursor\n* @cssClass     s-cursor:wait            Apply the wait cursor\n* @cssClass     s-cursor:cell            Apply the cell cursor\n* @cssClass     s-cursor:crosshair            Apply the crosshair cursor\n* @cssClass     s-cursor:text            Apply the text cursor\n* @cssClass     s-cursor:vertical-text            Apply the vertical-text cursor\n* @cssClass     s-cursor:alias            Apply the alias cursor\n* @cssClass     s-cursor:copy            Apply the copy cursor\n* @cssClass     s-cursor:move            Apply the move cursor\n* @cssClass     s-cursor:no-drop            Apply the no-drop cursor\n* @cssClass     s-cursor:not-allowed            Apply the not-allowed cursor\n* @cssClass     s-cursor:e-resize            Apply the e-resize cursor\n* @cssClass     s-cursor:n-resize            Apply the n-resize cursor\n* @cssClass     s-cursor:ne-resize            Apply the ne-resize cursor\n* @cssClass     s-cursor:nw-resize            Apply the nw-resize cursor\n* @cssClass     s-cursor:s-resize            Apply the s-resize cursor\n* @cssClass     s-cursor:se-resize            Apply the se-resize cursor\n* @cssClass     s-cursor:sw-resize            Apply the sw-resize cursor\n* @cssClass     s-cursor:w-resize            Apply the w-resize cursor\n* @cssClass     s-cursor:ew-resize            Apply the ew-resize cursor\n* @cssClass     s-cursor:ns-resize            Apply the ns-resize cursor\n* @cssClass     s-cursor:nesw-resize            Apply the nesw-resize cursor\n* @cssClass     s-cursor:nwse-resize            Apply the nwse-resize cursor\n* @cssClass     s-cursor:col-resize            Apply the col-resize cursor\n* @cssClass     s-cursor:row-resize            Apply the row-resize cursor\n* @cssClass     s-cursor:all-scroll            Apply the all-scroll cursor\n* @cssClass     s-cursor:zoom-in            Apply the zoom-in cursor\n* @cssClass     s-cursor:zoom-out            Apply the zoom-out cursor\n* @cssClass     s-cursor:grab            Apply the grab cursor\n* @cssClass     s-cursor:grabbing            Apply the grabbing cursor\n*\n* @example         html\n* <div class=\"s-flex:wrap s-gap:20\">\n*   <div class=\"s-cursor:auto s-flex:center s-width:20 s-radius s-ratio:16-9\">\nauto\n*   </div>\n*\n*   <div class=\"s-cursor:default s-flex:center s-width:20 s-radius s-ratio:16-9\">\ndefault\n*   </div>\n*\n*   <div class=\"s-cursor:none s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnone\n*   </div>\n*\n*   <div class=\"s-cursor:context-menu s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncontext-menu\n*   </div>\n*\n*   <div class=\"s-cursor:help s-flex:center s-width:20 s-radius s-ratio:16-9\">\nhelp\n*   </div>\n*\n*   <div class=\"s-cursor:pointer s-flex:center s-width:20 s-radius s-ratio:16-9\">\npointer\n*   </div>\n*\n*   <div class=\"s-cursor:progress s-flex:center s-width:20 s-radius s-ratio:16-9\">\nprogress\n*   </div>\n*\n*   <div class=\"s-cursor:wait s-flex:center s-width:20 s-radius s-ratio:16-9\">\nwait\n*   </div>\n*\n*   <div class=\"s-cursor:cell s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncell\n*   </div>\n*\n*   <div class=\"s-cursor:crosshair s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncrosshair\n*   </div>\n*\n*   <div class=\"s-cursor:text s-flex:center s-width:20 s-radius s-ratio:16-9\">\ntext\n*   </div>\n*\n*   <div class=\"s-cursor:vertical-text s-flex:center s-width:20 s-radius s-ratio:16-9\">\nvertical-text\n*   </div>\n*\n*   <div class=\"s-cursor:alias s-flex:center s-width:20 s-radius s-ratio:16-9\">\nalias\n*   </div>\n*\n*   <div class=\"s-cursor:copy s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncopy\n*   </div>\n*\n*   <div class=\"s-cursor:move s-flex:center s-width:20 s-radius s-ratio:16-9\">\nmove\n*   </div>\n*\n*   <div class=\"s-cursor:no-drop s-flex:center s-width:20 s-radius s-ratio:16-9\">\nno-drop\n*   </div>\n*\n*   <div class=\"s-cursor:not-allowed s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnot-allowed\n*   </div>\n*\n*   <div class=\"s-cursor:e-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\ne-resize\n*   </div>\n*\n*   <div class=\"s-cursor:n-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nn-resize\n*   </div>\n*\n*   <div class=\"s-cursor:ne-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nne-resize\n*   </div>\n*\n*   <div class=\"s-cursor:nw-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnw-resize\n*   </div>\n*\n*   <div class=\"s-cursor:s-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\ns-resize\n*   </div>\n*\n*   <div class=\"s-cursor:se-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nse-resize\n*   </div>\n*\n*   <div class=\"s-cursor:sw-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nsw-resize\n*   </div>\n*\n*   <div class=\"s-cursor:w-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nw-resize\n*   </div>\n*\n*   <div class=\"s-cursor:ew-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\new-resize\n*   </div>\n*\n*   <div class=\"s-cursor:ns-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nns-resize\n*   </div>\n*\n*   <div class=\"s-cursor:nesw-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnesw-resize\n*   </div>\n*\n*   <div class=\"s-cursor:nwse-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnwse-resize\n*   </div>\n*\n*   <div class=\"s-cursor:col-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncol-resize\n*   </div>\n*\n*   <div class=\"s-cursor:row-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nrow-resize\n*   </div>\n*\n*   <div class=\"s-cursor:all-scroll s-flex:center s-width:20 s-radius s-ratio:16-9\">\nall-scroll\n*   </div>\n*\n*   <div class=\"s-cursor:zoom-in s-flex:center s-width:20 s-radius s-ratio:16-9\">\nzoom-in\n*   </div>\n*\n*   <div class=\"s-cursor:zoom-out s-flex:center s-width:20 s-radius s-ratio:16-9\">\nzoom-out\n*   </div>\n*\n*   <div class=\"s-cursor:grab s-flex:center s-width:20 s-radius s-ratio:16-9\">\ngrab\n*   </div>\n*\n*   <div class=\"s-cursor:grabbing s-flex:center s-width:20 s-radius s-ratio:16-9\">\ngrabbing\n*   </div>\n*\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.cursor.Cursor"
+        }
+    ]
+}

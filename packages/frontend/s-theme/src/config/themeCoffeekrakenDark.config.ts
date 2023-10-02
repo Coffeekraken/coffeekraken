@@ -22,9 +22,9 @@ export default function (api) {
         get color() {
             return {
                 ...api.config.themeColor,
-                base: '#90816F',
-                accent: '#CAAC72',
-                complementary: '#A0917F',
+                main: '#818898',
+                accent: '#F7C33F',
+                complementary: '#F9656E',
             };
         },
 

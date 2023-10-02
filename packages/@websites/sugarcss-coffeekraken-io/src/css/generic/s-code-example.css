@@ -1,26 +1,13 @@
 .s-code-example {
-    &_code,
-    code {
-        /* background: none !important; */
-        background: s.color(base, border, --alpha 0.02) !important;
-    }
-
     &_content {
-        border: 1px solid s.color(base, border, --alpha 0.2);
-    }
-
-    &_tab {
-        background: none !important;
-        color: s.color(base) !important;
+        max-height: 60vh !important;
+        overflow-y: auto;
+        @s.scrollbar;
     }
 
     &_more-bar {
         &:before {
             display: none;
         }
-    }
-
-    .s-clipboard-copy .icon-copy * {
-        fill: s.color(base);
     }
 }

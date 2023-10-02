@@ -96,19 +96,22 @@ export default class SSitemapBuilderFileSource extends __SSitemapBuilderSource {
             for (let [key, file] of Object.entries(files)) {
                 // @ts-ignore
                 let filePath = file.path,
-                    itemsCount = 0;
+                    itemsCount = 0,
+                    buildedFile;
 
                 if (filePath.match(/\.ts$/)) {
-                    const buildedFile =
-                        await __STypescriptBuilder.buildTemporary(filePath);
+                    buildedFile = await __STypescriptBuilder.buildTemporary(
+                        filePath,
+                    );
                     filePath = buildedFile.path;
-                    setTimeout(() => {
-                        buildedFile.remove();
-                    }, 500);
                 }
 
                 // @ts-ignore
                 const fn = (await import(filePath)).default;
+
+                // remove the temp file
+                buildedFile.remove();
+
                 if (typeof fn === 'function') {
                     const fileItems = await fn(params);
                     itemsCount = fileItems.length;

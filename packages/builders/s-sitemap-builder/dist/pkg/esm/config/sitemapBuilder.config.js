@@ -50,7 +50,7 @@ export default (api) => {
                      * @name            glob
                      * @namespace       config.sitemapBuilder.sources.file.settings
                      * @type            String[]
-                     * @default         ['** /*.sitemap.js']
+                     * @default         ['** /*.sitemap.{js,ts}']
                      *
                      * Specify the glob(s) to use to find the sitemap files
                      *

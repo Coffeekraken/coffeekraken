@@ -26,7 +26,7 @@ export default (api) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            lighten: 15,
+            lighten: 10,
 
             color: {
                 main: {
@@ -104,17 +104,17 @@ export default (api) => {
         },
         ui: {
             /**
-             * @name          darken
+             * @name          lighten
              * @namespace     config.themeShadesDark.ui
              * @type          Number
-             * @default      29
+             * @default      10
              *
              * Specify the darken value for the "ui" color variant
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            darken: 28,
+            lighten: 10,
         },
         border: {
             /**

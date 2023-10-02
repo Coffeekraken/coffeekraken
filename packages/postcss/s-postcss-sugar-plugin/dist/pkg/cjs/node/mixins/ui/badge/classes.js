@@ -94,7 +94,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         ${finalParams.lnfs
         .map((lnf) => {
         return ` * @example        html       ${lnf}
-            * <div class="s-flex s-gap:20">
+            * <div class="s-flex:align-center:wrap s-gap:20">
             *   <a class="s-badge${finalParams.defaultLnf === lnf ? '' : `:${lnf}`}">Say hello!</a>
             *   <a class="s-badge${finalParams.defaultLnf === lnf ? '' : `:${lnf}`} s-color:accent">Say hello!</a>
             *   <a class="s-badge${finalParams.defaultLnf === lnf ? '' : `:${lnf}`} s-color:complementary">Say hello!</a>
@@ -105,14 +105,14 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         .join('\n')}
         * 
         * @example          html        Shapes
-        * <div class="s-flex s-gap:20">
+        * <div class="s-flex:align-center:wrap s-gap:20">
         *   <a class="s-badge">Say hello!</a>
         *   <a class="s-badge s-shape:pill">Say hello!</a>
         *   <a class="s-badge s-shape:square">Say hello!</a>
         * </div>
         * 
         * @example        html       Scales
-        * <div class="s-flex s-gap:20">
+        * <div class="s-flex:align-center:wrap s-gap:20">
         *   <a class="s-badge s-scale:05">Say hello!</a>
         *   <a class="s-badge s-scale:1">Say hello!</a>
         *   <a class="s-badge s-scale:12">Say hello!</a>

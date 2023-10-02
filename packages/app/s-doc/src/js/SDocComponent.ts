@@ -387,17 +387,12 @@ export default class SDocComponent extends __SLitComponent {
             <header class="${this.utils.cls('_metas')}">
                 ${itemObj.name
                     ? html`
-                          <h1
-                              class="${this.utils.cls(
-                                  '_doc-title',
-                                  's-typo-h1 s-mbe-30',
-                              )}"
-                          >
+                          <h1 class="${this.utils.cls('_title', 's-mbe-30')}">
                               ${itemObj.as ?? itemObj.name}
                               ${itemObj.status
                                   ? html` <span
                                         class="${this.utils.cls(
-                                            '_doc-status',
+                                            '_status',
                                             `s-badge s-color:${
                                                 itemObj.status === 'stable'
                                                     ? 'success'
@@ -422,10 +417,9 @@ export default class SDocComponent extends __SLitComponent {
                     : ''}
                 ${itemObj.description
                     ? html`
-                <p class="${this.utils.cls(
-                    '_doc-description',
-                    's-typo-lead s-mbe-30',
-                )}">${itemObj.description}</h1>
+                <p class="${this.utils.cls('_description', 's-mbe-30')}">${
+                          itemObj.description
+                      }</h1>
             `
                     : ''}
             </header>
@@ -451,15 +445,82 @@ export default class SDocComponent extends __SLitComponent {
         `;
     }
 
+    _renderItemCssClasses(itemObj: any): any {
+        return html`
+            <div class="${this.utils.cls('_css-classes')}">
+                <h2
+                    class="${this.utils.cls(
+                        '_section-title _classes-title',
+                        's-mbe-30',
+                    )}"
+                >
+                    ${this.props.i18n.cssClassesTitle}
+                </h2>
+            </div>
+            ${Object.keys(itemObj.cssClasses).map((cls) => {
+                const clsObj = itemObj.cssClasses[cls];
+                return html`
+                    <div class="${this.utils.cls('_classes')}">
+                        <div class="${this.utils.cls('_classes-metas')}">
+                            <div class="${this.utils.cls('_classes-name')}">
+                                ${clsObj.name}
+                            </div>
+                        </div>
+                        <p class="${this.utils.cls('_classes-description')}">
+                            ${clsObj.description}
+                        </p>
+                    </div>
+                `;
+            })}
+        `;
+    }
+
+    _renderItemParams(itemObj: any): any {
+        return html`
+            <div class="${this.utils.cls('_params')}">
+                <h2 class="${this.utils.cls('_section-title', 's-mbe-30')}">
+                    ${this.props.i18n.paramsTitle}
+                </h2>
+                ${Object.keys(itemObj.param).map((param) => {
+                    const paramObj = itemObj.param[param];
+                    return html`
+                        <div class="${this.utils.cls('_param')}">
+                            <div class="${this.utils.cls('_param-metas')}">
+                                <div class="${this.utils.cls('_param-name')}">
+                                    ${paramObj.name}
+                                    ${paramObj.required
+                                        ? html`<span
+                                              class="${this.utils.cls(
+                                                  '_required',
+                                                  's-required',
+                                              )}"
+                                          ></span>`
+                                        : ''}
+                                </div>
+                                ${this._renderItemDefault(paramObj)}
+                                <div class="${this.utils.cls('_param-type')}">
+                                    ${paramObj.type?.raw ?? paramObj.type}
+                                </div>
+                            </div>
+                            <p class="${this.utils.cls('_param-description')}">
+                                ${paramObj.description}
+                            </p>
+                        </div>
+                    `;
+                })}
+            </div>
+        `;
+    }
+
     _renderItemExamples(itemObj: any): any {
         return html`
             ${itemObj.example
                 ? html`
-                      <div class="${this.utils.cls('_examples')}">
+                      <div class="${this.utils.cls('_section _examples')}">
                           <h2
                               class="${this.utils.cls(
                                   '_section-title',
-                                  's-typo-h2 s-mbe-30',
+                                  's-mbe-30',
                               )}"
                           >
                               ${this.props.i18n.examplesTitle}
@@ -475,7 +536,7 @@ export default class SDocComponent extends __SLitComponent {
                                       <h3
                                           class="${this.utils.cls(
                                               '_example-title',
-                                              's-typo-h3 s-mbe-50',
+                                              's-mbe-50',
                                           )}"
                                       >
                                           ${__upperFirst(example.title ?? '')}
@@ -515,6 +576,8 @@ export default class SDocComponent extends __SLitComponent {
             `;
         }
 
+        console.log('IT', itemObj);
+
         if (itemObj.type.raw.toLowerCase() === 'config') {
             return html`
                 ${this._renderItemMetas(itemObj)}
@@ -531,6 +594,9 @@ export default class SDocComponent extends __SLitComponent {
             `;
         }
 
+        // cssClasses
+        itemObj.cssClasses = itemObj.docblocks[0]?.cssClass;
+
         // default item
         return html`
             <div
@@ -539,58 +605,8 @@ export default class SDocComponent extends __SLitComponent {
             >
                 ${this._renderItemMetas(itemObj)}
                 ${this._renderItemExamples(itemObj)}
-                ${itemObj.param
-                    ? html`
-                          <div class="${this.utils.cls('_params')}">
-                              <h2
-                                  class="${this.utils.cls(
-                                      '_section-title',
-                                      's-typo-h2 s-mbe-30',
-                                  )}"
-                              >
-                                  ${this.props.i18n.paramsTitle}
-                              </h2>
-                              ${Object.keys(itemObj.param).map((param) => {
-                                  const paramObj = itemObj.param[param];
-                                  return html`
-                                      <div class="${this.utils.cls('_param')}">
-                                          <div
-                                              class="${this.utils.cls(
-                                                  '_param-metas',
-                                              )}"
-                                          >
-                                              <div
-                                                  class="${this.utils.cls(
-                                                      '_param-name',
-                                                  )}"
-                                              >
-                                                  ${paramObj.name}
-                                              </div>
-                                              ${this._renderItemDefault(
-                                                  paramObj,
-                                              )}
-                                              <div
-                                                  class="${this.utils.cls(
-                                                      '_param-type',
-                                                  )}"
-                                              >
-                                                  ${paramObj.type?.raw ??
-                                                  paramObj.type}
-                                              </div>
-                                          </div>
-                                          <p
-                                              class="${this.utils.cls(
-                                                  '_param-description',
-                                              )}"
-                                          >
-                                              ${paramObj.description}
-                                          </p>
-                                      </div>
-                                  `;
-                              })}
-                          </div>
-                      `
-                    : ''}
+                ${itemObj.param ? this._renderItemParams(itemObj) : ''}
+                ${itemObj.cssClasses ? this._renderItemCssClasses(itemObj) : ''}
             </div>
         `;
     }

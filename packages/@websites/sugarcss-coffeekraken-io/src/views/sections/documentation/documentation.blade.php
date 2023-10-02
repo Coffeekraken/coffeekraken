@@ -5,11 +5,11 @@
         <div class="_layout s-mbe:50">
             
             <div>
-                <h2 class="s-typo:h3 s-mbe:30 s-tc:complementary">
+                <h2 class="s-typo:h3 s-mbe:30 s-tc:accent">
                     Documentation
                 </h2>
                 <p class="s-typo:h5 s-mbe:30">
-                    Here all the available <span class="s-tc:accent">mixins</span>, <span class="s-tc:complementary">functions</span> and configurations
+                    Here all the available <span class="s-tc:complementary">mixins</span>, <span class="s-tc:accent">functions</span> and configurations
                 </p>
             </div>
 

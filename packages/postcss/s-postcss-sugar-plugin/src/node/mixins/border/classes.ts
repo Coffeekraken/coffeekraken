@@ -87,16 +87,18 @@ export default function ({
             .join('\n')}
         *
         * @example        html          Border radius
+        * <div class="s-flex:wrap s-gap:20">
         ${radiusesKeys
             .map((radiusName) => {
                 if (radiusName === 'default') return '';
                 return `
-              *   <div class="s-radius:${radiusName} s-display:inline-block s-width:20 s-bg:main s-pbs:30 s-mie:30 s-mbe:30 s-text:center s-ratio:1">
+              *   <div class="s-radius:${radiusName} s-width:20 s-bg:main s-flex:center s-ratio:1">
               *     ${radiusName}
               *   </div> 
             `;
             })
             .join('\n')}
+        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -124,20 +126,22 @@ export default function ({
         ${widthsKeys
             .map((widthName) => {
                 if (widthName === 'default') return '';
-                return ` * @cssClass      s-bwidth:${widthName}      Apply the border width ${widthName} to any HTMLElement`;
+                return ` * @cssClass      s-border:${widthName}      Apply the border width ${widthName} to any HTMLElement`;
             })
             .join('\n')}
         *
         * @example             html         Border width
+        * <div class="s-flex:wrap s-gap:20">
         ${widthsKeys
             .map((widthName) => {
                 if (widthName === 'default') return '';
-                return `   <div class="s-display:inline-block s-width:20 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-bcolor:accent s-bwidth:${widthName}">
+                return `   <div class="s-width:20 s-flex:center s-ratio:1 s-border:${widthName}">
               *     ${widthName}
               *   </div> 
             `;
             })
             .join('\n')}
+        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -165,19 +169,21 @@ export default function ({
         ${Object.keys(__STheme.getTheme().baseColors())
             .map((colorName) => {
                 if (colorName === 'default') return '';
-                return ` * @cssClass      s-bcolor:${colorName}      Apply the border color ${colorName} to any HTMLElement`;
+                return ` * @cssClass      s-border:${colorName}      Apply the border color ${colorName} to any HTMLElement`;
             })
             .join('\n')}
         *
         * @example             html         Border color
+        * <div class="s-flex:wrap s-gap:20">
         ${Object.keys(__STheme.getTheme().baseColors())
             .map((colorName) => {
-                return ` * <div class="s-display:inline-block s-width:20 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-bcolor:${colorName} s-bwidth:20">
+                return ` * <div class="s-width:20 s-flex:center s-ratio:1 s-border:${colorName}:20">
               *     ${colorName}
               *   </div> 
             `;
             })
             .join('\n')}
+        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -214,8 +220,8 @@ export default function ({
     });
 
     widthsKeys.forEach((widthName) => {
-        const cls = `s-bwidth:${widthName}`.replace(':default', '');
-        const clsName = `s-bwidth-${widthName}`.replace('-default', '');
+        const cls = `s-border:${widthName}`.replace(':default', '');
+        const clsName = `s-border-${widthName}`.replace('-default', '');
         vars.comment(
             () => `/**
                 * @name               ${cls}
@@ -242,8 +248,8 @@ export default function ({
     });
 
     Object.keys(__STheme.getTheme().baseColors()).forEach((colorName) => {
-        const cls = `s-bcolor:${colorName}`.replace(':default', '');
-        const clsName = `s-bcolor-${colorName}`.replace('-default', '');
+        const cls = `s-border:${colorName}`.replace(':default', '');
+        const clsName = `s-border-${colorName}`.replace('-default', '');
         vars.comment(
             () => `/**
                 * @name               ${cls}

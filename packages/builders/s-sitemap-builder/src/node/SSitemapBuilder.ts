@@ -179,7 +179,7 @@ export default class SSitemapBuilder extends __SBuilder {
                 sitemap = [...sitemap, ...(buildResultItems ?? [])];
                 console.log(
                     `<yellow>[build]</yellow> "<magenta>${sourceId}</magenta>" sitemap builded with <magenta>${
-                        buildResult.length
+                        buildResult.items.length
                     }</magenta> item(s) <green>successfully</green> in <yellow>${
                         sourceDuration.end().formatedDuration
                     }</yellow>`,

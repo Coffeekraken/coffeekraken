@@ -62,6 +62,7 @@ export default function ({
         `@s.theme.apply(${finalParams.variant}, ${finalParams.theme});`,
         '@s.font.faces;',
         '@s.selection;',
+        `body { @s.color(main); }`,
         // '@s.autoload;', // Check if it's a good idea or not...
         // '@s.lnf.base;', called in the "@s.theme" mixin
     ];

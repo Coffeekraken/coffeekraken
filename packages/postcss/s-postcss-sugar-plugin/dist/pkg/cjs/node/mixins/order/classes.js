@@ -63,9 +63,9 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * 
         * @example        html          Simple order
         * <div class="s-flex s-gap:40">
-        *   <div class="s-order:3 s-p:30 s-ratio:16-9 s-grow s-bg:main-surface s-radius">1</div>
-        *   <div class="s-order:1 s-p:30 s-ratio:16-9 s-grow s-bg:main-surface s-radius">2</div>
-        *   <div class="s-order:2 s-p:30 s-ratio:16-9 s-grow s-bg:main-surface s-radius">3</div>
+        *   <div class="s-order:3 s-p:30 s-ratio:16-9 s-grow s-bg:main s-radius">1</div>
+        *   <div class="s-order:1 s-p:30 s-ratio:16-9 s-grow s-bg:main s-radius">2</div>
+        *   <div class="s-order:2 s-p:30 s-ratio:16-9 s-grow s-bg:main s-radius">3</div>
         * </div>
         * 
         * @since      2.0.0

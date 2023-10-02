@@ -227,6 +227,7 @@ export default function ({
             `
             @s.format.text {
                 blockquote {
+                    @s.color(accent);
                     @s.ui.blockquote($scope: '${finalParams.scope.join(',')}');
                 } 
             }

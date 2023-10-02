@@ -239,7 +239,7 @@ export default (api) => {
                 fontSize: 30,
                 lineHeight: 1.8,
                 maxWidth: '55ch',
-                color: ['main', 'text', '--alpha 0.5'],
+                color: ['main', 'text', '--alpha 0.7'],
             },
             rhythmVertical: {
                 marginBottom: 40,

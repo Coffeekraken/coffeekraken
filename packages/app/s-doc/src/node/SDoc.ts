@@ -200,7 +200,9 @@ export default class SDoc extends __SClass {
                 } else if (item) {
                     const docblock = new __SDocblock(item.path);
                     await docblock.parse();
-                    item.docblocks = docblock.toObject();
+                    item.docblocks = docblock.toObject().filter((db) => {
+                        return db.id === id;
+                    });
                 }
 
                 res.status(200);

@@ -16,19 +16,6 @@
 export default function (api) {
     return {
         /**
-         * @name            defaultColor
-         * @namespace        config.themeBase
-         * @type            String
-         * @default         main
-         *
-         * Specify which color to use by default for elements that make use of the "sugar.color(current)" color.
-         *
-         * @since           2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-         */
-        defaultColor: 'main',
-
-        /**
          * @name            color
          * @namespace        config.themeBase
          * @type            String

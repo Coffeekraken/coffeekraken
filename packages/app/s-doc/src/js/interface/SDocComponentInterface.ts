@@ -69,6 +69,9 @@ export default class SDocComponentInterface extends __SInterface {
                     paramsTitle: __i18n('Parameters', {
                         id: 's-doc.params.title',
                     }),
+                    cssClassesTitle: __i18n('CSS Classes', {
+                        id: 's-doc.cssClasses.title',
+                    }),
                     settingsTitle: __i18n('Settings', {
                         id: 's-doc.settings.title',
                     }),

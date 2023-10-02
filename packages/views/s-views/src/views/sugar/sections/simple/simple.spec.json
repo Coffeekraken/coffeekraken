@@ -5,6 +5,7 @@
     "title": "Simple section",
     "description": "Render your \"html\" or \"nodes\" inside a simple section",
     "props": {
+        "nodes": null,
         "title": {
             "type": "Text",
             "title": "Title",
@@ -26,43 +27,37 @@
             "type": "Object[]"
         },
         "beforeMetas": {
-            "type": "Html",
-            "widget": "node",
+            "type": "Node[]",
             "category": "zones",
             "title": "Before metas",
             "description": "The html to render before the metas (title, intro, etc..."
         },
         "afterMetas": {
-            "type": "Html",
-            "widget": "node",
+            "type": "Node[]",
             "category": "zones",
             "title": "After metas",
             "description": "The html to render after the metas (title, intro, etc...)"
         },
         "beforeContent": {
-            "type": "Html",
-            "widget": "node",
+            "type": "Node[]",
             "category": "zones",
             "title": "Before content",
             "description": "The html to render before the content"
         },
         "afterContent": {
-            "type": "Html",
-            "widget": "node",
+            "type": "Node[]",
             "category": "zones",
             "title": "After content",
             "description": "The html to render after the content"
         },
         "beforeCtas": {
-            "type": "Html",
-            "widget": "node",
+            "type": "Node[]",
             "category": "zones",
             "title": "Before ctas",
             "description": "The html to render before the ctas"
         },
         "afterCtas": {
-            "type": "Html",
-            "widget": "node",
+            "type": "Node[]",
             "category": "zones",
             "title": "After ctas",
             "description": "The html to render after the ctas"

@@ -67,6 +67,7 @@ class postcssSugarPluginColorInterface extends __SInterface {
             color: {
                 type: 'String',
                 alias: 'c',
+                required: true,
             },
             shade: {
                 type: 'String',

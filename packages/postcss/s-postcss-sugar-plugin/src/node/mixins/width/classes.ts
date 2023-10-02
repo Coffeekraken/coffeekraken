@@ -77,15 +77,18 @@ export default function ({
             return ` * @cssClass             s-width:${width}            Apply the \`${width}\` width`;
         })}
         * 
+        * @example         html        Widths
+        * <div class="s-flex:column s-gap:20">
         ${Object.keys(widthObj)
             .map((width) => {
-                return ` * @example         html        ${width}%
-                *   <div class="s-bg:main-surface s-radius:30">
-                *      <div style="overflow:hidden" class="s-width:${width} s-text:center s-bg:accent s-p:30 s-radius:30">s-width:${width}</div>
+                return ` 
+                *   <div>
+                *      <div style="overflow:hidden" class="s-width:${width} s-text:center s-bg:accent s-p:30 s-radius:30">${width}%</div>
                 *   </div>`;
             })
             .join('\n')}
-        * 
+        * </div> 
+        *
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */

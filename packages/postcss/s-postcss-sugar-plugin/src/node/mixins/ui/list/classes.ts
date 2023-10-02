@@ -119,13 +119,9 @@ export default function ({
         * 
         ${finalParams.lnfs
             .map((lnf) => {
-                return ` * @example        html       ${lnf} lnf ${
-                    params.defaultLnf === lnf
-                        ? '<span class="s-badge:outline s-scale:05">default</span>'
-                        : ''
-                }
+                return ` * @example        html       ${lnf}
             *   <ul class="s-list:${lnf} ${
-                    lnf === 'ol' ? 's-color:accent s-scale:15' : ''
+                    lnf === 'ol' ? 's-color:accent' : ''
                 }">
             *     <li>${
                 lnf === 'icon' ? `<i class="s-icon:user"></i>` : ''

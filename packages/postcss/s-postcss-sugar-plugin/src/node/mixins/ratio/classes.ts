@@ -126,6 +126,7 @@ export default function ({
         ).code(
             `
 .s-ratio-${ratioName.replace('/', '-')} {
+    position: relative;
     aspect-ratio: ${ratioName.replace('-', '/')};
 }`,
             { type: 'CssClass' },

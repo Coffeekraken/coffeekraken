@@ -69,16 +69,16 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * 
         * @example        html          Simple flex grid
         * <div class="s-flex s-gap:40">
-        *   <div class="s-ratio:16-9 s-grow s-radius s-p:30 s-bg:main-surface">1</div>
-        *   <div class="s-ratio:16-9 s-grow s-radius s-p:30 s-bg:main-surface">2</div>
-        *   <div class="s-ratio:16-9 s-grow s-radius s-p:30 s-bg:main-surface">3</div>
+        *   <div class="s-ratio:16-9 s-grow s-radius s-p:30 s-bg:main">1</div>
+        *   <div class="s-ratio:16-9 s-grow s-radius s-p:30 s-bg:main">2</div>
+        *   <div class="s-ratio:16-9 s-grow s-radius s-p:30 s-bg:main">3</div>
         * </div>
         * 
         * @example        html          Simple grid
         * <div class="s-grid:3 s-gap:40">
-        *   <div class="s-ratio:16-9 s-bg:main-surface s-radius s-p:30">1</div>
-        *   <div class="s-ratio:16-9 s-bg:main-surface s-radius s-p:30">2</div>
-        *   <div class="s-ratio:16-9 s-bg:main-surface s-radius s-p:30">3</div>
+        *   <div class="s-ratio:16-9 s-bg:main s-radius s-p:30">1</div>
+        *   <div class="s-ratio:16-9 s-bg:main s-radius s-p:30">2</div>
+        *   <div class="s-ratio:16-9 s-bg:main s-radius s-p:30">3</div>
         * </div>
         * 
         * @since      2.0.0

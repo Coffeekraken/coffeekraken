@@ -216,6 +216,10 @@ class SSpecs
                 ]);
                 $specJson->{$key} = $specs;
             }
+
+            if (!$value) {
+                unset($specJson->{$key});
+            }
         }
 
         return $specJson;

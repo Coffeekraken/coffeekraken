@@ -7,11 +7,11 @@
             <div class="_layout s-mbe:50">
                 
                 <div>
-                    <h2 class="s-typo:h3 s-mbe:30 s-tc:complementary">
+                    <h2 class="s-typo:h3 s-mbe:30 s-tc:accent">
                         Examples
                     </h2>
                     <p class="s-typo:h5 s-mbe:30">
-                        Here are some examples to <span class="s-tc:accent">showcase the power</span> of our sugar css plugin.
+                        Here are some examples to <span class="s-tc:complementary">showcase the power</span> of our sugar css plugin.
                     </p>
                 </div>
 

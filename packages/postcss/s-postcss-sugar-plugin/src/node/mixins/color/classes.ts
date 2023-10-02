@@ -1,6 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
-import __faker from 'faker';
 
 class postcssSugarPluginClassesMixinInterface extends __SInterface {
     static get _definition() {
@@ -75,16 +74,14 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
         * @example        html          Text color
         ${Object.keys(__STheme.getTheme().baseColors())
             .map((colorName) => {
-                return ` * <h4 class="s-typo:h4 s-mbe:20">${colorName}</h4>
-                    * <div class="s-tc:${colorName} s-mb:30">${__faker.name.findName()}</div>`;
+                return ` * <div class="s-tc:${colorName} s-mb:30">${colorName}</div>`;
             })
             .join('\n')}
         *
         * @example        html          Background color
         ${Object.keys(__STheme.getTheme().baseColors())
             .map((colorName) => {
-                return `  * <h4 class="s-typo:h4 s-mbe:20">${colorName}</h4>
-                    * <div class="s-bg:${colorName} s-p:10 s-mb:30 s-radius">${__faker.name.findName()}</div>`;
+                return ` * <div class="s-bg:${colorName} s-p:10 s-mb:30 s-radius">${colorName}</div>`;
             })
             .join('\n')}
         * 

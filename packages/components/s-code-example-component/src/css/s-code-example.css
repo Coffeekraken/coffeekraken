@@ -1,8 +1,15 @@
 .s-code-example {
-    display: block;
+    display: flex;
+    flex-direction: column;
     text-align: initial;
 
     @s.rhythm.vertical (ui.codeExample.rhythmVertical);
+}
+
+.s-code-example_root {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .s-code-example {
@@ -12,7 +19,7 @@
 
     &[mounted] {
         > * {
-            display: block;
+            display: flex;
         }
     }
 }
@@ -39,9 +46,12 @@
 
 .s-code-example_content {
     position: relative;
-    /* this variable comes from the @s.codeExample mixin */
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: auto;
 
+    /* this variable comes from the @s.codeExample mixin */
     .s-code-example[lines] & {
         max-height: calc(
             2em * var(--max-lines) + (var(--paddingBlock, 1em) * 2)
@@ -91,12 +101,14 @@
 .s-code-example_code {
     display: none;
     line-height: 0;
+    flex-grow: 1;
 
     &[active] {
-        display: block;
+        display: flex;
     }
 
     & > code {
+        flex-grow: 1;
         line-height: 1;
     }
 }

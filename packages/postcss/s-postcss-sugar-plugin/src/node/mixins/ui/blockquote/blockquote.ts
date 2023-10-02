@@ -79,9 +79,8 @@ export default function ({
         vars.push(`
             border-inline-start: s.theme(ui.blockquote.borderWidth) solid s.color(current);
             color: s.color(current, foreground);
-            background-color: s.color(current, surface);
-            font-size: s.scalable(1rem);
-            @s.shape();
+            background-color: s.color(main, surface, --alpha 0.5);
+            border-radius: s.border.radius();
             @s.font.family(quote);
     `);
     }

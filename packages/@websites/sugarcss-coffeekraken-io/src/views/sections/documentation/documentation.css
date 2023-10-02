@@ -1,5 +1,6 @@
 #documentation {
     padding-block-start: s.padding(100);
+    padding-block-end: s.padding(80);
     display: block;
 
     ._layout {
@@ -22,13 +23,13 @@
 
         .s-format-text {
             h1 {
-                font-size: s.font.size(70);
-            }
-            h2 {
                 font-size: s.font.size(60);
             }
-            h3 {
+            h2 {
                 font-size: s.font.size(50);
+            }
+            h3 {
+                font-size: s.font.size(40);
             }
         }
     }

@@ -69,10 +69,14 @@ body:has(.s-doc-fullscreen) {
         }
     }
 
+    &_example-preview {
+        @s.shape (default);
+    }
+
     &_toolbar {
         position: absolute;
-        top: 0;
-        right: 0;
+        top: s.margin(10);
+        right: s.margin(10);
     }
 }
 
@@ -91,8 +95,8 @@ body:has(.s-doc-fullscreen) {
         display: block;
     }
 
-    &_search-input {
-        @s.focus.outline accent;
+    &-fullscreen {
+        background: s.color(main, background);
     }
 
     &_explorer {
@@ -101,7 +105,13 @@ body:has(.s-doc-fullscreen) {
         height: 100%;
         max-height: 80vh;
         overflow-y: auto;
+        padding-inline-end: s.padding(30);
         @s.scrollbar;
+
+        .s-doc-fullscreen & {
+            padding-block-start: s.padding(30);
+            padding-inline-start: s.padding(30);
+        }
 
         @s.media <=tablet {
             background: s.color(main, background);
@@ -147,6 +157,7 @@ body:has(.s-doc-fullscreen) {
         > div {
             padding: s.padding(30) !important;
             @s.transition fast;
+            @s.shape;
 
             > i {
                 margin-inline-end: s.margin(10);
@@ -165,24 +176,11 @@ body:has(.s-doc-fullscreen) {
         }
         &:active > div,
         &.active > div {
+            background: s.color(main, surface, --alpha 0.3);
+
             > i {
                 color: s.color(complementary, --lighten 20);
             }
-        }
-
-        &:after {
-            content: '';
-            display: none;
-            position: absolute;
-            top: calc(s.margin(30) * 0.6 * 2 + 1em);
-            left: calc(s.margin(30) + 0.5em);
-            width: 1px;
-            bottom: 0;
-            background: s.color(main, border);
-        }
-
-        &.active:after {
-            display: block;
         }
     }
     &_categories {
@@ -232,8 +230,7 @@ body:has(.s-doc-fullscreen) {
         display: block;
         width: 100%;
         padding: s.padding(30) s.padding(30);
-        background: s.color(main, ui);
-        border-bottom: 1px solid s.color(main, border);
+        background: s.color(main, surface);
         @s.shape;
     }
 
@@ -244,7 +241,6 @@ body:has(.s-doc-fullscreen) {
         display: flex;
         flex-direction: column;
         gap: s.margin(50);
-        background: s.color(main, background);
         padding: s.padding(50);
         overflow-y: auto;
         @s.border.radius();
@@ -273,8 +269,6 @@ body:has(.s-doc-fullscreen) {
         }
     }
 
-    &_param-metas,
-    &_config-metas,
     .s-code-example {
         max-width: 960px;
     }
@@ -288,6 +282,7 @@ body:has(.s-doc-fullscreen) {
         padding: s.padding(30);
         background: s.color(main, surface);
         @s.transition;
+        @s.shape;
 
         &:hover {
             background: s.color(main, surface);
@@ -297,6 +292,14 @@ body:has(.s-doc-fullscreen) {
     &_metas {
     }
     &_title {
+        @s.typo h3;
+    }
+    &_section-title {
+        @s.typo h4;
+    }
+    &_classes-title,
+    &_example-title {
+        @s.typo h5;
     }
     &_status {
         position: relative;
@@ -304,6 +307,7 @@ body:has(.s-doc-fullscreen) {
         font-size: 0.3em !important;
     }
     &_description {
+        @s.typo lead;
     }
 
     &_examples {
@@ -318,7 +322,9 @@ body:has(.s-doc-fullscreen) {
     }
     &_param {
     }
+
     &_config-metas,
+    &_classes-metas,
     &_param-metas {
         display: flex;
         gap: s.margin(30);
@@ -327,8 +333,9 @@ body:has(.s-doc-fullscreen) {
         @s.border.radius();
     }
     &_config-name,
+    &_classes-name,
     &_param-name {
-        color: s.color(accent);
+        color: s.color(accent, text);
         flex-grow: 1;
     }
     &_config-default,
@@ -345,6 +352,7 @@ body:has(.s-doc-fullscreen) {
         color: s.color(info);
     }
     &_config-description,
+    &_classes-description,
     &_param-description {
         padding: s.padding(30);
         @s.typo (p);

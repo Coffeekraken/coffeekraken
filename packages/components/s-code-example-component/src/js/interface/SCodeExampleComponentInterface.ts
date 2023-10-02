@@ -55,7 +55,7 @@ export default class SCodeExampleComponentInterface extends __SInterface {
             lines: {
                 description: 'Specify how many lines to display at max',
                 type: 'Number',
-                default: 15,
+                default: 999,
                 physical: true,
             },
             moreLabel: {

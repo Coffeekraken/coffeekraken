@@ -21,8 +21,8 @@
             "description": "Specify the html to render"
         },
         "nodes": {
-            "type": "Html[]",
-            "description": "Specify some nodes to render"
+            "type": "Node[]",
+            "description": "Specify some nodes to render",
         },
         "align": {
             "type": "Select",

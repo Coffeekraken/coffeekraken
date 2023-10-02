@@ -96,6 +96,8 @@ export default function ({
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
             & > * {
+                color: s.color(main, text, --alpha 0.7);
+
                 ${bulletSelector} {
                     display: inline-block;
                     position: absolute;

@@ -122,7 +122,7 @@ export default function ({
  `,
         ).code(
             `
-.s-transition${transitionName === 'default' ? '' : `--${transitionName}`} {
+.s-transition${transitionName === 'default' ? '' : `-${transitionName}`} {
     @s.transition(${transitionName});
 }`,
             { type: 'CssClass' },

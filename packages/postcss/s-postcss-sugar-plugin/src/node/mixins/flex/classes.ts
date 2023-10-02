@@ -78,24 +78,27 @@ export default function ({
         * @cssClass                 s-flex:nowrap             Apply the wrap property to "nowrap"
         * @cssClass                 s-flex:wrap             Apply the wrap property to "wrap"
         * @cssClass                 s-flex:wrap-reverse             Apply the wrap property to "wrap-reverse"
-        * @cssClass                 s-flex:justify-start             Apply the justify property to "start"
-        * @cssClass                 s-flex:justify-flex-start             Apply the justify property to "flex-start"
-        * @cssClass                 s-flex:justify-end             Apply the justify property to "end"
-        * @cssClass                 s-flex:justify-flex-end             Apply the justify property to "flex-end"
-        * @cssClass                 s-flex:justify-center             Apply the justify property to "center"  
-        * @cssClass                 s-flex:justify-space-between             Apply the justify property to "space-between"
-        * @cssClass                 s-flex:justify-space-around             Apply the justify property to "space-around"
-        * @cssClass                 s-flex:justify-space-evenly             Apply the justify property to "space-evenly"
-        * @cssClass                 s-flex:justify-stretch             Apply the justify property to "stretch"
-        * @cssClass                 s-flex:align-start             Apply the align property to "start"
-        * @cssClass                 s-flex:align-flex-start             Apply the align property to "flex-start"
-        * @cssClass                 s-flex:align-end             Apply the align property to "end"
-        * @cssClass                 s-flex:align-flex-end             Apply the align property to "flex-end"
-        * @cssClass                 s-flex:align-center             Apply the align property to "center"
-        * @cssClass                 s-flex:align-baseline             Apply the align property to "baseline"
+        * @cssClass                 s-flex:center                   Apply the align-items AND the justify-content property to "center"
+        * @cssClass                 s-flex-start                  Apply the align-items AND the justify-content property to "start"
+        * @cssClass                 s-flex-end                  Apply the align-items AND the justify-content property to "end"
+        * @cssClass                 s-flex:justify-start             Apply the justify-content property to "start"
+        * @cssClass                 s-flex:justify-flex-start             Apply the justify-content property to "flex-start"
+        * @cssClass                 s-flex:justify-end             Apply the justify-content property to "end"
+        * @cssClass                 s-flex:justify-flex-end             Apply the justify-content property to "flex-end"
+        * @cssClass                 s-flex:justify-center             Apply the justify-content property to "center"  
+        * @cssClass                 s-flex:justify-space-between             Apply the justify-content property to "space-between"
+        * @cssClass                 s-flex:justify-space-around             Apply the justify-content property to "space-around"
+        * @cssClass                 s-flex:justify-space-evenly             Apply the justify-content property to "space-evenly"
+        * @cssClass                 s-flex:justify-stretch             Apply the justify-content property to "stretch"
+        * @cssClass                 s-flex:align-start             Apply the align-items property to "start"
+        * @cssClass                 s-flex:align-flex-start             Apply the align-items property to "flex-start"
+        * @cssClass                 s-flex:align-end             Apply the align-items property to "end"
+        * @cssClass                 s-flex:align-flex-end             Apply the align-items property to "flex-end"
+        * @cssClass                 s-flex:align-center             Apply the align-items property to "center"
+        * @cssClass                 s-flex:align-baseline             Apply the align-items property to "baseline"
         * 
         * @example        html          Simple grid
-        *   <div class="s-flex:row:wrap s-radius">
+        *   <div class="s-flex:row:wrap">
         *     <div class="s-bg:main s-width:50 s-p:30">${__faker.name.findName()}</div>
         *     <div class="s-bg:accent s-width:50 s-p:30">${__faker.name.findName()}</div>
         *     <div class="s-bg:complementary s-width:50 s-p:30">${__faker.name.findName()}</div>
@@ -103,21 +106,21 @@ export default function ({
         *   </div>
         * 
         * @example        html          Grow
-        *   <div class="s-flex:row:nowrap s-radius">
+        *   <div class="s-flex:row">
         *     <div class="s-grow s-bg:main s-p:30">${__faker.name.findName()}</div>
         *     <div class="s-bg:accent s-p:30">${__faker.name.findName()}</div>
         *     <div class="s-bg:complementary s-p:30">${__faker.name.findName()}</div>
         *   </div>
         * 
         * @example      html          Orders
-        *   <div class="s-flex:row:nowrap s-radius">
+        *   <div class="s-flex:row">
         *     <div class="s-order:3 s-bg:main s-p:30">${__faker.name.findName()}</div>
         *     <div class="s-bg:accent s-p:30">${__faker.name.findName()}</div>
         *     <div class="s-bg:complementary s-p:30">${__faker.name.findName()}</div>
         *   </div>
         * 
         * @example          html            Aligns
-        *   <div class="s-flex:row:nowrap:align-end s-radius">
+        *   <div class="s-flex:row:align-end">
         *     <div class="s-bg:main s-p:30">${__faker.name.findName()}</div>
         *     <div class="s-bg:accent s-p:30">${__faker.name.findName()}<br />${__faker.name.findName()}<br />${__faker.name.findName()}<br />${__faker.name.findName()}<br />${__faker.name.findName()}</div>
         *     <div class="s-bg:complementary s-p:30">${__faker.name.findName()}</div>
@@ -301,6 +304,75 @@ export default function ({
         `
             .s-flex-wrap-reverse {
                 flex-wrap: wrap-reverse;
+            }`,
+        { type: 'CssClass' },
+    );
+
+    vars.comment(
+        () => `/**
+            * @name          s-flex:start
+            * @namespace          sugar.style.helpers.flex
+            * @type               CssClass
+            * @platform           css
+            * @status               stable
+            * 
+            * This class allows specify the align-items AND justify-content property to start
+            * 
+            * @example        html
+            * <div class="s-flex\:start"></div>
+            */
+           `,
+    ).code(
+        `
+            .s-flex-start {
+                align-items: start;
+                justify-content: start;
+            }`,
+        { type: 'CssClass' },
+    );
+
+    vars.comment(
+        () => `/**
+            * @name          s-flex:center
+            * @namespace          sugar.style.helpers.flex
+            * @type               CssClass
+            * @platform           css
+            * @status               stable
+            * 
+            * This class allows specify the align-items AND justify-content property to center
+            * 
+            * @example        html
+            * <div class="s-flex\:center"></div>
+            */
+           `,
+    ).code(
+        `
+            .s-flex-center {
+                align-items: center;
+                justify-content: center;
+            }`,
+        { type: 'CssClass' },
+    );
+
+    vars.comment(
+        () => `/**
+            * @name          s-flex:end
+            * @namespace          sugar.style.helpers.flex
+            * @type               CssClass
+            * @platform           css
+            * @status               stable
+            * 
+            * This class allows specify the align-items AND justify-content property to end
+            * 
+            * @example        html
+            * <div class="s-flex\:end"></div>
+            */
+           `,
+    ).code(
+        `
+            .s-flex-end {
+                align-items: end;
+                justify-content: end;
             }`,
         { type: 'CssClass' },
     );

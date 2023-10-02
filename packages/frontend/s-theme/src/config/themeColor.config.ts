@@ -18,7 +18,7 @@ export default (api) => {
          * @name                accent
          * @namespace            config.themeColor
          * @type                Color
-         * @default             config.themeBase.defaultColor
+         * @default             api.this.main
          *
          * Specify the "current" color value.
          *
@@ -26,7 +26,7 @@ export default (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get current() {
-            return api.this[api.config.themeBase.defaultColor] ?? api.this.main;
+            return api.config.themeColor.main;
         },
 
         /**

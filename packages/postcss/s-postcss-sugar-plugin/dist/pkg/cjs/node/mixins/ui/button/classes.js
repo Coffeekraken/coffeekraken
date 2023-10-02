@@ -99,7 +99,7 @@ function default_1({ params, atRule, CssVars, sharedData, replaceWith, }) {
         ${finalParams.lnfs
         .map((lnf) => {
         return ` * @example        html       ${lnf} lnf
-            * <div class="s-flex s-gap:20">
+            * <div class="s-flex:align-center:wrap s-gap:20">
             *   <a class="s-btn:${finalParams.defaultLnf === lnf ? '' : `:${lnf}`}">Click me!</button>
             *   <a class="s-btn:${finalParams.defaultLnf === lnf ? '' : `:${lnf}`} s-color:accent">Click me!</a>
             *   <a class="s-btn:${finalParams.defaultLnf === lnf ? '' : `:${lnf}`} s-color:complementary">Click me!</a>
@@ -112,14 +112,14 @@ function default_1({ params, atRule, CssVars, sharedData, replaceWith, }) {
         .join('\n')}
         * 
         * @example       html       Shapes
-        * <div class="s-flex s-gap:20">
+        * <div class="s-flex:align-center:wrap s-gap:20">
         *   <a class="s-btn">Click me!</a>
         *   <a class="s-btn s-shape:pill">Click me!</a>
         *   <a class="s-btn s-shape:square">Click me!</a>
         * </div>
         * 
         * @example       html       Scales
-        * <div class="s-flex s-gap:20">
+        * <div class="s-flex:align-center:wrap s-gap:20">
         *   <a class="s-btn s-scale:07">Click me!</a>
         *   <a class="s-btn s-scale:1">Click me!</a>
         *   <a class="s-btn s-scale:13">Click me!</a>

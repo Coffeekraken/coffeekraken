@@ -92,8 +92,8 @@ export default function ({
         ${fitSizes
             .map((fitSizeName) => {
                 return ` * @example         html        ${fitSizeName}
-            *   <div class="s-ratio\:16-9 s-bg:ui">
-            *       <img class="s-fit\:${fitSizeName} s-radius" src="https://picsum.photos/1000/1000" />
+            *   <div class="s-ratio:16-9 s-bg:ui">
+            *       <img class="s-fit:${fitSizeName} s-radius" src="https://picsum.photos/1000/1000" />
             *   </div>
             * `;
             })

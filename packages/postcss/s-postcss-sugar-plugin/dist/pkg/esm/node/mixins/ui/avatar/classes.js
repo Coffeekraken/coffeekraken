@@ -66,7 +66,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @cssClass             s-avatar:interactive            Specify that this avatar is interactive
         * 
         * @example        html         Default
-        * <div class="s-flex s-gap:20 s-font:70">
+        * <div class="s-flex:align-center:wrap s-gap:20 s-font:70">
         *   <div class="s-avatar">
         *       <img src="https://i.pravatar.cc/300?v=${Math.round(Math.random() * 99999)}" />
         *   </div>
@@ -88,7 +88,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * </div>
         * 
         * @example       html         Notifications
-        * <div class="s-flex s-gap:20 s-font:70">
+        * <div class="s-flex:wrap:align-center s-gap:20 s-font:70">
         *   <div class="s-avatar notifications="10">
         *      <img src="https://i.pravatar.cc/300?v=${Math.round(Math.random() * 99999)}" />
         *   </div>
@@ -110,7 +110,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * </div>
         * 
         * @example       html         Interactive
-        * <div class="s-flex s-gap:20 s-font:70">
+        * <div class="s-flex:wrap:align-center s-gap:20 s-font:70">
         *   <div class="s-avatar:interactive">
         *        <img src="https://i.pravatar.cc/300?v=${Math.round(Math.random() * 99999)}" />
         *   </div>

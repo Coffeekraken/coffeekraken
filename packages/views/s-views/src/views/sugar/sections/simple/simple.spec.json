@@ -24,7 +24,7 @@
         },
         "ctas": {
             "extends": "sugar.views.components.cta",
-            "type": "Object[]"
+            "type": "Link[]"
         },
         "beforeMetas": {
             "type": "Node[]",

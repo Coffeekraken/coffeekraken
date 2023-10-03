@@ -21,9 +21,9 @@
 }
 
 /* @s.ui.menu.classes(); */
-@s.ui.slider.classes();
-@s.ui.googleMap.classes();
-@s.ui.googleMapMarker.classes();
+/* @s.ui.slider.classes(); */
+/* @s.ui.googleMap.classes(); */
+/* @s.ui.googleMapMarker.classes(); */
 
 /**
  * Define some icons to be used with classes like "s-icon:github", etc...

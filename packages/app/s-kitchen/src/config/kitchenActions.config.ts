@@ -1041,6 +1041,61 @@ export default function (api) {
                 processManager: {},
             },
         },
+        frontspecBuild: {
+            /**
+             * @name            title
+             * @namespace       config.kitchenActions.frontspecBuild
+             * @type            String
+             * @default        Vite build stasck
+             *
+             * Specify the frontspec build action title
+             *
+             * @since       2.0.0
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            title: 'Frontspec build stack',
+            /**
+             * @name            description
+             * @namespace       config.kitchenActions.frontspecBuild
+             * @type            String
+             * @default        ...
+             *
+             * Specify the frontspec build action description
+             *
+             * @since       2.0.0
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            description: 'Build the final frontspec.json file',
+            /**
+             * @name            command
+             * @namespace       config.kitchenActions.frontspecBuild
+             * @type            String
+             * @default        sugar vite.build [arguments]
+             *
+             * Specify the frontspec build action command
+             *
+             * @since       2.0.0
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            command: 'sugar frontspec.build [arguments]',
+            /**
+             * @name            interface
+             * @namespace       config.kitchenActions.frontspecBuild
+             * @type            String
+             * @default        @coffeekraken/s-vite/node/interface/SViteBuildParamsInterface
+             *
+             * Specify the frontspec build action interface
+             *
+             * @since       2.0.0
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            // interface:
+            //     '@coffeekraken/s-frontspec/dist/pkg/esm/node/interface/SFrontspecBuildParamsInterface',
+            params: {},
+            settings: {
+                processManager: {},
+            },
+        },
         docmapBuild: {
             /**
              * @name            title

@@ -1,3 +1,65 @@
 .s-card {
-    @s.ui.card ($scope: bare);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &.s-card-horizontal {
+        flex-direction: row;
+        max-width: none;
+
+        ._media {
+            align-self: stretch;
+            width: 50%;
+            height: 100%;
+        }
+
+        @s.media mobile {
+            flex-direction: column;
+        }
+    }
+    &.s-card-horizontal-reverse {
+        flex-direction: row-reverse;
+        max-width: none;
+
+        ._media {
+            align-self: stretch;
+            width: 50%;
+            height: 100%;
+        }
+
+        @s.media mobile {
+            flex-direction: column-reverse;
+        }
+    }
+    &.s-card-vertical-reverse {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+    }
+    &.s-card-vertical {
+        align-items: flex-start;
+    }
+
+    ._content {
+        align-items: unset;
+    }
+
+    ._ctas {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .s-cta {
+        display: block;
+    }
+
+    ._media {
+        width: 100%;
+    }
+
+    ._img {
+        aspect-ratio: 16/9;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
 }

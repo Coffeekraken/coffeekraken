@@ -1,3 +1,18 @@
 .s-card {
-    @s.ui.card ($scope: lnf);
+    background: s.color(main, background);
+    @s.border.radius (ui.card.borderRadius);
+    @s.depth (ui.card.depth);
+
+    ._img {
+        @s.border.radius (ui.card.borderRadius);
+    }
+
+    ._content {
+        padding-block: s.padding(ui.card.paddingBlock);
+        padding-inline: s.padding(ui.card.paddingInline);
+    }
+
+    ._ctas {
+        gap: s.margin(20);
+    }
 }

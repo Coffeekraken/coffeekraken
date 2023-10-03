@@ -7,11 +7,9 @@ export default {
             cta: {
                 label: 'CTA label...',
                 color: 'accent',
-                link: {
-                    text: 'Discover more on apple.com',
-                    url: '/contact',
-                    title: 'Discover more on apple.com',
-                },
+                text: 'Discover more on apple.com',
+                url: '/contact',
+                title: 'Discover more on apple.com',
             },
             image: {
                 url: '/dist/img/slider/slide-01.jpg',
@@ -26,11 +24,9 @@ export default {
             cta: {
                 label: 'CTA label...',
                 color: 'accent',
-                link: {
-                    text: 'Discover more on apple.com',
-                    url: '/contact',
-                    title: 'Discover more on apple.com',
-                },
+                text: 'Discover more on apple.com',
+                url: '/contact',
+                title: 'Discover more on apple.com',
             },
             image: {
                 url: '/dist/img/slider/slide-02.jpg',
@@ -45,11 +41,9 @@ export default {
             cta: {
                 text: 'CTA label...',
                 color: 'accent',
-                link: {
-                    text: 'Discover more on apple.com',
-                    url: '/contact',
-                    title: 'Discover more on apple.com',
-                },
+                text: 'Discover more on apple.com',
+                url: '/contact',
+                title: 'Discover more on apple.com',
             },
             image: {
                 url: '/dist/img/slider/slide-03.jpg',

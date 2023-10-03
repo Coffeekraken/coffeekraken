@@ -739,7 +739,7 @@
         },
         "rootDirs": [
             "./src/views",
-            "./node_modules/@coffeekraken/sugar/src/views"
+            "./node_modules/@coffeekraken/s-views/src/views"
         ]
     },
     "specs": {
@@ -763,57 +763,6 @@
         "map": {
             "apiKey": "AIzaSyDzFfEzhmYXRTlONUCtMWQ88uHJhsbtXY4"
         }
-    },
-    "lod": {
-        "enabled": false,
-        "defaultLevel": 3,
-        "botLevel": 1,
-        "levels": {
-            "0": {
-                "name": "bare",
-                "speedIndex": 0
-            },
-            "1": {
-                "name": "lnf",
-                "speedIndex": 30
-            },
-            "2": {
-                "name": "theme",
-                "speedIndex": 40
-            },
-            "3": {
-                "name": "high",
-                "speedIndex": 50
-            },
-            "4": {
-                "name": "ultra",
-                "speedIndex": 60
-            }
-        },
-        "method": "class",
-        "defaultAction": ">="
-    },
-    "partytown": {
-        "enabled": false,
-        "forward": [
-            "dataLayer.push",
-            "fbq",
-            "freshpaint.addPageviewProperties",
-            "freshpaint.identify",
-            "freshpaint.track",
-            "_hsq.push",
-            "Intercom",
-            "_learnq.push",
-            "ttq.track",
-            "ttq.page",
-            "ttq.load",
-            "mixpanel.track"
-        ]
-    },
-    "classmap": {
-        "enabled": false,
-        "url": "/classmap.json",
-        "path": "./classmap.json"
     },
     "categories": {
         "default": {

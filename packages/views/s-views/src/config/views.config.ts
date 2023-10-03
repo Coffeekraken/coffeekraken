@@ -16,7 +16,7 @@ export default function ({ env, config }) {
                 __packageRootDir(),
                 config.storage.src.viewsDir,
             )}`,
-            `./node_modules/@coffeekraken/sugar/src/views`,
+            `./node_modules/@coffeekraken/s-views/src/views`,
         ],
     };
 }

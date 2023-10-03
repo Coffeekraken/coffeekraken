@@ -203,44 +203,44 @@ export default function (api) {
                     type: 'config',
                     config: 'google',
                 },
-                lod: {
-                    title: 'Lod',
-                    description: 'Specify the lod (level of details) settings',
-                    type: 'object',
-                    get value() {
-                        const lodConfig = Object.assign({}, api.theme.lod);
-                        delete lodConfig.cssProperties;
-                        return lodConfig;
-                    },
-                },
-                partytown: {
-                    title: 'Partytown',
-                    description:
-                        'Specify if the project make uses of "partytown" and his settings',
-                    type: 'object',
-                    get value() {
-                        const partytownConfig = Object.assign(
-                            {},
-                            api.theme.partytown,
-                        );
-                        delete partytownConfig.cssProperties;
-                        return partytownConfig;
-                    },
-                },
-                classmap: {
-                    title: 'Classmap',
-                    description: 'Specify the classmap settings',
-                    type: 'object',
-                    get value() {
-                        return {
-                            ...Object.assign({}, api.theme.classmap),
-                            path: `./${__path.relative(
-                                __packageRootDir(),
-                                api.config.classmap.path,
-                            )}`,
-                        };
-                    },
-                },
+                // lod: {
+                //     title: 'Lod',
+                //     description: 'Specify the lod (level of details) settings',
+                //     type: 'object',
+                //     get value() {
+                //         const lodConfig = Object.assign({}, api.theme.lod);
+                //         delete lodConfig.cssProperties;
+                //         return lodConfig;
+                //     },
+                // },
+                // partytown: {
+                //     title: 'Partytown',
+                //     description:
+                //         'Specify if the project make uses of "partytown" and his settings',
+                //     type: 'object',
+                //     get value() {
+                //         const partytownConfig = Object.assign(
+                //             {},
+                //             api.theme.partytown,
+                //         );
+                //         delete partytownConfig.cssProperties;
+                //         return partytownConfig;
+                //     },
+                // },
+                // classmap: {
+                //     title: 'Classmap',
+                //     description: 'Specify the classmap settings',
+                //     type: 'object',
+                //     get value() {
+                //         return {
+                //             ...Object.assign({}, api.theme.classmap),
+                //             path: `./${__path.relative(
+                //                 __packageRootDir(),
+                //                 api.config.classmap.path,
+                //             )}`,
+                //         };
+                //     },
+                // },
             },
         },
 

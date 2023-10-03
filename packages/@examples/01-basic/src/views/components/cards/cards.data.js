@@ -31,14 +31,12 @@ function generateCard() {
                     id: 'accent',
                     value: 'accent',
                 },
-                link: {
-                    text: faker.lorem.words({
-                        min: 2,
-                        max: 4,
-                    }),
-                    url: '#',
-                    title: '',
-                },
+                text: faker.lorem.words({
+                    min: 2,
+                    max: 4,
+                }),
+                url: '#',
+                title: '',
             },
             {
                 color: {
@@ -49,14 +47,12 @@ function generateCard() {
                     id: 'outline',
                     value: 'outline',
                 },
-                link: {
-                    text: faker.lorem.words({
-                        min: 2,
-                        max: 4,
-                    }),
-                    url: '#',
-                    title: '',
-                },
+                text: faker.lorem.words({
+                    min: 2,
+                    max: 4,
+                }),
+                url: '#',
+                title: '',
             },
         ],
     };

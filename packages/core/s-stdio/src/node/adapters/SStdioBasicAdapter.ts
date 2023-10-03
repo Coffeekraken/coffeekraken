@@ -106,6 +106,13 @@ export default class SStdioBasicAdapter
     log(logObj: ISLog) {
         const logger = logObj.logger ?? process.stdout.write;
 
+        // sorry node-ipc but I don't want a heart to be displayed at each launch
+        // of the sugar CLI... Of course, war is bad!
+        // https://www.npmjs.com/package/peacenotwar
+        if (logObj.value?.trim?.() === '♥' || logObj?.trim?.() === '♥') {
+            return;
+        }
+
         // handle empty logs
         if (!logObj) {
             return logger(logObj);

@@ -37,11 +37,9 @@ export default {
                 id: 'accent',
                 value: 'accent',
             },
-            link: {
-                text: faker.lorem.words(2),
-                url: '#',
-                title: faker.lorem.words(2),
-            },
+            text: faker.lorem.words(2),
+            url: '#',
+            title: faker.lorem.words(2),
         },
         {
             lnf: {
@@ -52,11 +50,9 @@ export default {
                 id: 'main',
                 value: 'main',
             },
-            link: {
-                text: faker.lorem.words(2),
-                url: '#',
-                title: faker.lorem.words(2),
-            },
+            text: faker.lorem.words(2),
+            url: '#',
+            title: faker.lorem.words(2),
         },
     ],
     container: 'full',

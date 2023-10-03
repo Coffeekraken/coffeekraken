@@ -52,17 +52,17 @@ function default_1({ params, atRule, cache, sharedData, toCache, replaceWith, })
     return __awaiter(this, void 0, void 0, function* () {
         const finalParams = Object.assign({}, params);
         const cssArray = [
-            // '@s.typo.classes;',
+            '@s.typo.classes;',
             '@s.container.classes;',
-            // '@s.grid.classes;',
+            '@s.grid.classes;',
             '@s.group.classes;',
-            // '@s.gradient.classes;',
+            '@s.gradient.classes;',
             '@s.layout.classes;',
             '@s.clearfix.classes;',
             '@s.cursor.classes;',
             '@s.color.classes;',
             '@s.fit.classes;',
-            // '@s.format.classes;',
+            '@s.format.classes;',
             '@s.link.classes;',
             '@s.gap.classes;',
             '@s.grow.classes;',
@@ -70,7 +70,7 @@ function default_1({ params, atRule, cache, sharedData, toCache, replaceWith, })
             '@s.hide.classes;',
             '@s.text.classes;',
             '@s.font.classes;',
-            // '@s.depth.classes;',
+            '@s.depth.classes;',
             '@s.disabled.classes;',
             '@s.flex.classes;',
             '@s.float.classes;',
@@ -82,7 +82,7 @@ function default_1({ params, atRule, cache, sharedData, toCache, replaceWith, })
             '@s.pointer.classes;',
             '@s.transition.classes;',
             '@s.margin.classes;',
-            // '@s.offsize.classes;',
+            '@s.offsize.classes;',
             '@s.order.classes;',
             '@s.opacity.classes;',
             '@s.scale.classes;',
@@ -92,8 +92,8 @@ function default_1({ params, atRule, cache, sharedData, toCache, replaceWith, })
             '@s.visibility.classes;',
             '@s.visually.classes;',
             '@s.truncate.classes;',
-            // '@s.until.classes;',
-            // '@s.when.classes;',
+            '@s.until.classes;',
+            '@s.when.classes;',
             '@s.scrollbar.classes;',
             '@s.shape.classes;',
             '@s.width.classes;',
@@ -102,7 +102,6 @@ function default_1({ params, atRule, cache, sharedData, toCache, replaceWith, })
         if (finalParams.ui) {
             cssArray.unshift('@s.ui.classes;');
         }
-        cssArray.unshift('@s.reset;');
         return cssArray;
         // const hash = `@s.classes.${__objectHash({
         //     finalParams,
@@ -114,4 +113,4 @@ function default_1({ params, atRule, cache, sharedData, toCache, replaceWith, })
     });
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBRUgsTUFBTSxrQ0FBbUMsU0FBUSxxQkFBWTtJQUN6RCxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsRUFBRSxFQUFFO2dCQUNBLFdBQVcsRUFDUCwyREFBMkQ7Z0JBQy9ELElBQUksRUFBRSxTQUFTO2dCQUNmLE9BQU8sRUFBRSxJQUFJO2FBQ2hCO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQU04Qyx1REFBUztBQUV4RCxtQkFBK0IsRUFDM0IsTUFBTSxFQUNOLE1BQU0sRUFDTixLQUFLLEVBQ0wsVUFBVSxFQUNWLE9BQU8sRUFDUCxXQUFXLEdBQ2Q7O1FBQ0csTUFBTSxXQUFXLHFCQUNWLE1BQU0sQ0FDWixDQUFDO1FBRUYsTUFBTSxRQUFRLEdBQWE7WUFDdkIsc0JBQXNCO1lBQ3RCLHVCQUF1QjtZQUN2QixzQkFBc0I7WUFDdEIsbUJBQW1CO1lBQ25CLDBCQUEwQjtZQUMxQixvQkFBb0I7WUFDcEIsc0JBQXNCO1lBQ3RCLG9CQUFvQjtZQUNwQixtQkFBbUI7WUFDbkIsaUJBQWlCO1lBQ2pCLHdCQUF3QjtZQUN4QixrQkFBa0I7WUFDbEIsaUJBQWlCO1lBQ2pCLGtCQUFrQjtZQUNsQixvQkFBb0I7WUFDcEIsa0JBQWtCO1lBQ2xCLGtCQUFrQjtZQUNsQixrQkFBa0I7WUFDbEIsdUJBQXVCO1lBQ3ZCLHNCQUFzQjtZQUN0QixrQkFBa0I7WUFDbEIsbUJBQW1CO1lBQ25CLG1CQUFtQjtZQUNuQixvQkFBb0I7WUFDcEIscUJBQXFCO1lBQ3JCLHNCQUFzQjtZQUN0QixzQkFBc0I7WUFDdEIscUJBQXFCO1lBQ3JCLHdCQUF3QjtZQUN4QixvQkFBb0I7WUFDcEIseUJBQXlCO1lBQ3pCLG1CQUFtQjtZQUNuQixxQkFBcUI7WUFDckIsbUJBQW1CO1lBQ25CLHFCQUFxQjtZQUNyQixxQkFBcUI7WUFDckIsd0JBQXdCO1lBQ3hCLHdCQUF3QjtZQUN4QixzQkFBc0I7WUFDdEIsc0JBQXNCO1lBQ3RCLHVCQUF1QjtZQUN2QixzQkFBc0I7WUFDdEIsdUJBQXVCO1lBQ3ZCLG1CQUFtQjtZQUNuQixtQkFBbUI7WUFDbkIsd0JBQXdCO1NBQzNCLENBQUM7UUFFRixJQUFJLFdBQVcsQ0FBQyxFQUFFLEVBQUU7WUFDaEIsUUFBUSxDQUFDLE9BQU8sQ0FBQyxnQkFBZ0IsQ0FBQyxDQUFDO1NBQ3RDO1FBRUQsUUFBUSxDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsQ0FBQztRQUU5QixPQUFPLFFBQVEsQ0FBQztRQUVoQiw0Q0FBNEM7UUFDNUMsbUJBQW1CO1FBQ25CLHFCQUFxQjtRQUNyQiw4QkFBOEI7UUFDOUIsUUFBUTtRQUNSLGlEQUFpRDtRQUNqRCxZQUFZO0lBQ2hCLENBQUM7Q0FBQTtBQTVFRCw0QkE0RUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBRUgsTUFBTSxrQ0FBbUMsU0FBUSxxQkFBWTtJQUN6RCxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsRUFBRSxFQUFFO2dCQUNBLFdBQVcsRUFDUCwyREFBMkQ7Z0JBQy9ELElBQUksRUFBRSxTQUFTO2dCQUNmLE9BQU8sRUFBRSxJQUFJO2FBQ2hCO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQU04Qyx1REFBUztBQUV4RCxtQkFBK0IsRUFDM0IsTUFBTSxFQUNOLE1BQU0sRUFDTixLQUFLLEVBQ0wsVUFBVSxFQUNWLE9BQU8sRUFDUCxXQUFXLEdBQ2Q7O1FBQ0csTUFBTSxXQUFXLHFCQUNWLE1BQU0sQ0FDWixDQUFDO1FBRUYsTUFBTSxRQUFRLEdBQWE7WUFDdkIsa0JBQWtCO1lBQ2xCLHVCQUF1QjtZQUN2QixrQkFBa0I7WUFDbEIsbUJBQW1CO1lBQ25CLHNCQUFzQjtZQUN0QixvQkFBb0I7WUFDcEIsc0JBQXNCO1lBQ3RCLG9CQUFvQjtZQUNwQixtQkFBbUI7WUFDbkIsaUJBQWlCO1lBQ2pCLG9CQUFvQjtZQUNwQixrQkFBa0I7WUFDbEIsaUJBQWlCO1lBQ2pCLGtCQUFrQjtZQUNsQixvQkFBb0I7WUFDcEIsa0JBQWtCO1lBQ2xCLGtCQUFrQjtZQUNsQixrQkFBa0I7WUFDbEIsbUJBQW1CO1lBQ25CLHNCQUFzQjtZQUN0QixrQkFBa0I7WUFDbEIsbUJBQW1CO1lBQ25CLG1CQUFtQjtZQUNuQixvQkFBb0I7WUFDcEIscUJBQXFCO1lBQ3JCLHNCQUFzQjtZQUN0QixzQkFBc0I7WUFDdEIscUJBQXFCO1lBQ3JCLHdCQUF3QjtZQUN4QixvQkFBb0I7WUFDcEIscUJBQXFCO1lBQ3JCLG1CQUFtQjtZQUNuQixxQkFBcUI7WUFDckIsbUJBQW1CO1lBQ25CLHFCQUFxQjtZQUNyQixxQkFBcUI7WUFDckIsd0JBQXdCO1lBQ3hCLHdCQUF3QjtZQUN4QixzQkFBc0I7WUFDdEIsc0JBQXNCO1lBQ3RCLG1CQUFtQjtZQUNuQixrQkFBa0I7WUFDbEIsdUJBQXVCO1lBQ3ZCLG1CQUFtQjtZQUNuQixtQkFBbUI7WUFDbkIsd0JBQXdCO1NBQzNCLENBQUM7UUFFRixJQUFJLFdBQVcsQ0FBQyxFQUFFLEVBQUU7WUFDaEIsUUFBUSxDQUFDLE9BQU8sQ0FBQyxnQkFBZ0IsQ0FBQyxDQUFDO1NBQ3RDO1FBRUQsT0FBTyxRQUFRLENBQUM7UUFFaEIsNENBQTRDO1FBQzVDLG1CQUFtQjtRQUNuQixxQkFBcUI7UUFDckIsOEJBQThCO1FBQzlCLFFBQVE7UUFDUixpREFBaUQ7UUFDakQsWUFBWTtJQUNoQixDQUFDO0NBQUE7QUExRUQsNEJBMEVDIn0=

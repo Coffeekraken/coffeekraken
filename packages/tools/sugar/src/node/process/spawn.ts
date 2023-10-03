@@ -92,8 +92,6 @@ export default function spawn(
         childProcess = __spawn(command, [], {
             shell: true,
             stdio: ['inherit', 'inherit', 'inherit', 'ipc'],
-            // stdio: 'inherit',
-            // detached: true,
             maxBuffer: 1024 * 1024 * 100,
             cwd: settings.cwd || process.cwd(),
             ...settings,

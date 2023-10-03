@@ -19,11 +19,9 @@ export default {
             id: 'accent',
             value: 'accent',
         },
-        link: {
-            text: 'Discover more...',
-            url: '/contact',
-            title: 'Discover more on apple.com',
-        },
+        text: 'Discover more...',
+        url: '/contact',
+        title: 'Discover more on apple.com',
     },
     direction: {
         id: 'horizontal',

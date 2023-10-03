@@ -14,7 +14,7 @@ import { __wait } from '@coffeekraken/sugar/datetime';
 import { __isCommandExists } from '@coffeekraken/sugar/is';
 import { __import } from '@coffeekraken/sugar/module';
 import { __deepMerge, __filterObject } from '@coffeekraken/sugar/object';
-import { __sharedContext } from '@coffeekraken/sugar/process';
+import { __onProcessExit, __sharedContext } from '@coffeekraken/sugar/process';
 import type { IDetectProjectTypeResult } from '@coffeekraken/sugar/project';
 import { __detectProjectType } from '@coffeekraken/sugar/project';
 import { __stripAnsi } from '@coffeekraken/sugar/string';
@@ -281,6 +281,11 @@ class SKitchen extends __SClass {
                 actionsObj = kitchenConfig.actions,
                 sugarJson = new __SSugarJson().current();
 
+            let hasProcessEnded = false;
+            __onProcessExit(() => {
+                hasProcessEnded = true;
+            });
+
             // initalise final params.
             // it will be merged with the "stackObj.sharedParams" later...
             let finalParams = __SKitchenRunParamsInterface.apply(params);
@@ -467,6 +472,11 @@ class SKitchen extends __SClass {
                 for (let i = 0; i < Object.keys(stackObj.actions).length; i++) {
                     const actionName = Object.keys(stackObj.actions)[i];
 
+                    // stop if process has ended
+                    if (hasProcessEnded) {
+                        break;
+                    }
+
                     // if an action is setted in the finalParams, make sure we run only this one
                     if (
                         finalParams.action &&
@@ -649,7 +659,7 @@ class SKitchen extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    list(params: ISKitchenListParams | string): Promise<any | void> {
+    list(params: ISKitchenListParams | string): Promise<void | any> {
         return new Promise((resolve) => {
             const recipes = this.listRecipes();
 

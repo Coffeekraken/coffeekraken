@@ -442,17 +442,17 @@ export default function (api) {
                 description: 'Build your final production ready dist package',
                 sharedParams: {
                     /**
-                     * @name            prod
+                     * @name            target
                      * @namespace       config.kitchenRecipeDefault.stacks.build.sharedParams
                      * @type            String
-                     * @default         true
+                     * @default         production
                      *
                      * Specify that the build is made for production
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    prod: true,
+                    target: 'production',
                 },
                 actions: {
                     /**
@@ -500,50 +500,65 @@ export default function (api) {
                         return api.config.kitchen.actions.imagesBuild;
                     },
 
-                    // /**
-                    //  * @name            faviconBuild
-                    //  * @namespace       config.kitchenRecipeDefault.stacks.build.actions
-                    //  * @type            String
-                    //  * @default         [config.kitchen.actions.faviconBuild]
-                    //  *
-                    //  * Specify the recipe build stack faviconBuild action
-                    //  *
-                    //  * @since       2.0.0
-                    //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                    //  */
-                    // get faviconBuild() {
-                    //     return api.config.kitchen.actions.faviconBuild;
-                    // },
+                    /**
+                     * @name            frontspecBuild
+                     * @namespace       config.kitchenRecipeDefault.stacks.build.actions
+                     * @type            String
+                     * @default         [config.kitchen.actions.frontspecBuild]
+                     *
+                     * Specify the recipe build stack frontspecBuild action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    get frontspecBuild() {
+                        return api.config.kitchen.actions.frontspecBuild;
+                    },
 
-                    // /**
-                    //  * @name            docmapBuild
-                    //  * @namespace       config.kitchenRecipeDefault.stacks.build.actions
-                    //  * @type            String
-                    //  * @default         [config.kitchen.actions.docmapBuild]
-                    //  *
-                    //  * Specify the recipe build stack docmapBuild action
-                    //  *
-                    //  * @since       2.0.0
-                    //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                    //  */
-                    // get docmapBuild() {
-                    //     return api.config.kitchen.actions.docmapBuild;
-                    // },
+                    /**
+                     * @name            faviconBuild
+                     * @namespace       config.kitchenRecipeDefault.stacks.build.actions
+                     * @type            String
+                     * @default         [config.kitchen.actions.faviconBuild]
+                     *
+                     * Specify the recipe build stack faviconBuild action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    get faviconBuild() {
+                        return api.config.kitchen.actions.faviconBuild;
+                    },
 
-                    // /**
-                    //  * @name            sitemapBuild
-                    //  * @namespace       config.kitchenRecipeDefault.stacks.build.actions
-                    //  * @type            String
-                    //  * @default         [config.kitchen.actions.sitemapBuild]
-                    //  *
-                    //  * Specify the recipe build stack sitemapBuild action
-                    //  *
-                    //  * @since       2.0.0
-                    //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                    //  */
-                    // get sitemapBuild() {
-                    //     return api.config.kitchen.actions.sitemapBuild;
-                    // },
+                    /**
+                     * @name            docmapBuild
+                     * @namespace       config.kitchenRecipeDefault.stacks.build.actions
+                     * @type            String
+                     * @default         [config.kitchen.actions.docmapBuild]
+                     *
+                     * Specify the recipe build stack docmapBuild action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    get docmapBuild() {
+                        return api.config.kitchen.actions.docmapBuild;
+                    },
+
+                    /**
+                     * @name            sitemapBuild
+                     * @namespace       config.kitchenRecipeDefault.stacks.build.actions
+                     * @type            String
+                     * @default         [config.kitchen.actions.sitemapBuild]
+                     *
+                     * Specify the recipe build stack sitemapBuild action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    get sitemapBuild() {
+                        return api.config.kitchen.actions.sitemapBuild;
+                    },
 
                     // /**
                     //  * @name            markdownBuild

@@ -19,7 +19,7 @@
     "private": true,
     "scripts": {
         "dev": "sugar kitchen.run dev & npm run doc.serve",
-        "build": "sugar kitchen.run build --target production",
+        "build": "sugar kitchen.run build --target production && sugar frontspec.build",
         "preview": "sugar kitchen.run preview & npm run doc.serve",
         "static": "npm run preview & sleep 5 && npm run static.build && npm run static.serve",
         "static.serve": "sugar staticServer.start",

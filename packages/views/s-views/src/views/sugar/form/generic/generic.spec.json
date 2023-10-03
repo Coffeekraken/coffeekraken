@@ -34,24 +34,24 @@
                     ]
                 },
                 "name": {
-                    "type": "Text",
+                    "type": "String",
                     "title": "Name",
                     "description": "Name of field",
                     "required": true
                 },
                 "label": {
-                    "type": "Text",
+                    "type": "String",
                     "title": "Label",
                     "description": "Label of field",
                     "required": true
                 },
                 "value": {
-                    "type": "Text",
+                    "type": "String",
                     "title": "Value",
                     "description": "Value of field"
                 },
                 "placeholder": {
-                    "type": "Text",
+                    "type": "String",
                     "title": "Placeholder",
                     "description": "Placeholder of field"
                 },
@@ -59,7 +59,7 @@
             }
         },
         "action": {
-            "type": "Text",
+            "type": "String",
             "category": "development",
             "title": "Action",
             "description": "Action of form",
@@ -95,7 +95,7 @@
             "description": "Some actions for your form like submit, reset, etc...",
             "props": {
                 "label": {
-                    "type": "Text",
+                    "type": "String",
                     "title": "Label",
                     "description": "Label of action",
                     "required": true

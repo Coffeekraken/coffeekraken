@@ -10,7 +10,7 @@
             "description": "Card image"
         },
         "title": {
-            "type": "Text",
+            "type": "String",
             "title": "Title",
             "description": "The card title",
             "required": true

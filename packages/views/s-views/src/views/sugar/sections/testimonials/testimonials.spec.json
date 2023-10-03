@@ -5,7 +5,7 @@
     "description": "Display some testimonials with style",
     "props": {
         "title": {
-            "type": "Text",
+            "type": "String",
             "title": "Title",
             "description": "The testimonials section title"
         },
@@ -21,12 +21,12 @@
             "required": true,
             "props": {
                 "name": {
-                    "type": "Text",
+                    "type": "String",
                     "title": "Name",
                     "description": "The testimonial author name"
                 },
                 "role": {
-                    "type": "Text",
+                    "type": "String",
                     "title": "Role",
                     "description": "The author role"
                 },

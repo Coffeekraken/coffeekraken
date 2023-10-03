@@ -7,7 +7,13 @@
 <loc>http://localhost:9191/api/doc</loc>
   </url>
   <url>
+<loc>http://localhost:9191/api/doc/items/eyJ0eXBlIjoiTWFya2Rvd24iLCJpZCI6IkBjb2ZmZWVrcmFrZW4ucy1wb3N0Y3NzLXN1Z2FyLXBsdWdpbi4qKiJ9</loc>
+  </url>
+  <url>
 <loc>http://localhost:9191/api/doc/item/@coffeekraken.s-postcss-sugar-plugin.doc.README</loc>
+  </url>
+  <url>
+<loc>http://localhost:9191/api/doc/items/eyJ0eXBlIjoiU3R5bGVndWlkZSIsImlkIjoiLy4qLnN1Z2FyLnN0eWxlLnVpLiovIn0=</loc>
   </url>
   <url>
 <loc>http://localhost:9191/api/doc/item/@website.sugarcss-coffeekraken-io.sugar.style.ui.badge.Badge</loc>
@@ -20,6 +26,9 @@
   </url>
   <url>
 <loc>http://localhost:9191/api/doc/item/@website.sugarcss-coffeekraken-io.sugar.style.ui.list.List</loc>
+  </url>
+  <url>
+<loc>http://localhost:9191/api/doc/items/eyJ0eXBlIjoiU3R5bGVndWlkZSIsImlkIjoiLy4qLnN1Z2FyLnN0eWxlLmhlbHBlcnMuKi8ifQ==</loc>
   </url>
   <url>
 <loc>http://localhost:9191/api/doc/item/@website.sugarcss-coffeekraken-io.sugar.style.helpers.disabled.Disabled</loc>
@@ -113,6 +122,9 @@
   </url>
   <url>
 <loc>http://localhost:9191/api/doc/item/@website.sugarcss-coffeekraken-io.sugar.style.helpers.whiteSpace.White-space</loc>
+  </url>
+  <url>
+<loc>http://localhost:9191/api/doc/items/eyJ0eXBlIjoiUG9zdGNzc01peGluIiwiaWQiOiJAY29mZmVla3Jha2VuLnMtcG9zdGNzcy1zdWdhci1wbHVnaW4uKioifQ==</loc>
   </url>
   <url>
 <loc>http://localhost:9191/api/doc/item/@coffeekraken.s-postcss-sugar-plugin.node.mixin.classes</loc>
@@ -325,6 +337,9 @@
 <loc>http://localhost:9191/api/doc/item/@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.list.list</loc>
   </url>
   <url>
+<loc>http://localhost:9191/api/doc/items/eyJ0eXBlIjoiUG9zdGNzc0Z1bmN0aW9uIiwiaWQiOiJAY29mZmVla3Jha2VuLnMtcG9zdGNzcy1zdWdhci1wbHVnaW4uKioifQ==</loc>
+  </url>
+  <url>
 <loc>http://localhost:9191/api/doc/item/@coffeekraken.s-postcss-sugar-plugin.node.function.color.color</loc>
   </url>
   <url>
@@ -347,6 +362,9 @@
   </url>
   <url>
 <loc>http://localhost:9191/api/doc/item/@coffeekraken.s-postcss-sugar-plugin.node.function.transition.transition</loc>
+  </url>
+  <url>
+<loc>http://localhost:9191/api/doc/items/eyJ0eXBlIjoiQ29uZmlnIiwiaWQiOiJAY29mZmVla3Jha2VuLnMtcG9zdGNzcy1zdWdhci1wbHVnaW4uKioifQ==</loc>
   </url>
   <url>
 <loc>http://localhost:9191/api/doc/item/@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPluginConfig</loc>

@@ -5,7 +5,7 @@
     "description": "Simple layout area used inside a layout",
     "props": {
         "areaId": {
-            "type": "Text",
+            "type": "String",
             "title": "Area ID",
             "description": "The area id found in the layout string like \"1 2 _ 3 3\"",
             "required": true

@@ -15,7 +15,7 @@
       "description": "Systems list",
       "props": {
         "title": {
-          "type": "Text",
+          "type": "String",
           "title": "Title",
           "description": "System title",
           "required": true

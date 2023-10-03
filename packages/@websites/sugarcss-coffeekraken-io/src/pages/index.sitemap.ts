@@ -1,5 +1,6 @@
 import __SDocmap from '@coffeekraken/s-docmap';
 import __SPromise from '@coffeekraken/s-promise';
+import { __base64 } from '@coffeekraken/sugar/crypto';
 
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
@@ -23,6 +24,10 @@ export default function sitemap() {
             );
 
             if (!Object.keys(searchResult.items ?? {}).length) continue;
+
+            items.push({
+                loc: `http://localhost:${docConfig.server.port}/api/doc/items/${__base64.encrypt(JSON.stringify(categoryObj.filters ?? {}))}`;
+            });
 
             for (let [id, itemObj] of Object.entries(searchResult.items)) {
                 items.push({

@@ -57,9 +57,6 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
                 ? 'http://localhost:9191/api/doc'
                 : '/api/doc',
         },
-        fetchExtension: document.location.origin.includes(':5173')
-            ? ''
-            : 'json',
         icons: {
             file: '<i class="s-icon:file"></i>',
             search: '<i class="s-icon:search"></i>',

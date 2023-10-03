@@ -8,7 +8,10 @@ import __SStaticServerStartParamsInterface from './interface/SStaticServerStartP
 // import __vhost from 'vhost';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import { __onProcessExit } from '@coffeekraken/sugar/process';
+import __fs from 'fs';
 import __path from 'path';
+
+import __expressHtaccessMiddleware from 'express-htaccess-middleware';
 
 import { __deepMerge } from '@coffeekraken/sugar/object';
 
@@ -105,6 +108,22 @@ export default class SStaticServer extends __SClass {
                 finalParams.rootDir,
             );
             this._express.use(__express.static(relativeRootDir));
+
+            const htaccessFilePath = __path.resolve(
+                __packageRootDir(),
+                relativeRootDir,
+                '.htaccess',
+            );
+            if (__fs.existsSync(htaccessFilePath)) {
+                console.log('S', htaccessFilePath);
+                this._express.use(
+                    __expressHtaccessMiddleware({
+                        file: htaccessFilePath,
+                        verbose: true,
+                        watch: true,
+                    }),
+                );
+            }
 
             if (!(await __isPortFree(finalParams.port))) {
                 console.log(

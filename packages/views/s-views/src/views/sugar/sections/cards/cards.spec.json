@@ -5,7 +5,7 @@
     "description": "Display a nice and clean hero section",
     "props": {
         "title": {
-            "type": "Text",
+            "type": "String",
             "title": "Title",
             "description": "The card title",
             "required": true

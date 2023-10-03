@@ -1170,7 +1170,6 @@ export default function (api): IStorageConfig {
             '**/__TESTS/**',
             '**/__tests__/**',
             '**/__tests__.wip/**',
-            '**/.*/**',
             '**/node_modules/**',
         ],
     };

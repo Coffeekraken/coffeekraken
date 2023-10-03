@@ -3,9 +3,9 @@
 import __SClass from '@coffeekraken/s-class';
 import SFile from '@coffeekraken/s-file';
 import { __copySync } from '@coffeekraken/sugar/fs';
+import type { IResolveGlobSettings } from '@coffeekraken/sugar/glob';
 import { __extractGlob, __extractNoneGlob, __resolveGlobSync } from '@coffeekraken/sugar/glob';
 import { __isGlob } from '@coffeekraken/sugar/is';
-import type { IResolveGlobSettings } from '@coffeekraken/sugar/glob';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __micromatch from 'micromatch';
 

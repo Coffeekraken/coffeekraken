@@ -6,6 +6,8 @@ import { __unique } from '@coffeekraken/sugar/array';
 
 import { __camelCase } from '@coffeekraken/sugar/string';
 
+import { __base64 } from '@coffeekraken/sugar/crypto';
+
 import { __escapeQueue, __hotkey } from '@coffeekraken/sugar/keyboard';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, unsafeCSS } from 'lit';
@@ -216,19 +218,13 @@ export default class SDocComponent extends __SLitComponent {
         this._status.loading = true;
 
         const request = await fetch(
-                `${this.props.endpoints.base}${this.props.endpoints.items}${
+                `${this.props.endpoints.base}${
+                    this.props.endpoints.items
+                }/${__base64.encrypt(JSON.stringify(category.filters))}${
                     this.props.fetchExtension
                         ? `.${this.props.fetchExtension}`
                         : ''
                 }`,
-                {
-                    method: 'POST',
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: JSON.stringify(category.filters),
-                },
             ),
             items = await request.json();
 

@@ -53,7 +53,7 @@ class SFloatingFeatureInterface extends SInterface {
     };
   }
 }
-const __css = ".s-floating {\n    transform: none;\n    transition: none;\n}\n\n    .s-floating:before {\n        content: none;\n    }\n\n    .s-floating:after {\n        content: none;\n    }\n\n    .s-floating .s-floating_arrow {\n        position: absolute;\n        background: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),calc((var(--s-color-current-s, 0)) * 1%),calc((var(--s-color-current-l, 0)) * 1%),var(--s-color-current-a, 1));\n        width: var(--arrow-size, 8px);\n        height: var(--arrow-size, 8px);\n        transform: rotate(45deg);\n    }";
+const __css = ".s-floating {\n    transform: none;\n    transition: none;\n}\n\n    .s-floating:before {\n        content: none;\n    }\n\n    .s-floating:after {\n        content: none;\n    }\n\n    .s-floating .s-floating_arrow {\n        position: absolute;\n        background: hsla(calc(var(--s-color-current-h, 0) + var(--s-color-current-spin ,0)),calc((var(--s-color-current-s, 0)) * 1%),calc((var(--s-color-current-l, 0)) * 1%),var(--s-color-current-a, 1));\n        width: var(--arrow-size, 8px);\n        height: var(--arrow-size, 8px);\n        transform: rotate(45deg);\n    }\n";
 class SFloatingFeature extends SFeature {
   // @ts-ignore
   constructor(name, node, settings) {

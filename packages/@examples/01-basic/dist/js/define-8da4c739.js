@@ -106,20 +106,15 @@ class SDepsFeature extends SFeature {
    * Handle css dependencies for the passed element
    */
   static _handleCssDepsForElement($elm, props = {}) {
-    var _a, _b, _c, _d;
+    var _a, _b;
     return __awaiter(this, void 0, void 0, function* () {
       let finalDepsPath = props.css.split(",").map((l) => l.trim());
       $elm._sDepsCssStack = finalDepsPath;
       for (let [i, finalDepPath] of finalDepsPath.entries()) {
-        if (finalDepPath.match(/[a-zA-Z0-9_-]+/) && SDepsFeature._cssFrontData.chunks) {
-          if (!((_b = (_a = SDepsFeature._cssFrontData.chunks).includes) === null || _b === void 0 ? void 0 : _b.call(_a, finalDepPath))) {
-            continue;
-          }
-        }
         const $existing = document.querySelector(`link[s-deps-css="${finalDepPath}"]`);
         if ($existing) {
-          (_d = (_c = $elm._sDepsCssStack) === null || _c === void 0 ? void 0 : _c.splice) === null || _d === void 0 ? void 0 : _d.call(
-            _c,
+          (_b = (_a = $elm._sDepsCssStack) === null || _a === void 0 ? void 0 : _a.splice) === null || _b === void 0 ? void 0 : _b.call(
+            _a,
             // @ts-ignore
             $elm._sDepsCssStack.indexOf(finalDepPath),
             1

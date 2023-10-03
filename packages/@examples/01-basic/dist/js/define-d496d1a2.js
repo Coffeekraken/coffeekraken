@@ -216,7 +216,7 @@ max-width: 55ch;
 
 @media (max-width: 639px) {
 
-.s-slider_title {font-size: calc(var(--s-font-size-default, 16px) * calc(var(--s-font-size-70, 3.2) * var(--s-scale, 1) * var(--s-scale-global, 1)));
+.s-slider_title {font-size: calc(var(--s-font-size-default, 16px) * calc(var(--s-font-size-70, 3.5) * var(--s-scale, 1) * var(--s-scale-global, 1)));
 }
 }
 
@@ -225,14 +225,14 @@ max-width: 55ch;
 }
 
 .s-slider_intro {display: block;font-family: var(--s-font-family-default-font-family, "Roboto"); 
- font-weight: var(--s-font-family-default-font-weight, 400);font-size: calc(var(--s-font-size-default, 16px) * calc(var(--s-font-size-40, 1.35) * var(--s-scale, 1) * var(--s-scale-global, 1)));
+ font-weight: var(--s-font-family-default-font-weight, 400);font-size: calc(var(--s-font-size-default, 16px) * calc(var(--s-font-size-40, 1.4) * var(--s-scale, 1) * var(--s-scale-global, 1)));
 line-height: 1.6;
 max-width: 55ch;
 }
 
 @media (max-width: 639px) {
 
-.s-slider_intro {font-size: calc(var(--s-font-size-default, 16px) * calc(var(--s-font-size-40, 1.35) * var(--s-scale, 1) * var(--s-scale-global, 1)));
+.s-slider_intro {font-size: calc(var(--s-font-size-default, 16px) * calc(var(--s-font-size-40, 1.4) * var(--s-scale, 1) * var(--s-scale-global, 1)));
 }
 }
 
@@ -244,7 +244,7 @@ max-width: 55ch;
  font-weight: var(--s-font-family-default-font-weight, 400);font-size: calc(var(--s-font-size-default, 16px) * calc(var(--s-font-size-30, 1.1) * var(--s-scale, 1) * var(--s-scale-global, 1)));
 line-height: 1.8;
 max-width: 55ch;
-color: hsla(calc(var(--s-color-main-h, 0) + var(--s-color-main-text-spin ,0)),calc((var(--s-color-main-s, 0) + var(--s-color-main-text-saturation-offset, 0)) * 1%),calc((var(--s-color-main-l, 0) + var(--s-color-main-text-lightness-offset, 0)) * 1%),0.5);
+color: hsla(calc(var(--s-color-main-h, 0) + var(--s-color-main-text-spin ,0)),calc((var(--s-color-main-s, 0) + var(--s-color-main-text-saturation-offset, 0)) * 1%),calc((var(--s-color-main-l, 0) + var(--s-color-main-text-lightness-offset, 0)) * 1%),0.7);
     max-width: 100%;
 }
 

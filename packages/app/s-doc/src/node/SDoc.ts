@@ -3,6 +3,7 @@ import __SDocblock from '@coffeekraken/s-docblock';
 import __SDocmap from '@coffeekraken/s-docmap';
 import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import { __base64 } from '@coffeekraken/sugar/crypto';
 import { __wait } from '@coffeekraken/sugar/datetime';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __onProcessExit } from '@coffeekraken/sugar/process';
@@ -157,11 +158,13 @@ export default class SDoc extends __SClass {
             `<yellow>[SDoc]</yellow> Exposing doc endpoint "<cyan>${this.settings.endpoints.base}</cyan>"`,
         );
 
-        express.post(
-            `${this.settings.endpoints.base}${this.settings.endpoints.items}`,
+        express.get(
+            `${this.settings.endpoints.base}${this.settings.endpoints.items}/:filters`,
             cors,
             async (req, res) => {
-                const filters = JSON.parse(Object.keys(req.body)[0]),
+                const filters = JSON.parse(
+                        __base64.decrypt(req.params.filters),
+                    ),
                     result = await this._docmap.search(filters);
 
                 res.status(200);

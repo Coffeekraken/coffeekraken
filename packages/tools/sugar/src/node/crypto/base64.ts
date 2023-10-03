@@ -2,7 +2,8 @@
 
 import toString from '../../shared/string/toString.js';
 
-import * as CryptoJS from 'crypto-js/enc-base64.js';
+import __base64 from 'crypto-js/enc-base64.js';
+import __utf8 from 'crypto-js/enc-utf8.js';
 
 /**
  * @name            base64
@@ -42,8 +43,8 @@ export default {
     encrypt: function (message) {
         if (typeof message !== 'string') message = toString(message);
 
-        const encodedWord = CryptoJS.enc.Utf8.parse(message); // encodedWord Array object
-        const encoded = CryptoJS.enc.Base64.stringify(encodedWord); // string: 'NzUzMjI1NDE='
+        const encodedWord = __utf8.parse(message); // encodedWord Array object
+        const encoded = __base64.stringify(encodedWord); // string: 'NzUzMjI1NDE='
         return encoded;
     },
 
@@ -60,8 +61,8 @@ export default {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     decrypt: function (message) {
-        const encodedWord = CryptoJS.enc.Base64.parse(message); // encodedWord via Base64.parse()
-        const decoded = CryptoJS.enc.Utf8.stringify(encodedWord); // decode encodedWord via Utf8.stringify() '75322541'
+        const encodedWord = __base64.parse(message); // encodedWord via Base64.parse()
+        const decoded = __utf8.stringify(encodedWord); // decode encodedWord via Utf8.stringify() '75322541'
         return decoded;
     },
 };

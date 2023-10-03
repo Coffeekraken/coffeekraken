@@ -1,12 +1,12 @@
 import { define as __SActivateFeatureDefine } from '@coffeekraken/s-activate-feature/lazy';
 import { define as __SAppearFeatureDefine } from '@coffeekraken/s-appear-feature/lazy';
 import { define as __SClipboardCopyComponentDefine } from '@coffeekraken/s-clipboard-copy-component/lazy';
-import { define as __SSDepsFeatureDefine } from '@coffeekraken/s-deps-feature/lazy';
+// import { define as __SSDepsFeatureDefine } from '@coffeekraken/s-deps-feature/lazy';
 import { define as __SFloatingFeatureDefine } from '@coffeekraken/s-floating-feature/lazy';
 import { define as __SFormValidateFeatureDefine } from '@coffeekraken/s-form-validate-feature/lazy';
 import { define as __SInlineFeatureDefine } from '@coffeekraken/s-inline-feature/lazy';
 import { define as __SLazyFeatureDefine } from '@coffeekraken/s-lazy-feature';
-import { define as __SRefocusFeatureDefine } from '@coffeekraken/s-refocus-feature/lazy';
+// import { define as __SRefocusFeatureDefine } from '@coffeekraken/s-refocus-feature/lazy';
 import { define as __SScrollComponentDefine } from '@coffeekraken/s-scroll-component/lazy';
 import { define as __SSugarFeatureDefine } from '@coffeekraken/s-sugar-feature/lazy';
 
@@ -27,7 +27,7 @@ import { define as __SSugarFeatureDefine } from '@coffeekraken/s-sugar-feature/l
  * - [@coffeekraken/s-inline-feature](/package/@coffeekraken/s-inline-feature/doc/readme)
  * - [@coffeekraken/s-refocus-feature](/package/@coffeekraken/s-refocus-feature/doc/readme)
  * - [@coffeekraken/s-sugar-feature](/package/@coffeekraken/s-sugar-feature/doc/readme)
- * - [@coffeekraken/s-sugar-feature](/package/@coffeekraken/s-lazy-feature/doc/readme)
+ * - [@coffeekraken/s-lazy-feature](/package/@coffeekraken/s-lazy-feature/doc/readme)
  * - [@coffeekraken/s-scroll-component](/package/@coffeekraken/s-scroll-component/doc/readme)
  *
  * @todo      interface
@@ -51,14 +51,14 @@ export default function SPackEssentials(): void {
     // Features
     __SSugarFeatureDefine();
     __SLazyFeatureDefine();
-    __SSDepsFeatureDefine();
+    // __SSDepsFeatureDefine();
     __SActivateFeatureDefine();
     __SAppearFeatureDefine();
     __SFloatingFeatureDefine();
     __SFormValidateFeatureDefine();
     __SInlineFeatureDefine();
-    __SRefocusFeatureDefine({
-        trigger: ['event:actual', 'anchor', 'history'],
-        offsetY: 200,
-    });
+    // __SRefocusFeatureDefine({
+    //     trigger: ['event:actual', 'anchor', 'history'],
+    //     offsetY: 200,
+    // });
 }

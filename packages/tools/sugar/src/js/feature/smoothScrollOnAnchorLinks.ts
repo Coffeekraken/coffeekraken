@@ -50,6 +50,18 @@ export default function __smoothScrollOnAnchorLinks(
         settings,
     );
 
+    if (document.env?.SUGAR?.theme) {
+        settings.scroll = {
+            ...{
+                duration: document.env.SUGAR.theme.get('scroll').duration,
+                delay: document.env.SUGAR.theme.get('scroll').delay,
+                offsetX: document.env.SUGAR.theme.get('scroll').offsetX,
+                offsetY: document.env.SUGAR.theme.get('scroll').offsetY,
+            },
+            ...(settings.scroll ?? {}),
+        };
+    }
+
     __querySelectorLive('a:not([is])[href*="#"]', ($link) => {
         // listen for click
         $link.addEventListener('click', (e) => {
@@ -81,7 +93,9 @@ export default function __smoothScrollOnAnchorLinks(
             history.pushState({}, null, linkUrl.hash);
 
             // all seems to be good, we can scroll to the target
-            __scrollTo($target, settings.scroll);
+            setTimeout(() => {
+                __scrollTo($target, settings.scroll);
+            }, settings.scroll.delay ?? 0);
         });
     });
 }

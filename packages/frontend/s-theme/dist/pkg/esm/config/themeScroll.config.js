@@ -16,20 +16,32 @@ export default function (api) {
         /**
          * @name                duration
          * @namespace           config.themeScroll
-         * @type                String
+         * @type                Number
          * @default             300
          *
-         * Specify the scroll duration for your theme
+         * Specify the scroll duration in ms for your theme
          *
          * @since               2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         duration: 300,
         /**
+         * @name                delay
+         * @namespace           config.themeScroll
+         * @type                Number
+         * @default             300
+         *
+         * Specify the scroll delay in ms for your theme
+         *
+         * @since               2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        delay: 300,
+        /**
          * @name                offset
          * @namespace           config.themeScroll
-         * @type                String
-         * @default             300
+         * @type                Number
+         * @default             0
          *
          * Specify the scroll offset for your theme
          *
@@ -40,31 +52,27 @@ export default function (api) {
         /**
          * @name                offsetX
          * @namespace           config.themeScroll
-         * @type                String
-         * @default             [theme.layout.offset.left]
+         * @type                Number
+         * @default             0
          *
          * Specify the scroll offset x for your theme
          *
          * @since               2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        get offsetX() {
-            return api.theme.layout.offset.left;
-        },
+        offsetX: 0,
         /**
          * @name                offsetY
          * @namespace           config.themeScroll
-         * @type                String
-         * @default             [theme.layout.offset.top]
+         * @type                Number
+         * @default             200
          *
          * Specify the scroll offset y for your theme
          *
          * @since               2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        get offsetY() {
-            return api.theme.layout.offset.top;
-        },
+        offsetY: 200,
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7R0FZRztBQUVILE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixPQUFPO1FBQ0g7Ozs7Ozs7Ozs7V0FVRztRQUNILFFBQVEsRUFBRSxHQUFHO1FBRWI7Ozs7Ozs7Ozs7V0FVRztRQUNILE1BQU0sRUFBRSxDQUFDO1FBRVQ7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksT0FBTztZQUNQLE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxNQUFNLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQztRQUN4QyxDQUFDO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksT0FBTztZQUNQLE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxNQUFNLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQztRQUN2QyxDQUFDO0tBQ0osQ0FBQztBQUNOLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7R0FZRztBQUVILE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixPQUFPO1FBQ0g7Ozs7Ozs7Ozs7V0FVRztRQUNILFFBQVEsRUFBRSxHQUFHO1FBRWI7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSxHQUFHO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILE1BQU0sRUFBRSxDQUFDO1FBRVQ7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRSxDQUFDO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRSxHQUFHO0tBQ2YsQ0FBQztBQUNOLENBQUMifQ==

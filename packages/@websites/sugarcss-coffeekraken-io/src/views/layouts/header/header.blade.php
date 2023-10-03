@@ -1,4 +1,4 @@
-<header id="header">
+{{-- <header id="header">
 
     <div class="_nav">
         <div class="_logo">
@@ -23,4 +23,4 @@
     </div>
 
 
-</header>
+</header> --}}

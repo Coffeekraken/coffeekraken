@@ -20,16 +20,16 @@
             <div class="examples">
 
                 <div class="_sidebar">
-                    <a href="#example-index" s-activate group="examples" title="Example of index.css file using Coffeekraken postcss sugar plugin">
+                    <a href="#example-index" s-activate group="examples" trigger="click,anchor,history" title="Example of index.css file using Coffeekraken postcss sugar plugin">
                         <i class="s-icon:examples"></i> index.css
                     </a>
-                    <a href="#example-sugar" s-activate group="examples" title="Example of sugar.css file using Coffeekraken postcss sugar plugin">
+                    <a href="#example-sugar" s-activate group="examples" trigger="click,anchor,history" title="Example of sugar.css file using Coffeekraken postcss sugar plugin">
                         <i class="s-icon:examples"></i> sugar.css
                     </a>
-                    <a href="#example-layout" s-activate group="examples" title="Example using the @sugar.layout Coffeekraken postcss sugar plugin mixin">
+                    <a href="#example-layout" s-activate group="examples" trigger="click,anchor,history" title="Example using the @sugar.layout Coffeekraken postcss sugar plugin mixin">
                         <i class="s-icon:examples"></i> layout.css
                     </a>
-                    <a href="#example-media" s-activate group="examples" title="Example using the @sugar.media Coffeekraken postcss sugar plugin mixin">
+                    <a href="#example-media" s-activate group="examples" trigger="click,anchor,history" title="Example using the @sugar.media Coffeekraken postcss sugar plugin mixin">
                         <i class="s-icon:examples"></i> media.css
                     </a>
                     <a href="#example-component" s-activate group="examples" title="Example using the scopes Coffeekraken postcss sugar plugin feature">

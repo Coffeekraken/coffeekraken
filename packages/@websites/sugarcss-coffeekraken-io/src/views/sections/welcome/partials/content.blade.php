@@ -2,7 +2,7 @@
 <div class="_title">
     @include ('sugar.logos.coffeekraken.picto')
 
-    <h1 class="s-typo:h3:bold s-mbe:30">
+    <h1 class="s-typo:h3:bold">
         <span class="s-tc:accent">Sugar</span>css
     </h1>
 </div>

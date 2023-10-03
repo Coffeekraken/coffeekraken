@@ -285,6 +285,18 @@ export default class SActivateFeature extends __SFeature {
                                 this.unactivate();
                             });
                             break;
+                        case 'history':
+                            window.addEventListener('popstate', (e) => {
+                                if (
+                                    document.location.hash ===
+                                    this._hrefSelector
+                                ) {
+                                    this.activate();
+                                } else {
+                                    this.unactivate();
+                                }
+                            });
+                            break;
                         case 'anchor':
                             if (document.location.hash === this._hrefSelector) {
                                 this.activate();

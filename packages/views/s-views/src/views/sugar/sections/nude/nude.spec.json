@@ -22,7 +22,7 @@
         },
         "nodes": {
             "type": "Node[]",
-            "description": "Specify some nodes to render",
+            "description": "Specify some nodes to render"
         },
         "align": {
             "type": "Select",

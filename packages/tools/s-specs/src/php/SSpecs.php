@@ -328,6 +328,13 @@ class SSpecs
 
         // read the spec file
         $specJson = json_decode(file_get_contents($finalSpecFilePath), true);
+        if ($specJson == null && json_last_error() != JSON_ERROR_NONE) {
+            throw new Exception(
+                '[SSpecs] The requested spec file "' .
+                    $finalSpecFilePath .
+                    '" is not a valid json file...'
+            );
+        }
 
         // make sure we have an object
         $specJson = \Sugar\convert\toObject($specJson);

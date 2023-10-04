@@ -1,0 +1,47 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.doc.10.-Icons",
+    "name": "10. Icons",
+    "type": {
+        "types": [
+            {
+                "type": "Markdown"
+            }
+        ],
+        "raw": "Markdown"
+    },
+    "menu": {
+        "tree": [
+            "Documentation"
+        ],
+        "slug": "/doc/icons"
+    },
+    "platform": [
+        {
+            "name": "md",
+            "description": ""
+        }
+    ],
+    "namespace": "@website.sugarcss-coffeekraken-io.doc",
+    "status": "stable",
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "45-icons.md.twig",
+    "extension": "md",
+    "relPath": "src/doc/45-icons.md.twig",
+    "children": {},
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/src/doc/45-icons.md.twig",
+    "docHtml": "<!-- This file has been generated using\n     the \"@coffeekraken/s-markdown-builder\" package.\n     !!! Do not edit it directly... -->\n\n<!-- body -->\n\n<!--\n/**\n* @name            10. Icons\n* @namespace       doc\n* @type            Markdown\n* @platform        md\n* @status          stable\n* @menu            Documentation           /doc/icons\n*\n* @since           2.0.0\n* @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n*/\n-->\n\n<h1 id=\"icons\">Icons</h1>\n<p>Icons are very important these days in web design/development. The bad part of this is that icons are often coming from different sources like <a href=\"https://fontawesome.com/\">Font Awesome</a>, <a href=\"https://fonts.google.com/icons\">Google icons</a>, some others or even plain SVG files.</p>\n<p>This make the treatment and usage of these icons a pain in the ass to say at least...</p>\n<p>Our solution to this is the <code>@s.icon.classes</code> mixin that let you register all of your icons from different sources and use them down the line with a single class syntax the looks like <code>.s-icon:user</code>.</p>\n<blockquote>\n<p>Your final icons will be generated in a <strong>font-icon format</strong> so you can apply them colors, and all features a text can have.</p>\n</blockquote>\n<h2 id=\"register-some-icons\">Register some icons</h2>\n<p>To register some icons, simply call the <code>@s.icon.classes</code> mixin with the list of icons you want in your website like so:</p>\n<s-code-example>\n   <template language=\"css\">\n\n@s.icon.classes (\n    fab:vuejs\n    fa:tasks\n    fa:hammer:todo\n    fs:src/icons/read-direction.svg:support-rtl\n    fs:src/icons/ *.svg\n    );\n\n\n   </template>\n</s-code-example>\n\n<p>Each line define an icon using this syntax:</p>\n<p><code>{protocol}:{name-or-path}:{internal-name-you-want}</code></p>\n<ul>\n<li><code>protocol</code>: This define the source of the icon. See bellow the list of supported ones</li>\n<li><code>name-or-path</code>: This define the name or path where to find your icon</li>\n<li><code>internal-name-you-want</code>: This is optional and let you change the name to use which one you want internally</li>\n</ul>\n<h2 id=\"protocols\">Protocols</h2>\n<p>For now, we support 2 protocols that are:</p>\n<ul>\n<li><code>fa|fab|fas|fad|fal</code>: These are <a href=\"https://fontawesome.com\">Font awesome</a> icons</li>\n<li><code>fs</code>: This is <code>filesystem</code> plain SVG icons<ul>\n<li>Support glob paths like <code>src/icons/*.svg</code></li>\n</ul>\n</li>\n</ul>\n<blockquote>\n<p>These are the supported protocols that we have for now. We can as well add some depending on your needs and requests through our different communication channels.</p>\n</blockquote>\n<h2 id=\"usage\">Usage</h2>\n<p>To use your registered icons, simply reference them inside your html like so:</p>\n<s-code-example>\n   <template language=\"html\">\n\n<i class=\"s-icon s-icon-vuejs\"></i>\n<i class=\"s-icon s-icon-support-rtl\"></i>\n<!-- etc... -->\n\n\n   </template>\n</s-code-example>\n\n"
+}

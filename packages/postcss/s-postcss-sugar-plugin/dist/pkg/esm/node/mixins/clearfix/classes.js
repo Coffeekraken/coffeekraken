@@ -75,7 +75,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         return ` * @example        html         ${clearfixName}
             *   <div class="s-clearfix${clearfixName === finalParams.defaultClearfix
             ? ``
-            : `:${clearfixName}`} s-bg:ui">
+            : `:${clearfixName}`} s-bc:ui">
             *       <img src="https://picsum.photos/200/200" style="float: right" />
             *   </div>
             * `;

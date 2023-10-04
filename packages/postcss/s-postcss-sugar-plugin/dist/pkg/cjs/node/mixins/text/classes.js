@@ -70,41 +70,41 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @cssClass             s-text:capitalize             Apply the capitalize text transform
         * 
         * @example        html          Aligns
-        *   <div class="s-text:left s-bg:main s-p:20 s-mbe:30 s-radius">
+        *   <div class="s-text:left s-bc:main s-p:20 s-mbe:30 s-radius">
         *       (left) ${faker_1.default.name.findName()}
         *   </div>
-        *   <div class="s-text:right s-bg:main s-p:20 s-mbe:30 s-radius">
+        *   <div class="s-text:right s-bc:main s-p:20 s-mbe:30 s-radius">
         *       (right) ${faker_1.default.name.findName()}
         *   </div>
-        *   <div class="s-text:center s-bg:main s-p:20 s-mbe:30 s-radius">
+        *   <div class="s-text:center s-bc:main s-p:20 s-mbe:30 s-radius">
         *       (center) ${faker_1.default.name.findName()}
         *   </div>
-        *   <div class="s-text:start s-bg:main s-p:20 s-mbe:30 s-radius">
+        *   <div class="s-text:start s-bc:main s-p:20 s-mbe:30 s-radius">
         *       (start) ${faker_1.default.name.findName()}
         *   </div>
-        *   <div class="s-text:end s-bg:main s-p:20 s-mbe:30 s-radius">
+        *   <div class="s-text:end s-bc:main s-p:20 s-mbe:30 s-radius">
         *       (end) ${faker_1.default.name.findName()}
         *   </div>
         * 
         * @example        html          Decorations
-        *   <div class="s-text:overline s-bg:main s-p:20 s-mbe:30 s-radius">
+        *   <div class="s-text:overline s-bc:main s-p:20 s-mbe:30 s-radius">
         *       (overline) ${faker_1.default.name.findName()}
         *   </div>
-        *   <div class="s-text:underline s-bg:main s-p:20 s-mbe:30 s-radius">
+        *   <div class="s-text:underline s-bc:main s-p:20 s-mbe:30 s-radius">
         *       (underline) ${faker_1.default.name.findName()}
         *   </div>
-        *   <div class="s-text:line-through s-bg:main s-p:20 s-mbe:30 s-radius">
+        *   <div class="s-text:line-through s-bc:main s-p:20 s-mbe:30 s-radius">
         *       (line-through) ${faker_1.default.name.findName()}
         *   </div>
         * 
         * @example        html          Transforms
-        *   <div class="s-text:lowercase s-bg:main s-p:20 s-mbe:30 s-radius">
+        *   <div class="s-text:lowercase s-bc:main s-p:20 s-mbe:30 s-radius">
         *       (lowercase) ${faker_1.default.name.findName()}
         *   </div>
-        *   <div class="s-text:uppercase s-bg:main s-p:20 s-mbe:30 s-radius">
+        *   <div class="s-text:uppercase s-bc:main s-p:20 s-mbe:30 s-radius">
         *       (uppercase) ${faker_1.default.name.findName()}
         *   </div>
-        *   <div class="s-text:capitalize s-bg:main s-p:20 s-mbe:30 s-radius">
+        *   <div class="s-text:capitalize s-bc:main s-p:20 s-mbe:30 s-radius">
         *       (capitalize) ${faker_1.default.name.findName()}
         *   </div>
         * 

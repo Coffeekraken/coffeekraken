@@ -48,12 +48,8 @@ function expandPleasantCssClassnames($html)
 
     // grab do not touch tags
     $tags = ['code', 'template'];
-    $tags = [];
     foreach ($tags as $tag) {
         $tagsHtmls = get_tag($tag, $html);
-
-        // print '<pre>';
-        // print_r($tagsHtmls);
 
         foreach ($tagsHtmls[0] as $tagHtml) {
             $id = uniqid();

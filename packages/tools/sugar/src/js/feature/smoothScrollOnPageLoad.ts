@@ -39,7 +39,9 @@ export default function __smoothScrollOnPageLoad(
 ): void {
     settings = __deepMerge(
         {
-            scroll: {},
+            scroll: {
+                delay: document?.env?.SUGAR?.theme?.get?.('scroll')?.delay ?? 0,
+            },
         },
         settings,
     );

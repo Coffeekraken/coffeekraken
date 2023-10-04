@@ -78,31 +78,31 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * 
         * @example        html          Simple grid
         *   <div class="s-flex:row:wrap">
-        *     <div class="s-bg:main s-width:50 s-p:30">${__faker.name.findName()}</div>
-        *     <div class="s-bg:accent s-width:50 s-p:30">${__faker.name.findName()}</div>
-        *     <div class="s-bg:complementary s-width:50 s-p:30">${__faker.name.findName()}</div>
-        *     <div class="s-bg:info s-width:50 s-p:30">${__faker.name.findName()}</div>
+        *     <div class="s-bc:main s-width:50 s-p:30">${__faker.name.findName()}</div>
+        *     <div class="s-bc:accent s-width:50 s-p:30">${__faker.name.findName()}</div>
+        *     <div class="s-bc:complementary s-width:50 s-p:30">${__faker.name.findName()}</div>
+        *     <div class="s-bc:info s-width:50 s-p:30">${__faker.name.findName()}</div>
         *   </div>
         * 
         * @example        html          Grow
         *   <div class="s-flex:row">
-        *     <div class="s-grow s-bg:main s-p:30">${__faker.name.findName()}</div>
-        *     <div class="s-bg:accent s-p:30">${__faker.name.findName()}</div>
-        *     <div class="s-bg:complementary s-p:30">${__faker.name.findName()}</div>
+        *     <div class="s-grow s-bc:main s-p:30">${__faker.name.findName()}</div>
+        *     <div class="s-bc:accent s-p:30">${__faker.name.findName()}</div>
+        *     <div class="s-bc:complementary s-p:30">${__faker.name.findName()}</div>
         *   </div>
         * 
         * @example      html          Orders
         *   <div class="s-flex:row">
-        *     <div class="s-order:3 s-bg:main s-p:30">${__faker.name.findName()}</div>
-        *     <div class="s-bg:accent s-p:30">${__faker.name.findName()}</div>
-        *     <div class="s-bg:complementary s-p:30">${__faker.name.findName()}</div>
+        *     <div class="s-order:3 s-bc:main s-p:30">${__faker.name.findName()}</div>
+        *     <div class="s-bc:accent s-p:30">${__faker.name.findName()}</div>
+        *     <div class="s-bc:complementary s-p:30">${__faker.name.findName()}</div>
         *   </div>
         * 
         * @example          html            Aligns
         *   <div class="s-flex:row:align-end">
-        *     <div class="s-bg:main s-p:30">${__faker.name.findName()}</div>
-        *     <div class="s-bg:accent s-p:30">${__faker.name.findName()}<br />${__faker.name.findName()}<br />${__faker.name.findName()}<br />${__faker.name.findName()}<br />${__faker.name.findName()}</div>
-        *     <div class="s-bg:complementary s-p:30">${__faker.name.findName()}</div>
+        *     <div class="s-bc:main s-p:30">${__faker.name.findName()}</div>
+        *     <div class="s-bc:accent s-p:30">${__faker.name.findName()}<br />${__faker.name.findName()}<br />${__faker.name.findName()}<br />${__faker.name.findName()}<br />${__faker.name.findName()}</div>
+        *     <div class="s-bc:complementary s-p:30">${__faker.name.findName()}</div>
         *   </div>
         * 
         * @since      2.0.0

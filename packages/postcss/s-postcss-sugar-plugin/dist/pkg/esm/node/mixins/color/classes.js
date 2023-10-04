@@ -63,7 +63,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
         .join('\n')}
         ${Object.keys(__STheme.getTheme().baseColors())
         .map((colorName) => {
-        return ` * @cssClass            s-bg:${colorName}       Apply the ${colorName} background color`;
+        return ` * @cssClass            s-bc:${colorName}       Apply the ${colorName} background color`;
     })
         .join('\n')}
         *
@@ -77,7 +77,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
         * @example        html          Background color
         ${Object.keys(__STheme.getTheme().baseColors())
         .map((colorName) => {
-        return ` * <div class="s-bg:${colorName} s-p:10 s-mb:30 s-radius">${colorName}</div>`;
+        return ` * <div class="s-bc:${colorName} s-p:10 s-mb:30 s-radius">${colorName}</div>`;
     })
         .join('\n')}
         * 
@@ -117,7 +117,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
         cssArray
             .comment(() => [
             `/**`,
-            ` * @name           s-bg:${colorName}`,
+            ` * @name           s-bc:${colorName}`,
             ` * @namespace          sugar.style.helpers.color`,
             ` * @type           CssClass`,
             ` * @platform       css`,
@@ -126,13 +126,13 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             ` * This class allows you to apply the "${colorName}" color to the background of an HTMLElement`,
             ` *`,
             ` * @example        html`,
-            ` * <h1 class="s-bg:${colorName}">`,
+            ` * <h1 class="s-bc:${colorName}">`,
             ` *     Something cool`,
             ` * </h1>`,
             ` */`,
         ].join('\n'))
             .code(`
-                .s-bg-${colorName} {
+                .s-bc-${colorName} {
                     background-color: s.color(${colorName}) !important;
                 }
         `, { type: 'CssClass' });
@@ -167,7 +167,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
         cssArray
             .comment(() => [
             `/**`,
-            ` * @name           s-bg:${colorName}`,
+            ` * @name           s-bc:${colorName}`,
             ` * @namespace          sugar.style.helpers.color`,
             ` * @type           CssClass`,
             ` * @platform       css`,
@@ -176,13 +176,13 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             ` * This class allows you to apply the "${colorName}" color to the background of an HTMLElement`,
             ` *`,
             ` * @example        html`,
-            ` * <h1 class="s-bg:${colorName}">`,
+            ` * <h1 class="s-bc:${colorName}">`,
             ` *     Something cool`,
             ` * </h1>`,
             ` */`,
         ].join('\n'))
             .code(`
-                .s-bg-${colorName} {
+                .s-bc-${colorName} {
                     background-color: s.color(${colorName}) !important;
                 }
         `, { type: 'CssClass' });
@@ -190,7 +190,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
     cssArray
         .comment(() => [
         `/**`,
-        ` * @name           s-bg:odd`,
+        ` * @name           s-bc:odd`,
         ` * @namespace          sugar.style.helpers.color`,
         ` * @type           CssClass`,
         ` * @platform       css`,
@@ -199,22 +199,22 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
         ` * This class allows you to scope the applied bgs on the direct childs to only be applied on "odd" HTMLElement`,
         ` *`,
         ` * @example        html`,
-        ` * <ol class="s-bg:odd">`,
-        ` *     <li class="s-bg-accent">Something cool</li>`,
-        ` *     <li class="s-bg-accent">Something cool</li>`,
-        ` *     <li class="s-bg-accent">Something cool</li>`,
+        ` * <ol class="s-bc:odd">`,
+        ` *     <li class="s-bc-accent">Something cool</li>`,
+        ` *     <li class="s-bc-accent">Something cool</li>`,
+        ` *     <li class="s-bc-accent">Something cool</li>`,
         ` * </li>`,
         ` */`,
     ].join('\n'))
         .code(`
-            .s-bg-odd > *:nth-child(even) {
+            .s-bc-odd > *:nth-child(even) {
               background-color: transparent !important;
             }
     `, { type: 'CssClass' });
     cssArray
         .comment(() => [
         `/**`,
-        ` * @name           s-bg:even`,
+        ` * @name           s-bc:even`,
         ` * @namespace          sugar.style.helpers.color`,
         ` * @type           CssClass`,
         ` * @platform       css`,
@@ -223,15 +223,15 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
         ` * This class allows you to scope the applied colors on the direct childs to only be applied on "even" HTMLElement`,
         ` *`,
         ` * @example        html`,
-        ` * <ol class="s-bg:even">`,
-        ` *     <li class="s-bg-accent">Something cool</li>`,
-        ` *     <li class="s-bg-accent">Something cool</li>`,
-        ` *     <li class="s-bg-accent">Something cool</li>`,
+        ` * <ol class="s-bc:even">`,
+        ` *     <li class="s-bc-accent">Something cool</li>`,
+        ` *     <li class="s-bc-accent">Something cool</li>`,
+        ` *     <li class="s-bc-accent">Something cool</li>`,
         ` * </li>`,
         ` */`,
     ].join('\n'))
         .code(`
-        .s-bg-even > *:nth-child(even) {
+        .s-bc-even > *:nth-child(even) {
             background-color: transparent !important;
         }
     `, { type: 'CssClass' });

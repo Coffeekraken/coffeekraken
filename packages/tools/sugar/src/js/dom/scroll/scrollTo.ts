@@ -58,14 +58,15 @@ export default function __scrollTo(
     target: HTMLElement | 'top' | 'bottom' | 'left' | 'right',
     settings: Partial<IScrollToSettings> = {},
 ): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         settings = {
             $elm: window,
-            duration: 500,
+            duration:
+                document.env?.SUGAR?.theme?.get?.('scroll')?.duration ?? 500,
             easing: easeInOutQuad,
             offset: 0,
-            offsetX: undefined,
-            offsetY: undefined,
+            offsetX: document.env?.SUGAR?.theme?.get?.('scroll')?.offsetX,
+            offsetY: document.env?.SUGAR?.theme?.get?.('scroll')?.offsetY,
             align: 'start',
             justify: 'start',
             onFinish: null,
@@ -125,7 +126,11 @@ export default function __scrollTo(
             targetX = currentX;
         let targetBounds;
         try {
+            if (window.getComputedStyle(target).display === 'none') {
+                target.style.display = 'block';
+            }
             targetBounds = target.getBoundingClientRect();
+            target.style.display = null;
         } catch (e) {
             targetBounds = {
                 top: 0,

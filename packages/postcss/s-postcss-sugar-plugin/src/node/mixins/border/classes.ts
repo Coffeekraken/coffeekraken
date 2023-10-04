@@ -92,7 +92,7 @@ export default function ({
             .map((radiusName) => {
                 if (radiusName === 'default') return '';
                 return `
-              *   <div class="s-radius:${radiusName} s-width:20 s-bg:main s-flex:center s-ratio:1">
+              *   <div class="s-radius:${radiusName} s-width:20 s-bc:main s-flex:center s-ratio:1">
               *     ${radiusName}
               *   </div> 
             `;

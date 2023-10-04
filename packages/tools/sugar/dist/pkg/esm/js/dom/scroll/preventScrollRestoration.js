@@ -16,10 +16,10 @@
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function () {
+export default function preventScrollRestoration() {
     if ('scrollRestoration' in history) {
         // Back off, browser, I got this...
         history.scrollRestoration = 'manual';
     }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7Ozs7OztHQWlCRztBQUNILE1BQU0sQ0FBQyxPQUFPO0lBQ1YsSUFBSSxtQkFBbUIsSUFBSSxPQUFPLEVBQUU7UUFDaEMsbUNBQW1DO1FBQ25DLE9BQU8sQ0FBQyxpQkFBaUIsR0FBRyxRQUFRLENBQUM7S0FDeEM7QUFDTCxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7Ozs7OztHQWlCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQVUsd0JBQXdCO0lBQzVDLElBQUksbUJBQW1CLElBQUksT0FBTyxFQUFFO1FBQ2hDLG1DQUFtQztRQUNuQyxPQUFPLENBQUMsaUJBQWlCLEdBQUcsUUFBUSxDQUFDO0tBQ3hDO0FBQ0wsQ0FBQyJ9

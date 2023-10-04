@@ -3,7 +3,6 @@ import __deepMerge from '../../shared/object/deepMerge.js';
 import type { IScrollToSettings } from '../dom/scroll/scrollTo.js';
 
 import __smoothScrollOnAnchorLinks from './smoothScrollOnAnchorLinks.js';
-import __smoothScrollOnHashChange from './smoothScrollOnHashChange.js';
 import __smoothScrollOnPageLoad from './smoothScrollOnPageLoad.js';
 
 /**
@@ -53,5 +52,5 @@ export default function __smoothScroll(
 
     __smoothScrollOnPageLoad(settings);
     __smoothScrollOnAnchorLinks(settings);
-    __smoothScrollOnHashChange(settings);
+    // __smoothScrollOnHashChange(settings);
 }

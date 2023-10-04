@@ -226,7 +226,7 @@ export default function (api) {
                  * @since           2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                glob: '+(css|fonts|favicon|img|js)/**/*',
+                glob: '+(css|fonts|video|favicon|img|js)/**/*',
                 /**
                  * @name            to
                  * @namespace       config.staticBuilder.assets.dist

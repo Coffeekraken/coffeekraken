@@ -78,23 +78,23 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         *
         * 
         * @example        html          Inline
-        *   <p class="s-bg:accent s-radius s-pi:30 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
-        *   <p class="s-bg:complementary s-radius s-pis:50 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
-        *   <p class="s-bg:main s-radius s-pis:80 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
-        *   <p class="s-bg:error s-radius s-pis:100 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
+        *   <p class="s-bc:accent s-radius s-pi:30 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
+        *   <p class="s-bc:complementary s-radius s-pis:50 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
+        *   <p class="s-bc:main s-radius s-pis:80 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
+        *   <p class="s-bc:error s-radius s-pis:100 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
         * 
         * @example            html                Block
-        *   <div class="s-bg:accent s-radius s-pbs:30 s-pbe:40 s-text:center s-mbe:20">${__faker.name.findName()}</div>
-        *   <div class="s-bg:complementary s-radius s-pb:30 s-text:center s-mbe:20">${__faker.name.findName()}</div>
-        *   <div class="s-bg:main s-radius s-pbs:50 s-pbe:30 s-text:center s-mbe:20">${__faker.name.findName()}</div>
-        *   <div class="s-bg:error s-radius s-pbs:100 s-pbe:60 s-text:center s-mbe:20">${__faker.name.findName()}</div>
+        *   <div class="s-bc:accent s-radius s-pbs:30 s-pbe:40 s-text:center s-mbe:20">${__faker.name.findName()}</div>
+        *   <div class="s-bc:complementary s-radius s-pb:30 s-text:center s-mbe:20">${__faker.name.findName()}</div>
+        *   <div class="s-bc:main s-radius s-pbs:50 s-pbe:30 s-text:center s-mbe:20">${__faker.name.findName()}</div>
+        *   <div class="s-bc:error s-radius s-pbs:100 s-pbe:60 s-text:center s-mbe:20">${__faker.name.findName()}</div>
         * 
         * @example       html          RTL
         * <div dir="rtl">
-        *   <p class="s-bg:accent s-radius s-pi:30 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
-        *   <p class="s-bg:complementary s-radius s-pis:50 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
-        *   <p class="s-bg:main s-radius s-pis:80 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
-        *   <p class="s-bg:error s-radius s-pis:100 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
+        *   <p class="s-bc:accent s-radius s-pi:30 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
+        *   <p class="s-bc:complementary s-radius s-pis:50 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
+        *   <p class="s-bc:main s-radius s-pis:80 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
+        *   <p class="s-bc:error s-radius s-pis:100 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
         * </div>
         * 
         * @since      2.0.0
@@ -103,9 +103,9 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     `);
     paddingsKeys.forEach((spaceName) => {
         // margins
-        const clsMargin = `s-p:${spaceName}`;
+        const clsPadding = `s-p:${spaceName}`;
         vars.comment(() => `/**
-    * @name            ${clsMargin}
+    * @name            ${clsPadding}
     * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
@@ -114,18 +114,18 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" padding style around any HTMLElement
     * 
     * @example      html
-    * <span class="${clsMargin.replace(':', ':')}">Something cool</span>
+    * <span class="${clsPadding.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
-   .${clsMargin.replace(':', '-')} {
+   .${clsPadding.replace(':', '-')} {
         padding: s.padding(${spaceName});
    }`, { type: 'CssClass' });
-        const clsMarginTop = `s-pbs:${spaceName}`;
+        const clsPaddingBlockStart = `s-pbs:${spaceName}`;
         vars.comment(() => `/**
-    * @name            ${clsMarginTop}
+    * @name            ${clsPaddingBlockStart}
     * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
@@ -134,18 +134,18 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" block start padding style to any HTMLElement
     * 
     * @example      html
-    * <span class="${clsMarginTop.replace(':', ':')}">Something cool</span>
+    * <span class="${clsPaddingBlockStart.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
-   .${clsMarginTop.replace(':', '-')} {
+   .${clsPaddingBlockStart.replace(':', '-')} {
         padding-block-start: s.padding(${spaceName}) !important;
    }`, { type: 'CssClass' });
-        const clsMarginBottom = `s-pbe:${spaceName}`;
+        const clsPaddingBlockEnd = `s-pbe:${spaceName}`;
         vars.comment(() => `/**
-    * @name            ${clsMarginBottom}
+    * @name            ${clsPaddingBlockEnd}
     * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
@@ -154,18 +154,18 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" block end padding style to any HTMLElement
     * 
     * @example      html
-    * <span class="${clsMarginBottom.replace(':', ':')}">Something cool</span>
+    * <span class="${clsPaddingBlockEnd.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
-   .${clsMarginBottom.replace(':', '-')} {
+   .${clsPaddingBlockEnd.replace(':', '-')} {
         padding-block-end: s.padding(${spaceName}) !important;
    }`, { type: 'CssClass' });
-        const clsMarginLeft = `s-pis:${spaceName}`;
+        const clsPaddingInlineStart = `s-pis:${spaceName}`;
         vars.comment(() => `/**
-    * @name            ${clsMarginLeft}
+    * @name            ${clsPaddingInlineStart}
     * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
@@ -174,18 +174,18 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" inline start padding style to any HTMLElement
     * 
     * @example      html
-    * <span class="${clsMarginLeft.replace(':', ':')}">Something cool</span>
+    * <span class="${clsPaddingInlineStart.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
-   .${clsMarginLeft.replace(':', '-')} {
+   .${clsPaddingInlineStart.replace(':', '-')} {
         padding-inline-start: s.padding(${spaceName}) !important;
    }`, { type: 'CssClass' });
-        const clsMarginRight = `s-pie:${spaceName}`;
+        const clsPaddingInlineEnd = `s-pie:${spaceName}`;
         vars.comment(() => `/**
-    * @name            .${clsMarginRight}
+    * @name            .${clsPaddingInlineEnd}
     * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
@@ -194,18 +194,18 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" inline end padding style to any HTMLElement
     * 
     * @example      html
-    * <span class="${clsMarginRight.replace(':', ':')}">Something cool</span>
+    * <span class="${clsPaddingInlineEnd.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
-   .${clsMarginRight.replace(':', '-')} {
+   .${clsPaddingInlineEnd.replace(':', '-')} {
         padding-inline-end: s.padding(${spaceName}) !important;
    }`, { type: 'CssClass' });
-        const clsMarginX = `s-pi:${spaceName}`;
+        const clsPaddingInline = `s-pi:${spaceName}`;
         vars.comment(() => `/**
-    * @name            ${clsMarginX}
+    * @name            ${clsPaddingInline}
     * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
@@ -214,19 +214,19 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" inline start and end padding style to any HTMLElement
     * 
     * @example      html
-    * <span class="${clsMarginX.replace(':', ':')}">Something cool</span>
+    * <span class="${clsPaddingInline.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
-     .${clsMarginX.replace(':', '-')} {
+     .${clsPaddingInline.replace(':', '-')} {
         padding-inline-start: s.padding(${spaceName}) !important;
         padding-inline-end: s.padding(${spaceName}) !important;
    }`, { type: 'CssClass' });
-        const clsMarginY = `s-pb:${spaceName}`;
+        const clsPaddingBlock = `s-pb:${spaceName}`;
         vars.comment(() => `/**
-    * @name            ${clsMarginY}
+    * @name            ${clsPaddingBlock}
     * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
@@ -235,17 +235,17 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" block start and end padding style to any HTMLElement
     * 
     * @example      html
-    * <span class="${clsMarginY.replace(':', ':')}">Something cool</span>
+    * <span class="${clsPaddingBlock.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
-   .${clsMarginY.replace(':', '-')} {
+   .${clsPaddingBlock.replace(':', '-')} {
         padding-block-start: s.padding(${spaceName}) !important;
         padding-block-end: s.padding(${spaceName}) !important;
    }`, { type: 'CssClass' });
     });
     return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBQzdDLE9BQU8sRUFBRSxXQUFXLEVBQUUsTUFBTSwyQkFBMkIsQ0FBQztBQUN4RCxPQUFPLE9BQU8sTUFBTSxPQUFPLENBQUM7QUFFNUI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FtQkc7QUFFSCxNQUFNLHlDQUEwQyxTQUFRLFlBQVk7SUFDaEUsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTyxFQUFFLENBQUM7SUFDZCxDQUFDO0NBQ0o7QUFJRCxPQUFPLEVBQUUseUNBQXlDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFbEUsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLE9BQU8sRUFDUCxXQUFXLEdBTWQ7SUFDRyxNQUFNLFdBQVcscUJBQ1YsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBRyxJQUFJLE9BQU8sRUFBRSxDQUFDO0lBRTNCLE1BQU0sV0FBVyxHQUFHLFFBQVEsQ0FBQyxHQUFHLENBQUMsU0FBUyxDQUFDLENBQUM7SUFDNUMsTUFBTSxZQUFZLEdBQUcsV0FBVyxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsV0FBVyxDQUFDLEVBQUUsQ0FBQyxTQUFTLENBQUMsQ0FBQyxDQUFDO0lBRXhFLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztVQXFCSixZQUFZO1NBQ1QsR0FBRyxDQUFDLENBQUMsU0FBUyxFQUFFLEVBQUU7UUFDZixJQUFJLFNBQVMsS0FBSyxTQUFTO1lBQUUsT0FBTyxFQUFFLENBQUM7UUFDdkMsT0FBTztZQUNILHVCQUF1QixTQUFTLHVCQUF1QixTQUFTLHVCQUF1QjtZQUN2Rix3QkFBd0IsU0FB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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBQzdDLE9BQU8sRUFBRSxXQUFXLEVBQUUsTUFBTSwyQkFBMkIsQ0FBQztBQUN4RCxPQUFPLE9BQU8sTUFBTSxPQUFPLENBQUM7QUFFNUI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FtQkc7QUFFSCxNQUFNLHlDQUEwQyxTQUFRLFlBQVk7SUFDaEUsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTyxFQUFFLENBQUM7SUFDZCxDQUFDO0NBQ0o7QUFJRCxPQUFPLEVBQUUseUNBQXlDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFbEUsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLE9BQU8sRUFDUCxXQUFXLEdBTWQ7SUFDRyxNQUFNLFdBQVcscUJBQ1YsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBRyxJQUFJLE9BQU8sRUFBRSxDQUFDO0lBRTNCLE1BQU0sV0FBVyxHQUFHLFFBQVEsQ0FBQyxHQUFHLENBQUMsU0FBUyxDQUFDLENBQUM7SUFDNUMsTUFBTSxZQUFZLEdBQUcsV0FBVyxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsV0FBVyxDQUFDLEVBQUUsQ0FBQyxTQUFTLENBQUMsQ0FBQyxDQUFDO0lBRXhFLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztVQXFCSixZQUFZO1NBQ1QsR0FBRyxDQUFDLENBQUMsU0FBUyxFQUFFLEVBQUU7UUFDZixJQUFJLFNBQVMsS0FBSyxTQUFTO1lBQUUsT0FBTyxFQUFFLENBQUM7UUFDdkMsT0FBTztZQUNILHVCQUF1QixTQUFTLHVCQUF1QixTQUFTLHVCQUF1QjtZQUN2Rix3QkFBd0IsU0FB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

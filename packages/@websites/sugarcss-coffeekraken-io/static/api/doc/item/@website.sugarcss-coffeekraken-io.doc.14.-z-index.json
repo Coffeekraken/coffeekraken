@@ -1,0 +1,47 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.doc.14.-z-index",
+    "name": "14. z-index",
+    "type": {
+        "types": [
+            {
+                "type": "Markdown"
+            }
+        ],
+        "raw": "Markdown"
+    },
+    "menu": {
+        "tree": [
+            "Documentation"
+        ],
+        "slug": "/doc/z-index"
+    },
+    "platform": [
+        {
+            "name": "md",
+            "description": ""
+        }
+    ],
+    "namespace": "@website.sugarcss-coffeekraken-io.doc",
+    "status": "stable",
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "65-zIndex.md.twig",
+    "extension": "md",
+    "relPath": "src/doc/65-zIndex.md.twig",
+    "children": {},
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/src/doc/65-zIndex.md.twig",
+    "docHtml": "<!-- This file has been generated using\n     the \"@coffeekraken/s-markdown-builder\" package.\n     !!! Do not edit it directly... -->\n\n<!-- body -->\n\n<!--\n/**\n* @name            14. z-index\n* @namespace       doc\n* @type            Markdown\n* @platform        md\n* @status          stable\n* @menu            Documentation           /doc/z-index\n*\n* @since           2.0.0\n* @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n*/\n-->\n\n<h1 id=\"z-index\">z-index</h1>\n<p>To avoid headaches, here&#39;s some z-index where you can find our UI elements:</p>\n<ul>\n<li><code>50</code>: Tooltips, dropdowns, etc...</li>\n<li><code>100</code>: Backdrop</li>\n<li><code>200</code>: Floating UI like datetime picker, color picker, etc...</li>\n</ul>\n"
+}

@@ -153,10 +153,10 @@ export default class SDashboard extends __SClass {
         document.body.appendChild(this._$focusItem);
 
         // shortcuts
-        __hotkey('ctrl+s').on('press', () => {
-            this.open();
-        });
-        __hotkey('ctrl+x').on('press', () => {
+        __hotkey('ctrl+x', {
+            title: 'Dashboard',
+            description: 'Open the Sugar dashboard',
+        }).on('press', () => {
             this.open();
         });
 

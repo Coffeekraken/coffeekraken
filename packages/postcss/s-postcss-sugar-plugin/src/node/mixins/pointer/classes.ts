@@ -112,7 +112,7 @@ export default function ({
     * This class allows you to apply a "<yellow>none</yellow>" pointer events style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-pointer-events\:none s-bg:accent">
+    * <div class="s-pointer-events\:none s-bc:accent">
     *     <div class="s-center-abs">I'm a cool overflow auto container</div>
     * </div>
     */
@@ -136,7 +136,7 @@ export default function ({
     * This class allows you to apply a "<yellow>all</yellow>" pointer events style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-pointer-events\:all s-bg:accent">
+    * <div class="s-pointer-events\:all s-bc:accent">
     *     <div class="s-center-abs">I'm a cool overflow auto container</div>
     * </div>
     */
@@ -160,7 +160,7 @@ export default function ({
     * This class allows you to apply a "<yellow>auto</yellow>" pointer events style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-pointer-events\:auto s-bg:accent">
+    * <div class="s-pointer-events\:auto s-bc:accent">
     *     <div class="s-center-abs">I'm a cool overflow auto container</div>
     * </div>
     */
@@ -184,7 +184,7 @@ export default function ({
     * This class allows you to apply a "<yellow>fill</yellow>" pointer events style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-pointer-events\:fill s-bg:accent">
+    * <div class="s-pointer-events\:fill s-bc:accent">
     *     <div class="s-center-abs">I'm a cool overflow auto container</div>
     * </div>
     */

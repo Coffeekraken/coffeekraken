@@ -85,10 +85,10 @@ export default function ({
                 const id = `s-transition-${__uniqid()}`;
                 return `
                 * @example          html        ${transition}
-                *   <div class="s-bg:main-surface s-radius:30" id="${id}">
+                *   <div class="s-bc:main-surface s-radius:30" id="${id}">
                 *      <div class="s-transition${
                     transition === 'default' ? '' : `:${transition}`
-                } s-ratio:1 s-bg:accent s-radius:30"></div>
+                } s-ratio:1 s-bc:accent s-radius:30"></div>
                 *       <style>
                 *           #${id} > div { position: relative; left: 0; width: 100px; }
                 *           #${id}:hover > div { left: calc(100% - 100px); )  }
@@ -115,7 +115,7 @@ export default function ({
   * This class allows you to apply a "<yellow>${transitionName}</yellow>" transition style to any HTMLElement
   * 
   * @example        html
-  * <div class="s-transition\:${transitionName.replace('/', '-')} s-bg:accent">
+  * <div class="s-transition\:${transitionName.replace('/', '-')} s-bc:accent">
   *     <div class="s-center-abs">I'm a cool container</div>
   * </div>
   */

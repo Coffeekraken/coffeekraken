@@ -29,7 +29,7 @@
         {
             "language": "html",
             "title": "Visually",
-            "code": "<div class=\"s-bg:main-surface s-radius s-p:30\">\n  <div style=\"height: 100px\" class=\"s-bg:accent s-radius s-p:30\">I'm visible</div>\n  <div style=\"height: 100px\" class=\"s-visually:hidden s-bg:complementary s-radius s-p:30\">I'm hidden</div>\n</div>"
+            "code": "<div class=\"s-bc:main-surface s-radius s-p:30\">\n  <div style=\"height: 100px\" class=\"s-bc:accent s-radius s-p:30\">I'm visible</div>\n  <div style=\"height: 100px\" class=\"s-visually:hidden s-bc:complementary s-radius s-p:30\">I'm hidden</div>\n</div>"
         }
     ],
     "since": "2.0.0",
@@ -38,9 +38,9 @@
         "email": "olivier.bossel@gmail.com",
         "url": "https://coffeekraken.io"
     },
-    "filename": "index.css",
-    "extension": "css",
-    "relPath": "dist/css/index.css",
+    "filename": "index.dev.css",
+    "extension": "dev",
+    "relPath": "dist/css/index.dev.css",
     "isDependency": false,
     "package": {
         "name": "@website/sugarcss-coffeekraken-io",
@@ -116,7 +116,7 @@
                 {
                     "language": "html",
                     "title": "Visually",
-                    "code": "<div class=\"s-bg:main-surface s-radius s-p:30\">\n  <div style=\"height: 100px\" class=\"s-bg:accent s-radius s-p:30\">I'm visible</div>\n  <div style=\"height: 100px\" class=\"s-visually:hidden s-bg:complementary s-radius s-p:30\">I'm hidden</div>\n</div>"
+                    "code": "<div class=\"s-bc:main-surface s-radius s-p:30\">\n  <div style=\"height: 100px\" class=\"s-bc:accent s-radius s-p:30\">I'm visible</div>\n  <div style=\"height: 100px\" class=\"s-visually:hidden s-bc:complementary s-radius s-p:30\">I'm hidden</div>\n</div>"
                 }
             ],
             "since": "2.0.0",
@@ -125,7 +125,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name          Visually\n* @namespace          sugar.style.helpers.visually\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/visually\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply a visually style on any HTMLElement\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.visually.classes;\n*\n* .my-element {\n*   \\@s.visually.hidden;\n* }\n*\n* @cssClass         s-visually:hidden             Make the element hidden in the ui\n* @cssClass         s-visually:visible            Make the element visible in the ui\n*\n* @example        html             Visually\n* <div class=\"s-bg:main-surface s-radius s-p:30\">\n*   <div style=\"height: 100px\" class=\"s-bg:accent s-radius s-p:30\">I'm visible</div>\n*   <div style=\"height: 100px\" class=\"s-visually:hidden s-bg:complementary s-radius s-p:30\">I'm hidden</div>\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name          Visually\n* @namespace          sugar.style.helpers.visually\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/visually\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply a visually style on any HTMLElement\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.visually.classes;\n*\n* .my-element {\n*   \\@s.visually.hidden;\n* }\n*\n* @cssClass         s-visually:hidden             Make the element hidden in the ui\n* @cssClass         s-visually:visible            Make the element visible in the ui\n*\n* @example        html             Visually\n* <div class=\"s-bc:main-surface s-radius s-p:30\">\n*   <div style=\"height: 100px\" class=\"s-bc:accent s-radius s-p:30\">I'm visible</div>\n*   <div style=\"height: 100px\" class=\"s-visually:hidden s-bc:complementary s-radius s-p:30\">I'm hidden</div>\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.visually.Visually"
         }
     ]

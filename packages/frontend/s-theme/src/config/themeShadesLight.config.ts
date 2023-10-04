@@ -128,6 +128,20 @@ export default (api) => {
              */
             lighten: 49,
         },
+        uiBackground: {
+            /**
+             * @name          lighten
+             * @namespace     config.themeShadesDark.uiBackground
+             * @type          Number
+             * @default      48
+             *
+             * Specify the lighten value for the "uiBackground" color variant
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            lighten: 48,
+        },
         border: {
             /**
              * @name          alpha

@@ -1,0 +1,47 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.doc.11.-Layout",
+    "name": "11. Layout",
+    "type": {
+        "types": [
+            {
+                "type": "Markdown"
+            }
+        ],
+        "raw": "Markdown"
+    },
+    "menu": {
+        "tree": [
+            "Documentation"
+        ],
+        "slug": "/doc/layout"
+    },
+    "platform": [
+        {
+            "name": "md",
+            "description": ""
+        }
+    ],
+    "namespace": "@website.sugarcss-coffeekraken-io.doc",
+    "status": "stable",
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "50-layout.md.twig",
+    "extension": "md",
+    "relPath": "src/doc/50-layout.md.twig",
+    "children": {},
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/src/doc/50-layout.md.twig",
+    "docHtml": "<!-- This file has been generated using\n     the \"@coffeekraken/s-markdown-builder\" package.\n     !!! Do not edit it directly... -->\n\n<!-- body -->\n\n<!--\n/**\n* @name            11. Layout\n* @namespace       doc\n* @type            Markdown\n* @platform        md\n* @status          stable\n* @menu            Documentation           /doc/layout\n*\n* @since           2.0.0\n* @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n*/\n-->\n\n<h1 id=\"layout\">Layout</h1>\n<p>Layouts, grid, or however you want to call them are a central piece in web development.\nSome layout system can be used these days including <code>old floats</code>, <code>flexbox</code> as well as <code>grids</code>.</p>\n<p>We are not here to say which is the best one for you or your use cases, but our toolkit provides you a simple way to generate and apply simple and complex layouts through either classes or inline css mixin.</p>\n<blockquote>\n<p>This technique is using the AMAZING <code>css-grid</code> specification under the hood.</p>\n</blockquote>\n<h2 id=\"concept\">Concept</h2>\n<p>Our concept is based on a simple syntax that looks like this:</p>\n<p><code>1 2 _ 3 4</code></p>\n<p>This defines a two columns layout with <code>4</code> areas. Area <code>1</code> and <code>2</code> are on the first row, area <code>3</code> and <code>4</code> are in the second row. The <code>_</code> character means <code>new row</code>.</p>\n<p>Here&#39;s the layout that will be provided:</p>\n<pre><code>|---------|---------|\n| area 1  | area 2  |\n|---------|---------|\n| area 3  | area 4  |\n|---------|---------|\n</code></pre>\n<p>A slightly more complex:</p>\n<p><code>1 2 4 _ 3 3 4</code></p>\n<p>This defines a 3 columns layout with <code>4</code> areas and will provide this layout:</p>\n<pre><code>|---------|---------|---------|\n| area 1  | area 2  | area 4  |\n|---------|---------|         |\n| area 3            |         |\n|---------|---------|---------|\n</code></pre>\n<p>This technique allows you to make really crazy layouts using a simple and kind of &quot;visual&quot; syntax.</p>\n<blockquote>\n<p>Note that this is obviously usable in a media query (native or sugar) like so:</p>\n</blockquote>\n<s-code-example>\n   <template language=\"css\">\n\n.my-layout {\n  @s.layout ('1 2 _ 3 4');\n\n  @s.media mobile {\n    @s.layout ('1 _ 2 _ 3 _ 4');\n  }\n}\n\n\n   </template>\n</s-code-example>\n\n<h2 id=\"mixin\">Mixin</h2>\n<p>First possibility to apply layouts using this technique is to use the <code>@s.layout</code> mixin. Here&#39;s how:</p>\n<s-code-example>\n   <template language=\"css\">\n\n.my-layout {\n  @s.layout ('1 2 _ 3 4');\n}\n\n\n   </template>\n</s-code-example>\n\n<s-code-example>\n   <template language=\"html\">\n\n<div class=\"my-layout\">\n  <div>Area 1</div>\n  <div>Area 2</div>\n  <div>Area 3</div>\n  <div>Area 4</div>\n</div>\n\n\n   </template>\n</s-code-example>\n\n<blockquote>\n<p>Note that the order of <code>div</code> areas in your html is just linked to area &quot;id&quot; like <code>1</code>, <code>2</code>, etc... This mean that you can have the first area in the html that is displayed at the end, etc...</p>\n</blockquote>\n<h2 id=\"classes\">Classes</h2>\n<p>Second possibility is to use auto-generated layout classes. These layouts are defined in your theme configuration like so:</p>\n<p>Here&#39;s the built-in layout classes:</p>\n<p>These classes are generated depending on your <code>theme.layout.layout</code> configuration.</p>\n<s-code-example>\n   <template language=\"js\">\n\nexport default {\n  layout: {\n    layout: {\n      12: '1 2',\n      123: '1 2 3',\n      112: '1 1 2',\n      // etc...\n    },\n  },\n};\n\n\n   </template>\n</s-code-example>\n\n<blockquote>\n<p>Note that the <code>themeLayout.config.ts</code> configuration file provide already some generic layouts. To check more on that, take a look at our <a href=\"/doc/config/explorer\">configuration explorer</a></p>\n</blockquote>\n"
+}

@@ -58,17 +58,17 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @cssClass     s-float:none         Apply the none float style
         * 
         * @example        html              Left
-        * <div class="s-bg:accent s-clearfix  s-p:30 s-radius">
+        * <div class="s-bc:accent s-clearfix  s-p:30 s-radius">
         *     <div class="s-float:left">I'm a cool float left element</div>
         * </div>
         * 
         * @example      html                Right
-        * <div class="s-bg:complementary s-clearfix s-p:30 s-radius">
+        * <div class="s-bc:complementary s-clearfix s-p:30 s-radius">
         *     <div class="s-float:right">I'm a cool float right element</div>
         * </div>
         * 
         * @example      html                None
-        * <div class="s-bg:error s-p:30 s-radius">
+        * <div class="s-bc:error s-p:30 s-radius">
         *     <div class="s-float:none">I'm a cool float none element</div>
         * </div>
         * 
@@ -86,7 +86,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     * This class allows you to apply a "<yellow>left</yellow>" float style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-bg:accent">
+    * <div class="s-bc:accent">
     *     <div class="s-float:left">I'm a cool float left element</div>
     * </div>
     */
@@ -104,7 +104,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     * This class allows you to apply a "<yellow>right</yellow>" float style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-bg:accent">
+    * <div class="s-bc:accent">
     *     <div class="s-float:right">I'm a cool float right element</div>
     * </div>
     */
@@ -122,7 +122,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     * This class allows you to apply a "<yellow>none</yellow>" float style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-bg:accent">
+    * <div class="s-bc:accent">
     *     <div class="s-float:none">I'm a cool float none element</div>
     * </div>
     */

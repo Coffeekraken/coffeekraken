@@ -57,9 +57,9 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @cssClass         s-visibility:collapse            Make the element visibly collapased in the ui
         * 
         * @example        html              Visible
-        * <div class="s-bg:main-surface s-radius s-p:30">
-        *   <div style="height: 100px" class="s-bg:accent s-radius s-p:30">I'm visible</div>
-        *   <div style="height: 100px" class="s-visibility:hidden s-bg:complementary s-radius s-p:30">I'm hidden</div>
+        * <div class="s-bc:main s-radius s-p:30">
+        *   <div style="height: 100px" class="s-bc:accent s-radius s-p:30">I'm visible</div>
+        *   <div style="height: 100px" class="s-visibility:hidden s-bc:complementary s-radius s-p:30">I'm hidden</div>
         * </div>
         * 
         * @since      2.0.0

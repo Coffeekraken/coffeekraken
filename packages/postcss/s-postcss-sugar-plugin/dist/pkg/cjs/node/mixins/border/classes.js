@@ -80,7 +80,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         if (radiusName === 'default')
             return '';
         return `
-              *   <div class="s-radius:${radiusName} s-width:20 s-bg:main s-flex:center s-ratio:1">
+              *   <div class="s-radius:${radiusName} s-width:20 s-bc:main s-flex:center s-ratio:1">
               *     ${radiusName}
               *   </div> 
             `;

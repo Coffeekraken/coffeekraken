@@ -1,0 +1,47 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.doc.06.-Functions",
+    "name": "06. Functions",
+    "type": {
+        "types": [
+            {
+                "type": "Markdown"
+            }
+        ],
+        "raw": "Markdown"
+    },
+    "menu": {
+        "tree": [
+            "Documentation"
+        ],
+        "slug": "/doc/functions"
+    },
+    "platform": [
+        {
+            "name": "md",
+            "description": ""
+        }
+    ],
+    "namespace": "@website.sugarcss-coffeekraken-io.doc",
+    "status": "stable",
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "25-functions.md.twig",
+    "extension": "md",
+    "relPath": "src/doc/25-functions.md.twig",
+    "children": {},
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/src/doc/25-functions.md.twig",
+    "docHtml": "<!-- This file has been generated using\n     the \"@coffeekraken/s-markdown-builder\" package.\n     !!! Do not edit it directly... -->\n\n<!-- body -->\n\n<!--\n/**\n* @name            06. Functions\n* @namespace       doc\n* @type            Markdown\n* @platform        md\n* @status          stable\n* @menu            Documentation           /doc/functions\n*\n* @since           2.0.0\n* @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n*/\n-->\n\n<h1 id=\"function\">Function</h1>\n<p>Coffeekraken gives your access to a lot of nice postcss functions to use across your codebase.</p>\n<p>It can be to access theme values like <code>padding</code>, <code>margin</code>, etc... as well as colors, etc...</p>\n<p>Here&#39;s a none exhaustive list of available functions:</p>\n<ul>\n<li><code>color: s.color(accent);</code>: Get the accent color from the theme;</li>\n<li><code>color: s.color(complementary, text);</code>: Get the complementary color with the <code>text</code> shade from the theme;</li>\n<li><code>color: s.color(accent, --darken 10 --alpha 0.3);</code>: Get the accent color from the theme, darken it by 10% and apply an alpha of 0.3;</li>\n<li><code>font-family: s.font.family(code);</code>: Apply the <code>code</code> font family from the theme;</li>\n<li><code>font-size: s.font.size(50);</code>: Apply the <code>50</code> font size from the theme;</li>\n<li><code>margin: s.margin(30);</code>: Apply the <code>30</code> margin from the theme;</li>\n<li><code>transition: s.transition(fast);</code>: Apply the <code>fast</code> transition from the theme;</li>\n<li>and more...</li>\n</ul>\n<blockquote>\n<p>You can find the full list of available helper classes mixins under the <strong>Functions</strong> section.</p>\n</blockquote>\n"
+}

@@ -36,9 +36,9 @@ import __css from '../../../../src/css/s-floating-feature.css'; // relative to /
  * npm i @coffeekraken/s-floating-feature
  *
  * @example         html            Email field
- * <div class="s-ratio:16-9 s-width:50 s-bg:main-surface s-p:30">
+ * <div class="s-ratio:16-9 s-width:50 s-bc:main-surface s-p:30">
  *   Floating element preview. Try to scroll...
- *   <div class="s-ratio:16-9 s-bg:accent s-color:accent s-radius s-p:30" s-floating>
+ *   <div class="s-ratio:16-9 s-bc:accent s-color:accent s-radius s-p:30" s-floating>
  *      I'm the floating element
  *  </div>
  * </div>

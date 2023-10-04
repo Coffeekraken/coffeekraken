@@ -74,7 +74,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         ${fitSizes
         .map((fitSizeName) => {
         return ` * @example         html        ${fitSizeName}
-            *   <div class="s-ratio:16-9 s-bg:ui">
+            *   <div class="s-ratio:16-9 s-bc:ui">
             *       <img class="s-fit:${fitSizeName} s-radius" src="https://picsum.photos/1000/1000" />
             *   </div>
             * `;
@@ -96,7 +96,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
                 * This class allows you to apply a "<yellow>${fitSizeName}</yellow>" fit size to any HTMLElement. Work best on images and videos
                 * 
                 * @example        html
-                * <div class="s-ratio\:16-9 s-bg:ui">
+                * <div class="s-ratio\:16-9 s-bc:ui">
                 *       <img class="s-fit\:${fitSizeName} src="https://picsum.photos/200/200" />
                 *   </div>
                 * 

@@ -54,8 +54,8 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @cssClass             s-link:stretch                  Stretch a link clickable area without changing his actual size and style
         * 
         * @example          html            Stretch
-        * <div class="s-position:relative s-bg:main s-radius s-p:50">
-        *   <a href="#" class="s-link:stretch s-bg:accent s-radius s-p:20">I'm a stretched link!</a>
+        * <div class="s-position:relative s-bc:main s-radius s-p:50">
+        *   <a href="#" class="s-link:stretch s-bc:accent s-radius s-p:20">I'm a stretched link!</a>
         * </div>
         * 
         * @since      2.0.0
@@ -72,8 +72,8 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * This class allows you to apply the "<yellow>stretch</yellow>" link style to any HTMLElement
         * 
         * @example      html
-        * <div class="s-position:relative s-bg:main s-radius s-p:50">
-        *   <a href="#" class="s-link:stretch s-bg:accent s-radius s-p:20">I'm a stretched link!</a>
+        * <div class="s-position:relative s-bc:main s-radius s-p:50">
+        *   <a href="#" class="s-link:stretch s-bc:accent s-radius s-p:20">I'm a stretched link!</a>
         * </div>
         * 
         * @since        2.0.0

@@ -54,9 +54,9 @@
             "email": "olivier.bossel@gmail.com",
             "url": "https://coffeekraken.io"
         },
-        "filename": "index.css",
-        "extension": "css",
-        "relPath": "dist/css/index.css",
+        "filename": "index.dev.css",
+        "extension": "dev",
+        "relPath": "dist/css/index.dev.css",
         "isDependency": false,
         "package": {
             "name": "@website/sugarcss-coffeekraken-io",
@@ -133,9 +133,9 @@
             "email": "olivier.bossel@gmail.com",
             "url": "https://coffeekraken.io"
         },
-        "filename": "index.css",
-        "extension": "css",
-        "relPath": "dist/css/index.css",
+        "filename": "index.dev.css",
+        "extension": "dev",
+        "relPath": "dist/css/index.dev.css",
         "isDependency": false,
         "package": {
             "name": "@website/sugarcss-coffeekraken-io",
@@ -178,17 +178,17 @@
             {
                 "language": "html",
                 "title": "Default",
-                "code": "<div class=\"s-flex:align-center:wrap s-gap:20 s-font:70\">\n  <div class=\"s-avatar\">\n      <img src=\"https://i.pravatar.cc/300?v=99373\" />\n  </div>\n      <div class=\"s-avatar s-color:accent\">\n      <img src=\"https://i.pravatar.cc/300?v=72264\" />\n  </div>\n  <div class=\"s-avatar s-color:complementary\">\n      <img src=\"https://i.pravatar.cc/300?v=73029\" />\n  </div>\n  <div class=\"s-avatar s-color:info\">\n      <img src=\"https://i.pravatar.cc/300?v=66035\" />\n  </div>\n  <div class=\"s-avatar s-color:success\">\n      <img src=\"https://i.pravatar.cc/300?v=9027\" />\n  </div>\n  <div class=\"s-avatar s-color:error\">\n     <img src=\"https://i.pravatar.cc/300?v=94397\" />\n  </div>\n</div>"
+                "code": "<div class=\"s-flex:align-center:wrap s-gap:20 s-font:70\">\n  <div class=\"s-avatar\">\n      <img src=\"https://i.pravatar.cc/300?v=95306\" />\n  </div>\n      <div class=\"s-avatar s-color:accent\">\n      <img src=\"https://i.pravatar.cc/300?v=42034\" />\n  </div>\n  <div class=\"s-avatar s-color:complementary\">\n      <img src=\"https://i.pravatar.cc/300?v=87215\" />\n  </div>\n  <div class=\"s-avatar s-color:info\">\n      <img src=\"https://i.pravatar.cc/300?v=76954\" />\n  </div>\n  <div class=\"s-avatar s-color:success\">\n      <img src=\"https://i.pravatar.cc/300?v=45906\" />\n  </div>\n  <div class=\"s-avatar s-color:error\">\n     <img src=\"https://i.pravatar.cc/300?v=64602\" />\n  </div>\n</div>"
             },
             {
                 "language": "html",
                 "title": "Notifications",
-                "code": "<div class=\"s-flex:wrap:align-center s-gap:20 s-font:70\">\n  <div class=\"s-avatar notifications=\"10\">\n     <img src=\"https://i.pravatar.cc/300?v=49944\" />\n  </div>\n  <div class=\"s-avatar s-color:accent\" notifications=\"10\">\n      <img src=\"https://i.pravatar.cc/300?v=2893\" />\n  </div>\n  <div class=\"s-avatar s-color:complementary\" notifications=\"10\">\n      <img src=\"https://i.pravatar.cc/300?v=1929\" />\n  </div>\n  <div class=\"s-avatar s-color:info\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=51453\" />\n  </div>\n  <div class=\"s-avatar s-color:success\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=74684\" />\n  </div>\n  <div class=\"s-avatar s-color:error\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=74388\" />\n  </div>\n</div>"
+                "code": "<div class=\"s-flex:wrap:align-center s-gap:20 s-font:70\">\n  <div class=\"s-avatar notifications=\"10\">\n     <img src=\"https://i.pravatar.cc/300?v=22450\" />\n  </div>\n  <div class=\"s-avatar s-color:accent\" notifications=\"10\">\n      <img src=\"https://i.pravatar.cc/300?v=11340\" />\n  </div>\n  <div class=\"s-avatar s-color:complementary\" notifications=\"10\">\n      <img src=\"https://i.pravatar.cc/300?v=65072\" />\n  </div>\n  <div class=\"s-avatar s-color:info\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=13356\" />\n  </div>\n  <div class=\"s-avatar s-color:success\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=6171\" />\n  </div>\n  <div class=\"s-avatar s-color:error\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=48501\" />\n  </div>\n</div>"
             },
             {
                 "language": "html",
                 "title": "Interactive",
-                "code": "<div class=\"s-flex:wrap:align-center s-gap:20 s-font:70\">\n  <div class=\"s-avatar:interactive\">\n       <img src=\"https://i.pravatar.cc/300?v=57084\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:accent\">\n      <img src=\"https://i.pravatar.cc/300?v=15420\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:complementary\">\n      <img src=\"https://i.pravatar.cc/300?v=45944\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:info\">\n      <img src=\"https://i.pravatar.cc/300?v=91894\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:success\">\n      <img src=\"https://i.pravatar.cc/300?v=94895\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:error\">\n      <img src=\"https://i.pravatar.cc/300?v=7759\" />\n  </div>\n</div>"
+                "code": "<div class=\"s-flex:wrap:align-center s-gap:20 s-font:70\">\n  <div class=\"s-avatar:interactive\">\n       <img src=\"https://i.pravatar.cc/300?v=37846\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:accent\">\n      <img src=\"https://i.pravatar.cc/300?v=75886\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:complementary\">\n      <img src=\"https://i.pravatar.cc/300?v=42368\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:info\">\n      <img src=\"https://i.pravatar.cc/300?v=37735\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:success\">\n      <img src=\"https://i.pravatar.cc/300?v=73896\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:error\">\n      <img src=\"https://i.pravatar.cc/300?v=40844\" />\n  </div>\n</div>"
             }
         ],
         "since": "2.0.0",
@@ -197,9 +197,9 @@
             "email": "olivier.bossel@gmail.com",
             "url": "https://coffeekraken.io"
         },
-        "filename": "index.css",
-        "extension": "css",
-        "relPath": "dist/css/index.css",
+        "filename": "index.dev.css",
+        "extension": "dev",
+        "relPath": "dist/css/index.dev.css",
         "isDependency": false,
         "package": {
             "name": "@website/sugarcss-coffeekraken-io",
@@ -242,32 +242,32 @@
             {
                 "language": "html",
                 "title": "dl",
-                "code": "<ul class=\"s-list:dl \">\n    <li>Regional Accountability Orchestrator Desiree Goodwin</li>\n    <li>Investor Quality Consultant Arlene Predovic</li>\n    <li>Investor Research Orchestrator Taylor Dicki</li>\n  </ul>"
+                "code": "<ul class=\"s-list:dl \">\n    <li>Central Directives Facilitator Elmer Sanford</li>\n    <li>Legacy Markets Administrator Luke Kemmer</li>\n    <li>Senior Operations Designer Yvette Stokes</li>\n  </ul>"
             },
             {
                 "language": "html",
                 "title": "ul",
-                "code": "<ul class=\"s-list:ul \">\n    <li>Legacy Accounts Agent Verna McGlynn</li>\n    <li>Principal Accounts Director Angelo Hamill</li>\n    <li>Senior Brand Producer Allen Feest</li>\n  </ul>"
+                "code": "<ul class=\"s-list:ul \">\n    <li>Dynamic Interactions Engineer Mrs. Sergio Hammes</li>\n    <li>Direct Program Associate Ms. Jeanette Botsford</li>\n    <li>International Implementation Director Jesus Graham</li>\n  </ul>"
             },
             {
                 "language": "html",
                 "title": "ol",
-                "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>Human Configuration Agent Jean Rohan Sr.</li>\n    <li>Forward Optimization Developer Heather Robel</li>\n    <li>Regional Program Director Laurie Runolfsson</li>\n  </ul>"
+                "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>Global Brand Manager Martha Lockman</li>\n    <li>Corporate Functionality Administrator Jodi Wiegand</li>\n    <li>International Program Administrator Garry Considine</li>\n  </ul>"
             },
             {
                 "language": "html",
                 "title": "icon",
-                "code": "<ul class=\"s-list:icon \">\n    <li><i class=\"s-icon:user\"></i>Product Metrics Coordinator Roderick Parker</li>\n    <li><i class=\"s-icon:heart s-color:accent\"></i>Chief Interactions Engineer Jeremy Vandervort</li>\n    <li><i class=\"s-icon:fire s-color:error\"></i>Principal Integration Manager Noah White DDS</li>\n  </ul>"
+                "code": "<ul class=\"s-list:icon \">\n    <li><i class=\"s-icon:user\"></i>Human Usability Facilitator Roosevelt Stokes</li>\n    <li><i class=\"s-icon:heart s-color:accent\"></i>Senior Mobility Designer Kevin Paucek</li>\n    <li><i class=\"s-icon:fire s-color:error\"></i>Direct Implementation Orchestrator Kelli Witting</li>\n  </ul>"
             },
             {
                 "language": "html",
                 "title": "RTL Support",
-                "code": "<div dir=\"rtl\">\n  <ul class=\"s-list:ul s-color:accent s-mbe:30\">\n    <li>Chief Configuration Designer Salvador Ernser</li>\n    <li>Internal Functionality Officer Javier Metz</li>\n  </ul>\n  <ul class=\"s-list:ol s-color:accent s-mbe:30\">\n    <li>National Metrics Strategist Tracy Krajcik</li>\n    <li>Principal Applications Executive Violet Rolfson</li>\n  </ul>\n  <ul class=\"s-list:icon s-color:accent s-mbe:30\">\n    <li><i class=\"s-icon:user\"></i> Central Infrastructure Specialist Julius Skiles</li>\n    <li><i class=\"s-icon:heart s-color:error\"></i> Chief Interactions Representative Amy Jenkins PhD</li>\n  </ul>\n</div>"
+                "code": "<div dir=\"rtl\">\n  <ul class=\"s-list:ul s-color:accent s-mbe:30\">\n    <li>Senior Intranet Producer Christine Shanahan</li>\n    <li>Legacy Program Specialist Iris Lowe</li>\n  </ul>\n  <ul class=\"s-list:ol s-color:accent s-mbe:30\">\n    <li>Regional Web Strategist Laura Hessel</li>\n    <li>Legacy Division Associate Ray Pollich</li>\n  </ul>\n  <ul class=\"s-list:icon s-color:accent s-mbe:30\">\n    <li><i class=\"s-icon:user\"></i> Regional Operations Specialist Sam Krajcik</li>\n    <li><i class=\"s-icon:heart s-color:error\"></i> Legacy Usability Executive Shelly Williamson</li>\n  </ul>\n</div>"
             },
             {
                 "language": "html",
                 "title": "Colors (none-exhaustive)",
-                "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>International Integration Consultant Krista Koss</li>\n    <li class=\"s-color:complementary\">Dynamic Creative Manager Muriel Olson</li>\n    <li class=\"s-color:error\">Future Creative Administrator Pamela Harvey</li>\n  </ul>"
+                "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>Human Directives Agent Miss Lyle Kuhn</li>\n    <li class=\"s-color:complementary\">Product Directives Associate Ricardo Aufderhar</li>\n    <li class=\"s-color:error\">District Infrastructure Representative Monica Kihn V</li>\n  </ul>"
             }
         ],
         "since": "2.0.0",
@@ -276,9 +276,9 @@
             "email": "olivier.bossel@gmail.com",
             "url": "https://coffeekraken.io"
         },
-        "filename": "index.css",
-        "extension": "css",
-        "relPath": "dist/css/index.css",
+        "filename": "index.dev.css",
+        "extension": "dev",
+        "relPath": "dist/css/index.dev.css",
         "isDependency": false,
         "package": {
             "name": "@website/sugarcss-coffeekraken-io",

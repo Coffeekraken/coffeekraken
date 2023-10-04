@@ -42,9 +42,9 @@ export interface ISParallaxFeatureProps {
  *
  * @example         html
  * <div class="s-position:relative" style="width:150px; height:150px;">
- *      <div s-parallax amount="0.1" class="s-ratio:1 s-radius s-bg:error" style="position:absolute; top:0; width:150px"></div>
- *      <div s-parallax amount="0.3" class="s-ratio:1 s-radius s-bg:complementary" style="position:absolute; top:0; width:150px"></div>
- *      <div s-parallax amount="0.5" class="s-ratio:1 s-radius s-bg:accent" style="position:absolute; top:0; width:150px"></div>
+ *      <div s-parallax amount="0.1" class="s-ratio:1 s-radius s-bc:error" style="position:absolute; top:0; width:150px"></div>
+ *      <div s-parallax amount="0.3" class="s-ratio:1 s-radius s-bc:complementary" style="position:absolute; top:0; width:150px"></div>
+ *      <div s-parallax amount="0.5" class="s-ratio:1 s-radius s-bc:accent" style="position:absolute; top:0; width:150px"></div>
  * </div>
  *
  * @since       2.0.0

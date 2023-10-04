@@ -1,9 +1,9 @@
 RewriteEngine On
 
-RewriteCond %{REQUEST_URI}  ^\/api\/[^.]+$|\.(?!(json)$)([^.]+$)\/   NC
+RewriteCond %{REQUEST_URI}  ^\/api\/[^.]+$|\.(?!(json)$)([^.]+$)\/   [NC]
 RewriteRule ^api/(.*)/$  /api/$1.json         [R=301,L]
 
-RewriteCond %{REQUEST_URI}  ^\/api\/[^.]+$|\.(?!(json)$)([^.]+$)   NC
+RewriteCond %{REQUEST_URI}  ^\/api\/[^.]+$|\.(?!(json)$)([^.]+$)   [NC]
 RewriteRule ^api/(.*)$  /api/$1.json         [R=301,L]
 
 <FilesMatch "\.(jpg|jpeg|png|webp|webm|gif|svg|css|js|woff|woff2|eot|ico)$">

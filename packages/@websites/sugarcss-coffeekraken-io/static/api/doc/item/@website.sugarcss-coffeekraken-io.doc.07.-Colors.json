@@ -1,0 +1,47 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.doc.07.-Colors",
+    "name": "07. Colors",
+    "type": {
+        "types": [
+            {
+                "type": "Markdown"
+            }
+        ],
+        "raw": "Markdown"
+    },
+    "menu": {
+        "tree": [
+            "Documentation"
+        ],
+        "slug": "/doc/colors"
+    },
+    "platform": [
+        {
+            "name": "md",
+            "description": ""
+        }
+    ],
+    "namespace": "@website.sugarcss-coffeekraken-io.doc",
+    "status": "stable",
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "30-colors.md.twig",
+    "extension": "md",
+    "relPath": "src/doc/30-colors.md.twig",
+    "children": {},
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/src/doc/30-colors.md.twig",
+    "docHtml": "<!-- This file has been generated using\n     the \"@coffeekraken/s-markdown-builder\" package.\n     !!! Do not edit it directly... -->\n\n<!-- body -->\n\n<!--\n/**\n* @name            07. Colors\n* @namespace       doc\n* @type            Markdown\n* @platform        md\n* @status          stable\n* @menu            Documentation           /doc/colors\n*\n* @since           2.0.0\n* @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n*/\n-->\n\n<h1 id=\"colors\">Colors</h1>\n<p>Colors in Coffeekraken are handled directly in your theme configuration file.</p>\n<p>By default, the colors that are defined are these ones:</p>\n<s-code-example>\n   <template language=\"js\">\n\nexport default {\n  current: '#808080',\n  main: '#808080',\n  accent: '#ffbb00',\n  complementary: '#8054F9',\n  success: '#91ff00',\n  warning: '#ffd500',\n  error: '#ff003b',\n  info: '#00ffff',\n};\n\n\n   </template>\n</s-code-example>\n\n<p>You can obviously override these colors by setting your own through our <a href=\"/doc/config/overview\">configuration system</a> like so:</p>\n<p>Create this file in your package:\n<code>.sugar/themeColor.config.ts</code></p>\n<p>Override the colors you want or even create new ones if needed:</p>\n<s-code-example>\n   <template language=\"js\">\n\nexport default function () {\n  return {\n    base: 'hsl(156,50,50)',\n    main: 'hsl(156,50,50)',\n    accent: '#ffbb00',\n  };\n}\n\n\n   </template>\n</s-code-example>\n\n<h2 id=\"syntax\">Syntax</h2>\n<p>Colors can be defined in your theme configuration using one of these syntax:</p>\n<ul>\n<li><code>hsl(156,50,50)</code>: HSL syntax <strong>prefered</strong></li>\n<li><code>hsla(156,50,50,1)</code>: HSLA syntax</li>\n<li><code>rgb(245,234,65)</code>: RGB syntax</li>\n<li><code>rgba(245,234,65,1)</code>: RGBA syntax</li>\n<li><code>#ff347f</code>: Hexadecimal syntax</li>\n</ul>\n<blockquote>\n<p>It&#39;s preferable to <strong>set your colors directly in HSL(A)</strong> syntax cause under the hood this will be the used one. Setting them directly in HSL avoid unecessary conversion.</p>\n</blockquote>\n<h2 id=\"schemas\">Schemas</h2>\n<p>Our theming system support to define some color schemas that can be used later on with each colors.</p>\n<p>A color schema is an object that define as key the name like &quot;background&quot;, &quot;surface&quot;, &quot;placeholder&quot;, etc... with as value an object of <strong>modifier</strong> to apply on your base color for this particular schema.</p>\n<p>Here&#39;s for example the default schemas that are setted by default. You can obviously override any of theme just like colors:</p>\n<p><code>themeShadesDark.ts</code></p>\n<s-code-example>\n   <template language=\"js\">\n\nexport default {\n  text: { lighten: 10, color: { main: { lighten: 50 } } },\n  placeholder: { lighten: 50, alpha: 0.4 },\n  foreground: { lighten: 50 },\n  background: { darken: 30 },\n  surface: { darken: 25 },\n  ui: { lighten: 10 },\n  uiBackground: { darken: 27 },\n  border: { alpha: 0.4 },\n  hover: { lighten: 40 },\n  active: { darken: 10 },\n  gradientStart: { lighten: 0 },\n  gradientEnd: { darken: 20 },\n};\n\n\n   </template>\n</s-code-example>\n\n<p><code>themeShadesLight.ts</code></p>\n<s-code-example>\n   <template language=\"js\">\n\nexport default {\n  text: {\n    darken: 0,\n    color: {\n      main: { darken: 15 },\n      complementary: { lighten: 15 },\n      info: { darken: 10 },\n    },\n  },\n  placeholder: { darken: 0, alpha: 0.4 },\n  foreground: { lighten: 50 },\n  background: { lighten: 50 },\n  surface: { lighten: 40, color: { main: { lighten: 49 } } },\n  ui: { lighten: 49 },\n  uiBackground: { lighten: 48 },\n  border: { alpha: 0.2 },\n  hover: { lighten: 40 },\n  active: { darken: 10 },\n  gradientStart: { lighten: 0 },\n  gradientEnd: { lighten: 20 },\n};\n\n\n   </template>\n</s-code-example>\n\n<blockquote>\n<p>Note the <code>text.color</code> object. You can specify different modifiers depending on the color if needed.</p>\n</blockquote>\n<p>To override these configs, simple create this file in your package and set the values you want:\n<code>.sugar/themeShadesDark.config.ts</code></p>\n<s-code-example>\n   <template language=\"js\">\n\nexport default function () {\n  return {\n    text: {\n      lighten: 0,\n    },\n    placeholder: {\n      lighten: 50,\n      alpha: 0.4,\n    },\n  };\n}\n\n\n   </template>\n</s-code-example>\n\n<p>These variants are the same color defined in the <code>color</code> property, but with some tweaks like:</p>\n<ul>\n<li><code>lighten</code>: Allows you to increase the <code>l</code> HSL color by <code>0 - 100</code></li>\n<li><code>darken</code>: Allows you to decrease the <code>l</code> HSL color by <code>0 - 100</code></li>\n<li><code>saturate</code>: Allows you to increase the <code>s</code> HSL color by <code>0 - 100</code></li>\n<li><code>desaturate</code>: Allows you to decrease the <code>s</code> HSL color by <code>0 - 100</code></li>\n<li><code>spin</code>: Allows you to &quot;spin&quot; the <code>h</code> HSL color by <code>-360 - 360</code></li>\n<li><code>alpha</code>: Allows you to increase/decrease the <code>a</code> HSLA color by <code>0 - 1</code></li>\n</ul>\n<h2 id=\"current-color\"><code>current</code> color</h2>\n<p>The concept of the <code>current</code> color in Coffeekraken is very similar to the <code>currentColor</code> CSS value.\nTake an example when we want to create a button that uses this <code>current</code> color, then we apply some other colors to it:</p>\n<s-code-example>\n   <template language=\"css\">\n\n.btn {\n  background: s.color(current);\n  color: s.color(current, foreground);\n}\n.my-section {\n  @s.color (accent);\n}\n.my-button {\n  @s.color (error);\n}\n\n\n   </template>\n</s-code-example>\n\n<s-code-example>\n   <template language=\"html\">\n\n<div class=\"my-section\">\n  <a class=\"btn\">Hello world</a>\n</div>\n<a class=\"my-button btn\">Other button</a>\n\n\n   </template>\n</s-code-example>\n\n<blockquote>\n<p>Note that behind the scene the <strong>colors are applied using variables</strong>. This mean that the CSS cascading feature works here as well.</p>\n</blockquote>\n"
+}

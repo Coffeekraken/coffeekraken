@@ -34,6 +34,7 @@ body:has(.s-doc-fullscreen) {
     &_explorer {
         flex-grow: 0;
         flex-shrink: 0;
+        align-self: stretch;
     }
 
     &_content {
@@ -102,9 +103,8 @@ body:has(.s-doc-fullscreen) {
     &_explorer {
         position: relative;
         width: 400px;
-        height: 100%;
         max-height: 80vh;
-        overflow-y: auto;
+        overflow-y: scroll;
         padding-inline-end: s.padding(30);
         @s.scrollbar;
 
@@ -155,7 +155,7 @@ body:has(.s-doc-fullscreen) {
         cursor: pointer;
 
         > div {
-            padding: s.padding(30) !important;
+            padding: s.padding(30) s.padding(40) !important;
             @s.transition fast;
             @s.shape;
 
@@ -176,7 +176,7 @@ body:has(.s-doc-fullscreen) {
         }
         &:active > div,
         &.active > div {
-            background: s.color(main, surface, --alpha 0.3);
+            background: s.color(main, surface, --alpha 0.5);
 
             > i {
                 color: s.color(complementary, --lighten 20);
@@ -221,6 +221,7 @@ body:has(.s-doc-fullscreen) {
         top: 0;
         display: block;
         background: s.color(main, background) !important;
+        margin-block-end: s.margin(20);
 
         i {
             opacity: 0.3;
@@ -229,7 +230,7 @@ body:has(.s-doc-fullscreen) {
     &_search-input {
         display: block;
         width: 100%;
-        padding: s.padding(30) s.padding(30);
+        padding: s.padding(30) s.padding(40);
         background: s.color(main, surface);
         @s.shape;
     }

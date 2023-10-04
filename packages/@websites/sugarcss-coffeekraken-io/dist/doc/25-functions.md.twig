@@ -1,0 +1,37 @@
+{% extends 'sugar/readme/layouts/doc/doc.twig' %}
+{% block body %}
+
+<!--
+/**
+ * @name            06. Functions
+ * @namespace       doc
+ * @type            Markdown
+ * @platform        md
+ * @status          stable
+ * @menu            Documentation           /doc/functions
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+# Function
+
+Coffeekraken gives your access to a lot of nice postcss functions to use across your codebase.
+
+It can be to access theme values like `padding`, `margin`, etc... as well as colors, etc...
+
+Here's a none exhaustive list of available functions:
+
+- `color: s.color(accent);`: Get the accent color from the theme;
+- `color: s.color(complementary, text);`: Get the complementary color with the `text` shade from the theme;
+- `color: s.color(accent, --darken 10 --alpha 0.3);`: Get the accent color from the theme, darken it by 10% and apply an alpha of 0.3;
+- `font-family: s.font.family(code);`: Apply the `code` font family from the theme;
+- `font-size: s.font.size(50);`: Apply the `50` font size from the theme;
+- `margin: s.margin(30);`: Apply the `30` margin from the theme;
+- `transition: s.transition(fast);`: Apply the `fast` transition from the theme;
+- and more...
+
+> You can find the full list of available helper classes mixins under the **Functions** section.
+
+{% endblock %}

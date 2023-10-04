@@ -26,10 +26,10 @@
                     <a href="#example-sugar" s-activate group="examples" trigger="click,anchor,history" title="Example of sugar.css file using Coffeekraken postcss sugar plugin">
                         <i class="s-icon:examples"></i> sugar.css
                     </a>
-                    <a href="#example-layout" s-activate group="examples" trigger="click,anchor,history" title="Example using the @sugar.layout Coffeekraken postcss sugar plugin mixin">
+                    <a href="#example-layout" s-activate group="examples" trigger="click,anchor,history" title="Example using the @s.layout Coffeekraken postcss sugar plugin mixin">
                         <i class="s-icon:examples"></i> layout.css
                     </a>
-                    <a href="#example-media" s-activate group="examples" trigger="click,anchor,history" title="Example using the @sugar.media Coffeekraken postcss sugar plugin mixin">
+                    <a href="#example-media" s-activate group="examples" trigger="click,anchor,history" title="Example using the @s.media Coffeekraken postcss sugar plugin mixin">
                         <i class="s-icon:examples"></i> media.css
                     </a>
                     <a href="#example-component" s-activate group="examples" title="Example using the scopes Coffeekraken postcss sugar plugin feature">
@@ -53,10 +53,10 @@
                             <s-code-example lines="100">
                                 <template language="css">
     /**
-    &nbsp;* Init sugar. This will import a reset css and print the
+    &nbsp;* Init s. This will import a reset css and print the
     &nbsp;* needed variables used across the toolkit classes.
     &nbsp;*/
-    @sugar.init ($variant: 'dark');
+    @s.init ($variant: 'dark');
 
     /**
     &nbsp;* Generate some utility classes like "s-tc:accent, s-mb:30", etc...
@@ -64,16 +64,16 @@
     &nbsp;* You can as well import only the classes you need.
     &nbsp;* See the API section for more details...
     &nbsp;*/
-    @sugar.classes();
-    @sugar.flex.classes(); /* import only the flex helper classes */
+    @s.classes();
+    @s.flex.classes(); /* import only the flex helper classes */
 
     /**
     &nbsp;* Generate media scoped classes to use like "@mobile s-pbe:100", etc...
     &nbsp;* that depends on your theme configuration
     &nbsp;*/
-    @sugar.media.classes ('mobile,tablet,wide') {
-    &nbsp;&nbsp;&nbsp;&nbsp;@sugar.margin.classes();
-    &nbsp;&nbsp;&nbsp;&nbsp;@sugar.padding.classes();
+    @s.media.classes ('mobile,tablet,wide') {
+    &nbsp;&nbsp;&nbsp;&nbsp;@s.margin.classes();
+    &nbsp;&nbsp;&nbsp;&nbsp;@s.padding.classes();
     }
                                 </template>
                             </s-code-example>
@@ -94,15 +94,15 @@
     */
 
     /* importing sugar toolkit */
-    @sugar.import ('./sugar.css');
+    @s.import ('./sugar.css');
 
     /* importing other css */
-    @sugar.import ('../views/**/*.css');
-    @sugar.import ('./generic/**/*.css');
+    @s.import ('../views/**/*.css');
+    @s.import ('./generic/**/*.css');
 
     /* make use of the sugar power */
     body {
-    &nbsp;&nbsp;&nbsp;&nbsp;background: sugar.color(main, background);
+    &nbsp;&nbsp;&nbsp;&nbsp;background: s.color(main, background);
     }
                             
                             </template>
@@ -120,9 +120,9 @@
     &nbsp;* |-------------|------|
     &nbsp;*/
     .my-layout {
-    &nbsp;&nbsp;&nbsp;&nbsp;@sugar.layout("1 2 4 _ 3 3 4");
+    &nbsp;&nbsp;&nbsp;&nbsp;@s.layout("1 2 4 _ 3 3 4");
     &nbsp;&nbsp;&nbsp;&nbsp;/* or */
-    &nbsp;&nbsp;&nbsp;&nbsp;@sugar.layout("
+    &nbsp;&nbsp;&nbsp;&nbsp;@s.layout("
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 2 4
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3 3 4
     &nbsp;&nbsp;&nbsp;&nbsp;");
@@ -137,23 +137,23 @@
                         <s-code-example>
                             <template language="css">
     /**
-    &nbsp;* The @sugar.media mixin allows you to apply media queries with ease.
+    &nbsp;* The @s.media mixin allows you to apply media queries with ease.
     &nbsp;* Available breakpoints are "mobile", "tablet", "desktop" and "wide"
     &nbsp;* but can be cusotmize through the .sugar/themeMedia.config.ts file.
     &nbsp;* By default, the default action is "<=" (desktop first) but you can override
     &nbsp;* this as well in the same file.
     &nbsp;*/
     .my-element {
-    &nbsp;&nbsp;&nbsp;&nbsp;background: sugar.color(complementary);
+    &nbsp;&nbsp;&nbsp;&nbsp;background: s.color(complementary);
 
     &nbsp;&nbsp;&nbsp;&nbsp;/* apply another color for <= mobile */
-    &nbsp;&nbsp;&nbsp;&nbsp;@sugar.media mobile {
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background: sugar.color(main);
+    &nbsp;&nbsp;&nbsp;&nbsp;@s.media mobile {
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background: s.color(main);
     &nbsp;&nbsp;&nbsp;&nbsp;}
 
     &nbsp;&nbsp;&nbsp;&nbsp;/* apply another color only on wide */
-    &nbsp;&nbsp;&nbsp;&nbsp;@sugar.media >=wide {
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background: sugar.color(accent);
+    &nbsp;&nbsp;&nbsp;&nbsp;@s.media >=wide {
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background: s.color(accent);
     &nbsp;&nbsp;&nbsp;&nbsp;}
     }
                             
@@ -165,14 +165,14 @@
                         <s-code-example>
                             <template language="css">
     .my-component {
-    &nbsp;&nbsp;&nbsp;&nbsp;background: sugar.color(main, surface);
-    &nbsp;&nbsp;&nbsp;&nbsp;border: 1px solid sugar.color(main, border);
-    &nbsp;&nbsp;&nbsp;&nbsp;padding: sugar.padding(30);
-    &nbsp;&nbsp;&nbsp;&nbsp;@sugar.border.radius();
-    &nbsp;&nbsp;&nbsp;&nbsp;@sugar.depth(100);
+    &nbsp;&nbsp;&nbsp;&nbsp;background: s.color(main, surface);
+    &nbsp;&nbsp;&nbsp;&nbsp;border: 1px solid s.color(main, border);
+    &nbsp;&nbsp;&nbsp;&nbsp;padding: s.padding(30);
+    &nbsp;&nbsp;&nbsp;&nbsp;@s.border.radius();
+    &nbsp;&nbsp;&nbsp;&nbsp;@s.depth(100);
 
     &nbsp;&nbsp;&nbsp;&nbsp;&:hover {
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;border-color: sugar.color(accent, --alpha 0.3);
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;border-color: s.color(accent, --alpha 0.3);
     &nbsp;&nbsp;&nbsp;&nbsp;}
     }
                             
@@ -187,13 +187,13 @@
     &nbsp;* Colors in a design toolkit is a central part.
     &nbsp;* Sugar let you define your own colors through
     &nbsp;* the .sugar/themeColor.config.ts
-    &nbsp;* and using them with the convinient sugar.color function.
+    &nbsp;* and using them with the convinient s.color function.
     &nbsp;* Default colors available are: "main", "accent",
     &nbsp;* "complementary", "success", "warning",
     &nbsp;* "error", "info" and "current" (more on this one) bellow.
     &nbsp;*/
     .my-element {
-    &nbsp;&nbsp;&nbsp;&nbsp;background: sugar.color(main);
+    &nbsp;&nbsp;&nbsp;&nbsp;background: s.color(main);
     }
 
     &nbsp;&nbsp;&nbsp;&nbsp;/**
@@ -201,7 +201,7 @@
                             * "spin" and "alpha" to tweak your color
                             */
     .my-element {
-    &nbsp;&nbsp;&nbsp;&nbsp;color: sugar.color(main, --alpha 0.3 --lighten 10); 
+    &nbsp;&nbsp;&nbsp;&nbsp;color: s.color(main, --alpha 0.3 --lighten 10); 
     }
 
     &nbsp;&nbsp;&nbsp;&nbsp;/**
@@ -211,19 +211,19 @@
                             * .sugar/themeColorSchema(Light|Dark).config.ts
                             */
     .my-element {
-    &nbsp;&nbsp;&nbsp;&nbsp;color: sugar.color(accent, text);
+    &nbsp;&nbsp;&nbsp;&nbsp;color: s.color(accent, text);
     }
 
     /**
                             * The "current" color act like the "currentColor" css native value, but
                             * difference that it will have the value of the color defined with the
-                            * @sugar.color mixin.
+                            * @s.color mixin.
                             * It uses variables under the hood so the value will be propagated down
                             * just like any any other variables.
                             */
     .my-element {
-    &nbsp;&nbsp;&nbsp;&nbsp;@sugar.color(accent);
-    &nbsp;&nbsp;&nbsp;&nbsp;color: sugar.color(current);
+    &nbsp;&nbsp;&nbsp;&nbsp;@s.color(accent);
+    &nbsp;&nbsp;&nbsp;&nbsp;color: s.color(current);
     }                         
                             </template>
                         </s-code-example>
@@ -239,7 +239,7 @@
     &nbsp;* With glob: fs:src/icons/*
     &nbsp;* Without glob: fs:src/icon/my-cool-icon.svg:my-icon
     &nbsp;*/
-    @sugar.icon.classes (
+    @s.icon.classes (
     &nbsp;&nbsp;&nbsp;&nbsp;fab:github
     &nbsp;&nbsp;&nbsp;&nbsp;fab:discord
     &nbsp;&nbsp;&nbsp;&nbsp;fab:twitter

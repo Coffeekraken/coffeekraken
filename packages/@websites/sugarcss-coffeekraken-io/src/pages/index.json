@@ -3,11 +3,17 @@
     "uid": "index",
     "name": "index",
     "scope": "repo",
-    "slug": ["/"],
+    "slug": [
+        "/"
+    ],
     "nodes": [
         {
             "type": "node",
             "uid": "welcome"
+        },
+        {
+            "type": "node",
+            "uid": "features"
         },
         {
             "type": "node",

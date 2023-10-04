@@ -79,8 +79,8 @@ export default function ({
         ${Object.keys(heightObj)
             .map((height) => {
                 return ` * @example         html        ${height}%
-                *   <div class="s-bg:main-surface s-radius:30" style="height:500px">
-                *      <div style="overflow:hidden" class="s-height:${height} s-text:center s-bg:accent s-p:30 s-radius:30">s-height:${height}</div>
+                *   <div class="s-bc:main-surface s-radius:30" style="height:500px">
+                *      <div style="overflow:hidden" class="s-height:${height} s-text:center s-bc:accent s-p:30 s-radius:30">s-height:${height}</div>
                 *   </div>`;
             })
             .join('\n')}

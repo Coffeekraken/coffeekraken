@@ -19,13 +19,13 @@
     "private": true,
     "scripts": {
         "dev": "sugar kitchen.run dev & npm run doc.serve",
-        "build": "sugar kitchen.run build --target production && sugar frontspec.build",
+        "build": "sugar kitchen.run build --target production",
         "preview": "sugar kitchen.run preview & npm run doc.serve",
         "static": "npm run preview & sleep 5 && npm run static.build && npm run static.serve",
         "static.serve": "sugar staticServer.start",
         "static.build": "sugar static.build --clean --env production --target production",
         "doc.serve": "sugar doc.serve",
-        "deploy": "echo 'Simply push in the master branch to deploy'",
+        "deploy": "rsync -avzh --delete --progress --stats ./static fe0mt_coffeekraken@fe0mt.ftp.infomaniak.com:~/sites/sugarcss.coffeekraken.io",
         "server.ssh": "ssh root@194.233.173.214"
     },
     "repository": {
@@ -39,6 +39,8 @@
         "@coffeekraken/s-dashboard": "^2.0.0-beta.1",
         "@coffeekraken/s-doc": "^2.0.0-beta.1",
         "@coffeekraken/s-docmap": "^2.0.0-beta.1",
+        "@coffeekraken/s-highlight-feature": "^2.0.0-beta.1",
+        "@coffeekraken/s-parallax-feature": "^2.0.0-beta.1",
         "@coffeekraken/s-filtrable-input-component": "^2.0.0-beta.1",
         "@coffeekraken/s-front": "^2.0.0-beta.1",
         "@coffeekraken/s-lit-component": "^2.0.0-beta.1",

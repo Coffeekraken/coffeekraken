@@ -590,8 +590,6 @@ export default class SDocComponent extends __SLitComponent {
             `;
         }
 
-        console.log('IT', itemObj);
-
         if (itemObj.type.raw.toLowerCase() === 'config') {
             return html`
                 ${this._renderItemMetas(itemObj)}

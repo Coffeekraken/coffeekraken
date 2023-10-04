@@ -29,22 +29,22 @@
         {
             "language": "html",
             "title": "overflow",
-            "code": "<div class=\"s-clearfix s-bg:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
+            "code": "<div class=\"s-clearfix s-bc:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
         },
         {
             "language": "html",
             "title": "facebook",
-            "code": "<div class=\"s-clearfix:facebook s-bg:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
+            "code": "<div class=\"s-clearfix:facebook s-bc:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
         },
         {
             "language": "html",
             "title": "micro",
-            "code": "<div class=\"s-clearfix:micro s-bg:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
+            "code": "<div class=\"s-clearfix:micro s-bc:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
         },
         {
             "language": "html",
             "title": "after",
-            "code": "<div class=\"s-clearfix:after s-bg:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
+            "code": "<div class=\"s-clearfix:after s-bc:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
         }
     ],
     "since": "2.0.0",
@@ -53,9 +53,9 @@
         "email": "olivier.bossel@gmail.com",
         "url": "https://coffeekraken.io"
     },
-    "filename": "index.css",
-    "extension": "css",
-    "relPath": "dist/css/index.css",
+    "filename": "index.dev.css",
+    "extension": "dev",
+    "relPath": "dist/css/index.dev.css",
     "isDependency": false,
     "package": {
         "name": "@website/sugarcss-coffeekraken-io",
@@ -139,22 +139,22 @@
                 {
                     "language": "html",
                     "title": "overflow",
-                    "code": "<div class=\"s-clearfix s-bg:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
+                    "code": "<div class=\"s-clearfix s-bc:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
                 },
                 {
                     "language": "html",
                     "title": "facebook",
-                    "code": "<div class=\"s-clearfix:facebook s-bg:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
+                    "code": "<div class=\"s-clearfix:facebook s-bc:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
                 },
                 {
                     "language": "html",
                     "title": "micro",
-                    "code": "<div class=\"s-clearfix:micro s-bg:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
+                    "code": "<div class=\"s-clearfix:micro s-bc:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
                 },
                 {
                     "language": "html",
                     "title": "after",
-                    "code": "<div class=\"s-clearfix:after s-bg:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
+                    "code": "<div class=\"s-clearfix:after s-bc:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
                 }
             ],
             "since": "2.0.0",
@@ -163,7 +163,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name          Clearfix\n* @namespace          sugar.style.helpers.clearfix\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/clearfix\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply a clearfix on any HTMLElement\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.clearfix.classes;\n*\n* .my-element {\n*   \\@s.clearfix;\n* }\n*\n* @cssClass     s-clearfixs-clearfix            Apply the overflow clearfix\n* @cssClass     s-clearfixs-clearfix:facebook            Apply the facebook clearfix\n* @cssClass     s-clearfixs-clearfix:micro            Apply the micro clearfix\n* @cssClass     s-clearfixs-clearfix:after            Apply the after clearfix\n*\n* @example        html         overflow\n*   <div class=\"s-clearfix s-bg:ui\">\n*       <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n*   </div>\n*\n* @example        html         facebook\n*   <div class=\"s-clearfix:facebook s-bg:ui\">\n*       <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n*   </div>\n*\n* @example        html         micro\n*   <div class=\"s-clearfix:micro s-bg:ui\">\n*       <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n*   </div>\n*\n* @example        html         after\n*   <div class=\"s-clearfix:after s-bg:ui\">\n*       <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n*   </div>\n*\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name          Clearfix\n* @namespace          sugar.style.helpers.clearfix\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/clearfix\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply a clearfix on any HTMLElement\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.clearfix.classes;\n*\n* .my-element {\n*   \\@s.clearfix;\n* }\n*\n* @cssClass     s-clearfixs-clearfix            Apply the overflow clearfix\n* @cssClass     s-clearfixs-clearfix:facebook            Apply the facebook clearfix\n* @cssClass     s-clearfixs-clearfix:micro            Apply the micro clearfix\n* @cssClass     s-clearfixs-clearfix:after            Apply the after clearfix\n*\n* @example        html         overflow\n*   <div class=\"s-clearfix s-bc:ui\">\n*       <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n*   </div>\n*\n* @example        html         facebook\n*   <div class=\"s-clearfix:facebook s-bc:ui\">\n*       <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n*   </div>\n*\n* @example        html         micro\n*   <div class=\"s-clearfix:micro s-bc:ui\">\n*       <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n*   </div>\n*\n* @example        html         after\n*   <div class=\"s-clearfix:after s-bc:ui\">\n*       <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n*   </div>\n*\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.clearfix.Clearfix"
         }
     ]

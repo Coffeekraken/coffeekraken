@@ -29,7 +29,7 @@
         {
             "language": "html",
             "title": "Simple order",
-            "code": "<div class=\"s-flex s-gap:40\">\n  <div class=\"s-order:3 s-p:30 s-ratio:16-9 s-grow s-bg:main s-radius\">1</div>\n  <div class=\"s-order:1 s-p:30 s-ratio:16-9 s-grow s-bg:main s-radius\">2</div>\n  <div class=\"s-order:2 s-p:30 s-ratio:16-9 s-grow s-bg:main s-radius\">3</div>\n</div>"
+            "code": "<div class=\"s-flex s-gap:40\">\n  <div class=\"s-order:3 s-p:30 s-ratio:16-9 s-grow s-bc:main s-radius\">1</div>\n  <div class=\"s-order:1 s-p:30 s-ratio:16-9 s-grow s-bc:main s-radius\">2</div>\n  <div class=\"s-order:2 s-p:30 s-ratio:16-9 s-grow s-bc:main s-radius\">3</div>\n</div>"
         }
     ],
     "since": "2.0.0",
@@ -38,9 +38,9 @@
         "email": "olivier.bossel@gmail.com",
         "url": "https://coffeekraken.io"
     },
-    "filename": "index.css",
-    "extension": "css",
-    "relPath": "dist/css/index.css",
+    "filename": "index.dev.css",
+    "extension": "dev",
+    "relPath": "dist/css/index.dev.css",
     "isDependency": false,
     "package": {
         "name": "@website/sugarcss-coffeekraken-io",
@@ -188,7 +188,7 @@
                 {
                     "language": "html",
                     "title": "Simple order",
-                    "code": "<div class=\"s-flex s-gap:40\">\n  <div class=\"s-order:3 s-p:30 s-ratio:16-9 s-grow s-bg:main s-radius\">1</div>\n  <div class=\"s-order:1 s-p:30 s-ratio:16-9 s-grow s-bg:main s-radius\">2</div>\n  <div class=\"s-order:2 s-p:30 s-ratio:16-9 s-grow s-bg:main s-radius\">3</div>\n</div>"
+                    "code": "<div class=\"s-flex s-gap:40\">\n  <div class=\"s-order:3 s-p:30 s-ratio:16-9 s-grow s-bc:main s-radius\">1</div>\n  <div class=\"s-order:1 s-p:30 s-ratio:16-9 s-grow s-bc:main s-radius\">2</div>\n  <div class=\"s-order:2 s-p:30 s-ratio:16-9 s-grow s-bc:main s-radius\">3</div>\n</div>"
                 }
             ],
             "since": "2.0.0",
@@ -197,7 +197,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name          Order\n* @namespace          sugar.style.helpers.order\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/order\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply some order attributes on any HTMLElement.\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.order.classes;\n*\n* @cssClass             s-order-0        Apply the order 0\n* @cssClass             s-order-1        Apply the order 1\n* @cssClass             s-order-2        Apply the order 2\n* @cssClass             s-order-3        Apply the order 3\n* @cssClass             s-order-4        Apply the order 4\n* @cssClass             s-order-5        Apply the order 5\n* @cssClass             s-order-6        Apply the order 6\n* @cssClass             s-order-7        Apply the order 7\n* @cssClass             s-order-8        Apply the order 8\n* @cssClass             s-order-9        Apply the order 9\n* @cssClass             s-order-10        Apply the order 10\n* @cssClass             s-order-11        Apply the order 11\n* @cssClass             s-order-12        Apply the order 12\n* @cssClass             s-order-13        Apply the order 13\n* @cssClass             s-order-14        Apply the order 14\n* @cssClass             s-order-15        Apply the order 15\n* @cssClass             s-order-16        Apply the order 16\n* @cssClass             s-order-17        Apply the order 17\n* @cssClass             s-order-18        Apply the order 18\n* @cssClass             s-order-19        Apply the order 19\n*\n* @example        html          Simple order\n* <div class=\"s-flex s-gap:40\">\n*   <div class=\"s-order:3 s-p:30 s-ratio:16-9 s-grow s-bg:main s-radius\">1</div>\n*   <div class=\"s-order:1 s-p:30 s-ratio:16-9 s-grow s-bg:main s-radius\">2</div>\n*   <div class=\"s-order:2 s-p:30 s-ratio:16-9 s-grow s-bg:main s-radius\">3</div>\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name          Order\n* @namespace          sugar.style.helpers.order\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/order\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply some order attributes on any HTMLElement.\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.order.classes;\n*\n* @cssClass             s-order-0        Apply the order 0\n* @cssClass             s-order-1        Apply the order 1\n* @cssClass             s-order-2        Apply the order 2\n* @cssClass             s-order-3        Apply the order 3\n* @cssClass             s-order-4        Apply the order 4\n* @cssClass             s-order-5        Apply the order 5\n* @cssClass             s-order-6        Apply the order 6\n* @cssClass             s-order-7        Apply the order 7\n* @cssClass             s-order-8        Apply the order 8\n* @cssClass             s-order-9        Apply the order 9\n* @cssClass             s-order-10        Apply the order 10\n* @cssClass             s-order-11        Apply the order 11\n* @cssClass             s-order-12        Apply the order 12\n* @cssClass             s-order-13        Apply the order 13\n* @cssClass             s-order-14        Apply the order 14\n* @cssClass             s-order-15        Apply the order 15\n* @cssClass             s-order-16        Apply the order 16\n* @cssClass             s-order-17        Apply the order 17\n* @cssClass             s-order-18        Apply the order 18\n* @cssClass             s-order-19        Apply the order 19\n*\n* @example        html          Simple order\n* <div class=\"s-flex s-gap:40\">\n*   <div class=\"s-order:3 s-p:30 s-ratio:16-9 s-grow s-bc:main s-radius\">1</div>\n*   <div class=\"s-order:1 s-p:30 s-ratio:16-9 s-grow s-bc:main s-radius\">2</div>\n*   <div class=\"s-order:2 s-p:30 s-ratio:16-9 s-grow s-bc:main s-radius\">3</div>\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.order.Order"
         }
     ]

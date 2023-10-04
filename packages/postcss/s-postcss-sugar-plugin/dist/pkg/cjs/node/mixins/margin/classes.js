@@ -91,23 +91,23 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         *
         * 
         * @example        html               Inline
-        *   <p class="s-bg:accent s-radius s-p:30 s-mbe:20">${faker_1.default.name.findName()}</p>
-        *   <p class="s-bg:complementary s-radius s-mi:50 s-mbe:20 s-p:30">${faker_1.default.name.findName()}</p>
-        *   <p class="s-bg:main s-mie:100 s-radius s-mbe:20 s-p:30">${faker_1.default.name.findName()}</p>
-        *   <p class="s-bg:error s-mie:30 s-radius s-p:30">${faker_1.default.name.findName()}</p>
+        *   <p class="s-bc:accent s-radius s-p:30 s-mbe:20">${faker_1.default.name.findName()}</p>
+        *   <p class="s-bc:complementary s-radius s-mi:50 s-mbe:20 s-p:30">${faker_1.default.name.findName()}</p>
+        *   <p class="s-bc:main s-mie:100 s-radius s-mbe:20 s-p:30">${faker_1.default.name.findName()}</p>
+        *   <p class="s-bc:error s-mie:30 s-radius s-p:30">${faker_1.default.name.findName()}</p>
         * 
         * @example            html                Block
-        *   <div class="s-bg:accent s-radius s-mbe:40 s-p:30 s-text:center">${faker_1.default.name.findName()}</div>
-        *   <div class="s-bg:complementary s-radius s-mbe:20 s-p:30 s-text:center">${faker_1.default.name.findName()}</div>
-        *   <div class="s-bg:main s-radius s-mbe:50 s-p:30 s-text:center">${faker_1.default.name.findName()}</div>
-        *   <div class="s-bg:error s-radius s-p:30 s-text:center">${faker_1.default.name.findName()}</div>
+        *   <div class="s-bc:accent s-radius s-mbe:40 s-p:30 s-text:center">${faker_1.default.name.findName()}</div>
+        *   <div class="s-bc:complementary s-radius s-mbe:20 s-p:30 s-text:center">${faker_1.default.name.findName()}</div>
+        *   <div class="s-bc:main s-radius s-mbe:50 s-p:30 s-text:center">${faker_1.default.name.findName()}</div>
+        *   <div class="s-bc:error s-radius s-p:30 s-text:center">${faker_1.default.name.findName()}</div>
         * 
         * @example            html                RTL
         * <div dir="rtl">
-        *   <p class="s-bg:accent s-radius s-p:30 s-mbe:20">${faker_1.default.name.findName()}</p>
-        *   <p class="s-bg:complementary s-radius s-mi:50 s-mbe:20 s-p:30">${faker_1.default.name.findName()}</p>
-        *   <p class="s-bg:main s-radius s-mie:100 s-mbe:20 s-p:30">${faker_1.default.name.findName()}</p>
-        *   <p class="s-bg:error s-radius s-mie:30 s-p:30">${faker_1.default.name.findName()}</p>
+        *   <p class="s-bc:accent s-radius s-p:30 s-mbe:20">${faker_1.default.name.findName()}</p>
+        *   <p class="s-bc:complementary s-radius s-mi:50 s-mbe:20 s-p:30">${faker_1.default.name.findName()}</p>
+        *   <p class="s-bc:main s-radius s-mie:100 s-mbe:20 s-p:30">${faker_1.default.name.findName()}</p>
+        *   <p class="s-bc:error s-radius s-mie:30 s-p:30">${faker_1.default.name.findName()}</p>
         * </div>
         * 
         * @since      2.0.0

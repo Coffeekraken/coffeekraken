@@ -7,24 +7,24 @@ exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 /**
- * @__name           classes
- * @__namespace      node.mixin.height
- * @__type           PostcssMixin
- * @__platform      postcss
- * @__status        alpha
+ * @name           classes
+ * @namespace      node.mixin.height
+ * @type           PostcssMixin
+ * @platform      postcss
+ * @status        alpha
  *
  * This mixin generate all the height helper classes like s-height:20, s-height:50, etc...
  * It will generate all the height defined in the config.theme.height configuration stack
  *
- * @__return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
- * @__snippet         @s.height.classes
+ * @snippet         @s.height.classes
  *
- * @__example        css
+ * @example        css
  * \@s.height.classes;
  *
- * @__since       2.0.0
- * @__author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginWidthClassesMixinInterface extends s_interface_1.default {
     static get _definition() {
@@ -63,8 +63,8 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         ${Object.keys(heightObj)
         .map((height) => {
         return ` * @example         html        ${height}%
-                *   <div class="s-bg:main-surface s-radius:30" style="height:500px">
-                *      <div style="overflow:hidden" class="s-height:${height} s-text:center s-bg:accent s-p:30 s-radius:30">s-height:${height}</div>
+                *   <div class="s-bc:main-surface s-radius:30" style="height:500px">
+                *      <div style="overflow:hidden" class="s-height:${height} s-text:center s-bc:accent s-p:30 s-radius:30">s-height:${height}</div>
                 *   </div>`;
     })
         .join('\n')}

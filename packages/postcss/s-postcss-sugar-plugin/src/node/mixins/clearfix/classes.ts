@@ -104,7 +104,7 @@ export default function ({
                 clearfixName === finalParams.defaultClearfix
                     ? ``
                     : `:${clearfixName}`
-            } s-bg:ui">
+            } s-bc:ui">
             *       <img src="https://picsum.photos/200/200" style="float: right" />
             *   </div>
             * `;

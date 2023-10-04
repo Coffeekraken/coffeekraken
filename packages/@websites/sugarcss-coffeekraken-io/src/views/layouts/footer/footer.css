@@ -1,19 +1,9 @@
 .footer {
-    background-color: s.color(main, surface);
     position: relative;
     z-index: 20;
-    border-top: 1px solid s.color(main, --alpha 0.05);
 
     a {
         @s.focus.outline accent;
-    }
-
-    @s.wireframe {
-        @s.wireframe.border;
-    }
-
-    @s.theme dark {
-        background-color: s.color(main, surface);
     }
 
     @s.media mobile {
@@ -21,31 +11,21 @@
     }
 
     ._main {
-        padding-block: s.padding(70);
-
-        @s.media tablet {
-            padding-inline: s.padding(50);
-        }
-        @s.media mobile {
-            padding-inline: s.padding(30);
-        }
+        padding: s.padding(50) s.padding(50);
+        background: s.color(main, background, --darken 5);
+        @s.border.radius (40);
 
         svg {
-            /* height: 60px; */
-            width: 250px;
+            width: 200px;
             margin-block-end: s.margin(30);
-
-            @s.media mobile {
-                width: 150px;
-            }
         }
     }
 
     @s.theme (dark) {
-        svg .main {
+        svg [fill='white'] {
             fill: s.color(main, text);
         }
-        svg .accent {
+        svg [fill='black'] {
             fill: s.color(accent);
         }
     }

@@ -1,0 +1,646 @@
+{
+    "@website.sugarcss-coffeekraken-io.doc.01.-Installation": {
+        "id": "@website.sugarcss-coffeekraken-io.doc.01.-Installation",
+        "name": "01. Installation",
+        "type": {
+            "types": [
+                {
+                    "type": "Markdown"
+                }
+            ],
+            "raw": "Markdown"
+        },
+        "menu": {
+            "tree": [
+                "Documentation"
+            ],
+            "slug": "/doc/installation"
+        },
+        "platform": [
+            {
+                "name": "md",
+                "description": ""
+            }
+        ],
+        "namespace": "@website.sugarcss-coffeekraken-io.doc",
+        "status": "stable",
+        "since": "2.0.0",
+        "author": {
+            "name": "Olivier Bossel",
+            "email": "olivier.bossel@gmail.com",
+            "url": "https://coffeekraken.io"
+        },
+        "filename": "00-install.md.twig",
+        "extension": "md",
+        "relPath": "src/doc/00-install.md.twig",
+        "children": {},
+        "isDependency": false,
+        "package": {
+            "name": "@website/sugarcss-coffeekraken-io",
+            "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+            "version": "2.0.0-beta.1",
+            "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+            "license": "MIT",
+            "type": "npm"
+        },
+        "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/src/doc/00-install.md.twig"
+    },
+    "@website.sugarcss-coffeekraken-io.doc.02.-Features": {
+        "id": "@website.sugarcss-coffeekraken-io.doc.02.-Features",
+        "name": "02. Features",
+        "type": {
+            "types": [
+                {
+                    "type": "Markdown"
+                }
+            ],
+            "raw": "Markdown"
+        },
+        "menu": {
+            "tree": [
+                "Documentation"
+            ],
+            "slug": "/doc/features"
+        },
+        "platform": [
+            {
+                "name": "md",
+                "description": ""
+            }
+        ],
+        "namespace": "@website.sugarcss-coffeekraken-io.doc",
+        "status": "stable",
+        "since": "2.0.0",
+        "author": {
+            "name": "Olivier Bossel",
+            "email": "olivier.bossel@gmail.com",
+            "url": "https://coffeekraken.io"
+        },
+        "filename": "05-features.md.twig",
+        "extension": "md",
+        "relPath": "src/doc/05-features.md.twig",
+        "children": {},
+        "isDependency": false,
+        "package": {
+            "name": "@website/sugarcss-coffeekraken-io",
+            "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+            "version": "2.0.0-beta.1",
+            "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+            "license": "MIT",
+            "type": "npm"
+        },
+        "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/src/doc/05-features.md.twig"
+    },
+    "@website.sugarcss-coffeekraken-io.doc.03.-Pleasant-syntax": {
+        "id": "@website.sugarcss-coffeekraken-io.doc.03.-Pleasant-syntax",
+        "name": "03. Pleasant syntax",
+        "type": {
+            "types": [
+                {
+                    "type": "Markdown"
+                }
+            ],
+            "raw": "Markdown"
+        },
+        "menu": {
+            "tree": [
+                "Documentation"
+            ],
+            "slug": "/doc/pleasant-syntax"
+        },
+        "platform": [
+            {
+                "name": "md",
+                "description": ""
+            }
+        ],
+        "namespace": "@website.sugarcss-coffeekraken-io.doc",
+        "status": "stable",
+        "since": "2.0.0",
+        "author": {
+            "name": "Olivier Bossel",
+            "email": "olivier.bossel@gmail.com",
+            "url": "https://coffeekraken.io"
+        },
+        "filename": "10-pleasantSyntax.md.twig",
+        "extension": "md",
+        "relPath": "src/doc/10-pleasantSyntax.md.twig",
+        "children": {},
+        "isDependency": false,
+        "package": {
+            "name": "@website/sugarcss-coffeekraken-io",
+            "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+            "version": "2.0.0-beta.1",
+            "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+            "license": "MIT",
+            "type": "npm"
+        },
+        "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/src/doc/10-pleasantSyntax.md.twig"
+    },
+    "@website.sugarcss-coffeekraken-io.doc.04.-Classes": {
+        "id": "@website.sugarcss-coffeekraken-io.doc.04.-Classes",
+        "name": "04. Classes",
+        "type": {
+            "types": [
+                {
+                    "type": "Markdown"
+                }
+            ],
+            "raw": "Markdown"
+        },
+        "menu": {
+            "tree": [
+                "Documentation"
+            ],
+            "slug": "/doc/classes"
+        },
+        "platform": [
+            {
+                "name": "md",
+                "description": ""
+            }
+        ],
+        "namespace": "@website.sugarcss-coffeekraken-io.doc",
+        "status": "stable",
+        "since": "2.0.0",
+        "author": {
+            "name": "Olivier Bossel",
+            "email": "olivier.bossel@gmail.com",
+            "url": "https://coffeekraken.io"
+        },
+        "filename": "15-classes.md.twig",
+        "extension": "md",
+        "relPath": "src/doc/15-classes.md.twig",
+        "children": {},
+        "isDependency": false,
+        "package": {
+            "name": "@website/sugarcss-coffeekraken-io",
+            "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+            "version": "2.0.0-beta.1",
+            "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+            "license": "MIT",
+            "type": "npm"
+        },
+        "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/src/doc/15-classes.md.twig"
+    },
+    "@website.sugarcss-coffeekraken-io.doc.05.-Mixins": {
+        "id": "@website.sugarcss-coffeekraken-io.doc.05.-Mixins",
+        "name": "05. Mixins",
+        "type": {
+            "types": [
+                {
+                    "type": "Markdown"
+                }
+            ],
+            "raw": "Markdown"
+        },
+        "menu": {
+            "tree": [
+                "Documentation"
+            ],
+            "slug": "/doc/mixins"
+        },
+        "platform": [
+            {
+                "name": "md",
+                "description": ""
+            }
+        ],
+        "namespace": "@website.sugarcss-coffeekraken-io.doc",
+        "status": "stable",
+        "since": "2.0.0",
+        "author": {
+            "name": "Olivier Bossel",
+            "email": "olivier.bossel@gmail.com",
+            "url": "https://coffeekraken.io"
+        },
+        "filename": "20-mixins.md.twig",
+        "extension": "md",
+        "relPath": "src/doc/20-mixins.md.twig",
+        "children": {},
+        "isDependency": false,
+        "package": {
+            "name": "@website/sugarcss-coffeekraken-io",
+            "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+            "version": "2.0.0-beta.1",
+            "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+            "license": "MIT",
+            "type": "npm"
+        },
+        "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/src/doc/20-mixins.md.twig"
+    },
+    "@website.sugarcss-coffeekraken-io.doc.06.-Functions": {
+        "id": "@website.sugarcss-coffeekraken-io.doc.06.-Functions",
+        "name": "06. Functions",
+        "type": {
+            "types": [
+                {
+                    "type": "Markdown"
+                }
+            ],
+            "raw": "Markdown"
+        },
+        "menu": {
+            "tree": [
+                "Documentation"
+            ],
+            "slug": "/doc/functions"
+        },
+        "platform": [
+            {
+                "name": "md",
+                "description": ""
+            }
+        ],
+        "namespace": "@website.sugarcss-coffeekraken-io.doc",
+        "status": "stable",
+        "since": "2.0.0",
+        "author": {
+            "name": "Olivier Bossel",
+            "email": "olivier.bossel@gmail.com",
+            "url": "https://coffeekraken.io"
+        },
+        "filename": "25-functions.md.twig",
+        "extension": "md",
+        "relPath": "src/doc/25-functions.md.twig",
+        "children": {},
+        "isDependency": false,
+        "package": {
+            "name": "@website/sugarcss-coffeekraken-io",
+            "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+            "version": "2.0.0-beta.1",
+            "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+            "license": "MIT",
+            "type": "npm"
+        },
+        "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/src/doc/25-functions.md.twig"
+    },
+    "@website.sugarcss-coffeekraken-io.doc.07.-Colors": {
+        "id": "@website.sugarcss-coffeekraken-io.doc.07.-Colors",
+        "name": "07. Colors",
+        "type": {
+            "types": [
+                {
+                    "type": "Markdown"
+                }
+            ],
+            "raw": "Markdown"
+        },
+        "menu": {
+            "tree": [
+                "Documentation"
+            ],
+            "slug": "/doc/colors"
+        },
+        "platform": [
+            {
+                "name": "md",
+                "description": ""
+            }
+        ],
+        "namespace": "@website.sugarcss-coffeekraken-io.doc",
+        "status": "stable",
+        "since": "2.0.0",
+        "author": {
+            "name": "Olivier Bossel",
+            "email": "olivier.bossel@gmail.com",
+            "url": "https://coffeekraken.io"
+        },
+        "filename": "30-colors.md.twig",
+        "extension": "md",
+        "relPath": "src/doc/30-colors.md.twig",
+        "children": {},
+        "isDependency": false,
+        "package": {
+            "name": "@website/sugarcss-coffeekraken-io",
+            "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+            "version": "2.0.0-beta.1",
+            "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+            "license": "MIT",
+            "type": "npm"
+        },
+        "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/src/doc/30-colors.md.twig"
+    },
+    "@website.sugarcss-coffeekraken-io.doc.08.-Theming": {
+        "id": "@website.sugarcss-coffeekraken-io.doc.08.-Theming",
+        "name": "08. Theming",
+        "type": {
+            "types": [
+                {
+                    "type": "Markdown"
+                }
+            ],
+            "raw": "Markdown"
+        },
+        "menu": {
+            "tree": [
+                "Documentation"
+            ],
+            "slug": "/doc/theming"
+        },
+        "platform": [
+            {
+                "name": "md",
+                "description": ""
+            }
+        ],
+        "namespace": "@website.sugarcss-coffeekraken-io.doc",
+        "status": "stable",
+        "since": "2.0.0",
+        "author": {
+            "name": "Olivier Bossel",
+            "email": "olivier.bossel@gmail.com",
+            "url": "https://coffeekraken.io"
+        },
+        "filename": "35-theming.md.twig",
+        "extension": "md",
+        "relPath": "src/doc/35-theming.md.twig",
+        "children": {},
+        "isDependency": false,
+        "package": {
+            "name": "@website/sugarcss-coffeekraken-io",
+            "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+            "version": "2.0.0-beta.1",
+            "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+            "license": "MIT",
+            "type": "npm"
+        },
+        "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/src/doc/35-theming.md.twig"
+    },
+    "@website.sugarcss-coffeekraken-io.doc.09.-Typography": {
+        "id": "@website.sugarcss-coffeekraken-io.doc.09.-Typography",
+        "name": "09. Typography",
+        "type": {
+            "types": [
+                {
+                    "type": "Markdown"
+                }
+            ],
+            "raw": "Markdown"
+        },
+        "menu": {
+            "tree": [
+                "Documentation"
+            ],
+            "slug": "/doc/typography"
+        },
+        "platform": [
+            {
+                "name": "md",
+                "description": ""
+            }
+        ],
+        "namespace": "@website.sugarcss-coffeekraken-io.doc",
+        "status": "stable",
+        "since": "2.0.0",
+        "author": {
+            "name": "Olivier Bossel",
+            "email": "olivier.bossel@gmail.com",
+            "url": "https://coffeekraken.io"
+        },
+        "filename": "40-typography.md.twig",
+        "extension": "md",
+        "relPath": "src/doc/40-typography.md.twig",
+        "children": {},
+        "isDependency": false,
+        "package": {
+            "name": "@website/sugarcss-coffeekraken-io",
+            "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+            "version": "2.0.0-beta.1",
+            "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+            "license": "MIT",
+            "type": "npm"
+        },
+        "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/src/doc/40-typography.md.twig"
+    },
+    "@website.sugarcss-coffeekraken-io.doc.10.-Icons": {
+        "id": "@website.sugarcss-coffeekraken-io.doc.10.-Icons",
+        "name": "10. Icons",
+        "type": {
+            "types": [
+                {
+                    "type": "Markdown"
+                }
+            ],
+            "raw": "Markdown"
+        },
+        "menu": {
+            "tree": [
+                "Documentation"
+            ],
+            "slug": "/doc/icons"
+        },
+        "platform": [
+            {
+                "name": "md",
+                "description": ""
+            }
+        ],
+        "namespace": "@website.sugarcss-coffeekraken-io.doc",
+        "status": "stable",
+        "since": "2.0.0",
+        "author": {
+            "name": "Olivier Bossel",
+            "email": "olivier.bossel@gmail.com",
+            "url": "https://coffeekraken.io"
+        },
+        "filename": "45-icons.md.twig",
+        "extension": "md",
+        "relPath": "src/doc/45-icons.md.twig",
+        "children": {},
+        "isDependency": false,
+        "package": {
+            "name": "@website/sugarcss-coffeekraken-io",
+            "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+            "version": "2.0.0-beta.1",
+            "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+            "license": "MIT",
+            "type": "npm"
+        },
+        "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/src/doc/45-icons.md.twig"
+    },
+    "@website.sugarcss-coffeekraken-io.doc.11.-Layout": {
+        "id": "@website.sugarcss-coffeekraken-io.doc.11.-Layout",
+        "name": "11. Layout",
+        "type": {
+            "types": [
+                {
+                    "type": "Markdown"
+                }
+            ],
+            "raw": "Markdown"
+        },
+        "menu": {
+            "tree": [
+                "Documentation"
+            ],
+            "slug": "/doc/layout"
+        },
+        "platform": [
+            {
+                "name": "md",
+                "description": ""
+            }
+        ],
+        "namespace": "@website.sugarcss-coffeekraken-io.doc",
+        "status": "stable",
+        "since": "2.0.0",
+        "author": {
+            "name": "Olivier Bossel",
+            "email": "olivier.bossel@gmail.com",
+            "url": "https://coffeekraken.io"
+        },
+        "filename": "50-layout.md.twig",
+        "extension": "md",
+        "relPath": "src/doc/50-layout.md.twig",
+        "children": {},
+        "isDependency": false,
+        "package": {
+            "name": "@website/sugarcss-coffeekraken-io",
+            "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+            "version": "2.0.0-beta.1",
+            "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+            "license": "MIT",
+            "type": "npm"
+        },
+        "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/src/doc/50-layout.md.twig"
+    },
+    "@website.sugarcss-coffeekraken-io.doc.12.-Responsive": {
+        "id": "@website.sugarcss-coffeekraken-io.doc.12.-Responsive",
+        "name": "12. Responsive",
+        "type": {
+            "types": [
+                {
+                    "type": "Markdown"
+                }
+            ],
+            "raw": "Markdown"
+        },
+        "menu": {
+            "tree": [
+                "Documentation"
+            ],
+            "slug": "/doc/responsive"
+        },
+        "platform": [
+            {
+                "name": "md",
+                "description": ""
+            }
+        ],
+        "namespace": "@website.sugarcss-coffeekraken-io.doc",
+        "status": "stable",
+        "since": "2.0.0",
+        "author": {
+            "name": "Olivier Bossel",
+            "email": "olivier.bossel@gmail.com",
+            "url": "https://coffeekraken.io"
+        },
+        "filename": "55-responsive.md.twig",
+        "extension": "md",
+        "relPath": "src/doc/55-responsive.md.twig",
+        "children": {},
+        "isDependency": false,
+        "package": {
+            "name": "@website/sugarcss-coffeekraken-io",
+            "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+            "version": "2.0.0-beta.1",
+            "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+            "license": "MIT",
+            "type": "npm"
+        },
+        "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/src/doc/55-responsive.md.twig"
+    },
+    "@website.sugarcss-coffeekraken-io.doc.13.-Scopes": {
+        "id": "@website.sugarcss-coffeekraken-io.doc.13.-Scopes",
+        "name": "13. Scopes",
+        "type": {
+            "types": [
+                {
+                    "type": "Markdown"
+                }
+            ],
+            "raw": "Markdown"
+        },
+        "menu": {
+            "tree": [
+                "Documentation"
+            ],
+            "slug": "/doc/scopes"
+        },
+        "platform": [
+            {
+                "name": "md",
+                "description": ""
+            }
+        ],
+        "namespace": "@website.sugarcss-coffeekraken-io.doc",
+        "status": "stable",
+        "since": "2.0.0",
+        "author": {
+            "name": "Olivier Bossel",
+            "email": "olivier.bossel@gmail.com",
+            "url": "https://coffeekraken.io"
+        },
+        "filename": "60-scopes.md.twig",
+        "extension": "md",
+        "relPath": "src/doc/60-scopes.md.twig",
+        "children": {},
+        "isDependency": false,
+        "package": {
+            "name": "@website/sugarcss-coffeekraken-io",
+            "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+            "version": "2.0.0-beta.1",
+            "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+            "license": "MIT",
+            "type": "npm"
+        },
+        "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/src/doc/60-scopes.md.twig"
+    },
+    "@website.sugarcss-coffeekraken-io.doc.14.-z-index": {
+        "id": "@website.sugarcss-coffeekraken-io.doc.14.-z-index",
+        "name": "14. z-index",
+        "type": {
+            "types": [
+                {
+                    "type": "Markdown"
+                }
+            ],
+            "raw": "Markdown"
+        },
+        "menu": {
+            "tree": [
+                "Documentation"
+            ],
+            "slug": "/doc/z-index"
+        },
+        "platform": [
+            {
+                "name": "md",
+                "description": ""
+            }
+        ],
+        "namespace": "@website.sugarcss-coffeekraken-io.doc",
+        "status": "stable",
+        "since": "2.0.0",
+        "author": {
+            "name": "Olivier Bossel",
+            "email": "olivier.bossel@gmail.com",
+            "url": "https://coffeekraken.io"
+        },
+        "filename": "65-zIndex.md.twig",
+        "extension": "md",
+        "relPath": "src/doc/65-zIndex.md.twig",
+        "children": {},
+        "isDependency": false,
+        "package": {
+            "name": "@website/sugarcss-coffeekraken-io",
+            "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+            "version": "2.0.0-beta.1",
+            "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+            "license": "MIT",
+            "type": "npm"
+        },
+        "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/src/doc/65-zIndex.md.twig"
+    }
+}

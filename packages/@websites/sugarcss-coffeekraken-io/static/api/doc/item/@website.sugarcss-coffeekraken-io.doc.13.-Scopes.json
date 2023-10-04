@@ -1,0 +1,47 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.doc.13.-Scopes",
+    "name": "13. Scopes",
+    "type": {
+        "types": [
+            {
+                "type": "Markdown"
+            }
+        ],
+        "raw": "Markdown"
+    },
+    "menu": {
+        "tree": [
+            "Documentation"
+        ],
+        "slug": "/doc/scopes"
+    },
+    "platform": [
+        {
+            "name": "md",
+            "description": ""
+        }
+    ],
+    "namespace": "@website.sugarcss-coffeekraken-io.doc",
+    "status": "stable",
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "60-scopes.md.twig",
+    "extension": "md",
+    "relPath": "src/doc/60-scopes.md.twig",
+    "children": {},
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/src/doc/60-scopes.md.twig",
+    "docHtml": "<!-- This file has been generated using\n     the \"@coffeekraken/s-markdown-builder\" package.\n     !!! Do not edit it directly... -->\n\n<!-- body -->\n\n<!--\n/**\n* @name            13. Scopes\n* @namespace       doc\n* @type            Markdown\n* @platform        md\n* @status          stable\n* @menu            Documentation           /doc/scopes\n*\n* @since           2.0.0\n* @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n*/\n-->\n\n<h1 id=\"scopes\">Scopes</h1>\n<p>In the toolkit, most of the UI elements style (and some other things) can be applied through mixins like <code>@s.ui.button();</code> for example. These mixins can takes some arguments and one of them is <code>scope</code>.</p>\n<p>This <code>scope</code> argument tells the mixin which &quot;part&quot; of the element css you want to generate.\nHere&#39;s some values that this argument can take that will make things a lot more simple to understand:</p>\n<ul>\n<li><code>bare</code>: This correspond to the structural css like paddings, sizes and functional css for something like <code>dropdown</code> that need some css just to work properly.</li>\n<li><code>lnf</code>: This means &quot;look and feel&quot; and correspond to all the css that make an element visually pleasing like colors, border-radius, etc...</li>\n</ul>\n<p>These two <code>scopes</code> are the main ones that are usually available with every mixins that print out some styling css for &quot;components&quot; or &quot;UI&quot;.</p>\n<p>Some mixins can have more <code>scopes</code> available. Let&#39;s take for example the <code>@s.ui.avatar</code> mixin.</p>\n<p>This mixins offer some additional &quot;behaviors&quot; like:</p>\n<ul>\n<li><code>shape</code>: An avatar can be &quot;circle&quot;, &quot;rounded&quot; or &quot;square&quot;</li>\n<li><code>interactive</code>: An avatar can have an &quot;hover&quot; state to let the user know that it can interact with</li>\n</ul>\n<p>These are some small features that need to tweak a little bit the css. It would be not optimal to generate these &quot;tweaks&quot; classes like so:</p>\n<s-code-example>\n   <template language=\"css\">\n\n.my-avatar {\n  /* this would print the all avatar css and that's ok */\n  @s.ui.avatar;\n}\n.my-avatar--notifications {\n  /* this would pring only the notifications needed css */\n  @s.ui.avatar ($scope: notifications);\n}\n\n\n   </template>\n</s-code-example>\n\n<blockquote>\n<p>Each mixins API are documented either through the <a href=\"/styleguide/ui/card\">styleguide</a> for more visual exploration, or through the <a href=\"/api\">API</a> for more technical specifications.</p>\n</blockquote>\n"
+}

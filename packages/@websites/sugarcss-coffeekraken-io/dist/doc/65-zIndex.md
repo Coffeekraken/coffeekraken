@@ -1,0 +1,29 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
+
+<!-- body -->
+
+<!--
+/**
+* @name            14. z-index
+* @namespace       doc
+* @type            Markdown
+* @platform        md
+* @status          stable
+* @menu            Documentation           /doc/z-index
+*
+* @since           2.0.0
+* @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+*/
+-->
+
+# z-index
+
+To avoid headaches, here's some z-index where you can find our UI elements:
+
+-   `50`: Tooltips, dropdowns, etc...
+-   `100`: Backdrop
+-   `200`: Floating UI like datetime picker, color picker, etc...
+

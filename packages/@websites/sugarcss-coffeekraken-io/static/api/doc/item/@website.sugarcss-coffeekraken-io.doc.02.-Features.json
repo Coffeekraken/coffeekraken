@@ -1,0 +1,47 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.doc.02.-Features",
+    "name": "02. Features",
+    "type": {
+        "types": [
+            {
+                "type": "Markdown"
+            }
+        ],
+        "raw": "Markdown"
+    },
+    "menu": {
+        "tree": [
+            "Documentation"
+        ],
+        "slug": "/doc/features"
+    },
+    "platform": [
+        {
+            "name": "md",
+            "description": ""
+        }
+    ],
+    "namespace": "@website.sugarcss-coffeekraken-io.doc",
+    "status": "stable",
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "05-features.md.twig",
+    "extension": "md",
+    "relPath": "src/doc/05-features.md.twig",
+    "children": {},
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/src/doc/05-features.md.twig",
+    "docHtml": "<!-- This file has been generated using\n     the \"@coffeekraken/s-markdown-builder\" package.\n     !!! Do not edit it directly... -->\n\n<!-- body -->\n\n<!--\n/**\n* @name            02. Features\n* @namespace       doc\n* @type            Markdown\n* @platform        md\n* @status          stable\n* @menu            Documentation           /doc/features\n*\n* @since           2.0.0\n* @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n*/\n-->\n\n<h2 id=\"features\">Features</h2>\n<p>The sugar plugin for PostCSS gives you a lot of features like:</p>\n<ol>\n<li>Access theme configuration properties like <code>margins</code>, <code>colors</code>, <code>paddings</code>, etc... using some <code>sugar</code> functions like so:<ul>\n<li><code>color: s.color(main)</code>: Apply the main color to the text</li>\n<li><code>padding: s.padding(30)</code>: Apply the <code>30</code> padding</li>\n<li>and more...</li>\n</ul>\n</li>\n<li>Utilities through some mixins like:<ul>\n<li><code>@s.media(mobile) { ... }</code>: Apply some styles only for the <code>mobile</code> media</li>\n<li><code>@s.scrollbar();</code>: Apply a custom scrollbar depending on your theme configuration</li>\n<li><code>@s.depth(30)</code>: Apply the depthj <code>30</code></li>\n<li><code>@s.icon.classes(...)</code>: Define some icons to be used in your HTML</li>\n<li><code>@s.layout(1 2 3)</code>: Build some complex layouts using <code>css grid</code>.</li>\n<li>and more...</li>\n</ul>\n</li>\n<li>Theming support using these mixins:<ul>\n<li><code>@s.theme.apply(dark)</code>: Apply the dark theme to any HTMLElement and his children</li>\n<li><code>@s.theme(dark) { ... }</code>: Specify some styles that will be applied only if the dark theme is applied</li>\n<li><code>@s.init</code>: Apply some resets as well as printing the variables needed for theming</li>\n<li>and more...</li>\n</ul>\n</li>\n<li>Helpers/Components classes generation for things like:<ul>\n<li>Paddings:<ul>\n<li><code>.s-p:10</code>: Apply the <code>10</code> padding</li>\n<li><code>.s-pbe:10</code>: Apply the <code>10</code> block start padding</li>\n<li><code>.s-pi:20</code>: Apply the <code>20</code> inline padding</li>\n<li><code>.s-pb:30</code>: Apply the <code>30</code> block padding</li>\n<li>etc...</li>\n</ul>\n</li>\n<li>Margins:<ul>\n<li><code>.s-m:10</code>: Apply the <code>10</code> margin</li>\n<li><code>.s-mbe:10</code>: Apply the <code>10</code> block start margin</li>\n<li><code>.s-mi:20</code>: Apply the <code>20</code> inline margin</li>\n<li><code>.s-mb:30</code>: Apply the <code>30</code> block margin</li>\n<li>etc...</li>\n</ul>\n</li>\n<li>Flex:<ul>\n<li><code>.s-flex</code>: Apply the flex display</li>\n<li><code>.s-flex:row</code>: Apply the flex display with the <code>row</code> direction</li>\n<li><code>.s-flex:center</code>: Apply the flex display and center the children horizontally and vertically</li>\n<li>etc...</li>\n</ul>\n</li>\n<li>Depth:<ul>\n<li><code>.s-depth:10</code>: Apply the depth <code>10</code></li>\n<li><code>.s-depth:20</code>: Apply the depth <code>20</code></li>\n<li>...</li>\n<li><code>.s-depth:100</code>: Apply the depth <code>100</code></li>\n</ul>\n</li>\n<li>Typography:<ul>\n<li><code>.s-typo:h1</code>: Apply the <code>h1</code> typography</li>\n<li><code>.s-typo:h2</code>: Apply the <code>h2</code> typography</li>\n<li><code>.s-typo:p</code>: Apply the <code>p</code> typography</li>\n<li><code>.s-typo:blockquote</code>: Apply the <code>blockquote</code> typography</li>\n<li>etc...</li>\n</ul>\n</li>\n<li>Colors:<ul>\n<li><code>.s-tc:accent</code>: Apply the accent text color</li>\n<li><code>.s-bc:accent</code>: Apply the accent background color</li>\n<li><code>.s-color:complementary</code>: Apply the complementary color theme on element and his children</li>\n<li>etc...</li>\n</ul>\n</li>\n<li>and more...</li>\n</ul>\n</li>\n</ol>\n<blockquote>\n<p>Note that the values passed in the mixins like <code>30</code>, <code>main</code>, etc... are values coming from the theme configuration. All of these can be updated through out <a href=\"/doc/configuration\">configuration system</a>.</p>\n</blockquote>\n<blockquote>\n<p>Note also the classes with some <code>:</code> in them. This is called the <code>pleasant</code> syntax that let you write your classes in your html like <code>s-flex:column:align-center</code>. This class will be rewrited with <code>s-flex s-flex-column s-flex-align-center</code>. Please check the <a href=\"/doc/pleasant-syntax\">pleasant syntax</a> documentation for more information.</p>\n</blockquote>\n"
+}

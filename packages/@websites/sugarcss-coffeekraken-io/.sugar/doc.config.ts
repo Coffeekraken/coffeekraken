@@ -7,7 +7,7 @@ export default function (api) {
                     'All the documentations like install, get started, etc...',
                 filters: {
                     type: 'Markdown',
-                    id: '@coffeekraken.s-postcss-sugar-plugin.**',
+                    id: '@website.sugarcss-coffeekraken-io.doc.**',
                 },
             },
             styleguideComponents: {

@@ -99,23 +99,23 @@ export default function ({
         *
         * 
         * @example        html          Inline
-        *   <p class="s-bg:accent s-radius s-pi:30 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
-        *   <p class="s-bg:complementary s-radius s-pis:50 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
-        *   <p class="s-bg:main s-radius s-pis:80 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
-        *   <p class="s-bg:error s-radius s-pis:100 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
+        *   <p class="s-bc:accent s-radius s-pi:30 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
+        *   <p class="s-bc:complementary s-radius s-pis:50 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
+        *   <p class="s-bc:main s-radius s-pis:80 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
+        *   <p class="s-bc:error s-radius s-pis:100 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
         * 
         * @example            html                Block
-        *   <div class="s-bg:accent s-radius s-pbs:30 s-pbe:40 s-text:center s-mbe:20">${__faker.name.findName()}</div>
-        *   <div class="s-bg:complementary s-radius s-pb:30 s-text:center s-mbe:20">${__faker.name.findName()}</div>
-        *   <div class="s-bg:main s-radius s-pbs:50 s-pbe:30 s-text:center s-mbe:20">${__faker.name.findName()}</div>
-        *   <div class="s-bg:error s-radius s-pbs:100 s-pbe:60 s-text:center s-mbe:20">${__faker.name.findName()}</div>
+        *   <div class="s-bc:accent s-radius s-pbs:30 s-pbe:40 s-text:center s-mbe:20">${__faker.name.findName()}</div>
+        *   <div class="s-bc:complementary s-radius s-pb:30 s-text:center s-mbe:20">${__faker.name.findName()}</div>
+        *   <div class="s-bc:main s-radius s-pbs:50 s-pbe:30 s-text:center s-mbe:20">${__faker.name.findName()}</div>
+        *   <div class="s-bc:error s-radius s-pbs:100 s-pbe:60 s-text:center s-mbe:20">${__faker.name.findName()}</div>
         * 
         * @example       html          RTL
         * <div dir="rtl">
-        *   <p class="s-bg:accent s-radius s-pi:30 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
-        *   <p class="s-bg:complementary s-radius s-pis:50 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
-        *   <p class="s-bg:main s-radius s-pis:80 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
-        *   <p class="s-bg:error s-radius s-pis:100 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
+        *   <p class="s-bc:accent s-radius s-pi:30 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
+        *   <p class="s-bc:complementary s-radius s-pis:50 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
+        *   <p class="s-bc:main s-radius s-pis:80 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
+        *   <p class="s-bc:error s-radius s-pis:100 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
         * </div>
         * 
         * @since      2.0.0
@@ -126,10 +126,10 @@ export default function ({
 
     paddingsKeys.forEach((spaceName) => {
         // margins
-        const clsMargin = `s-p:${spaceName}`;
+        const clsPadding = `s-p:${spaceName}`;
         vars.comment(
             () => `/**
-    * @name            ${clsMargin}
+    * @name            ${clsPadding}
     * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
@@ -138,7 +138,7 @@ export default function ({
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" padding style around any HTMLElement
     * 
     * @example      html
-    * <span class="${clsMargin.replace(':', ':')}">Something cool</span>
+    * <span class="${clsPadding.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -146,15 +146,15 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMargin.replace(':', '-')} {
+   .${clsPadding.replace(':', '-')} {
         padding: s.padding(${spaceName});
    }`,
             { type: 'CssClass' },
         );
-        const clsMarginTop = `s-pbs:${spaceName}`;
+        const clsPaddingBlockStart = `s-pbs:${spaceName}`;
         vars.comment(
             () => `/**
-    * @name            ${clsMarginTop}
+    * @name            ${clsPaddingBlockStart}
     * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
@@ -163,7 +163,10 @@ export default function ({
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" block start padding style to any HTMLElement
     * 
     * @example      html
-    * <span class="${clsMarginTop.replace(':', ':')}">Something cool</span>
+    * <span class="${clsPaddingBlockStart.replace(
+        ':',
+        ':',
+    )}">Something cool</span>
     * 
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -171,15 +174,15 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMarginTop.replace(':', '-')} {
+   .${clsPaddingBlockStart.replace(':', '-')} {
         padding-block-start: s.padding(${spaceName}) !important;
    }`,
             { type: 'CssClass' },
         );
-        const clsMarginBottom = `s-pbe:${spaceName}`;
+        const clsPaddingBlockEnd = `s-pbe:${spaceName}`;
         vars.comment(
             () => `/**
-    * @name            ${clsMarginBottom}
+    * @name            ${clsPaddingBlockEnd}
     * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
@@ -188,7 +191,10 @@ export default function ({
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" block end padding style to any HTMLElement
     * 
     * @example      html
-    * <span class="${clsMarginBottom.replace(':', ':')}">Something cool</span>
+    * <span class="${clsPaddingBlockEnd.replace(
+        ':',
+        ':',
+    )}">Something cool</span>
     * 
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -196,15 +202,15 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMarginBottom.replace(':', '-')} {
+   .${clsPaddingBlockEnd.replace(':', '-')} {
         padding-block-end: s.padding(${spaceName}) !important;
    }`,
             { type: 'CssClass' },
         );
-        const clsMarginLeft = `s-pis:${spaceName}`;
+        const clsPaddingInlineStart = `s-pis:${spaceName}`;
         vars.comment(
             () => `/**
-    * @name            ${clsMarginLeft}
+    * @name            ${clsPaddingInlineStart}
     * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
@@ -213,7 +219,10 @@ export default function ({
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" inline start padding style to any HTMLElement
     * 
     * @example      html
-    * <span class="${clsMarginLeft.replace(':', ':')}">Something cool</span>
+    * <span class="${clsPaddingInlineStart.replace(
+        ':',
+        ':',
+    )}">Something cool</span>
     * 
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -221,15 +230,15 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMarginLeft.replace(':', '-')} {
+   .${clsPaddingInlineStart.replace(':', '-')} {
         padding-inline-start: s.padding(${spaceName}) !important;
    }`,
             { type: 'CssClass' },
         );
-        const clsMarginRight = `s-pie:${spaceName}`;
+        const clsPaddingInlineEnd = `s-pie:${spaceName}`;
         vars.comment(
             () => `/**
-    * @name            .${clsMarginRight}
+    * @name            .${clsPaddingInlineEnd}
     * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
@@ -238,7 +247,10 @@ export default function ({
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" inline end padding style to any HTMLElement
     * 
     * @example      html
-    * <span class="${clsMarginRight.replace(':', ':')}">Something cool</span>
+    * <span class="${clsPaddingInlineEnd.replace(
+        ':',
+        ':',
+    )}">Something cool</span>
     * 
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -246,15 +258,15 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMarginRight.replace(':', '-')} {
+   .${clsPaddingInlineEnd.replace(':', '-')} {
         padding-inline-end: s.padding(${spaceName}) !important;
    }`,
             { type: 'CssClass' },
         );
-        const clsMarginX = `s-pi:${spaceName}`;
+        const clsPaddingInline = `s-pi:${spaceName}`;
         vars.comment(
             () => `/**
-    * @name            ${clsMarginX}
+    * @name            ${clsPaddingInline}
     * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
@@ -263,7 +275,7 @@ export default function ({
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" inline start and end padding style to any HTMLElement
     * 
     * @example      html
-    * <span class="${clsMarginX.replace(':', ':')}">Something cool</span>
+    * <span class="${clsPaddingInline.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -271,16 +283,16 @@ export default function ({
    `,
         ).code(
             `
-     .${clsMarginX.replace(':', '-')} {
+     .${clsPaddingInline.replace(':', '-')} {
         padding-inline-start: s.padding(${spaceName}) !important;
         padding-inline-end: s.padding(${spaceName}) !important;
    }`,
             { type: 'CssClass' },
         );
-        const clsMarginY = `s-pb:${spaceName}`;
+        const clsPaddingBlock = `s-pb:${spaceName}`;
         vars.comment(
             () => `/**
-    * @name            ${clsMarginY}
+    * @name            ${clsPaddingBlock}
     * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
@@ -289,7 +301,7 @@ export default function ({
     * This class allows you to apply the "<yellow>${spaceName}</yellow>" block start and end padding style to any HTMLElement
     * 
     * @example      html
-    * <span class="${clsMarginY.replace(':', ':')}">Something cool</span>
+    * <span class="${clsPaddingBlock.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -297,7 +309,7 @@ export default function ({
    `,
         ).code(
             `
-   .${clsMarginY.replace(':', '-')} {
+   .${clsPaddingBlock.replace(':', '-')} {
         padding-block-start: s.padding(${spaceName}) !important;
         padding-block-end: s.padding(${spaceName}) !important;
    }`,

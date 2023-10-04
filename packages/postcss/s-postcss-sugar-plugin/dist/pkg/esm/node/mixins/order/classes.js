@@ -57,9 +57,9 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * 
         * @example        html          Simple order
         * <div class="s-flex s-gap:40">
-        *   <div class="s-order:3 s-p:30 s-ratio:16-9 s-grow s-bg:main s-radius">1</div>
-        *   <div class="s-order:1 s-p:30 s-ratio:16-9 s-grow s-bg:main s-radius">2</div>
-        *   <div class="s-order:2 s-p:30 s-ratio:16-9 s-grow s-bg:main s-radius">3</div>
+        *   <div class="s-order:3 s-p:30 s-ratio:16-9 s-grow s-bc:main s-radius">1</div>
+        *   <div class="s-order:1 s-p:30 s-ratio:16-9 s-grow s-bc:main s-radius">2</div>
+        *   <div class="s-order:2 s-p:30 s-ratio:16-9 s-grow s-bc:main s-radius">3</div>
         * </div>
         * 
         * @since      2.0.0
@@ -78,8 +78,8 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                 * 
                 * @example        html
                 * <div class="s-flex">
-                *   <div class="s-order:${i} s-p:20 s-bg:accent s-radius">World</div>
-                *   <div class="s-p:20 s-bg:main s-radius">World</div>
+                *   <div class="s-order:${i} s-p:20 s-bc:accent s-radius">World</div>
+                *   <div class="s-p:20 s-bc:main s-radius">World</div>
                 * </div>
                 * 
                 * @since      2.0.0

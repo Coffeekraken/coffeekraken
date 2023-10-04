@@ -560,20 +560,20 @@ export default function (api) {
                         return api.config.kitchen.actions.sitemapBuild;
                     },
 
-                    // /**
-                    //  * @name            markdownBuild
-                    //  * @namespace       config.kitchenRecipeDefault.stacks.build.actions
-                    //  * @type            String
-                    //  * @default         [config.kitchen.actions.markdownBuild]
-                    //  *
-                    //  * Specify the recipe build stack markdownBuild action
-                    //  *
-                    //  * @since       2.0.0
-                    //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                    //  */
-                    // get markdownBuild() {
-                    //     return api.config.kitchen.actions.markdownBuild;
-                    // },
+                    /**
+                     * @name            markdownBuild
+                     * @namespace       config.kitchenRecipeDefault.stacks.build.actions
+                     * @type            String
+                     * @default         [config.kitchen.actions.markdownBuild]
+                     *
+                     * Specify the recipe build stack markdownBuild action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    get markdownBuild() {
+                        return api.config.kitchen.actions.markdownBuild;
+                    },
 
                     /**
                      * @name            copyAssets
@@ -589,7 +589,7 @@ export default function (api) {
                         extends: 'copy',
                         params: {
                             src: 'src',
-                            glob: '+(fonts|doc)',
+                            glob: '+(fonts|doc|video)',
                             dest: 'dist',
                         },
                     },

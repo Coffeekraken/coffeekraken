@@ -80,7 +80,7 @@ export default function ({
             }
             &::-webkit-scrollbar-track {
                     ${
-                        finalParams.background.match(/^sugar\.color/) ??
+                        finalParams.background.match(/^s\.color/) ??
                         finalParams.background.match(/^(var|hsla?|rgba?)\(/)
                             ? `
                         background-color: ${finalParams.background};
@@ -93,13 +93,13 @@ export default function ({
             }
             &::-webkit-scrollbar-thumb {
                 ${
-                    finalParams.color.match(/^sugar\.color/) ||
+                    finalParams.color.match(/^s\.color/) ||
                     finalParams.color.match(/^(var|hsla?|rgba?)\(/)
                         ? `
                         background-color: ${finalParams.color};
                 `
                         : `
-                    background-color: s.color(${finalParams.color});
+                    background-color: s.color(${finalParams.color}, --alpha 0.3);
                 `
                 }
             }

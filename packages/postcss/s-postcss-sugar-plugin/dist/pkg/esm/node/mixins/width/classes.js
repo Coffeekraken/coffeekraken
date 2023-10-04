@@ -62,7 +62,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         .map((width) => {
         return ` 
                 *   <div>
-                *      <div style="overflow:hidden" class="s-width:${width} s-text:center s-bg:accent s-p:30 s-radius:30">${width}%</div>
+                *      <div style="overflow:hidden" class="s-width:${width} s-text:center s-bc:accent s-p:30 s-radius:30">${width}%</div>
                 *   </div>`;
     })
         .join('\n')}

@@ -1,0 +1,47 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.doc.04.-Classes",
+    "name": "04. Classes",
+    "type": {
+        "types": [
+            {
+                "type": "Markdown"
+            }
+        ],
+        "raw": "Markdown"
+    },
+    "menu": {
+        "tree": [
+            "Documentation"
+        ],
+        "slug": "/doc/classes"
+    },
+    "platform": [
+        {
+            "name": "md",
+            "description": ""
+        }
+    ],
+    "namespace": "@website.sugarcss-coffeekraken-io.doc",
+    "status": "stable",
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "15-classes.md.twig",
+    "extension": "md",
+    "relPath": "src/doc/15-classes.md.twig",
+    "children": {},
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/src/doc/15-classes.md.twig",
+    "docHtml": "<!-- This file has been generated using\n     the \"@coffeekraken/s-markdown-builder\" package.\n     !!! Do not edit it directly... -->\n\n<!-- body -->\n\n<!--\n/**\n* @name            04. Classes\n* @namespace       doc\n* @type            Markdown\n* @platform        md\n* @status          stable\n* @menu            Documentation           /doc/classes\n*\n* @since           2.0.0\n* @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n*/\n-->\n\n<h1 id=\"classes\">Classes</h1>\n<p>Out of the box, the <code>postcssSugarPlugin</code> can generate a lot of helper classes based for the most part on your theme configuration.</p>\n<p>To generate all these classes, you can simply add this to your css file:</p>\n<s-code-example>\n   <template language=\"css\">\n\n/* init the sugar toolkit */\n@s.init();\n\n/* generate ALL the classes */\n@s.classes();\n\n/* or generate only the classes you need */\n@s.flex.classes();\n@s.ui.avatar.classes();\n\n\n   </template>\n</s-code-example>\n\n<blockquote>\n<p>You can find the full list of available helper classes mixins under the <strong>Helpers</strong> section.</p>\n</blockquote>\n"
+}

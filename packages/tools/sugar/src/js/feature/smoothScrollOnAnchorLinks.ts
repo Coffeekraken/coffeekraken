@@ -44,23 +44,13 @@ export default function __smoothScrollOnAnchorLinks(
 ): void {
     settings = __deepMerge(
         {
-            scroll: {},
+            scroll: {
+                delay: document?.env?.SUGAR?.theme?.get?.('scroll')?.delay ?? 0,
+            },
             checkPathNames: true,
         },
         settings,
     );
-
-    if (document.env?.SUGAR?.theme) {
-        settings.scroll = {
-            ...{
-                duration: document.env.SUGAR.theme.get('scroll').duration,
-                delay: document.env.SUGAR.theme.get('scroll').delay,
-                offsetX: document.env.SUGAR.theme.get('scroll').offsetX,
-                offsetY: document.env.SUGAR.theme.get('scroll').offsetY,
-            },
-            ...(settings.scroll ?? {}),
-        };
-    }
 
     __querySelectorLive('a:not([is])[href*="#"]', ($link) => {
         // listen for click

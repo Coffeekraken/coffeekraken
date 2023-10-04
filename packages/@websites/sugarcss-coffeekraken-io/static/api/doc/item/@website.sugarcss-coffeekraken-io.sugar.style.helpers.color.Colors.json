@@ -34,7 +34,7 @@
         {
             "language": "html",
             "title": "Background color",
-            "code": "<div class=\"s-bg:current s-p:10 s-mb:30 s-radius\">current</div>\n<div class=\"s-bg:main s-p:10 s-mb:30 s-radius\">main</div>\n<div class=\"s-bg:accent s-p:10 s-mb:30 s-radius\">accent</div>\n<div class=\"s-bg:complementary s-p:10 s-mb:30 s-radius\">complementary</div>\n<div class=\"s-bg:success s-p:10 s-mb:30 s-radius\">success</div>\n<div class=\"s-bg:warning s-p:10 s-mb:30 s-radius\">warning</div>\n<div class=\"s-bg:error s-p:10 s-mb:30 s-radius\">error</div>\n<div class=\"s-bg:info s-p:10 s-mb:30 s-radius\">info</div>"
+            "code": "<div class=\"s-bc:current s-p:10 s-mb:30 s-radius\">current</div>\n<div class=\"s-bc:main s-p:10 s-mb:30 s-radius\">main</div>\n<div class=\"s-bc:accent s-p:10 s-mb:30 s-radius\">accent</div>\n<div class=\"s-bc:complementary s-p:10 s-mb:30 s-radius\">complementary</div>\n<div class=\"s-bc:success s-p:10 s-mb:30 s-radius\">success</div>\n<div class=\"s-bc:warning s-p:10 s-mb:30 s-radius\">warning</div>\n<div class=\"s-bc:error s-p:10 s-mb:30 s-radius\">error</div>\n<div class=\"s-bc:info s-p:10 s-mb:30 s-radius\">info</div>"
         }
     ],
     "since": "2.0.0",
@@ -43,9 +43,9 @@
         "email": "olivier.bossel@gmail.com",
         "url": "https://coffeekraken.io"
     },
-    "filename": "index.css",
-    "extension": "css",
-    "relPath": "dist/css/index.css",
+    "filename": "index.dev.css",
+    "extension": "dev",
+    "relPath": "dist/css/index.dev.css",
     "isDependency": false,
     "package": {
         "name": "@website/sugarcss-coffeekraken-io",
@@ -172,36 +172,36 @@
                     "name": "s-tc:info",
                     "description": "Apply the info text color"
                 },
-                "s-bg-current": {
-                    "name": "s-bg:current",
+                "s-bc-current": {
+                    "name": "s-bc:current",
                     "description": "Apply the current background color"
                 },
-                "s-bg-main": {
-                    "name": "s-bg:main",
+                "s-bc-main": {
+                    "name": "s-bc:main",
                     "description": "Apply the main background color"
                 },
-                "s-bg-accent": {
-                    "name": "s-bg:accent",
+                "s-bc-accent": {
+                    "name": "s-bc:accent",
                     "description": "Apply the accent background color"
                 },
-                "s-bg-complementary": {
-                    "name": "s-bg:complementary",
+                "s-bc-complementary": {
+                    "name": "s-bc:complementary",
                     "description": "Apply the complementary background color"
                 },
-                "s-bg-success": {
-                    "name": "s-bg:success",
+                "s-bc-success": {
+                    "name": "s-bc:success",
                     "description": "Apply the success background color"
                 },
-                "s-bg-warning": {
-                    "name": "s-bg:warning",
+                "s-bc-warning": {
+                    "name": "s-bc:warning",
                     "description": "Apply the warning background color"
                 },
-                "s-bg-error": {
-                    "name": "s-bg:error",
+                "s-bc-error": {
+                    "name": "s-bc:error",
                     "description": "Apply the error background color"
                 },
-                "s-bg-info": {
-                    "name": "s-bg:info",
+                "s-bc-info": {
+                    "name": "s-bc:info",
                     "description": "Apply the info background color"
                 }
             },
@@ -214,7 +214,7 @@
                 {
                     "language": "html",
                     "title": "Background color",
-                    "code": "<div class=\"s-bg:current s-p:10 s-mb:30 s-radius\">current</div>\n<div class=\"s-bg:main s-p:10 s-mb:30 s-radius\">main</div>\n<div class=\"s-bg:accent s-p:10 s-mb:30 s-radius\">accent</div>\n<div class=\"s-bg:complementary s-p:10 s-mb:30 s-radius\">complementary</div>\n<div class=\"s-bg:success s-p:10 s-mb:30 s-radius\">success</div>\n<div class=\"s-bg:warning s-p:10 s-mb:30 s-radius\">warning</div>\n<div class=\"s-bg:error s-p:10 s-mb:30 s-radius\">error</div>\n<div class=\"s-bg:info s-p:10 s-mb:30 s-radius\">info</div>"
+                    "code": "<div class=\"s-bc:current s-p:10 s-mb:30 s-radius\">current</div>\n<div class=\"s-bc:main s-p:10 s-mb:30 s-radius\">main</div>\n<div class=\"s-bc:accent s-p:10 s-mb:30 s-radius\">accent</div>\n<div class=\"s-bc:complementary s-p:10 s-mb:30 s-radius\">complementary</div>\n<div class=\"s-bc:success s-p:10 s-mb:30 s-radius\">success</div>\n<div class=\"s-bc:warning s-p:10 s-mb:30 s-radius\">warning</div>\n<div class=\"s-bc:error s-p:10 s-mb:30 s-radius\">error</div>\n<div class=\"s-bc:info s-p:10 s-mb:30 s-radius\">info</div>"
                 }
             ],
             "since": "2.0.0",
@@ -223,7 +223,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name          Colors\n* @namespace          sugar.style.helpers.color\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/colors\n* @platform       css\n* @status       stable\n*\n* These classes allows you to set text and background colors easily to any HTMLElement\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.color.classes;\n*\n* .my-element {\n*   \\@s.color(accent);\n* }\n*\n* @cssClass            s-color:current       Apply the current color for the \"current\" color\n* @cssClass            s-color:main       Apply the main color for the \"current\" color\n* @cssClass            s-color:accent       Apply the accent color for the \"current\" color\n* @cssClass            s-color:complementary       Apply the complementary color for the \"current\" color\n* @cssClass            s-color:success       Apply the success color for the \"current\" color\n* @cssClass            s-color:warning       Apply the warning color for the \"current\" color\n* @cssClass            s-color:error       Apply the error color for the \"current\" color\n* @cssClass            s-color:info       Apply the info color for the \"current\" color\n* @cssClass            s-tc:current       Apply the current text color\n* @cssClass            s-tc:main       Apply the main text color\n* @cssClass            s-tc:accent       Apply the accent text color\n* @cssClass            s-tc:complementary       Apply the complementary text color\n* @cssClass            s-tc:success       Apply the success text color\n* @cssClass            s-tc:warning       Apply the warning text color\n* @cssClass            s-tc:error       Apply the error text color\n* @cssClass            s-tc:info       Apply the info text color\n* @cssClass            s-bg:current       Apply the current background color\n* @cssClass            s-bg:main       Apply the main background color\n* @cssClass            s-bg:accent       Apply the accent background color\n* @cssClass            s-bg:complementary       Apply the complementary background color\n* @cssClass            s-bg:success       Apply the success background color\n* @cssClass            s-bg:warning       Apply the warning background color\n* @cssClass            s-bg:error       Apply the error background color\n* @cssClass            s-bg:info       Apply the info background color\n*\n* @example        html          Text color\n* <div class=\"s-tc:current s-mb:30\">current</div>\n* <div class=\"s-tc:main s-mb:30\">main</div>\n* <div class=\"s-tc:accent s-mb:30\">accent</div>\n* <div class=\"s-tc:complementary s-mb:30\">complementary</div>\n* <div class=\"s-tc:success s-mb:30\">success</div>\n* <div class=\"s-tc:warning s-mb:30\">warning</div>\n* <div class=\"s-tc:error s-mb:30\">error</div>\n* <div class=\"s-tc:info s-mb:30\">info</div>\n*\n* @example        html          Background color\n* <div class=\"s-bg:current s-p:10 s-mb:30 s-radius\">current</div>\n* <div class=\"s-bg:main s-p:10 s-mb:30 s-radius\">main</div>\n* <div class=\"s-bg:accent s-p:10 s-mb:30 s-radius\">accent</div>\n* <div class=\"s-bg:complementary s-p:10 s-mb:30 s-radius\">complementary</div>\n* <div class=\"s-bg:success s-p:10 s-mb:30 s-radius\">success</div>\n* <div class=\"s-bg:warning s-p:10 s-mb:30 s-radius\">warning</div>\n* <div class=\"s-bg:error s-p:10 s-mb:30 s-radius\">error</div>\n* <div class=\"s-bg:info s-p:10 s-mb:30 s-radius\">info</div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name          Colors\n* @namespace          sugar.style.helpers.color\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/colors\n* @platform       css\n* @status       stable\n*\n* These classes allows you to set text and background colors easily to any HTMLElement\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.color.classes;\n*\n* .my-element {\n*   \\@s.color(accent);\n* }\n*\n* @cssClass            s-color:current       Apply the current color for the \"current\" color\n* @cssClass            s-color:main       Apply the main color for the \"current\" color\n* @cssClass            s-color:accent       Apply the accent color for the \"current\" color\n* @cssClass            s-color:complementary       Apply the complementary color for the \"current\" color\n* @cssClass            s-color:success       Apply the success color for the \"current\" color\n* @cssClass            s-color:warning       Apply the warning color for the \"current\" color\n* @cssClass            s-color:error       Apply the error color for the \"current\" color\n* @cssClass            s-color:info       Apply the info color for the \"current\" color\n* @cssClass            s-tc:current       Apply the current text color\n* @cssClass            s-tc:main       Apply the main text color\n* @cssClass            s-tc:accent       Apply the accent text color\n* @cssClass            s-tc:complementary       Apply the complementary text color\n* @cssClass            s-tc:success       Apply the success text color\n* @cssClass            s-tc:warning       Apply the warning text color\n* @cssClass            s-tc:error       Apply the error text color\n* @cssClass            s-tc:info       Apply the info text color\n* @cssClass            s-bc:current       Apply the current background color\n* @cssClass            s-bc:main       Apply the main background color\n* @cssClass            s-bc:accent       Apply the accent background color\n* @cssClass            s-bc:complementary       Apply the complementary background color\n* @cssClass            s-bc:success       Apply the success background color\n* @cssClass            s-bc:warning       Apply the warning background color\n* @cssClass            s-bc:error       Apply the error background color\n* @cssClass            s-bc:info       Apply the info background color\n*\n* @example        html          Text color\n* <div class=\"s-tc:current s-mb:30\">current</div>\n* <div class=\"s-tc:main s-mb:30\">main</div>\n* <div class=\"s-tc:accent s-mb:30\">accent</div>\n* <div class=\"s-tc:complementary s-mb:30\">complementary</div>\n* <div class=\"s-tc:success s-mb:30\">success</div>\n* <div class=\"s-tc:warning s-mb:30\">warning</div>\n* <div class=\"s-tc:error s-mb:30\">error</div>\n* <div class=\"s-tc:info s-mb:30\">info</div>\n*\n* @example        html          Background color\n* <div class=\"s-bc:current s-p:10 s-mb:30 s-radius\">current</div>\n* <div class=\"s-bc:main s-p:10 s-mb:30 s-radius\">main</div>\n* <div class=\"s-bc:accent s-p:10 s-mb:30 s-radius\">accent</div>\n* <div class=\"s-bc:complementary s-p:10 s-mb:30 s-radius\">complementary</div>\n* <div class=\"s-bc:success s-p:10 s-mb:30 s-radius\">success</div>\n* <div class=\"s-bc:warning s-p:10 s-mb:30 s-radius\">warning</div>\n* <div class=\"s-bc:error s-p:10 s-mb:30 s-radius\">error</div>\n* <div class=\"s-bc:info s-p:10 s-mb:30 s-radius\">info</div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.color.Colors"
         }
     ]

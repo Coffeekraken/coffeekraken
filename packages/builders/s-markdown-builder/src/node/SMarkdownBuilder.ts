@@ -317,8 +317,8 @@ export default class SMarkdownBuilder extends __SBuilder {
                         SFile: false,
                     });
                 } else {
-                    throw new Error(
-                        `<red>[${this.constructor.name}]</red> Sorry but the passed argument "<yellow>${path}</yellow>" does not resolve to any file on your system...`,
+                    console.log(
+                        `<red>[SMarkdownBuilder]</red> Sorry but the passed argument "<yellow>${path}</yellow>" does not resolve to any file on your system...`,
                     );
                 }
                 if (sourceObj.outPath) {

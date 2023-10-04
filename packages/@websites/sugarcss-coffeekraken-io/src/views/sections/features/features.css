@@ -1,0 +1,43 @@
+.section-features {
+    min-height: 0;
+    margin-top: calc(30vh * -1);
+
+    ._cards {
+        @s.layout (1 2 3);
+        gap: s.margin(50);
+
+        > *:nth-child(1) {
+            position: relative;
+            top: 50px;
+        }
+        > *:nth-child(2) {
+            position: relative;
+            top: 0px;
+        }
+        > *:nth-child(3) {
+            position: relative;
+            top: -50px;
+        }
+    }
+
+    i {
+        position: absolute;
+        top: s.margin(30);
+        right: s.margin(30);
+        font-size: 150px;
+        mix-blend-mode: overlay;
+        opacity: 0.2;
+    }
+
+    ._card {
+        position: relative;
+        padding: s.padding(50);
+        background: linear-gradient(
+            to right bottom,
+            s.color(current),
+            s.color(current, surface)
+        );
+        overflow: hidden;
+        @s.border.radius (30);
+    }
+}

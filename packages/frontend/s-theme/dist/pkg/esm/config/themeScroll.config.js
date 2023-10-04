@@ -29,14 +29,14 @@ export default function (api) {
          * @name                delay
          * @namespace           config.themeScroll
          * @type                Number
-         * @default             300
+         * @default             500
          *
          * Specify the scroll delay in ms for your theme
          *
          * @since               2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        delay: 300,
+        delay: 500,
         /**
          * @name                offset
          * @namespace           config.themeScroll

@@ -38,7 +38,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * This class allows you to hide any HTMLElement
     * 
     * @example        html
-    * <div class="s-hide s-bg:accent">
+    * <div class="s-hide s-bc:accent">
     *     <p>I'm a cool hide container</p>
     * </div>
     */

@@ -1,0 +1,75 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
+
+<!-- body -->
+
+<!--
+/**
+* @name            10. Icons
+* @namespace       doc
+* @type            Markdown
+* @platform        md
+* @status          stable
+* @menu            Documentation           /doc/icons
+*
+* @since           2.0.0
+* @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+*/
+-->
+
+# Icons
+
+Icons are very important these days in web design/development. The bad part of this is that icons are often coming from different sources like [Font Awesome](https://fontawesome.com/), [Google icons](https://fonts.google.com/icons), some others or even plain SVG files.
+
+This make the treatment and usage of these icons a pain in the ass to say at least...
+
+Our solution to this is the `@s.icon.classes` mixin that let you register all of your icons from different sources and use them down the line with a single class syntax the looks like `.s-icon:user`.
+
+> Your final icons will be generated in a **font-icon format** so you can apply them colors, and all features a text can have.
+
+## Register some icons
+
+To register some icons, simply call the `@s.icon.classes` mixin with the list of icons you want in your website like so:
+
+```css
+@s.icon.classes (
+    fab:vuejs
+    fa:tasks
+    fa:hammer:todo
+    fs:src/icons/read-direction.svg:support-rtl
+    fs:src/icons/ *.svg
+    );
+
+```
+
+Each line define an icon using this syntax:
+
+`{protocol}:{name-or-path}:{internal-name-you-want}`
+
+-   `protocol`: This define the source of the icon. See bellow the list of supported ones
+-   `name-or-path`: This define the name or path where to find your icon
+-   `internal-name-you-want`: This is optional and let you change the name to use which one you want internally
+
+## Protocols
+
+For now, we support 2 protocols that are:
+
+- `fa|fab|fas|fad|fal`: These are [Font awesome](https://fontawesome.com) icons
+- `fs`: This is `filesystem` plain SVG icons
+    -   Support glob paths like `src/icons/*.svg`
+
+> These are the supported protocols that we have for now. We can as well add some depending on your needs and requests through our different communication channels.
+
+## Usage
+
+To use your registered icons, simply reference them inside your html like so:
+
+```html
+<i class="s-icon s-icon-vuejs"></i>
+<i class="s-icon s-icon-support-rtl"></i>
+<!-- etc... -->
+
+```
+

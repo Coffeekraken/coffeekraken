@@ -87,7 +87,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
   * This class allows you to apply a "<yellow>${ratioName}</yellow>" ratio style to any HTMLElement
   * 
   * @example        html
-  * <div class="s-ratio\:${ratioName.replace('/', '-')} s-bg:accent">
+  * <div class="s-ratio\:${ratioName.replace('/', '-')} s-bc:accent">
   *     <div class="s-center-abs">I'm a cool ratio container</div>
   * </div>
   */

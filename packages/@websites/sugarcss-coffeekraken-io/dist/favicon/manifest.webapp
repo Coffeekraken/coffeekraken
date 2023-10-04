@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "name": "@website/css-coffeekraken-io",
+  "name": "@website/sugarcss-coffeekraken-io",
   "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
   "icons": {
     "60": "/dist/favicon/firefox_app_60x60.png",

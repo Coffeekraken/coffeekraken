@@ -396,7 +396,7 @@ export default class STheme extends __SThemeBase {
      */
     getColor(name, variant, $context = document.body) {
         const $elm = document.createElement('p');
-        $elm.classList.add(`s-bg-${name}${variant ? `-${variant}` : ''}`);
+        $elm.classList.add(`s-bc-${name}${variant ? `-${variant}` : ''}`);
         const $wrapper = document.createElement('div');
         $wrapper.setAttribute('hidden', 'true');
         $wrapper.setAttribute('theme', `${this.theme}-${this.variant}`);

@@ -43,29 +43,29 @@ import __css from '../../../../src/css/s-appear-feature.css'; // relative to /di
  * npm i @coffeekraken/s-appear-feature
  *
  * @example         html            Bottom
- * <div class="s-ratio:16-9 s-width:50 s-bg:main-surface s-p:30 s-mbe:50">
- *   <div class="s-ratio:16-9 s-bg:accent s-color:accent s-radius s-p:30" s-appear in="bottom">
+ * <div class="s-ratio:16-9 s-width:50 s-bc:main s-p:30 s-mbe:50">
+ *   <div class="s-ratio:16-9 s-bc:accent s-color:accent s-radius s-p:30" s-appear in="bottom">
  *      I'm the appear element
  *  </div>
  * </div>
  *
  * @example         html            Top
- * <div class="s-ratio:16-9 s-width:50 s-bg:main-surface s-p:30 s-mbe:50">
- *   <div class="s-ratio:16-9 s-bg:accent s-color:accent s-radius s-p:30" s-appear in="top">
+ * <div class="s-ratio:16-9 s-width:50 s-bc:main s-p:30 s-mbe:50">
+ *   <div class="s-ratio:16-9 s-bc:accent s-color:accent s-radius s-p:30" s-appear in="top">
  *      I'm the appear element
  *  </div>
  * </div>
  *
  * @example         html            Right
- * <div class="s-ratio:16-9 s-width:50 s-bg:main-surface s-p:30 s-mbe:50">
- *   <div class="s-ratio:16-9 s-bg:accent s-color:accent s-radius s-p:30" s-appear in="right">
+ * <div class="s-ratio:16-9 s-width:50 s-bc:main s-p:30 s-mbe:50">
+ *   <div class="s-ratio:16-9 s-bc:accent s-color:accent s-radius s-p:30" s-appear in="right">
  *      I'm the appear element
  *  </div>
  * </div>
  *
  * @example         html            Left
- * <div class="s-ratio:16-9 s-width:50 s-bg:main-surface s-p:30 s-mbe:50">
- *   <div class="s-ratio:16-9 s-bg:accent s-color:accent s-radius s-p:30" s-appear in="left">
+ * <div class="s-ratio:16-9 s-width:50 s-bc:main s-p:30 s-mbe:50">
+ *   <div class="s-ratio:16-9 s-bc:accent s-color:accent s-radius s-p:30" s-appear in="left">
  *      I'm the appear element
  *  </div>
  * </div>

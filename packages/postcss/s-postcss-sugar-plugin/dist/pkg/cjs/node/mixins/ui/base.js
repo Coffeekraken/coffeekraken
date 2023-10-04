@@ -41,7 +41,7 @@ function default_1({ params, atRule, replaceWith, }) {
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
             color: s.color(main, text);
-            background-color: s.color(main, ui);
+            background-color: s.color(main, uiBackground);
             font-size: s.scalable(1rem);
             border: s.color(current, --alpha 0.2) solid s.theme(ui.${finalParams.name}.borderWidth);
             border-radius: s.border.radius(ui.${finalParams.name}.borderRadius);

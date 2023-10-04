@@ -462,7 +462,7 @@ export default class SActivateFeature extends __SFeature {
                         return;
                     }
                     // @ts-ignore
-                    $element.unactivate();
+                    $element.unactivate?.();
                 });
             }
 

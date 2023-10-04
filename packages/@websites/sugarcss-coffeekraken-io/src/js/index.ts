@@ -14,8 +14,10 @@ import { define as __SGaugeComponentDefine } from '@coffeekraken/s-gauge-compone
 
 // features
 import __SFeature from '@coffeekraken/s-feature';
+import { define as __SHighlightFeatureDefine } from '@coffeekraken/s-highlight-feature';
 import { define as __SHotkeysListComponentDefine } from '@coffeekraken/s-hotkeys-list-component';
 import __SLitComponent from '@coffeekraken/s-lit-component';
+import { define as __SParallaxFeatureDefine } from '@coffeekraken/s-parallax-feature';
 import { __smoothScroll } from '@coffeekraken/sugar/feature';
 
 // Views specific
@@ -44,6 +46,8 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
 
     // features
     __smoothScroll();
+    __SHighlightFeatureDefine();
+    __SParallaxFeatureDefine();
 
     // components
     __CKMenuDefine();

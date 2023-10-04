@@ -1,0 +1,129 @@
+{% extends 'sugar/readme/layouts/doc/doc.twig' %}
+{% block body %}
+
+<!--
+/**
+ * @name            07. Colors
+ * @namespace       doc
+ * @type            Markdown
+ * @platform        md
+ * @status          stable
+ * @menu            Documentation           /doc/colors
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+# Colors
+
+Colors in Coffeekraken are handled directly in your theme configuration file.
+
+By default, the colors that are defined are these ones:
+
+```js
+export default {{ theme.color|json_encode()|raw }}
+```
+
+You can obviously override these colors by setting your own through our [configuration system](/doc/config/overview) like so:
+
+Create this file in your package:
+`.sugar/themeColor.config.ts`
+
+Override the colors you want or even create new ones if needed:
+```js
+export default function () {
+    return {
+        base: 'hsl(156,50,50)',
+        main: 'hsl(156,50,50)',
+        accent: '#ffbb00',
+    };
+}
+```
+
+## Syntax
+
+Colors can be defined in your theme configuration using one of these syntax:
+
+-   `hsl(156,50,50)`: HSL syntax **prefered**
+-   `hsla(156,50,50,1)`: HSLA syntax
+-   `rgb(245,234,65)`: RGB syntax
+-   `rgba(245,234,65,1)`: RGBA syntax
+-   `#ff347f`: Hexadecimal syntax
+
+> It's preferable to **set your colors directly in HSL(A)** syntax cause under the hood this will be the used one. Setting them directly in HSL avoid unecessary conversion.
+
+## Schemas
+
+Our theming system support to define some color schemas that can be used later on with each colors.
+
+A color schema is an object that define as key the name like "background", "surface", "placeholder", etc... with as value an object of **modifier** to apply on your base color for this particular schema.
+
+Here's for example the default schemas that are setted by default. You can obviously override any of theme just like colors:
+
+`themeShadesDark.ts`
+```js
+export default {{ config.themeShadesDark|json_encode()|raw }}
+```
+
+`themeShadesLight.ts`
+```js
+export default {{ config.themeShadesLight|json_encode()|raw }}
+```
+
+> Note the `text.color` object. You can specify different modifiers depending on the color if needed.
+
+To override these configs, simple create this file in your package and set the values you want:
+`.sugar/themeShadesDark.config.ts`
+
+```js
+export default function () {
+    return {
+        text: {
+            lighten: 0,
+        },
+        placeholder: {
+            lighten: 50,
+            alpha: 0.4,
+        },
+    };
+}
+```
+
+These variants are the same color defined in the `color` property, but with some tweaks like:
+
+-   `lighten`: Allows you to increase the `l` HSL color by `0 - 100`
+-   `darken`: Allows you to decrease the `l` HSL color by `0 - 100`
+-   `saturate`: Allows you to increase the `s` HSL color by `0 - 100`
+-   `desaturate`: Allows you to decrease the `s` HSL color by `0 - 100`
+-   `spin`: Allows you to "spin" the `h` HSL color by `-360 - 360`
+-   `alpha`: Allows you to increase/decrease the `a` HSLA color by `0 - 1`
+
+## `current` color
+
+The concept of the `current` color in Coffeekraken is very similar to the `currentColor` CSS value.
+Take an example when we want to create a button that uses this `current` color, then we apply some other colors to it:
+
+```css
+.btn {
+    background: s.color(current);
+    color: s.color(current, foreground);
+}
+.my-section {
+    @s.color (accent);
+}
+.my-button {
+    @s.color (error);
+}
+```
+
+```html
+<div class="my-section">
+    <a class="btn">Hello world</a>
+</div>
+<a class="my-button btn">Other button</a>
+```
+
+> Note that behind the scene the **colors are applied using variables**. This mean that the CSS cascading feature works here as well.
+
+{% endblock %}

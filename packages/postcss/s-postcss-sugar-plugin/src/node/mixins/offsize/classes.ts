@@ -94,23 +94,23 @@ export default function ({
         *
         * 
         * @example        html               All around
-        * <div class="s-bg:main-surface s-position:relative" style="height: 250px">
-        *   <div class="s-os:50 s-bg:accent s-opacity:10"></div>
+        * <div class="s-bc:main-surface s-position:relative" style="height: 250px">
+        *   <div class="s-os:50 s-bc:accent s-opacity:10"></div>
         * </div>
         * 
         * @example        html               Inline
-        * <div class="s-bg:main-surface">
-        *   <div class="s-osi:50 s-bg:accent s-opacity:10" style="height: 250px"></div>
+        * <div class="s-bc:main-surface">
+        *   <div class="s-osi:50 s-bc:accent s-opacity:10" style="height: 250px"></div>
         * </div>
         * 
         * @example        html               Block
-        * <div class="s-bg:main-surface s-position:relative" style="height: 250px">
-        *   <div class="s-osb:50 s-bg:accent s-opacity:10"></div>
+        * <div class="s-bc:main-surface s-position:relative" style="height: 250px">
+        *   <div class="s-osb:50 s-bc:accent s-opacity:10"></div>
         * </div>
         * 
         * @example        html               Inline end
-        * <div class="s-bg:main-surface">
-        *   <div class="s-osie:50 s-bg:accent s-opacity:10" style="height: 250px"></div>
+        * <div class="s-bc:main-surface">
+        *   <div class="s-osie:50 s-bc:accent s-opacity:10" style="height: 250px"></div>
         * </div>
         * 
         * @since      2.0.0

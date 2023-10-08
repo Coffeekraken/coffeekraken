@@ -101,8 +101,7 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
         // determine the running format (cjs|esm)
         try {
             if (module !== undefined) format = 'cjs';
-        } catch (e) {
-        }
+        } catch (e) {}
 
         // handle each scopes
         Object.keys(this.settings.scopes).forEach((scope) => {
@@ -237,22 +236,13 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                     importedConfig = await import(filePath);
                 }
 
+                // CJS async import resolution
+                if (importedConfig.__esModule && importedConfig.default) {
+                    importedConfig = importedConfig.default;
+                }
+
                 clearTimeout(importTimeout);
 
-                // if (
-                //     !filePath.includes(
-                //         this.settings.fileName.replace('%name', ''),
-                //     )
-                // ) {
-                //     // if (buildTemporaryRes) {
-                //     //     buildTemporaryRes.remove();
-                //     // }
-                //     continue;
-                // }
-
-                // if (buildTemporaryRes) {
-                //     // buildTemporaryRes.remove();
-                // }
                 let configData = importedConfig.default;
                 if (typeof configData === 'function') {
                     configData = configData({

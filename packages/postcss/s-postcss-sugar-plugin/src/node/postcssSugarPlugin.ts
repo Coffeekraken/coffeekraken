@@ -276,11 +276,16 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
 
         for (let i = 0; i < paths.length; i++) {
             const path = paths[i];
-            const {
-                default: fn,
-                interface: int,
-                dependencies,
-            } = await import(path);
+            const importedProcessor = await import(path);
+            let fn = importedProcessor.default,
+                int = importedProcessor.interface,
+                dependencies = importedProcessor.dependencies;
+
+            // CJS compatibility
+            if (importedProcessor.__esModule) {
+                fn = fn.default;
+            }
+
             if (type === 'mixins') {
                 mixinsStack[
                     `${path
@@ -384,7 +389,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                 fnId = `${fnId}.${fnId.split('.').slice(-1)[0]}`;
             }
 
-            const fnObject = stack[fnId];
+            const fnObject = stack[fnId]?.default ?? stack[fnId];
 
             if (!fnObject) {
                 throw new Error(
@@ -521,9 +526,11 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         for (let i = 0; i < postProcessorsPaths.length; i++) {
             const path = postProcessorsPaths[i];
 
-            const { default: processorFn } = await import(
+            let { default: processorFn } = await import(
                 `${__dirname()}/postProcessors/${path}`
             );
+            if (processorFn.default) processorFn = processorFn.default;
+
             await processorFn({
                 CssVars: __CssVars,
                 packageHash,

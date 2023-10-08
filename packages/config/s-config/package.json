@@ -9,6 +9,7 @@
         "@coffeekraken/s-config-adapter": "^2.0.0-beta.1",
         "@coffeekraken/s-duration": "^2.0.0-beta.1",
         "@coffeekraken/s-env": "^2.0.0-beta.1",
+        "@coffeekraken/s-theme": "^2.0.0-beta.1",
         "@coffeekraken/sugar": "^2.0.0-beta.1"
     },
     "main": "dist/pkg/cjs/node/exports.js",

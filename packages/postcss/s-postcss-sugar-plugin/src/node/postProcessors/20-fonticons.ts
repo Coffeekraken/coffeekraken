@@ -14,7 +14,7 @@ import {
 } from '@coffeekraken/sugar/path';
 import { generateFonts } from 'fantasticon';
 import __fs from 'fs';
-import __svgFixer from 'oslllo-svg-fixer';
+// import __svgFixer from 'oslllo-svg-fixer';
 import __path from 'path';
 import __postcss from 'postcss';
 
@@ -116,7 +116,7 @@ export default async function ({ root, sharedData, settings }) {
 
     console.log(`<yellow>[fonticons]</yellow> Generate fonticons...`);
 
-    await __svgFixer(inputDir, inputDir).fix();
+    // await __svgFixer(inputDir, inputDir).fix();
 
     const result = await generateFonts({
         inputDir,

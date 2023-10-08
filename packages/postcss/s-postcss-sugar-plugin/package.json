@@ -43,7 +43,6 @@
         "filehound": "^1.17.6",
         "glob": "^7.2.3",
         "known-css-properties": "^0.28.0",
-        "oslllo-svg-fixer": "^1.4.1",
         "postcss": "^8.4.14"
     },
     "main": "dist/pkg/cjs/node/exports.js",

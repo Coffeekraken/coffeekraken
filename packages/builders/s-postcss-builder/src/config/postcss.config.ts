@@ -26,11 +26,11 @@ export default function (api) {
          */
         plugins: [
             '@coffeekraken/s-postcss-sugar-plugin',
-            'postcss-import',
-            'postcss-nested',
-            'postcss-atroot',
-            'postcss-extend-rule',
-            'postcss-property-lookup',
+            // 'postcss-import',
+            // 'postcss-nested',
+            // 'postcss-atroot',
+            // 'postcss-extend-rule',
+            // 'postcss-property-lookup',
             'autoprefixer',
         ],
         pluginsOptions: {},

@@ -42,7 +42,7 @@ __SWysiwygComponentDefine();
 /**
  * @name                SSpecsEditorComponent
  * @as                  Specs editor
- * @___namespace           js
+ * @namespace           js
  * @type                CustomElement
  * @interface           ./interface/SSpecsEditorComponentInterface.ts
  * @menu                Styleguide / UI              /styleguide/ui/s-clipboard-copy

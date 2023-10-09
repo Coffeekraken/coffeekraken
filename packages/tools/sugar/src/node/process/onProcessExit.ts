@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import { __isChildProcess } from '@coffeekraken/sugar/is';
-import __terminalKit from 'terminal-kit';
+// import { terminal as __terminal } from 'terminal-kit';
 
 /**
  * @name            onProcessExit
@@ -53,11 +53,11 @@ export default function __onProcessExit(callback) {
                 const cbFn = __onProcessExitCallbacks[i];
                 await cbFn(state);
             }
-            if (killTerminal) {
-                setTimeout(() => {
-                    __terminalKit.terminal.processExit('SIGTERM');
-                }, 100);
-            }
+            // if (killTerminal) {
+            //     setTimeout(() => {
+            //         __terminal.processExit('SIGTERM');
+            //     }, 100);
+            // }
         }
         process.on('close', (code) =>
             code === 0 ? exitHandler('success') : exitHandler('error'),

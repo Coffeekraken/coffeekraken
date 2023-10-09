@@ -41,7 +41,7 @@ export default function sVitePluginSugar(settings: any = {}) {
 
         // frontspec
         const frontspec = new __SFrontspec(),
-            frontspecJson = frontspec.read();
+            frontspecJson = await frontspec.read();
 
         // classmap
         const classmap = new __SClassmap(),

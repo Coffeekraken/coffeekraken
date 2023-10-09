@@ -1,12 +1,12 @@
 import __SInterface from '@coffeekraken/s-interface';
 /**
- * @__name          classes
- * @__as          @s.ui.backdrop.classes
- * @__namespace     node.mixin.ui.backdrop
- * @__type          PostcssMixin
- * @__interface       ./classes
- * @__platform      postcss
- * @__status        beta
+ * @name          classes
+ * @as          @s.ui.backdrop.classes
+ * @namespace     node.mixin.ui.backdrop
+ * @type          PostcssMixin
+ * @interface       ./classes
+ * @platform      postcss
+ * @status        beta
  *
  * Generate the backdrop classes
  *

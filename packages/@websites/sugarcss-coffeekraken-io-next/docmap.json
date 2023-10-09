@@ -1,0 +1,2698 @@
+{
+    "map": {},
+    "generated": {
+        "map": {
+            "sugarcss-coffeekraken-io-next.doc.01.-Installation": {
+                "id": "sugarcss-coffeekraken-io-next.doc.01.-Installation",
+                "name": "01. Installation",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/installation"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "sugarcss-coffeekraken-io-next.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "00-install.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/00-install.md.twig",
+                "children": {}
+            },
+            "sugarcss-coffeekraken-io-next.doc.02.-Features": {
+                "id": "sugarcss-coffeekraken-io-next.doc.02.-Features",
+                "name": "02. Features",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/features"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "sugarcss-coffeekraken-io-next.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "05-features.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/05-features.md.twig",
+                "children": {}
+            },
+            "sugarcss-coffeekraken-io-next.doc.03.-Pleasant-syntax": {
+                "id": "sugarcss-coffeekraken-io-next.doc.03.-Pleasant-syntax",
+                "name": "03. Pleasant syntax",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/pleasant-syntax"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "sugarcss-coffeekraken-io-next.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "10-pleasantSyntax.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/10-pleasantSyntax.md.twig",
+                "children": {}
+            },
+            "sugarcss-coffeekraken-io-next.doc.04.-Classes": {
+                "id": "sugarcss-coffeekraken-io-next.doc.04.-Classes",
+                "name": "04. Classes",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/classes"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "sugarcss-coffeekraken-io-next.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "15-classes.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/15-classes.md.twig",
+                "children": {}
+            },
+            "sugarcss-coffeekraken-io-next.doc.05.-Mixins": {
+                "id": "sugarcss-coffeekraken-io-next.doc.05.-Mixins",
+                "name": "05. Mixins",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/mixins"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "sugarcss-coffeekraken-io-next.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "20-mixins.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/20-mixins.md.twig",
+                "children": {}
+            },
+            "sugarcss-coffeekraken-io-next.doc.06.-Functions": {
+                "id": "sugarcss-coffeekraken-io-next.doc.06.-Functions",
+                "name": "06. Functions",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/functions"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "sugarcss-coffeekraken-io-next.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "25-functions.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/25-functions.md.twig",
+                "children": {}
+            },
+            "sugarcss-coffeekraken-io-next.doc.07.-Colors": {
+                "id": "sugarcss-coffeekraken-io-next.doc.07.-Colors",
+                "name": "07. Colors",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/colors"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "sugarcss-coffeekraken-io-next.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "30-colors.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/30-colors.md.twig",
+                "children": {}
+            },
+            "sugarcss-coffeekraken-io-next.doc.08.-Theming": {
+                "id": "sugarcss-coffeekraken-io-next.doc.08.-Theming",
+                "name": "08. Theming",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/theming"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "sugarcss-coffeekraken-io-next.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "35-theming.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/35-theming.md.twig",
+                "children": {}
+            },
+            "sugarcss-coffeekraken-io-next.doc.09.-Typography": {
+                "id": "sugarcss-coffeekraken-io-next.doc.09.-Typography",
+                "name": "09. Typography",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/typography"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "sugarcss-coffeekraken-io-next.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "40-typography.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/40-typography.md.twig",
+                "children": {}
+            },
+            "sugarcss-coffeekraken-io-next.doc.10.-Icons": {
+                "id": "sugarcss-coffeekraken-io-next.doc.10.-Icons",
+                "name": "10. Icons",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/icons"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "sugarcss-coffeekraken-io-next.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "45-icons.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/45-icons.md.twig",
+                "children": {}
+            },
+            "sugarcss-coffeekraken-io-next.doc.11.-Layout": {
+                "id": "sugarcss-coffeekraken-io-next.doc.11.-Layout",
+                "name": "11. Layout",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/layout"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "sugarcss-coffeekraken-io-next.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "50-layout.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/50-layout.md.twig",
+                "children": {}
+            },
+            "sugarcss-coffeekraken-io-next.doc.12.-Responsive": {
+                "id": "sugarcss-coffeekraken-io-next.doc.12.-Responsive",
+                "name": "12. Responsive",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/responsive"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "sugarcss-coffeekraken-io-next.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "55-responsive.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/55-responsive.md.twig",
+                "children": {}
+            },
+            "sugarcss-coffeekraken-io-next.doc.13.-Scopes": {
+                "id": "sugarcss-coffeekraken-io-next.doc.13.-Scopes",
+                "name": "13. Scopes",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/scopes"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "sugarcss-coffeekraken-io-next.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "60-scopes.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/60-scopes.md.twig",
+                "children": {}
+            },
+            "sugarcss-coffeekraken-io-next.doc.14.-z-index": {
+                "id": "sugarcss-coffeekraken-io-next.doc.14.-z-index",
+                "name": "14. z-index",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/z-index"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "sugarcss-coffeekraken-io-next.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "65-zIndex.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/65-zIndex.md.twig",
+                "children": {}
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.resets.Destyle-reset": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.resets.Destyle-reset",
+                "name": "Destyle reset",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Resets"
+                    ],
+                    "slug": "/styleguide/resets/destyle"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These mixins allows you to apply the `destyle` reset easily.",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.resets",
+                "status": "stable",
+                "example": [],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.resets.Sugar-reset": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.resets.Sugar-reset",
+                "name": "Sugar reset",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Resets"
+                    ],
+                    "slug": "/styleguide/resets/sugar"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to apply the `sugar` reset easily.",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.resets",
+                "status": "stable",
+                "example": [],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.ui.avatar.Avatar": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.ui.avatar.Avatar",
+                "name": "Avatar",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "UI"
+                    ],
+                    "slug": "/styleguide/ui/avatar"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows to apply some avatar style around any image.",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.ui.avatar",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Default",
+                        "code": "<div class=\"s-flex:align-center:wrap s-gap:20 s-font:70\">\n  <div class=\"s-avatar\">\n      <img src=\"https://i.pravatar.cc/300?v=61769\" />\n  </div>\n      <div class=\"s-avatar s-color:accent\">\n      <img src=\"https://i.pravatar.cc/300?v=97018\" />\n  </div>\n  <div class=\"s-avatar s-color:complementary\">\n      <img src=\"https://i.pravatar.cc/300?v=43436\" />\n  </div>\n  <div class=\"s-avatar s-color:info\">\n      <img src=\"https://i.pravatar.cc/300?v=80808\" />\n  </div>\n  <div class=\"s-avatar s-color:success\">\n      <img src=\"https://i.pravatar.cc/300?v=7037\" />\n  </div>\n  <div class=\"s-avatar s-color:error\">\n     <img src=\"https://i.pravatar.cc/300?v=8542\" />\n  </div>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Notifications",
+                        "code": "<div class=\"s-flex:wrap:align-center s-gap:20 s-font:70\">\n  <div class=\"s-avatar notifications=\"10\">\n     <img src=\"https://i.pravatar.cc/300?v=31449\" />\n  </div>\n  <div class=\"s-avatar s-color:accent\" notifications=\"10\">\n      <img src=\"https://i.pravatar.cc/300?v=51674\" />\n  </div>\n  <div class=\"s-avatar s-color:complementary\" notifications=\"10\">\n      <img src=\"https://i.pravatar.cc/300?v=66306\" />\n  </div>\n  <div class=\"s-avatar s-color:info\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=10714\" />\n  </div>\n  <div class=\"s-avatar s-color:success\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=45351\" />\n  </div>\n  <div class=\"s-avatar s-color:error\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=35345\" />\n  </div>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Interactive",
+                        "code": "<div class=\"s-flex:wrap:align-center s-gap:20 s-font:70\">\n  <div class=\"s-avatar:interactive\">\n       <img src=\"https://i.pravatar.cc/300?v=43473\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:accent\">\n      <img src=\"https://i.pravatar.cc/300?v=47437\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:complementary\">\n      <img src=\"https://i.pravatar.cc/300?v=98748\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:info\">\n      <img src=\"https://i.pravatar.cc/300?v=6824\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:success\">\n      <img src=\"https://i.pravatar.cc/300?v=18248\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:error\">\n      <img src=\"https://i.pravatar.cc/300?v=26759\" />\n  </div>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.ui.badge.Badge": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.ui.badge.Badge",
+                "name": "Badge",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "UI"
+                    ],
+                    "slug": "/styleguide/ui/badges"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to display any HTMLElement as a badge",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.ui.badge",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "solid",
+                        "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-badge\">Say hello!</a>\n  <a class=\"s-badge s-color:accent\">Say hello!</a>\n  <a class=\"s-badge s-color:complementary\">Say hello!</a>\n  <a class=\"s-badge s-color:error\">Say hello!</a>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "outline",
+                        "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-badge:outline\">Say hello!</a>\n  <a class=\"s-badge:outline s-color:accent\">Say hello!</a>\n  <a class=\"s-badge:outline s-color:complementary\">Say hello!</a>\n  <a class=\"s-badge:outline s-color:error\">Say hello!</a>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Shapes",
+                        "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-badge\">Say hello!</a>\n  <a class=\"s-badge s-shape:pill\">Say hello!</a>\n  <a class=\"s-badge s-shape:square\">Say hello!</a>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Scales",
+                        "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-badge s-scale:05\">Say hello!</a>\n  <a class=\"s-badge s-scale:1\">Say hello!</a>\n  <a class=\"s-badge s-scale:12\">Say hello!</a>\n  <a class=\"s-badge s-scale:15\">Say hello!</a>\n  <a class=\"s-badge s-scale:20\">Say hello!</a>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.ui.button.Buttons": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.ui.button.Buttons",
+                "name": "Buttons",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "UI"
+                    ],
+                    "slug": "/styleguide/ui/button"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to display any HTMLElement as a button",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.ui.button",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "solid lnf",
+                        "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-btn:\">Click me!</button>\n  <a class=\"s-btn: s-color:accent\">Click me!</a>\n  <a class=\"s-btn: s-color:complementary\">Click me!</a>\n  <a class=\"s-btn: s-color:info\">Click me!</a>\n  <a class=\"s-btn: s-color:error\">Click me!</a>\n  <a disabled class=\"s-btn:\">Click me!</a>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "outline lnf",
+                        "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-btn::outline\">Click me!</button>\n  <a class=\"s-btn::outline s-color:accent\">Click me!</a>\n  <a class=\"s-btn::outline s-color:complementary\">Click me!</a>\n  <a class=\"s-btn::outline s-color:info\">Click me!</a>\n  <a class=\"s-btn::outline s-color:error\">Click me!</a>\n  <a disabled class=\"s-btn::outline\">Click me!</a>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "text lnf",
+                        "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-btn::text\">Click me!</button>\n  <a class=\"s-btn::text s-color:accent\">Click me!</a>\n  <a class=\"s-btn::text s-color:complementary\">Click me!</a>\n  <a class=\"s-btn::text s-color:info\">Click me!</a>\n  <a class=\"s-btn::text s-color:error\">Click me!</a>\n  <a disabled class=\"s-btn::text\">Click me!</a>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "loading lnf",
+                        "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-btn::loading\">Click me!</button>\n  <a class=\"s-btn::loading s-color:accent\">Click me!</a>\n  <a class=\"s-btn::loading s-color:complementary\">Click me!</a>\n  <a class=\"s-btn::loading s-color:info\">Click me!</a>\n  <a class=\"s-btn::loading s-color:error\">Click me!</a>\n  <a disabled class=\"s-btn::loading\">Click me!</a>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Shapes",
+                        "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-btn\">Click me!</a>\n  <a class=\"s-btn s-shape:pill\">Click me!</a>\n  <a class=\"s-btn s-shape:square\">Click me!</a>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Scales",
+                        "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-btn s-scale:07\">Click me!</a>\n  <a class=\"s-btn s-scale:1\">Click me!</a>\n  <a class=\"s-btn s-scale:13\">Click me!</a>\n  <a class=\"s-btn s-scale:16\">Click me!</a>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.ui.list.List": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.ui.list.List",
+                "name": "List",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "UI"
+                    ],
+                    "slug": "/styleguide/ui/lists"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply list lnfs to any ul, ol, dl, etc...",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.ui.list",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "dl",
+                        "code": "<ul class=\"s-list:dl \">\n    <li>Forward Identity Engineer Homer Hirthe</li>\n    <li>Global Group Manager Ramiro Heaney</li>\n    <li>Central Solutions Technician Willie Kohler</li>\n  </ul>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "ul",
+                        "code": "<ul class=\"s-list:ul \">\n    <li>Product Program Manager Todd Sawayn</li>\n    <li>National Configuration Consultant Miss Brandi Schaefer</li>\n    <li>International Factors Developer Meghan Swift</li>\n  </ul>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "ol",
+                        "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>Dynamic Applications Officer Doris Boyer</li>\n    <li>Dynamic Accounts Associate Marcia Bashirian</li>\n    <li>District Division Executive Blanca Okuneva</li>\n  </ul>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "icon",
+                        "code": "<ul class=\"s-list:icon \">\n    <li><i class=\"s-icon:user\"></i>Internal Usability Associate Bertha Brown</li>\n    <li><i class=\"s-icon:heart s-color:accent\"></i>National Functionality Administrator Lena McClure III</li>\n    <li><i class=\"s-icon:fire s-color:error\"></i>Investor Accountability Consultant Daniel Glover</li>\n  </ul>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "RTL Support",
+                        "code": "<div dir=\"rtl\">\n  <ul class=\"s-list:ul s-color:accent s-mbe:30\">\n    <li>Dynamic Marketing Orchestrator Eugene Kessler</li>\n    <li>Central Intranet Consultant Marlon Reinger IV</li>\n  </ul>\n  <ul class=\"s-list:ol s-color:accent s-mbe:30\">\n    <li>Direct Communications Supervisor Flora Ullrich</li>\n    <li>Lead Functionality Designer Eugene Corkery Sr.</li>\n  </ul>\n  <ul class=\"s-list:icon s-color:accent s-mbe:30\">\n    <li><i class=\"s-icon:user\"></i> District Data Producer Kirk Koepp</li>\n    <li><i class=\"s-icon:heart s-color:error\"></i> Human Usability Representative Elbert Crist DVM</li>\n  </ul>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Colors (none-exhaustive)",
+                        "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>Central Applications Engineer Miss Leroy Feil</li>\n    <li class=\"s-color:complementary\">Central Research Agent Jay Goyette</li>\n    <li class=\"s-color:error\">District Accountability Planner Sherri Hammes</li>\n  </ul>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.clearfix.Clearfix": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.clearfix.Clearfix",
+                "name": "Clearfix",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/clearfix"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply a clearfix on any HTMLElement",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.clearfix",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "overflow",
+                        "code": "<div class=\"s-clearfix s-bc:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "facebook",
+                        "code": "<div class=\"s-clearfix:facebook s-bc:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "micro",
+                        "code": "<div class=\"s-clearfix:micro s-bc:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "after",
+                        "code": "<div class=\"s-clearfix:after s-bc:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.cursor.Cursor": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.cursor.Cursor",
+                "name": "Cursor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/cursor"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply a specific cursor on any HTMLElement",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.cursor",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div class=\"s-flex:wrap s-gap:20\">\n  <div class=\"s-cursor:auto s-flex:center s-width:20 s-radius s-ratio:16-9\">\nauto\n  </div>\n\n  <div class=\"s-cursor:default s-flex:center s-width:20 s-radius s-ratio:16-9\">\ndefault\n  </div>\n\n  <div class=\"s-cursor:none s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnone\n  </div>\n\n  <div class=\"s-cursor:context-menu s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncontext-menu\n  </div>\n\n  <div class=\"s-cursor:help s-flex:center s-width:20 s-radius s-ratio:16-9\">\nhelp\n  </div>\n\n  <div class=\"s-cursor:pointer s-flex:center s-width:20 s-radius s-ratio:16-9\">\npointer\n  </div>\n\n  <div class=\"s-cursor:progress s-flex:center s-width:20 s-radius s-ratio:16-9\">\nprogress\n  </div>\n\n  <div class=\"s-cursor:wait s-flex:center s-width:20 s-radius s-ratio:16-9\">\nwait\n  </div>\n\n  <div class=\"s-cursor:cell s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncell\n  </div>\n\n  <div class=\"s-cursor:crosshair s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncrosshair\n  </div>\n\n  <div class=\"s-cursor:text s-flex:center s-width:20 s-radius s-ratio:16-9\">\ntext\n  </div>\n\n  <div class=\"s-cursor:vertical-text s-flex:center s-width:20 s-radius s-ratio:16-9\">\nvertical-text\n  </div>\n\n  <div class=\"s-cursor:alias s-flex:center s-width:20 s-radius s-ratio:16-9\">\nalias\n  </div>\n\n  <div class=\"s-cursor:copy s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncopy\n  </div>\n\n  <div class=\"s-cursor:move s-flex:center s-width:20 s-radius s-ratio:16-9\">\nmove\n  </div>\n\n  <div class=\"s-cursor:no-drop s-flex:center s-width:20 s-radius s-ratio:16-9\">\nno-drop\n  </div>\n\n  <div class=\"s-cursor:not-allowed s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnot-allowed\n  </div>\n\n  <div class=\"s-cursor:e-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\ne-resize\n  </div>\n\n  <div class=\"s-cursor:n-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nn-resize\n  </div>\n\n  <div class=\"s-cursor:ne-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nne-resize\n  </div>\n\n  <div class=\"s-cursor:nw-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnw-resize\n  </div>\n\n  <div class=\"s-cursor:s-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\ns-resize\n  </div>\n\n  <div class=\"s-cursor:se-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nse-resize\n  </div>\n\n  <div class=\"s-cursor:sw-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nsw-resize\n  </div>\n\n  <div class=\"s-cursor:w-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nw-resize\n  </div>\n\n  <div class=\"s-cursor:ew-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\new-resize\n  </div>\n\n  <div class=\"s-cursor:ns-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nns-resize\n  </div>\n\n  <div class=\"s-cursor:nesw-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnesw-resize\n  </div>\n\n  <div class=\"s-cursor:nwse-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnwse-resize\n  </div>\n\n  <div class=\"s-cursor:col-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncol-resize\n  </div>\n\n  <div class=\"s-cursor:row-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nrow-resize\n  </div>\n\n  <div class=\"s-cursor:all-scroll s-flex:center s-width:20 s-radius s-ratio:16-9\">\nall-scroll\n  </div>\n\n  <div class=\"s-cursor:zoom-in s-flex:center s-width:20 s-radius s-ratio:16-9\">\nzoom-in\n  </div>\n\n  <div class=\"s-cursor:zoom-out s-flex:center s-width:20 s-radius s-ratio:16-9\">\nzoom-out\n  </div>\n\n  <div class=\"s-cursor:grab s-flex:center s-width:20 s-radius s-ratio:16-9\">\ngrab\n  </div>\n\n  <div class=\"s-cursor:grabbing s-flex:center s-width:20 s-radius s-ratio:16-9\">\ngrabbing\n  </div>\n\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.color.Colors": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.color.Colors",
+                "name": "Colors",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/colors"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to set text and background colors easily to any HTMLElement",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.color",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Text color",
+                        "code": "<div class=\"s-tc:current s-mb:30\">current</div>\n<div class=\"s-tc:main s-mb:30\">main</div>\n<div class=\"s-tc:accent s-mb:30\">accent</div>\n<div class=\"s-tc:complementary s-mb:30\">complementary</div>\n<div class=\"s-tc:success s-mb:30\">success</div>\n<div class=\"s-tc:warning s-mb:30\">warning</div>\n<div class=\"s-tc:error s-mb:30\">error</div>\n<div class=\"s-tc:info s-mb:30\">info</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Background color",
+                        "code": "<div class=\"s-bc:current s-p:10 s-mb:30 s-radius\">current</div>\n<div class=\"s-bc:main s-p:10 s-mb:30 s-radius\">main</div>\n<div class=\"s-bc:accent s-p:10 s-mb:30 s-radius\">accent</div>\n<div class=\"s-bc:complementary s-p:10 s-mb:30 s-radius\">complementary</div>\n<div class=\"s-bc:success s-p:10 s-mb:30 s-radius\">success</div>\n<div class=\"s-bc:warning s-p:10 s-mb:30 s-radius\">warning</div>\n<div class=\"s-bc:error s-p:10 s-mb:30 s-radius\">error</div>\n<div class=\"s-bc:info s-p:10 s-mb:30 s-radius\">info</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.fit.Fit-Sizes": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.fit.Fit-Sizes",
+                "name": "Fit Sizes",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/fit-sizes"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply a fit size on any HTMLElement.\nOn image and video, uses `object-fit` property, on all others,\nsimply fill the element using an absolute position, top: 0, left: 0 and width/height: 100%.",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.fit",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "fill",
+                        "code": "<div class=\"s-ratio:16-9 s-bc:ui\">\n      <img class=\"s-fit:fill s-radius\" src=\"https://picsum.photos/1000/1000\" />\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "cover",
+                        "code": "<div class=\"s-ratio:16-9 s-bc:ui\">\n      <img class=\"s-fit:cover s-radius\" src=\"https://picsum.photos/1000/1000\" />\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "contain",
+                        "code": "<div class=\"s-ratio:16-9 s-bc:ui\">\n      <img class=\"s-fit:contain s-radius\" src=\"https://picsum.photos/1000/1000\" />\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "none",
+                        "code": "<div class=\"s-ratio:16-9 s-bc:ui\">\n      <img class=\"s-fit:none s-radius\" src=\"https://picsum.photos/1000/1000\" />\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "abs",
+                        "code": "<div class=\"s-ratio:16-9 s-bc:ui\">\n      <img class=\"s-fit:abs s-radius\" src=\"https://picsum.photos/1000/1000\" />\n  </div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.link.Link": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.link.Link",
+                "name": "Link",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/link"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows to apply some link styling utils to any HTMLElement.",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.link",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Stretch",
+                        "code": "<div class=\"s-position:relative s-bc:main s-radius s-p:50\">\n  <a href=\"#\" class=\"s-link:stretch s-bc:accent s-radius s-p:20\">I'm a stretched link!</a>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.gap.Gap": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.gap.Gap",
+                "name": "Gap",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/gap"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply some gap attributes on any HTMLElement and with",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.gap",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Simple flex grid",
+                        "code": "<div class=\"s-flex s-gap:40\">\n  <div class=\"s-ratio:16-9 s-grow s-radius s-p:30 s-bc:main\">1</div>\n  <div class=\"s-ratio:16-9 s-grow s-radius s-p:30 s-bc:main\">2</div>\n  <div class=\"s-ratio:16-9 s-grow s-radius s-p:30 s-bc:main\">3</div>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Simple grid",
+                        "code": "<div class=\"s-grid:3 s-gap:40\">\n  <div class=\"s-ratio:16-9 s-bc:main s-radius s-p:30\">1</div>\n  <div class=\"s-ratio:16-9 s-bc:main s-radius s-p:30\">2</div>\n  <div class=\"s-ratio:16-9 s-bc:main s-radius s-p:30\">3</div>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.grow.Grow": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.grow.Grow",
+                "name": "Grow",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/grow"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply some grow attributes on any HTMLElement",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.grow",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Simple flex grid",
+                        "code": "<div class=\"s-flex\">\n  <div>I'm not growing</div>\n  <div class=\"s-grow\">I'm growing</div>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.shrink.Grow": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.shrink.Grow",
+                "name": "Grow",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/shrink"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply some shrink attributes on any HTMLElement",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.shrink",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Simple flex grid",
+                        "code": "<div class=\"s-flex\">\n  <div>I'm not shrinking</div>\n  <div class=\"s-shrink\">I'm shrinking</div>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.text.Text": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.text.Text",
+                "name": "Text",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/text"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows to apply some text styling like `text-align: left`, `text-align: right`, `text-decoration: underline`, etc...\ndirectly inside your HTML.",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.text",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Aligns",
+                        "code": "<div class=\"s-text:left s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (left) Sandy Steuber\n  </div>\n  <div class=\"s-text:right s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (right) Mrs. Alison Klocko\n  </div>\n  <div class=\"s-text:center s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (center) Leigh Jerde\n  </div>\n  <div class=\"s-text:start s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (start) Donna Gerhold\n  </div>\n  <div class=\"s-text:end s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (end) Leigh Ziemann\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Decorations",
+                        "code": "<div class=\"s-text:overline s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (overline) Maxine Streich\n  </div>\n  <div class=\"s-text:underline s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (underline) Johnnie Volkman\n  </div>\n  <div class=\"s-text:line-through s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (line-through) Kurt Bayer\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Transforms",
+                        "code": "<div class=\"s-text:lowercase s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (lowercase) Duane Hermann\n  </div>\n  <div class=\"s-text:uppercase s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (uppercase) Richard Howell\n  </div>\n  <div class=\"s-text:capitalize s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (capitalize) Mitchell Barrows\n  </div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.disabled.Disabled": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.disabled.Disabled",
+                "name": "Disabled",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/disabled"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply the disabled style on any HTMLElement.\nThis make sure *no pointer events** stays active as well as displaying the **not-allowed cursor**.",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.disabled",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Disabled",
+                        "code": "<input type=\"text\" class=\"s-input s-disabled\" placeholder=\"I'm disabled\" />"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.flex.Flex": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.flex.Flex",
+                "name": "Flex",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/flexbox"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply some flex attributes on any HTMLElement and with\nthat you can *create some layouts directly in your HTML**.",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.flex",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Simple grid",
+                        "code": "<div class=\"s-flex:row:wrap\">\n    <div class=\"s-bc:main s-width:50 s-p:30\">Vickie Cummerata PhD</div>\n    <div class=\"s-bc:accent s-width:50 s-p:30\">Kathy Dickinson</div>\n    <div class=\"s-bc:complementary s-width:50 s-p:30\">Viola Daniel</div>\n    <div class=\"s-bc:info s-width:50 s-p:30\">Nicole Botsford</div>\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Grow",
+                        "code": "<div class=\"s-flex:row\">\n    <div class=\"s-grow s-bc:main s-p:30\">Mona Fahey</div>\n    <div class=\"s-bc:accent s-p:30\">Ted Pagac</div>\n    <div class=\"s-bc:complementary s-p:30\">Peter Skiles</div>\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Orders",
+                        "code": "<div class=\"s-flex:row\">\n    <div class=\"s-order:3 s-bc:main s-p:30\">Leona Franecki</div>\n    <div class=\"s-bc:accent s-p:30\">Mr. Annie Connelly</div>\n    <div class=\"s-bc:complementary s-p:30\">Steve O'Keefe</div>\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Aligns",
+                        "code": "<div class=\"s-flex:row:align-end\">\n    <div class=\"s-bc:main s-p:30\">Angelica Lockman</div>\n    <div class=\"s-bc:accent s-p:30\">Horace Ortiz<br />Alfredo Moore IV<br />Jeffery Lemke<br />Mabel Huel<br />Theresa Kassulke</div>\n    <div class=\"s-bc:complementary s-p:30\">Deanna Walter</div>\n  </div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.float.Float": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.float.Float",
+                "name": "Float",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/float"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply some float styling into your html.",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.float",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Left",
+                        "code": "<div class=\"s-bc:accent s-clearfix  s-p:30 s-radius\">\n    <div class=\"s-float:left\">I'm a cool float left element</div>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Right",
+                        "code": "<div class=\"s-bc:complementary s-clearfix s-p:30 s-radius\">\n    <div class=\"s-float:right\">I'm a cool float right element</div>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "None",
+                        "code": "<div class=\"s-bc:error s-p:30 s-radius\">\n    <div class=\"s-float:none\">I'm a cool float none element</div>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.ratio.Ratio": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.ratio.Ratio",
+                "name": "Ratio",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/ratio"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply some ratio to any HTMLElement.\n*These classes make use of the `aspect-ratio` css property**",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.ratio",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "1",
+                        "code": "<div class=\"s-ratio:1 s-width:40\">\n      <img class=\"s-fit:cover s-radius\" src=\"https://picsum.photos/500/500\" />\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "16-9",
+                        "code": "<div class=\"s-ratio:16-9 s-width:40\">\n      <img class=\"s-fit:cover s-radius\" src=\"https://picsum.photos/500/500\" />\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "16-10",
+                        "code": "<div class=\"s-ratio:16-10 s-width:40\">\n      <img class=\"s-fit:cover s-radius\" src=\"https://picsum.photos/500/500\" />\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "21-9",
+                        "code": "<div class=\"s-ratio:21-9 s-width:40\">\n      <img class=\"s-fit:cover s-radius\" src=\"https://picsum.photos/500/500\" />\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "1-2",
+                        "code": "<div class=\"s-ratio:1-2 s-width:40\">\n      <img class=\"s-fit:cover s-radius\" src=\"https://picsum.photos/500/500\" />\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "2-1",
+                        "code": "<div class=\"s-ratio:2-1 s-width:40\">\n      <img class=\"s-fit:cover s-radius\" src=\"https://picsum.photos/500/500\" />\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "2-3",
+                        "code": "<div class=\"s-ratio:2-3 s-width:40\">\n      <img class=\"s-fit:cover s-radius\" src=\"https://picsum.photos/500/500\" />\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "3-2",
+                        "code": "<div class=\"s-ratio:3-2 s-width:40\">\n      <img class=\"s-fit:cover s-radius\" src=\"https://picsum.photos/500/500\" />\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "4-3",
+                        "code": "<div class=\"s-ratio:4-3 s-width:40\">\n      <img class=\"s-fit:cover s-radius\" src=\"https://picsum.photos/500/500\" />\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "3-4",
+                        "code": "<div class=\"s-ratio:3-4 s-width:40\">\n      <img class=\"s-fit:cover s-radius\" src=\"https://picsum.photos/500/500\" />\n  </div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.Radius": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.Radius",
+                "name": "Radius",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/radius"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply border radius on any HTMLElement",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Border radius",
+                        "code": "<div class=\"s-flex:wrap s-gap:20\">\n  <div class=\"s-radius:0 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    0\n  </div>\n  <div class=\"s-radius:10 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    10\n  </div>\n  <div class=\"s-radius:20 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    20\n  </div>\n  <div class=\"s-radius:30 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    30\n  </div>\n  <div class=\"s-radius:40 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    40\n  </div>\n  <div class=\"s-radius:50 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    50\n  </div>\n  <div class=\"s-radius:60 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    60\n  </div>\n  <div class=\"s-radius:70 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    70\n  </div>\n  <div class=\"s-radius:80 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    80\n  </div>\n  <div class=\"s-radius:90 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    90\n  </div>\n  <div class=\"s-radius:100 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    100\n  </div>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.Border-width": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.Border-width",
+                "name": "Border width",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/border-width"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply some border width to any HTMLElement",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Border width",
+                        "code": "<div class=\"s-flex:wrap s-gap:20\">\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:0\">\n    0\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:10\">\n    10\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:20\">\n    20\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:30\">\n    30\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:40\">\n    40\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:50\">\n    50\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:60\">\n    60\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:70\">\n    70\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:80\">\n    80\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:90\">\n    90\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:100\">\n    100\n  </div>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.border.Border-color": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.border.Border-color",
+                "name": "Border color",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/border-color"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply some border color to any HTMLElement",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.border",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Border color",
+                        "code": "<div class=\"s-flex:wrap s-gap:20\">\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:current:20\">\n    current\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:main:20\">\n    main\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:accent:20\">\n    accent\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:complementary:20\">\n    complementary\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:success:20\">\n    success\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:warning:20\">\n    warning\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:error:20\">\n    error\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:info:20\">\n    info\n  </div>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.display.Display": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.display.Display",
+                "name": "Display",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/display"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply the some display like `inline`, `inline-block`, `block`, etc...\non any HTMLElement",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.display",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Block",
+                        "code": "<div class=\"s-display:block\">\n    <p class=\"s-typo:p\">Ginger Jacobs</p>\n    <p class=\"s-typo:p\">Alyssa Block</p>\n    <p class=\"s-typo:p\">Marcos Bernhard</p>\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Inline-block",
+                        "code": "<div class=\"s-display:inline-block\">\n    <p class=\"s-typo:p\">Evelyn Barrows</p>\n    <p class=\"s-typo:p\">Penny Hamill</p>\n    <p class=\"s-typo:p\">Sammy Simonis</p>\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Contents",
+                        "code": "<div class=\"s-display:contents\">\n    <p class=\"s-typo:p\">Carol Upton I</p>\n    <p class=\"s-typo:p\">Terri Cremin</p>\n    <p class=\"s-typo:p\">Dr. Candice Zieme</p>\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Flex",
+                        "code": "<div class=\"s-display:flex\">\n    <p class=\"s-typo:p\">Mable O'Reilly</p>\n    <p class=\"s-typo:p\">Kim Torp MD</p>\n    <p class=\"s-typo:p\">Neil Mosciski</p>\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Grid",
+                        "code": "<div class=\"s-display:grid\">\n    <p class=\"s-typo:p\">Marion Weissnat</p>\n    <p class=\"s-typo:p\">Wilson Dickinson</p>\n    <p class=\"s-typo:p\">Zachary Walter</p>\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Inline-flex",
+                        "code": "<div class=\"s-display:inline-flex\">\n    <p class=\"s-typo:p\">Isabel Torphy</p>\n    <p class=\"s-typo:p\">Domingo Parker</p>\n    <p class=\"s-typo:p\">Dr. Gerald Farrell</p>\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Inline-grid",
+                        "code": "<div class=\"s-display:inline-grid\">\n    <p class=\"s-typo:p\">Gloria Schaefer</p>\n    <p class=\"s-typo:p\">Dr. Cecil Lockman</p>\n    <p class=\"s-typo:p\">Miguel Orn</p>\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "None",
+                        "code": "<div class=\"s-display:none\">\n    <p class=\"s-typo:p\">Hattie Goyette</p>\n    <p class=\"s-typo:p\">Sally Turcotte</p>\n    <p class=\"s-typo:p\">Casey Predovic</p>\n  </div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.overflow.Overflow": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.overflow.Overflow",
+                "name": "Overflow",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/overflow"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply some overflow attributes on any HTMLElement.",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.overflow",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Auto",
+                        "code": "<div class=\"s-overflow:auto\">\n  I'm in an \"auto\" overflow container\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Hidden",
+                        "code": "<div class=\"s-overflow:hidden\">\n  I'm in an \"hidden\" overflow container\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Inherit",
+                        "code": "<div class=\"s-overflow:inherit\">\n  I'm in an \"inherit\" overflow container\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Initial",
+                        "code": "<div class=\"s-overflow:initial\">\n  I'm in an \"initial\" overflow container\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Overlay",
+                        "code": "<div class=\"s-overflow:overlay\">\n  I'm in an \"overlay\" overflow container\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Revert",
+                        "code": "<div class=\"s-overflow:revert\">\n  I'm in an \"revert\" overflow container\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Scroll",
+                        "code": "<div class=\"s-overflow:scroll\">\n  I'm in an \"scroll\" overflow container\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Visible",
+                        "code": "<div class=\"s-overflow:visible\">\n  I'm in an \"visible\" overflow container\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Unset",
+                        "code": "<div class=\"s-overflow:unset\">\n  I'm in an \"unset\" overflow container\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.position.Positions": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.position.Positions",
+                "name": "Positions",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/positions"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply some positions like `absolute`, `fixed`, etc... on any HTMLElement",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.position",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Absolute",
+                        "code": "<div class=\"s-position:relative s-ratio:16-9\">\n      <img class=\"s-position:absolute:top:left s-radius\" src=\"https://picsum.photos/100/100?v=323333\"/>\n      <img class=\"s-position:absolute:top:center s-radius\" src=\"https://picsum.photos/100/100?v=3232\"/>\n      <img class=\"s-position:absolute:top:right s-radius\" src=\"https://picsum.photos/100/100?v=3222132\"/>\n      <img class=\"s-position:absolute:center:left s-radius\" src=\"https://picsum.photos/100/100?v=322232\"/>\n      <img class=\"s-position:absolute:center s-radius\" src=\"https://picsum.photos/100/100?v=3434\"/>\n      <img class=\"s-position:absolute:center:right s-radius\" src=\"https://picsum.photos/100/100?v=35456232\"/>\n      <img class=\"s-position:absolute:bottom:left s-radius\" src=\"https://picsum.photos/100/100?v=6566\"/>\n      <img class=\"s-position:absolute:bottom:center s-radius\" src=\"https://picsum.photos/100/100?v=8787\"/>\n      <img class=\"s-position:absolute:bottom:right s-radius\" src=\"https://picsum.photos/100/100?v=2323\"/>\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Relative",
+                        "code": "<div class=\"s-position:relative s-ratio:21-9\">\n      <img class=\"s-position:relative\" src=\"https://picsum.photos/100/100\"/>\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Fixed",
+                        "code": "<div class=\"s-position:relative s-ratio:21-9\">\n      <img class=\"s-position:fixed:top:left s-radius\" src=\"https://picsum.photos/100/100?v=323333\"/>\n      <img class=\"s-position:fixed:top:center s-radius\" src=\"https://picsum.photos/100/100?v=3232\"/>\n      <img class=\"s-position:fixed:top:right s-radius\" src=\"https://picsum.photos/100/100?v=3222132\"/>\n      <img class=\"s-position:fixed:center:left s-radius\" src=\"https://picsum.photos/100/100?v=322232\"/>\n      <img class=\"s-position:fixed:center s-radius\" src=\"https://picsum.photos/100/100?v=3434\"/>\n      <img class=\"s-position:fixed:center:right s-radius\" src=\"https://picsum.photos/100/100?v=35456232\"/>\n      <img class=\"s-position:fixed:bottom:left s-radius\" src=\"https://picsum.photos/100/100?v=6566\"/>\n      <img class=\"s-position:fixed:bottom:center s-radius\" src=\"https://picsum.photos/100/100?v=8787\"/>\n      <img class=\"s-position:fixed:bottom:right s-radius\" src=\"https://picsum.photos/100/100?v=2323\"/>\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Sticky",
+                        "code": "<div class=\"s-position:relative s-ratio:21-9\">\n      <div class=\"s-position:sticky:top\">\n        <img class=\"s-mbs:100 s-radius\" src=\"https://picsum.photos/100/100?v=323333\"/>\n    </div>\n  </div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.pointer.Pointer": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.pointer.Pointer",
+                "name": "Pointer",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/pointer"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply some pointer attributes on any HTMLElement.",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.pointer",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "None",
+                        "code": "<div class=\"s-pointer-events:none\">\n  I'm in an \"none\" pointer-events container\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "all",
+                        "code": "<div class=\"s-pointer-events:all\">\n  I'm in an \"all\" pointer-events container\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Auto",
+                        "code": "<div class=\"s-pointer-events:auto\">\n  I'm in an \"auto\" pointer-events container\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Fill",
+                        "code": "<div class=\"s-pointer-events:fill\">\n  I'm in an \"fill\" pointer-events container\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.transition.Transitions": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.transition.Transitions",
+                "name": "Transitions",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/transition"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows to apply some transitions on any HTMLElement.\nThese transitions are defined in the `theme.transition` theme settings.",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.transition",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "slow",
+                        "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-7de85971-2336-477e-847b-a6be03f7f6d8\">\n     <div class=\"s-transition:slow s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-7de85971-2336-477e-847b-a6be03f7f6d8 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-7de85971-2336-477e-847b-a6be03f7f6d8:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "default",
+                        "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-414a4bb1-3ed6-485e-87c8-1e664f7c3c02\">\n     <div class=\"s-transition s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-414a4bb1-3ed6-485e-87c8-1e664f7c3c02 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-414a4bb1-3ed6-485e-87c8-1e664f7c3c02:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "fast",
+                        "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-2f42e45a-d6ca-4580-81cf-466dcf2899a4\">\n     <div class=\"s-transition:fast s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-2f42e45a-d6ca-4580-81cf-466dcf2899a4 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-2f42e45a-d6ca-4580-81cf-466dcf2899a4:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.margin.Margin": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.margin.Margin",
+                "name": "Margin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/margin"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply margins to any HTMLElement",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.margin",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Inline",
+                        "code": "<p class=\"s-bc:accent s-radius s-p:30 s-mbe:20\">Ms. Emanuel Lemke</p>\n  <p class=\"s-bc:complementary s-radius s-mi:50 s-mbe:20 s-p:30\">Ebony Macejkovic</p>\n  <p class=\"s-bc:main s-mie:100 s-radius s-mbe:20 s-p:30\">Kay Bergstrom</p>\n  <p class=\"s-bc:error s-mie:30 s-radius s-p:30\">Bob Huels</p>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Block",
+                        "code": "<div class=\"s-bc:accent s-radius s-mbe:40 s-p:30 s-text:center\">Darrin Abbott</div>\n  <div class=\"s-bc:complementary s-radius s-mbe:20 s-p:30 s-text:center\">Marty Purdy Jr.</div>\n  <div class=\"s-bc:main s-radius s-mbe:50 s-p:30 s-text:center\">Anna Walsh</div>\n  <div class=\"s-bc:error s-radius s-p:30 s-text:center\">Camille Crist</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "RTL",
+                        "code": "<div dir=\"rtl\">\n  <p class=\"s-bc:accent s-radius s-p:30 s-mbe:20\">Lorenzo Sauer</p>\n  <p class=\"s-bc:complementary s-radius s-mi:50 s-mbe:20 s-p:30\">Jacquelyn Koch</p>\n  <p class=\"s-bc:main s-radius s-mie:100 s-mbe:20 s-p:30\">Marion Gerlach</p>\n  <p class=\"s-bc:error s-radius s-mie:30 s-p:30\">Manuel Kub</p>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.order.Order": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.order.Order",
+                "name": "Order",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/order"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply some order attributes on any HTMLElement.",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.order",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Simple order",
+                        "code": "<div class=\"s-flex s-gap:40\">\n  <div class=\"s-order:3 s-p:30 s-ratio:16-9 s-grow s-bc:main s-radius\">1</div>\n  <div class=\"s-order:1 s-p:30 s-ratio:16-9 s-grow s-bc:main s-radius\">2</div>\n  <div class=\"s-order:2 s-p:30 s-ratio:16-9 s-grow s-bc:main s-radius\">3</div>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.scale.Scale": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.scale.Scale",
+                "name": "Scale",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Tools"
+                    ],
+                    "slug": "/styleguide/tools/scale"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows to apply a scale to any supported UI elements.\nThis scale does not use the transform property but increase actual values like `padding`,\n`margin`, etc... In fact, all the properties setted with the `sugar.scallable` function.\nIt's usually a good practice to set the `font-size` of your UI element to `s.scalable(1rem)`\nand then to set inner values using `em` unit.",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.scale",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<!-- 10 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 10</h3>\n  <div class=\"s-scale:10\">\n      <a class=\"s-btn\">Mr. Shelly Gleason</a>\n  </div>\n</div>\n\n<!-- 11 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 11</h3>\n  <div class=\"s-scale:11\">\n      <a class=\"s-btn\">Blake Huel</a>\n  </div>\n</div>\n\n<!-- 12 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 12</h3>\n  <div class=\"s-scale:12\">\n      <a class=\"s-btn\">Dr. Ida Leffler</a>\n  </div>\n</div>\n\n<!-- 13 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 13</h3>\n  <div class=\"s-scale:13\">\n      <a class=\"s-btn\">Joann Reichert</a>\n  </div>\n</div>\n\n<!-- 14 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 14</h3>\n  <div class=\"s-scale:14\">\n      <a class=\"s-btn\">Jaime Rosenbaum MD</a>\n  </div>\n</div>\n\n<!-- 15 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 15</h3>\n  <div class=\"s-scale:15\">\n      <a class=\"s-btn\">Ruth Koepp</a>\n  </div>\n</div>\n\n<!-- 16 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 16</h3>\n  <div class=\"s-scale:16\">\n      <a class=\"s-btn\">Sophie Hammes</a>\n  </div>\n</div>\n\n<!-- 17 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 17</h3>\n  <div class=\"s-scale:17\">\n      <a class=\"s-btn\">Jennie Fritsch</a>\n  </div>\n</div>\n\n<!-- 18 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 18</h3>\n  <div class=\"s-scale:18\">\n      <a class=\"s-btn\">Aubrey Dietrich</a>\n  </div>\n</div>\n\n<!-- 19 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 19</h3>\n  <div class=\"s-scale:19\">\n      <a class=\"s-btn\">Armando Funk</a>\n  </div>\n</div>\n\n<!-- 20 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 20</h3>\n  <div class=\"s-scale:20\">\n      <a class=\"s-btn\">Ronald Feeney</a>\n  </div>\n</div>\n\n<!-- default scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale default</h3>\n  <div class=\"s-scale:default\">\n      <a class=\"s-btn\">Sarah Mayert</a>\n  </div>\n</div>\n\n<!-- 01 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 01</h3>\n  <div class=\"s-scale:01\">\n      <a class=\"s-btn\">Jean Fisher</a>\n  </div>\n</div>\n\n<!-- 02 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 02</h3>\n  <div class=\"s-scale:02\">\n      <a class=\"s-btn\">Shannon Witting</a>\n  </div>\n</div>\n\n<!-- 03 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 03</h3>\n  <div class=\"s-scale:03\">\n      <a class=\"s-btn\">Mandy Wiegand</a>\n  </div>\n</div>\n\n<!-- 04 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 04</h3>\n  <div class=\"s-scale:04\">\n      <a class=\"s-btn\">Sonya Breitenberg</a>\n  </div>\n</div>\n\n<!-- 05 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 05</h3>\n  <div class=\"s-scale:05\">\n      <a class=\"s-btn\">Mrs. Bridget Dare</a>\n  </div>\n</div>\n\n<!-- 06 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 06</h3>\n  <div class=\"s-scale:06\">\n      <a class=\"s-btn\">Lewis Rolfson</a>\n  </div>\n</div>\n\n<!-- 07 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 07</h3>\n  <div class=\"s-scale:07\">\n      <a class=\"s-btn\">Mrs. Wanda Schinner</a>\n  </div>\n</div>\n\n<!-- 08 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 08</h3>\n  <div class=\"s-scale:08\">\n      <a class=\"s-btn\">Brenda Rippin</a>\n  </div>\n</div>\n\n<!-- 09 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 09</h3>\n  <div class=\"s-scale:09\">\n      <a class=\"s-btn\">Clifford Krajcik</a>\n  </div>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.padding.Padding": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.padding.Padding",
+                "name": "Padding",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/padding"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply padding to any HTMLElement",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.padding",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Inline",
+                        "code": "<p class=\"s-bc:accent s-radius s-pi:30 s-pb:30 s-mbe:20\">Esther Murray</p>\n  <p class=\"s-bc:complementary s-radius s-pis:50 s-pb:30 s-mbe:20\">Lillian Fay</p>\n  <p class=\"s-bc:main s-radius s-pis:80 s-pb:30 s-mbe:20\">Roman Ritchie</p>\n  <p class=\"s-bc:error s-radius s-pis:100 s-pb:30 s-mbe:20\">Marvin Volkman</p>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Block",
+                        "code": "<div class=\"s-bc:accent s-radius s-pbs:30 s-pbe:40 s-text:center s-mbe:20\">Malcolm Jenkins</div>\n  <div class=\"s-bc:complementary s-radius s-pb:30 s-text:center s-mbe:20\">Marvin Cormier</div>\n  <div class=\"s-bc:main s-radius s-pbs:50 s-pbe:30 s-text:center s-mbe:20\">Kevin Jaskolski</div>\n  <div class=\"s-bc:error s-radius s-pbs:100 s-pbe:60 s-text:center s-mbe:20\">Benny Sporer Jr.</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "RTL",
+                        "code": "<div dir=\"rtl\">\n  <p class=\"s-bc:accent s-radius s-pi:30 s-pb:30 s-mbe:20\">Jan Daniel</p>\n  <p class=\"s-bc:complementary s-radius s-pis:50 s-pb:30 s-mbe:20\">Dr. Dallas Yost</p>\n  <p class=\"s-bc:main s-radius s-pis:80 s-pb:30 s-mbe:20\">Roberto Hamill</p>\n  <p class=\"s-bc:error s-radius s-pis:100 s-pb:30 s-mbe:20\">Regina Ebert</p>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.spacing.Spacing": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.spacing.Spacing",
+                "name": "Spacing",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/spacing"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply spacing to any HTMLElement container",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.spacing",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Vertical spacing",
+                        "code": "<div class=\"s-spacing:40\">\n  <h1 class=\"s-typo:h1\">Hello world</h1>\n  <p class=\"s-typo:lead\">Naomi Reichert</p>\n  <p class=\"s-typo:p\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis egestas non tortor sed aliquet. Fusce finibus erat at leo scelerisque, a lobortis purus pretium. Aliquam ornare leo id mi imperdiet.</p>\n  <a class=\"s-btn s-color:accent\">Simple Cta</a>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.userSelect.User-select": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.userSelect.User-select",
+                "name": "User select",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/user-select"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply some user-select style on any HTMLElement",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.userSelect",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "All",
+                        "code": "<p class=\"s-user-select:all\">\n      Vel recusandae itaque perspiciatis sequi facere et accusantium. Rerum id iusto doloribus. Nisi nemo qui alias amet.\n  </p>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "auto",
+                        "code": "<p class=\"s-user-select:auto\">\n      Asperiores et vero aut. Soluta consequatur nulla rerum recusandae repudiandae. Doloribus consequatur laborum perspiciatis labore. Iure neque dolore repellendus qui laudantium.\n  </p>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "none",
+                        "code": "<p class=\"s-user-select:none\">\n      Ut impedit earum. Tempora in omnis at quisquam possimus quia et velit. Qui delectus sapiente nostrum reprehenderit et inventore voluptas fugit architecto.\n  </p>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "text",
+                        "code": "<p class=\"s-user-select:text\">\n      Officiis qui voluptatibus vel. Quod voluptas quidem natus. Voluptatem dignissimos eos libero.\n  </p>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.visibility.Visibility": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.visibility.Visibility",
+                "name": "Visibility",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/visibility"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply a visibility style on any HTMLElement",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.visibility",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Visible",
+                        "code": "<div class=\"s-bc:main s-radius s-p:30\">\n  <div style=\"height: 100px\" class=\"s-bc:accent s-radius s-p:30\">I'm visible</div>\n  <div style=\"height: 100px\" class=\"s-visibility:hidden s-bc:complementary s-radius s-p:30\">I'm hidden</div>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.visually.Visually": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.visually.Visually",
+                "name": "Visually",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/visually"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply a visually style on any HTMLElement",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.visually",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Visually",
+                        "code": "<div class=\"s-bc:main-surface s-radius s-p:30\">\n  <div style=\"height: 100px\" class=\"s-bc:accent s-radius s-p:30\">I'm visible</div>\n  <div style=\"height: 100px\" class=\"s-visually:hidden s-bc:complementary s-radius s-p:30\">I'm hidden</div>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.truncate.Truncate": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.truncate.Truncate",
+                "name": "Truncate",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/truncate"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to **truncate texts to a number of lines** on any HTMLElement",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.truncate",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "1 line",
+                        "code": "<p class=\"s-typo:p s-truncate:1\">Adipisci omnis aut ullam impedit soluta explicabo voluptas aut.<br />Minus sequi corporis est.<br />Quas deserunt earum maxime aut consequatur sunt sunt rerum.<br />Sed perferendis nihil facilis voluptatem.<br />Quis facilis soluta velit alias dolorem vero.<br />Porro corporis eum hic quo qui dolores.<br />Reprehenderit ipsum debitis porro.<br />Laboriosam architecto sint nulla natus.<br />Vel et enim beatae repellendus labore.<br />Aut veniam dolores et perspiciatis possimus.<br />Accusamus asperiores dolorum voluptatem aspernatur voluptate a nulla quisquam quam.<br />Dicta quam dolores porro velit voluptas.<br />Molestias harum id quasi adipisci reiciendis quibusdam animi voluptatum.<br />Ut et iusto iure culpa facilis totam laudantium nobis architecto.<br />Eum sapiente laboriosam enim.</p>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "2 line",
+                        "code": "<p class=\"s-typo:p s-truncate:2\">Exercitationem enim eos harum molestiae qui pariatur at sit.<br />Fuga doloremque et quia non dolor autem maiores.<br />Rerum molestias cupiditate.<br />Accusantium quae dolorem nostrum nobis.<br />Cumque consequuntur quis quia commodi.<br />Nisi aut esse dolorem.<br />Aut rem perspiciatis dolorem suscipit.<br />Qui hic voluptatum debitis mollitia odio totam.<br />Voluptas veritatis saepe consequuntur et labore quia exercitationem non.<br />Ipsum minima officiis voluptas aperiam.<br />Eos vero enim ut et vel odio placeat suscipit.<br />Architecto blanditiis autem reiciendis odit blanditiis reprehenderit enim.<br />Molestiae sint perferendis et ea in quae tempora numquam.<br />Nam aut sint et.<br />Aut ut expedita fuga quia fuga voluptas molestiae molestiae.</p>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "3 lines",
+                        "code": "<p class=\"s-typo:p s-truncate:3\">Voluptatum sint doloremque aut rerum laboriosam fugiat velit iure.<br />Facilis quam officiis aspernatur nam quas et harum labore debitis.<br />Ut eveniet ut illo quod distinctio veniam earum.<br />Saepe eius laudantium aut itaque eos nostrum officia a rem.<br />Sed similique voluptatem et neque sed omnis sed.<br />Unde rerum autem.<br />Ad nihil exercitationem labore quo cupiditate consequuntur.<br />Non nihil maiores illum adipisci autem voluptatibus qui.<br />Voluptatem id est nesciunt esse ut qui.<br />Quis saepe nemo rerum iure numquam mollitia excepturi blanditiis molestiae.<br />Neque debitis perspiciatis dolores necessitatibus laudantium hic.<br />Sequi facilis unde aut sint facilis fugiat reprehenderit fugit ab.<br />Laudantium architecto dolorem quo odio amet corrupti.<br />Est porro vel ullam consequatur rerum saepe.<br />Consectetur quia quis exercitationem.</p>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "4 lines",
+                        "code": "<p class=\"s-typo:p s-truncate:4\">Et quia consectetur alias suscipit ut perspiciatis.<br />Soluta tempore voluptates voluptas.<br />Et dolores molestiae quam velit excepturi cum.<br />Maiores quis minus quasi nobis corrupti amet recusandae tenetur amet.<br />Illo excepturi delectus consequatur.<br />Ut est accusamus.<br />Quia perspiciatis consequatur perferendis laborum.<br />Exercitationem illo accusantium et aut explicabo vitae et voluptatibus.<br />Et consectetur in et omnis.<br />Ut architecto autem cupiditate accusamus quia.<br />Tenetur ex maxime repellat et hic est sed qui.<br />Illo alias non quam est cum at.<br />Et eligendi nostrum consequatur deleniti illo quas voluptates quaerat.<br />Aut perspiciatis iure quo rerum a aspernatur velit voluptate.<br />Et et vitae.</p>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "5 lines",
+                        "code": "<p class=\"s-typo:p s-truncate:5\">Eligendi tenetur aspernatur ut qui deleniti incidunt omnis voluptates.<br />Corrupti molestiae aut vitae.<br />Hic aliquid velit consequatur quisquam.<br />Est quis est.<br />Quos fuga magnam dicta voluptatum in molestiae incidunt non assumenda.<br />Aspernatur delectus est optio sunt ea quasi est deleniti in.<br />Voluptatem dolor minus unde hic beatae harum rerum dolorem occaecati.<br />Sunt architecto nisi et sapiente maiores cum.<br />Optio quibusdam ea temporibus.<br />Quia pariatur mollitia eum.<br />Et beatae et.<br />Nemo ea eius.<br />Qui excepturi et est amet aut eos aut maiores provident.<br />Amet exercitationem laboriosam nihil.<br />Iusto quidem et et numquam aliquam quisquam.</p>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "6 lines",
+                        "code": "<p class=\"s-typo:p s-truncate:6\">Non ut doloremque eos eos dolor eum ea hic.<br />Sint ex deleniti quis vel voluptatum.<br />Magnam alias quia doloremque soluta quae facilis explicabo ullam eum.<br />Aut distinctio error natus debitis illo tempore quis.<br />Recusandae voluptatibus et dolorem a laboriosam.<br />Explicabo ipsam est magnam quam est voluptatibus consectetur.<br />Quis occaecati rerum minima et.<br />Quidem sapiente consequatur.<br />Consequatur eveniet quia reprehenderit molestiae temporibus.<br />Incidunt et illum.<br />Sit blanditiis sapiente culpa quibusdam.<br />Ipsa et est fuga sit rerum.<br />Culpa sit deleniti illum eum repellat velit ea.<br />Non autem sequi quo vitae natus iusto neque et et.<br />Eum aspernatur qui.</p>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "7 lines",
+                        "code": "<p class=\"s-typo:p s-truncate:7\">Nobis aut ipsa et esse aspernatur.<br />Ullam laboriosam quas.<br />Debitis consequatur est ipsum sit.<br />Sit ratione deserunt cupiditate est non et labore.<br />Nulla magnam maxime nesciunt magni repellendus eum.<br />Ratione sit repellat a repellat ab iure totam tempore.<br />Est recusandae maxime.<br />Qui recusandae quibusdam deleniti fugiat et accusantium non laudantium rem.<br />Libero expedita sit dolorem incidunt accusantium beatae ullam.<br />Sunt et quas quaerat tempore sed sequi.<br />Veritatis autem sint ut.<br />Optio velit tempore tenetur voluptatibus.<br />Optio ut beatae inventore explicabo pariatur velit error.<br />Excepturi pariatur deserunt.<br />Est porro qui deserunt reprehenderit qui.</p>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "8 lines",
+                        "code": "<p class=\"s-typo:p s-truncate:8\">Est sequi provident.<br />Ipsa ea dolores nam dolor adipisci sit et.<br />Est corporis aspernatur.<br />Cupiditate delectus quas.<br />Dolorum ea culpa cum pariatur qui.<br />Aliquid sint aliquam nulla.<br />Provident qui reiciendis et nulla corrupti minus enim.<br />Architecto et sit tempora amet non.<br />Adipisci qui est deserunt reprehenderit qui labore architecto iste.<br />Odit qui ex quod.<br />Molestiae quod adipisci saepe.<br />Omnis voluptas nobis.<br />Quo explicabo quis dolorum amet dolore.<br />Cumque ipsum id sit perferendis ut est ex explicabo.<br />Quis dolor eos ut aut et dolor iure possimus.</p>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "9 lines",
+                        "code": "<p class=\"s-typo:p s-truncate:9\">Qui ipsum nisi sit repudiandae sint.<br />Et enim quibusdam aut.<br />Nihil excepturi voluptas.<br />A quam fuga modi et.<br />Itaque quidem voluptatem sapiente harum natus.<br />Autem ut molestias recusandae ut praesentium.<br />Nihil rem incidunt cumque.<br />Et ut similique ut.<br />Alias voluptatem accusamus tempora quasi sed sit quos.<br />Voluptates explicabo autem tempora rem aut.<br />Autem labore omnis.<br />Beatae sequi officiis culpa vel omnis rerum voluptates similique laborum.<br />Eligendi corporis eos ullam minima cupiditate nobis minus.<br />Adipisci neque sit molestias tempora veritatis voluptates aut commodi vero.<br />Saepe officiis autem harum.</p>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "10 lines",
+                        "code": "<p class=\"s-typo:p s-truncate:10\">Et enim libero ea ducimus quia et dolor.<br />Expedita non fugit blanditiis delectus aperiam ea.<br />Dolores odio sunt dolores vitae sit.<br />Voluptas vel praesentium aut iure quis.<br />In in qui repudiandae.<br />Officia explicabo recusandae deleniti consectetur enim qui culpa.<br />In molestias quae nesciunt.<br />Qui natus corporis architecto facere perspiciatis quis.<br />Id non et enim est qui sapiente eos eum et.<br />Aperiam ea amet sequi.<br />Minus et exercitationem modi sit.<br />Occaecati consequuntur in quo.<br />Et aliquam ipsa quae quis.<br />Numquam enim ea.<br />Odio autem sed accusamus quo quos iusto.</p>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.scrollbar.Scrollbar": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.scrollbar.Scrollbar",
+                "name": "Scrollbar",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "UI"
+                    ],
+                    "slug": "/styleguide/ui/scrollbar"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows to apply a custom scrollbar that follows your theme settings.\nIt is based on the `theme.ui.scrollbar` settings.",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.scrollbar",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Vertical scrollbar",
+                        "code": "<!-- scrollbar vertical -->\n  <div class=\"s-scrollbar\" style=\"height:100px; overflow-y: auto;\">\n      Facilis omnis ut et rem eveniet tenetur velit cumque eveniet. Sed explicabo sed officia hic iste et laudantium iusto saepe. Qui cupiditate et eos autem labore tempora.\nDicta est molestias quis aut quia. Vel et autem. Et quasi autem culpa. Voluptatem occaecati sunt delectus. Optio eaque magni qui id necessitatibus nam. Quia et exercitationem.\nConsequatur ipsum ipsa qui blanditiis esse possimus. Et velit necessitatibus accusantium. Molestias qui laudantium aut accusantium nemo architecto et molestiae voluptatem. Non adipisci nihil numquam placeat et. Architecto eos debitis officiis natus. Ab sed corrupti enim sequi sed dignissimos.\nEt eum perspiciatis consequatur suscipit aperiam cumque vel. Facilis consequatur nemo vel sint. Et beatae assumenda velit est necessitatibus ut voluptates. Magni est laudantium. Officia minima ea possimus voluptatem sapiente suscipit quidem. Vitae recusandae nulla non alias voluptatem repellat illo aspernatur.\nSuscipit eius tenetur voluptas quia corporis reiciendis nisi accusantium aut. Officia nihil tenetur exercitationem. Repellendus sint non nihil nihil velit eum. Soluta adipisci incidunt quia atque molestias blanditiis ducimus placeat. Eum commodi laboriosam nisi. Reiciendis impedit quas asperiores necessitatibus praesentium ipsum id.\nSed ut sint nobis assumenda non sed id. Itaque sit iure esse quidem. Eos qui sed rem sint. Sint doloremque mollitia qui reiciendis et corporis.\nDolores ullam doloremque rerum maxime dicta mollitia quia. Aut quis voluptates consequuntur consequatur velit natus ea aut labore. Magni culpa ad ut quae. Eos nesciunt doloremque adipisci voluptates natus. Minus omnis corporis voluptas ea sapiente eum. Quos sit quos omnis tenetur sunt.\nA placeat omnis in eum. Rerum velit temporibus sed voluptatem velit officia. Est aut qui. Non id distinctio fugit ullam deserunt rerum. Incidunt nisi sit quae. Sed reiciendis unde ea incidunt eaque.\nNesciunt non fuga quaerat ad. Aperiam deleniti enim voluptate ut deleniti eos rerum assumenda quasi. Tempore et sunt aut sint aut minima libero praesentium et. Corrupti quo autem.\nAdipisci expedita maxime harum laboriosam. Ab suscipit sed qui exercitationem non cum magnam eum. Sed sed corrupti aperiam porro eum et quia ab.\n  </div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Horizontal scrollbar",
+                        "code": "<div class=\"s-scrollbar\" style=\"white-space:nowrap; width: 200px; height: 2em; overflow-x: auto; overflow-y: hidden;\">\n      Et eius tempora autem saepe minima vero corporis vitae eum. Accusamus et ipsum nostrum autem commodi ad. Molestiae animi non veritatis. Quia consequatur et repellat facilis doloribus ullam omnis consequatur. Id nemo fuga molestiae. Tenetur rem non vitae eos dolorem.\n  </div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.shape.Shape": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.shape.Shape",
+                "name": "Shape",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/shape"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply a shape to any elements that support it using the\n`border-radius: s.border.radius(shape);` statement.",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.shape",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Shape on buttons",
+                        "code": "<a class=\"s-btn s-color:accent s-shape:default\">Default shape</a>\n<a class=\"s-btn s-color:accent s-shape:square\">Square shape</a>\n<a class=\"s-btn s-color:accent s-shape:pill\">Pill shape</a>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.width.Widths": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.width.Widths",
+                "name": "Widths",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/widths"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows to apply some width to any HTMLElement.\nThese widths are defined in the `theme.width` theme settings.",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.width",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Widths",
+                        "code": "<div class=\"s-flex:column s-gap:20\">\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:0 s-text:center s-bc:accent s-p:30 s-radius:30\">0%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:10 s-text:center s-bc:accent s-p:30 s-radius:30\">10%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:20 s-text:center s-bc:accent s-p:30 s-radius:30\">20%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:30 s-text:center s-bc:accent s-p:30 s-radius:30\">30%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:40 s-text:center s-bc:accent s-p:30 s-radius:30\">40%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:50 s-text:center s-bc:accent s-p:30 s-radius:30\">50%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:60 s-text:center s-bc:accent s-p:30 s-radius:30\">60%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:70 s-text:center s-bc:accent s-p:30 s-radius:30\">70%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:80 s-text:center s-bc:accent s-p:30 s-radius:30\">80%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:90 s-text:center s-bc:accent s-p:30 s-radius:30\">90%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:100 s-text:center s-bc:accent s-p:30 s-radius:30\">100%</div>\n  </div>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "sugarcss-coffeekraken-io-next.sugar.style.helpers.whiteSpace.White-space": {
+                "id": "sugarcss-coffeekraken-io-next.sugar.style.helpers.whiteSpace.White-space",
+                "name": "White space",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Helpers"
+                    ],
+                    "slug": "/styleguide/helpers/white-space"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply some white-space style on any HTMLElement",
+                "namespace": "sugarcss-coffeekraken-io-next.sugar.style.helpers.whiteSpace",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Wrap",
+                        "code": "<p class=\"s-white-space:wrap\">\n      Quia quisquam facere consequuntur unde aperiam alias eum magnam. Necessitatibus tempore consectetur eos alias fugiat unde porro quas. Fugit recusandae iusto debitis reiciendis enim sapiente quia tempore.\n  </p>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Nowrap",
+                        "code": "<p class=\"s-white-space:nowrap\">\n      Consequatur neque perferendis dicta. Id soluta qui. Quasi autem et et explicabo animi suscipit vitae voluptatum. Ipsum veritatis voluptatem amet est. Sit facere libero.\n  </p>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Break spaces",
+                        "code": "<p class=\"s-white-space:break-spaces\">\n      Quas alias eaque occaecati eos est maiores. Voluptates error architecto commodi quo expedita sit aspernatur. Minus enim exercitationem quod occaecati. Qui velit voluptatem quibusdam delectus repellat.\n  </p>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Normal",
+                        "code": "<p class=\"s-white-space:normal\">\n      Consectetur placeat modi repellat vel iusto autem nemo ut. Recusandae cumque nobis nobis recusandae repellat odio distinctio quidem repellat. Excepturi reprehenderit modi asperiores nesciunt molestiae. Aliquam ullam eos earum consequatur aliquam cupiditate quo. Deleniti ipsam et eos mollitia qui. Aliquam et fuga.\n  </p>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Pre",
+                        "code": "<p class=\"s-white-space:pre\">\n      Ullam praesentium voluptatem incidunt et ea est. Cum exercitationem magnam officiis vel possimus fuga et eveniet. Molestiae laboriosam optio tempora quaerat nam et.\n  </p>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Pre-line",
+                        "code": "<p class=\"s-white-space:pre-line\">\n      Velit a ab adipisci voluptatem. Sint eos suscipit repudiandae quia et sit. Et harum est perferendis temporibus nemo alias aut incidunt. Et ullam qui sint a facilis. Repellat hic esse ratione placeat ipsam ipsa sit odit et.\n  </p>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Pre-wrap",
+                        "code": "<p class=\"s-white-space:pre-wrap\">\n      Quia esse vitae illo totam saepe a repudiandae. Dolores reprehenderit saepe delectus esse aut quidem laboriosam. Sunt ullam harum nostrum architecto ipsam inventore odit voluptatem quisquam. Laborum sed dignissimos ratione et et consequatur veritatis architecto iste.\n  </p>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Revert",
+                        "code": "<p class=\"s-white-space:revert\">\n      Dolor ut molestias ipsa quia non ut molestiae similique. Quia aut repudiandae id aut. Maxime aliquam eius qui. Quos voluptate aut dolorem.\n  </p>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Unset",
+                        "code": "<p class=\"s-white-space:unset\">\n      Rerum eum dignissimos ut nisi autem. Quo voluptas omnis corporis quaerat rem odit aspernatur. Eos dignissimos unde ab est reprehenderit atque fugiat ut. Amet quibusdam id est reprehenderit aut autem amet. Doloremque et quis. Rem perferendis voluptates praesentium minus.\n  </p>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css",
+                "children": {}
+            }
+        }
+    }
+}

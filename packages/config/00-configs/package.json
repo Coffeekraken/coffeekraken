@@ -1,0 +1,9 @@
+{
+    "name": "@coffeekraken/00-configs",
+    "version": "2.0.0-beta.1",
+    "description": "Store all the base configurations for the coffeekraken ecosystem",
+    "type": "module",
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+    "license": "MIT",
+    "homepage": "https://coffeekraken.io"
+}

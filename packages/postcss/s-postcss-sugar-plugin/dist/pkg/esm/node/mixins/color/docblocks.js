@@ -7,24 +7,24 @@ class postcssSugarPluginDocblockColorsMixinInterface extends __SInterface {
 }
 export { postcssSugarPluginDocblockColorsMixinInterface as interface };
 /**
- * @__name           docblocks
- * @__namespace      node.mixin.color
- * @__type           PostcssMixin
- * @__platform      postcss
- * @__status        wip
+ * @name           docblocks
+ * @namespace      node.mixin.color
+ * @type           PostcssMixin
+ * @platform      postcss
+ * @status        wip
  *
  * This mixin print the documentation docblocks for the colors
  * into your final css.
  *
- * @__param       {String}        query       The query string like ">tablet", "<=desktop", etc...
+ * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  *
- * @__snippet         @s.color.docblocks
+ * @snippet         @s.color.docblocks
  *
- * @__example        css
+ * @example        css
  * \@s.color.docblocks;
  *
- * @__since       2.0.0
- * @__author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function ({ params, atRule, CssVars, replaceWith }) {
     const vars = new CssVars();

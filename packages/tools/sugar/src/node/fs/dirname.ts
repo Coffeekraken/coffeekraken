@@ -23,7 +23,7 @@ import __path from 'path';
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function __dirname(importMeta: any): string {
+export default function dirname(importMeta: any): string {
     const error = new Error();
 
     // @ts-ignore
@@ -47,10 +47,30 @@ export default function __dirname(importMeta: any): string {
         break;
     }
 
+    pathLine = pathLine
+        .trim()
+        .replace(/at\s/, '')
+        .replace('file://', '')
+        .replace('webpack-internal:///(rsc)', '')
+        .split(' ')
+        .pop();
+
     const filePathMatch = pathLine.match(
-        /(at\s|\(|file\:\/\/)(\/[a-zA-Z0-9_-].*)\:[0-9]+\:[0-9]+/,
+        /\(?([a-zA-Z0-9_\.-\/].*)\:[0-9]+\:[0-9]+\)?/,
     );
-    const filePath = filePathMatch[2];
-    const dirPath = __path.dirname(filePath).replace('file:', '');
-    return dirPath;
+
+    if (!filePathMatch?.[1]) {
+        console.log('E', stackArray, pathLine);
+    }
+
+    let finalFilePath = filePathMatch[1];
+
+    if (finalFilePath.startsWith('/..')) {
+        finalFilePath = __path.resolve(
+            process.cwd(),
+            finalFilePath.replace(/\//, ''),
+        );
+    }
+
+    return __path.dirname(finalFilePath);
 }

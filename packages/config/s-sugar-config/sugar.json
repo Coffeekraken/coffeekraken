@@ -1,11 +1,4 @@
 {
-  "config": {
-    "folders": [
-      {
-        "path": "./dist/pkg/%moduleSystem/config"
-      }
-    ]
-  },
   "cli": [
     {
       "stack": "config",

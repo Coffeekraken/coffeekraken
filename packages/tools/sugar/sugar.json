@@ -6,15 +6,6 @@
             }
         ]
     },
-    "postcss": {
-        "folders": {
-          "mixins": [
-            {
-              "path": "./dist/pkg/%moduleSystem/node/postcss/mixins"
-            }
-          ]
-        }
-      },
     "cli": [
         {
             "stack": "command",

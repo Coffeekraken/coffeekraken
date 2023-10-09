@@ -410,7 +410,7 @@ export default class SConfig {
 
         // Serialize the config just to be sure all is ok
         try {
-            //     // make sure we don't have any cyclic references inside our config
+            // make sure we don't have any cyclic references inside our config
             // const cyclic = __isCyclic(this.config);
             // if (cyclic) {
             //     throw new Error(cyclic);
@@ -420,13 +420,13 @@ export default class SConfig {
         } catch (e) {
             console.error(`[SConfig] Your configuration seems to be invalid... This is usually cause of one of these issue:
 
-- One of your configuration try to access another one that is not available in your current "api.env" which is
-    - Platform: ${this.settings.env.platform}
-    - Environment: ${this.settings.env.env}
-- One of your configuration does create a cyclic structure...
+        - One of your configuration try to access another one that is not available in your current "api.env" which is
+            - Platform: ${this.settings.env.platform}
+            - Environment: ${this.settings.env.env}
+        - One of your configuration does create a cyclic structure...
 
-Make sure to check these before anything else...
-            `);
+        Make sure to check these before anything else...
+                    `);
 
             throw e;
         }

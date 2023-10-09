@@ -398,6 +398,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             }
 
             const functionInterface = stack[fnId].interface;
+
             const params = functionInterface.apply(paramsStatement, {});
             delete params.help;
 

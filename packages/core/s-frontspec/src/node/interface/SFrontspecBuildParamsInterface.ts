@@ -27,6 +27,17 @@ class SFrontspecBuildParamsInterface extends __SInterface {
                     'Specify each properties you want in your frontspec with an object that describe the type of the source and some settings depending on the source itself',
                 default: __SSugarConfig.get('frontspec.build.sources'),
             },
+            silent: {
+                type: 'Boolean',
+                description: 'Specify if you want to mute the output',
+                default: false,
+            },
+            write: {
+                type: 'Boolean',
+                description:
+                    'Specify if you want to write the frontspec.json file',
+                default: true,
+            },
         };
     }
 }

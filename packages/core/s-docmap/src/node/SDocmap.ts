@@ -2,7 +2,6 @@ import __SClass from '@coffeekraken/s-class';
 import __SDocblock from '@coffeekraken/s-docblock';
 import __SFile from '@coffeekraken/s-file';
 import __SGlob from '@coffeekraken/s-glob';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __composerJsonSync } from '@coffeekraken/sugar/composer';
 import {
     __checkPathWithMultipleExtensions,
@@ -26,7 +25,6 @@ import {
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 
 import { __namespaceCompliant } from '@coffeekraken/sugar/string';
-import __chokidar from 'chokidar';
 import __fs from 'fs';
 import __micromatch from 'micromatch';
 import __path from 'path';
@@ -255,20 +253,7 @@ class SDocmap extends __SClass implements ISDocmap {
             ...this.constructor._registeredTagsProxy,
             ...this.settings.tagsProxy,
         };
-
-        // watch file
-        // @ts-ignore
-        if (!this.constructor.watcher) {
-            // @ts-ignore
-            this.constructor.watcher = __chokidar.watch(
-                __SSugarConfig.get('docmap.read.input'),
-            );
-            // @ts-ignore
-            this.constructor.watcher.on('change', () => {
-                // @ts-ignore
-                delete this.constructor._cachedDocmapJson.current;
-            });
-        }
+        console.log('S', this.settings);
     }
 
     /**

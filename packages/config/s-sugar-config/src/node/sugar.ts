@@ -269,6 +269,16 @@ export default class SSugarConfig extends __SClass {
                     instance:
                         SSugarConfig._sSugarConfigInstances[finalSettings.id],
                 });
+
+                // resolve ready promise
+                setTimeout(() => {
+                    console.log(
+                        'III',
+                        this._readyPromiseResolve[finalSettings.id],
+                        finalSettings.id,
+                    );
+                    this._readyPromiseResolve[finalSettings.id]?.();
+                });
             },
         );
 
@@ -333,6 +343,16 @@ export default class SSugarConfig extends __SClass {
     static isLoaded(id = 'default'): boolean {
         if (!this._sSugarConfigInstances[id]) return false;
         return true;
+    }
+
+    static _readyPromiseResolve = {};
+    static ready(id = 'default'): Promise<void> {
+        return new Promise((resolve) => {
+            if (this._sSugarConfigInstances[id]?.isLoaded) {
+                return resolve();
+            }
+            this._readyPromiseResolve[id] = resolve;
+        });
     }
 
     /**
@@ -472,6 +492,8 @@ export default class SSugarConfig extends __SClass {
         const sugarJson = new __SSugarJson();
 
         if (!this._rootSugarJson) {
+            console.log('PACKAGE', __packageRootDir, process.pid, process.ppid);
+
             const rootSugarJsonPath = `${__packageRootDir()}/sugar.json`;
             if (__fs.existsSync(rootSugarJsonPath)) {
                 const json = __readJsonSync(rootSugarJsonPath);
@@ -517,6 +539,8 @@ export default class SSugarConfig extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     private _configInstance;
+
+    public isLoaded: boolean = false;
 
     /**
      * @name            constructor
@@ -767,6 +791,10 @@ export default class SSugarConfig extends __SClass {
             clean: settings.clean,
         });
 
+        this.isLoaded = true;
+
         return res;
     }
 }
+
+SSugarConfig.load();

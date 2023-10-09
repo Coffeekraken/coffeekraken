@@ -4,12 +4,15 @@ import __SClass from '@coffeekraken/s-class';
 import __SEnv from '@coffeekraken/s-env';
 import __SFile from '@coffeekraken/s-file';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __STheme from '@coffeekraken/s-theme';
 import { __folderPath, __readJsonSync } from '@coffeekraken/sugar/fs';
 import { __deepMerge, __get } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
 import __path from 'path';
 import __SFrontspecBuildParamsInterface from './interface/SFrontspecBuildParamsInterface.js';
+
+// import __defaultFrontspec from '../shared/defaultFrontspec.js';
 
 import type { ISFrontspec } from '@coffeekraken/s-frontspec';
 
@@ -57,6 +60,8 @@ export interface ISFrontspecSourceObj {
 
 export interface ISFrontspecBuildParams {
     sources: Record<string, ISFrontspecSourceObj>;
+    silent: boolean;
+    write: boolean;
 }
 
 export interface ISFrontspecAddParams {}
@@ -144,6 +149,12 @@ export default class SFrontspec extends __SClass {
         return __get(this._frontspec, dotpath);
     }
 
+    defaultFrontspec(): ISFrontspec {
+        const media = __STheme.get('media');
+        console.log('Media', media);
+        return {};
+    }
+
     /**
      * @name          read
      * @type          Function
@@ -158,7 +169,7 @@ export default class SFrontspec extends __SClass {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    read() {
+    async read() {
         // cached
         if (this._frontspec) {
             return this._frontspec;
@@ -167,7 +178,12 @@ export default class SFrontspec extends __SClass {
         const frontspecPath = `${__packageRootDir()}/frontspec.json`;
 
         if (!__fs.existsSync(frontspecPath)) {
-            return {};
+            // this._frontspec = __defaultFrontspec;
+            const frontspecJson = await this.build({
+                silent: true,
+                write: false,
+            });
+            return frontspecJson;
         }
 
         let frontspecJson = {};
@@ -214,16 +230,18 @@ export default class SFrontspec extends __SClass {
      * @since         2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    build(params: Partial<ISFrontspecBuildParams>): Promise<any> {
+    build(params: Partial<ISFrontspecBuildParams>): Promise<ISFrontspec> {
         const finalParams = <ISFrontspecBuildParams>(
             __deepMerge(__SFrontspecBuildParamsInterface.defaults(), params)
         );
         return new Promise(async (resolve) => {
             const frontspecPath = `${__packageRootDir()}/frontspec.json`;
 
-            console.log(
-                `<yellow>[build]</yellow> Building <cyan>frontspec.json</cyan>...`,
-            );
+            if (!finalParams.silent) {
+                console.log(
+                    `<yellow>[build]</yellow> Building <cyan>frontspec.json</cyan>...`,
+                );
+            }
 
             let finalFrontspecJson = {};
 
@@ -231,13 +249,17 @@ export default class SFrontspec extends __SClass {
             try {
                 frontspecJson = __readJsonSync(frontspecPath);
             } catch (e) {
-                console.log(e);
+                if (!finalParams.silent) {
+                    console.log(e);
+                }
             }
 
             for (let [prop, sourceObj] of Object.entries(finalParams.sources)) {
-                console.log(
-                    `<yellow>[build]</yellow> Gathering frontspec property "<yellow>${prop}</yellow>" of type "<magenta>${sourceObj.type}</magenta>"`,
-                );
+                if (!finalParams.silent) {
+                    console.log(
+                        `<yellow>[build]</yellow> Gathering frontspec property "<yellow>${prop}</yellow>" of type "<magenta>${sourceObj.type}</magenta>"`,
+                    );
+                }
 
                 switch (sourceObj.type) {
                     case 'config':
@@ -277,15 +299,17 @@ export default class SFrontspec extends __SClass {
                 JSON.stringify(finalFrontspecJson, null, 4),
             );
 
-            console.log(
-                `<green>[save]</green> File saved <green>successfully</green> under "<cyan>${frontspecPath.replace(
-                    __packageRootDir() + '/',
-                    '',
-                )}</cyan>"`,
-            );
+            if (!finalParams.silent) {
+                console.log(
+                    `<green>[save]</green> File saved <green>successfully</green> under "<cyan>${frontspecPath.replace(
+                        __packageRootDir() + '/',
+                        '',
+                    )}</cyan>"`,
+                );
+            }
 
             // resolve the process
-            resolve();
+            resolve(finalFrontspecJson);
         });
     }
 

@@ -12,12 +12,12 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __upperFirst } from '@coffeekraken/sugar/string';
 import __fs from 'fs';
 /**
- * @___name            SInterfaceRenderer
- * @___namespace       node.renderers
- * @___type            Class
- * @___extends         SClass
- * @___platform        node
- * @___status          beta
+ * @name            SInterfaceRenderer
+ * @namespace       node.renderers
+ * @type            Class
+ * @extends         SClass
+ * @platform        node
+ * @status          beta
  * @private
  *
  * This class represent the base for every interface renderers.

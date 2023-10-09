@@ -233,11 +233,24 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                 } else if (filePath.match(/\.json$/)) {
                     importedConfig = __readJsonSync(filePath);
                 } else {
-                    importedConfig = await import(filePath);
+                    try {
+                        importedConfig = await import(
+                            /* webpackIgnore: true */ filePath
+                        );
+                    } catch (e) {
+                        if (__fs.existsSync(filePath)) {
+                            console.log('EXISTE', filePath);
+                            console.log('P', process.pid, process.ppid);
+                        }
+                    }
+                }
+
+                if (!importedConfig) {
+                    importedConfig = {};
                 }
 
                 // CJS async import resolution
-                if (importedConfig.__esModule && importedConfig.default) {
+                if (importedConfig?.__esModule && importedConfig?.default) {
                     importedConfig = importedConfig.default;
                 }
 

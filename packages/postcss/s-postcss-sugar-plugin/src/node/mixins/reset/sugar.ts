@@ -87,14 +87,13 @@ export default function ({
         */`,
     ).code(`
 
-
     /* purgecss start ignore */
 
     /**
      * Body height
      */
     html {
-        height: fill-available;
+        height: stretch;
     }
     body {
         min-height: 100vh;

@@ -17,12 +17,12 @@ const object_1 = require("@coffeekraken/sugar/object");
 const string_1 = require("@coffeekraken/sugar/string");
 const fs_1 = __importDefault(require("fs"));
 /**
- * @___name            SInterfaceRenderer
- * @___namespace       node.renderers
- * @___type            Class
- * @___extends         SClass
- * @___platform        node
- * @___status          beta
+ * @name            SInterfaceRenderer
+ * @namespace       node.renderers
+ * @type            Class
+ * @extends         SClass
+ * @platform        node
+ * @status          beta
  * @private
  *
  * This class represent the base for every interface renderers.

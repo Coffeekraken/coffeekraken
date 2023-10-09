@@ -1,1 +1,3 @@
 @s.init ($variant: dark);
+
+@s.classes();

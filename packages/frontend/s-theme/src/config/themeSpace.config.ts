@@ -17,16 +17,15 @@ export default function (api) {
         /**
          * @name            default
          * @namespace       config.themeSpace
-         * @type            String
-         * @default         1rem
+         * @type            Number
+         * @default         16
          *
-         * Specify the "default" space used for margins and paddings.
-         * MUST be an absolute css value like "1rem".
+         * Specify the "default" space used for margins and paddings in px.
          *
          @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        default: '1rem',
+        default: 16,
 
         /**
          * @name            0

@@ -159,6 +159,7 @@ export default function (api) {
                 'status',
                 'snippet',
                 'example',
+                'install',
                 'interface',
                 'async',
                 'static',

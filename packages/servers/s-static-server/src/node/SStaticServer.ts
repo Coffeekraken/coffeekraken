@@ -115,7 +115,6 @@ export default class SStaticServer extends __SClass {
                 '.htaccess',
             );
             if (__fs.existsSync(htaccessFilePath)) {
-                console.log('S', htaccessFilePath);
                 this._express.use(
                     __expressHtaccessMiddleware({
                         file: htaccessFilePath,

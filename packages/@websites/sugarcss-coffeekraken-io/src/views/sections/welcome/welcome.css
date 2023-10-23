@@ -106,7 +106,6 @@
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                /* mix-blend-mode: overlay; */
                 opacity: 0.4;
                 color: s.color(current, --darken 40);
                 transform-origin: 0 0;

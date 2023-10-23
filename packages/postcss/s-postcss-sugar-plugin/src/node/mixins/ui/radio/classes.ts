@@ -1,6 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
-import __faker from 'faker';
 
 /**
  * @name          classes
@@ -9,7 +8,7 @@ import __faker from 'faker';
  * @type               PostcssMixin
  * @interface     ./classes          interface
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * Generate the radio classes
  *
@@ -88,7 +87,7 @@ export default function ({
         * @type               Styleguide
         * @menu           Styleguide / Forms        /styleguide/forms/radio
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to display nice radio in your forms
         * 
@@ -120,7 +119,7 @@ export default function ({
             .map((lnf) => {
                 return ` * @example        html       ${lnf} lnf
             *   <label class="s-mbe:30 s-label">
-            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+            *     <span>John Doe</span>
             *     <input type="radio" checked class="s-radio" name="radio-lnf-${lnf}" value="hello 1" checked />
             *   </label>
             *   <label class="s-mbe:30 s-label">
@@ -133,29 +132,29 @@ export default function ({
         *
         * @example        html          Shapes
         *   <label class="s-mbe:30 s-label">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     <span>John Doe</span>
         *     <input type="radio" checked class="s-radio s-shape:default" name="radio-style-color" value="hello 1" checked />
         * </label>
         * <label class="s-mbe:30 s-label">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     <span>John Doe</span>
         *     <input type="radio" checked class="s-radio s-shape:square" name="radio-style-color" value="hello 1" checked />
         * </label>
         * <label class="s-mbe:30 s-label">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     <span>John Doe</span>
         *     <input type="radio" checked class="s-radio s-shape:pill" name="radio-style-color" value="hello 1" checked />
         * </label>
         * 
         * @example        html          Colors (none-exhaustive)
         *   <label class="s-mbe:30 s-label">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     <span>John Doe</span>
         *     <input type="radio" checked class="s-radio" name="radio-style-color" value="hello 1" checked />
         *   </label>
         *   <label class="s-mbe:30 s-label">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     <span>John Doe</span>
         *     <input type="radio" class="s-radio s-color:accent" name="radio-style-color" value="hello 2" />
         *   </label>
         *   <label class="s-mbe:30 s-label">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     <span>John Doe</span>
         *     <input type="radio" class="s-radio s-color:complementary" name="radio-style-color" value="hello 3" />
         *   </label>
         *   <label class="s-mbe:30 s-label">
@@ -166,26 +165,26 @@ export default function ({
         * @example        html          RTL
         * <div dir="rtl">
         *   <label class="s-mbe:30 s-label">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     <span>John Doe</span>
         *     <input type="radio" checked class="s-radio s-color:accent" name="radio-style-ltr" value="hello 1" checked />
         *   </label>
         * </div>
         * 
         * @example        html          Scales
         *   <label class="s-mbe:30 s-label s-scale:07">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     <span>John Doe</span>
         *     <input type="radio" checked class="s-radio s-color:accent" name="radio-style-scale" value="hello 1" checked />
         *   </label>
         *   <label class="s-mbe:30 s-label">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     <span>John Doe</span>
         *     <input type="radio" class="s-radio s-color:accent" name="radio-style-scale" value="hello 2" />
         *   </label>
-        *   <label class="s-mbe:30 s-label s-scale:13">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *   <label class="s-mbe:30 s-label s-scale:20">
+        *     <span>John Doe</span>
         *     <input type="radio" class="s-radio s-color:accent" name="radio-style-scale" value="hello 3" />
         *   </label>
-        *   <label class="s-mbe:30 s-label s-scale:16">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *   <label class="s-mbe:30 s-label s-scale:30">
+        *     <span>John Doe</span>
         *     <input type="radio" class="s-radio s-color:accent" name="radio-style-scale" value="hello 3" />
         *   </label>
         * 

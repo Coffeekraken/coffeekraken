@@ -17,11 +17,10 @@ export default function (api) {
         /**
          * @name            default
          * @namespace       config.themeMargin
-         * @type            String
+         * @type            Number
          * @default         theme.space.default
          *
-         * Specify the "default" space used for margins.
-         * MUST be an absolute css value like "3rem", etc...
+         * Specify the "default" space used for margins in px
          *
          @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

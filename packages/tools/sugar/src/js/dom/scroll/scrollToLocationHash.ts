@@ -55,7 +55,10 @@ export default function __scrollToLocationHash(
     if (!hash) return;
 
     // try to get the hash target in the page
-    const targetElm = document.querySelector(hash);
+    let targetElm;
+    try {
+        targetElm = document.querySelector(hash);
+    } catch (e) {}
 
     // if no target found, do nothing
     if (!targetElm) return;

@@ -10,7 +10,7 @@ import __faker from 'faker';
  * @type               PostcssMixin
  * @interface     ./classes          interface
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * Generate the input classes
  *
@@ -87,7 +87,7 @@ export default function ({
         * @type               Styleguide
         * @menu           Styleguide / Forms        /styleguide/forms/text-input
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to apply some lnfs to your text input
         * 
@@ -135,24 +135,20 @@ export default function ({
             })
             .join('\n')}
         *
-        ${__keysFirst(finalParams.lnfs, ['default'])
-            .map((lnf) => {
-                return ` * @example        html       Shapes
-            *   <label class="s-label:responsive s-mbe:30">
-            *       <span>${__faker.name.findName()}</span>
-            *       <input type="text" placeholder="Type something!" class="s-input\:${lnf} s-shape:default s-width:40" />
-            *  </label>
-            *   <label class="s-label:responsive s-mbe:30">
-            *       <span>${__faker.name.findName()}</span>
-            *       <input type="text" placeholder="Type something!" class="s-input\:${lnf} s-shape:square s-width:40" />
-            *  </label>
-            * <label class="s-label:responsive s-mbe:30">
-            *       <span>${__faker.name.findName()}</span>
-            *       <input type="text" placeholder="Type something!" class="s-input\:${lnf} s-shape:pill s-width:40" />
-            *  </label>
-            * `;
-            })
-            .join('\n')}
+        * @example        html       Shapes
+        *   <label class="s-label:responsive s-mbe:30">
+        *       <span>${__faker.name.findName()}</span>
+        *       <input type="text" placeholder="Type something!" class="s-input s-shape:default s-width:40" />
+        *  </label>
+        *   <label class="s-label:responsive s-mbe:30">
+        *       <span>${__faker.name.findName()}</span>
+        *       <input type="text" placeholder="Type something!" class="s-input s-shape:square s-width:40" />
+        *  </label>
+        * <label class="s-label:responsive s-mbe:30">
+        *       <span>${__faker.name.findName()}</span>
+        *       <input type="text" placeholder="Type something!" class="s-input s-shape:pill s-width:40" />
+        *  </label>
+        * 
         *
         * @example        html       Colors (non-exhaustive)
         ${['main', 'accent', 'complementary', 'error']

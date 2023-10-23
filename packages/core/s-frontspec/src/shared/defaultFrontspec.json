@@ -1,24 +1,24 @@
-export default {
+{
     media: {
         defaultAction: '<=',
         defaultMedia: 'desktop',
         queries: {
             wide: {
-                minWidth: 2048,
-                maxWidth: null,
+                "minWidth": 2048,
+                "maxWidth": null,
             },
-            desktop: {
-                minWidth: 1280,
-                maxWidth: 2047,
+            "desktop": {
+                "minWidth": 1280,
+                "maxWidth": 2047,
             },
-            tablet: {
-                minWidth: 640,
-                maxWidth: 1279,
+            "tablet": {
+                "minWidth": 640,
+                "maxWidth": 1279,
             },
-            mobile: {
-                minWidth: 0,
-                maxWidth: 639,
-            },
-        },
-    },
-};
+            "mobile": {
+                "minWidth": 0,
+                "maxWidth": 639,
+            }
+        }
+    }
+}

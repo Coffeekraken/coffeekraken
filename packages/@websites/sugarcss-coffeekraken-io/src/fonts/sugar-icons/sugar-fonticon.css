@@ -2,9 +2,9 @@
 font-display: swap;
 
     font-family: "sugar-fonticon";
-    src: url("/dist/fonts/sugar-icons/sugar-fonticon.eot?1c9d40ead662e943ad53f20c4aceb30e#iefix") format("embedded-opentype"),
-url("/dist/fonts/sugar-icons/sugar-fonticon.woff2?1c9d40ead662e943ad53f20c4aceb30e") format("woff2"),
-url("/dist/fonts/sugar-icons/sugar-fonticon.woff?1c9d40ead662e943ad53f20c4aceb30e") format("woff");
+    src: url("/dist/fonts/sugar-icons/sugar-fonticon.eot?7dcdb853deffe57fffe0a50fab66613e#iefix") format("embedded-opentype"),
+url("/dist/fonts/sugar-icons/sugar-fonticon.woff2?7dcdb853deffe57fffe0a50fab66613e") format("woff2"),
+url("/dist/fonts/sugar-icons/sugar-fonticon.woff?7dcdb853deffe57fffe0a50fab66613e") format("woff");
 }
 
 .s-icon-logo-coffeekraken-sugar:before,.s-icon-logo-opensource:before,.s-icon-logo-postcss:before,.s-icon-ui-menu-grid-solid:before {

@@ -43,7 +43,10 @@
         "filehound": "^1.17.6",
         "glob": "^7.2.3",
         "known-css-properties": "^0.28.0",
-        "postcss": "^8.4.14"
+        "oslllo-svg-fixer": "^3.0.0",
+        "postcss": "^8.4.14",
+        "svg-path-bounds": "^1.0.2",
+        "svg-path-commander": "^2.0.8"
     },
     "main": "dist/pkg/cjs/node/exports.js",
     "module": "dist/pkg/esm/node/exports.js",

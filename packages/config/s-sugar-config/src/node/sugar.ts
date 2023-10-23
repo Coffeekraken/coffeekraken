@@ -272,11 +272,6 @@ export default class SSugarConfig extends __SClass {
 
                 // resolve ready promise
                 setTimeout(() => {
-                    console.log(
-                        'III',
-                        this._readyPromiseResolve[finalSettings.id],
-                        finalSettings.id,
-                    );
                     this._readyPromiseResolve[finalSettings.id]?.();
                 });
             },
@@ -492,8 +487,6 @@ export default class SSugarConfig extends __SClass {
         const sugarJson = new __SSugarJson();
 
         if (!this._rootSugarJson) {
-            console.log('PACKAGE', __packageRootDir, process.pid, process.ppid);
-
             const rootSugarJsonPath = `${__packageRootDir()}/sugar.json`;
             if (__fs.existsSync(rootSugarJsonPath)) {
                 const json = __readJsonSync(rootSugarJsonPath);
@@ -796,5 +789,3 @@ export default class SSugarConfig extends __SClass {
         return res;
     }
 }
-
-SSugarConfig.load();

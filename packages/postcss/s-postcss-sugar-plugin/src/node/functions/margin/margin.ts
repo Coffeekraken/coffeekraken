@@ -84,7 +84,7 @@ export default function ({
             }
             return `${s}`;
         } else {
-            return `calc(s.theme(margin.default, ${finalParams.scalable}) * ${s})`;
+            return `calc(s.theme(margin.default, ${finalParams.scalable}) * ${s} * 1px)`;
         }
     });
 

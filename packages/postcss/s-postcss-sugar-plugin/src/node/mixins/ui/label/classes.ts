@@ -8,7 +8,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @type               PostcssMixin
  * @interface     ./classes          interface
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * Generate the label classes
  *
@@ -87,7 +87,7 @@ export default function ({
         * @type               Styleguide
         * @menu           Styleguide / Forms        /styleguide/forms/labels
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to structure forms using labels.
         * 
@@ -105,12 +105,12 @@ export default function ({
         *
         ${finalParams.lnfs
             .map((lnf) => {
-                return ` * @cssClass     s-label:responsive${
+                return ` * @cssClass     s-label${
                     lnf === finalParams.defaultLnf ? '' : `:${lnf}`
                 }           Apply the ${lnf} label lnf`;
             })
             .join('\n')}
-        * @cssClass         s-label:inline          Make sure the input and label stay inline even on mobile. Usefull for checkbox and radio for example.
+        * @cssClass                 s-label:responsive           Make the label responsive
         * 
         ${finalParams.lnfs
             .map((lnf) => {
@@ -120,31 +120,25 @@ export default function ({
                 lnf === finalParams.defaultLnf ? '' : `:${lnf}`
             }">
             *     <span>John Doe</span>
-            *     <input type="text" class="s-input" placeholder="Type something!" />
+            *     <input type="text" class="s-input s-width:60" placeholder="Type something!" />
             *   </label>
             *   <label class="s-label:responsive${
                 lnf === finalParams.defaultLnf ? '' : `:${lnf}`
             }">
             *     <span>John Doe</span>
-            *     <textarea class="s-input" placeholder="Type something!" rows="3"></textarea>
+            *     <textarea class="s-input s-width:60" placeholder="Type something!" rows="3"></textarea>
             *   </label>
             *   <label class=" s-label:responsive${
                 lnf === finalParams.defaultLnf ? '' : `:${lnf}`
             }">
-            *     <span>I'm disabled</span>
-            *     <input type="text" disabled class="s-input" placeholder="Type something!" />
-            *   </label>
-            *   <label dir="rtl" class="s-label:responsive${
-                lnf === finalParams.defaultLnf ? '' : `:${lnf}`
-            }">
             *     <span>Support RTL</span>
-            *     <input type="text" class="s-input" placeholder="Type something!" />
+            *     <input type="text" class="s-input s-width:60" placeholder="Type something!" />
             *   </label>
             *   <label class="s-label:responsive${
                 lnf === finalParams.defaultLnf ? '' : `:${lnf}`
             } s-color:accent">
             *     <span>With the accent color</span>
-            *     <input type="text" class="s-input" placeholder="Type something!" />
+            *     <input type="text" class="s-input s-width:60" placeholder="Type something!" />
             *   </label>
             * </div>
             * `;
@@ -232,12 +226,9 @@ export default function ({
         `
         .s-label-responsive:not(.s-label-float) {
             text-align: initial;
-            
             display: flex;
             
             > * {
-                width: auto;
-                flex-grow: 1;
                 flex-shrink: 0;
             }
 
@@ -245,7 +236,7 @@ export default function ({
                 @s.ui.label($lnf: block, $scope: bare);
 
                 > * {
-                    width: 100%;
+                    width: 100% !important;
                 }
             }
         }

@@ -20,166 +20,59 @@
 @s.padding.classes;
 
 @s.ui.gauge.classes;
+@s.ui.avatar.classes;
+@s.ui.backdrop.classes;
+@s.ui.blockquote.classes;
+@s.ui.checkbox.classes;
+@s.ui.fstree.classes;
+@s.ui.input.classes;
+@s.ui.inputcontainer.classes;
+@s.ui.label.classes;
+@s.ui.list.classes;
+@s.ui.loader.classes;
+@s.ui.media.classes;
+@s.ui.radio.classes;
+@s.ui.range.classes;
+@s.ui.select.classes;
+@s.ui.switch.classes;
+@s.ui.table.classes;
+@s.ui.toggle.classes;
 
-/* chunked ui's */
-@s.chunk 'avatar' {
-    @s.ui.avatar.classes;
-}
-@s.chunk 'backdrop' {
-    @s.ui.backdrop.classes;
-}
-@s.chunk 'blockquote' {
-    @s.ui.blockquote.classes;
-}
-@s.chunk 'checkbox' {
-    @s.ui.checkbox.classes;
-}
-@s.chunk 'fsTree' {
-    @s.ui.fstree.classes;
-}
-@s.chunk 'input' {
-    @s.ui.input.classes;
-}
-@s.chunk 'inputContainer' {
-    @s.ui.inputcontainer.classes;
-}
-@s.chunk 'label' {
-    @s.ui.label.classes;
-}
-@s.chunk 'list' {
-    @s.ui.list.classes;
-}
-@s.chunk 'loader' {
-    @s.ui.loader.classes;
-}
-@s.chunk 'media' {
-    @s.ui.media.classes;
-}
-@s.chunk 'radio' {
-    @s.ui.radio.classes;
-}
-@s.chunk 'range' {
-    @s.ui.range.classes;
-}
-@s.chunk 'select' {
-    @s.ui.select.classes;
-}
-@s.chunk 'switch' {
-    @s.ui.switch.classes;
-}
-@s.chunk 'table' {
-    @s.ui.table.classes;
-}
-@s.chunk 'toggle' {
-    @s.ui.toggle.classes;
-}
-
-/* chunked helpers */
-@s.chunk 'gradient' {
-    @s.gradient.classes;
-}
-@s.chunk 'grid' {
-    @s.grid.classes;
-}
-@s.chunk 'group' {
-    @s.group.classes;
-}
-@s.chunk 'hide' {
-    @s.hide.classes;
-}
-@s.chunk 'clearfix' {
-    @s.clearfix.classes;
-}
-@s.chunk 'cursor' {
-    @s.cursor.classes;
-}
-@s.chunk 'link' {
-    @s.link.classes;
-}
-@s.chunk 'gap' {
-    @s.gap.classes;
-}
-@s.chunk 'text' {
-    @s.text.classes;
-}
-@s.chunk 'depth' {
-    @s.depth.classes;
-}
-@s.chunk 'flex' {
-    @s.flex.classes;
-}
-@s.chunk 'fit' {
-    @s.fit.classes;
-}
-@s.chunk 'float' {
-    @s.float.classes;
-}
-@s.chunk 'font' {
-    @s.font.classes;
-}
-@s.chunk 'ratio' {
-    @s.ratio.classes;
-}
-@s.chunk 'scale' {
-    @s.scale.classes;
-}
-@s.chunk 'border' {
-    @s.border.classes;
-}
-@s.chunk 'display' {
-    @s.display.classes;
-}
-@s.chunk 'overflow' {
-    @s.overflow.classes;
-}
-@s.chunk 'position' {
-    @s.position.classes;
-}
-@s.chunk 'pointer' {
-    @s.pointer.classes;
-}
-@s.chunk 'transition' {
-    @s.transition.classes;
-}
-@s.chunk 'offsize' {
-    @s.offsize.classes;
-}
-@s.chunk 'opacity' {
-    @s.opacity.classes;
-}
-@s.chunk 'order' {
-    @s.order.classes;
-}
-@s.chunk 'spacing' {
-    @s.spacing.classes;
-}
-@s.chunk 'until' {
-    @s.until.classes;
-}
-@s.chunk 'when' {
-    @s.when.classes;
-}
-@s.chunk 'userSelect' {
-    @s.userselect.classes;
-}
-@s.chunk 'visibility' {
-    @s.visibility.classes;
-}
-@s.chunk 'visually' {
-    @s.visually.classes;
-}
-@s.chunk 'truncate' {
-    @s.truncate.classes;
-}
-@s.chunk 'shape' {
-    @s.shape.classes;
-}
-@s.chunk 'width' {
-    @s.width.classes;
-}
-@s.chunk 'whiteSpace' {
-    @s.whitespace.classes;
-}
+@s.gradient.classes;
+@s.grid.classes;
+@s.group.classes;
+@s.hide.classes;
+@s.clearfix.classes;
+@s.cursor.classes;
+@s.link.classes;
+@s.gap.classes;
+@s.text.classes;
+@s.depth.classes;
+@s.flex.classes;
+@s.fit.classes;
+@s.float.classes;
+@s.font.classes;
+@s.ratio.classes;
+@s.scale.classes;
+@s.border.classes;
+@s.display.classes;
+@s.overflow.classes;
+@s.position.classes;
+@s.pointer.classes;
+@s.transition.classes;
+@s.offsize.classes;
+@s.opacity.classes;
+@s.order.classes;
+@s.spacing.classes;
+@s.until.classes;
+@s.when.classes;
+@s.userselect.classes;
+@s.visibility.classes;
+@s.visually.classes;
+@s.truncate.classes;
+@s.shape.classes;
+@s.width.classes;
+@s.whitespace.classes;
 
 /* UI's */
 @s.ui.codeexample.classes;

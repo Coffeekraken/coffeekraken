@@ -267,7 +267,127 @@ function default_1(api) {
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         '20': 2,
+        /**
+         * @name                21
+         * @namespace           config.themeScale
+         * @type                Number
+         * @default             21
+         *
+         * Specify the 21 scale for your theme
+         *
+         * @since               2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        '21': 2.1,
+        /**
+         * @name                22
+         * @namespace           config.themeScale
+         * @type                Number
+         * @default             2.2
+         *
+         * Specify the 22 scale for your theme
+         *
+         * @since               2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        '22': 2.2,
+        /**
+         * @name                23
+         * @namespace           config.themeScale
+         * @type                Number
+         * @default             2.3
+         *
+         * Specify the 23 scale for your theme
+         *
+         * @since               2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        '23': 2.3,
+        /**
+         * @name                24
+         * @namespace           config.themeScale
+         * @type                Number
+         * @default             2.4
+         *
+         * Specify the 24 scale for your theme
+         *
+         * @since               2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        '24': 2.4,
+        /**
+         * @name                25
+         * @namespace           config.themeScale
+         * @type                Number
+         * @default             25
+         *
+         * Specify the 25 scale for your theme
+         *
+         * @since               2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        '25': 25,
+        /**
+         * @name                26
+         * @namespace           config.themeScale
+         * @type                Number
+         * @default             2.6
+         *
+         * Specify the 26 scale for your theme
+         *
+         * @since               2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        '26': 2.6,
+        /**
+         * @name                27
+         * @namespace           config.themeScale
+         * @type                Number
+         * @default             2.7
+         *
+         * Specify the 27 scale for your theme
+         *
+         * @since               2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        '27': 2.7,
+        /**
+         * @name                28
+         * @namespace           config.themeScale
+         * @type                Number
+         * @default             2.8
+         *
+         * Specify the 28 scale for your theme
+         *
+         * @since               2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        '28': 2.8,
+        /**
+         * @name                29
+         * @namespace           config.themeScale
+         * @type                Number
+         * @default             2.9
+         *
+         * Specify the 29 scale for your theme
+         *
+         * @since               2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        '29': 2.9,
+        /**
+         * @name                30
+         * @namespace           config.themeScale
+         * @type                Number
+         * @default             3
+         *
+         * Specify the 30 scale for your theme
+         *
+         * @since               2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        '30': 3,
     };
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQTs7Ozs7Ozs7Ozs7O0dBWUc7O0FBRUgsbUJBQXlCLEdBQUc7SUFDeEIsT0FBTztRQUNIOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsQ0FBQztRQUNWOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsQ0FBQztRQUNQOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsQ0FBQztLQUNWLENBQUM7QUFDTixDQUFDO0FBL1BELDRCQStQQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQTs7Ozs7Ozs7Ozs7O0dBWUc7O0FBRUgsbUJBQXlCLEdBQUc7SUFDeEIsT0FBTztRQUNIOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsQ0FBQztRQUNWOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsQ0FBQztRQUNQOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsQ0FBQztRQUNQOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsRUFBRTtRQUNSOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsR0FBRztRQUNUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsQ0FBQztLQUNWLENBQUM7QUFDTixDQUFDO0FBdlhELDRCQXVYQyJ9

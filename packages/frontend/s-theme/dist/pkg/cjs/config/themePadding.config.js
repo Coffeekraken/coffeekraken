@@ -18,10 +18,10 @@ function default_1(api) {
         /**
          * @name            default
          * @namespace       config.themePadding
-         * @type            String
+         * @type            Number
          * @default         theme.space.default
          *
-         * Specify the "default" space used for paddings
+         * Specify the "default" space used for paddings in px.
          *
          @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

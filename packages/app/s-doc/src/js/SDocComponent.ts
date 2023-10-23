@@ -92,6 +92,7 @@ export default class SDocComponent extends __SLitComponent {
     };
     _categories: any;
     _item: any;
+    _items: any = {};
     _searchValue: string;
 
     _$body: HTMLElement;
@@ -124,6 +125,16 @@ export default class SDocComponent extends __SLitComponent {
             ),
             categories = await request.json();
         this._categories = categories;
+
+        // listen for popstate
+        window.addEventListener('hashchange', (e) => {
+            // this._goTo(e.state);
+            const potentialItem =
+                this._items[document.location.hash.replace(/^#/, '')];
+            if (potentialItem) {
+                this._goTo(potentialItem);
+            }
+        });
 
         this.requestUpdate();
     }
@@ -161,6 +172,18 @@ export default class SDocComponent extends __SLitComponent {
             description: 'Search the documentation',
         }).on('press', (e) => {
             this._$searchInput?.focus();
+        });
+    }
+
+    /**
+     * Go to a specific doc item
+     */
+    async _goTo(itemObj: any): void {
+        this._loadItem(itemObj);
+        await __wait(100);
+        document.activeElement?.blur?.();
+        __scrollTo(this._$body, {
+            offset: 100,
         });
     }
 
@@ -228,10 +251,23 @@ export default class SDocComponent extends __SLitComponent {
             ),
             items = await request.json();
 
+        // save in global stack
+        this._items = {
+            ...this._items,
+            ...items,
+        };
+
+        const potentialItem =
+            items[document.location.hash?.replace?.(/^#/, '')];
+        if (potentialItem) {
+            this._goTo(potentialItem);
+        }
+
+        // save in category
         category.items = items;
 
         // load first item if needed
-        if (loadFirstItem) {
+        if (!potentialItem && loadFirstItem) {
             const firstItemId = Object.keys(items)[0];
             this._loadItem(items[firstItemId]);
         } else {
@@ -327,12 +363,8 @@ export default class SDocComponent extends __SLitComponent {
                                 tabindex="0"
                                 @pointerup=${async (e) => {
                                     e.stopPropagation();
-                                    this._loadItem(itemObj);
-                                    await __wait(100);
-                                    document.activeElement?.blur?.();
-                                    __scrollTo(this._$body, {
-                                        offset: 100,
-                                    });
+                                    document.location.hash = itemObj.id;
+                                    this._goTo(itemObj);
                                 }}
                             >
                                 <div>
@@ -442,7 +474,7 @@ export default class SDocComponent extends __SLitComponent {
 
     _renderItemConfig(configObj: any): any {
         return html`
-            <div class="${this.utils.cls('_config')}">
+            <div class="${this.utils.cls('_section _config')}">
                 <div class="${this.utils.cls('_config-metas')}">
                     <div class="${this.utils.cls('_config-name')}">
                         ${configObj.id.replace(/^.*\.config\./, '')}
@@ -461,7 +493,7 @@ export default class SDocComponent extends __SLitComponent {
 
     _renderItemCssClasses(itemObj: any): any {
         return html`
-            <div class="${this.utils.cls('_css-classes')}">
+            <div class="${this.utils.cls('_section _css-classes')}">
                 <h2
                     class="${this.utils.cls(
                         '_section-title _classes-title',
@@ -491,7 +523,7 @@ export default class SDocComponent extends __SLitComponent {
 
     _renderItemParams(itemObj: any): any {
         return html`
-            <div class="${this.utils.cls('_params')}">
+            <div class="${this.utils.cls('_section _params')}">
                 <h2 class="${this.utils.cls('_section-title', 's-mbe-30')}">
                     ${this.props.i18n.paramsTitle}
                 </h2>
@@ -522,6 +554,25 @@ export default class SDocComponent extends __SLitComponent {
                         </div>
                     `;
                 })}
+            </div>
+        `;
+    }
+
+    _renderItemInstall(itemObj: any): any {
+        if (!itemObj.install?.length) {
+            return '';
+        }
+        return html`
+            <div class="${this.utils.cls('_section _install')}">
+                <h2 class="${this.utils.cls('_section-title', 's-mbe-30')}">
+                    ${this.props.i18n.installTitle}
+                </h2>
+
+                <s-code-example bare=${this.props.bare}>
+                    <code language="${itemObj.install[0].language}">
+                        ${itemObj.install[0].code}
+                    </code>
+                </s-code-example>
             </div>
         `;
     }
@@ -616,6 +667,7 @@ export default class SDocComponent extends __SLitComponent {
                 css="${__camelCase(itemObj.namespace?.split?.('.').pop())}"
             >
                 ${this._renderItemMetas(itemObj)}
+                ${this._renderItemInstall(itemObj)}
                 ${this._renderItemExamples(itemObj)}
                 ${itemObj.param ? this._renderItemParams(itemObj) : ''}
                 ${itemObj.cssClasses ? this._renderItemCssClasses(itemObj) : ''}

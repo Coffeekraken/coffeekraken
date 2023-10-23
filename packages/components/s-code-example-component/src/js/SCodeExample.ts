@@ -326,6 +326,7 @@ export default class SCodeExample extends __SLitComponent {
                         ${(this.props.items ?? []).map(
                             (item) => html`
                                 <div
+                                    id="${item.id ?? item.language}"
                                     class="${this.utils.cls('_tab')} ${this
                                         .state.activeTabId === item.id
                                         ? 'active'

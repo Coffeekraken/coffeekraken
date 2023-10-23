@@ -37,6 +37,10 @@
         color: s.color(main, text) !important;
     }
 
+    i {
+        color: s.color(#fff);
+    }
+
     .s-tooltip {
         width: 400px;
         padding: s.padding(50);

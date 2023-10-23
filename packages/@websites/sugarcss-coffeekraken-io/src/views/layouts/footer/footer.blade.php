@@ -74,7 +74,7 @@
 
     </div>
 
-    <div class="_collab">
+    {{-- <div class="_collab">
 
         <div class="_bkg">
             @include('generic.logos.weWantYou')
@@ -100,6 +100,6 @@
 
         </div>
 
-    </div>
+    </div> --}}
 
 </footer>

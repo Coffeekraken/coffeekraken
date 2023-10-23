@@ -1,4 +1,3 @@
-import __SBench from '@coffeekraken/s-bench';
 import __SClass from '@coffeekraken/s-class';
 import { __unique } from '@coffeekraken/sugar/array';
 import { __dirname, __readJsonSync } from '@coffeekraken/sugar/fs';
@@ -112,10 +111,6 @@ export default class SSugarJson extends __SClass {
     async read(
         settings?: Partial<ISSugarJsonSettings>,
     ): Record<string, ISSugarJsonFile> | ISSugarJsonFile {
-        // const bench = new __SBench('SSugarJson.read', {
-        //     bubbles: false,
-        // });
-
         // const SSugarJsonSettingsInterface = await import('./interface/SSugarJsonSettingsInterface');
         const finalSettings = <ISSugarJsonSettings>{
             // ...SSugarJsonSettingsInterface.default.defaults(),
@@ -197,10 +192,6 @@ export default class SSugarJson extends __SClass {
             ...this.settings,
             ...(settings ?? {}),
         };
-
-        const bench = new __SBench('SSugarJson.search', {
-            bubbles: false,
-        });
 
         // get global node modules directory path
         const globalNodeModulesPath = __globalNodeModulesPath();
@@ -309,8 +300,6 @@ export default class SSugarJson extends __SClass {
             if (__fs.existsSync(packageJsonPath)) return true;
             return false;
         });
-
-        bench.end();
 
         const finalFiles = __unique(
             files

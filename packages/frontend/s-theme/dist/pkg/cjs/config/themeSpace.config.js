@@ -18,16 +18,15 @@ function default_1(api) {
         /**
          * @name            default
          * @namespace       config.themeSpace
-         * @type            String
-         * @default         1rem
+         * @type            Number
+         * @default         16
          *
-         * Specify the "default" space used for margins and paddings.
-         * MUST be an absolute css value like "1rem".
+         * Specify the "default" space used for margins and paddings in px.
          *
          @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        default: '1rem',
+        default: 16,
         /**
          * @name            0
          * @namespace       config.themeSpace
@@ -174,4 +173,4 @@ function default_1(api) {
     };
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQTs7Ozs7Ozs7Ozs7O0dBWUc7O0FBRUgsbUJBQXlCLEdBQUc7SUFDeEIsT0FBTztRQUNIOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsT0FBTyxFQUFFLE1BQU07UUFFZjs7Ozs7Ozs7Ozs7V0FXRztRQUNILENBQUMsRUFBRSxDQUFDO1FBRUo7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxFQUFFLEVBQUUsS0FBSztRQUVUOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsRUFBRSxFQUFFLElBQUk7UUFFUjs7Ozs7Ozs7Ozs7V0FXRztRQUNILEVBQUUsRUFBRSxHQUFHO1FBRVA7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxFQUFFLEVBQUUsQ0FBQztRQUVMOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsRUFBRSxFQUFFLEdBQUc7UUFFUDs7Ozs7Ozs7Ozs7V0FXRztRQUNILEVBQUUsRUFBRSxDQUFDO1FBRUw7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxFQUFFLEVBQUUsR0FBRztRQUVQOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsRUFBRSxFQUFFLEVBQUU7UUFFTjs7Ozs7Ozs7Ozs7V0FXRztRQUNILEVBQUUsRUFBRSxFQUFFO1FBRU47Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxHQUFHLEVBQUUsRUFBRTtLQUNWLENBQUM7QUFDTixDQUFDO0FBMUtELDRCQTBLQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQTs7Ozs7Ozs7Ozs7O0dBWUc7O0FBRUgsbUJBQXlCLEdBQUc7SUFDeEIsT0FBTztRQUNIOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsRUFBRTtRQUVYOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsQ0FBQyxFQUFFLENBQUM7UUFFSjs7Ozs7Ozs7Ozs7V0FXRztRQUNILEVBQUUsRUFBRSxLQUFLO1FBRVQ7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxFQUFFLEVBQUUsSUFBSTtRQUVSOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsRUFBRSxFQUFFLEdBQUc7UUFFUDs7Ozs7Ozs7Ozs7V0FXRztRQUNILEVBQUUsRUFBRSxDQUFDO1FBRUw7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxFQUFFLEVBQUUsR0FBRztRQUVQOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsRUFBRSxFQUFFLENBQUM7UUFFTDs7Ozs7Ozs7Ozs7V0FXRztRQUNILEVBQUUsRUFBRSxHQUFHO1FBRVA7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxFQUFFLEVBQUUsRUFBRTtRQUVOOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsRUFBRSxFQUFFLEVBQUU7UUFFTjs7Ozs7Ozs7Ozs7V0FXRztRQUNILEdBQUcsRUFBRSxFQUFFO0tBQ1YsQ0FBQztBQUNOLENBQUM7QUF6S0QsNEJBeUtDIn0=

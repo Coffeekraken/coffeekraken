@@ -8,7 +8,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @type          PostcssMixin
  * @interface       ./classes
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * Generate the checkbox classes
  *
@@ -87,7 +87,7 @@ export default function ({
         * @type               Styleguide
         * @menu           Styleguide / Forms        /styleguide/forms/checkbox
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to display nice checkbox in your forms
         * 
@@ -178,15 +178,15 @@ export default function ({
         * 
         * @example          html        Scales
         * <div class="s-flex:column s-gap:30">
-        *   <label class="s-label s-scale:07">
+        *   <label class="s-label">
         *     <span>John Doe</span>
         *     <input type="checkbox" checked class="s-checkbox" name="checkbox-style-ltr-1" value="hello 1" />
         *   </label>
-        *   <label class="s-label">
+        *   <label class="s-label s-scale:20">
         *     <span>John Doe</span>
         *     <input type="checkbox" class="s-checkbox" name="checkbox-style-ltr-2" value="hello 2" />
         *   </label>
-        *   <label class="s-label s-scale:13">
+        *   <label class="s-label s-scale:30">
         *     <span>John Doe</span>
         *     <input type="checkbox" class="s-checkbox" name="checkbox-style-ltr-3" value="hello 3" />
         *   </label>

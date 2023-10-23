@@ -17,15 +17,15 @@ export default function (api) {
         /**
          * @name          default
          * @namespace     config.themeSize
-         * @type          String
+         * @type          Number
          * @default       16px
          *
-         * Declare the font size "default"
+         * Declare the font size "default" in px.
          *
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        default: '16px',
+        default: 16,
 
         /**
          * @name          0

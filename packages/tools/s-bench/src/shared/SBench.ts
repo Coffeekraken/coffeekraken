@@ -2,13 +2,10 @@ import __SClass from '@coffeekraken/s-class';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __formatDuration, __utcTime } from '@coffeekraken/sugar/datetime';
 import { __isChildProcess } from '@coffeekraken/sugar/is';
-import { __hotkey } from '@coffeekraken/sugar/keyboard';
 import { __clamp } from '@coffeekraken/sugar/math';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import { __onProcessExit } from '@coffeekraken/sugar/process';
 import { __countLineChars } from '@coffeekraken/sugar/string';
 import __micromatch from 'micromatch';
-import __nodeIpc from 'node-ipc';
 
 // import __SBenchSettingsInterface from './interface/SBenchSettingsInterface.js';
 
@@ -350,70 +347,71 @@ export default class SBench extends __SClass {
         }
 
         // init ipc communication if needed
-        if (!this.constructor._ipc) {
-            this.constructor._ipc = new __nodeIpc.IPC();
-            this.constructor._ipc.config.id = `ipc-s-bench-${process.pid}`;
-            this.constructor._ipc.config.retry = 1500;
-            this.constructor._ipc.config.silent = true;
+        // if (!this.constructor._ipc) {
+        //     this.constructor._ipc = new __nodeIpc.IPC();
+        //     this.constructor._ipc.config.id = `ipc-s-bench-${process.pid}`;
+        //     this.constructor._ipc.config.retry = 1500;
+        //     this.constructor._ipc.config.silent = true;
+        //     this.constructor._ipc.config.logger = () => {};
 
-            if (__isChildProcess()) {
-                this.constructor._ipc.connectTo(
-                    `ipc-s-bench-${process.ppid}`,
-                    () => {
-                        // console.log('UPC ready', process.ppid);
-                        // start when IPC is ready
-                        this.start();
-                    },
-                );
-            } else {
-                // start our IPC server
-                this.constructor._ipc.serve(() => {
-                    this.constructor._ipc.server.on(
-                        'message',
-                        (data, socket) => {
-                            if (!this.constructor._benches[data.id]) {
-                                this.constructor._benches[data.id] = {
-                                    id: data.id,
-                                    benches: [],
-                                };
-                            }
-                            this.constructor._benches.push(data);
-                        },
-                    );
-                });
-                this.constructor._ipc.server.start();
+        //     if (__isChildProcess()) {
+        //         this.constructor._ipc.connectTo(
+        //             `ipc-s-bench-${process.ppid}`,
+        //             () => {
+        //                 // console.log('UPC ready', process.ppid);
+        //                 // start when IPC is ready
+        //                 this.start();
+        //             },
+        //         );
+        //     } else {
+        //         // start our IPC server
+        //         this.constructor._ipc.serve(() => {
+        //             this.constructor._ipc.server.on(
+        //                 'message',
+        //                 (data, socket) => {
+        //                     if (!this.constructor._benches[data.id]) {
+        //                         this.constructor._benches[data.id] = {
+        //                             id: data.id,
+        //                             benches: [],
+        //                         };
+        //                     }
+        //                     this.constructor._benches.push(data);
+        //                 },
+        //             );
+        //         });
+        //         this.constructor._ipc.server.start();
 
-                // log the stats at process exit
-                __onProcessExit(() => {
-                    this.constructor.stats(this.settings.filters);
-                });
+        //         // log the stats at process exit
+        //         __onProcessExit(() => {
+        //             this.constructor.stats(this.settings.filters);
+        //         });
 
-                // some usefull hotkeys
-                __hotkey('shift+c').on('press', () => {
-                    // reseting the current global stats
-                    console.log(
-                        `<yellow>[clear]</yellow> Clearing global gathered benches data...`,
-                    );
-                    this.constructor._benches = [];
-                });
-                __hotkey('shift+s').on('press', () => {
-                    // loging actual data
-                    this.constructor.stats(this.settings.filters);
-                });
-                __hotkey('shift+f').on('press', async () => {
-                    // loging actual data
-                    this.constructor.stats(this.settings.filters, {
-                        compact: true,
-                    });
-                });
+        //         // some usefull hotkeys
+        //         __hotkey('shift+c').on('press', () => {
+        //             // reseting the current global stats
+        //             console.log(
+        //                 `<yellow>[clear]</yellow> Clearing global gathered benches data...`,
+        //             );
+        //             this.constructor._benches = [];
+        //         });
+        //         __hotkey('shift+s').on('press', () => {
+        //             // loging actual data
+        //             this.constructor.stats(this.settings.filters);
+        //         });
+        //         __hotkey('shift+f').on('press', async () => {
+        //             // loging actual data
+        //             this.constructor.stats(this.settings.filters, {
+        //                 compact: true,
+        //             });
+        //         });
 
-                // start our bench
-                this.start();
-            }
-        } else {
-            // start bench directly
-            this.start();
-        }
+        //         // start our bench
+        //         this.start();
+        //     }
+        // } else {
+        // start bench directly
+        this.start();
+        // }
     }
 
     /**

@@ -107,6 +107,7 @@ export default class SScrollComponent extends __SLitComponent {
                     offsetX,
                     offsetY,
                 });
+                document.location.hash = '';
                 break;
             case 'bottom':
                 __scrollTo('bottom', {
@@ -115,6 +116,7 @@ export default class SScrollComponent extends __SLitComponent {
                     offsetX,
                     offsetY,
                 });
+                document.location.hash = '';
                 break;
             default:
                 // grab the element to scroll to

@@ -11,7 +11,7 @@
         "@coffeekraken/s-log": "^2.0.0-beta.1",
         "@coffeekraken/sugar": "^2.0.0-beta.1",
         "glob-to-regexp": "^0.4.1",
-        "node-ipc": "^10.0.0"
+        "node-ipc": "^11.1.0"
     },
     "main": "dist/pkg/cjs/js/exports.js",
     "module": "dist/pkg/esm/js/exports.js",

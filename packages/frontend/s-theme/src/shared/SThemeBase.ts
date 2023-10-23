@@ -92,7 +92,7 @@ export interface ISThemeDefaultStaticSettings {
 
 export interface ISThemeResolveColorSettings
     extends ISThemeDefaultStaticSettings {
-    return: 'value' | 'var';
+    return: 'value' | 'var' | 'object';
 }
 
 export interface ISThemeFontFamilyStack {
@@ -1708,9 +1708,7 @@ export default class SThemeBase extends __SEventEmitter {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     resolveFontSize(size: any): any {
-        const defaultSizeStr = this.get('font.size.default'),
-            defaultSizeUnit = defaultSizeStr.replace(/[0-9]+/gm, ''),
-            defaultSize = parseInt(defaultSizeStr);
+        const defaultSize = this.get('font.size.default');
 
         // try to get the padding with the pased
         const registeredValue = this.getSafe(`font.size.${size}`);
@@ -1719,10 +1717,10 @@ export default class SThemeBase extends __SEventEmitter {
         if (registeredValue !== undefined) {
             // int
             if (typeof registeredValue === 'number') {
-                return `${defaultSize * registeredValue}${defaultSizeUnit}`;
+                return `${defaultSize * registeredValue}px`;
             }
         } else if (typeof size === 'number') {
-            return `${defaultSize * size}${defaultSizeUnit}`;
+            return `${defaultSize * size}`;
         }
 
         // by default, return the passed size
@@ -1742,9 +1740,7 @@ export default class SThemeBase extends __SEventEmitter {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     resolvePadding(size: any): any {
-        const defaultSizeStr = this.get('padding.default'),
-            defaultSizeUnit = defaultSizeStr.replace(/[0-9]+/gm, ''),
-            defaultSize = parseInt(defaultSizeStr);
+        const defaultSize = this.get('padding.default');
 
         // try to get the padding with the pased
         const registeredValue = this.getSafe(`padding.${size}`);
@@ -1753,10 +1749,10 @@ export default class SThemeBase extends __SEventEmitter {
         if (registeredValue !== undefined) {
             // int
             if (typeof registeredValue === 'number') {
-                return `${defaultSize * registeredValue}${defaultSizeUnit}`;
+                return `${defaultSize * registeredValue}px`;
             }
         } else if (typeof size === 'number') {
-            return `${defaultSize * size}${defaultSizeUnit}`;
+            return `${defaultSize * size}px`;
         }
 
         // by default, return the passed size
@@ -1776,9 +1772,7 @@ export default class SThemeBase extends __SEventEmitter {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     resolveMargin(size: any): any {
-        const defaultSizeStr = this.get('margin.default'),
-            defaultSizeUnit = defaultSizeStr.replace(/[0-9]+/gm, ''),
-            defaultSize = parseInt(defaultSizeStr);
+        const defaultSize = this.get('margin.default');
 
         // try to get the padding with the pased
         const registeredValue = this.getSafe(`margin.${size}`);
@@ -1787,10 +1781,10 @@ export default class SThemeBase extends __SEventEmitter {
         if (registeredValue !== undefined) {
             // int
             if (typeof registeredValue === 'number') {
-                return `${defaultSize * registeredValue}${defaultSizeUnit}`;
+                return `${defaultSize * registeredValue}px`;
             }
         } else if (typeof size === 'number') {
-            return `${defaultSize * size}${defaultSizeUnit}`;
+            return `${defaultSize * size}px`;
         }
 
         // by default, return the passed size
@@ -1810,9 +1804,7 @@ export default class SThemeBase extends __SEventEmitter {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     resolveBorderRadius(size: any): any {
-        const defaultSizeStr = this.get('border.radius.default'),
-            defaultSizeUnit = defaultSizeStr.replace(/[0-9]+/gm, ''),
-            defaultSize = parseInt(defaultSizeStr);
+        const defaultSize = this.get('border.radius.default');
 
         // try to get the padding with the pased
         const registeredValue = this.getSafe(`border.radius.${size}`);
@@ -1821,10 +1813,10 @@ export default class SThemeBase extends __SEventEmitter {
         if (registeredValue !== undefined) {
             // int
             if (typeof registeredValue === 'number') {
-                return `${defaultSize * registeredValue}${defaultSizeUnit}`;
+                return `${defaultSize * registeredValue}px`;
             }
         } else if (typeof size === 'number') {
-            return `${defaultSize * size}${defaultSizeUnit}`;
+            return `${defaultSize * size}px`;
         }
 
         // by default, return the passed size
@@ -1844,9 +1836,7 @@ export default class SThemeBase extends __SEventEmitter {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     resolveBorderWidth(size: any): any {
-        const defaultSizeStr = this.get('border.width.default'),
-            defaultSizeUnit = defaultSizeStr.replace(/[0-9]+/gm, ''),
-            defaultSize = parseInt(defaultSizeStr);
+        const defaultSize = this.get('border.width.default');
 
         // try to get the padding with the pased
         const registeredValue = this.getSafe(`border.width.${size}`);
@@ -1855,10 +1845,10 @@ export default class SThemeBase extends __SEventEmitter {
         if (registeredValue !== undefined) {
             // int
             if (typeof registeredValue === 'number') {
-                return `${defaultSize * registeredValue}${defaultSizeUnit}`;
+                return `${defaultSize * registeredValue}px`;
             }
         } else if (typeof size === 'number') {
-            return `${defaultSize * size}${defaultSizeUnit}`;
+            return `${defaultSize * size}px`;
         }
 
         // by default, return the passed size
@@ -1916,128 +1906,126 @@ export default class SThemeBase extends __SEventEmitter {
 
         let finalValue;
 
+        let colorInstance;
+
         // is is a color, return it
         if (__isColor(colorName)) {
-            const color = new __SColor(colorName);
+            colorInstance = new __SColor(colorName);
             if (colorModifier) {
-                color.apply(colorModifier);
+                colorInstance.apply(colorModifier);
             }
-            return color.toString();
         } else {
-            // check what we want back
-            // it can be either a "var" or a "value"
-            switch (finalSettings.return) {
-                case 'var':
-                    const colorVar = `--s-color-${colorName}`;
+            const colorValue = this.getSafe(`color.${color}`) ?? color;
 
-                    let shadeNameVar = `s-color-${colorName}`;
-                    if (shadeName) {
-                        shadeNameVar += `-${__dashCase(shadeName)}`;
-                    }
-                    shadeNameVar =
-                        '--' + shadeNameVar.replace(/-{2,999}/gm, '-');
-
-                    finalValue = colorVar;
-
-                    const hParts = [
-                        `var(${colorVar}-h, 0)`,
-                        `var(${shadeNameVar}-spin ,${
-                            modifierParams.spin ?? 0
-                        })`,
-                    ];
-
-                    const sParts = [`var(${colorVar}-s, 0)`];
-                    if (shadeName) {
-                        sParts.push(
-                            `var(${shadeNameVar}-saturation-offset, 0)`,
-                        );
-                    }
-                    let saturationOffset = modifierParams.saturate
-                        ? modifierParams.saturate
-                        : modifierParams.desaturate
-                        ? modifierParams.desaturate * -1
-                        : undefined;
-                    if (saturationOffset !== undefined) {
-                        sParts.push(saturationOffset);
-                    }
-
-                    const lParts = [`var(${colorVar}-l, 0)`];
-                    if (shadeName) {
-                        lParts.push(`var(${shadeNameVar}-lightness-offset, 0)`);
-                    }
-                    let lightnessOffset = modifierParams.lighten
-                        ? modifierParams.lighten
-                        : modifierParams.darken
-                        ? modifierParams.darken * -1
-                        : undefined;
-                    if (lightnessOffset !== undefined) {
-                        lParts.push(lightnessOffset);
-                    }
-
-                    let alpha =
-                        modifierParams.alpha !== undefined
-                            ? modifierParams.alpha
-                            : 1;
-
-                    finalValue = `hsla(
-                    calc(
-                        ${hParts.join(' + ')}
-                    ),
-                    calc(
-                        (${sParts.join(' + ')}) * 1%
-                    ),
-                    calc(
-                        (${lParts.join(' + ')}) * 1%
-                    ),
-                    ${
-                        modifierParams.alpha !== undefined
-                            ? alpha
-                            : `var(${shadeNameVar}-a, 1)`
-                    }
-                    )`;
-
-                    finalValue = finalValue
-                        .replace(/(\n|\s{2,99999999})/gm, '')
-                        .replace(/\t/gm, ' ')
-                        .replace(/\s?\+\s?/gm, ' + ')
-                        .replace(/\)\-\s?/gm, ') - ')
-                        .replace(/\s?\*\s?/gm, ' * ')
-                        .replace(/\s?\/\s?/gm, ' / ');
-                    break;
-                case 'value':
-                default:
-                    const colorValue = this.getSafe(`color.${color}`) ?? color;
-
-                    // nothing to apply on the color
-                    if (!shade && !modifier) {
-                        finalValue = colorValue;
-                    }
-
-                    // init a new SColor instance
-                    let colorInstance = new __SColor(colorValue);
-
-                    if (shade) {
-                        let finalSchema = shade;
-                        if (typeof shade === 'string') {
-                            finalSchema = this.getSafe(
-                                `shades.${shade}.color.${color}`,
-                            );
-                            if (!finalSchema) {
-                                finalSchema = this.getSafe(`shades.${shade}`);
-                            }
-                        }
-                        if (finalSchema) {
-                            colorInstance = colorInstance.apply(finalSchema);
-                        }
-                    }
-                    if (modifier) {
-                        colorInstance = colorInstance.apply(modifier);
-                    }
-
-                    finalValue = colorInstance.toString();
-
-                    break;
+            // nothing to apply on the color
+            if (!shade && !modifier) {
+                finalValue = colorValue;
             }
+
+            // init a new SColor instance
+            colorInstance = new __SColor(colorValue);
+
+            if (shade) {
+                let finalSchema = shade;
+                if (typeof shade === 'string') {
+                    finalSchema = this.getSafe(
+                        `shades.${shade}.color.${color}`,
+                    );
+                    if (!finalSchema) {
+                        finalSchema = this.getSafe(`shades.${shade}`);
+                    }
+                }
+                if (finalSchema) {
+                    colorInstance = colorInstance.apply(finalSchema);
+                }
+            }
+            if (modifier) {
+                colorInstance = colorInstance.apply(modifier);
+            }
+        }
+
+        // check what we want back
+        // it can be either a "var" or a "value"
+        switch (finalSettings.return) {
+            case 'object':
+                finalValue = colorInstance.toObject();
+                break;
+            case 'var':
+                const colorVar = `--s-color-${colorName}`;
+
+                let shadeNameVar = `s-color-${colorName}`;
+                if (shadeName) {
+                    shadeNameVar += `-${__dashCase(shadeName)}`;
+                }
+                shadeNameVar = '--' + shadeNameVar.replace(/-{2,999}/gm, '-');
+
+                finalValue = colorVar;
+
+                const hParts = [
+                    `var(${colorVar}-h, 0)`,
+                    `var(${shadeNameVar}-spin ,${modifierParams.spin ?? 0})`,
+                ];
+
+                const sParts = [`var(${colorVar}-s, 0)`];
+                if (shadeName) {
+                    sParts.push(`var(${shadeNameVar}-saturation-offset, 0)`);
+                }
+                let saturationOffset = modifierParams.saturate
+                    ? modifierParams.saturate
+                    : modifierParams.desaturate
+                    ? modifierParams.desaturate * -1
+                    : undefined;
+                if (saturationOffset !== undefined) {
+                    sParts.push(saturationOffset);
+                }
+
+                const lParts = [`var(${colorVar}-l, 0)`];
+                if (shadeName) {
+                    lParts.push(`var(${shadeNameVar}-lightness-offset, 0)`);
+                }
+                let lightnessOffset = modifierParams.lighten
+                    ? modifierParams.lighten
+                    : modifierParams.darken
+                    ? modifierParams.darken * -1
+                    : undefined;
+                if (lightnessOffset !== undefined) {
+                    lParts.push(lightnessOffset);
+                }
+
+                let alpha =
+                    modifierParams.alpha !== undefined
+                        ? modifierParams.alpha
+                        : 1;
+
+                finalValue = `hsla(
+                calc(
+                    ${hParts.join(' + ')}
+                ),
+                calc(
+                    (${sParts.join(' + ')}) * 1%
+                ),
+                calc(
+                    (${lParts.join(' + ')}) * 1%
+                ),
+                ${
+                    modifierParams.alpha !== undefined
+                        ? alpha
+                        : `var(${shadeNameVar}-a, 1)`
+                }
+                )`;
+
+                finalValue = finalValue
+                    .replace(/(\n|\s{2,99999999})/gm, '')
+                    .replace(/\t/gm, ' ')
+                    .replace(/\s?\+\s?/gm, ' + ')
+                    .replace(/\)\-\s?/gm, ') - ')
+                    .replace(/\s?\*\s?/gm, ' * ')
+                    .replace(/\s?\/\s?/gm, ' / ');
+                break;
+            case 'value':
+            default:
+                finalValue = colorInstance.toString();
+                break;
         }
 
         return finalValue;

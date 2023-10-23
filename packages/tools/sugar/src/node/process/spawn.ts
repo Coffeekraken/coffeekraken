@@ -47,13 +47,10 @@ import __onProcessExit from './onProcessExit.js';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export interface ISpawnSettings extends SpawnOptions {
-    pipeEvents: boolean;
     returnValueOnly: boolean;
     silent: boolean;
     [key: string]: any;
 }
-
-const _nativeLog = console.log;
 
 export interface ISpawn {
     (
@@ -72,7 +69,6 @@ export default function spawn(
     const promise = new __SPromise(async ({ resolve, reject, emit, pipe }) => {
         settings = __deepMerge(
             {
-                pipeEvents: true,
                 returnValueOnly: false,
             },
             settings ?? {},

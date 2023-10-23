@@ -14,7 +14,7 @@ import {
 } from '@coffeekraken/sugar/path';
 import { generateFonts } from 'fantasticon';
 import __fs from 'fs';
-// import __svgFixer from 'oslllo-svg-fixer';
+import __svgFixer from 'oslllo-svg-fixer';
 import __path from 'path';
 import __postcss from 'postcss';
 
@@ -91,32 +91,32 @@ export default async function ({ root, sharedData, settings }) {
     // use cache only if the target is  "vite"
     const hashCacheFilePath = `${__packageCacheDir()}/postcss/iconsFolderHash.txt`;
 
-    // if (settings.target === 'vite') {
-    // handle cached hash
-    if (__fs.existsSync(hashCacheFilePath)) {
-        const cachedFolderHash = __fs
-            .readFileSync(hashCacheFilePath, 'utf8')
-            .toString();
-        if (cachedFolderHash === folderHash) {
-            // same icons, nothing to generate again
-            if (__SEnv.is('verbose')) {
-                console.log(
-                    `<green>[fonticons]</green> Fonticons are up to date`,
-                );
-            }
+    // // if (settings.target === 'vite') {
+    // // handle cached hash
+    // if (__fs.existsSync(hashCacheFilePath)) {
+    //     const cachedFolderHash = __fs
+    //         .readFileSync(hashCacheFilePath, 'utf8')
+    //         .toString();
+    //     if (cachedFolderHash === folderHash) {
+    //         // same icons, nothing to generate again
+    //         if (__SEnv.is('verbose')) {
+    //             console.log(
+    //                 `<green>[fonticons]</green> Fonticons are up to date`,
+    //             );
+    //         }
 
-            // inject css
-            injectIconsCss();
+    //         // inject css
+    //         injectIconsCss();
 
-            // stop here
-            return;
-        }
-    }
+    //         // stop here
+    //         return;
+    //     }
     // }
+    // // }
 
     console.log(`<yellow>[fonticons]</yellow> Generate fonticons...`);
 
-    // await __svgFixer(inputDir, inputDir).fix();
+    await __svgFixer(inputDir, inputDir).fix();
 
     const result = await generateFonts({
         inputDir,

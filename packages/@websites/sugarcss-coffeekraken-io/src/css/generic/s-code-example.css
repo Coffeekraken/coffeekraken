@@ -5,6 +5,10 @@
         @s.scrollbar;
     }
 
+    code {
+        background: s.color(main, surface, --alpha 0.4) !important;
+    }
+
     &_more-bar {
         &:before {
             display: none;

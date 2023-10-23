@@ -100,12 +100,21 @@ export default function color({
         ...params,
     };
 
-    return __STheme.resolveColor(
+    // const colorObj = __STheme.resolveColor(
+    //     finalParams.color,
+    //     finalParams.shade,
+    //     finalParams.modifier,
+    //     {
+    //         return: 'object',
+    //     },
+    // );
+
+    return `${__STheme.resolveColor(
         finalParams.color,
         finalParams.shade,
         finalParams.modifier,
         {
             return: 'var',
         },
-    );
+    )}`;
 }

@@ -23,13 +23,20 @@
 
         .s-format-text {
             h1 {
-                font-size: s.font.size(60);
+                font-size: s.font.size(70);
+                margin-block-end: s.margin(40);
             }
             h2 {
-                font-size: s.font.size(50);
+                font-size: s.font.size(60);
+                margin-block-end: s.margin(40);
             }
             h3 {
+                font-size: s.font.size(50);
+                margin-block-end: s.margin(40) !important;
+            }
+            h4 {
                 font-size: s.font.size(40);
+                margin-block-end: s.margin(40);
             }
         }
     }

@@ -91,7 +91,7 @@ export default function ({
             );
         }
         // generate css value
-        return `calc(s.theme(font.size.default) * ${factor})`;
+        return `calc(s.theme(font.size.default) * ${factor} * 1px)`;
     });
 
     return sizes.join(' ');

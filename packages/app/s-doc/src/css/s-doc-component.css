@@ -311,7 +311,8 @@ body:has(.s-doc-fullscreen) {
         @s.typo lead;
     }
 
-    &_examples {
+    &_section {
+        margin-block-start: s.margin(50);
     }
 
     &_color-preview {

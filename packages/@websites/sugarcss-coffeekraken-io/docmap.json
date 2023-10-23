@@ -540,9 +540,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.resets.Sugar-reset": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.resets.Sugar-reset",
@@ -578,9 +578,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.ui.badge.Badge": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.badge.Badge",
@@ -631,15 +631,21 @@
                         "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-badge s-scale:05\">Say hello!</a>\n  <a class=\"s-badge s-scale:1\">Say hello!</a>\n  <a class=\"s-badge s-scale:12\">Say hello!</a>\n  <a class=\"s-badge s-scale:15\">Say hello!</a>\n  <a class=\"s-badge s-scale:20\">Say hello!</a>\n</div>"
                     }
                 ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.ui.badge.classes;\n\n.my-badge {\n  @s.ui.badge;\n}"
+                    }
+                ],
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.ui.button.Buttons": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.button.Buttons",
@@ -700,15 +706,21 @@
                         "code": "<div class=\"s-flex:align-center:wrap s-gap:20\">\n  <a class=\"s-btn s-scale:07\">Click me!</a>\n  <a class=\"s-btn s-scale:1\">Click me!</a>\n  <a class=\"s-btn s-scale:13\">Click me!</a>\n  <a class=\"s-btn s-scale:16\">Click me!</a>\n</div>"
                     }
                 ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.ui.button.classes;\n\n.my-button {\n  @s.ui.button;\n}"
+                    }
+                ],
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.disabled.Disabled": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.disabled.Disabled",
@@ -744,15 +756,21 @@
                         "code": "<input type=\"text\" class=\"s-input s-disabled\" placeholder=\"I'm disabled\" />"
                     }
                 ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.disabled.classes;\n\n.my-element {\n  \\@s.disabled;\n}"
+                    }
+                ],
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.color.Colors": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.color.Colors",
@@ -793,15 +811,21 @@
                         "code": "<div class=\"s-bc:current s-p:10 s-mb:30 s-radius\">current</div>\n<div class=\"s-bc:main s-p:10 s-mb:30 s-radius\">main</div>\n<div class=\"s-bc:accent s-p:10 s-mb:30 s-radius\">accent</div>\n<div class=\"s-bc:complementary s-p:10 s-mb:30 s-radius\">complementary</div>\n<div class=\"s-bc:success s-p:10 s-mb:30 s-radius\">success</div>\n<div class=\"s-bc:warning s-p:10 s-mb:30 s-radius\">warning</div>\n<div class=\"s-bc:error s-p:10 s-mb:30 s-radius\">error</div>\n<div class=\"s-bc:info s-p:10 s-mb:30 s-radius\">info</div>"
                     }
                 ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.color.classes;\n\n.my-element {\n  \\@s.color(accent);\n}"
+                    }
+                ],
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.margin.Margin": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.margin.Margin",
@@ -834,17 +858,23 @@
                     {
                         "language": "html",
                         "title": "Inline",
-                        "code": "<p class=\"s-bc:accent s-radius s-p:30 s-mbe:20\">Bob Green</p>\n  <p class=\"s-bc:complementary s-radius s-mi:50 s-mbe:20 s-p:30\">Wade Champlin</p>\n  <p class=\"s-bc:main s-mie:100 s-radius s-mbe:20 s-p:30\">Dr. Luis Kuhic</p>\n  <p class=\"s-bc:error s-mie:30 s-radius s-p:30\">Jacquelyn Gottlieb</p>"
+                        "code": "<p class=\"s-bc:accent s-radius s-p:30 s-mbe:20\">Yolanda Hyatt</p>\n  <p class=\"s-bc:complementary s-radius s-mi:50 s-mbe:20 s-p:30\">Ronald Dickinson</p>\n  <p class=\"s-bc:main s-mie:100 s-radius s-mbe:20 s-p:30\">Georgia Herzog</p>\n  <p class=\"s-bc:error s-mie:30 s-radius s-p:30\">Jody Cronin</p>"
                     },
                     {
                         "language": "html",
                         "title": "Block",
-                        "code": "<div class=\"s-bc:accent s-radius s-mbe:40 s-p:30 s-text:center\">Constance Schoen</div>\n  <div class=\"s-bc:complementary s-radius s-mbe:20 s-p:30 s-text:center\">Tami Gislason</div>\n  <div class=\"s-bc:main s-radius s-mbe:50 s-p:30 s-text:center\">Jennie Bosco IV</div>\n  <div class=\"s-bc:error s-radius s-p:30 s-text:center\">Allison Barton</div>"
+                        "code": "<div class=\"s-bc:accent s-radius s-mbe:40 s-p:30 s-text:center\">Lucille Brekke</div>\n  <div class=\"s-bc:complementary s-radius s-mbe:20 s-p:30 s-text:center\">Omar Carroll</div>\n  <div class=\"s-bc:main s-radius s-mbe:50 s-p:30 s-text:center\">Annette Bradtke</div>\n  <div class=\"s-bc:error s-radius s-p:30 s-text:center\">Melody Upton</div>"
                     },
                     {
                         "language": "html",
                         "title": "RTL",
-                        "code": "<div dir=\"rtl\">\n  <p class=\"s-bc:accent s-radius s-p:30 s-mbe:20\">Otis Douglas</p>\n  <p class=\"s-bc:complementary s-radius s-mi:50 s-mbe:20 s-p:30\">Lynn Lesch</p>\n  <p class=\"s-bc:main s-radius s-mie:100 s-mbe:20 s-p:30\">Ray Connelly</p>\n  <p class=\"s-bc:error s-radius s-mie:30 s-p:30\">Raquel Douglas DVM</p>\n</div>"
+                        "code": "<div dir=\"rtl\">\n  <p class=\"s-bc:accent s-radius s-p:30 s-mbe:20\">Don Murphy Sr.</p>\n  <p class=\"s-bc:complementary s-radius s-mi:50 s-mbe:20 s-p:30\">Donnie Greenholt</p>\n  <p class=\"s-bc:main s-radius s-mie:100 s-mbe:20 s-p:30\">Cesar Heaney I</p>\n  <p class=\"s-bc:error s-radius s-mie:30 s-p:30\">Minnie Mayert V</p>\n</div>"
+                    }
+                ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.margin.classes;"
                     }
                 ],
                 "since": "2.0.0",
@@ -853,9 +883,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.padding.Padding": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.padding.Padding",
@@ -888,17 +918,23 @@
                     {
                         "language": "html",
                         "title": "Inline",
-                        "code": "<p class=\"s-bc:accent s-radius s-pi:30 s-pb:30 s-mbe:20\">Janis Miller</p>\n  <p class=\"s-bc:complementary s-radius s-pis:50 s-pb:30 s-mbe:20\">Diana Ondricka</p>\n  <p class=\"s-bc:main s-radius s-pis:80 s-pb:30 s-mbe:20\">Marta Crona Jr.</p>\n  <p class=\"s-bc:error s-radius s-pis:100 s-pb:30 s-mbe:20\">Cody Stamm</p>"
+                        "code": "<p class=\"s-bc:accent s-radius s-pi:30 s-pb:30 s-mbe:20\">Mamie Flatley</p>\n  <p class=\"s-bc:complementary s-radius s-pis:50 s-pb:30 s-mbe:20\">Casey Harvey</p>\n  <p class=\"s-bc:main s-radius s-pis:80 s-pb:30 s-mbe:20\">Ira Hirthe</p>\n  <p class=\"s-bc:error s-radius s-pis:100 s-pb:30 s-mbe:20\">Miss Patricia Kuhic</p>"
                     },
                     {
                         "language": "html",
                         "title": "Block",
-                        "code": "<div class=\"s-bc:accent s-radius s-pbs:30 s-pbe:40 s-text:center s-mbe:20\">Jenny Gaylord PhD</div>\n  <div class=\"s-bc:complementary s-radius s-pb:30 s-text:center s-mbe:20\">Carlos Swaniawski</div>\n  <div class=\"s-bc:main s-radius s-pbs:50 s-pbe:30 s-text:center s-mbe:20\">Joshua Herman</div>\n  <div class=\"s-bc:error s-radius s-pbs:100 s-pbe:60 s-text:center s-mbe:20\">Hattie Schamberger</div>"
+                        "code": "<div class=\"s-bc:accent s-radius s-pbs:30 s-pbe:40 s-text:center s-mbe:20\">Clifford Wehner II</div>\n  <div class=\"s-bc:complementary s-radius s-pb:30 s-text:center s-mbe:20\">Tonya Rodriguez</div>\n  <div class=\"s-bc:main s-radius s-pbs:50 s-pbe:30 s-text:center s-mbe:20\">Emmett Johns</div>\n  <div class=\"s-bc:error s-radius s-pbs:100 s-pbe:60 s-text:center s-mbe:20\">Tracey Kessler</div>"
                     },
                     {
                         "language": "html",
                         "title": "RTL",
-                        "code": "<div dir=\"rtl\">\n  <p class=\"s-bc:accent s-radius s-pi:30 s-pb:30 s-mbe:20\">Marcia Cremin</p>\n  <p class=\"s-bc:complementary s-radius s-pis:50 s-pb:30 s-mbe:20\">Dr. Nathan O'Hara</p>\n  <p class=\"s-bc:main s-radius s-pis:80 s-pb:30 s-mbe:20\">Angie Hoppe</p>\n  <p class=\"s-bc:error s-radius s-pis:100 s-pb:30 s-mbe:20\">Joyce McGlynn</p>\n</div>"
+                        "code": "<div dir=\"rtl\">\n  <p class=\"s-bc:accent s-radius s-pi:30 s-pb:30 s-mbe:20\">Greg Rohan DDS</p>\n  <p class=\"s-bc:complementary s-radius s-pis:50 s-pb:30 s-mbe:20\">Guadalupe Runolfsdottir</p>\n  <p class=\"s-bc:main s-radius s-pis:80 s-pb:30 s-mbe:20\">Bradley Gulgowski</p>\n  <p class=\"s-bc:error s-radius s-pis:100 s-pb:30 s-mbe:20\">Hilda Emard</p>\n</div>"
+                    }
+                ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.padding.classes;"
                     }
                 ],
                 "since": "2.0.0",
@@ -907,9 +943,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.ui.avatar.Avatar": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.avatar.Avatar",
@@ -942,17 +978,23 @@
                     {
                         "language": "html",
                         "title": "Default",
-                        "code": "<div class=\"s-flex:align-center:wrap s-gap:20 s-font:70\">\n  <div class=\"s-avatar\">\n      <img src=\"https://i.pravatar.cc/300?v=95306\" />\n  </div>\n      <div class=\"s-avatar s-color:accent\">\n      <img src=\"https://i.pravatar.cc/300?v=42034\" />\n  </div>\n  <div class=\"s-avatar s-color:complementary\">\n      <img src=\"https://i.pravatar.cc/300?v=87215\" />\n  </div>\n  <div class=\"s-avatar s-color:info\">\n      <img src=\"https://i.pravatar.cc/300?v=76954\" />\n  </div>\n  <div class=\"s-avatar s-color:success\">\n      <img src=\"https://i.pravatar.cc/300?v=45906\" />\n  </div>\n  <div class=\"s-avatar s-color:error\">\n     <img src=\"https://i.pravatar.cc/300?v=64602\" />\n  </div>\n</div>"
+                        "code": "<div class=\"s-flex:align-center:wrap s-gap:20 s-font:70\">\n  <div class=\"s-avatar\">\n      <img src=\"https://i.pravatar.cc/300?v=50378\" />\n  </div>\n      <div class=\"s-avatar s-color:accent\">\n      <img src=\"https://i.pravatar.cc/300?v=12870\" />\n  </div>\n  <div class=\"s-avatar s-color:complementary\">\n      <img src=\"https://i.pravatar.cc/300?v=29271\" />\n  </div>\n  <div class=\"s-avatar s-color:info\">\n      <img src=\"https://i.pravatar.cc/300?v=87718\" />\n  </div>\n  <div class=\"s-avatar s-color:success\">\n      <img src=\"https://i.pravatar.cc/300?v=43464\" />\n  </div>\n  <div class=\"s-avatar s-color:error\">\n     <img src=\"https://i.pravatar.cc/300?v=94347\" />\n  </div>\n</div>"
                     },
                     {
                         "language": "html",
                         "title": "Notifications",
-                        "code": "<div class=\"s-flex:wrap:align-center s-gap:20 s-font:70\">\n  <div class=\"s-avatar notifications=\"10\">\n     <img src=\"https://i.pravatar.cc/300?v=22450\" />\n  </div>\n  <div class=\"s-avatar s-color:accent\" notifications=\"10\">\n      <img src=\"https://i.pravatar.cc/300?v=11340\" />\n  </div>\n  <div class=\"s-avatar s-color:complementary\" notifications=\"10\">\n      <img src=\"https://i.pravatar.cc/300?v=65072\" />\n  </div>\n  <div class=\"s-avatar s-color:info\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=13356\" />\n  </div>\n  <div class=\"s-avatar s-color:success\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=6171\" />\n  </div>\n  <div class=\"s-avatar s-color:error\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=48501\" />\n  </div>\n</div>"
+                        "code": "<div class=\"s-flex:wrap:align-center s-gap:20 s-font:70\">\n  <div class=\"s-avatar notifications=\"10\">\n     <img src=\"https://i.pravatar.cc/300?v=80226\" />\n  </div>\n  <div class=\"s-avatar s-color:accent\" notifications=\"10\">\n      <img src=\"https://i.pravatar.cc/300?v=55988\" />\n  </div>\n  <div class=\"s-avatar s-color:complementary\" notifications=\"10\">\n      <img src=\"https://i.pravatar.cc/300?v=56715\" />\n  </div>\n  <div class=\"s-avatar s-color:info\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=73880\" />\n  </div>\n  <div class=\"s-avatar s-color:success\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=404\" />\n  </div>\n  <div class=\"s-avatar s-color:error\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=30997\" />\n  </div>\n</div>"
                     },
                     {
                         "language": "html",
                         "title": "Interactive",
-                        "code": "<div class=\"s-flex:wrap:align-center s-gap:20 s-font:70\">\n  <div class=\"s-avatar:interactive\">\n       <img src=\"https://i.pravatar.cc/300?v=37846\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:accent\">\n      <img src=\"https://i.pravatar.cc/300?v=75886\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:complementary\">\n      <img src=\"https://i.pravatar.cc/300?v=42368\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:info\">\n      <img src=\"https://i.pravatar.cc/300?v=37735\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:success\">\n      <img src=\"https://i.pravatar.cc/300?v=73896\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:error\">\n      <img src=\"https://i.pravatar.cc/300?v=40844\" />\n  </div>\n</div>"
+                        "code": "<div class=\"s-flex:wrap:align-center s-gap:20 s-font:70\">\n  <div class=\"s-avatar:interactive\">\n       <img src=\"https://i.pravatar.cc/300?v=26991\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:accent\">\n      <img src=\"https://i.pravatar.cc/300?v=3932\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:complementary\">\n      <img src=\"https://i.pravatar.cc/300?v=97121\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:info\">\n      <img src=\"https://i.pravatar.cc/300?v=91943\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:success\">\n      <img src=\"https://i.pravatar.cc/300?v=67494\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:error\">\n      <img src=\"https://i.pravatar.cc/300?v=55912\" />\n  </div>\n</div>"
+                    }
+                ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.ui.avatar.classes;\n\n.my-avatar {\n  @s.ui.avatar;\n}"
                     }
                 ],
                 "since": "2.0.0",
@@ -961,9 +1003,214 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@website.sugarcss-coffeekraken-io.sugar.style.ui.checkbox.Checkbox": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.checkbox.Checkbox",
+                "name": "Checkbox",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Forms"
+                    ],
+                    "slug": "/styleguide/forms/checkbox"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to display nice checkbox in your forms",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.checkbox",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "solid",
+                        "code": "<div class=\"s-flex:column s-gap:30\">\n  <label class=\"s-label\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" checked class=\"s-checkbox\" name=\"checkbox-lnf-solid-1\" value=\"hello 1\" />\n  </label>\n  <label class=\"s-label\">\n    <span>I'm disabled</span>\n    <input type=\"checkbox\" disabled class=\"s-checkbox s-color:accent\" name=\"checkbox-lnf-solid-3\" value=\"hello 3\" />\n  </label>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Shapes",
+                        "code": "<div class=\"s-flex:column s-gap:30\">\n  <label class=\"s-label\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-checkbox s-shape:default s-color:accent\" name=\"checkbox-style-color-2\" value=\"hello 2\" />\n  </label>\n  <label class=\"s-label\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-checkbox s-shape:square s-color:accent\" name=\"checkbox-style-color-2\" value=\"hello 2\" />\n  </label>\n<label class=\"s-label\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-checkbox s-shape:pill s-color:accent\" name=\"checkbox-style-color-2\" value=\"hello 2\" />\n  </label>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Colors (none-exhaustive)",
+                        "code": "<div class=\"s-flex:column s-gap:30\">\n  <label class=\"s-label\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-checkbox s-color:accent\" name=\"checkbox-style-color-2\" value=\"hello 2\" />\n  </label>\n  <label class=\"s-label\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-checkbox s-color:complementary\" name=\"checkbox-style-color-3\" value=\"hello 3\" />\n  </label>\n  <label class=\"s-label\">\n    <span>I'm disabled</span>\n    <input type=\"checkbox\" disabled class=\"s-checkbox s-color:error\" name=\"checkbox-style-color-4\" value=\"hello 4\" />\n  </label>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "RTL",
+                        "code": "<div class=\"s-flex:column s-gap:30\" dir=\"rtl\">\n  <label class=\"s-label\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" checked class=\"s-checkbox\" name=\"checkbox-style-ltr-1\" value=\"hello 1\" />\n  </label>\n  <label class=\"s-label\">\n    <span>I'm disabled</span>\n    <input type=\"checkbox\" disabled class=\"s-checkbox\" name=\"checkbox-style-ltr-3\" value=\"hello 3\" />\n  </label>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Scales",
+                        "code": "<div class=\"s-flex:column s-gap:30\">\n  <label class=\"s-label\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" checked class=\"s-checkbox\" name=\"checkbox-style-ltr-1\" value=\"hello 1\" />\n  </label>\n  <label class=\"s-label s-scale:20\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-ltr-2\" value=\"hello 2\" />\n  </label>\n  <label class=\"s-label s-scale:30\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-checkbox\" name=\"checkbox-style-ltr-3\" value=\"hello 3\" />\n  </label>\n</div>"
+                    }
+                ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.ui.checkbox.classes;\n\n.my-checkbox {\n  @s.ui.checkbox;\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@website.sugarcss-coffeekraken-io.sugar.style.ui.input.Input": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.input.Input",
+                "name": "Input",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Forms"
+                    ],
+                    "slug": "/styleguide/forms/text-input"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to apply some lnfs to your text input",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.input",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "solid lnf",
+                        "code": "<label class=\"s-label:responsive s-mbe:30\">\n      <span>Marian Jerde</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-width:40\" />\n </label>\n  <label class=\"s-label:responsive s-mbe:30\">\n       <span>I'm disabled</span>\n      <input type=\"text\" disabled placeholder=\"Type something!\" class=\"s-input:solid s-width:40\" />\n  </label>\n  <label dir=\"rtl\" class=\"s-label:responsive s-mbe:30\">\n      <span>Support RTL</span>\n      <input type=\"text\" placeholder=\"Type something! (RTL)\" class=\"s-input:solid s-width:40\" />\n  </label>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "underline lnf",
+                        "code": "<label class=\"s-label:responsive s-mbe:30\">\n      <span>Bobbie Upton</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:underline s-width:40\" />\n </label>\n  <label class=\"s-label:responsive s-mbe:30\">\n       <span>I'm disabled</span>\n      <input type=\"text\" disabled placeholder=\"Type something!\" class=\"s-input:underline s-width:40\" />\n  </label>\n  <label dir=\"rtl\" class=\"s-label:responsive s-mbe:30\">\n      <span>Support RTL</span>\n      <input type=\"text\" placeholder=\"Type something! (RTL)\" class=\"s-input:underline s-width:40\" />\n  </label>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Shapes",
+                        "code": "<label class=\"s-label:responsive s-mbe:30\">\n      <span>Dominic Sporer</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-shape:default s-width:40\" />\n </label>\n  <label class=\"s-label:responsive s-mbe:30\">\n      <span>Johanna Smith</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-shape:square s-width:40\" />\n </label>\n<label class=\"s-label:responsive s-mbe:30\">\n      <span>Amber Strosin</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid s-shape:pill s-width:40\" />\n </label>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Shapes",
+                        "code": "<label class=\"s-label:responsive s-mbe:30\">\n      <span>Becky Waelchi</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:underline s-shape:default s-width:40\" />\n </label>\n  <label class=\"s-label:responsive s-mbe:30\">\n      <span>Mrs. Diana Gottlieb</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:underline s-shape:square s-width:40\" />\n </label>\n<label class=\"s-label:responsive s-mbe:30\">\n      <span>Sonya Green</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:underline s-shape:pill s-width:40\" />\n </label>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Colors (non-exhaustive)",
+                        "code": "<label class=\"s-label:responsive s-mbe:30\">\n      <span>Jason Parker</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-color:main s-width:40\" />\n  </label>\n\n  <label class=\"s-label:responsive s-mbe:30\">\n      <span>Kenny Hermann</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-color:accent s-width:40\" />\n  </label>\n\n  <label class=\"s-label:responsive s-mbe:30\">\n      <span>Alberta Schuster</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-color:complementary s-width:40\" />\n  </label>\n\n  <label class=\"s-label:responsive s-mbe:30\">\n      <span>Brent Goodwin</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-color:error s-width:40\" />\n  </label>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Scales (non-exhaustive)",
+                        "code": "<label class=\"s-label:responsive s-mbe:30\">\n      <span>Lucy Padberg</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-scale:07 s-width:40\" />\n  </label>\n\n  <label class=\"s-label:responsive s-mbe:30\">\n      <span>Margarita D'Amore</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-scale:10 s-width:40\" />\n  </label>\n\n  <label class=\"s-label:responsive s-mbe:30\">\n      <span>Norma Hackett</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-scale:13 s-width:40\" />\n  </label>\n\n  <label class=\"s-label:responsive s-mbe:30\">\n      <span>Darryl Turner</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-scale:16 s-width:40\" />\n  </label>"
+                    }
+                ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.ui.input.classes;\n\n.my-input {\n  @s.ui.input;\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@website.sugarcss-coffeekraken-io.sugar.style.ui.label.Label": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.label.Label",
+                "name": "Label",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Forms"
+                    ],
+                    "slug": "/styleguide/forms/labels"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to structure forms using labels.",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.label",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "inline lnf",
+                        "code": "<form class=\"s-flex:column s-gap:30\">\n  <label class=\"s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive\">\n    <span>John Doe</span>\n    <textarea class=\"s-input s-width:60\" placeholder=\"Type something!\" rows=\"3\"></textarea>\n  </label>\n  <label class=\" s-label:responsive\">\n    <span>Support RTL</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive s-color:accent\">\n    <span>With the accent color</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "block lnf",
+                        "code": "<form class=\"s-flex:column s-gap:30\">\n  <label class=\"s-label:responsive:block\">\n    <span>John Doe</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive:block\">\n    <span>John Doe</span>\n    <textarea class=\"s-input s-width:60\" placeholder=\"Type something!\" rows=\"3\"></textarea>\n  </label>\n  <label class=\" s-label:responsive:block\">\n    <span>Support RTL</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive:block s-color:accent\">\n    <span>With the accent color</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "float lnf",
+                        "code": "<form class=\"s-flex:column s-gap:30\">\n  <label class=\"s-label:responsive:float\">\n    <span>John Doe</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive:float\">\n    <span>John Doe</span>\n    <textarea class=\"s-input s-width:60\" placeholder=\"Type something!\" rows=\"3\"></textarea>\n  </label>\n  <label class=\" s-label:responsive:float\">\n    <span>Support RTL</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive:float s-color:accent\">\n    <span>With the accent color</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n</div>"
+                    }
+                ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.ui.label.classes;\n\n.my-label {\n  @s.ui.label;\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.ui.list.List": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.list.List",
@@ -996,32 +1243,38 @@
                     {
                         "language": "html",
                         "title": "dl",
-                        "code": "<ul class=\"s-list:dl \">\n    <li>Central Directives Facilitator Elmer Sanford</li>\n    <li>Legacy Markets Administrator Luke Kemmer</li>\n    <li>Senior Operations Designer Yvette Stokes</li>\n  </ul>"
+                        "code": "<ul class=\"s-list:dl \">\n    <li>Future Solutions Executive Josh Erdman DVM</li>\n    <li>Lead Factors Agent Lena Feil</li>\n    <li>Global Metrics Orchestrator Jerome Dietrich</li>\n  </ul>"
                     },
                     {
                         "language": "html",
                         "title": "ul",
-                        "code": "<ul class=\"s-list:ul \">\n    <li>Dynamic Interactions Engineer Mrs. Sergio Hammes</li>\n    <li>Direct Program Associate Ms. Jeanette Botsford</li>\n    <li>International Implementation Director Jesus Graham</li>\n  </ul>"
+                        "code": "<ul class=\"s-list:ul \">\n    <li>Principal Response Strategist Alison Maggio</li>\n    <li>District Markets Officer Janet Corwin Jr.</li>\n    <li>Senior Creative Analyst Deanna Feeney</li>\n  </ul>"
                     },
                     {
                         "language": "html",
                         "title": "ol",
-                        "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>Global Brand Manager Martha Lockman</li>\n    <li>Corporate Functionality Administrator Jodi Wiegand</li>\n    <li>International Program Administrator Garry Considine</li>\n  </ul>"
+                        "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>Customer Identity Associate Jaime Wisozk</li>\n    <li>Direct Markets Technician Sherman Considine</li>\n    <li>Corporate Operations Engineer Laurie Osinski</li>\n  </ul>"
                     },
                     {
                         "language": "html",
                         "title": "icon",
-                        "code": "<ul class=\"s-list:icon \">\n    <li><i class=\"s-icon:user\"></i>Human Usability Facilitator Roosevelt Stokes</li>\n    <li><i class=\"s-icon:heart s-color:accent\"></i>Senior Mobility Designer Kevin Paucek</li>\n    <li><i class=\"s-icon:fire s-color:error\"></i>Direct Implementation Orchestrator Kelli Witting</li>\n  </ul>"
+                        "code": "<ul class=\"s-list:icon \">\n    <li><i class=\"s-icon:user\"></i>National Paradigm Technician Clayton Mueller</li>\n    <li><i class=\"s-icon:heart s-color:accent\"></i>Regional Intranet Executive Darryl Lowe</li>\n    <li><i class=\"s-icon:fire s-color:error\"></i>Forward Communications Director Danielle Orn I</li>\n  </ul>"
                     },
                     {
                         "language": "html",
                         "title": "RTL Support",
-                        "code": "<div dir=\"rtl\">\n  <ul class=\"s-list:ul s-color:accent s-mbe:30\">\n    <li>Senior Intranet Producer Christine Shanahan</li>\n    <li>Legacy Program Specialist Iris Lowe</li>\n  </ul>\n  <ul class=\"s-list:ol s-color:accent s-mbe:30\">\n    <li>Regional Web Strategist Laura Hessel</li>\n    <li>Legacy Division Associate Ray Pollich</li>\n  </ul>\n  <ul class=\"s-list:icon s-color:accent s-mbe:30\">\n    <li><i class=\"s-icon:user\"></i> Regional Operations Specialist Sam Krajcik</li>\n    <li><i class=\"s-icon:heart s-color:error\"></i> Legacy Usability Executive Shelly Williamson</li>\n  </ul>\n</div>"
+                        "code": "<div dir=\"rtl\">\n  <ul class=\"s-list:ul s-color:accent s-mbe:30\">\n    <li>National Intranet Manager Ms. Brittany Skiles</li>\n    <li>District Communications Facilitator Salvador Mraz</li>\n  </ul>\n  <ul class=\"s-list:ol s-color:accent s-mbe:30\">\n    <li>Product Creative Specialist Jaime Fritsch</li>\n    <li>Legacy Quality Orchestrator Manuel Zulauf IV</li>\n  </ul>\n  <ul class=\"s-list:icon s-color:accent s-mbe:30\">\n    <li><i class=\"s-icon:user\"></i> Global Branding Technician Alison Beier</li>\n    <li><i class=\"s-icon:heart s-color:error\"></i> Dynamic Quality Coordinator Thomas Powlowski</li>\n  </ul>\n</div>"
                     },
                     {
                         "language": "html",
                         "title": "Colors (none-exhaustive)",
-                        "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>Human Directives Agent Miss Lyle Kuhn</li>\n    <li class=\"s-color:complementary\">Product Directives Associate Ricardo Aufderhar</li>\n    <li class=\"s-color:error\">District Infrastructure Representative Monica Kihn V</li>\n  </ul>"
+                        "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>Forward Group Engineer Ashley Fritsch</li>\n    <li class=\"s-color:complementary\">Global Integration Analyst Sadie Klein</li>\n    <li class=\"s-color:error\">Direct Assurance Supervisor Norman Robel</li>\n  </ul>"
+                    }
+                ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.ui.list.classes;\n\n.my-list {\n  @s.ui.list;\n}"
                     }
                 ],
                 "since": "2.0.0",
@@ -1030,9 +1283,79 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
+            },
+            "@website.sugarcss-coffeekraken-io.sugar.style.ui.radio.Radio": {
+                "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.radio.Radio",
+                "name": "Radio",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Styleguide"
+                        }
+                    ],
+                    "raw": "Styleguide"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Forms"
+                    ],
+                    "slug": "/styleguide/forms/radio"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "These classes allows you to display nice radio in your forms",
+                "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.radio",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "solid lnf",
+                        "code": "<label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"radio\" checked class=\"s-radio\" name=\"radio-lnf-solid\" value=\"hello 1\" checked />\n  </label>\n  <label class=\"s-mbe:30 s-label\">\n    <span>I'm disabled</span>\n    <input type=\"radio\" disabled class=\"s-radio\" name=\"radio-lnf-solid\" value=\"hello 3\" />\n  </label>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Shapes",
+                        "code": "<label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"radio\" checked class=\"s-radio s-shape:default\" name=\"radio-style-color\" value=\"hello 1\" checked />\n</label>\n<label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"radio\" checked class=\"s-radio s-shape:square\" name=\"radio-style-color\" value=\"hello 1\" checked />\n</label>\n<label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"radio\" checked class=\"s-radio s-shape:pill\" name=\"radio-style-color\" value=\"hello 1\" checked />\n</label>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Colors (none-exhaustive)",
+                        "code": "<label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"radio\" checked class=\"s-radio\" name=\"radio-style-color\" value=\"hello 1\" checked />\n  </label>\n  <label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"radio\" class=\"s-radio s-color:accent\" name=\"radio-style-color\" value=\"hello 2\" />\n  </label>\n  <label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"radio\" class=\"s-radio s-color:complementary\" name=\"radio-style-color\" value=\"hello 3\" />\n  </label>\n  <label class=\"s-mbe:30 s-label\">\n    <span>I'm disabled</span>\n    <input type=\"radio\" disabled class=\"s-radio s-color:error\" name=\"radio-style-color\" value=\"hello 4\" />\n  </label>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "RTL",
+                        "code": "<div dir=\"rtl\">\n  <label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"radio\" checked class=\"s-radio s-color:accent\" name=\"radio-style-ltr\" value=\"hello 1\" checked />\n  </label>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Scales",
+                        "code": "<label class=\"s-mbe:30 s-label s-scale:07\">\n    <span>John Doe</span>\n    <input type=\"radio\" checked class=\"s-radio s-color:accent\" name=\"radio-style-scale\" value=\"hello 1\" checked />\n  </label>\n  <label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"radio\" class=\"s-radio s-color:accent\" name=\"radio-style-scale\" value=\"hello 2\" />\n  </label>\n  <label class=\"s-mbe:30 s-label s-scale:20\">\n    <span>John Doe</span>\n    <input type=\"radio\" class=\"s-radio s-color:accent\" name=\"radio-style-scale\" value=\"hello 3\" />\n  </label>\n  <label class=\"s-mbe:30 s-label s-scale:30\">\n    <span>John Doe</span>\n    <input type=\"radio\" class=\"s-radio s-color:accent\" name=\"radio-style-scale\" value=\"hello 3\" />\n  </label>"
+                    }
+                ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.ui.radio.classes;\n\n.my-radio {\n  @s.ui.radio;\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.clearfix.Clearfix": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.clearfix.Clearfix",
@@ -1083,15 +1406,21 @@
                         "code": "<div class=\"s-clearfix:after s-bc:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
                     }
                 ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.clearfix.classes;\n\n.my-element {\n  \\@s.clearfix;\n}"
+                    }
+                ],
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.cursor.Cursor": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.cursor.Cursor",
@@ -1126,15 +1455,21 @@
                         "code": "<div class=\"s-flex:wrap s-gap:20\">\n  <div class=\"s-cursor:auto s-flex:center s-width:20 s-radius s-ratio:16-9\">\nauto\n  </div>\n\n  <div class=\"s-cursor:default s-flex:center s-width:20 s-radius s-ratio:16-9\">\ndefault\n  </div>\n\n  <div class=\"s-cursor:none s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnone\n  </div>\n\n  <div class=\"s-cursor:context-menu s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncontext-menu\n  </div>\n\n  <div class=\"s-cursor:help s-flex:center s-width:20 s-radius s-ratio:16-9\">\nhelp\n  </div>\n\n  <div class=\"s-cursor:pointer s-flex:center s-width:20 s-radius s-ratio:16-9\">\npointer\n  </div>\n\n  <div class=\"s-cursor:progress s-flex:center s-width:20 s-radius s-ratio:16-9\">\nprogress\n  </div>\n\n  <div class=\"s-cursor:wait s-flex:center s-width:20 s-radius s-ratio:16-9\">\nwait\n  </div>\n\n  <div class=\"s-cursor:cell s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncell\n  </div>\n\n  <div class=\"s-cursor:crosshair s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncrosshair\n  </div>\n\n  <div class=\"s-cursor:text s-flex:center s-width:20 s-radius s-ratio:16-9\">\ntext\n  </div>\n\n  <div class=\"s-cursor:vertical-text s-flex:center s-width:20 s-radius s-ratio:16-9\">\nvertical-text\n  </div>\n\n  <div class=\"s-cursor:alias s-flex:center s-width:20 s-radius s-ratio:16-9\">\nalias\n  </div>\n\n  <div class=\"s-cursor:copy s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncopy\n  </div>\n\n  <div class=\"s-cursor:move s-flex:center s-width:20 s-radius s-ratio:16-9\">\nmove\n  </div>\n\n  <div class=\"s-cursor:no-drop s-flex:center s-width:20 s-radius s-ratio:16-9\">\nno-drop\n  </div>\n\n  <div class=\"s-cursor:not-allowed s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnot-allowed\n  </div>\n\n  <div class=\"s-cursor:e-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\ne-resize\n  </div>\n\n  <div class=\"s-cursor:n-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nn-resize\n  </div>\n\n  <div class=\"s-cursor:ne-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nne-resize\n  </div>\n\n  <div class=\"s-cursor:nw-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnw-resize\n  </div>\n\n  <div class=\"s-cursor:s-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\ns-resize\n  </div>\n\n  <div class=\"s-cursor:se-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nse-resize\n  </div>\n\n  <div class=\"s-cursor:sw-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nsw-resize\n  </div>\n\n  <div class=\"s-cursor:w-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nw-resize\n  </div>\n\n  <div class=\"s-cursor:ew-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\new-resize\n  </div>\n\n  <div class=\"s-cursor:ns-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nns-resize\n  </div>\n\n  <div class=\"s-cursor:nesw-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnesw-resize\n  </div>\n\n  <div class=\"s-cursor:nwse-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnwse-resize\n  </div>\n\n  <div class=\"s-cursor:col-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncol-resize\n  </div>\n\n  <div class=\"s-cursor:row-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nrow-resize\n  </div>\n\n  <div class=\"s-cursor:all-scroll s-flex:center s-width:20 s-radius s-ratio:16-9\">\nall-scroll\n  </div>\n\n  <div class=\"s-cursor:zoom-in s-flex:center s-width:20 s-radius s-ratio:16-9\">\nzoom-in\n  </div>\n\n  <div class=\"s-cursor:zoom-out s-flex:center s-width:20 s-radius s-ratio:16-9\">\nzoom-out\n  </div>\n\n  <div class=\"s-cursor:grab s-flex:center s-width:20 s-radius s-ratio:16-9\">\ngrab\n  </div>\n\n  <div class=\"s-cursor:grabbing s-flex:center s-width:20 s-radius s-ratio:16-9\">\ngrabbing\n  </div>\n\n</div>"
                     }
                 ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.cursor.classes;"
+                    }
+                ],
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.link.Link": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.link.Link",
@@ -1170,15 +1505,21 @@
                         "code": "<div class=\"s-position:relative s-bc:main s-radius s-p:50\">\n  <a href=\"#\" class=\"s-link:stretch s-bc:accent s-radius s-p:20\">I'm a stretched link!</a>\n</div>"
                     }
                 ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.link.classes;\n\n.my-element {\n  \\@s.link.stretch;\n}"
+                    }
+                ],
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.gap.Gap": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.gap.Gap",
@@ -1219,15 +1560,21 @@
                         "code": "<div class=\"s-grid:3 s-gap:40\">\n  <div class=\"s-ratio:16-9 s-bc:main s-radius s-p:30\">1</div>\n  <div class=\"s-ratio:16-9 s-bc:main s-radius s-p:30\">2</div>\n  <div class=\"s-ratio:16-9 s-bc:main s-radius s-p:30\">3</div>\n</div>"
                     }
                 ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.gap.classes;"
+                    }
+                ],
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.text.Text": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.text.Text",
@@ -1260,17 +1607,23 @@
                     {
                         "language": "html",
                         "title": "Aligns",
-                        "code": "<div class=\"s-text:left s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (left) Suzanne Schuppe\n  </div>\n  <div class=\"s-text:right s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (right) Willie Padberg\n  </div>\n  <div class=\"s-text:center s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (center) Whitney Wuckert\n  </div>\n  <div class=\"s-text:start s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (start) Forrest Veum\n  </div>\n  <div class=\"s-text:end s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (end) Kelvin Kautzer\n  </div>"
+                        "code": "<div class=\"s-text:left s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (left) Drew Berge III\n  </div>\n  <div class=\"s-text:right s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (right) Emmett Hartmann MD\n  </div>\n  <div class=\"s-text:center s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (center) Sam Carroll\n  </div>\n  <div class=\"s-text:start s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (start) Jesse Pfannerstill\n  </div>\n  <div class=\"s-text:end s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (end) Ms. Kristy Watsica\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Decorations",
-                        "code": "<div class=\"s-text:overline s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (overline) Hattie Blick\n  </div>\n  <div class=\"s-text:underline s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (underline) Marlon Murazik\n  </div>\n  <div class=\"s-text:line-through s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (line-through) Mr. Joann Weissnat\n  </div>"
+                        "code": "<div class=\"s-text:overline s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (overline) Benny Cartwright\n  </div>\n  <div class=\"s-text:underline s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (underline) Elijah Donnelly\n  </div>\n  <div class=\"s-text:line-through s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (line-through) Charlotte White\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Transforms",
-                        "code": "<div class=\"s-text:lowercase s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (lowercase) Kathy Okuneva\n  </div>\n  <div class=\"s-text:uppercase s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (uppercase) Miss Alexis Erdman\n  </div>\n  <div class=\"s-text:capitalize s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (capitalize) Wade Breitenberg\n  </div>"
+                        "code": "<div class=\"s-text:lowercase s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (lowercase) Lucas Kulas\n  </div>\n  <div class=\"s-text:uppercase s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (uppercase) Bert Fisher\n  </div>\n  <div class=\"s-text:capitalize s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (capitalize) Laurie Effertz\n  </div>"
+                    }
+                ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.text.classes;"
                     }
                 ],
                 "since": "2.0.0",
@@ -1279,9 +1632,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.flex.Flex": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.flex.Flex",
@@ -1314,22 +1667,28 @@
                     {
                         "language": "html",
                         "title": "Simple grid",
-                        "code": "<div class=\"s-flex:row:wrap\">\n    <div class=\"s-bc:main s-width:50 s-p:30\">Ruth Hessel</div>\n    <div class=\"s-bc:accent s-width:50 s-p:30\">Felipe Hettinger</div>\n    <div class=\"s-bc:complementary s-width:50 s-p:30\">Guillermo Howe</div>\n    <div class=\"s-bc:info s-width:50 s-p:30\">Dewey Heathcote</div>\n  </div>"
+                        "code": "<div class=\"s-flex:row:wrap\">\n    <div class=\"s-bc:main s-width:50 s-p:30\">Ruby Dare</div>\n    <div class=\"s-bc:accent s-width:50 s-p:30\">Dr. Terry Kemmer</div>\n    <div class=\"s-bc:complementary s-width:50 s-p:30\">Dennis Boyle</div>\n    <div class=\"s-bc:info s-width:50 s-p:30\">Eleanor Cassin</div>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Grow",
-                        "code": "<div class=\"s-flex:row\">\n    <div class=\"s-grow s-bc:main s-p:30\">Kelly Gorczany</div>\n    <div class=\"s-bc:accent s-p:30\">Manuel Rice</div>\n    <div class=\"s-bc:complementary s-p:30\">Isaac Murray</div>\n  </div>"
+                        "code": "<div class=\"s-flex:row\">\n    <div class=\"s-grow s-bc:main s-p:30\">Cesar Hartmann</div>\n    <div class=\"s-bc:accent s-p:30\">Toby Hayes</div>\n    <div class=\"s-bc:complementary s-p:30\">Ms. Marilyn Becker</div>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Orders",
-                        "code": "<div class=\"s-flex:row\">\n    <div class=\"s-order:3 s-bc:main s-p:30\">Edna Moore</div>\n    <div class=\"s-bc:accent s-p:30\">Cornelius Huels</div>\n    <div class=\"s-bc:complementary s-p:30\">Jenny Green</div>\n  </div>"
+                        "code": "<div class=\"s-flex:row\">\n    <div class=\"s-order:3 s-bc:main s-p:30\">Gerald Hansen</div>\n    <div class=\"s-bc:accent s-p:30\">Simon Ondricka</div>\n    <div class=\"s-bc:complementary s-p:30\">Christian Mante V</div>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Aligns",
-                        "code": "<div class=\"s-flex:row:align-end\">\n    <div class=\"s-bc:main s-p:30\">Julia Witting</div>\n    <div class=\"s-bc:accent s-p:30\">Carol Hayes<br />Natasha Torphy<br />Elizabeth Howell<br />Sarah Schneider<br />Lawrence Schamberger III</div>\n    <div class=\"s-bc:complementary s-p:30\">Gladys Dietrich</div>\n  </div>"
+                        "code": "<div class=\"s-flex:row:align-end\">\n    <div class=\"s-bc:main s-p:30\">Bryan Predovic</div>\n    <div class=\"s-bc:accent s-p:30\">Caroline Beatty<br />Kent Murray<br />Stewart Hettinger<br />Mr. Camille Schultz<br />Arthur Quitzon</div>\n    <div class=\"s-bc:complementary s-p:30\">Ray Casper IV</div>\n  </div>"
+                    }
+                ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.flex.classes;"
                     }
                 ],
                 "since": "2.0.0",
@@ -1338,9 +1697,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.fit.Fit-Sizes": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.fit.Fit-Sizes",
@@ -1396,15 +1755,21 @@
                         "code": "<div class=\"s-ratio:16-9 s-bc:ui\">\n      <img class=\"s-fit:abs s-radius\" src=\"https://picsum.photos/1000/1000\" />\n  </div>"
                     }
                 ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.fit.classes;\n\n.my-element {\n  \\@s.fit(fill);\n}"
+                    }
+                ],
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.float.Float": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.float.Float",
@@ -1450,15 +1815,21 @@
                         "code": "<div class=\"s-bc:error s-p:30 s-radius\">\n    <div class=\"s-float:none\">I'm a cool float none element</div>\n</div>"
                     }
                 ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.float.classes;"
+                    }
+                ],
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.ratio.Ratio": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.ratio.Ratio",
@@ -1539,15 +1910,21 @@
                         "code": "<div class=\"s-ratio:3-4 s-width:40\">\n      <img class=\"s-fit:cover s-radius\" src=\"https://picsum.photos/500/500\" />\n  </div>"
                     }
                 ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.ratio.classes;\n\n.my-element {\n  \\@s.ratio(16/9);\n}"
+                    }
+                ],
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.scale.Scale": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.scale.Scale",
@@ -1579,7 +1956,13 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- 10 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 10</h3>\n  <div class=\"s-scale:10\">\n      <a class=\"s-btn\">Sandra Schaefer</a>\n  </div>\n</div>\n\n<!-- 11 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 11</h3>\n  <div class=\"s-scale:11\">\n      <a class=\"s-btn\">Joann Bergstrom</a>\n  </div>\n</div>\n\n<!-- 12 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 12</h3>\n  <div class=\"s-scale:12\">\n      <a class=\"s-btn\">Sam Cummings</a>\n  </div>\n</div>\n\n<!-- 13 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 13</h3>\n  <div class=\"s-scale:13\">\n      <a class=\"s-btn\">Darrin Kunze</a>\n  </div>\n</div>\n\n<!-- 14 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 14</h3>\n  <div class=\"s-scale:14\">\n      <a class=\"s-btn\">Lee Wiegand</a>\n  </div>\n</div>\n\n<!-- 15 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 15</h3>\n  <div class=\"s-scale:15\">\n      <a class=\"s-btn\">Seth Breitenberg</a>\n  </div>\n</div>\n\n<!-- 16 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 16</h3>\n  <div class=\"s-scale:16\">\n      <a class=\"s-btn\">Bradley Stoltenberg</a>\n  </div>\n</div>\n\n<!-- 17 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 17</h3>\n  <div class=\"s-scale:17\">\n      <a class=\"s-btn\">Damon Kshlerin</a>\n  </div>\n</div>\n\n<!-- 18 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 18</h3>\n  <div class=\"s-scale:18\">\n      <a class=\"s-btn\">Jimmie Bartell</a>\n  </div>\n</div>\n\n<!-- 19 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 19</h3>\n  <div class=\"s-scale:19\">\n      <a class=\"s-btn\">Forrest Howe</a>\n  </div>\n</div>\n\n<!-- 20 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 20</h3>\n  <div class=\"s-scale:20\">\n      <a class=\"s-btn\">Leland Welch</a>\n  </div>\n</div>\n\n<!-- default scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale default</h3>\n  <div class=\"s-scale:default\">\n      <a class=\"s-btn\">Paul Douglas</a>\n  </div>\n</div>\n\n<!-- 01 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 01</h3>\n  <div class=\"s-scale:01\">\n      <a class=\"s-btn\">Johanna Jacobs I</a>\n  </div>\n</div>\n\n<!-- 02 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 02</h3>\n  <div class=\"s-scale:02\">\n      <a class=\"s-btn\">Louis Kub</a>\n  </div>\n</div>\n\n<!-- 03 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 03</h3>\n  <div class=\"s-scale:03\">\n      <a class=\"s-btn\">Carlton Pacocha</a>\n  </div>\n</div>\n\n<!-- 04 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 04</h3>\n  <div class=\"s-scale:04\">\n      <a class=\"s-btn\">Mabel Okuneva</a>\n  </div>\n</div>\n\n<!-- 05 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 05</h3>\n  <div class=\"s-scale:05\">\n      <a class=\"s-btn\">Alan Ziemann</a>\n  </div>\n</div>\n\n<!-- 06 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 06</h3>\n  <div class=\"s-scale:06\">\n      <a class=\"s-btn\">Micheal Klein</a>\n  </div>\n</div>\n\n<!-- 07 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 07</h3>\n  <div class=\"s-scale:07\">\n      <a class=\"s-btn\">Jared Schneider</a>\n  </div>\n</div>\n\n<!-- 08 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 08</h3>\n  <div class=\"s-scale:08\">\n      <a class=\"s-btn\">Brenda Reilly IV</a>\n  </div>\n</div>\n\n<!-- 09 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 09</h3>\n  <div class=\"s-scale:09\">\n      <a class=\"s-btn\">Wanda Harris V</a>\n  </div>\n</div>"
+                        "code": "<!-- 10 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 10</h3>\n  <div class=\"s-scale:10\">\n      <a class=\"s-btn\">Sheldon Emard</a>\n  </div>\n</div>\n\n<!-- 11 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 11</h3>\n  <div class=\"s-scale:11\">\n      <a class=\"s-btn\">Mrs. Herbert Champlin</a>\n  </div>\n</div>\n\n<!-- 12 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 12</h3>\n  <div class=\"s-scale:12\">\n      <a class=\"s-btn\">Betty Legros</a>\n  </div>\n</div>\n\n<!-- 13 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 13</h3>\n  <div class=\"s-scale:13\">\n      <a class=\"s-btn\">Mabel Hettinger</a>\n  </div>\n</div>\n\n<!-- 14 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 14</h3>\n  <div class=\"s-scale:14\">\n      <a class=\"s-btn\">Karl Crooks</a>\n  </div>\n</div>\n\n<!-- 15 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 15</h3>\n  <div class=\"s-scale:15\">\n      <a class=\"s-btn\">Miss Samuel Daugherty</a>\n  </div>\n</div>\n\n<!-- 16 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 16</h3>\n  <div class=\"s-scale:16\">\n      <a class=\"s-btn\">Benjamin Johns</a>\n  </div>\n</div>\n\n<!-- 17 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 17</h3>\n  <div class=\"s-scale:17\">\n      <a class=\"s-btn\">Jorge Rempel</a>\n  </div>\n</div>\n\n<!-- 18 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 18</h3>\n  <div class=\"s-scale:18\">\n      <a class=\"s-btn\">Joanne Feeney</a>\n  </div>\n</div>\n\n<!-- 19 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 19</h3>\n  <div class=\"s-scale:19\">\n      <a class=\"s-btn\">Casey Skiles</a>\n  </div>\n</div>\n\n<!-- 20 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 20</h3>\n  <div class=\"s-scale:20\">\n      <a class=\"s-btn\">Ed Von</a>\n  </div>\n</div>\n\n<!-- 21 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 21</h3>\n  <div class=\"s-scale:21\">\n      <a class=\"s-btn\">Kate Ortiz DVM</a>\n  </div>\n</div>\n\n<!-- 22 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 22</h3>\n  <div class=\"s-scale:22\">\n      <a class=\"s-btn\">Lyle Bernier</a>\n  </div>\n</div>\n\n<!-- 23 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 23</h3>\n  <div class=\"s-scale:23\">\n      <a class=\"s-btn\">Pat Franecki</a>\n  </div>\n</div>\n\n<!-- 24 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 24</h3>\n  <div class=\"s-scale:24\">\n      <a class=\"s-btn\">Santos Torphy III</a>\n  </div>\n</div>\n\n<!-- 25 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 25</h3>\n  <div class=\"s-scale:25\">\n      <a class=\"s-btn\">Kelli Cronin</a>\n  </div>\n</div>\n\n<!-- 26 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 26</h3>\n  <div class=\"s-scale:26\">\n      <a class=\"s-btn\">Ellis Greenholt</a>\n  </div>\n</div>\n\n<!-- 27 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 27</h3>\n  <div class=\"s-scale:27\">\n      <a class=\"s-btn\">Gustavo Johnson</a>\n  </div>\n</div>\n\n<!-- 28 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 28</h3>\n  <div class=\"s-scale:28\">\n      <a class=\"s-btn\">Cameron Connelly</a>\n  </div>\n</div>\n\n<!-- 29 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 29</h3>\n  <div class=\"s-scale:29\">\n      <a class=\"s-btn\">Charles Zulauf</a>\n  </div>\n</div>\n\n<!-- 30 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 30</h3>\n  <div class=\"s-scale:30\">\n      <a class=\"s-btn\">Jill Hayes II</a>\n  </div>\n</div>\n\n<!-- default scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale default</h3>\n  <div class=\"s-scale:default\">\n      <a class=\"s-btn\">Kendra Mohr</a>\n  </div>\n</div>\n\n<!-- 01 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 01</h3>\n  <div class=\"s-scale:01\">\n      <a class=\"s-btn\">Joanne Cummings IV</a>\n  </div>\n</div>\n\n<!-- 02 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 02</h3>\n  <div class=\"s-scale:02\">\n      <a class=\"s-btn\">Kari Stoltenberg</a>\n  </div>\n</div>\n\n<!-- 03 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 03</h3>\n  <div class=\"s-scale:03\">\n      <a class=\"s-btn\">Pauline Sipes</a>\n  </div>\n</div>\n\n<!-- 04 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 04</h3>\n  <div class=\"s-scale:04\">\n      <a class=\"s-btn\">Kayla Little</a>\n  </div>\n</div>\n\n<!-- 05 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 05</h3>\n  <div class=\"s-scale:05\">\n      <a class=\"s-btn\">Lucille Nader</a>\n  </div>\n</div>\n\n<!-- 06 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 06</h3>\n  <div class=\"s-scale:06\">\n      <a class=\"s-btn\">Julia Jacobi</a>\n  </div>\n</div>\n\n<!-- 07 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 07</h3>\n  <div class=\"s-scale:07\">\n      <a class=\"s-btn\">Dr. Elbert Kassulke</a>\n  </div>\n</div>\n\n<!-- 08 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 08</h3>\n  <div class=\"s-scale:08\">\n      <a class=\"s-btn\">Clifton Krajcik</a>\n  </div>\n</div>\n\n<!-- 09 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 09</h3>\n  <div class=\"s-scale:09\">\n      <a class=\"s-btn\">Alonzo Boehm</a>\n  </div>\n</div>"
+                    }
+                ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.scale.classes;"
                     }
                 ],
                 "since": "2.0.0",
@@ -1588,9 +1971,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.Radius": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.Radius",
@@ -1626,15 +2009,21 @@
                         "code": "<div class=\"s-flex:wrap s-gap:20\">\n  <div class=\"s-radius:0 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    0\n  </div>\n  <div class=\"s-radius:10 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    10\n  </div>\n  <div class=\"s-radius:20 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    20\n  </div>\n  <div class=\"s-radius:30 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    30\n  </div>\n  <div class=\"s-radius:40 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    40\n  </div>\n  <div class=\"s-radius:50 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    50\n  </div>\n  <div class=\"s-radius:60 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    60\n  </div>\n  <div class=\"s-radius:70 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    70\n  </div>\n  <div class=\"s-radius:80 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    80\n  </div>\n  <div class=\"s-radius:90 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    90\n  </div>\n  <div class=\"s-radius:100 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    100\n  </div>\n</div>"
                     }
                 ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.border.classes;\n\n.my-element {\n  \\@s.border.radius(40);\n  \\@s.border.width(10);\n}"
+                    }
+                ],
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.Border-width": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.Border-width",
@@ -1676,9 +2065,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.border.Border-color": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.border.Border-color",
@@ -1720,9 +2109,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.display.Display": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.display.Display",
@@ -1755,42 +2144,48 @@
                     {
                         "language": "html",
                         "title": "Block",
-                        "code": "<div class=\"s-display:block\">\n    <p class=\"s-typo:p\">Lauren Koch</p>\n    <p class=\"s-typo:p\">Mr. Alan Vandervort</p>\n    <p class=\"s-typo:p\">Vivian Morar</p>\n  </div>"
+                        "code": "<div class=\"s-display:block\">\n    <p class=\"s-typo:p\">Neal Schiller</p>\n    <p class=\"s-typo:p\">Dr. Ernestine Marvin</p>\n    <p class=\"s-typo:p\">Irvin Brekke</p>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Inline-block",
-                        "code": "<div class=\"s-display:inline-block\">\n    <p class=\"s-typo:p\">Courtney Schinner</p>\n    <p class=\"s-typo:p\">Courtney Conroy</p>\n    <p class=\"s-typo:p\">Ramiro Blick</p>\n  </div>"
+                        "code": "<div class=\"s-display:inline-block\">\n    <p class=\"s-typo:p\">Jamie Abbott</p>\n    <p class=\"s-typo:p\">Andre Predovic</p>\n    <p class=\"s-typo:p\">Alicia Deckow</p>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Contents",
-                        "code": "<div class=\"s-display:contents\">\n    <p class=\"s-typo:p\">Jana Jacobs</p>\n    <p class=\"s-typo:p\">Mr. Doreen Wisozk</p>\n    <p class=\"s-typo:p\">Adrian Rogahn</p>\n  </div>"
+                        "code": "<div class=\"s-display:contents\">\n    <p class=\"s-typo:p\">Sylvia Herman</p>\n    <p class=\"s-typo:p\">Homer Blanda</p>\n    <p class=\"s-typo:p\">Dwayne Beatty</p>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Flex",
-                        "code": "<div class=\"s-display:flex\">\n    <p class=\"s-typo:p\">Mathew Weissnat</p>\n    <p class=\"s-typo:p\">Ryan Glover</p>\n    <p class=\"s-typo:p\">Ollie Grady</p>\n  </div>"
+                        "code": "<div class=\"s-display:flex\">\n    <p class=\"s-typo:p\">Charlene Hudson</p>\n    <p class=\"s-typo:p\">Kim Huel</p>\n    <p class=\"s-typo:p\">Jackie Considine</p>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Grid",
-                        "code": "<div class=\"s-display:grid\">\n    <p class=\"s-typo:p\">Harvey Rath V</p>\n    <p class=\"s-typo:p\">Jose Upton PhD</p>\n    <p class=\"s-typo:p\">Ann Simonis</p>\n  </div>"
+                        "code": "<div class=\"s-display:grid\">\n    <p class=\"s-typo:p\">Roy McLaughlin</p>\n    <p class=\"s-typo:p\">Nichole Volkman</p>\n    <p class=\"s-typo:p\">Kay Kiehn</p>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Inline-flex",
-                        "code": "<div class=\"s-display:inline-flex\">\n    <p class=\"s-typo:p\">Daniel Goyette</p>\n    <p class=\"s-typo:p\">Sherry Rice</p>\n    <p class=\"s-typo:p\">Ms. Jim Mosciski</p>\n  </div>"
+                        "code": "<div class=\"s-display:inline-flex\">\n    <p class=\"s-typo:p\">Eunice Zulauf</p>\n    <p class=\"s-typo:p\">Caleb Ferry</p>\n    <p class=\"s-typo:p\">Martha Hand</p>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Inline-grid",
-                        "code": "<div class=\"s-display:inline-grid\">\n    <p class=\"s-typo:p\">Jessie Barton</p>\n    <p class=\"s-typo:p\">Luis Hilpert</p>\n    <p class=\"s-typo:p\">Laurie Heaney</p>\n  </div>"
+                        "code": "<div class=\"s-display:inline-grid\">\n    <p class=\"s-typo:p\">Juanita Grant</p>\n    <p class=\"s-typo:p\">Mathew Mueller</p>\n    <p class=\"s-typo:p\">Ms. Dale Terry</p>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "None",
-                        "code": "<div class=\"s-display:none\">\n    <p class=\"s-typo:p\">Blake Bogisich</p>\n    <p class=\"s-typo:p\">Kristen Rogahn</p>\n    <p class=\"s-typo:p\">Julie Shields</p>\n  </div>"
+                        "code": "<div class=\"s-display:none\">\n    <p class=\"s-typo:p\">Alison Hettinger Sr.</p>\n    <p class=\"s-typo:p\">Mrs. Maria Prosacco</p>\n    <p class=\"s-typo:p\">Wayne Aufderhar</p>\n  </div>"
+                    }
+                ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.display.classes;"
                     }
                 ],
                 "since": "2.0.0",
@@ -1799,9 +2194,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.overflow.Overflow": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.overflow.Overflow",
@@ -1877,15 +2272,21 @@
                         "code": "<div class=\"s-overflow:unset\">\n  I'm in an \"unset\" overflow container\n</div>"
                     }
                 ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.overflow.classes;"
+                    }
+                ],
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.position.Positions": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.position.Positions",
@@ -1936,15 +2337,21 @@
                         "code": "<div class=\"s-position:relative s-ratio:21-9\">\n      <div class=\"s-position:sticky:top\">\n        <img class=\"s-mbs:100 s-radius\" src=\"https://picsum.photos/100/100?v=323333\"/>\n    </div>\n  </div>"
                     }
                 ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.position.classes;"
+                    }
+                ],
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.pointer.Pointer": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.pointer.Pointer",
@@ -1995,15 +2402,21 @@
                         "code": "<div class=\"s-pointer-events:fill\">\n  I'm in an \"fill\" pointer-events container\n</div>"
                     }
                 ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.pointer.classes;"
+                    }
+                ],
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.transition.Transitions": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.transition.Transitions",
@@ -2036,17 +2449,23 @@
                     {
                         "language": "html",
                         "title": "slow",
-                        "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-dced0a87-430a-4689-8b5b-98c373b669b2\">\n     <div class=\"s-transition:slow s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-dced0a87-430a-4689-8b5b-98c373b669b2 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-dced0a87-430a-4689-8b5b-98c373b669b2:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+                        "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-20ccc8f4-2768-4d9b-8a9a-31062876e800\">\n     <div class=\"s-transition:slow s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-20ccc8f4-2768-4d9b-8a9a-31062876e800 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-20ccc8f4-2768-4d9b-8a9a-31062876e800:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "default",
-                        "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-d72dd802-c9fc-4931-93e4-7974d275a6f5\">\n     <div class=\"s-transition s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-d72dd802-c9fc-4931-93e4-7974d275a6f5 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-d72dd802-c9fc-4931-93e4-7974d275a6f5:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+                        "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-b6114aed-0213-4ad5-bebb-de8846cb7625\">\n     <div class=\"s-transition s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-b6114aed-0213-4ad5-bebb-de8846cb7625 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-b6114aed-0213-4ad5-bebb-de8846cb7625:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "fast",
-                        "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-f8115979-5d35-4bcf-8d0e-e06001e54944\">\n     <div class=\"s-transition:fast s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-f8115979-5d35-4bcf-8d0e-e06001e54944 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-f8115979-5d35-4bcf-8d0e-e06001e54944:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+                        "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-c7a18cf5-9b70-402a-a3fa-901952542e99\">\n     <div class=\"s-transition:fast s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-c7a18cf5-9b70-402a-a3fa-901952542e99 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-c7a18cf5-9b70-402a-a3fa-901952542e99:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+                    }
+                ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.transition.classes;"
                     }
                 ],
                 "since": "2.0.0",
@@ -2055,9 +2474,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.order.Order": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.order.Order",
@@ -2093,15 +2512,21 @@
                         "code": "<div class=\"s-flex s-gap:40\">\n  <div class=\"s-order:3 s-p:30 s-ratio:16-9 s-grow s-bc:main s-radius\">1</div>\n  <div class=\"s-order:1 s-p:30 s-ratio:16-9 s-grow s-bc:main s-radius\">2</div>\n  <div class=\"s-order:2 s-p:30 s-ratio:16-9 s-grow s-bc:main s-radius\">3</div>\n</div>"
                     }
                 ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.order.classes;"
+                    }
+                ],
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.spacing.Spacing": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.spacing.Spacing",
@@ -2134,7 +2559,13 @@
                     {
                         "language": "html",
                         "title": "Vertical spacing",
-                        "code": "<div class=\"s-spacing:40\">\n  <h1 class=\"s-typo:h1\">Hello world</h1>\n  <p class=\"s-typo:lead\">Marjorie Harber</p>\n  <p class=\"s-typo:p\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis egestas non tortor sed aliquet. Fusce finibus erat at leo scelerisque, a lobortis purus pretium. Aliquam ornare leo id mi imperdiet.</p>\n  <a class=\"s-btn s-color:accent\">Simple Cta</a>\n</div>"
+                        "code": "<div class=\"s-spacing:40\">\n  <h1 class=\"s-typo:h1\">Hello world</h1>\n  <p class=\"s-typo:lead\">Ms. Diana Lueilwitz</p>\n  <p class=\"s-typo:p\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis egestas non tortor sed aliquet. Fusce finibus erat at leo scelerisque, a lobortis purus pretium. Aliquam ornare leo id mi imperdiet.</p>\n  <a class=\"s-btn s-color:accent\">Simple Cta</a>\n</div>"
+                    }
+                ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.spacing.classes;"
                     }
                 ],
                 "since": "2.0.0",
@@ -2143,9 +2574,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.userSelect.User-select": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.userSelect.User-select",
@@ -2178,22 +2609,28 @@
                     {
                         "language": "html",
                         "title": "All",
-                        "code": "<p class=\"s-user-select:all\">\n      Sit perferendis minus eos nesciunt aut fuga veritatis deleniti. Debitis sed vitae dolorem aperiam. At esse a quis nemo facere est dolorem. Quis et doloribus consectetur magnam et repudiandae provident voluptatem dolore. Ducimus fugit numquam deleniti alias cupiditate voluptatem impedit rerum. Et provident perspiciatis quidem.\n  </p>"
+                        "code": "<p class=\"s-user-select:all\">\n      Facere dolorem recusandae corporis assumenda inventore aut. Quae saepe explicabo est voluptas. Aut quos quaerat modi laborum adipisci. Neque fuga reprehenderit corrupti temporibus. Eaque labore officia commodi expedita qui voluptatem consectetur vero consectetur.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "auto",
-                        "code": "<p class=\"s-user-select:auto\">\n      Cum ducimus iure velit dolor. Possimus incidunt laudantium culpa. Tenetur ea nemo dolores voluptatem eveniet adipisci provident veniam magni. Aliquid non rerum quam voluptatum voluptatem.\n  </p>"
+                        "code": "<p class=\"s-user-select:auto\">\n      Rem accusamus commodi dolorem quas sint odit ullam. Cupiditate dolorum et dolor omnis. Quo quia eaque explicabo incidunt quae a recusandae atque.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "none",
-                        "code": "<p class=\"s-user-select:none\">\n      Itaque non dolores. Qui velit nesciunt ipsum possimus explicabo. Est ea minus tempora eligendi.\n  </p>"
+                        "code": "<p class=\"s-user-select:none\">\n      Laboriosam necessitatibus ut temporibus at quos sed. Tempora cum id voluptas est. Unde distinctio est ad expedita iste voluptatem atque. Nam sapiente nihil quisquam porro est totam accusamus sit dolorem. Voluptas aut necessitatibus qui magnam laboriosam quae ut enim perspiciatis. At voluptatem qui cupiditate vero veniam.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "text",
-                        "code": "<p class=\"s-user-select:text\">\n      Sunt blanditiis eius rerum id ut praesentium et modi et. In dolores minima ullam enim. Exercitationem veniam voluptas debitis. Recusandae quod mollitia vero.\n  </p>"
+                        "code": "<p class=\"s-user-select:text\">\n      Officia odit explicabo exercitationem. Sunt esse temporibus voluptatem. Sint est vel. Provident explicabo rerum ad ut sed et omnis quis. Quos quia nam minus ad tempore impedit neque.\n  </p>"
+                    }
+                ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.userSelect.classes;"
                     }
                 ],
                 "since": "2.0.0",
@@ -2202,9 +2639,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.visibility.Visibility": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.visibility.Visibility",
@@ -2240,15 +2677,21 @@
                         "code": "<div class=\"s-bc:main s-radius s-p:30\">\n  <div style=\"height: 100px\" class=\"s-bc:accent s-radius s-p:30\">I'm visible</div>\n  <div style=\"height: 100px\" class=\"s-visibility:hidden s-bc:complementary s-radius s-p:30\">I'm hidden</div>\n</div>"
                     }
                 ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.visibility.classes;\n\n.my-element {\n  \\@s.visibility.hidden;\n}"
+                    }
+                ],
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.visually.Visually": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.visually.Visually",
@@ -2284,15 +2727,21 @@
                         "code": "<div class=\"s-bc:main-surface s-radius s-p:30\">\n  <div style=\"height: 100px\" class=\"s-bc:accent s-radius s-p:30\">I'm visible</div>\n  <div style=\"height: 100px\" class=\"s-visually:hidden s-bc:complementary s-radius s-p:30\">I'm hidden</div>\n</div>"
                     }
                 ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.visually.classes;\n\n.my-element {\n  \\@s.visually.hidden;\n}"
+                    }
+                ],
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.truncate.Truncate": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.truncate.Truncate",
@@ -2325,52 +2774,58 @@
                     {
                         "language": "html",
                         "title": "1 line",
-                        "code": "<p class=\"s-typo:p s-truncate:1\">Vero mollitia consequatur.<br />Ea earum sit qui corrupti magnam incidunt quia rerum.<br />Nobis delectus ea.<br />Quaerat amet non incidunt exercitationem rerum.<br />Quaerat provident non adipisci earum ut quos.<br />Commodi quo quia pariatur a perspiciatis delectus et.<br />Molestiae porro dolor doloremque porro sed enim rerum molestias inventore.<br />Aut facilis nisi modi dolorem.<br />Maxime aut commodi magni.<br />Temporibus dolorem qui eos amet alias laboriosam quia odit.<br />Odit voluptatum et saepe aliquam ut rerum.<br />Occaecati cupiditate sunt consequatur voluptates.<br />Incidunt qui labore ut deserunt aut quaerat consequatur maxime voluptatum.<br />Sequi asperiores tempore a facilis reiciendis.<br />Quibusdam hic accusamus soluta est neque rerum iure.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:1\">Vero sequi non molestiae nulla qui earum ut.<br />Voluptate quae praesentium doloribus.<br />Voluptas assumenda officia perferendis.<br />Sit et molestiae ut quis aut officiis dicta.<br />Ullam et sint nemo vero et qui sapiente omnis.<br />Deserunt ut ipsum.<br />Vel veniam dolore veniam repellat fugit est et vel.<br />Et et architecto adipisci sunt beatae assumenda.<br />Sapiente iste facere.<br />Consequatur error quisquam.<br />A dicta modi quibusdam.<br />Magni dolorum sed.<br />In tempora consequuntur similique dolor velit.<br />Expedita quo in cupiditate non earum unde delectus quo est.<br />Et voluptatem omnis quo facilis fugit architecto.</p>"
                     },
                     {
                         "language": "html",
                         "title": "2 line",
-                        "code": "<p class=\"s-typo:p s-truncate:2\">Dolorem qui consequuntur assumenda similique.<br />Autem autem repellat deleniti quia aliquid consequatur.<br />Ipsa voluptas optio placeat et tempore dolor sit.<br />Debitis deleniti est nam accusamus ut minus velit.<br />Totam vitae animi quod eveniet voluptas sed sit in totam.<br />Cumque fugit aut asperiores dolor ullam.<br />Quisquam neque cupiditate.<br />Voluptas ipsa est nesciunt inventore eius et.<br />Quaerat aut error animi officiis quae et.<br />Sed fuga eius alias.<br />Odio quidem laboriosam.<br />Numquam blanditiis reiciendis.<br />Perspiciatis ullam sequi porro.<br />Enim reiciendis alias quae vel facere et ut quod.<br />Similique est et qui consequatur et odit facere.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:2\">Doloremque consectetur accusantium.<br />Tempora rerum omnis dolorum ea.<br />Excepturi est porro laborum.<br />Corporis consequatur iusto ut autem.<br />In ab dolores repellendus beatae illum doloremque.<br />Quisquam et a vel minima expedita qui et reprehenderit.<br />Ab deleniti labore doloribus fuga deleniti neque eius omnis minus.<br />Facilis vel nihil laborum quas delectus.<br />Sit repudiandae sunt dolore veniam.<br />Illo ut est quo ea quasi.<br />Voluptatem eum doloribus iste at autem necessitatibus necessitatibus incidunt.<br />Non eaque corporis aperiam consectetur quam eos beatae.<br />Alias culpa ut.<br />Minima voluptas rerum quam qui asperiores enim odit.<br />Ipsa quidem eaque velit sunt quod.</p>"
                     },
                     {
                         "language": "html",
                         "title": "3 lines",
-                        "code": "<p class=\"s-typo:p s-truncate:3\">Ad quis dignissimos sit quaerat dolore quaerat.<br />Et iure ab iste quo perspiciatis ad.<br />Occaecati quia excepturi quis nulla consequatur sequi et quos.<br />Commodi laboriosam porro et molestiae dolorum quas architecto vel incidunt.<br />Dolorem necessitatibus nobis nam porro dicta occaecati ex inventore inventore.<br />Eos dolorem sapiente veniam laboriosam totam possimus voluptas qui quia.<br />Qui a est culpa consequatur.<br />Aut nulla quae iusto.<br />Dignissimos fugit et earum cupiditate quia facilis incidunt quaerat pariatur.<br />Modi sit deserunt quos ut ipsam ullam facilis.<br />Repellendus doloribus quos ea quas voluptates architecto neque.<br />Esse incidunt modi cumque qui et maiores quibusdam numquam.<br />Magni fuga amet repellendus hic nostrum porro.<br />Dolore consequatur sint deleniti voluptate.<br />Tempore quo debitis omnis.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:3\">Autem aut sit eius optio ullam perspiciatis.<br />Voluptas fuga accusamus autem reprehenderit et corrupti blanditiis.<br />Aut quia sit rerum ut quod ipsum non sed non.<br />Occaecati delectus perspiciatis est.<br />Molestiae ducimus quis voluptatem sit maxime non.<br />Cupiditate exercitationem fuga esse et sunt nostrum sit necessitatibus consectetur.<br />Autem inventore id at.<br />Deleniti repudiandae quis illum ut atque voluptas.<br />Cum quia molestias ipsum libero.<br />Animi commodi qui aut officiis.<br />Consectetur quidem nihil.<br />Ea ullam animi.<br />Nulla neque sequi aut in placeat ratione autem nihil perferendis.<br />Magnam numquam harum non.<br />Asperiores in similique iure similique autem eum nostrum dignissimos.</p>"
                     },
                     {
                         "language": "html",
                         "title": "4 lines",
-                        "code": "<p class=\"s-typo:p s-truncate:4\">Praesentium velit voluptas sint autem iste tempore qui porro beatae.<br />Molestias quod molestiae labore minima ea omnis adipisci ad numquam.<br />Velit blanditiis assumenda impedit.<br />Dolores qui recusandae sint.<br />Nihil numquam voluptatum distinctio cumque qui sed alias corporis.<br />Error tenetur natus minus quia dolorum quia aut.<br />Molestiae quibusdam aut dolorem veniam consequatur totam.<br />Natus est id aliquam veritatis iusto quidem nulla.<br />Rem veniam at mollitia impedit.<br />Voluptas nam veniam aliquam aliquid.<br />Delectus pariatur nemo neque esse voluptates incidunt repellendus sapiente.<br />Est ex commodi officia cumque ex nihil.<br />Itaque pariatur aperiam reiciendis dolores ipsum quis facilis eos voluptatem.<br />Vero ullam beatae.<br />Inventore ipsa reiciendis eum libero itaque optio ratione autem dolor.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:4\">Libero voluptatem optio ut.<br />Reiciendis doloremque dolore officia rem corporis facilis.<br />Aut quo hic voluptatibus.<br />Dolores quidem perspiciatis deserunt enim facilis.<br />Earum vero cumque non quo magni explicabo dicta.<br />Soluta maxime et velit quisquam omnis dolores optio.<br />Officia unde nam ut dolorum quidem rem deserunt eligendi.<br />Adipisci saepe maiores vero quia quia est tempora omnis.<br />Voluptate voluptate reiciendis.<br />Et ipsum unde nam vero vel ut consequuntur.<br />Inventore pariatur illum.<br />Accusantium soluta cupiditate eum nisi sint eaque at nemo accusamus.<br />Vel amet explicabo eligendi sed et aut sit similique itaque.<br />Libero cupiditate quidem est et.<br />Voluptatem esse sapiente non aut aliquid ipsum sed aperiam voluptates.</p>"
                     },
                     {
                         "language": "html",
                         "title": "5 lines",
-                        "code": "<p class=\"s-typo:p s-truncate:5\">Nihil tempore et.<br />Eos dicta accusantium voluptas nemo non id accusamus optio et.<br />Assumenda ut et sint.<br />Similique odio corporis enim nemo unde deserunt et sed.<br />Debitis assumenda nihil quaerat est quia molestias et.<br />Et qui earum repellendus quae repellat aliquid doloribus quasi.<br />Dolor alias dolorum qui est.<br />Quo ut officiis ut possimus dolorem.<br />Atque vero perferendis.<br />Possimus est asperiores dolorum.<br />Voluptatem aliquam possimus libero illum reprehenderit beatae qui.<br />Voluptas quia beatae corrupti nihil ullam voluptatem.<br />In voluptate odit ea et.<br />Reprehenderit mollitia tenetur et numquam ipsum amet qui incidunt itaque.<br />Aut ullam provident amet et voluptas aut debitis voluptas sunt.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:5\">Reiciendis mollitia voluptatem.<br />Ut magnam officia incidunt aut asperiores cumque placeat ab aut.<br />Eum rem qui accusamus totam.<br />Ratione ut pariatur optio voluptas cum.<br />Voluptatem excepturi totam quidem ut ut quo.<br />Eum qui ducimus voluptatibus.<br />Atque in veniam ut sint non iure sed ab voluptatem.<br />Ut nisi distinctio labore officiis cumque sunt voluptas.<br />Earum fuga eius unde eos impedit vitae.<br />Qui asperiores ratione possimus eveniet repudiandae deserunt.<br />Eligendi nihil temporibus et ut.<br />Voluptatem facilis dolor eum sequi et inventore corrupti.<br />Et et ut dignissimos sit.<br />Amet occaecati dolorem id illum.<br />Porro qui quisquam harum molestiae aliquam fugit.</p>"
                     },
                     {
                         "language": "html",
                         "title": "6 lines",
-                        "code": "<p class=\"s-typo:p s-truncate:6\">Aperiam distinctio commodi.<br />Sed dolorem omnis sed ut ea perferendis totam ut rerum.<br />Aut praesentium cupiditate earum explicabo quisquam.<br />Consequatur velit accusantium sint odio nostrum ut.<br />Et quae numquam facilis libero dolor sed debitis atque.<br />Quis et similique reprehenderit et minima suscipit voluptate.<br />Possimus enim est cupiditate tenetur quidem provident quisquam nihil.<br />Omnis atque quibusdam quis molestiae.<br />Magnam deserunt consectetur autem iure voluptatem expedita praesentium et.<br />Id corrupti repudiandae quas.<br />Vitae qui repudiandae voluptatem atque voluptates aut quasi ut.<br />Nobis vero possimus natus voluptatem eius quaerat modi rerum.<br />Laudantium blanditiis assumenda sunt magnam optio qui dolore sed.<br />Ea quisquam non.<br />Et quia eum voluptatem ab.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:6\">Facere praesentium reprehenderit eveniet voluptatibus eum.<br />Nulla molestias consequatur error et voluptas.<br />In vero sed minus eos eos.<br />Cumque voluptatem nam voluptatum pariatur veritatis.<br />Odio omnis perspiciatis eveniet qui fugit voluptas temporibus reprehenderit voluptas.<br />Sint et voluptas est quis quis fuga inventore sed eos.<br />Quae voluptatem eius aliquid hic tempora vero dignissimos doloribus nihil.<br />Voluptas quaerat qui consectetur officia praesentium.<br />Labore et sint sit animi.<br />Pariatur aliquid quo consequuntur pariatur at perspiciatis.<br />Quibusdam quibusdam reiciendis quo error et libero aut magnam sit.<br />Qui ad explicabo sint magnam quidem id sit.<br />Ut accusamus facilis nobis saepe ea ea exercitationem earum.<br />Consequatur est nulla sunt aliquam ex quisquam mollitia.<br />Voluptatibus beatae saepe voluptatem.</p>"
                     },
                     {
                         "language": "html",
                         "title": "7 lines",
-                        "code": "<p class=\"s-typo:p s-truncate:7\">Esse officiis adipisci assumenda dicta aperiam sapiente.<br />Mollitia consequatur asperiores qui cum esse.<br />Dolore dicta perferendis corporis enim mollitia exercitationem nostrum nulla.<br />Velit ut excepturi aliquam ipsam deleniti.<br />Aspernatur dicta eos sed et fuga fugiat non et molestias.<br />Eaque saepe non quia aut tempora possimus.<br />Consequatur at hic fugiat suscipit vel mollitia est accusantium.<br />Neque placeat facilis.<br />Incidunt quia quidem similique saepe eum nesciunt quasi laboriosam.<br />Molestias quaerat nesciunt omnis nostrum at nihil officia repudiandae.<br />Aliquid eius illo quidem maxime beatae tempora.<br />Hic qui assumenda molestiae rerum repellat dolorum sequi voluptas beatae.<br />Ut tenetur eaque.<br />Perspiciatis numquam facere praesentium.<br />Facilis et cupiditate recusandae autem et et.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:7\">Doloremque alias voluptatem beatae est.<br />Nesciunt dolorem quaerat corporis et.<br />Aut ut corrupti rerum omnis laudantium iure quis vero.<br />Laboriosam ad eum possimus.<br />Non enim quos cum dolores modi.<br />Iure voluptate aut ad necessitatibus explicabo quidem.<br />Velit aspernatur aut repudiandae et voluptatem.<br />Rem sunt id occaecati aliquid sit placeat aut et.<br />Veritatis veritatis voluptas numquam sint molestiae omnis rerum.<br />Quia iste aspernatur sed dolores vero accusantium fuga eos voluptas.<br />Doloremque saepe repellat consequuntur voluptas est dolore tenetur dolorum blanditiis.<br />Dolorem consequatur culpa laudantium recusandae.<br />Ut corporis et ut placeat magni repellat omnis corrupti hic.<br />Nobis similique magnam eligendi necessitatibus vero doloremque est.<br />Fuga vero et.</p>"
                     },
                     {
                         "language": "html",
                         "title": "8 lines",
-                        "code": "<p class=\"s-typo:p s-truncate:8\">Qui quaerat doloremque.<br />Veniam et inventore ut fugit.<br />Harum et voluptatum fugiat dolorum.<br />Quia quisquam sunt quos pariatur repellendus perspiciatis corrupti deleniti sed.<br />Occaecati nulla voluptatem ipsam qui rerum error omnis eos.<br />Necessitatibus id est.<br />Aliquid velit reprehenderit officia.<br />Qui nisi fuga.<br />Sit ipsa eligendi.<br />Doloribus et animi.<br />Aspernatur vel eius sed impedit odit quaerat maxime enim.<br />Optio velit sint aut incidunt rerum provident porro eveniet animi.<br />Vel illo ut nisi temporibus possimus rerum enim.<br />Dolorem vitae quibusdam non dolor.<br />Doloremque sunt culpa voluptatem cumque recusandae consequuntur fuga nesciunt vel.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:8\">Illum aut natus corrupti commodi autem eaque non.<br />Alias eveniet optio ea facilis ab distinctio ut temporibus.<br />Incidunt quasi et quia et accusamus.<br />Corrupti perferendis voluptatem cum ullam blanditiis.<br />Corrupti illum nemo praesentium et excepturi laboriosam ea impedit consectetur.<br />Maiores sunt et aperiam quae dolores.<br />Voluptatem et laboriosam in et veritatis.<br />Molestias nihil molestiae.<br />Est voluptatibus occaecati error dolorem.<br />Aut quis et dolores illum voluptatum.<br />Consectetur vitae ducimus nobis hic ut accusantium eum.<br />Voluptas blanditiis eos autem ipsum.<br />Consectetur sit similique quia dignissimos sint provident.<br />Beatae vero officia similique veniam provident quo consequatur.<br />Et reiciendis ipsa sequi rerum.</p>"
                     },
                     {
                         "language": "html",
                         "title": "9 lines",
-                        "code": "<p class=\"s-typo:p s-truncate:9\">Libero sed aliquam fuga consequatur blanditiis odit consequatur voluptates.<br />Voluptatibus exercitationem doloremque labore natus quidem nam non alias dolores.<br />Reiciendis eos voluptatem rerum.<br />Tempora molestiae dolorem assumenda.<br />Eligendi excepturi quibusdam odio accusamus consequatur nam dolores quis.<br />Non qui et aut.<br />Eum ipsam maxime cum.<br />Non ea est.<br />Consequatur voluptatem recusandae.<br />Laudantium distinctio nihil qui repellat enim.<br />Quis quaerat molestiae cupiditate eum repellendus enim.<br />Laborum distinctio at qui quisquam numquam.<br />Quia fugiat est.<br />Aut rerum omnis velit nemo assumenda minus rem.<br />Aperiam qui animi qui quia in.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:9\">Quisquam tempora non quia animi id incidunt.<br />Aliquid qui qui repellendus quia possimus.<br />Molestiae ipsam et dolorum quae.<br />Excepturi in exercitationem dolore asperiores sed quibusdam.<br />Dolor quia ipsum rem provident sit dolores.<br />Eveniet et voluptatem odio quia saepe illum.<br />Deserunt accusamus et nobis illo tempora.<br />Provident animi maxime aliquam expedita rerum.<br />Nulla dolor enim eos necessitatibus.<br />Repellat quisquam velit autem fuga hic nihil dolores at ab.<br />Quis esse aut quae.<br />Est ut voluptatem illum dolores veniam eaque nihil.<br />Odit enim dolorum doloremque cumque ullam nihil rerum asperiores voluptatem.<br />Rerum voluptatum autem perferendis vel ad molestias mollitia tempore deserunt.<br />Nam totam occaecati rerum voluptatibus iure qui perspiciatis non earum.</p>"
                     },
                     {
                         "language": "html",
                         "title": "10 lines",
-                        "code": "<p class=\"s-typo:p s-truncate:10\">Dolores impedit quia inventore sed.<br />Ea rerum ut aut iusto.<br />Consectetur exercitationem sed aut atque quo.<br />Consequatur fugit eos qui vero dolor laborum magnam.<br />Omnis assumenda sed et labore iste.<br />Deserunt deleniti blanditiis in.<br />Expedita molestiae velit eum.<br />Officiis doloribus aliquid.<br />Eaque et dolorem sit eos sit enim ipsum qui aut.<br />Quas dolorum eos.<br />Voluptatem nihil est.<br />Sit rerum animi iure et aut quia autem temporibus doloribus.<br />Modi ratione et distinctio exercitationem omnis hic illo est.<br />Dolores eum incidunt.<br />Reprehenderit ullam sed sit.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:10\">Aut omnis corrupti placeat voluptatem ut totam et tempora.<br />Ut corrupti ipsa nulla.<br />Id possimus odit cupiditate.<br />Adipisci nostrum asperiores ut dolore et voluptas qui dolorem.<br />Assumenda ab facilis.<br />Ut ut dicta et nam eos et incidunt incidunt libero.<br />Dolore sequi deleniti deleniti inventore sint et esse non.<br />Velit quisquam inventore error quo et cum et ut ut.<br />Labore enim ullam.<br />Rerum iure quibusdam dicta ut nam.<br />Rerum laborum quasi.<br />Esse rerum molestiae nemo et.<br />Dolorum voluptates tempora veniam sunt aut.<br />Est voluptatibus ut iure tenetur maxime sunt officiis expedita.<br />Aspernatur quia et est pariatur laboriosam.</p>"
+                    }
+                ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.truncate.classes;"
                     }
                 ],
                 "since": "2.0.0",
@@ -2379,9 +2834,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.shape.Shape": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.shape.Shape",
@@ -2417,15 +2872,21 @@
                         "code": "<a class=\"s-btn s-color:accent s-shape:default\">Default shape</a>\n<a class=\"s-btn s-color:accent s-shape:square\">Square shape</a>\n<a class=\"s-btn s-color:accent s-shape:pill\">Pill shape</a>"
                     }
                 ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.shape.classes;"
+                    }
+                ],
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.width.Widths": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.width.Widths",
@@ -2461,15 +2922,21 @@
                         "code": "<div class=\"s-flex:column s-gap:20\">\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:0 s-text:center s-bc:accent s-p:30 s-radius:30\">0%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:10 s-text:center s-bc:accent s-p:30 s-radius:30\">10%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:20 s-text:center s-bc:accent s-p:30 s-radius:30\">20%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:30 s-text:center s-bc:accent s-p:30 s-radius:30\">30%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:40 s-text:center s-bc:accent s-p:30 s-radius:30\">40%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:50 s-text:center s-bc:accent s-p:30 s-radius:30\">50%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:60 s-text:center s-bc:accent s-p:30 s-radius:30\">60%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:70 s-text:center s-bc:accent s-p:30 s-radius:30\">70%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:80 s-text:center s-bc:accent s-p:30 s-radius:30\">80%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:90 s-text:center s-bc:accent s-p:30 s-radius:30\">90%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:100 s-text:center s-bc:accent s-p:30 s-radius:30\">100%</div>\n  </div>\n</div>"
                     }
                 ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.width.classes;"
+                    }
+                ],
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css"
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css"
             },
             "@website.sugarcss-coffeekraken-io.sugar.style.helpers.whiteSpace.White-space": {
                 "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.whiteSpace.White-space",
@@ -2502,47 +2969,53 @@
                     {
                         "language": "html",
                         "title": "Wrap",
-                        "code": "<p class=\"s-white-space:wrap\">\n      Numquam cumque ad aut facilis. Quis doloremque dolorem iure. Qui assumenda voluptatem culpa aut modi incidunt aut nisi vero. Atque excepturi at est maxime. Dolorem reprehenderit sed possimus totam non neque aperiam optio accusamus. Mollitia quia earum et vitae natus a est.\n  </p>"
+                        "code": "<p class=\"s-white-space:wrap\">\n      Nihil quo error fuga fuga optio sint velit. Quasi dolorem sit consequatur non. Quas aperiam rerum asperiores placeat et sequi dolorem aut minus. Iste rerum pariatur eum qui ab nostrum saepe quae voluptas. Est dolor numquam neque et est veritatis. Consequatur quam magnam id.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "Nowrap",
-                        "code": "<p class=\"s-white-space:nowrap\">\n      Sed expedita cum enim doloribus beatae est dolorem ducimus. Repellendus optio doloribus repudiandae quia ut. Pariatur culpa harum culpa eum odit optio quo cupiditate porro. Consequatur architecto quidem totam aliquid nisi atque. Vitae repellat aut. Aperiam commodi odio dolorem delectus.\n  </p>"
+                        "code": "<p class=\"s-white-space:nowrap\">\n      Quaerat rerum autem libero delectus in molestiae. Sapiente delectus voluptate cumque et exercitationem labore. Rem quidem blanditiis. Et ab ducimus corporis doloremque accusamus. Excepturi in dolores molestias voluptatibus.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "Break spaces",
-                        "code": "<p class=\"s-white-space:break-spaces\">\n      Velit quae qui tempore doloribus rerum soluta quae magnam maxime. Est magni nostrum iure id nobis. Ut ipsam distinctio id et.\n  </p>"
+                        "code": "<p class=\"s-white-space:break-spaces\">\n      Quis nisi laboriosam qui suscipit nam repudiandae quaerat. Id esse rerum qui sequi et quis. Ab sit qui atque quis et blanditiis. Deleniti ipsam perspiciatis saepe nulla. Sit ipsam et culpa fugiat dolores.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "Normal",
-                        "code": "<p class=\"s-white-space:normal\">\n      Molestias saepe ut aliquam dolor assumenda quis laudantium illum magni. Officiis facere architecto. Repudiandae deleniti maxime voluptas facere tenetur. Commodi eius non ipsa unde non est quisquam.\n  </p>"
+                        "code": "<p class=\"s-white-space:normal\">\n      Numquam rerum laudantium perferendis non quo porro. Sequi hic voluptatem consequatur qui eum corrupti quis. Quaerat atque ut ipsa omnis sit autem. Alias quasi expedita dolore mollitia voluptatem a ullam. Rem tenetur sint ut. Id ducimus itaque ex molestiae.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "Pre",
-                        "code": "<p class=\"s-white-space:pre\">\n      Nesciunt animi suscipit iure eius reiciendis aperiam consequatur. Vitae culpa et consectetur est voluptatum doloribus qui et. Laborum debitis doloremque odit quia fuga numquam a ut dignissimos. Voluptatem quas nobis sit occaecati exercitationem sit porro.\n  </p>"
+                        "code": "<p class=\"s-white-space:pre\">\n      Ipsa nemo et dolorum et voluptas est. Omnis doloremque est fugit expedita veniam officia voluptatem. Placeat sed reiciendis qui a ut impedit. Reprehenderit repellendus assumenda. Eligendi earum ut maiores beatae. Hic quidem animi omnis perferendis dolor.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "Pre-line",
-                        "code": "<p class=\"s-white-space:pre-line\">\n      Necessitatibus minus est exercitationem saepe sed exercitationem ab ut. Dolorum ea non saepe. Sed temporibus incidunt. Est omnis temporibus odio minus dolores culpa. Neque tenetur temporibus voluptas molestiae unde praesentium ea. Dolores nulla sed optio.\n  </p>"
+                        "code": "<p class=\"s-white-space:pre-line\">\n      Iusto maxime facilis libero ea. Id atque consequatur ea quisquam incidunt illum aperiam. Et molestiae ipsam ut consectetur.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "Pre-wrap",
-                        "code": "<p class=\"s-white-space:pre-wrap\">\n      Magni dolor ea impedit velit et reprehenderit voluptatem eveniet. Perferendis eligendi numquam perspiciatis et fuga consequatur facere officiis velit. Corrupti minima blanditiis laudantium quis. Nam illum sequi cupiditate earum.\n  </p>"
+                        "code": "<p class=\"s-white-space:pre-wrap\">\n      Nulla est sunt qui quidem harum sapiente. Est est et beatae. Nihil debitis sit quis rem optio. Dicta tenetur architecto ut maiores quia alias. Libero culpa voluptate excepturi cupiditate illo et. Reiciendis perferendis nihil ea enim sunt voluptatem qui sunt fugit.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "Revert",
-                        "code": "<p class=\"s-white-space:revert\">\n      Laboriosam qui architecto debitis ullam id ab. Voluptate illo modi alias. Consequatur labore ea.\n  </p>"
+                        "code": "<p class=\"s-white-space:revert\">\n      Quod maxime aspernatur eveniet eveniet vel doloribus reprehenderit. Itaque quae odit ullam omnis consequuntur hic quas. Ut voluptas sunt blanditiis sequi ratione.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "Unset",
-                        "code": "<p class=\"s-white-space:unset\">\n      Velit veritatis atque tempora quas modi accusamus rerum. Distinctio magni doloribus non non. Sequi totam nulla accusantium autem aliquid rerum accusamus ut quia. Voluptatem ut expedita explicabo sequi. Eum consequatur praesentium quo quod.\n  </p>"
+                        "code": "<p class=\"s-white-space:unset\">\n      Rem et placeat. Deleniti adipisci aliquid quam exercitationem. Voluptatem eos laudantium facilis quaerat ut labore. Natus iure maxime nesciunt rerum fugit non qui reprehenderit accusamus.\n  </p>"
+                    }
+                ],
+                "install": [
+                    {
+                        "language": "css",
+                        "code": "@s.whiteSpace.classes;"
                     }
                 ],
                 "since": "2.0.0",
@@ -2551,9 +3024,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "index.dev.css",
-                "extension": "dev",
-                "relPath": "dist/css/index.dev.css",
+                "filename": "index.css",
+                "extension": "css",
+                "relPath": "dist/css/index.css",
                 "children": {}
             }
         }

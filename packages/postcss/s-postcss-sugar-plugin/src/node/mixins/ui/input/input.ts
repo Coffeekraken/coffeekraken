@@ -8,7 +8,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @type               PostcssMixin
  * @interface       ./input
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * Apply the input style to any element
  *

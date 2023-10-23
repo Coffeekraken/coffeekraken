@@ -31,7 +31,7 @@ export default class SClipboardCopyComponentInterface extends __SInterface {
                 description:
                     'Specify the duration for displaying the "success" icon',
                 type: 'Number',
-                default: 1500,
+                default: 700,
             },
             errorTimeout: {
                 description:

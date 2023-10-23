@@ -82,10 +82,8 @@ export default function ({
                 -moz-appearance: none !important;
                 -webkit-appearance: none !important;
                 position: relative;
-                width: 1.4em;
-                height: 1.4em;
-                font-size: s.scalable(1rem);
-                margin-block: 0.7em 0.9em;
+                width: 1em; height: 1em;
+                font-size: clamp(s.scalable(24px), s.scalable(1rem), 999rem);
 
                 &:disabled {
                     @s.disabled;
@@ -104,11 +102,10 @@ export default function ({
                     background-color: transparent;
                     transition: s.theme(ui.form.transition);
                     box-shadow: 0 0 0 0 s.color(current, --alpha 0.2);
+                    @s.shape();
                     
-                    &.s-shape {
-                        @s.shape();
-                    }
-                    &:not(.s-shape) {
+                    &:not(.s-shape), 
+                    &:not(.s-shape):after {
                         border-radius: 999px;
                     }
 
@@ -116,11 +113,12 @@ export default function ({
                         content: '';
                         position: absolute;
                         top: 50%; left: 50%;
-                        width: 0.4em; height: 0.4em;
+                        width: 0.6em; height: 0.6em;
                         transform: translate(-50%, -50%);
                         background: s.color(current);
                         opacity: 0;
                         transition: s.theme(ui.form.transition);
+                        @s.shape();
                     }
                     label:hover > &:not(:disabled):after,
                     &:hover:not(:disabled):after {

@@ -8,7 +8,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @type               PostcssMixin
  * @interface     ./label          interface
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * Apply the label style to any element
  *
@@ -161,8 +161,9 @@ export default function ({
                   }
 
                   & input:not([type="checkbox"]):not([type="radio"]),
+                  & select,
                   & textarea {
-                    width: 100%;
+                    width: 100% !important;
                     margin: 0;
                   }
 
@@ -184,7 +185,7 @@ export default function ({
                   & input:not([type="checkbox"]):not([type="radio"]),
                   & select,
                   & textarea {
-                    width: 100%;
+                    width: 100% !important;
                   }
                 `);
                 break;
@@ -213,7 +214,6 @@ export default function ({
         switch (finalParams.lnf) {
             case 'float':
                 vars.push(`
-                  width: 100%;  
 
                   & > *:not(input):not(textarea):not(select) {
                     transition: s.theme(ui.label.transition);

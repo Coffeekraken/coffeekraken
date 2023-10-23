@@ -253,7 +253,6 @@ class SDocmap extends __SClass implements ISDocmap {
             ...this.constructor._registeredTagsProxy,
             ...this.settings.tagsProxy,
         };
-        console.log('S', this.settings);
     }
 
     /**

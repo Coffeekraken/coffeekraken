@@ -224,11 +224,10 @@ export default function (api) {
             /**
              * @name          default
              * @namespace     config.themeFont.size
-             * @type          String
+             * @type          Number
              * @default       [theme.size.default]
              *
-             * Declare the "default" font size.
-             * MUST be an absolute css value like "3rem".
+             * Declare the "default" font size in px
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

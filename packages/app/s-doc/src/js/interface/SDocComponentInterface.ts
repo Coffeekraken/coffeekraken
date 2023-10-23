@@ -72,6 +72,9 @@ export default class SDocComponentInterface extends __SInterface {
                     examplesTitle: __i18n('Examples', {
                         id: 's-doc.examples.title',
                     }),
+                    installTitle: __i18n('Install', {
+                        id: 's-doc.install.title',
+                    }),
                     paramsTitle: __i18n('Parameters', {
                         id: 's-doc.params.title',
                     }),

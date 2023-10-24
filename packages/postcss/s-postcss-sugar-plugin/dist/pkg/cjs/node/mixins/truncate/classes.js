@@ -24,7 +24,7 @@ const faker_1 = __importDefault(require("faker"));
  * @snippet         @s.truncate.classes
  *
  * @example        css
- * \@s.truncate.classes;
+ * @s.truncate.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -60,7 +60,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.truncate.classes;
+        * @s.truncate.classes;
         * 
         ${[...Array(finalParams.count).keys()].map((i) => {
         return ` * @cssClass        s-truncate:${i + 1}         Truncate the container to ${i + 1} line(s)`;

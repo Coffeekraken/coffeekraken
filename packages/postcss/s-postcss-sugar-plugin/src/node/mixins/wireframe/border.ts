@@ -20,11 +20,11 @@ export interface postcssSugarPluginWireframeBorderMixinParams {}
  * This mixin gives you back the wireframe border statement that depend on you themeWireframe config
  *
  * @snippet         @s.wireframe.border
- * \@s.wireframe.border;
+ * @s.wireframe.border;
  *
  * @example        css
  * .myCoolItem {
- *  \@s.wireframe.border;
+ *  @s.wireframe.border;
  * }
  *
  * @since       2.0.0

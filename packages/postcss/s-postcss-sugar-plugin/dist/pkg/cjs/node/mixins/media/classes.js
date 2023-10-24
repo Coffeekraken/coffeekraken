@@ -22,7 +22,7 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  * Take this as an example:
  *
  * ```css
- * \@s.media.classes(mobile) {
+ * @s.media.classes(mobile) {
  *    .my-cool-element {
  *      color: green;
  *    }
@@ -39,7 +39,7 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  * @return        {Css}         The generated css
  *
  * @example         css
- * \@s.media.classes(mobile) {
+ * @s.media.classes(mobile) {
  *    // only for this media context...
  * }
  *

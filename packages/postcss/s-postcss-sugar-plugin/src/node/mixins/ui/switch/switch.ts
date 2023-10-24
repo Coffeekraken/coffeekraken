@@ -8,7 +8,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @type               PostcssMixin
  * @interface     ./switch          interface
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * Apply the switch style to any element
  *
@@ -75,93 +75,83 @@ export default function ({
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
         
-        font-size: s.scalable(1rem);
-        margin-block: 0.7em 0.9em;
+        font-size: clamp(s.scalable(20px), s.scalable(1rem), 999rem);
 
-        --thumb-size: 1.4em;
-        --thumb-color-active: s.color(main, surface);
-        --thumb-color-inactive: s.color(current);
-        --thumb-color-highlight: s.color(current, --alpha 0.2);
+        --thumb-size: 1em;
+        --thumb-color-active: s.color(current);
+        --thumb-color-inactive: s.color(current, --desaturate 80);
+        --thumb-border-width: s.theme(ui.form.borderWidth);
+        --thumb-border-color: s.color(current, border);
 
-        --track-size: calc(var(--thumb-size) * 2);
-        --track-padding: 0.2em;
-        --track-color-active: s.color(current);
-        --track-color-inactive: s.color(current, --alpha 0);
-
-        --isLTR: 1;
-
-        @s.direction.rtl {
-            --isLTR: -1;
-        }
+        --track-size: 0.5em;
+        --track-color-active: s.color(current, --alpha 0.3);
+        --track-color-inactive: s.color(main, ui, --alpha 0.2 --desaturate 80);
+        --track-border-width: s.theme(ui.form.borderWidth);
+        --track-border-color: s.color(current, border);
 
         --thumb-position: 0%;
 
         --thumb-transition-duration: s.theme(ui.form.transition);
         
-        padding: var(--track-padding);
-        inline-size: var(--track-size);
-        block-size: var(--thumb-size);
-
         -webkit-appearance: none !important;
         -moz-appearance: none !important;
         appearance: none !important;
+        width: calc(var(--thumb-size) * 2);
+        height: var(--thumb-size);
+        position: relative;
         pointer-events: all;
         cursor: pointer;
         touch-action: pan-y;
-        outline-offset: 5px;
+        /* outline-offset: 5px; */
         box-sizing: content-box;
-
         flex-shrink: 0;
-        display: grid;
-        align-items: center;
-        grid: [track] 1fr / [track] 1fr;
-
-        &:checked {
-            &::before {
-            }
-            &::after {
-            }
-        }
 
         &::before {
-            --highlight-size: 0;
-
             content: "";
             cursor: pointer;
             pointer-events: none;
-            grid-area: track;
-            inline-size: var(--thumb-size);
-            block-size: var(--thumb-size);
+            width: calc(var(--thumb-size) * 2 - 20%);
+            height: var(--track-size);
+            position: absolute;
+            top: 50%; left: 10%;
+            transform: translateY(-50%);
         }
-
         &::after {
             content: "";
             cursor: pointer;
             pointer-events: none;
-            grid-area: track;
-            inline-size: var(--thumb-size);
-            block-size: var(--thumb-size);
+            width: var(--thumb-size);
+            height: var(--thumb-size);
+            position: absolute;
+            top: 50%; left: 0;
         }
 
-        &:not(:disabled):hover::before {
-        }
-        &:not(:disabled):focus::before {
-        }
 
-        &:checked {
-            --thumb-position: calc((var(--track-size) - 100%) * var(--isLTR));
+        --thumb-position: calc(--thumb-size) / 2);
+        @s.direction.rtl {
+            --thumb-position: calc(100% - var(--thumb-size) / 2);
         }
 
         &:indeterminate {
-            --thumb-position: calc(
-                calc(calc(var(--track-size) / 2) - calc(var(--thumb-size) / 2))
-                * var(--isLTR)
-            );
+            --thumb-position: 50%;
+        }
+
+        &:checked {
+            --thumb-position: calc(100% - var(--thumb-size) / 2);
+
+            @s.direction.rtl {
+                --thumb-position: calc(var(--thumb-size) / 2);
+            }
         }
 
         @s.state.disabled {
             --thumb-color: transparent;
             @s.disabled;
+        }
+
+        &:after {
+            left: var(--thumb-position);
+            transform: translate(-50%, -50%);
         }
 
     `);
@@ -171,47 +161,24 @@ export default function ({
         default:
             if (finalParams.scope.indexOf('lnf') !== -1) {
                 vars.push(`
-        
-                    font-size: s.scalable(0.8rem);        
-                    background: var(--track-color-inactive);
-
-                    border: s.color(main, border) solid s.border.width(ui.form.borderWidth);
-                    outline-offset: 5px;
-                    
-                    transition: var(--thumb-transition-duration);
-
-                    &:checked {
-                        &::before {
-                            background: var(--thumb-color-active) !important;
-                        }
-                        &::after {
-                        }
-                    }
-
-                    &::before {
-                        --highlight-size: 0;
-
-                        background: var(--thumb-color-inactive);
-                        box-shadow: 0 0 0 var(--highlight-size) var(--thumb-color-highlight);
-                        transform: translateX(var(--thumb-position));
+             
+                    &:before {
+                        background: var(--track-color-inactive);
                         transition: var(--thumb-transition-duration);
                     }
 
                     &::after {
-                        background: rgba(255,255,25,0);
-                        box-shadow: 0;
-                        transition: ;
-                    }
-
-                    &:not(:disabled):hover::before {
-                        --highlight-size: .5rem;
-                    }
-                    &:not(:disabled):focus::before {
-                        --highlight-size: .25rem;
+                        background: var(--thumb-color-inactive);
+                        transition: var(--thumb-transition-duration);
                     }
 
                     &:checked {
-                        background: var(--track-color-active);
+                        &:before {
+                            background: var(--track-color-active) !important;
+                        }
+                        &::after {
+                            background: var(--thumb-color-active) !important;
+                        }
                     }
 
                 `);

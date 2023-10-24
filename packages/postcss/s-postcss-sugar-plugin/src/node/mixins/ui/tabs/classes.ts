@@ -18,7 +18,7 @@ import __faker from 'faker';
  * @snippet     @s.ui.tabs.classes
  *
  * @example     css
- * \@s.ui.tabs.classes;
+ * @s.ui.tabs.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -85,10 +85,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@s.ui.tabs.classes;
+        * @s.ui.tabs.classes;
         * 
         * .my-tabs {
-        *   \@s.ui.tabs;
+        *   @s.ui.tabs;
         * }
         * 
         * @cssClass     s-tabs                  Apply the tabs lnf

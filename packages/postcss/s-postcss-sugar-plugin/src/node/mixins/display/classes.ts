@@ -16,7 +16,7 @@ import __faker from 'faker';
  * @snippet         @s.display.classes
  *
  * @example        css
- * \@s.display.classes;
+ * @s.display.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -68,7 +68,7 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@s.display.classes;
+        * @s.display.classes;
         * 
         * @cssClass                 s-display:block           Apply the display \`block\` to any HTMLElement
         * @cssClass                 s-display:inline-block           Apply the display \`inline-block\` to any HTMLElement

@@ -22,7 +22,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @snippet         @s.ui.avatar.classes
  *
  * @example       css
- * \@s.ui.avatar.classes();
+ * @s.ui.avatar.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -62,10 +62,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support      edge
         * 
         * @install          css
-        * \\@s.ui.avatar.classes;
+        * @s.ui.avatar.classes;
         * 
         * .my-avatar {
-        *   \@s.ui.avatar;
+        *   @s.ui.avatar;
         * }
         * 
         * @cssClass             s-avatar                Apply the avatar style

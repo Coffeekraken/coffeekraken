@@ -17,7 +17,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @snippet         @s.ui.backdrop.classes
  *
  * @example       css
- * \@s.ui.backdrop.classes();
+ * @s.ui.backdrop.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -80,10 +80,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@s.ui.backdrop.classes;
+        * @s.ui.backdrop.classes;
         * 
         * .my-backdrop {
-        *   \@s.ui.backdrop;
+        *   @s.ui.backdrop;
         * }
         * 
         * @cssClass                 s-backdrop          Apply the backdrop styling

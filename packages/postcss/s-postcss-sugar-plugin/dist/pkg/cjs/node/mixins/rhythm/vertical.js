@@ -31,13 +31,13 @@ exports.interface = postcssSugarPluginRhythmVerticalMixinInterface;
  * @return      {Css}         The generated css
  *
  * @snippet         @s.rhythm.vertical
- * \@s.rhythm.vertical {
+ * @s.rhythm.vertical {
  *      $1
  * }
  *
  * @example        css          Custom styling
  * .my-cool-element {
- *    \@s.rhythm.vertical {
+ *    @s.rhythm.vertical {
  *      margin-bottom: 50px;
  *    }
  * }

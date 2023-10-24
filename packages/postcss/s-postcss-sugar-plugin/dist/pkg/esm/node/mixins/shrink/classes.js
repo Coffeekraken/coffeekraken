@@ -14,7 +14,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @snippet         @s.shrink.classes
  *
  * @example        css
- * \@s.shrink.classes;
+ * @s.shrink.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -45,7 +45,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.shrink.classes;
+        * @s.shrink.classes;
         * 
         * @cssClass                 s-shrink             Apply the default shrink to any HTMLElement
         * ${Array.from(Array(10)).map((i) => `

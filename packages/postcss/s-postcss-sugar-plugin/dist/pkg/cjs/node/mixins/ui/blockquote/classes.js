@@ -23,7 +23,7 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  * @snippet         @s.ui.blockquote.classes
  *
  * @example       css
- * \@s.ui.blockquote.classes();
+ * @s.ui.blockquote.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -70,10 +70,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.ui.blockquote.classes;
+        * @s.ui.blockquote.classes;
         * 
         * .my-blockquote {
-        *   \@s.ui.blockquote;
+        *   @s.ui.blockquote;
         * }
         * 
         * @cssClass         s-blockquote            Apply the blockquote styling

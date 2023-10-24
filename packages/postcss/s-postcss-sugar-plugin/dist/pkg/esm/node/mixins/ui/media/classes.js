@@ -16,7 +16,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @snippet         @s.ui.media.classes
  *
  * @example       css
- * \@s.ui.media.classes();
+ * @s.ui.media.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -56,10 +56,10 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support      edge
         * 
         * @install          css
-        * \\@s.ui.media.classes;
+        * @s.ui.media.classes;
         * 
         * .my-media {
-        *   \@s.ui.media;
+        *   @s.ui.media;
         * }
         * 
         * @cssClass             s-media                Apply the media style

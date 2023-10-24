@@ -21,13 +21,13 @@ export interface postcssSugarPluginDirectionRtlMixinParams {}
  * The scope is specified like so: [dir="rtl"] &, &[dir="rtl"]
  *
  * @snippet         @s.direction.rtl
- * \@s.direction.rtl {
+ * @s.direction.rtl {
  *      $1
  * }
  *
  * @example        css
  * .myCoolItem {
- *  \@s.direction.rtl {
+ *  @s.direction.rtl {
  *      // ...
  *  }
  * }

@@ -23,7 +23,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @snippet         @s.reset.sugar
  *
  * @example        css
- * \@s.reset.sugar;
+ * @s.reset.sugar;
  *
  * @see       https://github.com/nicolas-cusan/destyle.css
  * @since       2.0.0
@@ -80,7 +80,7 @@ export default function ({
         * @support      edge
         * 
         * @example        css       Simple usage
-        * \@s.reset.sugar;
+        * @s.reset.sugar;
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

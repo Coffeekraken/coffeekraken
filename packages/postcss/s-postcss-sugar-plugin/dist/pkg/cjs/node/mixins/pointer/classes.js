@@ -22,7 +22,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @snippet         @s.pointer.classes
  *
  * @example        css
- * \@s.pointer.classes;
+ * @s.pointer.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -53,7 +53,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.pointer.classes;
+        * @s.pointer.classes;
         * 
         * @cssClass         s-pointer-events:none           Apply the pointer-events "none" attribute
         * @cssClass         s-pointer-events:all           Apply the pointer-events "all" attribute

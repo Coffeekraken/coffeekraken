@@ -15,7 +15,7 @@ import __faker from 'faker';
  * @snippet         @s.flex.classes
  *
  * @example        css
- * \@s.flex.classes;
+ * @s.flex.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -47,7 +47,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.flex.classes;
+        * @s.flex.classes;
         * 
         * @cssClass                 s-flex              Apply a display "flex" on any HTMLElement
         * @cssClass                 s-flex:row          Apply the flex direction to "row"

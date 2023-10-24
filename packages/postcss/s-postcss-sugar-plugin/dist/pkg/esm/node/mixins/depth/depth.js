@@ -16,7 +16,7 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @example        css
  * .my-element {
- *    \@s.depth(20);
+ *    @s.depth(20);
  * }
  *
  * @since       2.0.0

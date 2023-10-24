@@ -20,7 +20,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @snippet         @s.ui.label.classes
  *
  * @example     css
- * \@s.ui.input.classes;
+ * @s.ui.input.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -97,10 +97,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@s.ui.label.classes;
+        * @s.ui.label.classes;
         * 
         * .my-label {
-        *   \@s.ui.label;
+        *   @s.ui.label;
         * } 
         *
         ${finalParams.lnfs
@@ -228,6 +228,10 @@ export default function ({
             text-align: initial;
             display: flex;
             
+            > *:not(.s-width) {
+                width: 50%;
+            }
+
             > * {
                 flex-shrink: 0;
             }

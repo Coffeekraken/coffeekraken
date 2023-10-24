@@ -25,13 +25,13 @@ exports.interface = postcssSugarPluginFormatTextlMixinInterface;
  * @return      {Css}         The generated css
  *
  * @snippet         @s.format.text
- * \@s.format.text {
+ * @s.format.text {
  *      $1
  * }
  *
  * @example        css
  * .my-cool-element {
- *    \@s.format.text {
+ *    @s.format.text {
  *      font-size: 20px;
  *      margin-bottom: 50px;
  *    }

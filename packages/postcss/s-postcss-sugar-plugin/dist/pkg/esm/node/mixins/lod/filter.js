@@ -17,13 +17,13 @@ import { __fromQuantifier } from '@coffeekraken/sugar/array';
  * @return        {Css}         The generated css
  *
  * @snippet         @s.lod.filter($1)
- * \@s.lod.filter($1) {
+ * @s.lod.filter($1) {
  *      $2
  * }
  *
  * @example        css
- * \@s.lod.filter(2) {
- *      \@s.ui.button.classes;
+ * @s.lod.filter(2) {
+ *      @s.ui.button.classes;
  * }
  *
  * @since       2.0.0

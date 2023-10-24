@@ -21,7 +21,7 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  * @snippet         @s.height.classes
  *
  * @example        css
- * \@s.height.classes;
+ * @s.height.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -54,7 +54,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.height.classes; 
+        * @s.height.classes; 
         * 
         ${Object.keys(heightObj).map((height) => {
         return ` * @cssClass             s-height:${height}            Apply the \`${height}\` height`;

@@ -18,7 +18,7 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @example        css
  * .my-element {
- *  \@s.visually.hidden;
+ *  @s.visually.hidden;
  * }
  *
  * @since       2.0.0
@@ -46,7 +46,7 @@ export interface postcssSugarPluginVisuallyHiddenMixinParams {}
  *
  * @example        css
  * .my-cool-element {
- *    \@s.transition(fast);
+ *    @s.transition(fast);
  * }
  *
  * @example       html

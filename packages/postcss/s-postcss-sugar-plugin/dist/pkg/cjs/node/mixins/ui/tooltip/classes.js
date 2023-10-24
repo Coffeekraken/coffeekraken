@@ -26,7 +26,7 @@ const faker_1 = __importDefault(require("faker"));
  * @snippet         @s.ui.tooltip.classes
  *
  * @example     css
- * \@s.ui.tooltip.classes;
+ * @s.ui.tooltip.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -76,10 +76,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.ui.tooltip.classes;
+        * @s.ui.tooltip.classes;
         * 
         * .my-tooltip {
-        *   \@s.ui.tooltip;
+        *   @s.ui.tooltip;
         * }
         * 
         * @cssClass             s-tooltip-container             Allows to hide and show your tooltip on hover (focus)

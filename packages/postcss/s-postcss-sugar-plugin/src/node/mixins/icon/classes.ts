@@ -25,14 +25,14 @@ import { __unquote } from '@coffeekraken/sugar/string';
  *
  * - Filesystem:
  * Here's some example of filesystem icons declarations:
- * \@s.icon.classes(
+ * @s.icon.classes(
  *    fs:src/icons/vuejs.svg:vue
  *    fs:src/icons/something.svg:something
  * );
  *
  * - Font awesome (5)
  * Here's some example of font awesome icons declarations:
- * \@s.icon.classes(
+ * @s.icon.classes(
  *    fa:user:user
  *    fa:heart:heart
  *    fa:fire:fire
@@ -44,14 +44,14 @@ import { __unquote } from '@coffeekraken/sugar/string';
  * @return        {Css}         The generated css
  *
  * @snippet         @s.icon.classes($1)
- * \@s.icon.classes(
+ * @s.icon.classes(
  *      fa:user:user
  *      fs:src/icons/*.svg
  *      $1
  * )
  *
  * @example        css
- * \@s.icon.classes(
+ * @s.icon.classes(
  *    fa:user:user
  *    fa:heart:heart
  *    fs:src/icons/vuejs.svg:vue
@@ -245,7 +245,7 @@ export default function ({
         *   </div>
         * 
         * @example      css
-        * \@s.icon.classes("
+        * @s.icon.classes("
         ${iconsObjs
             .map((iconObj) => {
                 // @ts-ignore

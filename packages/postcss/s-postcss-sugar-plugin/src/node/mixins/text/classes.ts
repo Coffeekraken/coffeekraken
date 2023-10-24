@@ -17,7 +17,7 @@ import __faker from 'faker';
  * @snippet         @s.text.classes
  *
  * @example        css
- * \@s.text.classes;
+ * @s.text.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -70,7 +70,7 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@s.text.classes; 
+        * @s.text.classes; 
         * 
         * @cssClass             s-text:left             Align the text to the left
         * @cssClass             s-text:right             Align the text to the right

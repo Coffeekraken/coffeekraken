@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
-const faker_1 = __importDefault(require("faker"));
 /**
  * @name          classes
  * @as              @s.ui.range.classes
@@ -14,7 +13,7 @@ const faker_1 = __importDefault(require("faker"));
  * @type               PostcssMixin
  * @interface     ./classes          interface
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * Generate the range classes
  *
@@ -26,7 +25,7 @@ const faker_1 = __importDefault(require("faker"));
  * @snippet         @s.ui.range.classes
  *
  * @example     css
- * \@s.ui.range.classes;
+ * @s.ui.range.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -66,7 +65,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @type               Styleguide
         * @menu           Styleguide / Forms        /styleguide/forms/range
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to display nice radio in your forms
         * 
@@ -80,10 +79,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.ui.range.classes;
+        * @s.ui.range.classes;
         * 
         * .my-range {
-        *   \@s.ui.range;
+        *   @s.ui.range;
         * }
         * 
         ${finalParams.lnfs
@@ -96,20 +95,20 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         .map((lnf) => {
         return ` * @example        html       ${lnf}
             *   <label class="s-mbe:30 s-label:responsive">
-            *     <span>${faker_1.default.name.title()} ${faker_1.default.name.findName()}</span>
-            *     <input type="range" class="s-range${finalParams.defaultLnf === lnf ? '' : `:${lnf}`}" min="0" max="100" step="10" />
+            *     <span>John Doe</span>
+            *     <input type="range" class="s-range ${finalParams.defaultLnf === lnf ? '' : `:${lnf}`}" min="0" max="100" step="10" />
             *   </label>
             *   <label class="s-mbe:30 s-label:responsive">
-            *     <span>${faker_1.default.name.title()} ${faker_1.default.name.findName()}</span>
-            *     <input type="range" class="s-range${finalParams.defaultLnf === lnf ? '' : `:${lnf}`} s-color:accent" min="0" max="100" step="10" />
+            *     <span>John Doe</span>
+            *     <input type="range" class="s-range ${finalParams.defaultLnf === lnf ? '' : `:${lnf}`} s-color:accent" min="0" max="100" step="10" />
             *   </label>
             *   <label class="s-mbe:30 s-label:responsive">
-            *     <span>${faker_1.default.name.title()} ${faker_1.default.name.findName()}</span>
-            *     <input type="range" class="s-range${finalParams.defaultLnf === lnf ? '' : `:${lnf}`} s-color:complementary" min="0" max="100" step="10" />
+            *     <span>John Doe</span>
+            *     <input type="range" class="s-range ${finalParams.defaultLnf === lnf ? '' : `:${lnf}`} s-color:complementary" min="0" max="100" step="10" />
             *   </label>
             *   <label class="s-mbe:30 s-label:responsive">
             *     <span>I'm disabled</span>
-            *     <input type="range" disabled class="s-range${finalParams.defaultLnf === lnf ? '' : `:${lnf}`} s-color:complementary" min="0" max="100" step="10" />
+            *     <input type="range" disabled class="s-range ${finalParams.defaultLnf === lnf ? '' : `:${lnf}`} s-color:complementary" min="0" max="100" step="10" />
             *   </label>
             * `;
     })
@@ -117,76 +116,76 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * 
         * @example        html          Shapes
         *   <label class="s-mbe:30 s-label:responsive">
+        *     <span>John Doe</span>
         *     <input type="range" class="s-range s-shape:default" min="0" max="100" step="10" />
-        *     <span>${faker_1.default.name.title()} ${faker_1.default.name.findName()}</span>
         * </label>
         * <label class="s-mbe:30 s-label:responsive">
+        *     <span>John Doe</span>
         *     <input type="range" class="s-range s-shape:square" min="0" max="100" step="10" />
-        *     <span>${faker_1.default.name.title()} ${faker_1.default.name.findName()}</span>
         * </label>
         * <label class="s-mbe:30 s-label:responsive">
+        *     <span>John Doe</span>
         *     <input type="range" class="s-range s-shape:pill" min="0" max="100" step="10" />
-        *     <span>${faker_1.default.name.title()} ${faker_1.default.name.findName()}</span>
         * </label>
         * 
         * @example        html          Colors (none-exclusive)
         *   <label class="s-mbe:30 s-label:responsive">
+        *     <span>John Doe</span>
         *     <input type="range" class="s-range" min="0" max="100" step="10" />
-        *     <span>${faker_1.default.name.title()} ${faker_1.default.name.findName()}</span>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
+        *     <span>John Doe</span>
         *     <input type="range" class="s-range s-color:accent" min="0" max="100" step="10" />
-        *     <span>${faker_1.default.name.title()} ${faker_1.default.name.findName()}</span>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
+        *     <span>John Doe</span>
         *     <input type="range" class="s-range s-color:complementary" min="0" max="100" step="10" />
-        *     <span>${faker_1.default.name.title()} ${faker_1.default.name.findName()}</span>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
+        *     <span>John Doe</span>
         *     <input type="range" class="s-range s-color:error" disabled min="0" max="100" step="10" />
-        *     <span>${faker_1.default.name.title()} ${faker_1.default.name.findName()}</span>
         *   </label>
         * 
         * @example      html        RTL
         * <div dir="rtl">
         *   <label class="s-mbe:30 s-label:responsive">
-        *     <span>${faker_1.default.name.title()} ${faker_1.default.name.findName()}</span>
         *     <input type="range" class="s-range" min="0" max="100" step="10" />
+        *     <span>John Doe</span>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
-        *     <span>${faker_1.default.name.title()} ${faker_1.default.name.findName()}</span>
         *     <input type="range" class="s-range s-color:accent" min="0" max="100" step="10" />
+        *     <span>John Doe</span>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
-        *     <span>${faker_1.default.name.title()} ${faker_1.default.name.findName()}</span>
         *     <input type="range" class="s-range s-color:complementary" min="0" max="100" step="10" />
+        *     <span>John Doe</span>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
-        *     <span>${faker_1.default.name.title()} ${faker_1.default.name.findName()}</span>
         *     <input type="range" class="s-range s-color:error" disabled min="0" max="100" step="10" />
+        *     <span>John Doe</span>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
-        *     I'm disabled
+        *     <span>I'm disabled</span>
         *     <input type="range" disabled class="s-range s-color:error" disabled min="0" max="100" step="10" />
         *   </label>
         * </div>
         *
         * @example        html          Scales
         *   <label class="s-mbe:30 s-label:responsive">
+        *     <span>John Doe</span>
         *     <input type="range" class="s-range s-scale:08" min="0" max="100" step="10" />
-        *     <span>${faker_1.default.name.title()} ${faker_1.default.name.findName()}</span>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
-        *     <input type="range" class="s-range" min="0" max="100" step="10" />
-        *     <span>${faker_1.default.name.title()} ${faker_1.default.name.findName()}</span>
+        *     <span>John Doe</span>
+        *     <input type="range" class="s-range s-width:50" min="0" max="100" step="10" />
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
+        *     <span>John Doe</span>
         *     <input type="range" class="s-range s-scale:12" min="0" max="100" step="10" />
-        *     <span>${faker_1.default.name.title()} ${faker_1.default.name.findName()}</span>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
+        *     <span>John Doe</span>
         *     <input type="range" class="s-range s-scale:14" min="0" max="100" step="10" />
-        *     <span>${faker_1.default.name.title()} ${faker_1.default.name.findName()}</span>
         *   </label>
         * 
         * @since      2.0.0
@@ -202,7 +201,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * This class represent a(n) "<s-color="accent">bare</s-color>" range
         * 
         * @example        html
-        * <input type="range" class="s-range" min="0" max="100" step="10" />
+        * <input type="range" class="s-range s-width:50" min="0" max="100" step="10" />
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -227,7 +226,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * This class represent a(n) "<s-color="accent">${lnf}</s-color>" range
             * 
             * @example        html
-            * <input type="range" class="s-range${finalParams.defaultLnf === lnf ? '' : `:${lnf}`}" min="0" max="100" step="10" />
+            * <input type="range" class="s-range ${finalParams.defaultLnf === lnf ? '' : `:${lnf}`}" min="0" max="100" step="10" />
             * 
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -242,4 +241,4 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     return vars;
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUNyRCxvRUFBNkM7QUFDN0Msa0RBQTRCO0FBRTVCOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUVILE1BQU0seUNBQTBDLFNBQVEscUJBQVk7SUFDaEUsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILElBQUksRUFBRTtnQkFDRixJQUFJLEVBQUUsVUFBVTtnQkFDaEIsTUFBTSxFQUFFLENBQUMsT0FBTyxDQUFDO2dCQUNqQixPQUFPLEVBQUUsQ0FBQyxPQUFPLENBQUM7YUFDckI7WUFDRCxVQUFVLEVBQUU7Z0JBQ1IsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsTUFBTSxFQUFFLENBQUMsT0FBTyxDQUFDO2dCQUNqQixPQUFPLEVBQUUsaUJBQVEsQ0FBQyxHQUFHLENBQUMscUJBQXFCLENBQUM7YUFDL0M7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFO29CQUNGLElBQUksRUFBRSxlQUFlO29CQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDO2lCQUN6QjtnQkFDRCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxDQUFDO2dCQUN2QixPQUFPLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxDQUFDO2FBQzNCO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQVFxRCw4REFBUztBQUUvRCxtQkFBeUIsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixPQUFPLEVBQ1AsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLG1CQUNiLElBQUksRUFBRSxFQUFFLEVBQ1IsVUFBVSxFQUFFLE9BQU8sRUFDbkIsS0FBSyxFQUFFLEVBQUUsSUFDTixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFHLElBQUksT0FBTyxFQUFFLENBQUM7SUFFM0IsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O1VBMkJKLFdBQVcsQ0FBQyxJQUFJO1NBQ2IsR0FBRyxDQUFDLENBQUMsR0FBRyxFQUFFLEVBQUU7UUFDVCxPQUFPLDJCQUNILEdBQUcsS0FBSyxXQUFXLENBQUMsVUFBVSxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLElBQUksR0FBRyxFQUNqRCx3QkFBd0IsR0FBRyxZQUFZLENBQUM7SUFDNUMsQ0FBQyxDQUFDO1NBQ0QsSUFBSSxDQUFDLElBQUksQ0FBQzs7VUFFYixXQUFXLENBQUMsSUFBSTtTQUNiLEdBQUcsQ0FBQyxDQUFDLEdBQUcsRUFBRSxFQUFFO1FBQ1QsT0FBTyxpQ0FBaUMsR0FBRzs7MEJBRWpDLGVBQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFFLElBQUksZUFBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7c0RBRXpELFdBQVcsQ0FBQyxVQUFVLEtBQUssR0FBRyxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLElBQUksR0FBRyxFQUNqRDs7OzBCQUdjLGVBQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFFLElBQUksZUFBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7c0RBRXpELFdBQVcsQ0FBQyxVQUFVLEtBQUssR0FBRyxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLElBQUksR0FBRyxFQUNqRDs7OzBCQUdjLGVBQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFFLElBQUksZUFBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7c0RBRXpELFdBQVcsQ0FBQyxVQUFVLEtBQUssR0FBRyxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLElBQUksR0FBRyxFQUNqRDs7OzsrREFLSSxXQUFXLENBQUMsVUFBVSxLQUFLLEdBQUcsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxJQUFJLEdBQUcsRUFDakQ7O2VBRUcsQ0FBQztJQUNKLENBQUMsQ0FBQztTQUNELElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7O3NCQUtELGVBQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFFLElBQUksZUFBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Ozs7c0JBSS9DLGVBQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFFLElBQUksZUFBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Ozs7c0JBSS9DLGVBQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFFLElBQUksZUFBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Ozs7OztzQkFNL0MsZUFBTyxDQUFDLElBQUksQ0FBQyxLQUFLLEVBQUUsSUFBSSxlQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7OztzQkFJL0MsZUFBTyxDQUFDLElBQUksQ0FBQyxLQUFLLEVBQUUsSUFBSSxlQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7OztzQkFJL0MsZUFBTyxDQUFDLElBQUksQ0FBQyxLQUFLLEVBQUUsSUFBSSxlQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7OztzQkFJL0MsZUFBTyxDQUFDLElBQUksQ0FBQyxLQUFLLEVBQUUsSUFBSSxlQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7O3NCQU0vQyxlQUFPLENBQUMsSUFBSSxDQUFDLEtBQUssRUFBRSxJQUFJLGVBQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFOzs7O3NCQUkvQyxlQUFPLENBQUMsSUFBSSxDQUFDLEtBQUssRUFBRSxJQUFJLGVBQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFOzs7O3NCQUkvQyxlQUFPLENBQUMsSUFBSSxDQUFDLEtBQUssRUFBRSxJQUFJLGVBQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFOzs7O3NCQUkvQyxlQUFPLENBQUMsSUFBSSxDQUFDLEtBQUssRUFBRSxJQUFJLGVBQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFOzs7Ozs7Ozs7Ozs7c0JBWS9DLGVBQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFFLElBQUksZUFBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Ozs7c0JBSS9DLGVBQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFFLElBQUksZUFBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Ozs7c0JBSS9DLGVBQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFFLElBQUksZUFBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Ozs7c0JBSS9DLGVBQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFFLElBQUksZUFBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Ozs7OztLQU1oRSxDQUNBLENBQUM7SUFFRixJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLE1BQU0sQ0FBQyxFQUFFO1FBQ3BDLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7TUFhWixDQUNHLENBQUMsSUFBSSxDQUNGOzs7O1NBSUgsRUFDRyxFQUFFLElBQUksRUFBRSxVQUFVLEVBQUUsQ0FDdkIsQ0FBQztLQUNMO0lBRUQsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxLQUFLLENBQUMsRUFBRTtRQUNuQyxXQUFXLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxDQUFDLEdBQUcsRUFBRSxFQUFFO1lBQzdCLElBQUksR0FBRyxHQUFHLFNBQVMsQ0FBQztZQUNwQixJQUFJLEdBQUcsS0FBSyxXQUFXLENBQUMsVUFBVSxFQUFFO2dCQUNoQyxHQUFHLElBQUksSUFBSSxHQUFHLEVBQUUsQ0FBQzthQUNwQjtZQUVELElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Z0NBQ1UsR0FBRzs7Ozs2REFJMEIsR0FBRzs7O2tEQUloRCxXQUFXLENBQUMsVUFBVSxLQUFLLEdBQUcsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxJQUFJLEdBQUcsRUFDakQ7Ozs7O1FBS0osQ0FDSyxDQUFDLElBQUksQ0FDRjtlQUNELEdBQUc7b0NBQ2tCLEdBQUc7O2FBRTFCLEVBQ0csRUFBRSxJQUFJLEVBQUUsVUFBVSxFQUFFLENBQ3ZCLENBQUM7UUFDTixDQUFDLENBQUMsQ0FBQztLQUNOO0lBRUQsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQztBQXJPRCw0QkFxT0MifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUNyRCxvRUFBNkM7QUFFN0M7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBdUJHO0FBRUgsTUFBTSx5Q0FBMEMsU0FBUSxxQkFBWTtJQUNoRSxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsSUFBSSxFQUFFO2dCQUNGLElBQUksRUFBRSxVQUFVO2dCQUNoQixNQUFNLEVBQUUsQ0FBQyxPQUFPLENBQUM7Z0JBQ2pCLE9BQU8sRUFBRSxDQUFDLE9BQU8sQ0FBQzthQUNyQjtZQUNELFVBQVUsRUFBRTtnQkFDUixJQUFJLEVBQUUsUUFBUTtnQkFDZCxNQUFNLEVBQUUsQ0FBQyxPQUFPLENBQUM7Z0JBQ2pCLE9BQU8sRUFBRSxpQkFBUSxDQUFDLEdBQUcsQ0FBQyxxQkFBcUIsQ0FBQzthQUMvQztZQUNELEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUU7b0JBQ0YsSUFBSSxFQUFFLGVBQWU7b0JBQ3JCLFVBQVUsRUFBRSxDQUFDLEdBQUcsRUFBRSxHQUFHLENBQUM7aUJBQ3pCO2dCQUNELE1BQU0sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUM7Z0JBQ3ZCLE9BQU8sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUM7YUFDM0I7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBUXFELDhEQUFTO0FBRS9ELG1CQUF5QixFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLE9BQU8sRUFDUCxXQUFXLEdBTWQ7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsSUFBSSxFQUFFLEVBQUUsRUFDUixVQUFVLEVBQUUsT0FBTyxFQUNuQixLQUFLLEVBQUUsRUFBRSxJQUNOLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQUcsSUFBSSxPQUFPLEVBQUUsQ0FBQztJQUUzQixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7VUEyQkosV0FBVyxDQUFDLElBQUk7U0FDYixHQUFHLENBQUMsQ0FBQyxHQUFHLEVBQUUsRUFBRTtRQUNULE9BQU8sMkJBQ0gsR0FBRyxLQUFLLFdBQVcsQ0FBQyxVQUFVLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsSUFBSSxHQUFHLEVBQ2pELHdCQUF3QixHQUFHLFlBQVksQ0FBQztJQUM1QyxDQUFDLENBQUM7U0FDRCxJQUFJLENBQUMsSUFBSSxDQUFDOztVQUViLFdBQVcsQ0FBQyxJQUFJO1NBQ2IsR0FBRyxDQUFDLENBQUMsR0FBRyxFQUFFLEVBQUU7UUFDVCxPQUFPLGlDQUFpQyxHQUFHOzs7dURBSTNDLFdBQVcsQ0FBQyxVQUFVLEtBQUssR0FBRyxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLElBQUksR0FBRyxFQUNqRDs7Ozt1REFLSSxXQUFXLENBQUMsVUFBVSxLQUFLLEdBQUcsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxJQUFJLEdBQUcsRUFDakQ7Ozs7dURBS0ksV0FBVyxDQUFDLFVBQVUsS0FBSyxHQUFHLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsSUFBSSxHQUFHLEVBQ2pEOzs7O2dFQUtJLFdBQVcsQ0FBQyxVQUFVLEtBQUssR0FBRyxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLElBQUksR0FBRyxFQUNqRDs7ZUFFRyxDQUFDO0lBQ0osQ0FBQyxDQUFDO1NBQ0QsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztLQStFbEIsQ0FDQSxDQUFDO0lBRUYsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxNQUFNLENBQUMsRUFBRTtRQUNwQyxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7O01BYVosQ0FDRyxDQUFDLElBQUksQ0FDRjs7OztTQUlILEVBQ0csRUFBRSxJQUFJLEVBQUUsVUFBVSxFQUFFLENBQ3ZCLENBQUM7S0FDTDtJQUVELElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxRQUFRLENBQUMsS0FBSyxDQUFDLEVBQUU7UUFDbkMsV0FBVyxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsQ0FBQyxHQUFHLEVBQUUsRUFBRTtZQUM3QixJQUFJLEdBQUcsR0FBRyxTQUFTLENBQUM7WUFDcEIsSUFBSSxHQUFHLEtBQUssV0FBVyxDQUFDLFVBQVUsRUFBRTtnQkFDaEMsR0FBRyxJQUFJLElBQUksR0FBRyxFQUFFLENBQUM7YUFDcEI7WUFFRCxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDO2dDQUNVLEdBQUc7Ozs7NkRBSTBCLEdBQUc7OzttREFJaEQsV0FBVyxDQUFDLFVBQVUsS0FBSyxHQUFHLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsSUFBSSxHQUFHLEVBQ2pEOzs7OztRQUtKLENBQ0ssQ0FBQyxJQUFJLENBQ0Y7ZUFDRCxHQUFHO29DQUNrQixHQUFHOzthQUUxQixFQUNHLEVBQUUsSUFBSSxFQUFFLFVBQVUsRUFBRSxDQUN2QixDQUFDO1FBQ04sQ0FBQyxDQUFDLENBQUM7S0FDTjtJQUVELE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUM7QUFyT0QsNEJBcU9DIn0=

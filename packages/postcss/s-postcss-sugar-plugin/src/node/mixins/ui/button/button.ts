@@ -20,7 +20,7 @@ import __getRoot from '../../../utils/getRoot.js';
  *
  * @example       css
  * .my-element {
- *      \@s.ui.button();
+ *      @s.ui.button();
  * }
  *
  * @since     2.0.0

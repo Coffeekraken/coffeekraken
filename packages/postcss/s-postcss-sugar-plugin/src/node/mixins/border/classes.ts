@@ -27,7 +27,7 @@ export { postcssSugarPluginBorderRadiusClassesMixinInterface as interface };
  * @snippet         @s.border.classes
  *
  * @example       css
- * \@s.border.classes;
+ * @s.border.classes;
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -71,11 +71,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@s.border.classes;
+        * @s.border.classes;
         * 
         * .my-element {
-        *   \\@s.border.radius(40);
-        *   \\@s.border.width(10);
+        *   @s.border.radius(40);
         * }         
         * 
         * @cssClass             s-radius            Apply the default border radius to any HTMLElement
@@ -130,6 +129,13 @@ export default function ({
             })
             .join('\n')}
         *
+        * @install          css
+        * @s.border.classes;
+        * 
+        * .my-element {
+        *   @s.border.width(10);
+        * }       
+        * 
         * @example             html         Border width
         * <div class="s-flex:wrap s-gap:20">
         ${widthsKeys
@@ -173,6 +179,9 @@ export default function ({
             })
             .join('\n')}
         *
+        * @install          css
+        * @s.border.classes; 
+        * 
         * @example             html         Border color
         * <div class="s-flex:wrap s-gap:20">
         ${Object.keys(__STheme.getTheme().baseColors())

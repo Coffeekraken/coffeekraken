@@ -15,7 +15,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @snippet         @s.link.classes
  *
  * @example        css
- * \@s.link.classes;
+ * @s.link.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -66,10 +66,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@s.link.classes;
+        * @s.link.classes;
         * 
         * .my-element {
-        *   \\@s.link.stretch;
+        *   @s.link.stretch;
         * } 
         * 
         * @cssClass             s-link:stretch                  Stretch a link clickable area without changing his actual size and style

@@ -18,7 +18,7 @@ import __faker from 'faker';
  * @snippet         @s.padding.classes
  *
  * @example        css
- * \@s.padding.classes;
+ * @s.padding.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -74,7 +74,7 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@s.padding.classes;
+        * @s.padding.classes;
         * 
         ${paddingsKeys
             .map((spaceName) => {

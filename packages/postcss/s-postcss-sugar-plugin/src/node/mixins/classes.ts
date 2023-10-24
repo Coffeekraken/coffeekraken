@@ -17,7 +17,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @snippet         @s.classes
  *
  * @example        css
- * \@s.classes;
+ * @s.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

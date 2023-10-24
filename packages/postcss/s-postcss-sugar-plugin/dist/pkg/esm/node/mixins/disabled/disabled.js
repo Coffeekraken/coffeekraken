@@ -16,7 +16,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @example        css
  * .my-element {
- *    \@s.disabled();
+ *    @s.disabled();
  * }
  *
  * @since       2.0.0

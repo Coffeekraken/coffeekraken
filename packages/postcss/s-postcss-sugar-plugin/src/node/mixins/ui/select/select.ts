@@ -8,7 +8,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @type               PostcssMixin
  * @interface     ./select          interface
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * Apply the select style to any HTMLSelectElement
  *

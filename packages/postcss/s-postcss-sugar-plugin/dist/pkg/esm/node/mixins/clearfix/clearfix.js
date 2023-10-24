@@ -21,7 +21,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @example        css
  * .my-element {
- *    \@s.clearfix();
+ *    @s.clearfix();
  * }
  *
  * @since       2.0.0

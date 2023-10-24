@@ -26,7 +26,7 @@ const fs_2 = __importDefault(require("fs"));
  *
  * @example        css
  * .my-platform {
- *    \@s.platform(css);
+ *    @s.platform(css);
  * }
  *
  * @since       2.0.0

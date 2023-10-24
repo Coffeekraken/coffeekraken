@@ -27,12 +27,12 @@ export { postcssSugarPluginScopeExcludeMixinInterface as interface };
  * @return      {Css}         The generated css
  *
  * @snippet         @s.scope.exclude ($1) { $2 }
- * \@s.scope.exclude $1 {
+ * @s.scope.exclude $1 {
  *      $2
  * }
  *
  * @example        css
- * \@s.scope.exclude lnf {
+ * @s.scope.exclude lnf {
  *      @s.ui.button;
  *      // etc...
  * }

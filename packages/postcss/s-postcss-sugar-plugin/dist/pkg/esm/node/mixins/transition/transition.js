@@ -17,7 +17,7 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @example        css
  * .my-cool-element {
- *      \@s.transition(fast);
+ *      @s.transition(fast);
  * }
  *
  * @since       2.0.0

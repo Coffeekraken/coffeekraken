@@ -18,7 +18,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @snippet         @s.width.classes
  *
  * @example        css
- * \@s.width.classes;
+ * @s.width.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -71,7 +71,7 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@s.width.classes;
+        * @s.width.classes;
         * 
         ${Object.keys(widthObj).map((width) => {
             return ` * @cssClass             s-width:${width}            Apply the \`${width}\` width`;

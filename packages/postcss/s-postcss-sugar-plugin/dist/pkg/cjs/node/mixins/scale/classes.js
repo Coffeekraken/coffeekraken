@@ -23,7 +23,7 @@ const faker_1 = __importDefault(require("faker"));
  * @snippet         @s.scale.classes
  *
  * @example        css
- * \@s.scale.classes;
+ * @s.scale.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -59,7 +59,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.scale.classes;
+        * @s.scale.classes;
         * 
         ${Object.keys(scaleObj)
         .map((scaleName) => {

@@ -13,7 +13,7 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  * @type               PostcssMixin
  * @interface     ./select          interface
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * Apply the select style to any HTMLSelectElement
  *

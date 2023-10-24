@@ -17,7 +17,7 @@ import __faker from 'faker';
  * @snippet         @s.margin.classes
  *
  * @example        css
- * \@s.margin.classes;
+ * @s.margin.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -52,7 +52,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.margin.classes;
+        * @s.margin.classes;
         * 
         ${marginsKeys
         .map((spaceName) => {

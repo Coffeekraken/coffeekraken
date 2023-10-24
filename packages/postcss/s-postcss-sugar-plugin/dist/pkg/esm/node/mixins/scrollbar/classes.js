@@ -17,7 +17,7 @@ import __faker from 'faker';
  * @snippet         @s.scrollbar.classes
  *
  * @example        css
- * \@s.scale.classes;
+ * @s.scale.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -50,11 +50,11 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.scrollbar.classes;
+        * @s.scrollbar.classes;
         * 
         * .my-element {
-        *   \\@s.scrollbar.hide;
-        *   \\@s.scrollbar;
+        *   @s.scrollbar.hide;
+        *   @s.scrollbar;
         * } 
         * 
         * @cssClass     s-scrollbar         Apply the custom scrollbar

@@ -23,7 +23,7 @@ const string_1 = require("@coffeekraken/sugar/string");
  * @snippet         @s.ui.loader.classes
  *
  * @example     css
- * \@s.ui.loader.classes;
+ * @s.ui.loader.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -64,10 +64,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.ui.loader.classes;
+        * @s.ui.loader.classes;
         * 
         * .my-loader {
-        *   \@s.ui.loader;
+        *   @s.ui.loader;
         * }
         * 
         ${finalParams.loaders

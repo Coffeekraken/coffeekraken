@@ -16,7 +16,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @snippet     @s.reset.destyle
  *
  * @example        css
- * \@s.reset.destyle;
+ * @s.reset.destyle;
  *
  * @see       https://github.com/nicolas-cusan/destyle.css
  * @since       2.0.0
@@ -58,7 +58,7 @@ export default function ({ params, CssVars, atRule, replaceWith, }) {
         * @support      edge
         * 
         * @example        css
-        * \@s.reset.destyle;
+        * @s.reset.destyle;
         * 
         * @see          https://github.com/nicolas-cusan/destyle.css
         * @since      2.0.0

@@ -19,13 +19,13 @@ export { postcssSugarPluginStateHoverMixinInterface as interface };
  * - &:hover
  *
  * @snippet         @s.state.hover
- * \@s.state.hover {
+ * @s.state.hover {
  *      $1
  * }
  *
  * @example        css
  * .myCoolItem {
- *  \@s.state.hover {
+ *  @s.state.hover {
  *      // ...
  *  }
  * }

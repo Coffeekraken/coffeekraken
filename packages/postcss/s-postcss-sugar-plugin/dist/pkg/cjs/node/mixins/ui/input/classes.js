@@ -7,7 +7,6 @@ exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 const array_1 = require("@coffeekraken/sugar/array");
-const faker_1 = __importDefault(require("faker"));
 /**
  * @name          classes
  * @as          @s.ui.input.classes
@@ -27,7 +26,7 @@ const faker_1 = __importDefault(require("faker"));
  * @snippet         @s.ui.input.classes
  *
  * @example     css
- * \@s.ui.form.classes;
+ * @s.ui.form.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -79,10 +78,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.ui.input.classes;
+        * @s.ui.input.classes;
         * 
         * .my-input {
-        *   \@s.ui.input;
+        *   @s.ui.input;
         * }
         * 
         ${finalParams.lnfs
@@ -95,16 +94,16 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         .map((lnf) => {
         return ` * @example        html       ${lnf} lnf
             *   <label class="s-label:responsive s-mbe:30">
-            *       <span>${faker_1.default.name.findName()}</span>
-            *       <input type="text" placeholder="Type something!" class="s-input\:${lnf} s-width:40" />
+            *       <span>John Doe</span>
+            *       <input type="text" placeholder="Type something!" class="s-input\:${lnf}" />
             *  </label>
             *   <label class="s-label:responsive s-mbe:30">
             *        <span>I'm disabled</span>
-            *       <input type="text" disabled placeholder="Type something!" class="s-input\:${lnf} s-width:40" />
+            *       <input type="text" disabled placeholder="Type something!" class="s-input\:${lnf}" />
             *   </label>
             *   <label dir="rtl" class="s-label:responsive s-mbe:30">
             *       <span>Support RTL</span>
-            *       <input type="text" placeholder="Type something! (RTL)" class="s-input\:${lnf} s-width:40" />
+            *       <input type="text" placeholder="Type something! (RTL)" class="s-input\:${lnf}" />
             *   </label>
             * 
             * `;
@@ -113,16 +112,16 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         *
         * @example        html       Shapes
         *   <label class="s-label:responsive s-mbe:30">
-        *       <span>${faker_1.default.name.findName()}</span>
-        *       <input type="text" placeholder="Type something!" class="s-input s-shape:default s-width:40" />
+        *       <span>John Doe</span>
+        *       <input type="text" placeholder="Type something!" class="s-input s-shape:default" />
         *  </label>
         *   <label class="s-label:responsive s-mbe:30">
-        *       <span>${faker_1.default.name.findName()}</span>
-        *       <input type="text" placeholder="Type something!" class="s-input s-shape:square s-width:40" />
+        *       <span>John Doe</span>
+        *       <input type="text" placeholder="Type something!" class="s-input s-shape:square" />
         *  </label>
         * <label class="s-label:responsive s-mbe:30">
-        *       <span>${faker_1.default.name.findName()}</span>
-        *       <input type="text" placeholder="Type something!" class="s-input s-shape:pill s-width:40" />
+        *       <span>John Doe</span>
+        *       <input type="text" placeholder="Type something!" class="s-input s-shape:pill" />
         *  </label>
         * 
         *
@@ -131,8 +130,8 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         .map((color) => {
         return ` 
             *   <label class="s-label:responsive s-mbe:30">
-            *       <span>${faker_1.default.name.findName()}</span>
-            *       <input type="text" placeholder="Type something!" class="s-input s-color:${color} s-width:40" />
+            *       <span>John Doe</span>
+            *       <input type="text" placeholder="Type something!" class="s-input s-color:${color}" />
             *   </label>
             * `;
     })
@@ -142,9 +141,9 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         ${['07', '10', '13', '16']
         .map((scale) => {
         return ` 
-            *   <label class="s-label:responsive s-mbe:30">
-            *       <span>${faker_1.default.name.findName()}</span>
-            *       <input type="text" placeholder="Type something!" class="s-input s-scale:${scale} s-width:40" />
+            *   <label class="s-label:responsive s-scale:${scale} s-mbe:30">
+            *       <span>John Doe</span>
+            *       <input type="text" placeholder="Type something!" class="s-input" />
             *   </label>
             * `;
     })
@@ -205,4 +204,4 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     return vars;
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUNyRCxvRUFBNkM7QUFDN0MscURBQXdEO0FBQ3hELGtEQUE0QjtBQUU1Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFFSCxNQUFNLHdDQUF5QyxTQUFRLHFCQUFZO0lBQy9ELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxJQUFJLEVBQUU7Z0JBQ0YsSUFBSSxFQUFFLFVBQVU7Z0JBQ2hCLE9BQU8sRUFBRSxDQUFDLE9BQU8sRUFBRSxXQUFXLENBQUM7YUFDbEM7WUFDRCxVQUFVLEVBQUU7Z0JBQ1IsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsT0FBTyxFQUFFLGlCQUFRLENBQUMsR0FBRyxDQUFDLG9CQUFvQixDQUFDO2FBQzlDO1lBQ0QsS0FBSyxFQUFFO2dCQUNILElBQUksRUFBRTtvQkFDRixJQUFJLEVBQUUsZUFBZTtvQkFDckIsVUFBVSxFQUFFLENBQUMsR0FBRyxFQUFFLEdBQUcsQ0FBQztpQkFDekI7Z0JBQ0QsTUFBTSxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxJQUFJLENBQUM7Z0JBQzdCLE9BQU8sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLEVBQUUsSUFBSSxDQUFDO2FBQ2pDO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQVFvRCw2REFBUztBQUU5RCxtQkFBeUIsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixPQUFPLEVBQ1AsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLG1CQUNiLElBQUksRUFBRSxFQUFFLEVBQ1IsVUFBVSxFQUFFLE9BQU8sRUFDbkIsS0FBSyxFQUFFLEVBQUUsSUFDTixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFHLElBQUksT0FBTyxFQUFFLENBQUM7SUFFM0IsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUs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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUNyRCxvRUFBNkM7QUFDN0MscURBQXdEO0FBRXhEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUVILE1BQU0sd0NBQXlDLFNBQVEscUJBQVk7SUFDL0QsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILElBQUksRUFBRTtnQkFDRixJQUFJLEVBQUUsVUFBVTtnQkFDaEIsT0FBTyxFQUFFLENBQUMsT0FBTyxFQUFFLFdBQVcsQ0FBQzthQUNsQztZQUNELFVBQVUsRUFBRTtnQkFDUixJQUFJLEVBQUUsUUFBUTtnQkFDZCxPQUFPLEVBQUUsaUJBQVEsQ0FBQyxHQUFHLENBQUMsb0JBQW9CLENBQUM7YUFDOUM7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFO29CQUNGLElBQUksRUFBRSxlQUFlO29CQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDO2lCQUN6QjtnQkFDRCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLElBQUksQ0FBQztnQkFDN0IsT0FBTyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxJQUFJLENBQUM7YUFDakM7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBUW9ELDZEQUFTO0FBRTlELG1CQUF5QixFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLE9BQU8sRUFDUCxXQUFXLEdBTWQ7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsSUFBSSxFQUFFLEVBQUUsRUFDUixVQUFVLEVBQUUsT0FBTyxFQUNuQixLQUFLLEVBQUUsRUFBRSxJQUNOLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQUcsSUFBSSxPQUFPLEVBQUUsQ0FBQztJQUUzQixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7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

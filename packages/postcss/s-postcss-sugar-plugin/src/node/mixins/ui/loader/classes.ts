@@ -18,7 +18,7 @@ import { __camelCase } from '@coffeekraken/sugar/string';
  * @snippet         @s.ui.loader.classes
  *
  * @example     css
- * \@s.ui.loader.classes;
+ * @s.ui.loader.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -82,10 +82,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@s.ui.loader.classes;
+        * @s.ui.loader.classes;
         * 
         * .my-loader {
-        *   \@s.ui.loader;
+        *   @s.ui.loader;
         * }
         * 
         ${finalParams.loaders

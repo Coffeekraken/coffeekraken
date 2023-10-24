@@ -17,7 +17,7 @@ import { __keysFirst } from '@coffeekraken/sugar/array';
  * @snippet         @s.gap.classes
  *
  * @example        css
- * \@s.gap.classes;
+ * @s.gap.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -71,7 +71,7 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@s.gap.classes;
+        * @s.gap.classes;
         * 
         * @cssClass                 s-gap              Apply the default gap to any HTMLElement
         * @cssClass                s-gap:row          Apply the default row gap to any HTMLElement

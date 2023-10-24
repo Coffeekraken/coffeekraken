@@ -22,7 +22,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @snippet         @s.ui.toggle.classes
  *
  * @example       css
- * \@s.ui.toggle.classes();
+ * @s.ui.toggle.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -73,10 +73,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.ui.toggle.classes;
+        * @s.ui.toggle.classes;
         * 
         * .my-toggle {
-        *   \@s.ui.toggle;
+        *   @s.ui.toggle;
         * }
         * 
         ${finalParams.types

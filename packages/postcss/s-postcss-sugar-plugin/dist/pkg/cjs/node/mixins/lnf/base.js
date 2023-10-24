@@ -31,7 +31,7 @@ exports.interface = postcssSugarPluginLiikAndFeelBaseInterface;
  * @snippet         @s.lnf.base
  *
  * @example       css
- * \@s.lnf.base;
+ * @s.lnf.base;
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

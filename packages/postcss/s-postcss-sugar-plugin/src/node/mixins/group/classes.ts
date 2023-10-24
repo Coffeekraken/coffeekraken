@@ -15,7 +15,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @snippet         @s.group.classes
  *
  * @example        css
- * \@s.group.classes;
+ * @s.group.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -68,7 +68,7 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@s.group.classes;
+        * @s.group.classes;
         * 
         * @cssClass             s-group             Group some elements (button, inputs, etc...) together
         * 

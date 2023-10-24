@@ -17,7 +17,7 @@ import __faker from 'faker';
  * @snippet         @s.font.classes
  *
  * @example        css
- * \@s.font.classes;
+ * @s.font.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -95,11 +95,11 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@s.font.classes;
+        * @s.font.classes;
         * 
         * .my-element {
-        *   \\@s.font.family(title);
-        *   \\@s.font.size(30);
+        *   @s.font.family(title);
+        *   @s.font.size(30);
         * }  
         * 
         ${Object.keys(fontsFamiliesObj)

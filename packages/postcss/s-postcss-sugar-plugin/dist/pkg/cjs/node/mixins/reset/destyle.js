@@ -22,7 +22,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @snippet     @s.reset.destyle
  *
  * @example        css
- * \@s.reset.destyle;
+ * @s.reset.destyle;
  *
  * @see       https://github.com/nicolas-cusan/destyle.css
  * @since       2.0.0
@@ -64,7 +64,7 @@ function default_1({ params, CssVars, atRule, replaceWith, }) {
         * @support      edge
         * 
         * @example        css
-        * \@s.reset.destyle;
+        * @s.reset.destyle;
         * 
         * @see          https://github.com/nicolas-cusan/destyle.css
         * @since      2.0.0

@@ -22,7 +22,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  *
  * @example        css
  * .my-element {
- *    \@s.depth(20);
+ *    @s.depth(20);
  * }
  *
  * @since       2.0.0

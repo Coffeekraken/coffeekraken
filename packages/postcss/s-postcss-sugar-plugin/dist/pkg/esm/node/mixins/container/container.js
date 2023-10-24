@@ -17,7 +17,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @example        css
  * .my-cool-container {
- *    \@s.container;
+ *    @s.container;
  * }
  *
  * @since       2.0.0

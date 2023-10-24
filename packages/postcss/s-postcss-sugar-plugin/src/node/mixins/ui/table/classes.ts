@@ -19,7 +19,7 @@ import __faker from 'faker';
  * @snippet         @s.ui.table.classes
  *
  * @example     css
- * \@s.ui.table.classes;
+ * @s.ui.table.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -86,10 +86,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@s.ui.table.classes;
+        * @s.ui.table.classes;
         * 
         * .my-table {
-        *   \@s.ui.table;
+        *   @s.ui.table;
         * }
         * 
         * @cssClass     s-table            Apply the table lnf

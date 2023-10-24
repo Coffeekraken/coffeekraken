@@ -16,7 +16,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @snippet         @s.opacity.classes
  *
  * @example        css
- * \@s.opacity.classes;
+ * @s.opacity.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

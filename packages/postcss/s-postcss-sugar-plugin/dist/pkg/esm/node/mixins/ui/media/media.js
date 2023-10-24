@@ -17,7 +17,7 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @example       css
  * .my-element {
- *      \@s.ui.media();
+ *      @s.ui.media();
  * }
  *
  * @since     2.0.0

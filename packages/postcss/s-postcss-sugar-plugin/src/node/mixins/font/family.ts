@@ -20,7 +20,7 @@ import { __dashCase } from '@coffeekraken/sugar/string';
  *
  * @example        css
  * .my-cool-element {
- *    \@s.font.family(title);
+ *    @s.font.family(title);
  * }
  *
  * @since       2.0.0

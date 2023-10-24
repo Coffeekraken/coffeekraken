@@ -14,7 +14,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @snippet         @s.float.classes
  *
  * @example        css
- * \@s.float.classes;
+ * @s.float.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -45,7 +45,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.float.classes;
+        * @s.float.classes;
         * 
         * @cssClass     s-float:left         Apply the left float style
         * @cssClass     s-float:right         Apply the right float style

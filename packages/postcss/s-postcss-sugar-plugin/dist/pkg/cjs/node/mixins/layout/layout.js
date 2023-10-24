@@ -34,7 +34,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  *
  * @example        css
  * .my-element {
- *    \@s.layout(
+ *    @s.layout(
  *      1 1 1 2 2
  *      3 3 4 4 4
  *    );

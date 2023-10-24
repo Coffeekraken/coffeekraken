@@ -32,7 +32,7 @@ exports.interface = postcssSugarPluginMediaMixinInterface;
  * @return      {Css}         The generated css
  *
  * @snippet         @s.media $1
- * \@s.media $1 {
+ * @s.media $1 {
  *      $2
  * }
  *

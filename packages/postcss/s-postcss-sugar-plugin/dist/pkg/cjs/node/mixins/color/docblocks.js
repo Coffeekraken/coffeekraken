@@ -27,7 +27,7 @@ exports.interface = postcssSugarPluginDocblockColorsMixinInterface;
  * @snippet         @s.color.docblocks
  *
  * @example        css
- * \@s.color.docblocks;
+ * @s.color.docblocks;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

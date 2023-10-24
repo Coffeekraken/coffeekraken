@@ -27,8 +27,8 @@ const path_1 = __importDefault(require("path"));
  * @snippet         @s.import($1)
  *
  * @example        css
- * \@s.import('./my-cool-file.css');
- * \@s.import('../views/** /*.css');
+ * @s.import('./my-cool-file.css');
+ * @s.import('../views/** /*.css');
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

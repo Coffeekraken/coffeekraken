@@ -20,7 +20,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @snippet     @s.position.classes
  *
  * @example        css
- * \@s.position.classes;
+ * @s.position.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -51,7 +51,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.position.classes;
+        * @s.position.classes;
         * 
         * @cssClass       s-position:absolute       Apply the \`absolute\` position
         * @cssClass       s-position:relative       Apply the \`relative\` position

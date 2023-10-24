@@ -16,11 +16,11 @@ export { postcssSugarPluginWireframebackgroundMixinInterface as interface };
  * This mixin gives you back the wireframe background statement that depend on you themeWireframe config
  *
  * @snippet         @s.wireframe.background
- * \@s.wireframe.background;
+ * @s.wireframe.background;
  *
  * @example        css
  * .myCoolItem {
- *  \@s.wireframe.background;
+ *  @s.wireframe.background;
  * }
  *
  * @since       2.0.0

@@ -18,7 +18,7 @@
         "@coffeekraken/s-theme": "^2.0.0-beta.1",
         "@coffeekraken/sugar": "^2.0.0-beta.1",
         "@prettier/plugin-php": "^0.18.9",
-        "highlight.js": "^11.6.0",
+        "highlight.js": "^11.9.0",
         "html-tags": "^3.2.0",
         "known-css-properties": "^0.25.0",
         "lit": "^2.2.8",

@@ -22,7 +22,7 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  *
  * @example        css
  * .my-element {
- *    \@s.disabled();
+ *    @s.disabled();
  * }
  *
  * @since       2.0.0

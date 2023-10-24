@@ -22,7 +22,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @snippet         @s.ui.dropdown.classes
  *
  * @example     css
- * \@s.ui.dropdown.classes;
+ * @s.ui.dropdown.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -65,10 +65,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.ui.dropdown.classes;
+        * @s.ui.dropdown.classes;
         * 
         * .my-dropdown {
-        *   \@s.ui.dropdown;
+        *   @s.ui.dropdown;
         * }
         * 
         * @cssClass             s-dropdown-container        The container of the dropdown that will trigger the display, hide, etc...

@@ -22,7 +22,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  *
  * @example        css
  * .my-cool-element {
- *    \@s.truncate(2);
+ *    @s.truncate(2);
  * }
  *
  * @since       2.0.0

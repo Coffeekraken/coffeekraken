@@ -20,7 +20,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @snippet         @s.fit.classes
  *
  * @example        css
- * \@s.fit.classes;
+ * @s.fit.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -59,10 +59,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.fit.classes;
+        * @s.fit.classes;
         * 
         * .my-element {
-        *   \\@s.fit(fill);
+        *   @s.fit(fill);
         * }  
         * 
         ${fitSizes

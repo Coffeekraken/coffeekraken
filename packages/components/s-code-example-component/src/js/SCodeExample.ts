@@ -167,12 +167,12 @@ export default class SCodeExample extends __SLitComponent {
         // @ts-ignore
         this.$templates = this.querySelectorAll('template,code');
 
-        this.$templates.forEach(($template: HTMLElement) => {
+        for (let [idx, $template] of Object.entries(this.$templates)) {
             if (!$template.getAttribute) return;
             let parser = 'babel';
             switch (
-                $template.getAttribute('id') ??
-                $template.getAttribute('language')
+                $template.getAttribute('language') ??
+                $template.getAttribute('id')
             ) {
                 case 'html':
                 case 'xml':
@@ -192,9 +192,13 @@ export default class SCodeExample extends __SLitComponent {
                       $template.value
                     : $template.innerHTML,
             );
-            let formatedCode = rawCode;
+            let formatedCode = rawCode.replace(
+                /\<\!\-\-\?lit\$[a-zA-Z0-9]+\$\-\-\>/gm,
+                '',
+            );
+
             try {
-                formatedCode = __prettier.format(rawCode, {
+                formatedCode = await __prettier.format(formatedCode, {
                     parser,
                     plugins: [
                         __prettierCss,
@@ -203,7 +207,10 @@ export default class SCodeExample extends __SLitComponent {
                         __prettierPhp,
                     ],
                 });
-            } catch (e) {}
+            } catch (e) {
+                console.log('prettier error', e);
+            }
+
             this.props.items = [
                 ...this.props.items,
                 {
@@ -212,13 +219,13 @@ export default class SCodeExample extends __SLitComponent {
                         $template.getAttribute('language') ??
                         'html',
                     language: $template.getAttribute('language') ?? 'html',
-                    // @ts-ignore
                     code: formatedCode,
+                    highlightedCode: '',
                     lines: formatedCode.trim().split('\n').length,
                 },
             ];
             $template.remove();
-        });
+        }
     }
     async firstUpdated() {
         // active idx
@@ -277,20 +284,17 @@ export default class SCodeExample extends __SLitComponent {
         $content.setAttribute('inited', 'true');
         let code;
         try {
-            const codeToHighlight = __decodeHtmlEntities(
-                $content.innerHTML.replace(
-                    /(<|&lt;)!\s?--\?lit.*--\s?(>|&gt;)/,
-                    '',
-                ),
-            );
+            const codeToHighlight = item.code?.trim() ?? '';
             code = __hljs.highlight(codeToHighlight, {
-                language: <string>$content.getAttribute('language'),
+                language: item.language,
+                ignoreIllegals: true,
             });
         } catch (e) {
-            console.log(e);
+            console.log('highlight.js error', e);
         }
+
         // @ts-ignore
-        item.highlightedCode = code?.value ?? '';
+        item.highlightedCode = code?.value ?? code ?? '';
         this.setMoreClass();
     }
     copy() {
@@ -382,12 +386,8 @@ export default class SCodeExample extends __SLitComponent {
                             item.id}" class="language-${item.language} ${item.language} ${this
                                 .props.bare
                                 ? ''
-                                : 'hljs'}">${
-                                // @ts-ignore
-                                item.highlightedCode
-                                    ? unsafeHTML(item.highlightedCode.trim())
-                                    : item.code.trim()
-                            }</code>
+                                : 'hljs'}"
+                                .innerHTML=${item.highlightedCode ?? ''}></code>
                         </pre>
                         `,
                     )}

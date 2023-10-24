@@ -19,7 +19,7 @@ import __faker from 'faker';
  * @snippet         @s.truncate.classes
  *
  * @example        css
- * \@s.truncate.classes;
+ * @s.truncate.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -78,7 +78,7 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@s.truncate.classes;
+        * @s.truncate.classes;
         * 
         ${[...Array(finalParams.count).keys()].map((i) => {
             return ` * @cssClass        s-truncate:${

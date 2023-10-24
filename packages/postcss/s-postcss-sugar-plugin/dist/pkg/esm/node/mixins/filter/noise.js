@@ -15,7 +15,7 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @example        css
  * .my-element {
- *    \@s.filter.noise(20);
+ *    @s.filter.noise(20);
  * }
  *
  * @since       2.0.0

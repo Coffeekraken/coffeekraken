@@ -19,12 +19,12 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @return        {Css}         The generated css
  *
  * @snippet         @s.lod($1)
- * \@s.lod($1) {
+ * @s.lod($1) {
  *      $2
  * }
  *
  * @example        css
- * \@s.lod(4) {
+ * @s.lod(4) {
  *      .myElement {
  *          background: red;
  *          width: 100%;

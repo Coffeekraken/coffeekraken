@@ -58,6 +58,7 @@ export default function ({
     border-radius: s.border.radius(ui.code.borderRadius);
     line-height: 1.5 !important;
     color: s.color(current, text);
+    white-space: inherit;
 
     @s.media(mobile) {
         padding: clamp(10px, calc(s.padding(ui.code.paddingBlock) * 0.5), 100px) clamp(10px, calc(s.padding(ui.code.paddingInline) * 0.5), 100px);

@@ -17,7 +17,7 @@ import { __keysFirst } from '@coffeekraken/sugar/array';
  * @snippet         @s.offsize.classes
  *
  * @example        css
- * \@s.offsize.classes;
+ * @s.offsize.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -75,7 +75,7 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@s.offsize.classes;
+        * @s.offsize.classes;
         * 
         ${offsizeKeys
             .map((spaceName) => {

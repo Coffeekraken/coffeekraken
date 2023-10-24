@@ -34,13 +34,13 @@ export interface postcssSugarPluginThemeMixinParams {
  * @return      {Css}         The generated css
  *
  * @snippet         @s.theme($1)
- * \@s.theme $1 {
+ * @s.theme $1 {
  *      $2
  * }
  *
  * @example        css
  * .my-cool-element {
- *    \@s.theme(dark) {
+ *    @s.theme(dark) {
  *      margin-bottom: 50px;
  *    }
  * }

@@ -14,7 +14,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @snippet         @s.shape.classes
  *
  * @example        css
- * \@s.shape.classes;
+ * @s.shape.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -46,7 +46,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.shape.classes;
+        * @s.shape.classes;
         * 
         * @cssClass                 s-shape:default             Apply the default shape (default border radius)
         * @cssClass                 s-shape:square              Apply the square shape

@@ -16,7 +16,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @snippet         @s.ui.avatar.classes
  *
  * @example       css
- * \@s.ui.avatar.classes();
+ * @s.ui.avatar.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -56,10 +56,10 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support      edge
         * 
         * @install          css
-        * \\@s.ui.avatar.classes;
+        * @s.ui.avatar.classes;
         * 
         * .my-avatar {
-        *   \@s.ui.avatar;
+        *   @s.ui.avatar;
         * }
         * 
         * @cssClass             s-avatar                Apply the avatar style

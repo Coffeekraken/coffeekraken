@@ -21,7 +21,7 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  * @snippet         @s.order.classes
  *
  * @example        css
- * \@s.order.classes;
+ * @s.order.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -53,7 +53,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.order.classes;
+        * @s.order.classes;
         * 
         ${Array.from(Array(count))
         .map((v, i) => `

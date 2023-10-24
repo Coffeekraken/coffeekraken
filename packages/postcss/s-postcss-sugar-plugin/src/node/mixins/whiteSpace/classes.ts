@@ -18,7 +18,7 @@ import __faker from 'faker';
  * @snippet         @s.whiteSpace.classes
  *
  * @example        css
- * \@s.visibility.classes;
+ * @s.visibility.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -68,7 +68,7 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@s.whiteSpace.classes;
+        * @s.whiteSpace.classes;
         * 
         * @cssClass         s-white-space:wrap             Apply the \`white-space\` to \`wrap\`
         * @cssClass         s-white-space:nowrap             Apply the \`white-space\` to \`nowrap\`

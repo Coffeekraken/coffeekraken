@@ -15,7 +15,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @snippet         @s.visibility.classes
  *
  * @example        css
- * \@s.visibility.classes;
+ * @s.visibility.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -46,10 +46,10 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.visibility.classes;
+        * @s.visibility.classes;
         * 
         * .my-element {
-        *   \\@s.visibility.hidden;
+        *   @s.visibility.hidden;
         * } 
         * 
         * @cssClass         s-visibility:hidden             Make the element hidden in the ui

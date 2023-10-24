@@ -15,7 +15,7 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @example        css
  * .my-element {
- *    \@s.fit(cover);
+ *    @s.fit(cover);
  * }
  *
  * @since       2.0.0

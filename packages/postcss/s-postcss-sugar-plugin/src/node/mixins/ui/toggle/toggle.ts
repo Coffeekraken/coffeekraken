@@ -19,7 +19,7 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @example       css
  * .my-element {
- *      \@s.ui.toggle(burger);
+ *      @s.ui.toggle(burger);
  * }
  *
  * @since     2.0.0

@@ -20,7 +20,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @snippet         @s.float.classes
  *
  * @example        css
- * \@s.float.classes;
+ * @s.float.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -51,7 +51,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.float.classes;
+        * @s.float.classes;
         * 
         * @cssClass     s-float:left         Apply the left float style
         * @cssClass     s-float:right         Apply the right float style

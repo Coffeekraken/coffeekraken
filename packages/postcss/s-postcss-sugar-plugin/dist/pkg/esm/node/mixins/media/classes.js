@@ -16,7 +16,7 @@ import __STheme from '@coffeekraken/s-theme';
  * Take this as an example:
  *
  * ```css
- * \@s.media.classes(mobile) {
+ * @s.media.classes(mobile) {
  *    .my-cool-element {
  *      color: green;
  *    }
@@ -33,7 +33,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return        {Css}         The generated css
  *
  * @example         css
- * \@s.media.classes(mobile) {
+ * @s.media.classes(mobile) {
  *    // only for this media context...
  * }
  *

@@ -15,7 +15,7 @@ import __fs from 'fs';
  * @return        {Css}         The generated css
  *
  * @example        css
- * \@s.cache {
+ * @s.cache {
  *   @s.classes;
  * }
  *

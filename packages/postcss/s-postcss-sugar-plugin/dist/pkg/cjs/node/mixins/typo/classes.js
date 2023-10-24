@@ -23,7 +23,7 @@ const faker_1 = __importDefault(require("faker"));
  * @snippet         @s.typo.classes
  *
  * @example        css
- * \@s.typo.classes;
+ * @s.typo.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -56,7 +56,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.typo.classes;
+        * @s.typo.classes;
         * 
         ${Object.keys(typosObj)
         .map((typoName) => {

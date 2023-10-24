@@ -58,7 +58,7 @@ export default function ({
 
     vars.push(`
 
-        @keyframes s-outline-in {
+        @keyframes s-outline-in-${finalParams.color} {
             from {
                 outline: 0px solid s.color(${finalParams.color}, --alpha 0);
             }
@@ -67,7 +67,7 @@ export default function ({
             }
         }
 
-        animation: s-outline-in .1s ease-out forwards;    
+        animation: s-outline-in-${finalParams.color} .1s ease-out forwards;    
     `);
 
     return vars;

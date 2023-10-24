@@ -25,7 +25,7 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  *
  * @example       css
  * .my-element {
- *      \@s.ui.badge();
+ *      @s.ui.badge();
  * }
  *
  * @since     2.0.0

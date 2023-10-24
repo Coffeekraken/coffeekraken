@@ -29,7 +29,7 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @example        css
  * .my-element {
- *    \@s.layout(
+ *    @s.layout(
  *      1 1 1 2 2
  *      3 3 4 4 4
  *    );

@@ -20,7 +20,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @snippet         @s.until.classes
  *
  * @example        css
- * \@s.until.classes;
+ * @s.until.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

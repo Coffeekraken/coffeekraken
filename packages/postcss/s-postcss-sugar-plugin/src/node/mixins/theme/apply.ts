@@ -19,9 +19,9 @@ import __STheme from '@coffeekraken/s-theme';
  * @snippet         @s.theme.apply($1)
  *
  * @example        css
- * \@s.theme.apply(light);
+ * @s.theme.apply(light);
  * .my-cool-element {
- *    \@s.theme.apply(dark);
+ *    @s.theme.apply(dark);
  * }
  *
  * @since       2.0.0

@@ -17,12 +17,12 @@ export { postcssSugarPluginScopeWireframeMixinInterface as interface };
  * It also prevent the lod to be applied inside the atRule.
  *
  * @snippet         @s.lod.wireframe
- * \@s.wireframe {
+ * @s.wireframe {
  *      $1
  * }
  *
  * @example        css
- * \@s.wireframe() {
+ * @s.wireframe() {
  *      // ...
  * }
  *

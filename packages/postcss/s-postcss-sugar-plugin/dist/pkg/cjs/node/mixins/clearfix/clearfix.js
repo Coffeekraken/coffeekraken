@@ -27,7 +27,7 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  *
  * @example        css
  * .my-element {
- *    \@s.clearfix();
+ *    @s.clearfix();
  * }
  *
  * @since       2.0.0

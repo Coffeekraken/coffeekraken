@@ -16,7 +16,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @snippet         @s.font.faces
  *
  * @example        css
- * \@s.font.faces;
+ * @s.font.faces;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

@@ -8,7 +8,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @type               PostcssMixin
  * @interface     ./range          interface
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * Apply the range style to any HTMLInputElement
  *
@@ -70,24 +70,25 @@ export default function ({
 
     const vars: string[] = [
         `
-        --track-color: s.color(main, ui);
+        font-size: clamp(s.scalable(20px), s.scalable(1rem), 999rem);
+
+        --track-color: s.color(main, ui, --alpha 0.5);
         --thumb-color: s.color(current);
 
         --focus-spread: s.theme(ui.outline.borderWidth);
 
         --thumb-radius: var(--s-shape, s.border.radius(ui.form.borderRadius));
-        --thumb-height: s.scalable(1em);
-        --thumb-width: s.scalable(1em);
+        --thumb-height: 1em;
+        --thumb-width: 1em;
         --thumb-border-width: s.theme(ui.form.borderWidth);
         --thumb-border-color: s.color(current, border);
 
         --track-width: 100%;
-        --track-height: s.scalable(0.5em);
+        --track-height: 0.2em;
         --track-border-width: s.theme(ui.form.borderWidth);
         --track-border-color: s.color(current, --alpha 0.2);
 
         --track-radius: var(--s-shape, s.border.radius(ui.form.borderRadius));
-        --contrast: 5%;
 `,
     ];
 
@@ -120,15 +121,15 @@ export default function ({
 
                 &::-webkit-slider-runnable-track {
                     background: var(--track-color);
-                    border: var(--thumb-border-width) solid s.color(current, --alpha 0.3);
+                    border: var(--track-border-width) solid s.color(current, --alpha 0.3);
                 }
                 &::-moz-range-track {
                     background: var(--track-color);
-                    border: var(--thumb-border-width) solid s.color(current, --alpha 0.3);
+                    border: var(--track-border-width) solid s.color(current, --alpha 0.3);
                 }
                 &::-ms-track {
                     background: var(--track-color);
-                    border: var(--thumb-border-width) solid s.color(current, --alpha 0.3);
+                    border: var(--track-border-width) solid s.color(current, --alpha 0.3);
                 }
 
                 &::-ms-fill-lower {

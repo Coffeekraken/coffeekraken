@@ -17,7 +17,7 @@ import { __unique } from '@coffeekraken/sugar/array';
  * @snippet         @s.layout.classes
  *
  * @example        css
- * \@s.layout.classes;
+ * @s.layout.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

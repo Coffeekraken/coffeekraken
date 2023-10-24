@@ -18,7 +18,7 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @example       css
  * .my-element {
- *      \@s.ui.blockquote();
+ *      @s.ui.blockquote();
  * }
  *
  * @since     2.0.0

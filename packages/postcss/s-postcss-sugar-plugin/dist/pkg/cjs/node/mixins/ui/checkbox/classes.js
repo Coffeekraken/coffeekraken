@@ -25,7 +25,7 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  * @snippet         @s.checkbox.classes
  *
  * @example       css
- * \@s.ui.form.classes();
+ * @s.ui.form.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -79,10 +79,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.ui.checkbox.classes;
+        * @s.ui.checkbox.classes;
         * 
         * .my-checkbox {
-        *   \@s.ui.checkbox;
+        *   @s.ui.checkbox;
         * }
         * 
         ${finalParams.lnfs

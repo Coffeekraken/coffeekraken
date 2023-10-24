@@ -23,7 +23,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  *
  * @example       css
  * .my-element {
- *      \@s.ui.avatar();
+ *      @s.ui.avatar();
  * }
  *
  * @since     2.0.0

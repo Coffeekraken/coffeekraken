@@ -18,7 +18,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @snippet         @s.ui.blockquote.classes
  *
  * @example       css
- * \@s.ui.blockquote.classes();
+ * @s.ui.blockquote.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -88,10 +88,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@s.ui.blockquote.classes;
+        * @s.ui.blockquote.classes;
         * 
         * .my-blockquote {
-        *   \@s.ui.blockquote;
+        *   @s.ui.blockquote;
         * }
         * 
         * @cssClass         s-blockquote            Apply the blockquote styling

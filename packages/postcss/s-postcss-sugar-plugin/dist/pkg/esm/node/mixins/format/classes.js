@@ -16,7 +16,7 @@ import __faker from 'faker';
  * @snippet         @s.format.classes
  *
  * @example        css
- * \@s.format.classes;
+ * @s.format.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -69,7 +69,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.format.classes;
+        * @s.format.classes;
         * 
         * @cssClass               s-format:text             Apply the text formatting to childs elements like \`ul\`, \`ol\`, \`p\`, \`h1\`, \`h2\`, etc... HTML tags
         * 

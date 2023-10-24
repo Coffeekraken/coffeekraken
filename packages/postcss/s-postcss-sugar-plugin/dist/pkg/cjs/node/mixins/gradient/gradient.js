@@ -22,7 +22,7 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  *
  * @example        css
  * .my-cool-element {
- *    \@s.gradient(accent, secondary, radial);
+ *    @s.gradient(accent, secondary, radial);
  * }
  *
  * @since       2.0.0

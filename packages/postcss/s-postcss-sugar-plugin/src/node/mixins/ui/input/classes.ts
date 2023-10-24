@@ -1,7 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 import { __keysFirst } from '@coffeekraken/sugar/array';
-import __faker from 'faker';
 
 /**
  * @name          classes
@@ -22,7 +21,7 @@ import __faker from 'faker';
  * @snippet         @s.ui.input.classes
  *
  * @example     css
- * \@s.ui.form.classes;
+ * @s.ui.form.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -101,10 +100,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@s.ui.input.classes;
+        * @s.ui.input.classes;
         * 
         * .my-input {
-        *   \@s.ui.input;
+        *   @s.ui.input;
         * }
         * 
         ${finalParams.lnfs
@@ -119,16 +118,16 @@ export default function ({
             .map((lnf) => {
                 return ` * @example        html       ${lnf} lnf
             *   <label class="s-label:responsive s-mbe:30">
-            *       <span>${__faker.name.findName()}</span>
-            *       <input type="text" placeholder="Type something!" class="s-input\:${lnf} s-width:40" />
+            *       <span>John Doe</span>
+            *       <input type="text" placeholder="Type something!" class="s-input\:${lnf}" />
             *  </label>
             *   <label class="s-label:responsive s-mbe:30">
             *        <span>I'm disabled</span>
-            *       <input type="text" disabled placeholder="Type something!" class="s-input\:${lnf} s-width:40" />
+            *       <input type="text" disabled placeholder="Type something!" class="s-input\:${lnf}" />
             *   </label>
             *   <label dir="rtl" class="s-label:responsive s-mbe:30">
             *       <span>Support RTL</span>
-            *       <input type="text" placeholder="Type something! (RTL)" class="s-input\:${lnf} s-width:40" />
+            *       <input type="text" placeholder="Type something! (RTL)" class="s-input\:${lnf}" />
             *   </label>
             * 
             * `;
@@ -137,16 +136,16 @@ export default function ({
         *
         * @example        html       Shapes
         *   <label class="s-label:responsive s-mbe:30">
-        *       <span>${__faker.name.findName()}</span>
-        *       <input type="text" placeholder="Type something!" class="s-input s-shape:default s-width:40" />
+        *       <span>John Doe</span>
+        *       <input type="text" placeholder="Type something!" class="s-input s-shape:default" />
         *  </label>
         *   <label class="s-label:responsive s-mbe:30">
-        *       <span>${__faker.name.findName()}</span>
-        *       <input type="text" placeholder="Type something!" class="s-input s-shape:square s-width:40" />
+        *       <span>John Doe</span>
+        *       <input type="text" placeholder="Type something!" class="s-input s-shape:square" />
         *  </label>
         * <label class="s-label:responsive s-mbe:30">
-        *       <span>${__faker.name.findName()}</span>
-        *       <input type="text" placeholder="Type something!" class="s-input s-shape:pill s-width:40" />
+        *       <span>John Doe</span>
+        *       <input type="text" placeholder="Type something!" class="s-input s-shape:pill" />
         *  </label>
         * 
         *
@@ -155,8 +154,8 @@ export default function ({
             .map((color) => {
                 return ` 
             *   <label class="s-label:responsive s-mbe:30">
-            *       <span>${__faker.name.findName()}</span>
-            *       <input type="text" placeholder="Type something!" class="s-input s-color:${color} s-width:40" />
+            *       <span>John Doe</span>
+            *       <input type="text" placeholder="Type something!" class="s-input s-color:${color}" />
             *   </label>
             * `;
             })
@@ -166,9 +165,9 @@ export default function ({
         ${['07', '10', '13', '16']
             .map((scale) => {
                 return ` 
-            *   <label class="s-label:responsive s-mbe:30">
-            *       <span>${__faker.name.findName()}</span>
-            *       <input type="text" placeholder="Type something!" class="s-input s-scale:${scale} s-width:40" />
+            *   <label class="s-label:responsive s-scale:${scale} s-mbe:30">
+            *       <span>John Doe</span>
+            *       <input type="text" placeholder="Type something!" class="s-input" />
             *   </label>
             * `;
             })

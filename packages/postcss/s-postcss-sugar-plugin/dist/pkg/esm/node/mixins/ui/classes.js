@@ -17,7 +17,7 @@ export { postcssSugarPluginUiClassesInterface as interface };
  * @snippet         @s.ui.classes
  *
  * @example        css
- * \@s.ui.classes;
+ * @s.ui.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bospsel <olivier.bossel@gmail.com> (https://olivierbossel.com)

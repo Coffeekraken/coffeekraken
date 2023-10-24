@@ -26,7 +26,7 @@ const faker_1 = __importDefault(require("faker"));
  * @snippet         @s.ui.list.classes
  *
  * @example     css
- * \@s.ui.list.classes;
+ * @s.ui.list.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -82,10 +82,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.ui.list.classes;
+        * @s.ui.list.classes;
         * 
         * .my-list {
-        *   \@s.ui.list;
+        *   @s.ui.list;
         * }
         * 
         ${finalParams.lnfs

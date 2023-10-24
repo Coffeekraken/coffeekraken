@@ -23,7 +23,7 @@ const cli_1 = require("@coffeekraken/sugar/cli");
  * @snippet         @s.gradient.classes
  *
  * @example        css
- * \@s.gradient.classes;
+ * @s.gradient.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -67,7 +67,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.gradient.classes;
+        * @s.gradient.classes;
         * 
         ${Object.keys(s_theme_1.default.get('color'))
         .map((color) => {

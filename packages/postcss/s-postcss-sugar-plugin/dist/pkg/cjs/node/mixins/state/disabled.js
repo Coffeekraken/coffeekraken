@@ -25,13 +25,13 @@ exports.interface = postcssSugarPluginStateDisabledMixinInterface;
  * - &:disabled
  *
  * @snippet         @s.state.disabled
- * \@s.state.disabled {
+ * @s.state.disabled {
  *      $1
  * }
  *
  * @example        css
  * .myCoolItem {
- *  \@s.state.disabled {
+ *  @s.state.disabled {
  *      // ...
  *  }
  * }

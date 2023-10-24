@@ -15,7 +15,7 @@ import { interface as PostcssSugarPluginGradientInterface } from './gradient.js'
  *
  * @example        css
  * .my-cool-element {
- *    \@s.gradient.text(accent, secondary, radial);
+ *    @s.gradient.text(accent, secondary, radial);
  * }
  *
  * @since       2.0.0

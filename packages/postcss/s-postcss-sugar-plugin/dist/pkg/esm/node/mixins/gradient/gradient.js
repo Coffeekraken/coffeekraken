@@ -16,7 +16,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @example        css
  * .my-cool-element {
- *    \@s.gradient(accent, secondary, radial);
+ *    @s.gradient(accent, secondary, radial);
  * }
  *
  * @since       2.0.0

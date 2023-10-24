@@ -1,6 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
-import __faker from 'faker';
 
 /**
  * @name          classes
@@ -9,7 +8,7 @@ import __faker from 'faker';
  * @type               PostcssMixin
  * @interface     ./classes          interface
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * Generate the range classes
  *
@@ -21,7 +20,7 @@ import __faker from 'faker';
  * @snippet         @s.ui.range.classes
  *
  * @example     css
- * \@s.ui.range.classes;
+ * @s.ui.range.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -88,7 +87,7 @@ export default function ({
         * @type               Styleguide
         * @menu           Styleguide / Forms        /styleguide/forms/range
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to display nice radio in your forms
         * 
@@ -102,10 +101,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@s.ui.range.classes;
+        * @s.ui.range.classes;
         * 
         * .my-range {
-        *   \@s.ui.range;
+        *   @s.ui.range;
         * }
         * 
         ${finalParams.lnfs
@@ -120,26 +119,26 @@ export default function ({
             .map((lnf) => {
                 return ` * @example        html       ${lnf}
             *   <label class="s-mbe:30 s-label:responsive">
-            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
-            *     <input type="range" class="s-range${
+            *     <span>John Doe</span>
+            *     <input type="range" class="s-range ${
                 finalParams.defaultLnf === lnf ? '' : `:${lnf}`
             }" min="0" max="100" step="10" />
             *   </label>
             *   <label class="s-mbe:30 s-label:responsive">
-            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
-            *     <input type="range" class="s-range${
+            *     <span>John Doe</span>
+            *     <input type="range" class="s-range ${
                 finalParams.defaultLnf === lnf ? '' : `:${lnf}`
             } s-color:accent" min="0" max="100" step="10" />
             *   </label>
             *   <label class="s-mbe:30 s-label:responsive">
-            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
-            *     <input type="range" class="s-range${
+            *     <span>John Doe</span>
+            *     <input type="range" class="s-range ${
                 finalParams.defaultLnf === lnf ? '' : `:${lnf}`
             } s-color:complementary" min="0" max="100" step="10" />
             *   </label>
             *   <label class="s-mbe:30 s-label:responsive">
             *     <span>I'm disabled</span>
-            *     <input type="range" disabled class="s-range${
+            *     <input type="range" disabled class="s-range ${
                 finalParams.defaultLnf === lnf ? '' : `:${lnf}`
             } s-color:complementary" min="0" max="100" step="10" />
             *   </label>
@@ -149,76 +148,76 @@ export default function ({
         * 
         * @example        html          Shapes
         *   <label class="s-mbe:30 s-label:responsive">
+        *     <span>John Doe</span>
         *     <input type="range" class="s-range s-shape:default" min="0" max="100" step="10" />
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         * </label>
         * <label class="s-mbe:30 s-label:responsive">
+        *     <span>John Doe</span>
         *     <input type="range" class="s-range s-shape:square" min="0" max="100" step="10" />
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         * </label>
         * <label class="s-mbe:30 s-label:responsive">
+        *     <span>John Doe</span>
         *     <input type="range" class="s-range s-shape:pill" min="0" max="100" step="10" />
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         * </label>
         * 
         * @example        html          Colors (none-exclusive)
         *   <label class="s-mbe:30 s-label:responsive">
+        *     <span>John Doe</span>
         *     <input type="range" class="s-range" min="0" max="100" step="10" />
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
+        *     <span>John Doe</span>
         *     <input type="range" class="s-range s-color:accent" min="0" max="100" step="10" />
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
+        *     <span>John Doe</span>
         *     <input type="range" class="s-range s-color:complementary" min="0" max="100" step="10" />
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
+        *     <span>John Doe</span>
         *     <input type="range" class="s-range s-color:error" disabled min="0" max="100" step="10" />
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
         * 
         * @example      html        RTL
         * <div dir="rtl">
         *   <label class="s-mbe:30 s-label:responsive">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *     <input type="range" class="s-range" min="0" max="100" step="10" />
+        *     <span>John Doe</span>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *     <input type="range" class="s-range s-color:accent" min="0" max="100" step="10" />
+        *     <span>John Doe</span>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *     <input type="range" class="s-range s-color:complementary" min="0" max="100" step="10" />
+        *     <span>John Doe</span>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *     <input type="range" class="s-range s-color:error" disabled min="0" max="100" step="10" />
+        *     <span>John Doe</span>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
-        *     I'm disabled
+        *     <span>I'm disabled</span>
         *     <input type="range" disabled class="s-range s-color:error" disabled min="0" max="100" step="10" />
         *   </label>
         * </div>
         *
         * @example        html          Scales
         *   <label class="s-mbe:30 s-label:responsive">
+        *     <span>John Doe</span>
         *     <input type="range" class="s-range s-scale:08" min="0" max="100" step="10" />
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
-        *     <input type="range" class="s-range" min="0" max="100" step="10" />
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     <span>John Doe</span>
+        *     <input type="range" class="s-range s-width:50" min="0" max="100" step="10" />
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
+        *     <span>John Doe</span>
         *     <input type="range" class="s-range s-scale:12" min="0" max="100" step="10" />
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
         *   <label class="s-mbe:30 s-label:responsive">
+        *     <span>John Doe</span>
         *     <input type="range" class="s-range s-scale:14" min="0" max="100" step="10" />
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
         * 
         * @since      2.0.0
@@ -237,7 +236,7 @@ export default function ({
         * This class represent a(n) "<s-color="accent">bare</s-color>" range
         * 
         * @example        html
-        * <input type="range" class="s-range" min="0" max="100" step="10" />
+        * <input type="range" class="s-range s-width:50" min="0" max="100" step="10" />
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -269,7 +268,7 @@ export default function ({
             * This class represent a(n) "<s-color="accent">${lnf}</s-color>" range
             * 
             * @example        html
-            * <input type="range" class="s-range${
+            * <input type="range" class="s-range ${
                 finalParams.defaultLnf === lnf ? '' : `:${lnf}`
             }" min="0" max="100" step="10" />
             * 

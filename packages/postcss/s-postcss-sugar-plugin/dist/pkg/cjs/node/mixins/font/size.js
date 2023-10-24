@@ -23,7 +23,7 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  *
  * @example        css
  * .my-cool-element {
- *    \@s.font.size(20);
+ *    @s.font.size(20);
  * }
  *
  * @since       2.0.0

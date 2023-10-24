@@ -20,7 +20,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @example       css
  * .my-element {
- *      \@s.ui.badge();
+ *      @s.ui.badge();
  * }
  *
  * @since     2.0.0

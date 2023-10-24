@@ -19,7 +19,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @return        {Css}         The generated css
  *
  * @example        css
- * \@s.chunk(general) {
+ * @s.chunk(general) {
  *   body {
  *      background: red;
  *   }

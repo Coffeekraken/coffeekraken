@@ -19,7 +19,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @snippet         @s.ui.badge.classes
  *
  * @example       css
- * \@s.ui.badge.classes();
+ * @s.ui.badge.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -73,10 +73,10 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.ui.badge.classes;
+        * @s.ui.badge.classes;
         * 
         * .my-badge {
-        *   \@s.ui.badge;
+        *   @s.ui.badge;
         * }
         * 
         ${finalParams.lnfs

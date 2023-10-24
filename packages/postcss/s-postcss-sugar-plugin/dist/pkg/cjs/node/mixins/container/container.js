@@ -23,7 +23,7 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  *
  * @example        css
  * .my-cool-container {
- *    \@s.container;
+ *    @s.container;
  * }
  *
  * @since       2.0.0

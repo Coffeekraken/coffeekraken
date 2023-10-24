@@ -27,7 +27,7 @@ exports.interface = postcssSugarPluginClassesMixinInterface;
  * @snippet         @s.color.classes
  *
  * @example        css
- * \@s.color.classes;
+ * @s.color.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -51,10 +51,10 @@ function default_1({ params, atRule, CssVars, replaceWith }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.color.classes;
+        * @s.color.classes;
         * 
         * .my-element {
-        *   \\@s.color(accent);
+        *   @s.color(accent);
         * }                   
         * 
         ${Object.keys(s_theme_1.default.getTheme().baseColors())

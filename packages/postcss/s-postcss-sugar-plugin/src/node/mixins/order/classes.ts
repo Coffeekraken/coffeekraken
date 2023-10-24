@@ -16,7 +16,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @snippet         @s.order.classes
  *
  * @example        css
- * \@s.order.classes;
+ * @s.order.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -68,7 +68,7 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@s.order.classes;
+        * @s.order.classes;
         * 
         ${Array.from(Array(count))
             .map(

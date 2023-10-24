@@ -18,7 +18,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @example        css
  * .my-cool-element {
- *    \@s.font.size(20);
+ *    @s.font.size(20);
  * }
  *
  * @since       2.0.0

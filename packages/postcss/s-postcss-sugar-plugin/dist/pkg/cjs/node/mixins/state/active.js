@@ -27,13 +27,13 @@ exports.interface = postcssSugarPluginStateActiveMixinInterface;
  * @return      {Css}         The generated css
  *
  * @snippet         @s.state.active
- * \@s.state.active {
+ * @s.state.active {
  *      $1
  * }
  *
  * @example        css
  * .myCoolItem {
- *  \@s.state.active {
+ *  @s.state.active {
  *      // ...
  *  }
  * }

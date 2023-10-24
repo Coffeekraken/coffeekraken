@@ -19,7 +19,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @snippet         @s.ui.button.classes
  *
  * @example       css
- * \@s.ui.button.classes();
+ * @s.ui.button.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -76,10 +76,10 @@ export default function ({ params, atRule, CssVars, sharedData, replaceWith, }) 
         * @support          edge
         * 
         * @install          css
-        * \\@s.ui.button.classes;
+        * @s.ui.button.classes;
         * 
         * .my-button {
-        *   \@s.ui.button;
+        *   @s.ui.button;
         * }
         * 
         ${finalParams.lnfs

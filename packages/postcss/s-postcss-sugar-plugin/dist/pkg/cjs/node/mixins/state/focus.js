@@ -25,13 +25,13 @@ exports.interface = postcssSugarPluginStateFocusMixinInterface;
  * - &:focus
  *
  * @snippet         @s.state.focus
- * \@s.state.focus {
+ * @s.state.focus {
  *      $1
  * }
  *
  * @example        css
  * .myCoolItem {
- *  \@s.state.focus {
+ *  @s.state.focus {
  *      // ...
  *  }
  * }

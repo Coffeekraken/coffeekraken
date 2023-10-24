@@ -19,7 +19,7 @@ import __fs from 'fs';
  * @snippet         @s.platform.classes
  *
  * @example        css
- * \@s.platform.classes;
+ * @s.platform.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

@@ -27,7 +27,7 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  * @snippet         @s.theme.import($1)
  *
  * @example        css
- * \@s.theme.import(dark);
+ * @s.theme.import(dark);
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

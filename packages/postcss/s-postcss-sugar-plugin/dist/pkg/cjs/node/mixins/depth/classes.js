@@ -22,7 +22,7 @@ const array_1 = require("@coffeekraken/sugar/array");
  * @snippet         @s.depth.classes
  *
  * @example        css
- * \@s.depth.classes;
+ * @s.depth.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -56,10 +56,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.depth.classes;
+        * @s.depth.classes;
         * 
         * .my-element {
-        *   \\@s.depth(100);
+        *   @s.depth(100);
         * }          
         * 
         ${depthsArray

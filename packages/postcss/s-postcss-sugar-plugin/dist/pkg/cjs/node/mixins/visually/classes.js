@@ -21,7 +21,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @snippet         @s.visually.classes
  *
  * @example        css
- * \@s.visually.classes;
+ * @s.visually.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -52,10 +52,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.visually.classes;
+        * @s.visually.classes;
         * 
         * .my-element {
-        *   \\@s.visually.hidden;
+        *   @s.visually.hidden;
         * } 
         * 
         * @cssClass         s-visually:hidden             Make the element hidden in the ui

@@ -23,11 +23,11 @@ export { postcssSugarPluginWireframeImageMixinInterface as interface };
  * This mixin gives you back the wireframe image statement that depend on you themeWireframe config
  *
  * @snippet         @s.wireframe.image
- * \@s.wireframe.image;
+ * @s.wireframe.image;
  *
  * @example        css
  * .myCoolItem {
- *  \@s.wireframe.image;
+ *  @s.wireframe.image;
  * }
  *
  * @since       2.0.0

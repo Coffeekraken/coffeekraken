@@ -21,7 +21,7 @@ const fs_1 = __importDefault(require("fs"));
  * @return        {Css}         The generated css
  *
  * @example        css
- * \@s.cache {
+ * @s.cache {
  *   @s.classes;
  * }
  *

@@ -16,7 +16,7 @@ import __faker from 'faker';
  * @snippet         @s.userSelect.classes
  *
  * @example        css
- * \@s.userSelect.classes;
+ * @s.userSelect.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -47,7 +47,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.userSelect.classes;
+        * @s.userSelect.classes;
         * 
         * @cssClass         s-user-select:all             Apply the \`user-select\` to \`all\`
         * @cssClass         s-user-select:auto             Apply the \`user-select\` to \`auto\`

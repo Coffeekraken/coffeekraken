@@ -37,7 +37,7 @@ exports.interface = postcssSugarPluginLiikAndFeelSelectionInterface;
  * @snippet         @s.selection($1)
  *
  * @example       css
- * \@s.selection;
+ * @s.selection;
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

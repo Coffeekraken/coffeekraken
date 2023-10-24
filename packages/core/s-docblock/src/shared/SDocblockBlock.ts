@@ -273,8 +273,8 @@ class SDocblockBlock extends __SClass {
 
             lines.forEach((line) => {
                 // get the tag name
-                const tagNameReg = /\*[\s]?@([a-zA-Z0-9]+)/;
-                const tagNameMatch = line.match(tagNameReg);
+                const tagNameReg = /\*[\s]?@([a-zA-Z0-9]+)(\s)+/;
+                const tagNameMatch = line.trim().match(tagNameReg);
 
                 if (line.replace('*', '').trim() === '') {
                     if (currentContent.length > 0) {

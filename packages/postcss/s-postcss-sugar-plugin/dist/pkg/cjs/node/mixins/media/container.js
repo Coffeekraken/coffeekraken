@@ -36,15 +36,15 @@ exports.interface = postcssSugarPluginMediaContainerMixinInterface;
  * @return      {Css}         The generated css
  *
  * @snippet         @s.media.container $1
- * \@s.media.container $1 {
+ * @s.media.container $1 {
  *      $2
  * }
  *
  * @example        css
- * \@s.media.container >=200 {
+ * @s.media.container >=200 {
  *      // ...
  * }
- * \@s.media.container <=300 {
+ * @s.media.container <=300 {
  *      // ...
  * }
  *

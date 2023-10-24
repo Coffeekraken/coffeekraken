@@ -22,13 +22,13 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @return        {Css}         The generated css
  *
  * @snippet         @s.utils.removeProps
- * \@s.utils.removeProps '$1' {
+ * @s.utils.removeProps '$1' {
  *      $2
  * }
  *
  * @example        css
- * \@s.utils.removeProps('^padding, left$') {
- *      \@s.ui.button.classes;
+ * @s.utils.removeProps('^padding, left$') {
+ *      @s.ui.button.classes;
  *      /* and css you want... * /
  * }
  *

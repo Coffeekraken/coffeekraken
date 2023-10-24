@@ -16,7 +16,7 @@ import { __keysFirst } from '@coffeekraken/sugar/array';
  * @snippet         @s.depth.classes
  *
  * @example        css
- * \@s.depth.classes;
+ * @s.depth.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -50,10 +50,10 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.depth.classes;
+        * @s.depth.classes;
         * 
         * .my-element {
-        *   \\@s.depth(100);
+        *   @s.depth(100);
         * }          
         * 
         ${depthsArray

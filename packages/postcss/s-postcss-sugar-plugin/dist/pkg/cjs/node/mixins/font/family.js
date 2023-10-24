@@ -25,7 +25,7 @@ const string_1 = require("@coffeekraken/sugar/string");
  *
  * @example        css
  * .my-cool-element {
- *    \@s.font.family(title);
+ *    @s.font.family(title);
  * }
  *
  * @since       2.0.0

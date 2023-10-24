@@ -35,7 +35,7 @@ exports.interface = postcssSugarPluginAlignInterface;
  *
  * @example       css
  * .my-element {
- *    \@s.align.abs(top right);
+ *    @s.align.abs(top right);
  * }
  *
  * @since     2.0.0

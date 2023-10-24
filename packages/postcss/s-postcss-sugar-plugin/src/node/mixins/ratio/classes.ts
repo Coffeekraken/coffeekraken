@@ -17,7 +17,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @snippet         @s.ratio.classes
  *
  * @example        css
- * \@s.ratio.classes;
+ * @s.ratio.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -74,10 +74,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@s.ratio.classes;
+        * @s.ratio.classes;
         * 
         * .my-element {
-        *   \\@s.ratio(16/9);
+        *   @s.ratio(16/9);
         * } 
         * 
         ${Object.keys(ratioObj)

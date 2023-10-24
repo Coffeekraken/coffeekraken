@@ -13,7 +13,7 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  * @type               PostcssMixin
  * @interface     ./switch          interface
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * Apply the switch style to any element
  *
@@ -58,93 +58,83 @@ function default_1({ params, atRule, replaceWith, }) {
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
         
-        font-size: s.scalable(1rem);
-        margin-block: 0.7em 0.9em;
+        font-size: clamp(s.scalable(20px), s.scalable(1rem), 999rem);
 
-        --thumb-size: 1.4em;
-        --thumb-color-active: s.color(main, surface);
-        --thumb-color-inactive: s.color(current);
-        --thumb-color-highlight: s.color(current, --alpha 0.2);
+        --thumb-size: 1em;
+        --thumb-color-active: s.color(current);
+        --thumb-color-inactive: s.color(current, --desaturate 80);
+        --thumb-border-width: s.theme(ui.form.borderWidth);
+        --thumb-border-color: s.color(current, border);
 
-        --track-size: calc(var(--thumb-size) * 2);
-        --track-padding: 0.2em;
-        --track-color-active: s.color(current);
-        --track-color-inactive: s.color(current, --alpha 0);
-
-        --isLTR: 1;
-
-        @s.direction.rtl {
-            --isLTR: -1;
-        }
+        --track-size: 0.5em;
+        --track-color-active: s.color(current, --alpha 0.3);
+        --track-color-inactive: s.color(main, ui, --alpha 0.2 --desaturate 80);
+        --track-border-width: s.theme(ui.form.borderWidth);
+        --track-border-color: s.color(current, border);
 
         --thumb-position: 0%;
 
         --thumb-transition-duration: s.theme(ui.form.transition);
         
-        padding: var(--track-padding);
-        inline-size: var(--track-size);
-        block-size: var(--thumb-size);
-
         -webkit-appearance: none !important;
         -moz-appearance: none !important;
         appearance: none !important;
+        width: calc(var(--thumb-size) * 2);
+        height: var(--thumb-size);
+        position: relative;
         pointer-events: all;
         cursor: pointer;
         touch-action: pan-y;
-        outline-offset: 5px;
+        /* outline-offset: 5px; */
         box-sizing: content-box;
-
         flex-shrink: 0;
-        display: grid;
-        align-items: center;
-        grid: [track] 1fr / [track] 1fr;
-
-        &:checked {
-            &::before {
-            }
-            &::after {
-            }
-        }
 
         &::before {
-            --highlight-size: 0;
-
             content: "";
             cursor: pointer;
             pointer-events: none;
-            grid-area: track;
-            inline-size: var(--thumb-size);
-            block-size: var(--thumb-size);
+            width: calc(var(--thumb-size) * 2 - 20%);
+            height: var(--track-size);
+            position: absolute;
+            top: 50%; left: 10%;
+            transform: translateY(-50%);
         }
-
         &::after {
             content: "";
             cursor: pointer;
             pointer-events: none;
-            grid-area: track;
-            inline-size: var(--thumb-size);
-            block-size: var(--thumb-size);
+            width: var(--thumb-size);
+            height: var(--thumb-size);
+            position: absolute;
+            top: 50%; left: 0;
         }
 
-        &:not(:disabled):hover::before {
-        }
-        &:not(:disabled):focus::before {
-        }
 
-        &:checked {
-            --thumb-position: calc((var(--track-size) - 100%) * var(--isLTR));
+        --thumb-position: calc(--thumb-size) / 2);
+        @s.direction.rtl {
+            --thumb-position: calc(100% - var(--thumb-size) / 2);
         }
 
         &:indeterminate {
-            --thumb-position: calc(
-                calc(calc(var(--track-size) / 2) - calc(var(--thumb-size) / 2))
-                * var(--isLTR)
-            );
+            --thumb-position: 50%;
+        }
+
+        &:checked {
+            --thumb-position: calc(100% - var(--thumb-size) / 2);
+
+            @s.direction.rtl {
+                --thumb-position: calc(var(--thumb-size) / 2);
+            }
         }
 
         @s.state.disabled {
             --thumb-color: transparent;
             @s.disabled;
+        }
+
+        &:after {
+            left: var(--thumb-position);
+            transform: translate(-50%, -50%);
         }
 
     `);
@@ -153,47 +143,24 @@ function default_1({ params, atRule, replaceWith, }) {
         default:
             if (finalParams.scope.indexOf('lnf') !== -1) {
                 vars.push(`
-        
-                    font-size: s.scalable(0.8rem);        
-                    background: var(--track-color-inactive);
-
-                    border: s.color(main, border) solid s.border.width(ui.form.borderWidth);
-                    outline-offset: 5px;
-                    
-                    transition: var(--thumb-transition-duration);
-
-                    &:checked {
-                        &::before {
-                            background: var(--thumb-color-active) !important;
-                        }
-                        &::after {
-                        }
-                    }
-
-                    &::before {
-                        --highlight-size: 0;
-
-                        background: var(--thumb-color-inactive);
-                        box-shadow: 0 0 0 var(--highlight-size) var(--thumb-color-highlight);
-                        transform: translateX(var(--thumb-position));
+             
+                    &:before {
+                        background: var(--track-color-inactive);
                         transition: var(--thumb-transition-duration);
                     }
 
                     &::after {
-                        background: rgba(255,255,25,0);
-                        box-shadow: 0;
-                        transition: ;
-                    }
-
-                    &:not(:disabled):hover::before {
-                        --highlight-size: .5rem;
-                    }
-                    &:not(:disabled):focus::before {
-                        --highlight-size: .25rem;
+                        background: var(--thumb-color-inactive);
+                        transition: var(--thumb-transition-duration);
                     }
 
                     &:checked {
-                        background: var(--track-color-active);
+                        &:before {
+                            background: var(--track-color-active) !important;
+                        }
+                        &::after {
+                            background: var(--thumb-color-active) !important;
+                        }
                     }
 
                 `);
@@ -224,4 +191,4 @@ function default_1({ params, atRule, replaceWith, }) {
     return vars;
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUNyRCxvRUFBNkM7QUFFN0M7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUVILE1BQU0sd0NBQXlDLFNBQVEscUJBQVk7SUFDL0QsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILEdBQUcsRUFBRTtnQkFDRCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxNQUFNLEVBQUUsQ0FBQyxPQUFPLENBQUM7Z0JBQ2pCLE9BQU8sRUFBRSxpQkFBUSxDQUFDLEdBQUcsQ0FBQyxvQkFBb0IsQ0FBQzthQUM5QztZQUNELEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUU7b0JBQ0YsSUFBSSxFQUFFLGVBQWU7b0JBQ3JCLFVBQVUsRUFBRSxDQUFDLEdBQUcsRUFBRSxHQUFHLENBQUM7aUJBQ3pCO2dCQUNELE1BQU0sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUM7Z0JBQ3ZCLE9BQU8sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUM7YUFDM0I7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBT29ELDZEQUFTO0FBRTlELG1CQUF5QixFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsR0FLZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixHQUFHLEVBQUUsT0FBTyxFQUNaLEtBQUssRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUMsSUFDbkIsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsT0FBTztJQUNQLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDMUMsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztLQTJGYixDQUFDLENBQUM7S0FDRjtJQUVELFFBQVEsV0FBVyxDQUFDLEdBQUcsRUFBRTtRQUNyQjtZQUNJLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7Z0JBQ3pDLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O2lCQTRDVCxDQUFDLENBQUM7YUFDTjtZQUVELE1BQU07S0FDYjtJQUVELElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDekMsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7O2lCQU1ELENBQUMsQ0FBQztLQUNkO0lBRUQsWUFBWTtJQUNaLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7S0FVVCxDQUFDLENBQUM7SUFFSCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDO0FBOUxELDRCQThMQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUNyRCxvRUFBNkM7QUFFN0M7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUVILE1BQU0sd0NBQXlDLFNBQVEscUJBQVk7SUFDL0QsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILEdBQUcsRUFBRTtnQkFDRCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxNQUFNLEVBQUUsQ0FBQyxPQUFPLENBQUM7Z0JBQ2pCLE9BQU8sRUFBRSxpQkFBUSxDQUFDLEdBQUcsQ0FBQyxvQkFBb0IsQ0FBQzthQUM5QztZQUNELEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUU7b0JBQ0YsSUFBSSxFQUFFLGVBQWU7b0JBQ3JCLFVBQVUsRUFBRSxDQUFDLEdBQUcsRUFBRSxHQUFHLENBQUM7aUJBQ3pCO2dCQUNELE1BQU0sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUM7Z0JBQ3ZCLE9BQU8sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUM7YUFDM0I7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBT29ELDZEQUFTO0FBRTlELG1CQUF5QixFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsR0FLZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixHQUFHLEVBQUUsT0FBTyxFQUNaLEtBQUssRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUMsSUFDbkIsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsT0FBTztJQUNQLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDMUMsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0tBaUZiLENBQUMsQ0FBQztLQUNGO0lBRUQsUUFBUSxXQUFXLENBQUMsR0FBRyxFQUFFO1FBQ3JCO1lBQ0ksSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtnQkFDekMsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O2lCQXFCVCxDQUFDLENBQUM7YUFDTjtZQUVELE1BQU07S0FDYjtJQUVELElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDekMsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7O2lCQU1ELENBQUMsQ0FBQztLQUNkO0lBRUQsWUFBWTtJQUNaLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7S0FVVCxDQUFDLENBQUM7SUFFSCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDO0FBN0pELDRCQTZKQyJ9

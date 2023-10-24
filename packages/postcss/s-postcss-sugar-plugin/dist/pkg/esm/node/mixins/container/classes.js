@@ -15,7 +15,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @snippet         @s.container.classes
  *
  * @example        css
- * \@s.container.classes;
+ * @s.container.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

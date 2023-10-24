@@ -9,7 +9,7 @@ import __faker from 'faker';
  * @type               PostcssMixin
  * @interface     ./classes          interface
  * @platform      postcss
- * @status        beta
+ * @status        stable
  *
  * Generate the switch classes
  *
@@ -21,7 +21,7 @@ import __faker from 'faker';
  * @snippet         @s.ui.switch.classes
  *
  * @example     css
- * \@s.ui.switch.classes;
+ * @s.ui.switch.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -88,7 +88,7 @@ export default function ({
         * @type               Styleguide
         * @menu           Styleguide / Forms        /styleguide/form/switch
         * @platform       css
-        * @status       beta
+        * @status       stable
         * 
         * These classes allows you to style checkbox HTMLElement as switches
         * 
@@ -102,10 +102,10 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@s.ui.switch.classes;
+        * @s.ui.switch.classes;
         * 
         * .my-switch {
-        *   \@s.ui.switch;
+        *   @s.ui.switch;
         * }
         * 
         ${finalParams.lnfs
@@ -120,7 +120,7 @@ export default function ({
             .map((lnf) => {
                 return ` * @example        html       ${lnf} lnf
             *   <label class="s-mbe:30 s-label">
-            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+            *     <span>John Doe</span>
             *     <input type="checkbox" class="s-switch${
                 lnf === finalParams.defaultLnf ? '' : `:${lnf}`
             }" />
@@ -137,23 +137,23 @@ export default function ({
         *
         * @example      html            Shapes
         *   <label class="s-mbe:30 s-label">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
-        *     <input type="checkbox" class="s-switch s-shape:default" />
+        *     <span>John Doe</span>
+        *     <input type="checkbox" class="s-switch s-shape:default" checked />
         *   </label>
         * <label class="s-mbe:30 s-label">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
-        *     <input type="checkbox" class="s-switch s-shape:square" />
+        *     <span>John Doe</span>
+        *     <input type="checkbox" class="s-switch s-shape:square" checked />
         *   </label>
         * <label class="s-mbe:30 s-label">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
-        *     <input type="checkbox" class="s-switch s-shape:pill" />
+        *     <span>John Doe</span>
+        *     <input type="checkbox" class="s-switch s-shape:pill" checked />
         *   </label>
         *
         * @example      html            RTL Support
         * <div dir="rtl">
         *   <label class="s-mbe:30 s-label">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
-        *     <input type="checkbox" class="s-switch" />
+        *     <span>John Doe</span>
+        *     <input type="checkbox" class="s-switch" checked />
         *   </label>
         * </div>
         * 
@@ -162,8 +162,8 @@ export default function ({
             .map(
                 (color) => `
         *   <label class="s-mbe:30 s-label s-color:${color}">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
-        *     <input type="checkbox" class="s-switch" />
+        *     <span>John Doe</span>
+        *     <input type="checkbox" class="s-switch" checked />
         *   </label>
         `,
             )
@@ -171,20 +171,20 @@ export default function ({
         * 
         * @example      html            Scales
         *   <label class="s-mbe:30 s-label s-scale\:05">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
-        *     <input type="checkbox" class="s-switch" />
+        *     <span>John Doe</span>
+        *     <input type="checkbox" class="s-switch" checked />
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale\:10">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
-        *     <input type="checkbox" class="s-switch" />
+        *     <span>John Doe</span>
+        *     <input type="checkbox" class="s-switch" checked />
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale\:15">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
-        *     <input type="checkbox" class="s-switch" />
+        *     <span>John Doe</span>
+        *     <input type="checkbox" class="s-switch" checked />
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale\:20">
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
-        *     <input type="checkbox" class="s-switch" />
+        *     <span>John Doe</span>
+        *     <input type="checkbox" class="s-switch" checked />
         *   </label>
         * 
         * @since      2.0.0

@@ -18,7 +18,7 @@ import { __uniqid } from '@coffeekraken/sugar/string';
  * @snippet         @s.transition.classes
  *
  * @example        css
- * \@s.transition.classes;
+ * @s.transition.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -72,7 +72,7 @@ export default function ({
         * @support          edge
         * 
         * @install          css
-        * \\@s.transition.classes;
+        * @s.transition.classes;
         * 
         ${Object.keys(transitionObj).map((transition) => {
             return ` * @cssClass             s-transition${

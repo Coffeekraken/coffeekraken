@@ -17,7 +17,7 @@ import __faker from 'faker';
  * @snippet         @s.typo.classes
  *
  * @example        css
- * \@s.typo.classes;
+ * @s.typo.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -50,7 +50,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.typo.classes;
+        * @s.typo.classes;
         * 
         ${Object.keys(typosObj)
         .map((typoName) => {

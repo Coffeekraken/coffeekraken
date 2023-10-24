@@ -25,7 +25,7 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  * @snippet         @s.ui.button.classes
  *
  * @example       css
- * \@s.ui.button.classes();
+ * @s.ui.button.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -82,10 +82,10 @@ function default_1({ params, atRule, CssVars, sharedData, replaceWith, }) {
         * @support          edge
         * 
         * @install          css
-        * \\@s.ui.button.classes;
+        * @s.ui.button.classes;
         * 
         * .my-button {
-        *   \@s.ui.button;
+        *   @s.ui.button;
         * }
         * 
         ${finalParams.lnfs

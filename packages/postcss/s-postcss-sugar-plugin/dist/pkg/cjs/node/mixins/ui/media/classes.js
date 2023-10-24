@@ -22,7 +22,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @snippet         @s.ui.media.classes
  *
  * @example       css
- * \@s.ui.media.classes();
+ * @s.ui.media.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -62,10 +62,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @support      edge
         * 
         * @install          css
-        * \\@s.ui.media.classes;
+        * @s.ui.media.classes;
         * 
         * .my-media {
-        *   \@s.ui.media;
+        *   @s.ui.media;
         * }
         * 
         * @cssClass             s-media                Apply the media style

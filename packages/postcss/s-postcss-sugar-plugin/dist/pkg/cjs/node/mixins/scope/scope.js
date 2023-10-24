@@ -33,12 +33,12 @@ exports.interface = postcssSugarPluginScopeMixinInterface;
  * @return      {Css}         The generated css
  *
  * @snippet         @s.scope ($1) { $2 }
- * \@s.scope $1 {
+ * @s.scope $1 {
  *      $2
  * }
  *
  * @example        css
- * \@s.scope bare {
+ * @s.scope bare {
  *      @s.ui.button;
  *      // etc...
  * }

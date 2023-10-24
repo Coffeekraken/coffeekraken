@@ -22,11 +22,11 @@ exports.interface = postcssSugarPluginWireframesurfaceMixinInterface;
  * This mixin gives you back the wireframe surface statement that depend on you themeWireframe config
  *
  * @snippet         @s.wireframe.surface
- * \@s.wireframe.surface;
+ * @s.wireframe.surface;
  *
  * @example        css
  * .myCoolItem {
- *  \@s.wireframe.surface;
+ *  @s.wireframe.surface;
  * }
  *
  * @since       2.0.0

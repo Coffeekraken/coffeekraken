@@ -37,7 +37,7 @@ exports.interface = postcssSugarPluginBackdropInterface;
  *
  * @example       css
  * .my-element {
- *    \@s.backdrop();
+ *    @s.backdrop();
  * }
  *
  * @since     2.0.0

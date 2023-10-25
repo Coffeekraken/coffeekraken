@@ -25,7 +25,7 @@ import { __uniqid } from '@coffeekraken/sugar/string';
  *          return {};
  *      }
  * }
- * 
+ *
  * @example             js
  * import __SConfigAdapter from '@coffeekraken/s-config-adapter';
  * class SConfigCoolAdapter extends SConfigAdapter {
@@ -48,7 +48,6 @@ export interface ISConfigAdapterSettings {
 }
 
 export interface ISConfigAdapterLoadParams {
-    clearCache: boolean;
     env: ISConfigEnvObj;
     config: any;
 }
@@ -62,6 +61,9 @@ export interface ISConfigAdapter {
 }
 
 export default class SConfigAdapter {
+    readyPromise;
+    _readyPromiseResolve;
+
     /**
      * @name        settings
      * @type          ISConfigAdapterSettings
@@ -106,15 +108,30 @@ export default class SConfigAdapter {
             },
             settings ?? {},
         );
+
+        this.readyPromise = new Promise((resolve) => {
+            this._readyPromiseResolve = resolve;
+        });
+    }
+
+    /**
+     * @name        ready
+     * @type        Function
+     *
+     * Call this method from your adapter when it is ready.
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    ready(): void {
+        this._readyPromiseResolve();
     }
 
     /**
      * @name        update
      * @type        Function
      *
-     * Function that you have to call with the new config when it has been updated
-     *
-     * @param      {String}         identifier        A string identifier for the update. Can be a file path, an object hash, etc...
+     * Function that you have to call when some configs have been updated
      *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -124,8 +141,9 @@ export default class SConfigAdapter {
         // calling the "onUpdate" setting callback if exists
         clearTimeout(this._updateTimeout);
         this._updateTimeout = setTimeout(() => {
+            console.log('UPDATE');
             this.settings.onUpdate?.();
-        }, 50);
+        }, 1000);
     }
 
     /**

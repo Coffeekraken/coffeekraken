@@ -1197,13 +1197,17 @@ export default class SThemeBase extends __SEventEmitter {
             );
 
         let vars: string[] = [
-            `--s: ${themeInstance.theme};`,
+            `--s-theme: ${themeInstance.theme};`,
             `--s-variant: ${themeInstance.variant};`,
         ];
 
         // handle colors
         themeInstance.loopOnColors((colorObj) => {
             const baseVariable = colorObj.value.variable;
+
+            if (colorObj.name === 'accent') {
+                console.log('Color', colorObj);
+            }
 
             if (!colorObj.shade && colorObj.value.color) {
                 vars.push(`${baseVariable}-h: ${colorObj.value.h};`);
@@ -1477,9 +1481,9 @@ export default class SThemeBase extends __SEventEmitter {
      */
     _cachedConfig;
     get _config() {
-        if (this._cachedConfig) {
-            return this._cachedConfig;
-        }
+        // if (this._cachedConfig) {
+        //     return this._cachedConfig;
+        // }
         // @ts-ignore
         this._cachedConfig = Object.assign(
             {},

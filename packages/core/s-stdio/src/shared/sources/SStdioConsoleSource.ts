@@ -103,7 +103,7 @@ export default class SStdioConsoleSource
                     .toString()
                     .split('\n')
                     .slice(2)
-                    .map((str) => str.trim());
+                    .map((str) => str.trim?.());
                 const callerStr = stack[0] ?? '';
                 let group = callerStr
                     .split(' ')
@@ -116,7 +116,7 @@ export default class SStdioConsoleSource
                 }
 
                 if (group.match(`^file:\/\/\/`)) {
-                    group = group.trim().split('/').pop();
+                    group = group.trim?.().split('/').pop();
                 }
 
                 args = args.map((log) => {

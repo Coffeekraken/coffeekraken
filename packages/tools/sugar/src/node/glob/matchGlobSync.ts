@@ -72,7 +72,7 @@ export default function __matchGlobSync(
     let hasMatch = false;
     for (let i = 0; i < expandedGlobs.length; i++) {
         const g = expandedGlobs[i];
-        if (__minimatch(input, g)) {
+        if (__minimatch(__path.resolve(settings.cwd, input), g)) {
             hasMatch = true;
             break;
         }

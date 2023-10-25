@@ -1,5 +1,6 @@
-export default function(api) {
+export default function (api) {
     return {
-        variant: 'dark'
-    }
+        theme: 'coffeekraken',
+        variant: 'dark',
+    };
 }

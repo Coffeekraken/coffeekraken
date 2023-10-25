@@ -394,7 +394,7 @@ export default class SSugarCli {
                     // sorry node-ipc but I don't want a heart to be displayed at each launch
                     // of the sugar CLI... Of course, war is bad!
                     // https://www.npmjs.com/package/peacenotwar
-                    if (log.trim?.() == '♥') return false;
+                    if (log?.trim?.() == '♥') return false;
                     return true;
                 });
 

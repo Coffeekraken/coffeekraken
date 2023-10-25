@@ -11,6 +11,7 @@ export default function (api) {
             port: 3003,
         },
 
+        coco: 'dwdwdddefefedd',
         namespaces: ['views'],
 
         scopes: {

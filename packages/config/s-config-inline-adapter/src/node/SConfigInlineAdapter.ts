@@ -20,12 +20,12 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
  *
  * @snippet         __SConfigInlineAdapter($1)
  * new __SConfigInlineAdapter($1)
- * 
+ *
  * @example         js
  * import __SConfigInlineAdapter from '@coffeekraken/s-config-folder-adapter';
  * import __SConfig from '@coffeekraken/s-config';
  * const config = new __SConfig($1, new __SConfigInlineAdapter($2));
- * 
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -50,7 +50,7 @@ export default class SConfigInlineAdapter extends __SConfigAdapter {
         return hash;
     }
 
-    async load(clearCache = false, env: ISConfigEnvObj, configObj) {
+    async load(env: ISConfigEnvObj, configObj) {
         return this._json;
     }
 }

@@ -1,8 +1,9 @@
 import __SFile from '@coffeekraken/s-file';
 import __SPromise from '@coffeekraken/s-promise';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
+// import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __chokidar from 'chokidar';
 import __fs from 'fs';
+import __path from 'path';
 import __expandGlob from '../../shared/glob/expandGlob.js';
 import __deepMerge from '../../shared/object/deepMerge.js';
 import __matchGlobSync from '../glob/matchGlobSync.js';
@@ -101,7 +102,7 @@ export default function __pool(input, settings?: Partial<IPoolSettings>) {
 
     const promise = new __SPromise(
         async ({ resolve, reject, emit, cancel, on }) => {
-            await __SSugarConfig.load();
+            // await __SSugarConfig.load();
 
             const set = <IPoolSettings>__deepMerge(
                 {
@@ -153,8 +154,10 @@ export default function __pool(input, settings?: Partial<IPoolSettings>) {
                             filesStack[path] = __SFile.new(
                                 `${set.cwd}/${path}`,
                             );
-                        else filesStack[path] = path;
+                        else filesStack[path] = __path.resolve(set.cwd, path);
                     }
+
+                    promise.files.push(filesStack[path]);
                     emit('add', filesStack[path]);
                 })
                 .on('change', (path) => {
@@ -172,7 +175,7 @@ export default function __pool(input, settings?: Partial<IPoolSettings>) {
                             filesStack[path] = __SFile.new(
                                 `${set.cwd}/${path}`,
                             );
-                        else filesStack[path] = path;
+                        else filesStack[path] = __path.resolve(set.cwd, path);
                     }
                     emit('change', filesStack[path]);
                 })
@@ -187,11 +190,20 @@ export default function __pool(input, settings?: Partial<IPoolSettings>) {
                     ) {
                         emit('unlink', filesStack[path]);
                     }
+
+                    if (
+                        filesStack[path] &&
+                        promise.files.indexOf(filesStack[path]) !== -1
+                    ) {
+                        promise.files.splice(
+                            promise.files.indexOf(filesStack[path]),
+                            1,
+                        );
+                    }
                     delete filesStack[path];
                 })
                 .on('ready', () => {
                     const files = watcher.getWatched();
-
                     const filesPaths: string[] = [];
                     const finalFiles: (__SFile | string)[] = [];
                     Object.keys(files).forEach((path) => {
@@ -210,13 +222,17 @@ export default function __pool(input, settings?: Partial<IPoolSettings>) {
                                 finalFiles.push(
                                     __SFile.new(`${set.cwd}/${filePath}`),
                                 );
-                            else finalFiles.push(filePath);
+                            else
+                                finalFiles.push(
+                                    __path.resolve(set.cwd, filePath),
+                                );
                             emit('file', finalFiles[finalFiles.length - 1]);
                             // save file in file stack
                             filesStack[filePath] =
                                 finalFiles[finalFiles.length - 1];
                         });
 
+                    promise.files = finalFiles;
                     emit('ready', finalFiles);
                     whenReadyResolve(finalFiles);
                     if (!set.watch) {
@@ -234,6 +250,8 @@ export default function __pool(input, settings?: Partial<IPoolSettings>) {
             eventEmitter: {},
         },
     );
+
+    promise.files = [];
 
     // add an "initialFiles" promise to have access to them if wanted
     promise.ready = new Promise((resolve, reject) => {

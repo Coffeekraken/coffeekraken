@@ -52,7 +52,6 @@ export default function ({
 
     font-size: s.scalable(1rem);
     display: block;
-    overflow: hidden;
     padding: s.padding(ui.code.paddingBlock) s.padding(ui.code.paddingInline);
     background-color: s.color(current, surface);
     border-radius: s.border.radius(ui.code.borderRadius);

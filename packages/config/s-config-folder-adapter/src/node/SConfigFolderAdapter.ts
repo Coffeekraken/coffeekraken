@@ -14,6 +14,8 @@ import { __replaceTokens } from '@coffeekraken/sugar/token';
 import __fs from 'fs';
 import __path from 'path';
 
+import { __pool } from '@coffeekraken/sugar/fs';
+
 import { __hashFromSync } from '@coffeekraken/sugar/hash';
 
 /**
@@ -68,6 +70,7 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
     _scopedSettings: any = {};
     _scopedFoldersPaths: any = {};
     _foldersPaths: string[] = [];
+    _pool: any;
 
     constructor(settings: Partial<ISConfigFolderAdapterSettings>) {
         super(
@@ -114,7 +117,6 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                     return __replaceTokens(
                         path.replace('%folderName', this.settings.folderName),
                     );
-                    // .replace(/\%format/g, format);
                 });
             }
 
@@ -122,70 +124,51 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
             this._scopedFoldersPaths[scope] = scopeFoldersPathArray;
         });
 
-        // const watchPaths: string[] = [];
-        // Object.keys(this.settings.scopes).forEach(
-        //     (scope) => {
-        //         if (this._scopedFoldersPaths[scope]) {
-        //             this._scopedFoldersPaths[scope] = this._scopedFoldersPaths[
-        //                 scope
-        //             ].filter((path) => {
-        //                 if (
-        //                     __fs.existsSync(path) &&
-        //                     this._foldersPaths.indexOf(path) === -1
-        //                 ) {
-        //                     watchPaths.push(path);
-        //                     this._foldersPaths.push(path);
-        //                     return true;
-        //                 }
-        //                 return false;
-        //             });
-        //         }
-        //     },
-        // );
-
-        // // watch for changes
-        // __chokidar
-        //     .watch(__unique(watchPaths), {
-        //         ignoreInitial: true,
-        //     })
-        //     .on('change', (p) => {
-        //         this.update(p);
-        //     })
-        //     .on('unlink', (p) => this.update(p))
-        //     .on('add', (p) => this.update(p));
-    }
-
-    async integrity() {
-        const hashes: string[] = [];
-
+        let fullFoldersPaths = [];
         for (let [scope, folderPaths] of Object.entries(
             this._scopedFoldersPaths,
         )) {
-            for (let i = 0; i < folderPaths.length; i++) {
-                const folderPath = folderPaths[i];
-                if (!__fs.existsSync(folderPath)) continue;
-                const filesPaths = __fs.readdirSync(folderPath);
-                for (let j = 0; j < filesPaths.length; j++) {
-                    const filePath = `${folderPath}/${filesPaths[j]}`;
-                    try {
-                        hashes.push(__hashFromSync(filePath));
-                    } catch (e) {
-                        console.log(e);
-                    }
-                }
-            }
+            fullFoldersPaths = [
+                ...fullFoldersPaths,
+                ...folderPaths.map((folderPath) => {
+                    return `${folderPath}/${this.settings.fileName.replace(
+                        '%name',
+                        '*',
+                    )}`;
+                }),
+            ];
+        }
+
+        this._pool = __pool(fullFoldersPaths, {
+            watch: true,
+        });
+        this._pool.on('ready', (files) => {
+            this.ready();
+        });
+        this._pool.on('change', (file) => {
+            this._hashes[file.path] = file.hash;
+            this.update();
+        });
+    }
+
+    _hashes: Record<string, string> = {};
+    integrity() {
+        if (!Object.keys(this._hashes).length) {
+            this._pool.files.forEach((file) => {
+                this._hashes[file.path] = file.hash;
+            });
+        }
+
+        const hashes: string[] = [];
+        for (let [path, hash] of Object.entries(this._hashes)) {
+            hashes.push(hash);
         }
 
         const hash = __sha256.encrypt(`${hashes.join('-')}`);
         return hash;
     }
 
-    async _load(
-        folderPaths,
-        clearCache = false,
-        env: ISConfigEnvObj,
-        configObj,
-    ) {
+    async _load(folderPaths, env: ISConfigEnvObj, configObj) {
         folderPaths = __unique(folderPaths);
 
         for (let i = 0; i < folderPaths.length; i++) {
@@ -209,13 +192,6 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                 // make sure it's a js, ts or json file
                 if (!filePath.match(/\.(j|t)s(on)?$/)) continue;
 
-                if (
-                    filePath.match(/\.js$/) &&
-                    __fs.existsSync(filePath.replace(/\.js$/, '.ts'))
-                ) {
-                    continue;
-                }
-
                 let buildTemporaryRes;
                 let importedConfig;
 
@@ -229,11 +205,15 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                     buildTemporaryRes =
                         await __STypescriptBuilder.buildTemporary(filePath);
                     filePath = buildTemporaryRes.path;
-                    importedConfig = await import(filePath);
+                    importedConfig = await import(
+                        `${filePath}?v=${Math.round(Math.random() * 99999)}`
+                    );
                 } else if (filePath.match(/\.json$/)) {
                     importedConfig = __readJsonSync(filePath);
                 } else {
-                    importedConfig = await import(filePath);
+                    importedConfig = await import(
+                        `${filePath}?v=${Math.round(Math.random() * 99999)}`
+                    );
                 }
 
                 if (!importedConfig) {
@@ -261,9 +241,6 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                             return configObj.theme.themes[themeId];
                         },
                         extends: __merge,
-                        // extends(...objects) {
-                        //     return __merge.apply(null, ...objects.reverse());
-                        // },
                     });
                 }
 
@@ -303,23 +280,18 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
         return Object.assign({}, configObj);
     }
 
-    async load({ clearCache, env, config }) {
-        // try {
+    async load({ env, config }) {
         for (let i = 0; i < Object.keys(this._scopedFoldersPaths).length; i++) {
             const scope = Object.keys(this._scopedFoldersPaths)[i];
             const scopedFoldersPaths = this._scopedFoldersPaths[scope];
             if (scopedFoldersPaths && scopedFoldersPaths.length) {
                 this._scopedSettings[scope] = await this._load(
                     scopedFoldersPaths,
-                    clearCache,
                     env,
                     config,
                 );
             }
         }
-        // } catch (e) {
-        //     console.log('fffffffff', e);
-        // }
 
         let resultSettings: any = {};
         Object.keys(this._scopedSettings).forEach((scope) => {

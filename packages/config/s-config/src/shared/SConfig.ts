@@ -278,7 +278,12 @@ export default class SConfig {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     async load(settings?: Partial<ISConfigLoadSettings>) {
+        // wait until the adapter is ready
+        await this.adapter.readyPromise;
+
         const duration = new __SDuration();
+
+        console.log('LOAD');
 
         const finalSettings: ISConfigLoadSettings = {
             isUpdate: false,
@@ -298,7 +303,15 @@ export default class SConfig {
         // check for cache first
         // if (this.settings.cache && !finalSettings.isUpdate) {
         //     const cachedConfigObj = await this.fromCache();
+
         //     if (cachedConfigObj?.integrity === this.integrity) {
+        //         console.log(
+        //             'FROM C',
+        //             cachedConfigObj.integrity,
+        //             this.integrity,
+        //         );
+        //         // clear the load timeout
+        //         clearTimeout(loadTimeout);
         //         this.config = cachedConfigObj.config;
         //         return this.config;
         //     }
@@ -306,7 +319,6 @@ export default class SConfig {
 
         // normal loading otherwise
         const loadedConfig = await this.adapter.load({
-            clearCache: finalSettings.isUpdate,
             env: this.settings.env,
             config: this.config,
         });
@@ -397,7 +409,7 @@ export default class SConfig {
         }
 
         // cache for later
-        this.cache();
+        await this.cache();
 
         // filter the empty config
         if (finalSettings.clean) {
@@ -410,12 +422,6 @@ export default class SConfig {
 
         // Serialize the config just to be sure all is ok
         try {
-            // make sure we don't have any cyclic references inside our config
-            // const cyclic = __isCyclic(this.config);
-            // if (cyclic) {
-            //     throw new Error(cyclic);
-            // }
-
             JSON.stringify(this.config);
         } catch (e) {
             console.error(`[SConfig] Your configuration seems to be invalid... This is usually cause of one of these issue:
@@ -451,7 +457,7 @@ export default class SConfig {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    fromCache() {
+    fromCache(): Promise<any> {
         return new Promise(async (resolve, reject) => {
             // different caching method for node or browser
             if (__isNode()) {
@@ -459,14 +465,12 @@ export default class SConfig {
                 const { __packageRootDir } = await import(
                     '@coffeekraken/sugar/path'
                 );
-                const folderPath = `${__packageRootDir()}/.local/cache/config`;
-                if (!__fs.existsSync(folderPath)) return resolve();
-                const jsonStr = __fs
-                    .readFileSync(
-                        `${folderPath}/${this.id}.${this.settings.env.env}.${this.settings.env.platform}.json`,
-                    )
-                    .toString();
-                if (!jsonStr) return resolve();
+                const folderPath = `${__packageRootDir()}/.local/cache/config`,
+                    filePath = `${folderPath}/${this.id}.${this.settings.env.env}.${this.settings.env.platform}.json`;
+                if (!__fs.existsSync(folderPath) || !__fs.existsSync(filePath))
+                    return resolve({});
+                const jsonStr = __fs.readFileSync(filePath).toString();
+                if (!jsonStr) return resolve({});
                 resolve(JSON.parse(jsonStr));
             } else {
                 // @TODO            implement browser cache
@@ -498,6 +502,9 @@ export default class SConfig {
                 const { __packageRootDir } = await import(
                     '@coffeekraken/sugar/path'
                 );
+
+                // console.log('CACHE', this.integrity);
+
                 const folderPath = `${__packageRootDir()}/.local/cache/config`;
                 __fs.mkdirSync(folderPath, { recursive: true });
                 __fs.writeFileSync(
@@ -547,12 +554,6 @@ export default class SConfig {
         }
 
         let finalValue = __get(this.config, path);
-
-        if (__isPlainObject(finalValue)) {
-            // finalValue = JSON.parse(JSON.stringify(finalValue));
-            // finalValue = __toPlainObject(finalValue);
-            // finalValue = __derefSync(finalValue);
-        }
 
         if (settings.throwErrorOnUndefinedConfig && finalValue === undefined) {
             throw new Error(

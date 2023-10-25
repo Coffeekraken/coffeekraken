@@ -18,7 +18,7 @@ export default function (api) {
             description: 'Nice and elegant coffeekraken dark theme',
         },
         get color() {
-            return Object.assign(Object.assign({}, api.config.themeColor), { main: '#818898', accent: '#F7C33F', complementary: '#F9656E' });
+            return Object.assign(Object.assign({}, api.config.themeColor), { main: '#818898', accent: '#f0f0f0', complementary: '#F9656E' });
         },
         /**
          * @name            shades

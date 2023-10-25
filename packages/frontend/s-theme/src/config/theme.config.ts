@@ -16,6 +16,7 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
  */
 
 export function preprocess(api) {
+    console.log('PRE');
     // setting theme from sugar.json
     const sugarJsonInstance = new __SSugarJson();
     const sugarJson = sugarJsonInstance.current();
@@ -36,10 +37,12 @@ export function preprocess(api) {
             });
         }
     });
+
     return api.this;
 }
 
 export function postprocess(api) {
+    console.log('POST');
     for (let [key, value] of Object.entries(api.config)) {
         if (value.themeName && value.metas) {
             for (let [themeName, themeObj] of Object.entries(api.this.themes)) {

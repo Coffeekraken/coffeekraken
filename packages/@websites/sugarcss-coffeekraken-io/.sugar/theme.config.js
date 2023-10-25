@@ -1,6 +1,7 @@
 export default function (api) {
     return {
-        variant: 'dark'
+        theme: 'coffeekraken',
+        variant: 'dark',
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sQ0FBQyxPQUFPLFdBQVUsR0FBRztJQUN2QixPQUFPO1FBQ0gsT0FBTyxFQUFFLE1BQU07S0FDbEIsQ0FBQTtBQUNMLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixPQUFPO1FBQ0gsS0FBSyxFQUFFLGNBQWM7UUFDckIsT0FBTyxFQUFFLE1BQU07S0FDbEIsQ0FBQztBQUNOLENBQUMifQ==

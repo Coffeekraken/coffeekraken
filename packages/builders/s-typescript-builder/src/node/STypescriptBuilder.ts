@@ -603,8 +603,24 @@ export default class STypescriptBuilder extends __SBuilder {
                     __fs.mkdirSync(outPath, { recursive: true });
                 }
 
-                // save js file
-                await __fsPromise.writeFile(outFilePath, result.outputText);
+                // check if a file already exists and is the same as the conpiled one
+                // to avoid writing it again
+                if (__fs.existsSync(outFilePath)) {
+                    const currentContent = __fs.readFileSync(
+                        outFilePath,
+                        'utf8',
+                    );
+                    if (currentContent != result.outputText) {
+                        // save js file
+                        await __fsPromise.writeFile(
+                            outFilePath,
+                            result.outputText,
+                        );
+                    }
+                } else {
+                    // save js file
+                    await __fsPromise.writeFile(outFilePath, result.outputText);
+                }
 
                 // dirty hash to make the bin file(s) executable
                 if (__path.basename(outFilePath) === 'sugar.cli.js') {

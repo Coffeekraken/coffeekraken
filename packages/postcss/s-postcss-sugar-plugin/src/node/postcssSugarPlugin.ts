@@ -557,23 +557,9 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                 sharedData.rootFilePath = root.source?.input?.file;
             }
 
-            // bench = new __SBench(
-            //     `postcssSugarPlugin.${root.source.input.file
-            //         ?.replace(__packageRootDir(), '')
-            //         .replace(
-            //             __packageRootDir(process.cwd(), {
-            //                 highest: true,
-            //             }),
-            //             '',
-            //         )}`,
-            // );
-            await _load();
+            // console.log('SS', __SSugarConfig.get('carpenter'));
 
-            // calculate the final hash depending on the
-            // packageHash, settingsHash and themeHash
-            // cacheHash = `${packageHash}-${settingsHash}-${themeHash}-${__base64.encrypt(
-            //     externalPackagesHashes.join('-'),
-            // )}`;
+            await _load();
 
             // message when a file takes time to compile
             clearTimeout(compileFileTimeout);

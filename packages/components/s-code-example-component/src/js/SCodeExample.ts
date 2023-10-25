@@ -208,7 +208,7 @@ export default class SCodeExample extends __SLitComponent {
                     ],
                 });
             } catch (e) {
-                console.log('prettier error', e);
+                // console.log('prettier error', e);
             }
 
             this.props.items = [

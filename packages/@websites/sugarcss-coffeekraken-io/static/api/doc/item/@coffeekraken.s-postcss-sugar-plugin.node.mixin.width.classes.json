@@ -116,7 +116,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name           classes\n* @as              @s.width.classes\n* @namespace      node.mixin.width\n* @type           PostcssMixin\n* @platform      postcss\n* @interface     ./classes\n* @status        stable\n*\n* This mixin generate all the width helper classes like s-width:20, s-width:50, etc...\n* It will generate all the width defined in the config.theme.width configuration stack\n*\n* @return        {Css}         The generated css\n*\n* @snippet         @s.width.classes\n*\n* @example        css\n* \\@s.width.classes;\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name           classes\n* @as              @s.width.classes\n* @namespace      node.mixin.width\n* @type           PostcssMixin\n* @platform      postcss\n* @interface     ./classes\n* @status        stable\n*\n* This mixin generate all the width helper classes like s-width:20, s-width:50, etc...\n* It will generate all the width defined in the config.theme.width configuration stack\n*\n* @return        {Css}         The generated css\n*\n* @snippet         @s.width.classes\n*\n* @example        css\n* @s.width.classes;\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.width.classes"
         }
     ]

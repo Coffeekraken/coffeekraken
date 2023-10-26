@@ -33,6 +33,12 @@
                 "code": "<input type=\"text\" class=\"s-input s-disabled\" placeholder=\"I'm disabled\" />"
             }
         ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.disabled.classes;\n\n.my-element {\n  @s.disabled;\n}"
+            }
+        ],
         "since": "2.0.0",
         "author": {
             "name": "Olivier Bossel",
@@ -92,6 +98,12 @@
                 "code": "<div class=\"s-bc:current s-p:10 s-mb:30 s-radius\">current</div>\n<div class=\"s-bc:main s-p:10 s-mb:30 s-radius\">main</div>\n<div class=\"s-bc:accent s-p:10 s-mb:30 s-radius\">accent</div>\n<div class=\"s-bc:complementary s-p:10 s-mb:30 s-radius\">complementary</div>\n<div class=\"s-bc:success s-p:10 s-mb:30 s-radius\">success</div>\n<div class=\"s-bc:warning s-p:10 s-mb:30 s-radius\">warning</div>\n<div class=\"s-bc:error s-p:10 s-mb:30 s-radius\">error</div>\n<div class=\"s-bc:info s-p:10 s-mb:30 s-radius\">info</div>"
             }
         ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.color.classes;\n\n.my-element {\n  @s.color(accent);\n}"
+            }
+        ],
         "since": "2.0.0",
         "author": {
             "name": "Olivier Bossel",
@@ -143,17 +155,23 @@
             {
                 "language": "html",
                 "title": "Inline",
-                "code": "<p class=\"s-bc:accent s-radius s-p:30 s-mbe:20\">Bob Green</p>\n  <p class=\"s-bc:complementary s-radius s-mi:50 s-mbe:20 s-p:30\">Wade Champlin</p>\n  <p class=\"s-bc:main s-mie:100 s-radius s-mbe:20 s-p:30\">Dr. Luis Kuhic</p>\n  <p class=\"s-bc:error s-mie:30 s-radius s-p:30\">Jacquelyn Gottlieb</p>"
+                "code": "<p class=\"s-bc:accent s-radius s-p:30 s-mbe:20\">Chad Rippin DDS</p>\n  <p class=\"s-bc:complementary s-radius s-mi:50 s-mbe:20 s-p:30\">Eddie Volkman</p>\n  <p class=\"s-bc:main s-mie:100 s-radius s-mbe:20 s-p:30\">Rodolfo Mosciski</p>\n  <p class=\"s-bc:error s-mie:30 s-radius s-p:30\">Mae Oberbrunner</p>"
             },
             {
                 "language": "html",
                 "title": "Block",
-                "code": "<div class=\"s-bc:accent s-radius s-mbe:40 s-p:30 s-text:center\">Constance Schoen</div>\n  <div class=\"s-bc:complementary s-radius s-mbe:20 s-p:30 s-text:center\">Tami Gislason</div>\n  <div class=\"s-bc:main s-radius s-mbe:50 s-p:30 s-text:center\">Jennie Bosco IV</div>\n  <div class=\"s-bc:error s-radius s-p:30 s-text:center\">Allison Barton</div>"
+                "code": "<div class=\"s-bc:accent s-radius s-mbe:40 s-p:30 s-text:center\">Christian Wilkinson</div>\n  <div class=\"s-bc:complementary s-radius s-mbe:20 s-p:30 s-text:center\">Merle Fahey</div>\n  <div class=\"s-bc:main s-radius s-mbe:50 s-p:30 s-text:center\">Frank Grady</div>\n  <div class=\"s-bc:error s-radius s-p:30 s-text:center\">Jake Schmidt</div>"
             },
             {
                 "language": "html",
                 "title": "RTL",
-                "code": "<div dir=\"rtl\">\n  <p class=\"s-bc:accent s-radius s-p:30 s-mbe:20\">Otis Douglas</p>\n  <p class=\"s-bc:complementary s-radius s-mi:50 s-mbe:20 s-p:30\">Lynn Lesch</p>\n  <p class=\"s-bc:main s-radius s-mie:100 s-mbe:20 s-p:30\">Ray Connelly</p>\n  <p class=\"s-bc:error s-radius s-mie:30 s-p:30\">Raquel Douglas DVM</p>\n</div>"
+                "code": "<div dir=\"rtl\">\n  <p class=\"s-bc:accent s-radius s-p:30 s-mbe:20\">Bethany Larson I</p>\n  <p class=\"s-bc:complementary s-radius s-mi:50 s-mbe:20 s-p:30\">Dr. Sophie Quitzon</p>\n  <p class=\"s-bc:main s-radius s-mie:100 s-mbe:20 s-p:30\">Lorena Collins</p>\n  <p class=\"s-bc:error s-radius s-mie:30 s-p:30\">Bryan Beer</p>\n</div>"
+            }
+        ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.margin.classes;"
             }
         ],
         "since": "2.0.0",
@@ -207,17 +225,23 @@
             {
                 "language": "html",
                 "title": "Inline",
-                "code": "<p class=\"s-bc:accent s-radius s-pi:30 s-pb:30 s-mbe:20\">Janis Miller</p>\n  <p class=\"s-bc:complementary s-radius s-pis:50 s-pb:30 s-mbe:20\">Diana Ondricka</p>\n  <p class=\"s-bc:main s-radius s-pis:80 s-pb:30 s-mbe:20\">Marta Crona Jr.</p>\n  <p class=\"s-bc:error s-radius s-pis:100 s-pb:30 s-mbe:20\">Cody Stamm</p>"
+                "code": "<p class=\"s-bc:accent s-radius s-pi:30 s-pb:30 s-mbe:20\">Sherry Gutmann</p>\n  <p class=\"s-bc:complementary s-radius s-pis:50 s-pb:30 s-mbe:20\">Darlene Rau</p>\n  <p class=\"s-bc:main s-radius s-pis:80 s-pb:30 s-mbe:20\">Miss Lorene Predovic</p>\n  <p class=\"s-bc:error s-radius s-pis:100 s-pb:30 s-mbe:20\">Gerard Spencer</p>"
             },
             {
                 "language": "html",
                 "title": "Block",
-                "code": "<div class=\"s-bc:accent s-radius s-pbs:30 s-pbe:40 s-text:center s-mbe:20\">Jenny Gaylord PhD</div>\n  <div class=\"s-bc:complementary s-radius s-pb:30 s-text:center s-mbe:20\">Carlos Swaniawski</div>\n  <div class=\"s-bc:main s-radius s-pbs:50 s-pbe:30 s-text:center s-mbe:20\">Joshua Herman</div>\n  <div class=\"s-bc:error s-radius s-pbs:100 s-pbe:60 s-text:center s-mbe:20\">Hattie Schamberger</div>"
+                "code": "<div class=\"s-bc:accent s-radius s-pbs:30 s-pbe:40 s-text:center s-mbe:20\">Miss Ronald Keebler</div>\n  <div class=\"s-bc:complementary s-radius s-pb:30 s-text:center s-mbe:20\">Earnest Kirlin</div>\n  <div class=\"s-bc:main s-radius s-pbs:50 s-pbe:30 s-text:center s-mbe:20\">Vicky Jenkins PhD</div>\n  <div class=\"s-bc:error s-radius s-pbs:100 s-pbe:60 s-text:center s-mbe:20\">Marian Bailey</div>"
             },
             {
                 "language": "html",
                 "title": "RTL",
-                "code": "<div dir=\"rtl\">\n  <p class=\"s-bc:accent s-radius s-pi:30 s-pb:30 s-mbe:20\">Marcia Cremin</p>\n  <p class=\"s-bc:complementary s-radius s-pis:50 s-pb:30 s-mbe:20\">Dr. Nathan O'Hara</p>\n  <p class=\"s-bc:main s-radius s-pis:80 s-pb:30 s-mbe:20\">Angie Hoppe</p>\n  <p class=\"s-bc:error s-radius s-pis:100 s-pb:30 s-mbe:20\">Joyce McGlynn</p>\n</div>"
+                "code": "<div dir=\"rtl\">\n  <p class=\"s-bc:accent s-radius s-pi:30 s-pb:30 s-mbe:20\">Aubrey Runolfsdottir</p>\n  <p class=\"s-bc:complementary s-radius s-pis:50 s-pb:30 s-mbe:20\">Sylvester Schaden</p>\n  <p class=\"s-bc:main s-radius s-pis:80 s-pb:30 s-mbe:20\">Eva Welch</p>\n  <p class=\"s-bc:error s-radius s-pis:100 s-pb:30 s-mbe:20\">Nichole Morar</p>\n</div>"
+            }
+        ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.padding.classes;"
             }
         ],
         "since": "2.0.0",
@@ -289,6 +313,12 @@
                 "code": "<div class=\"s-clearfix:after s-bc:ui\">\n      <img src=\"https://picsum.photos/200/200\" style=\"float: right\" />\n  </div>"
             }
         ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.clearfix.classes;\n\n.my-element {\n  @s.clearfix;\n}"
+            }
+        ],
         "since": "2.0.0",
         "author": {
             "name": "Olivier Bossel",
@@ -340,6 +370,12 @@
             {
                 "language": "html",
                 "code": "<div class=\"s-flex:wrap s-gap:20\">\n  <div class=\"s-cursor:auto s-flex:center s-width:20 s-radius s-ratio:16-9\">\nauto\n  </div>\n\n  <div class=\"s-cursor:default s-flex:center s-width:20 s-radius s-ratio:16-9\">\ndefault\n  </div>\n\n  <div class=\"s-cursor:none s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnone\n  </div>\n\n  <div class=\"s-cursor:context-menu s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncontext-menu\n  </div>\n\n  <div class=\"s-cursor:help s-flex:center s-width:20 s-radius s-ratio:16-9\">\nhelp\n  </div>\n\n  <div class=\"s-cursor:pointer s-flex:center s-width:20 s-radius s-ratio:16-9\">\npointer\n  </div>\n\n  <div class=\"s-cursor:progress s-flex:center s-width:20 s-radius s-ratio:16-9\">\nprogress\n  </div>\n\n  <div class=\"s-cursor:wait s-flex:center s-width:20 s-radius s-ratio:16-9\">\nwait\n  </div>\n\n  <div class=\"s-cursor:cell s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncell\n  </div>\n\n  <div class=\"s-cursor:crosshair s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncrosshair\n  </div>\n\n  <div class=\"s-cursor:text s-flex:center s-width:20 s-radius s-ratio:16-9\">\ntext\n  </div>\n\n  <div class=\"s-cursor:vertical-text s-flex:center s-width:20 s-radius s-ratio:16-9\">\nvertical-text\n  </div>\n\n  <div class=\"s-cursor:alias s-flex:center s-width:20 s-radius s-ratio:16-9\">\nalias\n  </div>\n\n  <div class=\"s-cursor:copy s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncopy\n  </div>\n\n  <div class=\"s-cursor:move s-flex:center s-width:20 s-radius s-ratio:16-9\">\nmove\n  </div>\n\n  <div class=\"s-cursor:no-drop s-flex:center s-width:20 s-radius s-ratio:16-9\">\nno-drop\n  </div>\n\n  <div class=\"s-cursor:not-allowed s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnot-allowed\n  </div>\n\n  <div class=\"s-cursor:e-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\ne-resize\n  </div>\n\n  <div class=\"s-cursor:n-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nn-resize\n  </div>\n\n  <div class=\"s-cursor:ne-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nne-resize\n  </div>\n\n  <div class=\"s-cursor:nw-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnw-resize\n  </div>\n\n  <div class=\"s-cursor:s-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\ns-resize\n  </div>\n\n  <div class=\"s-cursor:se-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nse-resize\n  </div>\n\n  <div class=\"s-cursor:sw-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nsw-resize\n  </div>\n\n  <div class=\"s-cursor:w-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nw-resize\n  </div>\n\n  <div class=\"s-cursor:ew-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\new-resize\n  </div>\n\n  <div class=\"s-cursor:ns-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nns-resize\n  </div>\n\n  <div class=\"s-cursor:nesw-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnesw-resize\n  </div>\n\n  <div class=\"s-cursor:nwse-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nnwse-resize\n  </div>\n\n  <div class=\"s-cursor:col-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\ncol-resize\n  </div>\n\n  <div class=\"s-cursor:row-resize s-flex:center s-width:20 s-radius s-ratio:16-9\">\nrow-resize\n  </div>\n\n  <div class=\"s-cursor:all-scroll s-flex:center s-width:20 s-radius s-ratio:16-9\">\nall-scroll\n  </div>\n\n  <div class=\"s-cursor:zoom-in s-flex:center s-width:20 s-radius s-ratio:16-9\">\nzoom-in\n  </div>\n\n  <div class=\"s-cursor:zoom-out s-flex:center s-width:20 s-radius s-ratio:16-9\">\nzoom-out\n  </div>\n\n  <div class=\"s-cursor:grab s-flex:center s-width:20 s-radius s-ratio:16-9\">\ngrab\n  </div>\n\n  <div class=\"s-cursor:grabbing s-flex:center s-width:20 s-radius s-ratio:16-9\">\ngrabbing\n  </div>\n\n</div>"
+            }
+        ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.cursor.classes;"
             }
         ],
         "since": "2.0.0",
@@ -394,6 +430,12 @@
                 "language": "html",
                 "title": "Stretch",
                 "code": "<div class=\"s-position:relative s-bc:main s-radius s-p:50\">\n  <a href=\"#\" class=\"s-link:stretch s-bc:accent s-radius s-p:20\">I'm a stretched link!</a>\n</div>"
+            }
+        ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.link.classes;\n\n.my-element {\n  @s.link.stretch;\n}"
             }
         ],
         "since": "2.0.0",
@@ -455,6 +497,12 @@
                 "code": "<div class=\"s-grid:3 s-gap:40\">\n  <div class=\"s-ratio:16-9 s-bc:main s-radius s-p:30\">1</div>\n  <div class=\"s-ratio:16-9 s-bc:main s-radius s-p:30\">2</div>\n  <div class=\"s-ratio:16-9 s-bc:main s-radius s-p:30\">3</div>\n</div>"
             }
         ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.gap.classes;"
+            }
+        ],
         "since": "2.0.0",
         "author": {
             "name": "Olivier Bossel",
@@ -506,17 +554,23 @@
             {
                 "language": "html",
                 "title": "Aligns",
-                "code": "<div class=\"s-text:left s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (left) Suzanne Schuppe\n  </div>\n  <div class=\"s-text:right s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (right) Willie Padberg\n  </div>\n  <div class=\"s-text:center s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (center) Whitney Wuckert\n  </div>\n  <div class=\"s-text:start s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (start) Forrest Veum\n  </div>\n  <div class=\"s-text:end s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (end) Kelvin Kautzer\n  </div>"
+                "code": "<div class=\"s-text:left s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (left) Marguerite Hauck\n  </div>\n  <div class=\"s-text:right s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (right) Kellie Legros\n  </div>\n  <div class=\"s-text:center s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (center) Tomas Bogan\n  </div>\n  <div class=\"s-text:start s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (start) Dominic Waters\n  </div>\n  <div class=\"s-text:end s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (end) Jasmine Rippin\n  </div>"
             },
             {
                 "language": "html",
                 "title": "Decorations",
-                "code": "<div class=\"s-text:overline s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (overline) Hattie Blick\n  </div>\n  <div class=\"s-text:underline s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (underline) Marlon Murazik\n  </div>\n  <div class=\"s-text:line-through s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (line-through) Mr. Joann Weissnat\n  </div>"
+                "code": "<div class=\"s-text:overline s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (overline) Teri Collins\n  </div>\n  <div class=\"s-text:underline s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (underline) Ramiro Schneider\n  </div>\n  <div class=\"s-text:line-through s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (line-through) Trevor Bednar III\n  </div>"
             },
             {
                 "language": "html",
                 "title": "Transforms",
-                "code": "<div class=\"s-text:lowercase s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (lowercase) Kathy Okuneva\n  </div>\n  <div class=\"s-text:uppercase s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (uppercase) Miss Alexis Erdman\n  </div>\n  <div class=\"s-text:capitalize s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (capitalize) Wade Breitenberg\n  </div>"
+                "code": "<div class=\"s-text:lowercase s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (lowercase) Candice Turcotte\n  </div>\n  <div class=\"s-text:uppercase s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (uppercase) Dr. Wayne Douglas\n  </div>\n  <div class=\"s-text:capitalize s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (capitalize) Moses Orn I\n  </div>"
+            }
+        ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.text.classes;"
             }
         ],
         "since": "2.0.0",
@@ -570,22 +624,28 @@
             {
                 "language": "html",
                 "title": "Simple grid",
-                "code": "<div class=\"s-flex:row:wrap\">\n    <div class=\"s-bc:main s-width:50 s-p:30\">Ruth Hessel</div>\n    <div class=\"s-bc:accent s-width:50 s-p:30\">Felipe Hettinger</div>\n    <div class=\"s-bc:complementary s-width:50 s-p:30\">Guillermo Howe</div>\n    <div class=\"s-bc:info s-width:50 s-p:30\">Dewey Heathcote</div>\n  </div>"
+                "code": "<div class=\"s-flex:row:wrap\">\n    <div class=\"s-bc:main s-width:50 s-p:30\">Katrina O'Reilly</div>\n    <div class=\"s-bc:accent s-width:50 s-p:30\">Kelly Shields</div>\n    <div class=\"s-bc:complementary s-width:50 s-p:30\">Luke Lemke</div>\n    <div class=\"s-bc:info s-width:50 s-p:30\">Sheryl Schowalter</div>\n  </div>"
             },
             {
                 "language": "html",
                 "title": "Grow",
-                "code": "<div class=\"s-flex:row\">\n    <div class=\"s-grow s-bc:main s-p:30\">Kelly Gorczany</div>\n    <div class=\"s-bc:accent s-p:30\">Manuel Rice</div>\n    <div class=\"s-bc:complementary s-p:30\">Isaac Murray</div>\n  </div>"
+                "code": "<div class=\"s-flex:row\">\n    <div class=\"s-grow s-bc:main s-p:30\">Ronald Lueilwitz</div>\n    <div class=\"s-bc:accent s-p:30\">Cary Kuvalis</div>\n    <div class=\"s-bc:complementary s-p:30\">Roberto Hodkiewicz</div>\n  </div>"
             },
             {
                 "language": "html",
                 "title": "Orders",
-                "code": "<div class=\"s-flex:row\">\n    <div class=\"s-order:3 s-bc:main s-p:30\">Edna Moore</div>\n    <div class=\"s-bc:accent s-p:30\">Cornelius Huels</div>\n    <div class=\"s-bc:complementary s-p:30\">Jenny Green</div>\n  </div>"
+                "code": "<div class=\"s-flex:row\">\n    <div class=\"s-order:3 s-bc:main s-p:30\">Mrs. Pat Deckow</div>\n    <div class=\"s-bc:accent s-p:30\">Sidney Steuber</div>\n    <div class=\"s-bc:complementary s-p:30\">Derek Gerhold Jr.</div>\n  </div>"
             },
             {
                 "language": "html",
                 "title": "Aligns",
-                "code": "<div class=\"s-flex:row:align-end\">\n    <div class=\"s-bc:main s-p:30\">Julia Witting</div>\n    <div class=\"s-bc:accent s-p:30\">Carol Hayes<br />Natasha Torphy<br />Elizabeth Howell<br />Sarah Schneider<br />Lawrence Schamberger III</div>\n    <div class=\"s-bc:complementary s-p:30\">Gladys Dietrich</div>\n  </div>"
+                "code": "<div class=\"s-flex:row:align-end\">\n    <div class=\"s-bc:main s-p:30\">Flora Schulist</div>\n    <div class=\"s-bc:accent s-p:30\">Lena Stracke<br />Forrest Hirthe<br />Clarence O'Connell II<br />Mr. Dora Abernathy<br />Glen Williamson V</div>\n    <div class=\"s-bc:complementary s-p:30\">Hazel Yost</div>\n  </div>"
+            }
+        ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.flex.classes;"
             }
         ],
         "since": "2.0.0",
@@ -662,6 +722,12 @@
                 "code": "<div class=\"s-ratio:16-9 s-bc:ui\">\n      <img class=\"s-fit:abs s-radius\" src=\"https://picsum.photos/1000/1000\" />\n  </div>"
             }
         ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.fit.classes;\n\n.my-element {\n  @s.fit(fill);\n}"
+            }
+        ],
         "since": "2.0.0",
         "author": {
             "name": "Olivier Bossel",
@@ -724,6 +790,12 @@
                 "language": "html",
                 "title": "None",
                 "code": "<div class=\"s-bc:error s-p:30 s-radius\">\n    <div class=\"s-float:none\">I'm a cool float none element</div>\n</div>"
+            }
+        ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.float.classes;"
             }
         ],
         "since": "2.0.0",
@@ -825,6 +897,12 @@
                 "code": "<div class=\"s-ratio:3-4 s-width:40\">\n      <img class=\"s-fit:cover s-radius\" src=\"https://picsum.photos/500/500\" />\n  </div>"
             }
         ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.ratio.classes;\n\n.my-element {\n  @s.ratio(16/9);\n}"
+            }
+        ],
         "since": "2.0.0",
         "author": {
             "name": "Olivier Bossel",
@@ -875,7 +953,13 @@
         "example": [
             {
                 "language": "html",
-                "code": "<!-- 10 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 10</h3>\n  <div class=\"s-scale:10\">\n      <a class=\"s-btn\">Sandra Schaefer</a>\n  </div>\n</div>\n\n<!-- 11 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 11</h3>\n  <div class=\"s-scale:11\">\n      <a class=\"s-btn\">Joann Bergstrom</a>\n  </div>\n</div>\n\n<!-- 12 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 12</h3>\n  <div class=\"s-scale:12\">\n      <a class=\"s-btn\">Sam Cummings</a>\n  </div>\n</div>\n\n<!-- 13 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 13</h3>\n  <div class=\"s-scale:13\">\n      <a class=\"s-btn\">Darrin Kunze</a>\n  </div>\n</div>\n\n<!-- 14 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 14</h3>\n  <div class=\"s-scale:14\">\n      <a class=\"s-btn\">Lee Wiegand</a>\n  </div>\n</div>\n\n<!-- 15 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 15</h3>\n  <div class=\"s-scale:15\">\n      <a class=\"s-btn\">Seth Breitenberg</a>\n  </div>\n</div>\n\n<!-- 16 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 16</h3>\n  <div class=\"s-scale:16\">\n      <a class=\"s-btn\">Bradley Stoltenberg</a>\n  </div>\n</div>\n\n<!-- 17 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 17</h3>\n  <div class=\"s-scale:17\">\n      <a class=\"s-btn\">Damon Kshlerin</a>\n  </div>\n</div>\n\n<!-- 18 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 18</h3>\n  <div class=\"s-scale:18\">\n      <a class=\"s-btn\">Jimmie Bartell</a>\n  </div>\n</div>\n\n<!-- 19 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 19</h3>\n  <div class=\"s-scale:19\">\n      <a class=\"s-btn\">Forrest Howe</a>\n  </div>\n</div>\n\n<!-- 20 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 20</h3>\n  <div class=\"s-scale:20\">\n      <a class=\"s-btn\">Leland Welch</a>\n  </div>\n</div>\n\n<!-- default scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale default</h3>\n  <div class=\"s-scale:default\">\n      <a class=\"s-btn\">Paul Douglas</a>\n  </div>\n</div>\n\n<!-- 01 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 01</h3>\n  <div class=\"s-scale:01\">\n      <a class=\"s-btn\">Johanna Jacobs I</a>\n  </div>\n</div>\n\n<!-- 02 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 02</h3>\n  <div class=\"s-scale:02\">\n      <a class=\"s-btn\">Louis Kub</a>\n  </div>\n</div>\n\n<!-- 03 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 03</h3>\n  <div class=\"s-scale:03\">\n      <a class=\"s-btn\">Carlton Pacocha</a>\n  </div>\n</div>\n\n<!-- 04 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 04</h3>\n  <div class=\"s-scale:04\">\n      <a class=\"s-btn\">Mabel Okuneva</a>\n  </div>\n</div>\n\n<!-- 05 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 05</h3>\n  <div class=\"s-scale:05\">\n      <a class=\"s-btn\">Alan Ziemann</a>\n  </div>\n</div>\n\n<!-- 06 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 06</h3>\n  <div class=\"s-scale:06\">\n      <a class=\"s-btn\">Micheal Klein</a>\n  </div>\n</div>\n\n<!-- 07 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 07</h3>\n  <div class=\"s-scale:07\">\n      <a class=\"s-btn\">Jared Schneider</a>\n  </div>\n</div>\n\n<!-- 08 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 08</h3>\n  <div class=\"s-scale:08\">\n      <a class=\"s-btn\">Brenda Reilly IV</a>\n  </div>\n</div>\n\n<!-- 09 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 09</h3>\n  <div class=\"s-scale:09\">\n      <a class=\"s-btn\">Wanda Harris V</a>\n  </div>\n</div>"
+                "code": "<!-- 10 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 10</h3>\n  <div class=\"s-scale:10\">\n      <a class=\"s-btn\">Josefina Barton</a>\n  </div>\n</div>\n\n<!-- 11 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 11</h3>\n  <div class=\"s-scale:11\">\n      <a class=\"s-btn\">Ellis Moen PhD</a>\n  </div>\n</div>\n\n<!-- 12 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 12</h3>\n  <div class=\"s-scale:12\">\n      <a class=\"s-btn\">Wendy Braun</a>\n  </div>\n</div>\n\n<!-- 13 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 13</h3>\n  <div class=\"s-scale:13\">\n      <a class=\"s-btn\">Frank Collins</a>\n  </div>\n</div>\n\n<!-- 14 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 14</h3>\n  <div class=\"s-scale:14\">\n      <a class=\"s-btn\">Ralph Weber V</a>\n  </div>\n</div>\n\n<!-- 15 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 15</h3>\n  <div class=\"s-scale:15\">\n      <a class=\"s-btn\">Brooke Nienow</a>\n  </div>\n</div>\n\n<!-- 16 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 16</h3>\n  <div class=\"s-scale:16\">\n      <a class=\"s-btn\">Marshall Monahan</a>\n  </div>\n</div>\n\n<!-- 17 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 17</h3>\n  <div class=\"s-scale:17\">\n      <a class=\"s-btn\">Virgil Kling</a>\n  </div>\n</div>\n\n<!-- 18 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 18</h3>\n  <div class=\"s-scale:18\">\n      <a class=\"s-btn\">Ms. Kerry Veum</a>\n  </div>\n</div>\n\n<!-- 19 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 19</h3>\n  <div class=\"s-scale:19\">\n      <a class=\"s-btn\">Audrey Ernser Jr.</a>\n  </div>\n</div>\n\n<!-- 20 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 20</h3>\n  <div class=\"s-scale:20\">\n      <a class=\"s-btn\">Jill Purdy</a>\n  </div>\n</div>\n\n<!-- 21 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 21</h3>\n  <div class=\"s-scale:21\">\n      <a class=\"s-btn\">Gene Sipes</a>\n  </div>\n</div>\n\n<!-- 22 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 22</h3>\n  <div class=\"s-scale:22\">\n      <a class=\"s-btn\">Nora Cummerata</a>\n  </div>\n</div>\n\n<!-- 23 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 23</h3>\n  <div class=\"s-scale:23\">\n      <a class=\"s-btn\">Helen Gutkowski</a>\n  </div>\n</div>\n\n<!-- 24 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 24</h3>\n  <div class=\"s-scale:24\">\n      <a class=\"s-btn\">Karla Hoeger I</a>\n  </div>\n</div>\n\n<!-- 25 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 25</h3>\n  <div class=\"s-scale:25\">\n      <a class=\"s-btn\">Javier Abshire</a>\n  </div>\n</div>\n\n<!-- 26 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 26</h3>\n  <div class=\"s-scale:26\">\n      <a class=\"s-btn\">Kenny Zboncak</a>\n  </div>\n</div>\n\n<!-- 27 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 27</h3>\n  <div class=\"s-scale:27\">\n      <a class=\"s-btn\">Elbert Thompson IV</a>\n  </div>\n</div>\n\n<!-- 28 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 28</h3>\n  <div class=\"s-scale:28\">\n      <a class=\"s-btn\">Veronica Armstrong</a>\n  </div>\n</div>\n\n<!-- 29 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 29</h3>\n  <div class=\"s-scale:29\">\n      <a class=\"s-btn\">Josefina Krajcik</a>\n  </div>\n</div>\n\n<!-- 30 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 30</h3>\n  <div class=\"s-scale:30\">\n      <a class=\"s-btn\">Jon Gerhold</a>\n  </div>\n</div>\n\n<!-- default scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale default</h3>\n  <div class=\"s-scale:default\">\n      <a class=\"s-btn\">Johanna Wolff</a>\n  </div>\n</div>\n\n<!-- 01 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 01</h3>\n  <div class=\"s-scale:01\">\n      <a class=\"s-btn\">Brandi Erdman</a>\n  </div>\n</div>\n\n<!-- 02 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 02</h3>\n  <div class=\"s-scale:02\">\n      <a class=\"s-btn\">Pearl Kihn</a>\n  </div>\n</div>\n\n<!-- 03 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 03</h3>\n  <div class=\"s-scale:03\">\n      <a class=\"s-btn\">Simon Weimann</a>\n  </div>\n</div>\n\n<!-- 04 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 04</h3>\n  <div class=\"s-scale:04\">\n      <a class=\"s-btn\">Mercedes Mayer</a>\n  </div>\n</div>\n\n<!-- 05 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 05</h3>\n  <div class=\"s-scale:05\">\n      <a class=\"s-btn\">Moses Lueilwitz</a>\n  </div>\n</div>\n\n<!-- 06 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 06</h3>\n  <div class=\"s-scale:06\">\n      <a class=\"s-btn\">Dominic Hane Sr.</a>\n  </div>\n</div>\n\n<!-- 07 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 07</h3>\n  <div class=\"s-scale:07\">\n      <a class=\"s-btn\">Vicki Skiles</a>\n  </div>\n</div>\n\n<!-- 08 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 08</h3>\n  <div class=\"s-scale:08\">\n      <a class=\"s-btn\">Sharon Schmidt</a>\n  </div>\n</div>\n\n<!-- 09 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 09</h3>\n  <div class=\"s-scale:09\">\n      <a class=\"s-btn\">Dr. Angel Ward</a>\n  </div>\n</div>"
+            }
+        ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.scale.classes;"
             }
         ],
         "since": "2.0.0",
@@ -932,6 +1016,12 @@
                 "code": "<div class=\"s-flex:wrap s-gap:20\">\n  <div class=\"s-radius:0 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    0\n  </div>\n  <div class=\"s-radius:10 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    10\n  </div>\n  <div class=\"s-radius:20 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    20\n  </div>\n  <div class=\"s-radius:30 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    30\n  </div>\n  <div class=\"s-radius:40 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    40\n  </div>\n  <div class=\"s-radius:50 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    50\n  </div>\n  <div class=\"s-radius:60 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    60\n  </div>\n  <div class=\"s-radius:70 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    70\n  </div>\n  <div class=\"s-radius:80 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    80\n  </div>\n  <div class=\"s-radius:90 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    90\n  </div>\n  <div class=\"s-radius:100 s-width:20 s-bc:main s-flex:center s-ratio:1\">\n    100\n  </div>\n</div>"
             }
         ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.border.classes;\n\n.my-element {\n  @s.border.radius(40);\n}"
+            }
+        ],
         "since": "2.0.0",
         "author": {
             "name": "Olivier Bossel",
@@ -984,6 +1074,12 @@
                 "language": "html",
                 "title": "Border width",
                 "code": "<div class=\"s-flex:wrap s-gap:20\">\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:0\">\n    0\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:10\">\n    10\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:20\">\n    20\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:30\">\n    30\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:40\">\n    40\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:50\">\n    50\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:60\">\n    60\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:70\">\n    70\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:80\">\n    80\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:90\">\n    90\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:100\">\n    100\n  </div>\n</div>"
+            }
+        ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.border.classes;\n\n.my-element {\n  @s.border.width(10);\n}"
             }
         ],
         "since": "2.0.0",
@@ -1040,6 +1136,12 @@
                 "code": "<div class=\"s-flex:wrap s-gap:20\">\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:current:20\">\n    current\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:main:20\">\n    main\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:accent:20\">\n    accent\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:complementary:20\">\n    complementary\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:success:20\">\n    success\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:warning:20\">\n    warning\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:error:20\">\n    error\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:info:20\">\n    info\n  </div>\n</div>"
             }
         ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.border.classes;"
+            }
+        ],
         "since": "2.0.0",
         "author": {
             "name": "Olivier Bossel",
@@ -1091,42 +1193,48 @@
             {
                 "language": "html",
                 "title": "Block",
-                "code": "<div class=\"s-display:block\">\n    <p class=\"s-typo:p\">Lauren Koch</p>\n    <p class=\"s-typo:p\">Mr. Alan Vandervort</p>\n    <p class=\"s-typo:p\">Vivian Morar</p>\n  </div>"
+                "code": "<div class=\"s-display:block\">\n    <p class=\"s-typo:p\">Bertha Kulas</p>\n    <p class=\"s-typo:p\">Alma Langosh</p>\n    <p class=\"s-typo:p\">Laura Rau</p>\n  </div>"
             },
             {
                 "language": "html",
                 "title": "Inline-block",
-                "code": "<div class=\"s-display:inline-block\">\n    <p class=\"s-typo:p\">Courtney Schinner</p>\n    <p class=\"s-typo:p\">Courtney Conroy</p>\n    <p class=\"s-typo:p\">Ramiro Blick</p>\n  </div>"
+                "code": "<div class=\"s-display:inline-block\">\n    <p class=\"s-typo:p\">Rosie O'Kon</p>\n    <p class=\"s-typo:p\">Micheal Bartell</p>\n    <p class=\"s-typo:p\">Kay Hackett</p>\n  </div>"
             },
             {
                 "language": "html",
                 "title": "Contents",
-                "code": "<div class=\"s-display:contents\">\n    <p class=\"s-typo:p\">Jana Jacobs</p>\n    <p class=\"s-typo:p\">Mr. Doreen Wisozk</p>\n    <p class=\"s-typo:p\">Adrian Rogahn</p>\n  </div>"
+                "code": "<div class=\"s-display:contents\">\n    <p class=\"s-typo:p\">Alexandra Schroeder</p>\n    <p class=\"s-typo:p\">Rodney Schiller</p>\n    <p class=\"s-typo:p\">Ted Tromp</p>\n  </div>"
             },
             {
                 "language": "html",
                 "title": "Flex",
-                "code": "<div class=\"s-display:flex\">\n    <p class=\"s-typo:p\">Mathew Weissnat</p>\n    <p class=\"s-typo:p\">Ryan Glover</p>\n    <p class=\"s-typo:p\">Ollie Grady</p>\n  </div>"
+                "code": "<div class=\"s-display:flex\">\n    <p class=\"s-typo:p\">Myrtle Graham</p>\n    <p class=\"s-typo:p\">Mary Collins</p>\n    <p class=\"s-typo:p\">Aubrey Maggio</p>\n  </div>"
             },
             {
                 "language": "html",
                 "title": "Grid",
-                "code": "<div class=\"s-display:grid\">\n    <p class=\"s-typo:p\">Harvey Rath V</p>\n    <p class=\"s-typo:p\">Jose Upton PhD</p>\n    <p class=\"s-typo:p\">Ann Simonis</p>\n  </div>"
+                "code": "<div class=\"s-display:grid\">\n    <p class=\"s-typo:p\">Kristi Keebler DVM</p>\n    <p class=\"s-typo:p\">Benjamin Jacobs</p>\n    <p class=\"s-typo:p\">Kyle Marquardt</p>\n  </div>"
             },
             {
                 "language": "html",
                 "title": "Inline-flex",
-                "code": "<div class=\"s-display:inline-flex\">\n    <p class=\"s-typo:p\">Daniel Goyette</p>\n    <p class=\"s-typo:p\">Sherry Rice</p>\n    <p class=\"s-typo:p\">Ms. Jim Mosciski</p>\n  </div>"
+                "code": "<div class=\"s-display:inline-flex\">\n    <p class=\"s-typo:p\">Mabel Koch</p>\n    <p class=\"s-typo:p\">Luke Kris MD</p>\n    <p class=\"s-typo:p\">Chester Dooley</p>\n  </div>"
             },
             {
                 "language": "html",
                 "title": "Inline-grid",
-                "code": "<div class=\"s-display:inline-grid\">\n    <p class=\"s-typo:p\">Jessie Barton</p>\n    <p class=\"s-typo:p\">Luis Hilpert</p>\n    <p class=\"s-typo:p\">Laurie Heaney</p>\n  </div>"
+                "code": "<div class=\"s-display:inline-grid\">\n    <p class=\"s-typo:p\">Myra Breitenberg</p>\n    <p class=\"s-typo:p\">Miss Denise Klocko</p>\n    <p class=\"s-typo:p\">Steve Koelpin</p>\n  </div>"
             },
             {
                 "language": "html",
                 "title": "None",
-                "code": "<div class=\"s-display:none\">\n    <p class=\"s-typo:p\">Blake Bogisich</p>\n    <p class=\"s-typo:p\">Kristen Rogahn</p>\n    <p class=\"s-typo:p\">Julie Shields</p>\n  </div>"
+                "code": "<div class=\"s-display:none\">\n    <p class=\"s-typo:p\">Nick Schumm</p>\n    <p class=\"s-typo:p\">Rachael Gottlieb</p>\n    <p class=\"s-typo:p\">Nicholas Hilpert</p>\n  </div>"
+            }
+        ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.display.classes;"
             }
         ],
         "since": "2.0.0",
@@ -1223,6 +1331,12 @@
                 "code": "<div class=\"s-overflow:unset\">\n  I'm in an \"unset\" overflow container\n</div>"
             }
         ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.overflow.classes;"
+            }
+        ],
         "since": "2.0.0",
         "author": {
             "name": "Olivier Bossel",
@@ -1290,6 +1404,12 @@
                 "language": "html",
                 "title": "Sticky",
                 "code": "<div class=\"s-position:relative s-ratio:21-9\">\n      <div class=\"s-position:sticky:top\">\n        <img class=\"s-mbs:100 s-radius\" src=\"https://picsum.photos/100/100?v=323333\"/>\n    </div>\n  </div>"
+            }
+        ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.position.classes;"
             }
         ],
         "since": "2.0.0",
@@ -1361,6 +1481,12 @@
                 "code": "<div class=\"s-pointer-events:fill\">\n  I'm in an \"fill\" pointer-events container\n</div>"
             }
         ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.pointer.classes;"
+            }
+        ],
         "since": "2.0.0",
         "author": {
             "name": "Olivier Bossel",
@@ -1412,17 +1538,23 @@
             {
                 "language": "html",
                 "title": "slow",
-                "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-dced0a87-430a-4689-8b5b-98c373b669b2\">\n     <div class=\"s-transition:slow s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-dced0a87-430a-4689-8b5b-98c373b669b2 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-dced0a87-430a-4689-8b5b-98c373b669b2:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+                "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-a2a63c78-4acd-499f-9340-e6ab210cdbda\">\n     <div class=\"s-transition:slow s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-a2a63c78-4acd-499f-9340-e6ab210cdbda > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-a2a63c78-4acd-499f-9340-e6ab210cdbda:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
             },
             {
                 "language": "html",
                 "title": "default",
-                "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-d72dd802-c9fc-4931-93e4-7974d275a6f5\">\n     <div class=\"s-transition s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-d72dd802-c9fc-4931-93e4-7974d275a6f5 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-d72dd802-c9fc-4931-93e4-7974d275a6f5:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+                "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-0fb0fc09-3f81-4368-91a5-d8dd9f8ff2d1\">\n     <div class=\"s-transition s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-0fb0fc09-3f81-4368-91a5-d8dd9f8ff2d1 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-0fb0fc09-3f81-4368-91a5-d8dd9f8ff2d1:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
             },
             {
                 "language": "html",
                 "title": "fast",
-                "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-f8115979-5d35-4bcf-8d0e-e06001e54944\">\n     <div class=\"s-transition:fast s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-f8115979-5d35-4bcf-8d0e-e06001e54944 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-f8115979-5d35-4bcf-8d0e-e06001e54944:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+                "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-eb05f1ef-9a37-4b51-b5f5-037ab8375dfd\">\n     <div class=\"s-transition:fast s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-eb05f1ef-9a37-4b51-b5f5-037ab8375dfd > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-eb05f1ef-9a37-4b51-b5f5-037ab8375dfd:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+            }
+        ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.transition.classes;"
             }
         ],
         "since": "2.0.0",
@@ -1479,6 +1611,12 @@
                 "code": "<div class=\"s-flex s-gap:40\">\n  <div class=\"s-order:3 s-p:30 s-ratio:16-9 s-grow s-bc:main s-radius\">1</div>\n  <div class=\"s-order:1 s-p:30 s-ratio:16-9 s-grow s-bc:main s-radius\">2</div>\n  <div class=\"s-order:2 s-p:30 s-ratio:16-9 s-grow s-bc:main s-radius\">3</div>\n</div>"
             }
         ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.order.classes;"
+            }
+        ],
         "since": "2.0.0",
         "author": {
             "name": "Olivier Bossel",
@@ -1530,7 +1668,13 @@
             {
                 "language": "html",
                 "title": "Vertical spacing",
-                "code": "<div class=\"s-spacing:40\">\n  <h1 class=\"s-typo:h1\">Hello world</h1>\n  <p class=\"s-typo:lead\">Marjorie Harber</p>\n  <p class=\"s-typo:p\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis egestas non tortor sed aliquet. Fusce finibus erat at leo scelerisque, a lobortis purus pretium. Aliquam ornare leo id mi imperdiet.</p>\n  <a class=\"s-btn s-color:accent\">Simple Cta</a>\n</div>"
+                "code": "<div class=\"s-spacing:40\">\n  <h1 class=\"s-typo:h1\">Hello world</h1>\n  <p class=\"s-typo:lead\">Crystal O'Hara</p>\n  <p class=\"s-typo:p\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis egestas non tortor sed aliquet. Fusce finibus erat at leo scelerisque, a lobortis purus pretium. Aliquam ornare leo id mi imperdiet.</p>\n  <a class=\"s-btn s-color:accent\">Simple Cta</a>\n</div>"
+            }
+        ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.spacing.classes;"
             }
         ],
         "since": "2.0.0",
@@ -1584,22 +1728,28 @@
             {
                 "language": "html",
                 "title": "All",
-                "code": "<p class=\"s-user-select:all\">\n      Sit perferendis minus eos nesciunt aut fuga veritatis deleniti. Debitis sed vitae dolorem aperiam. At esse a quis nemo facere est dolorem. Quis et doloribus consectetur magnam et repudiandae provident voluptatem dolore. Ducimus fugit numquam deleniti alias cupiditate voluptatem impedit rerum. Et provident perspiciatis quidem.\n  </p>"
+                "code": "<p class=\"s-user-select:all\">\n      Consequatur amet repellendus ea perspiciatis maiores quibusdam placeat quis quia. Deleniti at beatae temporibus exercitationem rem minus molestiae corporis. Ea quisquam ut qui optio vitae aspernatur sit voluptatem velit. Fugiat voluptas libero eum reiciendis eos sint dolor magni. Dolorem ullam eius.\n  </p>"
             },
             {
                 "language": "html",
                 "title": "auto",
-                "code": "<p class=\"s-user-select:auto\">\n      Cum ducimus iure velit dolor. Possimus incidunt laudantium culpa. Tenetur ea nemo dolores voluptatem eveniet adipisci provident veniam magni. Aliquid non rerum quam voluptatum voluptatem.\n  </p>"
+                "code": "<p class=\"s-user-select:auto\">\n      Blanditiis nisi error. Error sit ut facilis et beatae. Voluptas culpa impedit. Nam recusandae ratione.\n  </p>"
             },
             {
                 "language": "html",
                 "title": "none",
-                "code": "<p class=\"s-user-select:none\">\n      Itaque non dolores. Qui velit nesciunt ipsum possimus explicabo. Est ea minus tempora eligendi.\n  </p>"
+                "code": "<p class=\"s-user-select:none\">\n      Asperiores quis tempora tempore architecto laborum qui ipsum nisi rerum. Doloribus expedita quo et vero laborum saepe alias aut. Enim quo pariatur et. Ab ullam a consectetur saepe est voluptatem quae ipsum aliquid. Quia ipsum et et voluptatum officia amet at.\n  </p>"
             },
             {
                 "language": "html",
                 "title": "text",
-                "code": "<p class=\"s-user-select:text\">\n      Sunt blanditiis eius rerum id ut praesentium et modi et. In dolores minima ullam enim. Exercitationem veniam voluptas debitis. Recusandae quod mollitia vero.\n  </p>"
+                "code": "<p class=\"s-user-select:text\">\n      Voluptates doloremque nostrum sequi vero porro officia non voluptates. Eius deserunt non adipisci. Ad consequatur sed qui et tempore sunt facilis enim necessitatibus. Quis doloribus nostrum tempore sunt sequi aut quia placeat. Dolor cumque sit impedit qui cupiditate eum voluptatibus optio delectus.\n  </p>"
+            }
+        ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.userSelect.classes;"
             }
         ],
         "since": "2.0.0",
@@ -1656,6 +1806,12 @@
                 "code": "<div class=\"s-bc:main s-radius s-p:30\">\n  <div style=\"height: 100px\" class=\"s-bc:accent s-radius s-p:30\">I'm visible</div>\n  <div style=\"height: 100px\" class=\"s-visibility:hidden s-bc:complementary s-radius s-p:30\">I'm hidden</div>\n</div>"
             }
         ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.visibility.classes;\n\n.my-element {\n  @s.visibility.hidden;\n}"
+            }
+        ],
         "since": "2.0.0",
         "author": {
             "name": "Olivier Bossel",
@@ -1710,6 +1866,12 @@
                 "code": "<div class=\"s-bc:main-surface s-radius s-p:30\">\n  <div style=\"height: 100px\" class=\"s-bc:accent s-radius s-p:30\">I'm visible</div>\n  <div style=\"height: 100px\" class=\"s-visually:hidden s-bc:complementary s-radius s-p:30\">I'm hidden</div>\n</div>"
             }
         ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.visually.classes;\n\n.my-element {\n  @s.visually.hidden;\n}"
+            }
+        ],
         "since": "2.0.0",
         "author": {
             "name": "Olivier Bossel",
@@ -1761,52 +1923,58 @@
             {
                 "language": "html",
                 "title": "1 line",
-                "code": "<p class=\"s-typo:p s-truncate:1\">Vero mollitia consequatur.<br />Ea earum sit qui corrupti magnam incidunt quia rerum.<br />Nobis delectus ea.<br />Quaerat amet non incidunt exercitationem rerum.<br />Quaerat provident non adipisci earum ut quos.<br />Commodi quo quia pariatur a perspiciatis delectus et.<br />Molestiae porro dolor doloremque porro sed enim rerum molestias inventore.<br />Aut facilis nisi modi dolorem.<br />Maxime aut commodi magni.<br />Temporibus dolorem qui eos amet alias laboriosam quia odit.<br />Odit voluptatum et saepe aliquam ut rerum.<br />Occaecati cupiditate sunt consequatur voluptates.<br />Incidunt qui labore ut deserunt aut quaerat consequatur maxime voluptatum.<br />Sequi asperiores tempore a facilis reiciendis.<br />Quibusdam hic accusamus soluta est neque rerum iure.</p>"
+                "code": "<p class=\"s-typo:p s-truncate:1\">Nesciunt a veniam ratione quis qui et nisi dolores voluptas.<br />Minima porro facilis sunt aut.<br />Quia assumenda earum quisquam excepturi ab.<br />Nostrum tempore aut quisquam amet vero cum.<br />Similique rerum cupiditate nostrum id blanditiis distinctio.<br />Commodi aut tempora amet et perferendis omnis impedit molestias.<br />Autem distinctio et ullam et consequatur impedit perspiciatis mollitia.<br />Iure nobis dicta error corrupti sapiente sed culpa adipisci nam.<br />Distinctio in cumque.<br />Maiores ut ut maxime voluptates sed et.<br />Repudiandae distinctio ullam voluptas maxime possimus deleniti et consequuntur quasi.<br />Similique impedit voluptas nesciunt modi ratione consequatur dignissimos aliquam soluta.<br />Iste quisquam velit libero molestiae rerum.<br />Facere sequi dolorem mollitia reiciendis et quia amet.<br />Rerum doloribus tempore et doloribus architecto porro fuga atque natus.</p>"
             },
             {
                 "language": "html",
                 "title": "2 line",
-                "code": "<p class=\"s-typo:p s-truncate:2\">Dolorem qui consequuntur assumenda similique.<br />Autem autem repellat deleniti quia aliquid consequatur.<br />Ipsa voluptas optio placeat et tempore dolor sit.<br />Debitis deleniti est nam accusamus ut minus velit.<br />Totam vitae animi quod eveniet voluptas sed sit in totam.<br />Cumque fugit aut asperiores dolor ullam.<br />Quisquam neque cupiditate.<br />Voluptas ipsa est nesciunt inventore eius et.<br />Quaerat aut error animi officiis quae et.<br />Sed fuga eius alias.<br />Odio quidem laboriosam.<br />Numquam blanditiis reiciendis.<br />Perspiciatis ullam sequi porro.<br />Enim reiciendis alias quae vel facere et ut quod.<br />Similique est et qui consequatur et odit facere.</p>"
+                "code": "<p class=\"s-typo:p s-truncate:2\">Et quas exercitationem delectus eum minus distinctio.<br />Facere nobis eligendi ratione ut asperiores.<br />Repellat deserunt dolores est architecto.<br />Est inventore iusto.<br />Deserunt nulla magnam qui rerum error nihil dolorem error.<br />Dolorem assumenda voluptas et sed dicta enim qui.<br />Qui repellat qui animi dolor sit maxime accusamus voluptatem.<br />Sequi est blanditiis et sint repudiandae.<br />Assumenda eum vel ut.<br />Illo doloribus at ducimus vitae error voluptas sunt.<br />Est qui autem nam dignissimos.<br />Temporibus sed sequi consectetur sed aut sunt animi debitis.<br />Ut sit cumque id laboriosam ut.<br />Libero qui repellat non cumque.<br />Qui et accusamus sint sit et sapiente.</p>"
             },
             {
                 "language": "html",
                 "title": "3 lines",
-                "code": "<p class=\"s-typo:p s-truncate:3\">Ad quis dignissimos sit quaerat dolore quaerat.<br />Et iure ab iste quo perspiciatis ad.<br />Occaecati quia excepturi quis nulla consequatur sequi et quos.<br />Commodi laboriosam porro et molestiae dolorum quas architecto vel incidunt.<br />Dolorem necessitatibus nobis nam porro dicta occaecati ex inventore inventore.<br />Eos dolorem sapiente veniam laboriosam totam possimus voluptas qui quia.<br />Qui a est culpa consequatur.<br />Aut nulla quae iusto.<br />Dignissimos fugit et earum cupiditate quia facilis incidunt quaerat pariatur.<br />Modi sit deserunt quos ut ipsam ullam facilis.<br />Repellendus doloribus quos ea quas voluptates architecto neque.<br />Esse incidunt modi cumque qui et maiores quibusdam numquam.<br />Magni fuga amet repellendus hic nostrum porro.<br />Dolore consequatur sint deleniti voluptate.<br />Tempore quo debitis omnis.</p>"
+                "code": "<p class=\"s-typo:p s-truncate:3\">Tempora repellat consequatur ut.<br />Dignissimos est maxime et.<br />Facilis autem cum suscipit occaecati molestias ut sunt deleniti eos.<br />Voluptate ullam suscipit ea atque omnis aspernatur sequi.<br />Est veritatis id.<br />Qui cumque dolorum aspernatur vitae cum molestias quia culpa minima.<br />Fugit dicta mollitia.<br />Ab tenetur quod.<br />Distinctio asperiores pariatur quis excepturi repellendus iure.<br />Aut numquam totam at velit autem.<br />Aut quia dolores recusandae a quia necessitatibus.<br />Ab nulla quo et nemo culpa.<br />Velit ipsam dolores saepe quia explicabo sed adipisci porro doloribus.<br />Officia iste quia exercitationem.<br />Beatae inventore aut voluptatum labore magnam cupiditate et velit.</p>"
             },
             {
                 "language": "html",
                 "title": "4 lines",
-                "code": "<p class=\"s-typo:p s-truncate:4\">Praesentium velit voluptas sint autem iste tempore qui porro beatae.<br />Molestias quod molestiae labore minima ea omnis adipisci ad numquam.<br />Velit blanditiis assumenda impedit.<br />Dolores qui recusandae sint.<br />Nihil numquam voluptatum distinctio cumque qui sed alias corporis.<br />Error tenetur natus minus quia dolorum quia aut.<br />Molestiae quibusdam aut dolorem veniam consequatur totam.<br />Natus est id aliquam veritatis iusto quidem nulla.<br />Rem veniam at mollitia impedit.<br />Voluptas nam veniam aliquam aliquid.<br />Delectus pariatur nemo neque esse voluptates incidunt repellendus sapiente.<br />Est ex commodi officia cumque ex nihil.<br />Itaque pariatur aperiam reiciendis dolores ipsum quis facilis eos voluptatem.<br />Vero ullam beatae.<br />Inventore ipsa reiciendis eum libero itaque optio ratione autem dolor.</p>"
+                "code": "<p class=\"s-typo:p s-truncate:4\">Molestiae eum quaerat occaecati neque pariatur aut qui harum.<br />Exercitationem iusto vel.<br />Occaecati ipsam aut voluptate natus ea assumenda earum.<br />Ex delectus eaque nobis.<br />Fugiat itaque qui culpa quia iusto qui.<br />Aspernatur veniam ipsum occaecati eos qui deserunt aliquam.<br />Omnis amet quos aut eaque.<br />Quia earum eaque est assumenda aliquam id minima qui qui.<br />Velit consequatur ratione consequatur aspernatur voluptas et quas.<br />Eius optio praesentium quasi suscipit dolore veniam optio.<br />Odit iure voluptatem quasi doloremque similique libero soluta sequi.<br />Voluptatum consequatur quis iure dolor voluptatem necessitatibus.<br />Corrupti est consequatur quia.<br />Aut ut est voluptas exercitationem saepe recusandae maiores.<br />Id nisi sit.</p>"
             },
             {
                 "language": "html",
                 "title": "5 lines",
-                "code": "<p class=\"s-typo:p s-truncate:5\">Nihil tempore et.<br />Eos dicta accusantium voluptas nemo non id accusamus optio et.<br />Assumenda ut et sint.<br />Similique odio corporis enim nemo unde deserunt et sed.<br />Debitis assumenda nihil quaerat est quia molestias et.<br />Et qui earum repellendus quae repellat aliquid doloribus quasi.<br />Dolor alias dolorum qui est.<br />Quo ut officiis ut possimus dolorem.<br />Atque vero perferendis.<br />Possimus est asperiores dolorum.<br />Voluptatem aliquam possimus libero illum reprehenderit beatae qui.<br />Voluptas quia beatae corrupti nihil ullam voluptatem.<br />In voluptate odit ea et.<br />Reprehenderit mollitia tenetur et numquam ipsum amet qui incidunt itaque.<br />Aut ullam provident amet et voluptas aut debitis voluptas sunt.</p>"
+                "code": "<p class=\"s-typo:p s-truncate:5\">Autem alias est vero non alias alias doloribus.<br />Ipsum ut corrupti odio nemo officia perferendis cum distinctio reiciendis.<br />Earum amet cupiditate delectus repellendus quos consequatur ratione voluptatem dolor.<br />Mollitia dolor modi officia id.<br />Molestias voluptatum et.<br />Numquam eaque soluta repellendus.<br />Laudantium sed modi.<br />Qui sed corrupti odio sit animi repellendus veniam.<br />Nihil numquam quia itaque nam ab non culpa.<br />Necessitatibus eos velit ex earum reprehenderit quam labore doloremque reprehenderit.<br />Doloribus id eum aperiam culpa deserunt.<br />Esse exercitationem veniam doloremque rerum necessitatibus dolor debitis recusandae incidunt.<br />Voluptas et voluptas hic.<br />Sed quis sed ut enim in est consequatur.<br />Ab expedita sint et accusamus qui non repudiandae.</p>"
             },
             {
                 "language": "html",
                 "title": "6 lines",
-                "code": "<p class=\"s-typo:p s-truncate:6\">Aperiam distinctio commodi.<br />Sed dolorem omnis sed ut ea perferendis totam ut rerum.<br />Aut praesentium cupiditate earum explicabo quisquam.<br />Consequatur velit accusantium sint odio nostrum ut.<br />Et quae numquam facilis libero dolor sed debitis atque.<br />Quis et similique reprehenderit et minima suscipit voluptate.<br />Possimus enim est cupiditate tenetur quidem provident quisquam nihil.<br />Omnis atque quibusdam quis molestiae.<br />Magnam deserunt consectetur autem iure voluptatem expedita praesentium et.<br />Id corrupti repudiandae quas.<br />Vitae qui repudiandae voluptatem atque voluptates aut quasi ut.<br />Nobis vero possimus natus voluptatem eius quaerat modi rerum.<br />Laudantium blanditiis assumenda sunt magnam optio qui dolore sed.<br />Ea quisquam non.<br />Et quia eum voluptatem ab.</p>"
+                "code": "<p class=\"s-typo:p s-truncate:6\">Doloremque et quidem sint error et ipsa saepe.<br />Reiciendis voluptas quia alias recusandae nobis.<br />Quod est sint sint.<br />Tenetur qui reiciendis quia earum tempora.<br />Ut temporibus numquam a animi sunt velit alias qui.<br />Ducimus omnis voluptas possimus.<br />Expedita totam natus exercitationem est iusto quia vero.<br />Omnis sit laborum aperiam veniam vitae vero.<br />Deserunt molestias veniam et.<br />Aperiam corrupti in dicta.<br />Corporis ratione eligendi velit.<br />Quae iusto distinctio cupiditate inventore error autem totam.<br />Quibusdam quidem non velit autem esse aut.<br />Explicabo aut beatae quo provident aut quia optio.<br />In suscipit voluptatem aut odit autem ipsa possimus aut.</p>"
             },
             {
                 "language": "html",
                 "title": "7 lines",
-                "code": "<p class=\"s-typo:p s-truncate:7\">Esse officiis adipisci assumenda dicta aperiam sapiente.<br />Mollitia consequatur asperiores qui cum esse.<br />Dolore dicta perferendis corporis enim mollitia exercitationem nostrum nulla.<br />Velit ut excepturi aliquam ipsam deleniti.<br />Aspernatur dicta eos sed et fuga fugiat non et molestias.<br />Eaque saepe non quia aut tempora possimus.<br />Consequatur at hic fugiat suscipit vel mollitia est accusantium.<br />Neque placeat facilis.<br />Incidunt quia quidem similique saepe eum nesciunt quasi laboriosam.<br />Molestias quaerat nesciunt omnis nostrum at nihil officia repudiandae.<br />Aliquid eius illo quidem maxime beatae tempora.<br />Hic qui assumenda molestiae rerum repellat dolorum sequi voluptas beatae.<br />Ut tenetur eaque.<br />Perspiciatis numquam facere praesentium.<br />Facilis et cupiditate recusandae autem et et.</p>"
+                "code": "<p class=\"s-typo:p s-truncate:7\">Quasi harum et at.<br />Quam incidunt rerum in.<br />Illo tenetur molestiae.<br />Corrupti vel illum et praesentium quod nesciunt recusandae ullam.<br />Nemo rerum qui sed rerum vero temporibus magni voluptatem sequi.<br />Neque suscipit aut.<br />Aut nam sit corporis architecto quo et.<br />Aliquid odio architecto quo et assumenda velit eaque optio nulla.<br />Aut cum vel voluptate qui eum quidem ipsam esse.<br />Perferendis consequatur veritatis quia omnis soluta harum deleniti et.<br />Consequatur facere veritatis est eos molestiae.<br />Voluptatem et qui qui.<br />Dolor excepturi ut aut.<br />Saepe est praesentium sequi consequatur est deserunt pariatur inventore dignissimos.<br />Quis quam iste eum beatae velit necessitatibus eum sint.</p>"
             },
             {
                 "language": "html",
                 "title": "8 lines",
-                "code": "<p class=\"s-typo:p s-truncate:8\">Qui quaerat doloremque.<br />Veniam et inventore ut fugit.<br />Harum et voluptatum fugiat dolorum.<br />Quia quisquam sunt quos pariatur repellendus perspiciatis corrupti deleniti sed.<br />Occaecati nulla voluptatem ipsam qui rerum error omnis eos.<br />Necessitatibus id est.<br />Aliquid velit reprehenderit officia.<br />Qui nisi fuga.<br />Sit ipsa eligendi.<br />Doloribus et animi.<br />Aspernatur vel eius sed impedit odit quaerat maxime enim.<br />Optio velit sint aut incidunt rerum provident porro eveniet animi.<br />Vel illo ut nisi temporibus possimus rerum enim.<br />Dolorem vitae quibusdam non dolor.<br />Doloremque sunt culpa voluptatem cumque recusandae consequuntur fuga nesciunt vel.</p>"
+                "code": "<p class=\"s-typo:p s-truncate:8\">Quis unde et provident ut alias earum totam fugit quisquam.<br />Enim et quam molestiae et molestiae qui nihil dolores.<br />Non laboriosam voluptatem inventore consequuntur maiores ut voluptas.<br />Ut et nulla et molestias et.<br />Distinctio eveniet qui eius eius et ea.<br />Ut nulla quam atque molestiae ut in.<br />Rerum perspiciatis ut minima temporibus ea voluptatem incidunt quidem voluptatem.<br />Qui ipsum sed consequuntur et.<br />Dolor ab consequatur est et.<br />Rerum dolore ex.<br />Rerum id suscipit sit modi.<br />Necessitatibus illum rem accusantium quia libero rerum eos iure qui.<br />Consequatur voluptate possimus deleniti aut.<br />Consequuntur eum beatae est dolor numquam aut sunt et dolorem.<br />Atque quaerat deserunt enim eum voluptatem est beatae.</p>"
             },
             {
                 "language": "html",
                 "title": "9 lines",
-                "code": "<p class=\"s-typo:p s-truncate:9\">Libero sed aliquam fuga consequatur blanditiis odit consequatur voluptates.<br />Voluptatibus exercitationem doloremque labore natus quidem nam non alias dolores.<br />Reiciendis eos voluptatem rerum.<br />Tempora molestiae dolorem assumenda.<br />Eligendi excepturi quibusdam odio accusamus consequatur nam dolores quis.<br />Non qui et aut.<br />Eum ipsam maxime cum.<br />Non ea est.<br />Consequatur voluptatem recusandae.<br />Laudantium distinctio nihil qui repellat enim.<br />Quis quaerat molestiae cupiditate eum repellendus enim.<br />Laborum distinctio at qui quisquam numquam.<br />Quia fugiat est.<br />Aut rerum omnis velit nemo assumenda minus rem.<br />Aperiam qui animi qui quia in.</p>"
+                "code": "<p class=\"s-typo:p s-truncate:9\">Quam voluptas quibusdam est sed rerum dolore.<br />Porro totam qui provident cumque facilis asperiores et voluptates.<br />Et cum dolor sunt.<br />Itaque et illo voluptatem sed ut.<br />Nihil enim temporibus quo omnis repellendus dolores nesciunt accusamus odit.<br />Culpa cum totam voluptas laboriosam harum ullam reiciendis.<br />Amet iusto tenetur dignissimos vel.<br />Dolorem mollitia autem excepturi laborum deleniti illo.<br />Sed nulla sed voluptas ducimus possimus.<br />Consequatur impedit consectetur sed voluptatem quod nihil eum nulla.<br />Temporibus sit odit ut ut.<br />Natus facere ut.<br />Nam blanditiis rerum aspernatur et quod cupiditate facere sapiente odit.<br />Expedita odit quis necessitatibus nisi consequuntur sapiente corrupti.<br />Consequatur ea sequi accusamus.</p>"
             },
             {
                 "language": "html",
                 "title": "10 lines",
-                "code": "<p class=\"s-typo:p s-truncate:10\">Dolores impedit quia inventore sed.<br />Ea rerum ut aut iusto.<br />Consectetur exercitationem sed aut atque quo.<br />Consequatur fugit eos qui vero dolor laborum magnam.<br />Omnis assumenda sed et labore iste.<br />Deserunt deleniti blanditiis in.<br />Expedita molestiae velit eum.<br />Officiis doloribus aliquid.<br />Eaque et dolorem sit eos sit enim ipsum qui aut.<br />Quas dolorum eos.<br />Voluptatem nihil est.<br />Sit rerum animi iure et aut quia autem temporibus doloribus.<br />Modi ratione et distinctio exercitationem omnis hic illo est.<br />Dolores eum incidunt.<br />Reprehenderit ullam sed sit.</p>"
+                "code": "<p class=\"s-typo:p s-truncate:10\">Distinctio quaerat laudantium est quia.<br />Pariatur harum qui repellendus.<br />Et nemo dolorem praesentium eligendi.<br />Sunt odio aut consequatur illum est non aut.<br />Voluptas consequatur debitis.<br />Quia amet officia repudiandae repellendus voluptatem odio ut in et.<br />Maiores assumenda ut neque est.<br />Quidem nam vel et non quia doloribus et.<br />Dignissimos magni quas maiores magni vel pariatur aliquid excepturi.<br />Ea et autem aspernatur.<br />Iste voluptas sequi temporibus ipsam ab recusandae adipisci.<br />Aut optio nostrum at aut alias laudantium minima qui neque.<br />Voluptas aut aut et soluta minus accusamus eaque tempora.<br />In sit et vel blanditiis qui numquam architecto.<br />Error dolor praesentium magni esse asperiores.</p>"
+            }
+        ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.truncate.classes;"
             }
         ],
         "since": "2.0.0",
@@ -1863,6 +2031,12 @@
                 "code": "<a class=\"s-btn s-color:accent s-shape:default\">Default shape</a>\n<a class=\"s-btn s-color:accent s-shape:square\">Square shape</a>\n<a class=\"s-btn s-color:accent s-shape:pill\">Pill shape</a>"
             }
         ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.shape.classes;"
+            }
+        ],
         "since": "2.0.0",
         "author": {
             "name": "Olivier Bossel",
@@ -1917,6 +2091,12 @@
                 "code": "<div class=\"s-flex:column s-gap:20\">\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:0 s-text:center s-bc:accent s-p:30 s-radius:30\">0%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:10 s-text:center s-bc:accent s-p:30 s-radius:30\">10%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:20 s-text:center s-bc:accent s-p:30 s-radius:30\">20%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:30 s-text:center s-bc:accent s-p:30 s-radius:30\">30%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:40 s-text:center s-bc:accent s-p:30 s-radius:30\">40%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:50 s-text:center s-bc:accent s-p:30 s-radius:30\">50%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:60 s-text:center s-bc:accent s-p:30 s-radius:30\">60%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:70 s-text:center s-bc:accent s-p:30 s-radius:30\">70%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:80 s-text:center s-bc:accent s-p:30 s-radius:30\">80%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:90 s-text:center s-bc:accent s-p:30 s-radius:30\">90%</div>\n  </div>\n  <div>\n     <div style=\"overflow:hidden\" class=\"s-width:100 s-text:center s-bc:accent s-p:30 s-radius:30\">100%</div>\n  </div>\n</div>"
             }
         ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.width.classes;"
+            }
+        ],
         "since": "2.0.0",
         "author": {
             "name": "Olivier Bossel",
@@ -1968,47 +2148,53 @@
             {
                 "language": "html",
                 "title": "Wrap",
-                "code": "<p class=\"s-white-space:wrap\">\n      Numquam cumque ad aut facilis. Quis doloremque dolorem iure. Qui assumenda voluptatem culpa aut modi incidunt aut nisi vero. Atque excepturi at est maxime. Dolorem reprehenderit sed possimus totam non neque aperiam optio accusamus. Mollitia quia earum et vitae natus a est.\n  </p>"
+                "code": "<p class=\"s-white-space:wrap\">\n      Natus id dolorum temporibus. Ut corrupti ab dolores adipisci eum. Ut quo atque. Inventore minus voluptatum tenetur maxime nobis animi iusto. Minus esse ex incidunt. Soluta est eius.\n  </p>"
             },
             {
                 "language": "html",
                 "title": "Nowrap",
-                "code": "<p class=\"s-white-space:nowrap\">\n      Sed expedita cum enim doloribus beatae est dolorem ducimus. Repellendus optio doloribus repudiandae quia ut. Pariatur culpa harum culpa eum odit optio quo cupiditate porro. Consequatur architecto quidem totam aliquid nisi atque. Vitae repellat aut. Aperiam commodi odio dolorem delectus.\n  </p>"
+                "code": "<p class=\"s-white-space:nowrap\">\n      Sunt tempore id quam et sint reprehenderit reiciendis. Unde dolores facere magnam eligendi id sed rerum sit aut. Accusamus quo illo temporibus reiciendis deserunt dignissimos et. Vitae et reprehenderit et officiis ut. Ea corporis et necessitatibus et dolores quaerat illum beatae. Dolores quo adipisci culpa voluptas eaque dicta repudiandae.\n  </p>"
             },
             {
                 "language": "html",
                 "title": "Break spaces",
-                "code": "<p class=\"s-white-space:break-spaces\">\n      Velit quae qui tempore doloribus rerum soluta quae magnam maxime. Est magni nostrum iure id nobis. Ut ipsam distinctio id et.\n  </p>"
+                "code": "<p class=\"s-white-space:break-spaces\">\n      Suscipit fugit a expedita magni doloremque ullam aut molestiae nobis. Voluptatem quia labore non a facilis placeat voluptas dolores necessitatibus. Magni quaerat et et nihil. Doloribus enim ducimus similique dolor nulla libero suscipit. Earum voluptatem placeat fugit officiis. Quia autem perspiciatis rem eum fugit in.\n  </p>"
             },
             {
                 "language": "html",
                 "title": "Normal",
-                "code": "<p class=\"s-white-space:normal\">\n      Molestias saepe ut aliquam dolor assumenda quis laudantium illum magni. Officiis facere architecto. Repudiandae deleniti maxime voluptas facere tenetur. Commodi eius non ipsa unde non est quisquam.\n  </p>"
+                "code": "<p class=\"s-white-space:normal\">\n      Dolorem doloribus occaecati voluptatum est. Ratione dicta assumenda. Suscipit saepe maiores dolores quidem ex qui.\n  </p>"
             },
             {
                 "language": "html",
                 "title": "Pre",
-                "code": "<p class=\"s-white-space:pre\">\n      Nesciunt animi suscipit iure eius reiciendis aperiam consequatur. Vitae culpa et consectetur est voluptatum doloribus qui et. Laborum debitis doloremque odit quia fuga numquam a ut dignissimos. Voluptatem quas nobis sit occaecati exercitationem sit porro.\n  </p>"
+                "code": "<p class=\"s-white-space:pre\">\n      Dolore dolor et aut quisquam sint quis. Enim sunt ullam quia non nihil non. Officia animi ratione expedita repellat facilis.\n  </p>"
             },
             {
                 "language": "html",
                 "title": "Pre-line",
-                "code": "<p class=\"s-white-space:pre-line\">\n      Necessitatibus minus est exercitationem saepe sed exercitationem ab ut. Dolorum ea non saepe. Sed temporibus incidunt. Est omnis temporibus odio minus dolores culpa. Neque tenetur temporibus voluptas molestiae unde praesentium ea. Dolores nulla sed optio.\n  </p>"
+                "code": "<p class=\"s-white-space:pre-line\">\n      Molestiae id ad suscipit doloribus pariatur et. Voluptatem repellendus commodi laboriosam similique. Unde ut vitae error consequuntur quos deserunt iste voluptas corporis. Ducimus est vel nulla quasi quis consequatur tempora quasi blanditiis.\n  </p>"
             },
             {
                 "language": "html",
                 "title": "Pre-wrap",
-                "code": "<p class=\"s-white-space:pre-wrap\">\n      Magni dolor ea impedit velit et reprehenderit voluptatem eveniet. Perferendis eligendi numquam perspiciatis et fuga consequatur facere officiis velit. Corrupti minima blanditiis laudantium quis. Nam illum sequi cupiditate earum.\n  </p>"
+                "code": "<p class=\"s-white-space:pre-wrap\">\n      Voluptas ex cum beatae et a labore repellendus blanditiis. In eum voluptatem repellat iure et et porro aliquid eveniet. Sint rerum voluptatem sequi non iusto. Nesciunt repudiandae alias est. Non sunt praesentium voluptates. Maiores quas tenetur sapiente.\n  </p>"
             },
             {
                 "language": "html",
                 "title": "Revert",
-                "code": "<p class=\"s-white-space:revert\">\n      Laboriosam qui architecto debitis ullam id ab. Voluptate illo modi alias. Consequatur labore ea.\n  </p>"
+                "code": "<p class=\"s-white-space:revert\">\n      Non qui eius accusamus odit voluptas animi. Beatae reprehenderit voluptatibus. Fugit vel id ex officia pariatur accusantium.\n  </p>"
             },
             {
                 "language": "html",
                 "title": "Unset",
-                "code": "<p class=\"s-white-space:unset\">\n      Velit veritatis atque tempora quas modi accusamus rerum. Distinctio magni doloribus non non. Sequi totam nulla accusantium autem aliquid rerum accusamus ut quia. Voluptatem ut expedita explicabo sequi. Eum consequatur praesentium quo quod.\n  </p>"
+                "code": "<p class=\"s-white-space:unset\">\n      Et ut ut ut. Facilis ut accusamus. Est corrupti alias eveniet iusto aliquid.\n  </p>"
+            }
+        ],
+        "install": [
+            {
+                "language": "css",
+                "code": "@s.whiteSpace.classes;"
             }
         ],
         "since": "2.0.0",

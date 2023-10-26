@@ -47,6 +47,12 @@
             "code": "<div class=\"s-pointer-events:fill\">\n  I'm in an \"fill\" pointer-events container\n</div>"
         }
     ],
+    "install": [
+        {
+            "language": "css",
+            "code": "@s.pointer.classes;"
+        }
+    ],
     "since": "2.0.0",
     "author": {
         "name": "Olivier Bossel",
@@ -163,7 +169,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name          Pointer\n* @namespace          sugar.style.helpers.pointer\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/pointer\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply some pointer attributes on any HTMLElement.\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.pointer.classes;\n*\n* @cssClass         s-pointer-events:none           Apply the pointer-events \"none\" attribute\n* @cssClass         s-pointer-events:all           Apply the pointer-events \"all\" attribute\n* @cssClass         s-pointer-events:auto           Apply the pointer-events \"auto\" attribute\n* @cssClass         s-pointer-events:fill           Apply the pointer-events \"fill\" attribute\n*\n* @example        html          None\n* <div class=\"s-pointer-events:none\">\n*   I'm in an \"none\" pointer-events container\n* </div>\n*\n* @example        html          all\n* <div class=\"s-pointer-events:all\">\n*   I'm in an \"all\" pointer-events container\n* </div>\n*\n* @example        html          Auto\n* <div class=\"s-pointer-events:auto\">\n*   I'm in an \"auto\" pointer-events container\n* </div>\n*\n* @example        html          Fill\n* <div class=\"s-pointer-events:fill\">\n*   I'm in an \"fill\" pointer-events container\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name          Pointer\n* @namespace          sugar.style.helpers.pointer\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/pointer\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply some pointer attributes on any HTMLElement.\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* @s.pointer.classes;\n*\n* @cssClass         s-pointer-events:none           Apply the pointer-events \"none\" attribute\n* @cssClass         s-pointer-events:all           Apply the pointer-events \"all\" attribute\n* @cssClass         s-pointer-events:auto           Apply the pointer-events \"auto\" attribute\n* @cssClass         s-pointer-events:fill           Apply the pointer-events \"fill\" attribute\n*\n* @example        html          None\n* <div class=\"s-pointer-events:none\">\n*   I'm in an \"none\" pointer-events container\n* </div>\n*\n* @example        html          all\n* <div class=\"s-pointer-events:all\">\n*   I'm in an \"all\" pointer-events container\n* </div>\n*\n* @example        html          Auto\n* <div class=\"s-pointer-events:auto\">\n*   I'm in an \"auto\" pointer-events container\n* </div>\n*\n* @example        html          Fill\n* <div class=\"s-pointer-events:fill\">\n*   I'm in an \"fill\" pointer-events container\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.pointer.Pointer"
         }
     ]

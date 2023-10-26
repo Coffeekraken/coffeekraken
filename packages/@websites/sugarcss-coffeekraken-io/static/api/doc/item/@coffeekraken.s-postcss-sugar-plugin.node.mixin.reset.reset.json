@@ -113,7 +113,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name           reset\n* @as              @s.reset\n* @namespace      node.mixin.reset\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin generate all the reset css needed to standardize display\n* on all browsers.\n*\n* @ƒeature       Reset from https://github.com/nicolas-cusan/destyle.css\n* @feature      Body height on desktop and IOS using \"fill-available\" technique\n*\n* @return        {Css}         The generated css\n*\n* @snippet         @s.reset\n*\n* @example        css\n* \\@s.reset;\n*\n* @see       https://github.com/nicolas-cusan/destyle.css\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name           reset\n* @as              @s.reset\n* @namespace      node.mixin.reset\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin generate all the reset css needed to standardize display\n* on all browsers.\n*\n* @ƒeature       Reset from https://github.com/nicolas-cusan/destyle.css\n* @feature      Body height on desktop and IOS using \"fill-available\" technique\n*\n* @return        {Css}         The generated css\n*\n* @snippet         @s.reset\n*\n* @example        css\n* @s.reset;\n*\n* @see       https://github.com/nicolas-cusan/destyle.css\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.reset.reset"
         }
     ]

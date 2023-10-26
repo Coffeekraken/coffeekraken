@@ -7,7 +7,7 @@
     </h1>
 </div>
 
-<h2 class="s-typo:h2:bold s-mbe:50">
+<h2 class="s-typo:h2:bold s-mbe:50 @mobile s-typo:h3">
     The frontend <span class="s-tc:complementary">CSS</span> <span class="s-tc:accent">toolkit</span><br />that make our days better...
 </h2>
 

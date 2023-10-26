@@ -109,13 +109,13 @@ export default function ({
                             const selectors = sel.match(/\.[a-zA-Z0-9_-]+/gm);
                             if (!selectors) return sel;
                             selectors.forEach((selector) => {
-                                const reg = new RegExp(`___${node._sMedia}$`);
+                                const reg = new RegExp(`_${node._sMedia}$`);
                                 if (reg.test(selector)) {
                                     return;
                                 }
                                 sel = sel.replace(
                                     selector,
-                                    `${selector}___${node._sMedia}`,
+                                    `${selector}_${node._sMedia}`,
                                 );
                             });
                             return sel;

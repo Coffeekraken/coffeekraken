@@ -106,7 +106,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name           classes\n* @as              @s.grow.classes\n* @namespace      node.mixin.grow\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin generate all grow helpers like s-grow, s-grow:1...10, etc...\n*\n* @return        {Css}         The generated css\n*\n* @snippet         @s.grow.classes\n*\n* @example        css\n* \\@s.grow.classes;\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name           classes\n* @as              @s.grow.classes\n* @namespace      node.mixin.grow\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin generate all grow helpers like s-grow, s-grow:1...10, etc...\n*\n* @return        {Css}         The generated css\n*\n* @snippet         @s.grow.classes\n*\n* @example        css\n* @s.grow.classes;\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.grow.classes"
         }
     ]

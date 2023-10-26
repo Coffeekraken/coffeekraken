@@ -2,6 +2,10 @@
     min-height: 0;
     margin-top: calc(30vh * -1);
 
+    @s.media mobile {
+        margin-top: 0;
+    }
+
     ._cards {
         @s.layout (1 2 3);
         gap: s.margin(50);
@@ -17,6 +21,15 @@
         > *:nth-child(3) {
             position: relative;
             top: -50px;
+        }
+
+        @s.media mobile {
+            @s.layout (1 _ 2 _ 3);
+            gap: s.margin(30);
+
+            > * {
+                top: 0 !important;
+            }
         }
     }
 

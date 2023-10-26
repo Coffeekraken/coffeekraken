@@ -41,6 +41,10 @@ body:has(.s-doc-fullscreen) {
         position: relative;
         flex-grow: 1;
         width: calc(100% - 400px);
+
+        @s.media mobile {
+            width: 100%;
+        }
     }
 
     &_body {
@@ -116,6 +120,8 @@ body:has(.s-doc-fullscreen) {
 
         @s.media <=tablet {
             background: s.color(main, background);
+            padding-inline-start: s.padding(30);
+            padding-block: s.padding(30);
             position: absolute;
             top: 0;
             left: 0;

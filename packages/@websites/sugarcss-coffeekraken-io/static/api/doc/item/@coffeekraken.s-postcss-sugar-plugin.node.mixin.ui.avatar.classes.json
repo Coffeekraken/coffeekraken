@@ -248,7 +248,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name          classes\n* @as              @s.ui.avatar.classes\n* @namespace     node.mixin.ui.avatar\n* @type          PostcssMixin\n* @interface     ./classes\n* @platform      postcss\n* @status        stable\n*\n* Generate the avatar classes\n*\n* @param       {('bare'|'lnf'|'shape'|'interactive'|'notifications')[]}        [scope=['bare','lnf','shape','interactive','notifications']]      The scope you want to generate\n* @return      {Css}                   The corresponding css\n*\n* @snippet         @s.ui.avatar.classes\n*\n* @example       css\n* \\@s.ui.avatar.classes();\n*\n* @since     2.0.0\n* @author \t                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name          classes\n* @as              @s.ui.avatar.classes\n* @namespace     node.mixin.ui.avatar\n* @type          PostcssMixin\n* @interface     ./classes\n* @platform      postcss\n* @status        stable\n*\n* Generate the avatar classes\n*\n* @param       {('bare'|'lnf'|'shape'|'interactive'|'notifications')[]}        [scope=['bare','lnf','shape','interactive','notifications']]      The scope you want to generate\n* @return      {Css}                   The corresponding css\n*\n* @snippet         @s.ui.avatar.classes\n*\n* @example       css\n* @s.ui.avatar.classes();\n*\n* @since     2.0.0\n* @author \t                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.avatar.classes"
         }
     ]

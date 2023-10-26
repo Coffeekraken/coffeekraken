@@ -47,6 +47,7 @@
 
     @s.media mobile {
         height: auto;
+        min-height: 0;
         position: relative;
         top: 0;
         left: 0;
@@ -70,6 +71,11 @@
             fill: s.color(accent);
             stroke: s.color(accent);
         }
+
+        @s.media mobile {
+            height: 70px;
+            margin-inline-start: 0;
+        }
     }
 
     ._content {
@@ -91,6 +97,10 @@
         user-select: none;
         pointer-events: none;
         @s.transition;
+
+        @s.media mobile {
+            display: none;
+        }
 
         ._round {
             width: 1em;

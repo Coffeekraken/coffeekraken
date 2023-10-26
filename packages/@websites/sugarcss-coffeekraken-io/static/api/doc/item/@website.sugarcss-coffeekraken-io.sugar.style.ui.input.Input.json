@@ -1,0 +1,183 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.input.Input",
+    "name": "Input",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "Forms"
+        ],
+        "slug": "/styleguide/forms/text-input"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows you to apply some lnfs to your text input",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.input",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "title": "solid lnf",
+            "code": "<label class=\"s-label:responsive s-mbe:30\">\n      <span>John Doe</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid\" />\n </label>\n  <label class=\"s-label:responsive s-mbe:30\">\n       <span>I'm disabled</span>\n      <input type=\"text\" disabled placeholder=\"Type something!\" class=\"s-input:solid\" />\n  </label>\n  <label dir=\"rtl\" class=\"s-label:responsive s-mbe:30\">\n      <span>Support RTL</span>\n      <input type=\"text\" placeholder=\"Type something! (RTL)\" class=\"s-input:solid\" />\n  </label>"
+        },
+        {
+            "language": "html",
+            "title": "underline lnf",
+            "code": "<label class=\"s-label:responsive s-mbe:30\">\n      <span>John Doe</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:underline\" />\n </label>\n  <label class=\"s-label:responsive s-mbe:30\">\n       <span>I'm disabled</span>\n      <input type=\"text\" disabled placeholder=\"Type something!\" class=\"s-input:underline\" />\n  </label>\n  <label dir=\"rtl\" class=\"s-label:responsive s-mbe:30\">\n      <span>Support RTL</span>\n      <input type=\"text\" placeholder=\"Type something! (RTL)\" class=\"s-input:underline\" />\n  </label>"
+        },
+        {
+            "language": "html",
+            "title": "Shapes",
+            "code": "<label class=\"s-label:responsive s-mbe:30\">\n      <span>John Doe</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-shape:default\" />\n </label>\n  <label class=\"s-label:responsive s-mbe:30\">\n      <span>John Doe</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-shape:square\" />\n </label>\n<label class=\"s-label:responsive s-mbe:30\">\n      <span>John Doe</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-shape:pill\" />\n </label>"
+        },
+        {
+            "language": "html",
+            "title": "Colors (non-exhaustive)",
+            "code": "<label class=\"s-label:responsive s-mbe:30\">\n      <span>John Doe</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-color:main\" />\n  </label>\n\n  <label class=\"s-label:responsive s-mbe:30\">\n      <span>John Doe</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-color:accent\" />\n  </label>\n\n  <label class=\"s-label:responsive s-mbe:30\">\n      <span>John Doe</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-color:complementary\" />\n  </label>\n\n  <label class=\"s-label:responsive s-mbe:30\">\n      <span>John Doe</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-color:error\" />\n  </label>"
+        },
+        {
+            "language": "html",
+            "title": "Scales (non-exhaustive)",
+            "code": "<label class=\"s-label:responsive s-scale:07 s-mbe:30\">\n      <span>John Doe</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input\" />\n  </label>\n\n  <label class=\"s-label:responsive s-scale:10 s-mbe:30\">\n      <span>John Doe</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input\" />\n  </label>\n\n  <label class=\"s-label:responsive s-scale:13 s-mbe:30\">\n      <span>John Doe</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input\" />\n  </label>\n\n  <label class=\"s-label:responsive s-scale:16 s-mbe:30\">\n      <span>John Doe</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input\" />\n  </label>"
+        }
+    ],
+    "install": [
+        {
+            "language": "css",
+            "code": "@s.ui.input.classes;\n\n.my-input {\n  @s.ui.input;\n}"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.dev.css",
+    "extension": "dev",
+    "relPath": "dist/css/index.dev.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Input",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.input",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "Forms"
+                ],
+                "slug": "/styleguide/forms/text-input"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows you to apply some lnfs to your text input",
+            "feature": [
+                "Support for shaping through the `s-shape:...` class",
+                "Support for scaling through the `s-scale:...` class",
+                "Support for colorizing through the `s-color:...` class"
+            ],
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.ui.input.classes;\n\n.my-input {\n  @s.ui.input;\n}"
+                }
+            ],
+            "cssClass": {
+                "s-input": {
+                    "name": "s-input",
+                    "description": "Apply the solid input lnf"
+                },
+                "s-input-underline": {
+                    "name": "s-input:underline",
+                    "description": "Apply the underline input lnf"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "title": "solid lnf",
+                    "code": "<label class=\"s-label:responsive s-mbe:30\">\n      <span>John Doe</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid\" />\n </label>\n  <label class=\"s-label:responsive s-mbe:30\">\n       <span>I'm disabled</span>\n      <input type=\"text\" disabled placeholder=\"Type something!\" class=\"s-input:solid\" />\n  </label>\n  <label dir=\"rtl\" class=\"s-label:responsive s-mbe:30\">\n      <span>Support RTL</span>\n      <input type=\"text\" placeholder=\"Type something! (RTL)\" class=\"s-input:solid\" />\n  </label>"
+                },
+                {
+                    "language": "html",
+                    "title": "underline lnf",
+                    "code": "<label class=\"s-label:responsive s-mbe:30\">\n      <span>John Doe</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:underline\" />\n </label>\n  <label class=\"s-label:responsive s-mbe:30\">\n       <span>I'm disabled</span>\n      <input type=\"text\" disabled placeholder=\"Type something!\" class=\"s-input:underline\" />\n  </label>\n  <label dir=\"rtl\" class=\"s-label:responsive s-mbe:30\">\n      <span>Support RTL</span>\n      <input type=\"text\" placeholder=\"Type something! (RTL)\" class=\"s-input:underline\" />\n  </label>"
+                },
+                {
+                    "language": "html",
+                    "title": "Shapes",
+                    "code": "<label class=\"s-label:responsive s-mbe:30\">\n      <span>John Doe</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-shape:default\" />\n </label>\n  <label class=\"s-label:responsive s-mbe:30\">\n      <span>John Doe</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-shape:square\" />\n </label>\n<label class=\"s-label:responsive s-mbe:30\">\n      <span>John Doe</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-shape:pill\" />\n </label>"
+                },
+                {
+                    "language": "html",
+                    "title": "Colors (non-exhaustive)",
+                    "code": "<label class=\"s-label:responsive s-mbe:30\">\n      <span>John Doe</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-color:main\" />\n  </label>\n\n  <label class=\"s-label:responsive s-mbe:30\">\n      <span>John Doe</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-color:accent\" />\n  </label>\n\n  <label class=\"s-label:responsive s-mbe:30\">\n      <span>John Doe</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-color:complementary\" />\n  </label>\n\n  <label class=\"s-label:responsive s-mbe:30\">\n      <span>John Doe</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-color:error\" />\n  </label>"
+                },
+                {
+                    "language": "html",
+                    "title": "Scales (non-exhaustive)",
+                    "code": "<label class=\"s-label:responsive s-scale:07 s-mbe:30\">\n      <span>John Doe</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input\" />\n  </label>\n\n  <label class=\"s-label:responsive s-scale:10 s-mbe:30\">\n      <span>John Doe</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input\" />\n  </label>\n\n  <label class=\"s-label:responsive s-scale:13 s-mbe:30\">\n      <span>John Doe</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input\" />\n  </label>\n\n  <label class=\"s-label:responsive s-scale:16 s-mbe:30\">\n      <span>John Doe</span>\n      <input type=\"text\" placeholder=\"Type something!\" class=\"s-input\" />\n  </label>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Input\n* @namespace          sugar.style.ui.input\n* @type               Styleguide\n* @menu           Styleguide / Forms        /styleguide/forms/text-input\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply some lnfs to your text input\n*\n* @feature          Support for shaping through the `s-shape:...` class\n* @feature          Support for scaling through the `s-scale:...` class\n* @feature          Support for colorizing through the `s-color:...` class\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* @s.ui.input.classes;\n*\n* .my-input {\n*   @s.ui.input;\n* }\n*\n* @cssClass     s-input           Apply the solid input lnf\n* @cssClass     s-input:underline           Apply the underline input lnf\n*\n* @example        html       solid lnf\n*   <label class=\"s-label:responsive s-mbe:30\">\n*       <span>John Doe</span>\n*       <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:solid\" />\n*  </label>\n*   <label class=\"s-label:responsive s-mbe:30\">\n*        <span>I'm disabled</span>\n*       <input type=\"text\" disabled placeholder=\"Type something!\" class=\"s-input:solid\" />\n*   </label>\n*   <label dir=\"rtl\" class=\"s-label:responsive s-mbe:30\">\n*       <span>Support RTL</span>\n*       <input type=\"text\" placeholder=\"Type something! (RTL)\" class=\"s-input:solid\" />\n*   </label>\n*\n*\n* @example        html       underline lnf\n*   <label class=\"s-label:responsive s-mbe:30\">\n*       <span>John Doe</span>\n*       <input type=\"text\" placeholder=\"Type something!\" class=\"s-input:underline\" />\n*  </label>\n*   <label class=\"s-label:responsive s-mbe:30\">\n*        <span>I'm disabled</span>\n*       <input type=\"text\" disabled placeholder=\"Type something!\" class=\"s-input:underline\" />\n*   </label>\n*   <label dir=\"rtl\" class=\"s-label:responsive s-mbe:30\">\n*       <span>Support RTL</span>\n*       <input type=\"text\" placeholder=\"Type something! (RTL)\" class=\"s-input:underline\" />\n*   </label>\n*\n*\n*\n* @example        html       Shapes\n*   <label class=\"s-label:responsive s-mbe:30\">\n*       <span>John Doe</span>\n*       <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-shape:default\" />\n*  </label>\n*   <label class=\"s-label:responsive s-mbe:30\">\n*       <span>John Doe</span>\n*       <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-shape:square\" />\n*  </label>\n* <label class=\"s-label:responsive s-mbe:30\">\n*       <span>John Doe</span>\n*       <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-shape:pill\" />\n*  </label>\n*\n*\n* @example        html       Colors (non-exhaustive)\n*   <label class=\"s-label:responsive s-mbe:30\">\n*       <span>John Doe</span>\n*       <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-color:main\" />\n*   </label>\n*\n*   <label class=\"s-label:responsive s-mbe:30\">\n*       <span>John Doe</span>\n*       <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-color:accent\" />\n*   </label>\n*\n*   <label class=\"s-label:responsive s-mbe:30\">\n*       <span>John Doe</span>\n*       <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-color:complementary\" />\n*   </label>\n*\n*   <label class=\"s-label:responsive s-mbe:30\">\n*       <span>John Doe</span>\n*       <input type=\"text\" placeholder=\"Type something!\" class=\"s-input s-color:error\" />\n*   </label>\n*\n*\n* @example        html       Scales (non-exhaustive)\n*   <label class=\"s-label:responsive s-scale:07 s-mbe:30\">\n*       <span>John Doe</span>\n*       <input type=\"text\" placeholder=\"Type something!\" class=\"s-input\" />\n*   </label>\n*\n*   <label class=\"s-label:responsive s-scale:10 s-mbe:30\">\n*       <span>John Doe</span>\n*       <input type=\"text\" placeholder=\"Type something!\" class=\"s-input\" />\n*   </label>\n*\n*   <label class=\"s-label:responsive s-scale:13 s-mbe:30\">\n*       <span>John Doe</span>\n*       <input type=\"text\" placeholder=\"Type something!\" class=\"s-input\" />\n*   </label>\n*\n*   <label class=\"s-label:responsive s-scale:16 s-mbe:30\">\n*       <span>John Doe</span>\n*       <input type=\"text\" placeholder=\"Type something!\" class=\"s-input\" />\n*   </label>\n*\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.input.Input"
+        }
+    ]
+}

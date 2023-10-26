@@ -116,7 +116,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name           classes\n* @as              @s.visually.classes\n* @namespace      node.mixin.visually\n* @type           PostcssMixin\n* @interface       ./classes\n* @platform      postcss\n* @status        stable\n*\n* This mixin generate all the overflow helper classes like ```.s-visually:hidden```, etc...\n*\n* @return        {Css}         The generated css\n*\n* @snippet         @s.visually.classes\n*\n* @example        css\n* \\@s.visually.classes;\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name           classes\n* @as              @s.visually.classes\n* @namespace      node.mixin.visually\n* @type           PostcssMixin\n* @interface       ./classes\n* @platform      postcss\n* @status        stable\n*\n* This mixin generate all the overflow helper classes like ```.s-visually:hidden```, etc...\n*\n* @return        {Css}         The generated css\n*\n* @snippet         @s.visually.classes\n*\n* @example        css\n* @s.visually.classes;\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.visually.classes"
         }
     ]

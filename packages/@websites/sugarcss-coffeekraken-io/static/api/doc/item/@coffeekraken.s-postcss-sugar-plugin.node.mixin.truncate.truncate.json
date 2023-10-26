@@ -138,7 +138,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name           truncate\n* @as              @s.truncate\n* @namespace      node.mixin.truncate\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin allows you to truncate some text to a number of lines\n*\n* @param         {Number}          [lines=1]           How many lines you want to display before truncating the rest...\n* @return        {Css}         The generated css\n*\n* @snippet         @s.truncate($1)\n*\n* @example        css\n* .my-cool-element {\n*    \\@s.truncate(2);\n* }\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name           truncate\n* @as              @s.truncate\n* @namespace      node.mixin.truncate\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin allows you to truncate some text to a number of lines\n*\n* @param         {Number}          [lines=1]           How many lines you want to display before truncating the rest...\n* @return        {Css}         The generated css\n*\n* @snippet         @s.truncate($1)\n*\n* @example        css\n* .my-cool-element {\n*    @s.truncate(2);\n* }\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.truncate.truncate"
         }
     ]

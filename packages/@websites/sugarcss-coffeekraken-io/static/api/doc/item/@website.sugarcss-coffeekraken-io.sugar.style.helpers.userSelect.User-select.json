@@ -29,22 +29,28 @@
         {
             "language": "html",
             "title": "All",
-            "code": "<p class=\"s-user-select:all\">\n      Sit perferendis minus eos nesciunt aut fuga veritatis deleniti. Debitis sed vitae dolorem aperiam. At esse a quis nemo facere est dolorem. Quis et doloribus consectetur magnam et repudiandae provident voluptatem dolore. Ducimus fugit numquam deleniti alias cupiditate voluptatem impedit rerum. Et provident perspiciatis quidem.\n  </p>"
+            "code": "<p class=\"s-user-select:all\">\n      Consequatur amet repellendus ea perspiciatis maiores quibusdam placeat quis quia. Deleniti at beatae temporibus exercitationem rem minus molestiae corporis. Ea quisquam ut qui optio vitae aspernatur sit voluptatem velit. Fugiat voluptas libero eum reiciendis eos sint dolor magni. Dolorem ullam eius.\n  </p>"
         },
         {
             "language": "html",
             "title": "auto",
-            "code": "<p class=\"s-user-select:auto\">\n      Cum ducimus iure velit dolor. Possimus incidunt laudantium culpa. Tenetur ea nemo dolores voluptatem eveniet adipisci provident veniam magni. Aliquid non rerum quam voluptatum voluptatem.\n  </p>"
+            "code": "<p class=\"s-user-select:auto\">\n      Blanditiis nisi error. Error sit ut facilis et beatae. Voluptas culpa impedit. Nam recusandae ratione.\n  </p>"
         },
         {
             "language": "html",
             "title": "none",
-            "code": "<p class=\"s-user-select:none\">\n      Itaque non dolores. Qui velit nesciunt ipsum possimus explicabo. Est ea minus tempora eligendi.\n  </p>"
+            "code": "<p class=\"s-user-select:none\">\n      Asperiores quis tempora tempore architecto laborum qui ipsum nisi rerum. Doloribus expedita quo et vero laborum saepe alias aut. Enim quo pariatur et. Ab ullam a consectetur saepe est voluptatem quae ipsum aliquid. Quia ipsum et et voluptatum officia amet at.\n  </p>"
         },
         {
             "language": "html",
             "title": "text",
-            "code": "<p class=\"s-user-select:text\">\n      Sunt blanditiis eius rerum id ut praesentium et modi et. In dolores minima ullam enim. Exercitationem veniam voluptas debitis. Recusandae quod mollitia vero.\n  </p>"
+            "code": "<p class=\"s-user-select:text\">\n      Voluptates doloremque nostrum sequi vero porro officia non voluptates. Eius deserunt non adipisci. Ad consequatur sed qui et tempore sunt facilis enim necessitatibus. Quis doloribus nostrum tempore sunt sequi aut quia placeat. Dolor cumque sit impedit qui cupiditate eum voluptatibus optio delectus.\n  </p>"
+        }
+    ],
+    "install": [
+        {
+            "language": "css",
+            "code": "@s.userSelect.classes;"
         }
     ],
     "since": "2.0.0",
@@ -139,22 +145,22 @@
                 {
                     "language": "html",
                     "title": "All",
-                    "code": "<p class=\"s-user-select:all\">\n      Sit perferendis minus eos nesciunt aut fuga veritatis deleniti. Debitis sed vitae dolorem aperiam. At esse a quis nemo facere est dolorem. Quis et doloribus consectetur magnam et repudiandae provident voluptatem dolore. Ducimus fugit numquam deleniti alias cupiditate voluptatem impedit rerum. Et provident perspiciatis quidem.\n  </p>"
+                    "code": "<p class=\"s-user-select:all\">\n      Consequatur amet repellendus ea perspiciatis maiores quibusdam placeat quis quia. Deleniti at beatae temporibus exercitationem rem minus molestiae corporis. Ea quisquam ut qui optio vitae aspernatur sit voluptatem velit. Fugiat voluptas libero eum reiciendis eos sint dolor magni. Dolorem ullam eius.\n  </p>"
                 },
                 {
                     "language": "html",
                     "title": "auto",
-                    "code": "<p class=\"s-user-select:auto\">\n      Cum ducimus iure velit dolor. Possimus incidunt laudantium culpa. Tenetur ea nemo dolores voluptatem eveniet adipisci provident veniam magni. Aliquid non rerum quam voluptatum voluptatem.\n  </p>"
+                    "code": "<p class=\"s-user-select:auto\">\n      Blanditiis nisi error. Error sit ut facilis et beatae. Voluptas culpa impedit. Nam recusandae ratione.\n  </p>"
                 },
                 {
                     "language": "html",
                     "title": "none",
-                    "code": "<p class=\"s-user-select:none\">\n      Itaque non dolores. Qui velit nesciunt ipsum possimus explicabo. Est ea minus tempora eligendi.\n  </p>"
+                    "code": "<p class=\"s-user-select:none\">\n      Asperiores quis tempora tempore architecto laborum qui ipsum nisi rerum. Doloribus expedita quo et vero laborum saepe alias aut. Enim quo pariatur et. Ab ullam a consectetur saepe est voluptatem quae ipsum aliquid. Quia ipsum et et voluptatum officia amet at.\n  </p>"
                 },
                 {
                     "language": "html",
                     "title": "text",
-                    "code": "<p class=\"s-user-select:text\">\n      Sunt blanditiis eius rerum id ut praesentium et modi et. In dolores minima ullam enim. Exercitationem veniam voluptas debitis. Recusandae quod mollitia vero.\n  </p>"
+                    "code": "<p class=\"s-user-select:text\">\n      Voluptates doloremque nostrum sequi vero porro officia non voluptates. Eius deserunt non adipisci. Ad consequatur sed qui et tempore sunt facilis enim necessitatibus. Quis doloribus nostrum tempore sunt sequi aut quia placeat. Dolor cumque sit impedit qui cupiditate eum voluptatibus optio delectus.\n  </p>"
                 }
             ],
             "since": "2.0.0",
@@ -163,7 +169,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name          User select\n* @namespace          sugar.style.helpers.userSelect\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/user-select\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply some user-select style on any HTMLElement\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.userSelect.classes;\n*\n* @cssClass         s-user-select:all             Apply the `user-select` to `all`\n* @cssClass         s-user-select:auto             Apply the `user-select` to `auto`\n* @cssClass         s-user-select:none             Apply the `user-select` to `none`\n* @cssClass         s-user-select:text             Apply the `user-select` to `text`\n*\n* @example        html          All\n*   <p class=\"s-user-select:all\">\n*       Sit perferendis minus eos nesciunt aut fuga veritatis deleniti. Debitis sed vitae dolorem aperiam. At esse a quis nemo facere est dolorem. Quis et doloribus consectetur magnam et repudiandae provident voluptatem dolore. Ducimus fugit numquam deleniti alias cupiditate voluptatem impedit rerum. Et provident perspiciatis quidem.\n*   </p>\n*\n* @example      html            auto\n*   <p class=\"s-user-select:auto\">\n*       Cum ducimus iure velit dolor. Possimus incidunt laudantium culpa. Tenetur ea nemo dolores voluptatem eveniet adipisci provident veniam magni. Aliquid non rerum quam voluptatum voluptatem.\n*   </p>\n*\n* @example          html            none\n*   <p class=\"s-user-select:none\">\n*       Itaque non dolores. Qui velit nesciunt ipsum possimus explicabo. Est ea minus tempora eligendi.\n*   </p>\n*\n* @example          html                text\n*   <p class=\"s-user-select:text\">\n*       Sunt blanditiis eius rerum id ut praesentium et modi et. In dolores minima ullam enim. Exercitationem veniam voluptas debitis. Recusandae quod mollitia vero.\n*   </p>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name          User select\n* @namespace          sugar.style.helpers.userSelect\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/user-select\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply some user-select style on any HTMLElement\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* @s.userSelect.classes;\n*\n* @cssClass         s-user-select:all             Apply the `user-select` to `all`\n* @cssClass         s-user-select:auto             Apply the `user-select` to `auto`\n* @cssClass         s-user-select:none             Apply the `user-select` to `none`\n* @cssClass         s-user-select:text             Apply the `user-select` to `text`\n*\n* @example        html          All\n*   <p class=\"s-user-select:all\">\n*       Consequatur amet repellendus ea perspiciatis maiores quibusdam placeat quis quia. Deleniti at beatae temporibus exercitationem rem minus molestiae corporis. Ea quisquam ut qui optio vitae aspernatur sit voluptatem velit. Fugiat voluptas libero eum reiciendis eos sint dolor magni. Dolorem ullam eius.\n*   </p>\n*\n* @example      html            auto\n*   <p class=\"s-user-select:auto\">\n*       Blanditiis nisi error. Error sit ut facilis et beatae. Voluptas culpa impedit. Nam recusandae ratione.\n*   </p>\n*\n* @example          html            none\n*   <p class=\"s-user-select:none\">\n*       Asperiores quis tempora tempore architecto laborum qui ipsum nisi rerum. Doloribus expedita quo et vero laborum saepe alias aut. Enim quo pariatur et. Ab ullam a consectetur saepe est voluptatem quae ipsum aliquid. Quia ipsum et et voluptatum officia amet at.\n*   </p>\n*\n* @example          html                text\n*   <p class=\"s-user-select:text\">\n*       Voluptates doloremque nostrum sequi vero porro officia non voluptates. Eius deserunt non adipisci. Ad consequatur sed qui et tempore sunt facilis enim necessitatibus. Quis doloribus nostrum tempore sunt sequi aut quia placeat. Dolor cumque sit impedit qui cupiditate eum voluptatibus optio delectus.\n*   </p>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.userSelect.User-select"
         }
     ]

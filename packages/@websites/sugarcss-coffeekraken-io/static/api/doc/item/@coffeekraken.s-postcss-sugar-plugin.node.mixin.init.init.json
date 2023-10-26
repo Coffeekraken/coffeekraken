@@ -114,7 +114,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name           init\n* @as              @s.init\n* @namespace      node.mixin.init\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin is the one you usually call first in your css.\n* His job is to:\n* - Apply a reset.css to standardize the display across browser\n* - Generate the base theme variables like colors, etc...\n* - Generate all the font-faces needed\n*\n* @param       {String}        query       The query string like \">tablet\", \"<=desktop\", etc...\n*\n* @snippet         @s.init\n*\n* @example        css\n* \\@s.init;\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name           init\n* @as              @s.init\n* @namespace      node.mixin.init\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin is the one you usually call first in your css.\n* His job is to:\n* - Apply a reset.css to standardize the display across browser\n* - Generate the base theme variables like colors, etc...\n* - Generate all the font-faces needed\n*\n* @param       {String}        query       The query string like \">tablet\", \"<=desktop\", etc...\n*\n* @snippet         @s.init\n*\n* @example        css\n* @s.init;\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.init.init"
         }
     ]

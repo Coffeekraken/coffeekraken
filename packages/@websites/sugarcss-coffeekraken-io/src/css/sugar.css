@@ -81,6 +81,7 @@
 /* mobile specific classes */
 @s.media.classes mobile {
     @s.layout.classes;
+    @s.typo.classes;
 }
 
 /* icons */
@@ -102,13 +103,13 @@
   fa:display
   fa:brush
   fa:scissors
+  fab:osi:logo-opensource
   fab:discord
   fab:github
   fab:facebook
   fab:patreon
   fab:twitter
   fab:instagram
-  fs:'src/icons/coffeekraken/logo-opensource.svg'
   fs:'src/icons/coffeekraken/logo-postcss.svg'
   fs:'src/icons/coffeekraken/ui-menu-grid-solid.svg'
   fs:'src/icons/coffeekraken/logo-coffeekraken-sugar.svg'

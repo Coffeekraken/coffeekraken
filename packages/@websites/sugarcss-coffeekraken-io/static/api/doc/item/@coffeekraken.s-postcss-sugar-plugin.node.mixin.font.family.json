@@ -106,7 +106,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name           family\n* @as              @s.font.family\n* @namespace      node.mixin.font\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin generate the css needed to apply a particular font in your css.\n* The font parameter accept any defined font family from the\n* config.theme.font.family stack\n*\n* @return        {Css}         The generated css\n*\n* @snippet         @s.font.family($1)\n*\n* @example        css\n* .my-cool-element {\n*    \\@s.font.family(title);\n* }\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name           family\n* @as              @s.font.family\n* @namespace      node.mixin.font\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin generate the css needed to apply a particular font in your css.\n* The font parameter accept any defined font family from the\n* config.theme.font.family stack\n*\n* @return        {Css}         The generated css\n*\n* @snippet         @s.font.family($1)\n*\n* @example        css\n* .my-cool-element {\n*    @s.font.family(title);\n* }\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.font.family"
         }
     ]

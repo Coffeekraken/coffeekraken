@@ -6,7 +6,7 @@
         @endphp
     </pre> --}}
 
-    <div class="s-container section">
+    <div class="s-container">
 
         <div class="_content">
             @include('sections.welcome.partials.content')

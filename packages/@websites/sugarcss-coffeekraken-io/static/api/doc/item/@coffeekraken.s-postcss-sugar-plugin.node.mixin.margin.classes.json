@@ -106,7 +106,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name           classes\n* @as              @s.margin.classes\n* @namespace      node.mixin.margin\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin generate all the margin helper classes like s-mie10, s-mis:40, etc...\n*\n* @return        {Css}         The generated css\n*\n* @snippet         @s.margin.classes\n*\n* @example        css\n* \\@s.margin.classes;\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name           classes\n* @as              @s.margin.classes\n* @namespace      node.mixin.margin\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin generate all the margin helper classes like s-mie10, s-mis:40, etc...\n*\n* @return        {Css}         The generated css\n*\n* @snippet         @s.margin.classes\n*\n* @example        css\n* @s.margin.classes;\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.margin.classes"
         }
     ]

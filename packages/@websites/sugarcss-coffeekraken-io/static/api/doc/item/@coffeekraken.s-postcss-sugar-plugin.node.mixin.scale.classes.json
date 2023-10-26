@@ -106,7 +106,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name           classes\n* @as              @s.scale.classes\n* @namespace      node.mixin.scale\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin generate all the scale helper classes like s-scale:01, s-scale:12, etc.\n* The generated scales are specified in the config.theme.scale configuration stack\n*\n* @return        {Css}         The generated css\n*\n* @snippet         @s.scale.classes\n*\n* @example        css\n* \\@s.scale.classes;\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name           classes\n* @as              @s.scale.classes\n* @namespace      node.mixin.scale\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin generate all the scale helper classes like s-scale:01, s-scale:12, etc.\n* The generated scales are specified in the config.theme.scale configuration stack\n*\n* @return        {Css}         The generated css\n*\n* @snippet         @s.scale.classes\n*\n* @example        css\n* @s.scale.classes;\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scale.classes"
         }
     ]

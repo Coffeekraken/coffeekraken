@@ -29,42 +29,48 @@
         {
             "language": "html",
             "title": "Block",
-            "code": "<div class=\"s-display:block\">\n    <p class=\"s-typo:p\">Lauren Koch</p>\n    <p class=\"s-typo:p\">Mr. Alan Vandervort</p>\n    <p class=\"s-typo:p\">Vivian Morar</p>\n  </div>"
+            "code": "<div class=\"s-display:block\">\n    <p class=\"s-typo:p\">Bertha Kulas</p>\n    <p class=\"s-typo:p\">Alma Langosh</p>\n    <p class=\"s-typo:p\">Laura Rau</p>\n  </div>"
         },
         {
             "language": "html",
             "title": "Inline-block",
-            "code": "<div class=\"s-display:inline-block\">\n    <p class=\"s-typo:p\">Courtney Schinner</p>\n    <p class=\"s-typo:p\">Courtney Conroy</p>\n    <p class=\"s-typo:p\">Ramiro Blick</p>\n  </div>"
+            "code": "<div class=\"s-display:inline-block\">\n    <p class=\"s-typo:p\">Rosie O'Kon</p>\n    <p class=\"s-typo:p\">Micheal Bartell</p>\n    <p class=\"s-typo:p\">Kay Hackett</p>\n  </div>"
         },
         {
             "language": "html",
             "title": "Contents",
-            "code": "<div class=\"s-display:contents\">\n    <p class=\"s-typo:p\">Jana Jacobs</p>\n    <p class=\"s-typo:p\">Mr. Doreen Wisozk</p>\n    <p class=\"s-typo:p\">Adrian Rogahn</p>\n  </div>"
+            "code": "<div class=\"s-display:contents\">\n    <p class=\"s-typo:p\">Alexandra Schroeder</p>\n    <p class=\"s-typo:p\">Rodney Schiller</p>\n    <p class=\"s-typo:p\">Ted Tromp</p>\n  </div>"
         },
         {
             "language": "html",
             "title": "Flex",
-            "code": "<div class=\"s-display:flex\">\n    <p class=\"s-typo:p\">Mathew Weissnat</p>\n    <p class=\"s-typo:p\">Ryan Glover</p>\n    <p class=\"s-typo:p\">Ollie Grady</p>\n  </div>"
+            "code": "<div class=\"s-display:flex\">\n    <p class=\"s-typo:p\">Myrtle Graham</p>\n    <p class=\"s-typo:p\">Mary Collins</p>\n    <p class=\"s-typo:p\">Aubrey Maggio</p>\n  </div>"
         },
         {
             "language": "html",
             "title": "Grid",
-            "code": "<div class=\"s-display:grid\">\n    <p class=\"s-typo:p\">Harvey Rath V</p>\n    <p class=\"s-typo:p\">Jose Upton PhD</p>\n    <p class=\"s-typo:p\">Ann Simonis</p>\n  </div>"
+            "code": "<div class=\"s-display:grid\">\n    <p class=\"s-typo:p\">Kristi Keebler DVM</p>\n    <p class=\"s-typo:p\">Benjamin Jacobs</p>\n    <p class=\"s-typo:p\">Kyle Marquardt</p>\n  </div>"
         },
         {
             "language": "html",
             "title": "Inline-flex",
-            "code": "<div class=\"s-display:inline-flex\">\n    <p class=\"s-typo:p\">Daniel Goyette</p>\n    <p class=\"s-typo:p\">Sherry Rice</p>\n    <p class=\"s-typo:p\">Ms. Jim Mosciski</p>\n  </div>"
+            "code": "<div class=\"s-display:inline-flex\">\n    <p class=\"s-typo:p\">Mabel Koch</p>\n    <p class=\"s-typo:p\">Luke Kris MD</p>\n    <p class=\"s-typo:p\">Chester Dooley</p>\n  </div>"
         },
         {
             "language": "html",
             "title": "Inline-grid",
-            "code": "<div class=\"s-display:inline-grid\">\n    <p class=\"s-typo:p\">Jessie Barton</p>\n    <p class=\"s-typo:p\">Luis Hilpert</p>\n    <p class=\"s-typo:p\">Laurie Heaney</p>\n  </div>"
+            "code": "<div class=\"s-display:inline-grid\">\n    <p class=\"s-typo:p\">Myra Breitenberg</p>\n    <p class=\"s-typo:p\">Miss Denise Klocko</p>\n    <p class=\"s-typo:p\">Steve Koelpin</p>\n  </div>"
         },
         {
             "language": "html",
             "title": "None",
-            "code": "<div class=\"s-display:none\">\n    <p class=\"s-typo:p\">Blake Bogisich</p>\n    <p class=\"s-typo:p\">Kristen Rogahn</p>\n    <p class=\"s-typo:p\">Julie Shields</p>\n  </div>"
+            "code": "<div class=\"s-display:none\">\n    <p class=\"s-typo:p\">Nick Schumm</p>\n    <p class=\"s-typo:p\">Rachael Gottlieb</p>\n    <p class=\"s-typo:p\">Nicholas Hilpert</p>\n  </div>"
+        }
+    ],
+    "install": [
+        {
+            "language": "css",
+            "code": "@s.display.classes;"
         }
     ],
     "since": "2.0.0",
@@ -175,42 +181,42 @@
                 {
                     "language": "html",
                     "title": "Block",
-                    "code": "<div class=\"s-display:block\">\n    <p class=\"s-typo:p\">Lauren Koch</p>\n    <p class=\"s-typo:p\">Mr. Alan Vandervort</p>\n    <p class=\"s-typo:p\">Vivian Morar</p>\n  </div>"
+                    "code": "<div class=\"s-display:block\">\n    <p class=\"s-typo:p\">Bertha Kulas</p>\n    <p class=\"s-typo:p\">Alma Langosh</p>\n    <p class=\"s-typo:p\">Laura Rau</p>\n  </div>"
                 },
                 {
                     "language": "html",
                     "title": "Inline-block",
-                    "code": "<div class=\"s-display:inline-block\">\n    <p class=\"s-typo:p\">Courtney Schinner</p>\n    <p class=\"s-typo:p\">Courtney Conroy</p>\n    <p class=\"s-typo:p\">Ramiro Blick</p>\n  </div>"
+                    "code": "<div class=\"s-display:inline-block\">\n    <p class=\"s-typo:p\">Rosie O'Kon</p>\n    <p class=\"s-typo:p\">Micheal Bartell</p>\n    <p class=\"s-typo:p\">Kay Hackett</p>\n  </div>"
                 },
                 {
                     "language": "html",
                     "title": "Contents",
-                    "code": "<div class=\"s-display:contents\">\n    <p class=\"s-typo:p\">Jana Jacobs</p>\n    <p class=\"s-typo:p\">Mr. Doreen Wisozk</p>\n    <p class=\"s-typo:p\">Adrian Rogahn</p>\n  </div>"
+                    "code": "<div class=\"s-display:contents\">\n    <p class=\"s-typo:p\">Alexandra Schroeder</p>\n    <p class=\"s-typo:p\">Rodney Schiller</p>\n    <p class=\"s-typo:p\">Ted Tromp</p>\n  </div>"
                 },
                 {
                     "language": "html",
                     "title": "Flex",
-                    "code": "<div class=\"s-display:flex\">\n    <p class=\"s-typo:p\">Mathew Weissnat</p>\n    <p class=\"s-typo:p\">Ryan Glover</p>\n    <p class=\"s-typo:p\">Ollie Grady</p>\n  </div>"
+                    "code": "<div class=\"s-display:flex\">\n    <p class=\"s-typo:p\">Myrtle Graham</p>\n    <p class=\"s-typo:p\">Mary Collins</p>\n    <p class=\"s-typo:p\">Aubrey Maggio</p>\n  </div>"
                 },
                 {
                     "language": "html",
                     "title": "Grid",
-                    "code": "<div class=\"s-display:grid\">\n    <p class=\"s-typo:p\">Harvey Rath V</p>\n    <p class=\"s-typo:p\">Jose Upton PhD</p>\n    <p class=\"s-typo:p\">Ann Simonis</p>\n  </div>"
+                    "code": "<div class=\"s-display:grid\">\n    <p class=\"s-typo:p\">Kristi Keebler DVM</p>\n    <p class=\"s-typo:p\">Benjamin Jacobs</p>\n    <p class=\"s-typo:p\">Kyle Marquardt</p>\n  </div>"
                 },
                 {
                     "language": "html",
                     "title": "Inline-flex",
-                    "code": "<div class=\"s-display:inline-flex\">\n    <p class=\"s-typo:p\">Daniel Goyette</p>\n    <p class=\"s-typo:p\">Sherry Rice</p>\n    <p class=\"s-typo:p\">Ms. Jim Mosciski</p>\n  </div>"
+                    "code": "<div class=\"s-display:inline-flex\">\n    <p class=\"s-typo:p\">Mabel Koch</p>\n    <p class=\"s-typo:p\">Luke Kris MD</p>\n    <p class=\"s-typo:p\">Chester Dooley</p>\n  </div>"
                 },
                 {
                     "language": "html",
                     "title": "Inline-grid",
-                    "code": "<div class=\"s-display:inline-grid\">\n    <p class=\"s-typo:p\">Jessie Barton</p>\n    <p class=\"s-typo:p\">Luis Hilpert</p>\n    <p class=\"s-typo:p\">Laurie Heaney</p>\n  </div>"
+                    "code": "<div class=\"s-display:inline-grid\">\n    <p class=\"s-typo:p\">Myra Breitenberg</p>\n    <p class=\"s-typo:p\">Miss Denise Klocko</p>\n    <p class=\"s-typo:p\">Steve Koelpin</p>\n  </div>"
                 },
                 {
                     "language": "html",
                     "title": "None",
-                    "code": "<div class=\"s-display:none\">\n    <p class=\"s-typo:p\">Blake Bogisich</p>\n    <p class=\"s-typo:p\">Kristen Rogahn</p>\n    <p class=\"s-typo:p\">Julie Shields</p>\n  </div>"
+                    "code": "<div class=\"s-display:none\">\n    <p class=\"s-typo:p\">Nick Schumm</p>\n    <p class=\"s-typo:p\">Rachael Gottlieb</p>\n    <p class=\"s-typo:p\">Nicholas Hilpert</p>\n  </div>"
                 }
             ],
             "since": "2.0.0",
@@ -219,7 +225,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name          Display\n* @namespace          sugar.style.helpers.display\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/display\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply the some display like `inline`, `inline-block`, `block`, etc...\n* on any HTMLElement\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.display.classes;\n*\n* @cssClass                 s-display:block           Apply the display `block` to any HTMLElement\n* @cssClass                 s-display:inline-block           Apply the display `inline-block` to any HTMLElement\n* @cssClass                 s-display:contents           Apply the display `contents` to any HTMLElement\n* @cssClass                 s-display:flex           Apply the display `flex` to any HTMLElement\n* @cssClass                 s-display:grid           Apply the display `grid` to any HTMLElement\n* @cssClass                 s-display:inline-flex           Apply the display `inline-flex` to any HTMLElement\n* @cssClass                 s-display:inline-grid           Apply the display `inline-grid` to any HTMLElement\n* @cssClass                 s-display:none           Apply the display `none` to any HTMLElement\n*\n* @example    html      Block\n*   <div class=\"s-display:block\">\n*     <p class=\"s-typo:p\">Lauren Koch</p>\n*     <p class=\"s-typo:p\">Mr. Alan Vandervort</p>\n*     <p class=\"s-typo:p\">Vivian Morar</p>\n*   </div>\n*\n* @example    html      Inline-block\n*   <div class=\"s-display:inline-block\">\n*     <p class=\"s-typo:p\">Courtney Schinner</p>\n*     <p class=\"s-typo:p\">Courtney Conroy</p>\n*     <p class=\"s-typo:p\">Ramiro Blick</p>\n*   </div>\n*\n* @example   html      Contents\n*   <div class=\"s-display:contents\">\n*     <p class=\"s-typo:p\">Jana Jacobs</p>\n*     <p class=\"s-typo:p\">Mr. Doreen Wisozk</p>\n*     <p class=\"s-typo:p\">Adrian Rogahn</p>\n*   </div>\n*\n* @example          html      Flex\n*   <div class=\"s-display:flex\">\n*     <p class=\"s-typo:p\">Mathew Weissnat</p>\n*     <p class=\"s-typo:p\">Ryan Glover</p>\n*     <p class=\"s-typo:p\">Ollie Grady</p>\n*   </div>\n*\n* @example          html      Grid\n*   <div class=\"s-display:grid\">\n*     <p class=\"s-typo:p\">Harvey Rath V</p>\n*     <p class=\"s-typo:p\">Jose Upton PhD</p>\n*     <p class=\"s-typo:p\">Ann Simonis</p>\n*   </div>\n*\n* @example          html      Inline-flex\n*   <div class=\"s-display:inline-flex\">\n*     <p class=\"s-typo:p\">Daniel Goyette</p>\n*     <p class=\"s-typo:p\">Sherry Rice</p>\n*     <p class=\"s-typo:p\">Ms. Jim Mosciski</p>\n*   </div>\n*\n* @example         html      Inline-grid\n*   <div class=\"s-display:inline-grid\">\n*     <p class=\"s-typo:p\">Jessie Barton</p>\n*     <p class=\"s-typo:p\">Luis Hilpert</p>\n*     <p class=\"s-typo:p\">Laurie Heaney</p>\n*   </div>\n*\n* @example     html      None\n*   <div class=\"s-display:none\">\n*     <p class=\"s-typo:p\">Blake Bogisich</p>\n*     <p class=\"s-typo:p\">Kristen Rogahn</p>\n*     <p class=\"s-typo:p\">Julie Shields</p>\n*   </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name          Display\n* @namespace          sugar.style.helpers.display\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/display\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply the some display like `inline`, `inline-block`, `block`, etc...\n* on any HTMLElement\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* @s.display.classes;\n*\n* @cssClass                 s-display:block           Apply the display `block` to any HTMLElement\n* @cssClass                 s-display:inline-block           Apply the display `inline-block` to any HTMLElement\n* @cssClass                 s-display:contents           Apply the display `contents` to any HTMLElement\n* @cssClass                 s-display:flex           Apply the display `flex` to any HTMLElement\n* @cssClass                 s-display:grid           Apply the display `grid` to any HTMLElement\n* @cssClass                 s-display:inline-flex           Apply the display `inline-flex` to any HTMLElement\n* @cssClass                 s-display:inline-grid           Apply the display `inline-grid` to any HTMLElement\n* @cssClass                 s-display:none           Apply the display `none` to any HTMLElement\n*\n* @example    html      Block\n*   <div class=\"s-display:block\">\n*     <p class=\"s-typo:p\">Bertha Kulas</p>\n*     <p class=\"s-typo:p\">Alma Langosh</p>\n*     <p class=\"s-typo:p\">Laura Rau</p>\n*   </div>\n*\n* @example    html      Inline-block\n*   <div class=\"s-display:inline-block\">\n*     <p class=\"s-typo:p\">Rosie O'Kon</p>\n*     <p class=\"s-typo:p\">Micheal Bartell</p>\n*     <p class=\"s-typo:p\">Kay Hackett</p>\n*   </div>\n*\n* @example   html      Contents\n*   <div class=\"s-display:contents\">\n*     <p class=\"s-typo:p\">Alexandra Schroeder</p>\n*     <p class=\"s-typo:p\">Rodney Schiller</p>\n*     <p class=\"s-typo:p\">Ted Tromp</p>\n*   </div>\n*\n* @example          html      Flex\n*   <div class=\"s-display:flex\">\n*     <p class=\"s-typo:p\">Myrtle Graham</p>\n*     <p class=\"s-typo:p\">Mary Collins</p>\n*     <p class=\"s-typo:p\">Aubrey Maggio</p>\n*   </div>\n*\n* @example          html      Grid\n*   <div class=\"s-display:grid\">\n*     <p class=\"s-typo:p\">Kristi Keebler DVM</p>\n*     <p class=\"s-typo:p\">Benjamin Jacobs</p>\n*     <p class=\"s-typo:p\">Kyle Marquardt</p>\n*   </div>\n*\n* @example          html      Inline-flex\n*   <div class=\"s-display:inline-flex\">\n*     <p class=\"s-typo:p\">Mabel Koch</p>\n*     <p class=\"s-typo:p\">Luke Kris MD</p>\n*     <p class=\"s-typo:p\">Chester Dooley</p>\n*   </div>\n*\n* @example         html      Inline-grid\n*   <div class=\"s-display:inline-grid\">\n*     <p class=\"s-typo:p\">Myra Breitenberg</p>\n*     <p class=\"s-typo:p\">Miss Denise Klocko</p>\n*     <p class=\"s-typo:p\">Steve Koelpin</p>\n*   </div>\n*\n* @example     html      None\n*   <div class=\"s-display:none\">\n*     <p class=\"s-typo:p\">Nick Schumm</p>\n*     <p class=\"s-typo:p\">Rachael Gottlieb</p>\n*     <p class=\"s-typo:p\">Nicholas Hilpert</p>\n*   </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.display.Display"
         }
     ]

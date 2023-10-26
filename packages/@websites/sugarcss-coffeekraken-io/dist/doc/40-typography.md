@@ -137,7 +137,7 @@ export default {
     label: '--',
     group: 'block',
     button: { label: '--' },
-    style: { display: 'block', color: '#808080', opacity: 0.2 },
+    style: { display: 'block', color: '#818898', opacity: 0.2 },
     rhythmVertical: { marginBottom: 50 },
   },
   'pre:not([class])': {
@@ -255,7 +255,7 @@ export default {
     label: 'Mark',
     group: 'text',
     button: { label: 'M' },
-    style: { backgroundColor: '#ffbb00' },
+    style: { backgroundColor: '#F7C33F' },
   },
   del: {
     label: 'Deleted',
@@ -291,7 +291,7 @@ export default {
     label: 'Main',
     group: 'color',
     type: 'color',
-    style: { color: '#808080' },
+    style: { color: '#818898' },
   },
   mainGradient: {
     label: 'Main gradient',
@@ -303,14 +303,14 @@ export default {
       '-mozBackgroundClip': 'text',
       '-webkitTextFillColor': 'transparent',
       '-mozTextFillColor': 'transparent',
-      backgroundImage: 'linear-gradient(90deg, #808080 0%, #8c8c8c 100%)',
+      backgroundImage: 'linear-gradient(90deg, #818898 0%, #8f95a3 100%)',
     },
   },
   accent: {
     label: 'Accent',
     group: 'color',
     type: 'color',
-    style: { color: '#ffbb00' },
+    style: { color: '#F7C33F' },
   },
   accentGradient: {
     label: 'Accent gradient',
@@ -322,14 +322,14 @@ export default {
       '-mozBackgroundClip': 'text',
       '-webkitTextFillColor': 'transparent',
       '-mozTextFillColor': 'transparent',
-      backgroundImage: 'linear-gradient(90deg, #ffbb00 0%, #ffc21a 100%)',
+      backgroundImage: 'linear-gradient(90deg, #F7C33F 0%, #f8c954 100%)',
     },
   },
   complementary: {
     label: 'Complementary',
     group: 'color',
     type: 'color',
-    style: { color: '#8054F9' },
+    style: { color: '#F9656E' },
   },
   complementaryGradient: {
     label: 'Complementary gradient',
@@ -341,7 +341,7 @@ export default {
       '-mozBackgroundClip': 'text',
       '-webkitTextFillColor': 'transparent',
       '-mozTextFillColor': 'transparent',
-      backgroundImage: 'linear-gradient(90deg, #8054F9 0%, #916bfa 100%)',
+      backgroundImage: 'linear-gradient(90deg, #F9656E 0%, #f97b83 100%)',
     },
   },
   success: {

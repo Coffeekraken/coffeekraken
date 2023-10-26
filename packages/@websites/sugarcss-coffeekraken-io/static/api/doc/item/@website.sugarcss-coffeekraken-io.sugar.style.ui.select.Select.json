@@ -1,0 +1,203 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.select.Select",
+    "name": "Select",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "Forms"
+        ],
+        "slug": "/styleguide/forms/select"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows you to display nice select in your forms",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.select",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "title": "solid lnf",
+            "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select\" name=\"select-lnf-solid\">\n      <option value=\"value1\">Alexandra Leuschke</option>\n      <option value=\"value2\">Sadie Jones</option>\n      <option value=\"value3\">Ashley Macejkovic</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>I'm disabled</span>\n    <select disabled class=\"s-select\" name=\"select-lnf-solid\">\n      <option value=\"value1\">Martha McGlynn</option>\n      <option value=\"value2\">Pat Wilkinson</option>\n      <option value=\"value3\">Freddie Schroeder</option>\n    </select>\n  </label>"
+        },
+        {
+            "language": "html",
+            "title": "underline lnf",
+            "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select:underline\" name=\"select-lnf-underline\">\n      <option value=\"value1\">Alyssa Zemlak</option>\n      <option value=\"value2\">Micheal D'Amore I</option>\n      <option value=\"value3\">Travis Hoppe</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>I'm disabled</span>\n    <select disabled class=\"s-select:underline\" name=\"select-lnf-underline\">\n      <option value=\"value1\">Elsie Klocko III</option>\n      <option value=\"value2\">Myron Schinner</option>\n      <option value=\"value3\">Mr. Tina Mante</option>\n    </select>\n  </label>"
+        },
+        {
+            "language": "html",
+            "title": "Shapes",
+            "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-shape:default\" name=\"select-color-accent\">\n      <option value=\"value1\">Gloria Hoppe</option>\n      <option value=\"value2\">Allison Hermann</option>\n      <option value=\"value3\">Mrs. Vernon Abbott</option>\n    </select>\n</label>\n<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-shape:square\" name=\"select-color-accent\">\n      <option value=\"value1\">Johanna Waelchi IV</option>\n      <option value=\"value2\">Eunice Terry</option>\n      <option value=\"value3\">Myron Hagenes</option>\n    </select>\n</label>\n<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-shape:pill\" name=\"select-color-accent\">\n      <option value=\"value1\">Caleb Cole</option>\n      <option value=\"value2\">Joanne Barton</option>\n      <option value=\"value3\">Ms. Doreen Feest</option>\n    </select>\n</label>"
+        },
+        {
+            "language": "html",
+            "title": "Colors (none-exhaustive)",
+            "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Mrs. Chris Gerhold</option>\n      <option value=\"value2\">Darnell Mayert</option>\n      <option value=\"value3\">Jean Friesen</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" name=\"select-color-complementary\">\n      <option value=\"value1\">Cathy Goyette</option>\n      <option value=\"value2\">Luis Roob</option>\n      <option value=\"value3\">Connie Bogan</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:complementary\" name=\"select-color-error\">\n      <option value=\"value1\">Lucy Farrell</option>\n      <option value=\"value2\">Vernon Borer</option>\n      <option value=\"value3\">Bradley Pouros</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:error\" name=\"select-color-error\" disabled>\n      <option value=\"value1\">Ida Emmerich</option>\n      <option value=\"value2\">Tina Flatley</option>\n      <option value=\"value3\">Gertrude Jast DDS</option>\n    </select>\n  </label>"
+        },
+        {
+            "language": "html",
+            "title": "Multiple",
+            "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" multiple name=\"select-color-accent\">\n      <option value=\"value1\">Pam O'Connell</option>\n      <option value=\"value2\">Daisy Simonis DDS</option>\n      <option value=\"value3\">Felipe Mueller</option>\n    </select>\n  </label>"
+        },
+        {
+            "language": "html",
+            "title": "RTL",
+            "code": "<div dir=\"rtl\">\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" name=\"select-color-accent\">\n      <option value=\"value1\">Alfonso Boehm</option>\n      <option value=\"value2\">Mattie Reynolds</option>\n      <option value=\"value3\">Elias Homenick</option>\n    </select>\n  </label>\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "Scales",
+            "code": "<label class=\"s-mbe:30 s-label:responsive s-scale:07\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" name=\"select-color-accent\">\n      <option value=\"value1\">Jeannette Hauck</option>\n      <option value=\"value2\">Iris Willms</option>\n      <option value=\"value3\">Jenna Murphy</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" name=\"select-color-accent\">\n      <option value=\"value1\">Natalie Franecki</option>\n      <option value=\"value2\">Mathew Emard</option>\n      <option value=\"value3\">Mr. Marie Green</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive s-scale:13\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" name=\"select-color-accent\">\n      <option value=\"value1\">Louise Bogan</option>\n      <option value=\"value2\">Mona Haag</option>\n      <option value=\"value3\">Maryann Collins</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive s-scale:16\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" name=\"select-color-accent\">\n      <option value=\"value1\">Frederick Bartell</option>\n      <option value=\"value2\">Jerome Ritchie</option>\n      <option value=\"value3\">Curtis Hermiston</option>\n    </select>\n  </label>"
+        }
+    ],
+    "install": [
+        {
+            "language": "css",
+            "code": "@s.ui.select.classes;\n\n.my-select {\n  @s.ui.select;\n}"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.dev.css",
+    "extension": "dev",
+    "relPath": "dist/css/index.dev.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Select",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.select",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "Forms"
+                ],
+                "slug": "/styleguide/forms/select"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows you to display nice select in your forms",
+            "feature": [
+                "Support for shaping through the `s-shape:...` class",
+                "Support for scaling through the `s-scale:...` class",
+                "Support for colorizing through the `s-color:...` class"
+            ],
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.ui.select.classes;\n\n.my-select {\n  @s.ui.select;\n}"
+                }
+            ],
+            "cssClass": {
+                "s-select": {
+                    "name": "s-select",
+                    "description": "Apply the solid select lnf"
+                },
+                "s-select-underline": {
+                    "name": "s-select:underline",
+                    "description": "Apply the underline select lnf"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "title": "solid lnf",
+                    "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select\" name=\"select-lnf-solid\">\n      <option value=\"value1\">Alexandra Leuschke</option>\n      <option value=\"value2\">Sadie Jones</option>\n      <option value=\"value3\">Ashley Macejkovic</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>I'm disabled</span>\n    <select disabled class=\"s-select\" name=\"select-lnf-solid\">\n      <option value=\"value1\">Martha McGlynn</option>\n      <option value=\"value2\">Pat Wilkinson</option>\n      <option value=\"value3\">Freddie Schroeder</option>\n    </select>\n  </label>"
+                },
+                {
+                    "language": "html",
+                    "title": "underline lnf",
+                    "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select:underline\" name=\"select-lnf-underline\">\n      <option value=\"value1\">Alyssa Zemlak</option>\n      <option value=\"value2\">Micheal D'Amore I</option>\n      <option value=\"value3\">Travis Hoppe</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>I'm disabled</span>\n    <select disabled class=\"s-select:underline\" name=\"select-lnf-underline\">\n      <option value=\"value1\">Elsie Klocko III</option>\n      <option value=\"value2\">Myron Schinner</option>\n      <option value=\"value3\">Mr. Tina Mante</option>\n    </select>\n  </label>"
+                },
+                {
+                    "language": "html",
+                    "title": "Shapes",
+                    "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-shape:default\" name=\"select-color-accent\">\n      <option value=\"value1\">Gloria Hoppe</option>\n      <option value=\"value2\">Allison Hermann</option>\n      <option value=\"value3\">Mrs. Vernon Abbott</option>\n    </select>\n</label>\n<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-shape:square\" name=\"select-color-accent\">\n      <option value=\"value1\">Johanna Waelchi IV</option>\n      <option value=\"value2\">Eunice Terry</option>\n      <option value=\"value3\">Myron Hagenes</option>\n    </select>\n</label>\n<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-shape:pill\" name=\"select-color-accent\">\n      <option value=\"value1\">Caleb Cole</option>\n      <option value=\"value2\">Joanne Barton</option>\n      <option value=\"value3\">Ms. Doreen Feest</option>\n    </select>\n</label>"
+                },
+                {
+                    "language": "html",
+                    "title": "Colors (none-exhaustive)",
+                    "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Mrs. Chris Gerhold</option>\n      <option value=\"value2\">Darnell Mayert</option>\n      <option value=\"value3\">Jean Friesen</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" name=\"select-color-complementary\">\n      <option value=\"value1\">Cathy Goyette</option>\n      <option value=\"value2\">Luis Roob</option>\n      <option value=\"value3\">Connie Bogan</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:complementary\" name=\"select-color-error\">\n      <option value=\"value1\">Lucy Farrell</option>\n      <option value=\"value2\">Vernon Borer</option>\n      <option value=\"value3\">Bradley Pouros</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:error\" name=\"select-color-error\" disabled>\n      <option value=\"value1\">Ida Emmerich</option>\n      <option value=\"value2\">Tina Flatley</option>\n      <option value=\"value3\">Gertrude Jast DDS</option>\n    </select>\n  </label>"
+                },
+                {
+                    "language": "html",
+                    "title": "Multiple",
+                    "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" multiple name=\"select-color-accent\">\n      <option value=\"value1\">Pam O'Connell</option>\n      <option value=\"value2\">Daisy Simonis DDS</option>\n      <option value=\"value3\">Felipe Mueller</option>\n    </select>\n  </label>"
+                },
+                {
+                    "language": "html",
+                    "title": "RTL",
+                    "code": "<div dir=\"rtl\">\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" name=\"select-color-accent\">\n      <option value=\"value1\">Alfonso Boehm</option>\n      <option value=\"value2\">Mattie Reynolds</option>\n      <option value=\"value3\">Elias Homenick</option>\n    </select>\n  </label>\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "Scales",
+                    "code": "<label class=\"s-mbe:30 s-label:responsive s-scale:07\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" name=\"select-color-accent\">\n      <option value=\"value1\">Jeannette Hauck</option>\n      <option value=\"value2\">Iris Willms</option>\n      <option value=\"value3\">Jenna Murphy</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" name=\"select-color-accent\">\n      <option value=\"value1\">Natalie Franecki</option>\n      <option value=\"value2\">Mathew Emard</option>\n      <option value=\"value3\">Mr. Marie Green</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive s-scale:13\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" name=\"select-color-accent\">\n      <option value=\"value1\">Louise Bogan</option>\n      <option value=\"value2\">Mona Haag</option>\n      <option value=\"value3\">Maryann Collins</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive s-scale:16\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" name=\"select-color-accent\">\n      <option value=\"value1\">Frederick Bartell</option>\n      <option value=\"value2\">Jerome Ritchie</option>\n      <option value=\"value3\">Curtis Hermiston</option>\n    </select>\n  </label>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Select\n* @namespace          sugar.style.ui.select\n* @type               Styleguide\n* @menu           Styleguide / Forms        /styleguide/forms/select\n* @platform       css\n* @status       stable\n*\n* These classes allows you to display nice select in your forms\n*\n* @feature          Support for shaping through the `s-shape:...` class\n* @feature          Support for scaling through the `s-scale:...` class\n* @feature          Support for colorizing through the `s-color:...` class\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* @s.ui.select.classes;\n*\n* .my-select {\n*   @s.ui.select;\n* }\n*\n* @cssClass     s-select           Apply the solid select lnf\n* @cssClass     s-select:underline           Apply the underline select lnf\n*\n* @example        html       solid lnf\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>John Doe</span>\n*     <select class=\"s-select\" name=\"select-lnf-solid\">\n*       <option value=\"value1\">Alexandra Leuschke</option>\n*       <option value=\"value2\">Sadie Jones</option>\n*       <option value=\"value3\">Ashley Macejkovic</option>\n*     </select>\n*   </label>\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>I'm disabled</span>\n*     <select disabled class=\"s-select\" name=\"select-lnf-solid\">\n*       <option value=\"value1\">Martha McGlynn</option>\n*       <option value=\"value2\">Pat Wilkinson</option>\n*       <option value=\"value3\">Freddie Schroeder</option>\n*     </select>\n*   </label>\n*\n* @example        html       underline lnf\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>John Doe</span>\n*     <select class=\"s-select:underline\" name=\"select-lnf-underline\">\n*       <option value=\"value1\">Alyssa Zemlak</option>\n*       <option value=\"value2\">Micheal D'Amore I</option>\n*       <option value=\"value3\">Travis Hoppe</option>\n*     </select>\n*   </label>\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>I'm disabled</span>\n*     <select disabled class=\"s-select:underline\" name=\"select-lnf-underline\">\n*       <option value=\"value1\">Elsie Klocko III</option>\n*       <option value=\"value2\">Myron Schinner</option>\n*       <option value=\"value3\">Mr. Tina Mante</option>\n*     </select>\n*   </label>\n*\n*\n* @example      html            Shapes\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>John Doe</span>\n*     <select class=\"s-select s-shape:default\" name=\"select-color-accent\">\n*       <option value=\"value1\">Gloria Hoppe</option>\n*       <option value=\"value2\">Allison Hermann</option>\n*       <option value=\"value3\">Mrs. Vernon Abbott</option>\n*     </select>\n* </label>\n* <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>John Doe</span>\n*     <select class=\"s-select s-shape:square\" name=\"select-color-accent\">\n*       <option value=\"value1\">Johanna Waelchi IV</option>\n*       <option value=\"value2\">Eunice Terry</option>\n*       <option value=\"value3\">Myron Hagenes</option>\n*     </select>\n* </label>\n* <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>John Doe</span>\n*     <select class=\"s-select s-shape:pill\" name=\"select-color-accent\">\n*       <option value=\"value1\">Caleb Cole</option>\n*       <option value=\"value2\">Joanne Barton</option>\n*       <option value=\"value3\">Ms. Doreen Feest</option>\n*     </select>\n* </label>\n*\n* @example      html            Colors (none-exhaustive)\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>John Doe</span>\n*     <select class=\"s-select\" name=\"select-color-accent\">\n*       <option value=\"value1\">Mrs. Chris Gerhold</option>\n*       <option value=\"value2\">Darnell Mayert</option>\n*       <option value=\"value3\">Jean Friesen</option>\n*     </select>\n*   </label>\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>John Doe</span>\n*     <select class=\"s-select s-color:accent\" name=\"select-color-complementary\">\n*       <option value=\"value1\">Cathy Goyette</option>\n*       <option value=\"value2\">Luis Roob</option>\n*       <option value=\"value3\">Connie Bogan</option>\n*     </select>\n*   </label>\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>John Doe</span>\n*     <select class=\"s-select s-color:complementary\" name=\"select-color-error\">\n*       <option value=\"value1\">Lucy Farrell</option>\n*       <option value=\"value2\">Vernon Borer</option>\n*       <option value=\"value3\">Bradley Pouros</option>\n*     </select>\n*   </label>\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>John Doe</span>\n*     <select class=\"s-select s-color:error\" name=\"select-color-error\" disabled>\n*       <option value=\"value1\">Ida Emmerich</option>\n*       <option value=\"value2\">Tina Flatley</option>\n*       <option value=\"value3\">Gertrude Jast DDS</option>\n*     </select>\n*   </label>\n*\n* @example      html            Multiple\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>John Doe</span>\n*     <select class=\"s-select s-color:accent\" multiple name=\"select-color-accent\">\n*       <option value=\"value1\">Pam O'Connell</option>\n*       <option value=\"value2\">Daisy Simonis DDS</option>\n*       <option value=\"value3\">Felipe Mueller</option>\n*     </select>\n*   </label>\n*\n* @example          html            RTL\n* <div dir=\"rtl\">\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>John Doe</span>\n*     <select class=\"s-select s-color:accent\" name=\"select-color-accent\">\n*       <option value=\"value1\">Alfonso Boehm</option>\n*       <option value=\"value2\">Mattie Reynolds</option>\n*       <option value=\"value3\">Elias Homenick</option>\n*     </select>\n*   </label>\n* </div>\n*\n* @example          html           Scales\n*   <label class=\"s-mbe:30 s-label:responsive s-scale:07\">\n*     <span>John Doe</span>\n*     <select class=\"s-select s-color:accent\" name=\"select-color-accent\">\n*       <option value=\"value1\">Jeannette Hauck</option>\n*       <option value=\"value2\">Iris Willms</option>\n*       <option value=\"value3\">Jenna Murphy</option>\n*     </select>\n*   </label>\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>John Doe</span>\n*     <select class=\"s-select s-color:accent\" name=\"select-color-accent\">\n*       <option value=\"value1\">Natalie Franecki</option>\n*       <option value=\"value2\">Mathew Emard</option>\n*       <option value=\"value3\">Mr. Marie Green</option>\n*     </select>\n*   </label>\n*   <label class=\"s-mbe:30 s-label:responsive s-scale:13\">\n*     <span>John Doe</span>\n*     <select class=\"s-select s-color:accent\" name=\"select-color-accent\">\n*       <option value=\"value1\">Louise Bogan</option>\n*       <option value=\"value2\">Mona Haag</option>\n*       <option value=\"value3\">Maryann Collins</option>\n*     </select>\n*   </label>\n*   <label class=\"s-mbe:30 s-label:responsive s-scale:16\">\n*     <span>John Doe</span>\n*     <select class=\"s-select s-color:accent\" name=\"select-color-accent\">\n*       <option value=\"value1\">Frederick Bartell</option>\n*       <option value=\"value2\">Jerome Ritchie</option>\n*       <option value=\"value3\">Curtis Hermiston</option>\n*     </select>\n*   </label>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.select.Select"
+        }
+    ]
+}

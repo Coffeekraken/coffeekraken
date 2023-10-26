@@ -112,7 +112,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name           destyle\n* @as          @s.reset.destyle\n* @namespace      node.mixin.reset\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin print the destyle css reset\n*\n* @ƒeature       Reset from https://github.com/nicolas-cusan/destyle.css\n*\n* @return        {Css}         The generated css\n*\n* @snippet     @s.reset.destyle\n*\n* @example        css\n* \\@s.reset.destyle;\n*\n* @see       https://github.com/nicolas-cusan/destyle.css\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name           destyle\n* @as          @s.reset.destyle\n* @namespace      node.mixin.reset\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin print the destyle css reset\n*\n* @ƒeature       Reset from https://github.com/nicolas-cusan/destyle.css\n*\n* @return        {Css}         The generated css\n*\n* @snippet     @s.reset.destyle\n*\n* @example        css\n* @s.reset.destyle;\n*\n* @see       https://github.com/nicolas-cusan/destyle.css\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.reset.destyle"
         }
     ]

@@ -174,7 +174,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name           classes\n* @as              @s.classes\n* @namespace      node.mixin\n* @type           PostcssMixin\n* @platform      postcss\n* @interface       ./classes\n* @status        stable\n*\n* This mixin generate all the sugar classes like utilities for colors, fonts, margins, etc...\n*\n* @param           {Boolean}           [ui=true]           Specify if you want to generate also the ui classes (avatar, etc...)\n* @return        {Css}         The generated css\n*\n* @snippet         @s.classes\n*\n* @example        css\n* \\@s.classes;\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name           classes\n* @as              @s.classes\n* @namespace      node.mixin\n* @type           PostcssMixin\n* @platform      postcss\n* @interface       ./classes\n* @status        stable\n*\n* This mixin generate all the sugar classes like utilities for colors, fonts, margins, etc...\n*\n* @param           {Boolean}           [ui=true]           Specify if you want to generate also the ui classes (avatar, etc...)\n* @return        {Css}         The generated css\n*\n* @snippet         @s.classes\n*\n* @example        css\n* @s.classes;\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.classes"
         }
     ]

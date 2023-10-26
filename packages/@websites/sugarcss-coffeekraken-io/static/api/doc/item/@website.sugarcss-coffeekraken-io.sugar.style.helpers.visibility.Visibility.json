@@ -32,6 +32,12 @@
             "code": "<div class=\"s-bc:main s-radius s-p:30\">\n  <div style=\"height: 100px\" class=\"s-bc:accent s-radius s-p:30\">I'm visible</div>\n  <div style=\"height: 100px\" class=\"s-visibility:hidden s-bc:complementary s-radius s-p:30\">I'm hidden</div>\n</div>"
         }
     ],
+    "install": [
+        {
+            "language": "css",
+            "code": "@s.visibility.classes;\n\n.my-element {\n  @s.visibility.hidden;\n}"
+        }
+    ],
     "since": "2.0.0",
     "author": {
         "name": "Olivier Bossel",
@@ -99,7 +105,7 @@
             "install": [
                 {
                     "language": "css",
-                    "code": "@s.visibility.classes;\n\n.my-element {\n  \\@s.visibility.hidden;\n}"
+                    "code": "@s.visibility.classes;\n\n.my-element {\n  @s.visibility.hidden;\n}"
                 }
             ],
             "cssClass": {
@@ -129,7 +135,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name          Visibility\n* @namespace          sugar.style.helpers.visibility\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/visibility\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply a visibility style on any HTMLElement\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.visibility.classes;\n*\n* .my-element {\n*   \\@s.visibility.hidden;\n* }\n*\n* @cssClass         s-visibility:hidden             Make the element hidden in the ui\n* @cssClass         s-visibility:visible            Make the element visible in the ui\n* @cssClass         s-visibility:collapse            Make the element visibly collapased in the ui\n*\n* @example        html              Visible\n* <div class=\"s-bc:main s-radius s-p:30\">\n*   <div style=\"height: 100px\" class=\"s-bc:accent s-radius s-p:30\">I'm visible</div>\n*   <div style=\"height: 100px\" class=\"s-visibility:hidden s-bc:complementary s-radius s-p:30\">I'm hidden</div>\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name          Visibility\n* @namespace          sugar.style.helpers.visibility\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/visibility\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply a visibility style on any HTMLElement\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* @s.visibility.classes;\n*\n* .my-element {\n*   @s.visibility.hidden;\n* }\n*\n* @cssClass         s-visibility:hidden             Make the element hidden in the ui\n* @cssClass         s-visibility:visible            Make the element visible in the ui\n* @cssClass         s-visibility:collapse            Make the element visibly collapased in the ui\n*\n* @example        html              Visible\n* <div class=\"s-bc:main s-radius s-p:30\">\n*   <div style=\"height: 100px\" class=\"s-bc:accent s-radius s-p:30\">I'm visible</div>\n*   <div style=\"height: 100px\" class=\"s-visibility:hidden s-bc:complementary s-radius s-p:30\">I'm hidden</div>\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.visibility.Visibility"
         }
     ]

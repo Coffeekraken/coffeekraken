@@ -106,7 +106,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name           container\n* @as              @s.container\n* @namespace      node.mixin.container\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin generate all the css needed for a container depending\n* on the config.theme.container.container configuration stack\n*\n* @return        {Css}         The generated css\n*\n* @snippet         @s.container($1)\n*\n* @example        css\n* .my-cool-container {\n*    \\@s.container;\n* }\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name           container\n* @as              @s.container\n* @namespace      node.mixin.container\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin generate all the css needed for a container depending\n* on the config.theme.container.container configuration stack\n*\n* @return        {Css}         The generated css\n*\n* @snippet         @s.container($1)\n*\n* @example        css\n* .my-cool-container {\n*    @s.container;\n* }\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.container.container"
         }
     ]

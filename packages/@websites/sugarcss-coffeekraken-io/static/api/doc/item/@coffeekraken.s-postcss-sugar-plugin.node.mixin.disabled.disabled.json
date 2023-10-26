@@ -106,7 +106,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name           disabled\n* @as              @s.disabled\n* @namespace      node.mixin.disabled\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin allows you to apply a the disabled styling to any HTMLElement.\n*\n* @return        {Css}         The generated css\n*\n* @snippet         @s.disabled\n*\n* @example        css\n* .my-element {\n*    \\@s.disabled();\n* }\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name           disabled\n* @as              @s.disabled\n* @namespace      node.mixin.disabled\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin allows you to apply a the disabled styling to any HTMLElement.\n*\n* @return        {Css}         The generated css\n*\n* @snippet         @s.disabled\n*\n* @example        css\n* .my-element {\n*    @s.disabled();\n* }\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.disabled.disabled"
         }
     ]

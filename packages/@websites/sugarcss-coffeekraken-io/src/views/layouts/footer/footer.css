@@ -9,6 +9,7 @@
 
     @s.media mobile {
         padding-block: s.padding(30);
+        padding-inline: s.padding(30);
     }
 
     ._main {

@@ -106,7 +106,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name           classes\n* @as          @s.disabled.classes\n* @namespace      node.mixin.disabled\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin allows you to generate all the disabled helper classes like s-disabled\n*\n* @return        {Css}        The generated css\n*\n* @snippet         @s.disabled.classes\n*\n* @example        css\n* \\@s.disabled.classes;\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name           classes\n* @as          @s.disabled.classes\n* @namespace      node.mixin.disabled\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin allows you to generate all the disabled helper classes like s-disabled\n*\n* @return        {Css}        The generated css\n*\n* @snippet         @s.disabled.classes\n*\n* @example        css\n* @s.disabled.classes;\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.disabled.classes"
         }
     ]

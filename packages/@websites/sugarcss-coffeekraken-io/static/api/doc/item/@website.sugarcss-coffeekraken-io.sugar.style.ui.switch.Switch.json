@@ -1,0 +1,179 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.switch.Switch",
+    "name": "Switch",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "Forms"
+        ],
+        "slug": "/styleguide/form/switch"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows you to style checkbox HTMLElement as switches",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.switch",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "title": "solid lnf",
+            "code": "<label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-switch\" />\n  </label>\n<label class=\"s-mbe:30 s-label\">\n    <span>I'm disabled</span>\n    <input type=\"checkbox\" disabled class=\"s-switch\" />\n  </label>"
+        },
+        {
+            "language": "html",
+            "title": "Shapes",
+            "code": "<label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-switch s-shape:default\" checked />\n  </label>\n<label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-switch s-shape:square\" checked />\n  </label>\n<label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-switch s-shape:pill\" checked />\n  </label>"
+        },
+        {
+            "language": "html",
+            "title": "RTL Support",
+            "code": "<div dir=\"rtl\">\n  <label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-switch\" checked />\n  </label>\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "Colors (non-exhauustive)",
+            "code": "<label class=\"s-mbe:30 s-label s-color:main\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-switch\" checked />\n  </label>\n  <label class=\"s-mbe:30 s-label s-color:accent\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-switch\" checked />\n  </label>\n  <label class=\"s-mbe:30 s-label s-color:complementary\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-switch\" checked />\n  </label>\n  <label class=\"s-mbe:30 s-label s-color:error\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-switch\" checked />\n  </label>"
+        },
+        {
+            "language": "html",
+            "title": "Scales",
+            "code": "<label class=\"s-mbe:30 s-label s-scale:05\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-switch\" checked />\n  </label>\n  <label class=\"s-mbe:30 s-label s-scale:10\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-switch\" checked />\n  </label>\n  <label class=\"s-mbe:30 s-label s-scale:15\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-switch\" checked />\n  </label>\n  <label class=\"s-mbe:30 s-label s-scale:20\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-switch\" checked />\n  </label>"
+        }
+    ],
+    "install": [
+        {
+            "language": "css",
+            "code": "@s.ui.switch.classes;\n\n.my-switch {\n  @s.ui.switch;\n}"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.dev.css",
+    "extension": "dev",
+    "relPath": "dist/css/index.dev.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Switch",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.switch",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "Forms"
+                ],
+                "slug": "/styleguide/form/switch"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows you to style checkbox HTMLElement as switches",
+            "feature": [
+                "Support for shaping through the `s-shape:...` class",
+                "Support for scaling through the `s-scale:...` class",
+                "Support for colorizing through the `s-color:...` class"
+            ],
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.ui.switch.classes;\n\n.my-switch {\n  @s.ui.switch;\n}"
+                }
+            ],
+            "cssClass": {
+                "s-switch": {
+                    "name": "s-switch",
+                    "description": "Apply the solid switch lnf"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "title": "solid lnf",
+                    "code": "<label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-switch\" />\n  </label>\n<label class=\"s-mbe:30 s-label\">\n    <span>I'm disabled</span>\n    <input type=\"checkbox\" disabled class=\"s-switch\" />\n  </label>"
+                },
+                {
+                    "language": "html",
+                    "title": "Shapes",
+                    "code": "<label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-switch s-shape:default\" checked />\n  </label>\n<label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-switch s-shape:square\" checked />\n  </label>\n<label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-switch s-shape:pill\" checked />\n  </label>"
+                },
+                {
+                    "language": "html",
+                    "title": "RTL Support",
+                    "code": "<div dir=\"rtl\">\n  <label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-switch\" checked />\n  </label>\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "Colors (non-exhauustive)",
+                    "code": "<label class=\"s-mbe:30 s-label s-color:main\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-switch\" checked />\n  </label>\n  <label class=\"s-mbe:30 s-label s-color:accent\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-switch\" checked />\n  </label>\n  <label class=\"s-mbe:30 s-label s-color:complementary\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-switch\" checked />\n  </label>\n  <label class=\"s-mbe:30 s-label s-color:error\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-switch\" checked />\n  </label>"
+                },
+                {
+                    "language": "html",
+                    "title": "Scales",
+                    "code": "<label class=\"s-mbe:30 s-label s-scale:05\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-switch\" checked />\n  </label>\n  <label class=\"s-mbe:30 s-label s-scale:10\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-switch\" checked />\n  </label>\n  <label class=\"s-mbe:30 s-label s-scale:15\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-switch\" checked />\n  </label>\n  <label class=\"s-mbe:30 s-label s-scale:20\">\n    <span>John Doe</span>\n    <input type=\"checkbox\" class=\"s-switch\" checked />\n  </label>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Switch\n* @namespace          sugar.style.ui.switch\n* @type               Styleguide\n* @menu           Styleguide / Forms        /styleguide/form/switch\n* @platform       css\n* @status       stable\n*\n* These classes allows you to style checkbox HTMLElement as switches\n*\n* @feature          Support for shaping through the `s-shape:...` class\n* @feature          Support for scaling through the `s-scale:...` class\n* @feature          Support for colorizing through the `s-color:...` class\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* @s.ui.switch.classes;\n*\n* .my-switch {\n*   @s.ui.switch;\n* }\n*\n* @cssClass     s-switch           Apply the solid switch lnf\n*\n* @example        html       solid lnf\n*   <label class=\"s-mbe:30 s-label\">\n*     <span>John Doe</span>\n*     <input type=\"checkbox\" class=\"s-switch\" />\n*   </label>\n<label class=\"s-mbe:30 s-label\">\n*     <span>I'm disabled</span>\n*     <input type=\"checkbox\" disabled class=\"s-switch\" />\n*   </label>\n*\n*\n* @example      html            Shapes\n*   <label class=\"s-mbe:30 s-label\">\n*     <span>John Doe</span>\n*     <input type=\"checkbox\" class=\"s-switch s-shape:default\" checked />\n*   </label>\n* <label class=\"s-mbe:30 s-label\">\n*     <span>John Doe</span>\n*     <input type=\"checkbox\" class=\"s-switch s-shape:square\" checked />\n*   </label>\n* <label class=\"s-mbe:30 s-label\">\n*     <span>John Doe</span>\n*     <input type=\"checkbox\" class=\"s-switch s-shape:pill\" checked />\n*   </label>\n*\n* @example      html            RTL Support\n* <div dir=\"rtl\">\n*   <label class=\"s-mbe:30 s-label\">\n*     <span>John Doe</span>\n*     <input type=\"checkbox\" class=\"s-switch\" checked />\n*   </label>\n* </div>\n*\n* @example      html            Colors (non-exhauustive)\n*   <label class=\"s-mbe:30 s-label s-color:main\">\n*     <span>John Doe</span>\n*     <input type=\"checkbox\" class=\"s-switch\" checked />\n*   </label>\n*   <label class=\"s-mbe:30 s-label s-color:accent\">\n*     <span>John Doe</span>\n*     <input type=\"checkbox\" class=\"s-switch\" checked />\n*   </label>\n*   <label class=\"s-mbe:30 s-label s-color:complementary\">\n*     <span>John Doe</span>\n*     <input type=\"checkbox\" class=\"s-switch\" checked />\n*   </label>\n*   <label class=\"s-mbe:30 s-label s-color:error\">\n*     <span>John Doe</span>\n*     <input type=\"checkbox\" class=\"s-switch\" checked />\n*   </label>\n*\n* @example      html            Scales\n*   <label class=\"s-mbe:30 s-label s-scale:05\">\n*     <span>John Doe</span>\n*     <input type=\"checkbox\" class=\"s-switch\" checked />\n*   </label>\n*   <label class=\"s-mbe:30 s-label s-scale:10\">\n*     <span>John Doe</span>\n*     <input type=\"checkbox\" class=\"s-switch\" checked />\n*   </label>\n*   <label class=\"s-mbe:30 s-label s-scale:15\">\n*     <span>John Doe</span>\n*     <input type=\"checkbox\" class=\"s-switch\" checked />\n*   </label>\n*   <label class=\"s-mbe:30 s-label s-scale:20\">\n*     <span>John Doe</span>\n*     <input type=\"checkbox\" class=\"s-switch\" checked />\n*   </label>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.switch.Switch"
+        }
+    ]
+}

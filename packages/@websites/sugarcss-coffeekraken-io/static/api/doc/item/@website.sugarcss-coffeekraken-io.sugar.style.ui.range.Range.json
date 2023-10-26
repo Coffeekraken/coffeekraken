@@ -1,0 +1,179 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.range.Range",
+    "name": "Range",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "Forms"
+        ],
+        "slug": "/styleguide/forms/range"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows you to display nice radio in your forms",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.range",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "title": "solid",
+            "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range \" min=\"0\" max=\"100\" step=\"10\" />\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range  s-color:accent\" min=\"0\" max=\"100\" step=\"10\" />\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range  s-color:complementary\" min=\"0\" max=\"100\" step=\"10\" />\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>I'm disabled</span>\n    <input type=\"range\" disabled class=\"s-range  s-color:complementary\" min=\"0\" max=\"100\" step=\"10\" />\n  </label>"
+        },
+        {
+            "language": "html",
+            "title": "Shapes",
+            "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range s-shape:default\" min=\"0\" max=\"100\" step=\"10\" />\n</label>\n<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range s-shape:square\" min=\"0\" max=\"100\" step=\"10\" />\n</label>\n<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range s-shape:pill\" min=\"0\" max=\"100\" step=\"10\" />\n</label>"
+        },
+        {
+            "language": "html",
+            "title": "Colors (none-exclusive)",
+            "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range\" min=\"0\" max=\"100\" step=\"10\" />\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range s-color:accent\" min=\"0\" max=\"100\" step=\"10\" />\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range s-color:complementary\" min=\"0\" max=\"100\" step=\"10\" />\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range s-color:error\" disabled min=\"0\" max=\"100\" step=\"10\" />\n  </label>"
+        },
+        {
+            "language": "html",
+            "title": "RTL",
+            "code": "<div dir=\"rtl\">\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <input type=\"range\" class=\"s-range\" min=\"0\" max=\"100\" step=\"10\" />\n    <span>John Doe</span>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <input type=\"range\" class=\"s-range s-color:accent\" min=\"0\" max=\"100\" step=\"10\" />\n    <span>John Doe</span>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <input type=\"range\" class=\"s-range s-color:complementary\" min=\"0\" max=\"100\" step=\"10\" />\n    <span>John Doe</span>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <input type=\"range\" class=\"s-range s-color:error\" disabled min=\"0\" max=\"100\" step=\"10\" />\n    <span>John Doe</span>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>I'm disabled</span>\n    <input type=\"range\" disabled class=\"s-range s-color:error\" disabled min=\"0\" max=\"100\" step=\"10\" />\n  </label>\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "Scales",
+            "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range s-scale:08\" min=\"0\" max=\"100\" step=\"10\" />\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range s-width:50\" min=\"0\" max=\"100\" step=\"10\" />\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range s-scale:12\" min=\"0\" max=\"100\" step=\"10\" />\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range s-scale:14\" min=\"0\" max=\"100\" step=\"10\" />\n  </label>"
+        }
+    ],
+    "install": [
+        {
+            "language": "css",
+            "code": "@s.ui.range.classes;\n\n.my-range {\n  @s.ui.range;\n}"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.dev.css",
+    "extension": "dev",
+    "relPath": "dist/css/index.dev.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Range",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.range",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "Forms"
+                ],
+                "slug": "/styleguide/forms/range"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows you to display nice radio in your forms",
+            "feature": [
+                "Support for shaping through the `s-shape:...` class",
+                "Support for scaling through the `s-scale:...` class",
+                "Support for colorizing through the `s-color:...` class"
+            ],
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.ui.range.classes;\n\n.my-range {\n  @s.ui.range;\n}"
+                }
+            ],
+            "cssClass": {
+                "s-range": {
+                    "name": "s-range",
+                    "description": "Apply the solid range lnf"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "title": "solid",
+                    "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range \" min=\"0\" max=\"100\" step=\"10\" />\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range  s-color:accent\" min=\"0\" max=\"100\" step=\"10\" />\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range  s-color:complementary\" min=\"0\" max=\"100\" step=\"10\" />\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>I'm disabled</span>\n    <input type=\"range\" disabled class=\"s-range  s-color:complementary\" min=\"0\" max=\"100\" step=\"10\" />\n  </label>"
+                },
+                {
+                    "language": "html",
+                    "title": "Shapes",
+                    "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range s-shape:default\" min=\"0\" max=\"100\" step=\"10\" />\n</label>\n<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range s-shape:square\" min=\"0\" max=\"100\" step=\"10\" />\n</label>\n<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range s-shape:pill\" min=\"0\" max=\"100\" step=\"10\" />\n</label>"
+                },
+                {
+                    "language": "html",
+                    "title": "Colors (none-exclusive)",
+                    "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range\" min=\"0\" max=\"100\" step=\"10\" />\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range s-color:accent\" min=\"0\" max=\"100\" step=\"10\" />\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range s-color:complementary\" min=\"0\" max=\"100\" step=\"10\" />\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range s-color:error\" disabled min=\"0\" max=\"100\" step=\"10\" />\n  </label>"
+                },
+                {
+                    "language": "html",
+                    "title": "RTL",
+                    "code": "<div dir=\"rtl\">\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <input type=\"range\" class=\"s-range\" min=\"0\" max=\"100\" step=\"10\" />\n    <span>John Doe</span>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <input type=\"range\" class=\"s-range s-color:accent\" min=\"0\" max=\"100\" step=\"10\" />\n    <span>John Doe</span>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <input type=\"range\" class=\"s-range s-color:complementary\" min=\"0\" max=\"100\" step=\"10\" />\n    <span>John Doe</span>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <input type=\"range\" class=\"s-range s-color:error\" disabled min=\"0\" max=\"100\" step=\"10\" />\n    <span>John Doe</span>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>I'm disabled</span>\n    <input type=\"range\" disabled class=\"s-range s-color:error\" disabled min=\"0\" max=\"100\" step=\"10\" />\n  </label>\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "Scales",
+                    "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range s-scale:08\" min=\"0\" max=\"100\" step=\"10\" />\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range s-width:50\" min=\"0\" max=\"100\" step=\"10\" />\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range s-scale:12\" min=\"0\" max=\"100\" step=\"10\" />\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"range\" class=\"s-range s-scale:14\" min=\"0\" max=\"100\" step=\"10\" />\n  </label>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Range\n* @namespace          sugar.style.ui.range\n* @type               Styleguide\n* @menu           Styleguide / Forms        /styleguide/forms/range\n* @platform       css\n* @status       stable\n*\n* These classes allows you to display nice radio in your forms\n*\n* @feature          Support for shaping through the `s-shape:...` class\n* @feature          Support for scaling through the `s-scale:...` class\n* @feature          Support for colorizing through the `s-color:...` class\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* @s.ui.range.classes;\n*\n* .my-range {\n*   @s.ui.range;\n* }\n*\n* @cssClass     s-range           Apply the solid range lnf\n*\n* @example        html       solid\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>John Doe</span>\n*     <input type=\"range\" class=\"s-range \" min=\"0\" max=\"100\" step=\"10\" />\n*   </label>\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>John Doe</span>\n*     <input type=\"range\" class=\"s-range  s-color:accent\" min=\"0\" max=\"100\" step=\"10\" />\n*   </label>\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>John Doe</span>\n*     <input type=\"range\" class=\"s-range  s-color:complementary\" min=\"0\" max=\"100\" step=\"10\" />\n*   </label>\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>I'm disabled</span>\n*     <input type=\"range\" disabled class=\"s-range  s-color:complementary\" min=\"0\" max=\"100\" step=\"10\" />\n*   </label>\n*\n*\n* @example        html          Shapes\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>John Doe</span>\n*     <input type=\"range\" class=\"s-range s-shape:default\" min=\"0\" max=\"100\" step=\"10\" />\n* </label>\n* <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>John Doe</span>\n*     <input type=\"range\" class=\"s-range s-shape:square\" min=\"0\" max=\"100\" step=\"10\" />\n* </label>\n* <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>John Doe</span>\n*     <input type=\"range\" class=\"s-range s-shape:pill\" min=\"0\" max=\"100\" step=\"10\" />\n* </label>\n*\n* @example        html          Colors (none-exclusive)\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>John Doe</span>\n*     <input type=\"range\" class=\"s-range\" min=\"0\" max=\"100\" step=\"10\" />\n*   </label>\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>John Doe</span>\n*     <input type=\"range\" class=\"s-range s-color:accent\" min=\"0\" max=\"100\" step=\"10\" />\n*   </label>\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>John Doe</span>\n*     <input type=\"range\" class=\"s-range s-color:complementary\" min=\"0\" max=\"100\" step=\"10\" />\n*   </label>\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>John Doe</span>\n*     <input type=\"range\" class=\"s-range s-color:error\" disabled min=\"0\" max=\"100\" step=\"10\" />\n*   </label>\n*\n* @example      html        RTL\n* <div dir=\"rtl\">\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <input type=\"range\" class=\"s-range\" min=\"0\" max=\"100\" step=\"10\" />\n*     <span>John Doe</span>\n*   </label>\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <input type=\"range\" class=\"s-range s-color:accent\" min=\"0\" max=\"100\" step=\"10\" />\n*     <span>John Doe</span>\n*   </label>\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <input type=\"range\" class=\"s-range s-color:complementary\" min=\"0\" max=\"100\" step=\"10\" />\n*     <span>John Doe</span>\n*   </label>\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <input type=\"range\" class=\"s-range s-color:error\" disabled min=\"0\" max=\"100\" step=\"10\" />\n*     <span>John Doe</span>\n*   </label>\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>I'm disabled</span>\n*     <input type=\"range\" disabled class=\"s-range s-color:error\" disabled min=\"0\" max=\"100\" step=\"10\" />\n*   </label>\n* </div>\n*\n* @example        html          Scales\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>John Doe</span>\n*     <input type=\"range\" class=\"s-range s-scale:08\" min=\"0\" max=\"100\" step=\"10\" />\n*   </label>\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>John Doe</span>\n*     <input type=\"range\" class=\"s-range s-width:50\" min=\"0\" max=\"100\" step=\"10\" />\n*   </label>\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>John Doe</span>\n*     <input type=\"range\" class=\"s-range s-scale:12\" min=\"0\" max=\"100\" step=\"10\" />\n*   </label>\n*   <label class=\"s-mbe:30 s-label:responsive\">\n*     <span>John Doe</span>\n*     <input type=\"range\" class=\"s-range s-scale:14\" min=\"0\" max=\"100\" step=\"10\" />\n*   </label>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.range.Range"
+        }
+    ]
+}

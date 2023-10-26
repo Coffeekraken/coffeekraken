@@ -2,12 +2,12 @@
 font-display: swap;
 
     font-family: "sugar-fonticon";
-    src: url("/dist/fonts/sugar-icons/sugar-fonticon.eot?1c9d40ead662e943ad53f20c4aceb30e#iefix") format("embedded-opentype"),
-url("/dist/fonts/sugar-icons/sugar-fonticon.woff2?1c9d40ead662e943ad53f20c4aceb30e") format("woff2"),
-url("/dist/fonts/sugar-icons/sugar-fonticon.woff?1c9d40ead662e943ad53f20c4aceb30e") format("woff");
+    src: url("/dist/fonts/sugar-icons/sugar-fonticon.eot?9e75ef33cee81f4bbe9000c3b459a9d6#iefix") format("embedded-opentype"),
+url("/dist/fonts/sugar-icons/sugar-fonticon.woff2?9e75ef33cee81f4bbe9000c3b459a9d6") format("woff2"),
+url("/dist/fonts/sugar-icons/sugar-fonticon.woff?9e75ef33cee81f4bbe9000c3b459a9d6") format("woff");
 }
 
-.s-icon-logo-coffeekraken-sugar:before,.s-icon-logo-opensource:before,.s-icon-logo-postcss:before,.s-icon-ui-menu-grid-solid:before {
+.s-icon-logo-coffeekraken-sugar:before,.s-icon-logo-postcss:before,.s-icon-ui-menu-grid-solid:before {
 position: relative;
 
     font-family: sugar-fonticon !important;
@@ -23,16 +23,13 @@ position: relative;
 .s-icon--logo-coffeekraken-sugar:before {
     content: "\f101";
 }
-.s-icon--logo-opensource:before {
+.s-icon--logo-postcss:before {
     content: "\f102";
 }
-.s-icon--logo-postcss:before {
+.s-icon--ui-menu-grid-solid:before {
     content: "\f103";
 }
-.s-icon--ui-menu-grid-solid:before {
-    content: "\f104";
-}
-.s-icon-logo-coffeekraken-sugar,.s-icon-logo-opensource,.s-icon-logo-postcss,.s-icon-ui-menu-grid-solid {
+.s-icon-logo-coffeekraken-sugar,.s-icon-logo-postcss,.s-icon-ui-menu-grid-solid {
 display: inline-block;
 line-height: 1;
 width: 1em;

@@ -106,7 +106,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name          classes\n* @as          @s.border.classes\n* @namespace     node.mixin.border\n* @type          PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin generate the borders helpers like s-radius:20, etc...\n*\n* @return      {Css}                   The generated css\n*\n* @snippet         @s.border.classes\n*\n* @example       css\n* \\@s.border.classes;\n*\n* @since     2.0.0\n* @author \t                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name          classes\n* @as          @s.border.classes\n* @namespace     node.mixin.border\n* @type          PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin generate the borders helpers like s-radius:20, etc...\n*\n* @return      {Css}                   The generated css\n*\n* @snippet         @s.border.classes\n*\n* @example       css\n* @s.border.classes;\n*\n* @since     2.0.0\n* @author \t                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.border.classes"
         }
     ]

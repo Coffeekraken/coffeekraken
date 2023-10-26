@@ -124,16 +124,21 @@
             },
             "snippet": {
                 "label": "@s.media $1",
-                "code": "\\@s.media $1 {\n     $2\n}"
+                "code": "@s.media $1 {\n     $2\n}"
             },
-            "example": [],
+            "example": [
+                {
+                    "language": "css",
+                    "code": "@s.media >=desktop {\n     // ...\n}\n@s.media tablet {\n     // ...\n}"
+                }
+            ],
             "since": "2.0.0",
             "author": {
                 "name": "Olivier Bossel",
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name           media\n* @as              @s.media\n* @namespace      node.mixin.media\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin allows you to apply any media queries that are defined\n* in the config.theme.media.queries configuration stack like \"tablet\", \"mobile\", etc...\n*\n* @param       {String}        query       The query string like \">tablet\", \"<=desktop\", etc...\n* @return      {Css}         The generated css\n*\n* @snippet         @s.media $1\n* \\@s.media $1 {\n*      $2\n* }\n*\n* @example        css\n* @s.media >=desktop {\n*      // ...\n* }\n* @s.media tablet {\n*      // ...\n* }\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name           media\n* @as              @s.media\n* @namespace      node.mixin.media\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin allows you to apply any media queries that are defined\n* in the config.theme.media.queries configuration stack like \"tablet\", \"mobile\", etc...\n*\n* @param       {String}        query       The query string like \">tablet\", \"<=desktop\", etc...\n* @return      {Css}         The generated css\n*\n* @snippet         @s.media $1\n* @s.media $1 {\n*      $2\n* }\n*\n* @example        css\n* @s.media >=desktop {\n*      // ...\n* }\n* @s.media tablet {\n*      // ...\n* }\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.media.media"
         }
     ]

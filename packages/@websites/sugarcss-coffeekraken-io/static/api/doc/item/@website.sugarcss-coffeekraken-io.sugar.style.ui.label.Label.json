@@ -1,0 +1,166 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.label.Label",
+    "name": "Label",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "Forms"
+        ],
+        "slug": "/styleguide/forms/labels"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows you to structure forms using labels.",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.label",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "title": "inline lnf",
+            "code": "<form class=\"s-flex:column s-gap:30\">\n  <label class=\"s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive\">\n    <span>John Doe</span>\n    <textarea class=\"s-input s-width:60\" placeholder=\"Type something!\" rows=\"3\"></textarea>\n  </label>\n  <label class=\" s-label:responsive\">\n    <span>Support RTL</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive s-color:accent\">\n    <span>With the accent color</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "block lnf",
+            "code": "<form class=\"s-flex:column s-gap:30\">\n  <label class=\"s-label:responsive:block\">\n    <span>John Doe</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive:block\">\n    <span>John Doe</span>\n    <textarea class=\"s-input s-width:60\" placeholder=\"Type something!\" rows=\"3\"></textarea>\n  </label>\n  <label class=\" s-label:responsive:block\">\n    <span>Support RTL</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive:block s-color:accent\">\n    <span>With the accent color</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "float lnf",
+            "code": "<form class=\"s-flex:column s-gap:30\">\n  <label class=\"s-label:responsive:float\">\n    <span>John Doe</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive:float\">\n    <span>John Doe</span>\n    <textarea class=\"s-input s-width:60\" placeholder=\"Type something!\" rows=\"3\"></textarea>\n  </label>\n  <label class=\" s-label:responsive:float\">\n    <span>Support RTL</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive:float s-color:accent\">\n    <span>With the accent color</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n</div>"
+        }
+    ],
+    "install": [
+        {
+            "language": "css",
+            "code": "@s.ui.label.classes;\n\n.my-label {\n  @s.ui.label;\n}"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.dev.css",
+    "extension": "dev",
+    "relPath": "dist/css/index.dev.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Label",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.label",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "Forms"
+                ],
+                "slug": "/styleguide/forms/labels"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows you to structure forms using labels.",
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.ui.label.classes;\n\n.my-label {\n  @s.ui.label;\n}"
+                }
+            ],
+            "cssClass": {
+                "s-label": {
+                    "name": "s-label",
+                    "description": "Apply the inline label lnf"
+                },
+                "s-label-block": {
+                    "name": "s-label:block",
+                    "description": "Apply the block label lnf"
+                },
+                "s-label-float": {
+                    "name": "s-label:float",
+                    "description": "Apply the float label lnf"
+                },
+                "s-label-responsive": {
+                    "name": "s-label:responsive",
+                    "description": "Make the label responsive"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "title": "inline lnf",
+                    "code": "<form class=\"s-flex:column s-gap:30\">\n  <label class=\"s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive\">\n    <span>John Doe</span>\n    <textarea class=\"s-input s-width:60\" placeholder=\"Type something!\" rows=\"3\"></textarea>\n  </label>\n  <label class=\" s-label:responsive\">\n    <span>Support RTL</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive s-color:accent\">\n    <span>With the accent color</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "block lnf",
+                    "code": "<form class=\"s-flex:column s-gap:30\">\n  <label class=\"s-label:responsive:block\">\n    <span>John Doe</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive:block\">\n    <span>John Doe</span>\n    <textarea class=\"s-input s-width:60\" placeholder=\"Type something!\" rows=\"3\"></textarea>\n  </label>\n  <label class=\" s-label:responsive:block\">\n    <span>Support RTL</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive:block s-color:accent\">\n    <span>With the accent color</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "float lnf",
+                    "code": "<form class=\"s-flex:column s-gap:30\">\n  <label class=\"s-label:responsive:float\">\n    <span>John Doe</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive:float\">\n    <span>John Doe</span>\n    <textarea class=\"s-input s-width:60\" placeholder=\"Type something!\" rows=\"3\"></textarea>\n  </label>\n  <label class=\" s-label:responsive:float\">\n    <span>Support RTL</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive:float s-color:accent\">\n    <span>With the accent color</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n</div>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Label\n* @namespace          sugar.style.ui.label\n* @type               Styleguide\n* @menu           Styleguide / Forms        /styleguide/forms/labels\n* @platform       css\n* @status       stable\n*\n* These classes allows you to structure forms using labels.\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* @s.ui.label.classes;\n*\n* .my-label {\n*   @s.ui.label;\n* }\n*\n* @cssClass     s-label           Apply the inline label lnf\n* @cssClass     s-label:block           Apply the block label lnf\n* @cssClass     s-label:float           Apply the float label lnf\n* @cssClass                 s-label:responsive           Make the label responsive\n*\n* @example        html       inline lnf\n* <form class=\"s-flex:column s-gap:30\">\n*   <label class=\"s-label:responsive\">\n*     <span>John Doe</span>\n*     <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n*   </label>\n*   <label class=\"s-label:responsive\">\n*     <span>John Doe</span>\n*     <textarea class=\"s-input s-width:60\" placeholder=\"Type something!\" rows=\"3\"></textarea>\n*   </label>\n*   <label class=\" s-label:responsive\">\n*     <span>Support RTL</span>\n*     <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n*   </label>\n*   <label class=\"s-label:responsive s-color:accent\">\n*     <span>With the accent color</span>\n*     <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n*   </label>\n* </div>\n*\n* @example        html       block lnf\n* <form class=\"s-flex:column s-gap:30\">\n*   <label class=\"s-label:responsive:block\">\n*     <span>John Doe</span>\n*     <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n*   </label>\n*   <label class=\"s-label:responsive:block\">\n*     <span>John Doe</span>\n*     <textarea class=\"s-input s-width:60\" placeholder=\"Type something!\" rows=\"3\"></textarea>\n*   </label>\n*   <label class=\" s-label:responsive:block\">\n*     <span>Support RTL</span>\n*     <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n*   </label>\n*   <label class=\"s-label:responsive:block s-color:accent\">\n*     <span>With the accent color</span>\n*     <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n*   </label>\n* </div>\n*\n* @example        html       float lnf\n* <form class=\"s-flex:column s-gap:30\">\n*   <label class=\"s-label:responsive:float\">\n*     <span>John Doe</span>\n*     <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n*   </label>\n*   <label class=\"s-label:responsive:float\">\n*     <span>John Doe</span>\n*     <textarea class=\"s-input s-width:60\" placeholder=\"Type something!\" rows=\"3\"></textarea>\n*   </label>\n*   <label class=\" s-label:responsive:float\">\n*     <span>Support RTL</span>\n*     <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n*   </label>\n*   <label class=\"s-label:responsive:float s-color:accent\">\n*     <span>With the accent color</span>\n*     <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n*   </label>\n* </div>\n*\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.label.Label"
+        }
+    ]
+}

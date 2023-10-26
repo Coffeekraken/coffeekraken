@@ -19,57 +19,72 @@
 
 The sugar plugin for PostCSS gives you a lot of features like:
 
-1. Access theme configuration properties like `margins`, `colors`, `paddings`, etc... using some `sugar` functions like so:
-    - `color: s.color(main)`: Apply the main color to the text
-    - `padding: s.padding(30)`: Apply the `30` padding
-    - and more...
-2. Utilities through some mixins like:
-    - `@s.media(mobile) { ... }`: Apply some styles only for the `mobile` media
-    - `@s.scrollbar();`: Apply a custom scrollbar depending on your theme configuration
-    - `@s.depth(30)`: Apply the depthj `30`
-    - `@s.icon.classes(...)`: Define some icons to be used in your HTML
-    - `@s.layout(1 2 3)`: Build some complex layouts using `css grid`.
-    - and more...
-3. Theming support using these mixins:
-    - `@s.theme.apply(dark)`: Apply the dark theme to any HTMLElement and his children
-    - `@s.theme(dark) { ... }`: Specify some styles that will be applied only if the dark theme is applied
-    - `@s.init`: Apply some resets as well as printing the variables needed for theming
-    - and more...
-4. Helpers/Components classes generation for things like:
-    - Paddings:
-        - `.s-p:10`: Apply the `10` padding
-        - `.s-pbe:10`: Apply the `10` block start padding
-        - `.s-pi:20`: Apply the `20` inline padding
-        - `.s-pb:30`: Apply the `30` block padding
-        - etc...
-    - Margins:
-        - `.s-m:10`: Apply the `10` margin
-        - `.s-mbe:10`: Apply the `10` block start margin
-        - `.s-mi:20`: Apply the `20` inline margin
-        - `.s-mb:30`: Apply the `30` block margin
-        - etc...
-    - Flex:
-        - `.s-flex`: Apply the flex display
-        - `.s-flex:row`: Apply the flex display with the `row` direction
-        - `.s-flex:center`: Apply the flex display and center the children horizontally and vertically
-        - etc...
-    - Depth:
-        - `.s-depth:10`: Apply the depth `10`
-        - `.s-depth:20`: Apply the depth `20`
-        - ...
-        - `.s-depth:100`: Apply the depth `100`
-    - Typography:
-        - `.s-typo:h1`: Apply the `h1` typography
-        - `.s-typo:h2`: Apply the `h2` typography
-        - `.s-typo:p`: Apply the `p` typography
-        - `.s-typo:blockquote`: Apply the `blockquote` typography
-        - etc...
-    - Colors:
-        - `.s-tc:accent`: Apply the accent text color
-        - `.s-bc:accent`: Apply the accent background color
-        - `.s-color:complementary`: Apply the complementary color theme on element and his children
-        - etc...
-    - and more...
+### Fully customizable
+
+Access theme configuration properties like `margins`, `colors`, `paddings`, etc... using some `sugar` functions like so:
+
+- `color: s.color(main)`: Apply the main color to the text
+- `padding: s.padding(30)`: Apply the `30` padding
+- and more...
+
+### Utilities
+
+Utilities through some mixins like:
+
+- `@s.media(mobile) { ... }`: Apply some styles only for the `mobile` media
+- `@s.scrollbar();`: Apply a custom scrollbar depending on your theme configuration
+- `@s.depth(30)`: Apply the depthj `30`
+- `@s.icon.classes(...)`: Define some icons to be used in your HTML
+- `@s.layout(1 2 3)`: Build some complex layouts using `css grid`.
+- and more...
+
+### Theming
+
+Theming support using these mixins:
+
+- `@s.theme.apply(dark)`: Apply the dark theme to any HTMLElement and his children
+- `@s.theme(dark) { ... }`: Specify some styles that will be applied only if the dark theme is applied
+- `@s.init`: Apply some resets as well as printing the variables needed for theming
+- and more...
+
+### Helpers / Components
+
+Helpers/Components classes generation for things like:
+
+- Paddings:
+    - `.s-p:10`: Apply the `10` padding
+    - `.s-pbe:10`: Apply the `10` block start padding
+    - `.s-pi:20`: Apply the `20` inline padding
+    - `.s-pb:30`: Apply the `30` block padding
+    - etc...
+- Margins:
+    - `.s-m:10`: Apply the `10` margin
+    - `.s-mbe:10`: Apply the `10` block start margin
+    - `.s-mi:20`: Apply the `20` inline margin
+    - `.s-mb:30`: Apply the `30` block margin
+    - etc...
+- Flex:
+    - `.s-flex`: Apply the flex display
+    - `.s-flex:row`: Apply the flex display with the `row` direction
+    - `.s-flex:center`: Apply the flex display and center the children horizontally and vertically
+    - etc...
+- Depth:
+    - `.s-depth:10`: Apply the depth `10`
+    - `.s-depth:20`: Apply the depth `20`
+    - ...
+    - `.s-depth:100`: Apply the depth `100`
+- Typography:
+    - `.s-typo:h1`: Apply the `h1` typography
+    - `.s-typo:h2`: Apply the `h2` typography
+    - `.s-typo:p`: Apply the `p` typography
+    - `.s-typo:blockquote`: Apply the `blockquote` typography
+    - etc...
+- Colors:
+    - `.s-tc:accent`: Apply the accent text color
+    - `.s-bc:accent`: Apply the accent background color
+    - `.s-color:complementary`: Apply the complementary color theme on element and his children
+    - etc...
+- and more...
 
 > Note that the values passed in the mixins like `30`, `main`, etc... are values coming from the theme configuration. All of these can be updated through out [configuration system](/doc/configuration).
 

@@ -32,6 +32,12 @@
             "code": "<div class=\"s-flex:wrap s-gap:20\">\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:current:20\">\n    current\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:main:20\">\n    main\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:accent:20\">\n    accent\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:complementary:20\">\n    complementary\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:success:20\">\n    success\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:warning:20\">\n    warning\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:error:20\">\n    error\n  </div>\n<div class=\"s-width:20 s-flex:center s-ratio:1 s-border:info:20\">\n    info\n  </div>\n</div>"
         }
     ],
+    "install": [
+        {
+            "language": "css",
+            "code": "@s.border.classes;"
+        }
+    ],
     "since": "2.0.0",
     "author": {
         "name": "Olivier Bossel",
@@ -130,6 +136,12 @@
                     "description": "Apply the border color info to any HTMLElement"
                 }
             },
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.border.classes;"
+                }
+            ],
             "example": [
                 {
                     "language": "html",
@@ -143,7 +155,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name          Border color\n* @namespace          sugar.style.helpers.border\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/border-color\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply some border color to any HTMLElement\n*\n* @support      chromium\n* @support      firefox\n* @support      safari\n* @support      edge\n*\n* @cssClass      s-border:current      Apply the border color current to any HTMLElement\n* @cssClass      s-border:main      Apply the border color main to any HTMLElement\n* @cssClass      s-border:accent      Apply the border color accent to any HTMLElement\n* @cssClass      s-border:complementary      Apply the border color complementary to any HTMLElement\n* @cssClass      s-border:success      Apply the border color success to any HTMLElement\n* @cssClass      s-border:warning      Apply the border color warning to any HTMLElement\n* @cssClass      s-border:error      Apply the border color error to any HTMLElement\n* @cssClass      s-border:info      Apply the border color info to any HTMLElement\n*\n* @example             html         Border color\n* <div class=\"s-flex:wrap s-gap:20\">\n* <div class=\"s-width:20 s-flex:center s-ratio:1 s-border:current:20\">\n*     current\n*   </div>\n* <div class=\"s-width:20 s-flex:center s-ratio:1 s-border:main:20\">\n*     main\n*   </div>\n* <div class=\"s-width:20 s-flex:center s-ratio:1 s-border:accent:20\">\n*     accent\n*   </div>\n* <div class=\"s-width:20 s-flex:center s-ratio:1 s-border:complementary:20\">\n*     complementary\n*   </div>\n* <div class=\"s-width:20 s-flex:center s-ratio:1 s-border:success:20\">\n*     success\n*   </div>\n* <div class=\"s-width:20 s-flex:center s-ratio:1 s-border:warning:20\">\n*     warning\n*   </div>\n* <div class=\"s-width:20 s-flex:center s-ratio:1 s-border:error:20\">\n*     error\n*   </div>\n* <div class=\"s-width:20 s-flex:center s-ratio:1 s-border:info:20\">\n*     info\n*   </div>\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name          Border color\n* @namespace          sugar.style.helpers.border\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/border-color\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply some border color to any HTMLElement\n*\n* @support      chromium\n* @support      firefox\n* @support      safari\n* @support      edge\n*\n* @cssClass      s-border:current      Apply the border color current to any HTMLElement\n* @cssClass      s-border:main      Apply the border color main to any HTMLElement\n* @cssClass      s-border:accent      Apply the border color accent to any HTMLElement\n* @cssClass      s-border:complementary      Apply the border color complementary to any HTMLElement\n* @cssClass      s-border:success      Apply the border color success to any HTMLElement\n* @cssClass      s-border:warning      Apply the border color warning to any HTMLElement\n* @cssClass      s-border:error      Apply the border color error to any HTMLElement\n* @cssClass      s-border:info      Apply the border color info to any HTMLElement\n*\n* @install          css\n* @s.border.classes;\n*\n* @example             html         Border color\n* <div class=\"s-flex:wrap s-gap:20\">\n* <div class=\"s-width:20 s-flex:center s-ratio:1 s-border:current:20\">\n*     current\n*   </div>\n* <div class=\"s-width:20 s-flex:center s-ratio:1 s-border:main:20\">\n*     main\n*   </div>\n* <div class=\"s-width:20 s-flex:center s-ratio:1 s-border:accent:20\">\n*     accent\n*   </div>\n* <div class=\"s-width:20 s-flex:center s-ratio:1 s-border:complementary:20\">\n*     complementary\n*   </div>\n* <div class=\"s-width:20 s-flex:center s-ratio:1 s-border:success:20\">\n*     success\n*   </div>\n* <div class=\"s-width:20 s-flex:center s-ratio:1 s-border:warning:20\">\n*     warning\n*   </div>\n* <div class=\"s-width:20 s-flex:center s-ratio:1 s-border:error:20\">\n*     error\n*   </div>\n* <div class=\"s-width:20 s-flex:center s-ratio:1 s-border:info:20\">\n*     info\n*   </div>\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.border.Border-color"
         }
     ]

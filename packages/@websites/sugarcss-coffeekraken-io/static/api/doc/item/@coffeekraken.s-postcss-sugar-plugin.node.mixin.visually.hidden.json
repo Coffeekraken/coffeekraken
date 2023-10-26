@@ -116,7 +116,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name           hidden\n* @as              @s.visibility.hidden\n* @namespace      node.mixin.visually\n* @type           PostcssMixin\n* @interface       ./hidden\n* @platform      postcss\n* @status        stable\n*\n* This mixin allows you to apply a css that make the element visually hidden but not really\n* hidden like when make use of `display: none;`.\n*\n* @return        {Css}         The generated css\n*\n* @snippet         @s.visibility.hidden\n*\n* @example        css\n* .my-element {\n*  \\@s.visually.hidden;\n* }\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name           hidden\n* @as              @s.visibility.hidden\n* @namespace      node.mixin.visually\n* @type           PostcssMixin\n* @interface       ./hidden\n* @platform      postcss\n* @status        stable\n*\n* This mixin allows you to apply a css that make the element visually hidden but not really\n* hidden like when make use of `display: none;`.\n*\n* @return        {Css}         The generated css\n*\n* @snippet         @s.visibility.hidden\n*\n* @example        css\n* .my-element {\n*  @s.visually.hidden;\n* }\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.visually.hidden"
         }
     ]

@@ -106,7 +106,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name           fit\n* @as              @s.fit\n* @namespace      node.mixin.fit\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin allows you to apply a certain object-fit on your element\n*\n* @return        {Css}         The generated css\n*\n* @snippet         @s.fit($1)\n*\n* @example        css\n* .my-element {\n*    \\@s.fit(cover);\n* }\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name           fit\n* @as              @s.fit\n* @namespace      node.mixin.fit\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin allows you to apply a certain object-fit on your element\n*\n* @return        {Css}         The generated css\n*\n* @snippet         @s.fit($1)\n*\n* @example        css\n* .my-element {\n*    @s.fit(cover);\n* }\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.fit.fit"
         }
     ]

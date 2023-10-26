@@ -5,11 +5,13 @@
     min-height: 80vh;
 
     @s.media tablet {
-        padding-block: s.padding(60) !important;
+        padding-block: s.padding(50) !important;
         padding-inline: s.padding(50);
+        min-height: 0;
     }
     @s.media mobile {
-        padding-block: s.padding(60) !important;
+        padding-block: s.padding(40) !important;
         padding-inline: s.padding(30);
+        min-height: 0;
     }
 }

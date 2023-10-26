@@ -32,6 +32,12 @@
             "code": "<input type=\"text\" class=\"s-input s-disabled\" placeholder=\"I'm disabled\" />"
         }
     ],
+    "install": [
+        {
+            "language": "css",
+            "code": "@s.disabled.classes;\n\n.my-element {\n  @s.disabled;\n}"
+        }
+    ],
     "since": "2.0.0",
     "author": {
         "name": "Olivier Bossel",
@@ -99,7 +105,7 @@
             "install": [
                 {
                     "language": "css",
-                    "code": "@s.disabled.classes;\n\n.my-element {\n  \\@s.disabled;\n}"
+                    "code": "@s.disabled.classes;\n\n.my-element {\n  @s.disabled;\n}"
                 }
             ],
             "cssClass": {
@@ -121,7 +127,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name          Disabled\n* @namespace          sugar.style.helpers.disabled\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/disabled\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply the disabled style on any HTMLElement.\n* This make sure **no pointer events** stays active as well as displaying the **not-allowed cursor**.\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* \\@s.disabled.classes;\n*\n* .my-element {\n*   \\@s.disabled;\n* }\n*\n* @cssClass                 s-disabled              Apply the disabled styling on any HTMLElement\n*\n* @example        html      Disabled\n* <input type=\"text\" class=\"s-input s-disabled\" placeholder=\"I'm disabled\" />\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name          Disabled\n* @namespace          sugar.style.helpers.disabled\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/disabled\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply the disabled style on any HTMLElement.\n* This make sure **no pointer events** stays active as well as displaying the **not-allowed cursor**.\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* @s.disabled.classes;\n*\n* .my-element {\n*   @s.disabled;\n* }\n*\n* @cssClass                 s-disabled              Apply the disabled styling on any HTMLElement\n*\n* @example        html      Disabled\n* <input type=\"text\" class=\"s-input s-disabled\" placeholder=\"I'm disabled\" />\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.disabled.Disabled"
         }
     ]

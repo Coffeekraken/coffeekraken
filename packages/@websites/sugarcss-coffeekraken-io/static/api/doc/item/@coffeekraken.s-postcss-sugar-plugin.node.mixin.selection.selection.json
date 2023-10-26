@@ -136,7 +136,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name          selection\n* @as          @s.selection\n* @namespace     node.mixin.selection\n* @type          PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin allows you to apply a \"selection\" style to any HTMLElement.\n* This will apply a background and text color to the selected text.\n*\n* - Selection background and text color\n*\n* @param       {String}        layout      The layout to generate\n* @return      {Css}                   The corresponding grid css\n*\n* @snippet         @s.selection($1)\n*\n* @example       css\n* \\@s.selection;\n*\n* @since     2.0.0\n* @author \t                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name          selection\n* @as          @s.selection\n* @namespace     node.mixin.selection\n* @type          PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin allows you to apply a \"selection\" style to any HTMLElement.\n* This will apply a background and text color to the selected text.\n*\n* - Selection background and text color\n*\n* @param       {String}        layout      The layout to generate\n* @return      {Css}                   The corresponding grid css\n*\n* @snippet         @s.selection($1)\n*\n* @example       css\n* @s.selection;\n*\n* @since     2.0.0\n* @author \t                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.selection.selection"
         }
     ]

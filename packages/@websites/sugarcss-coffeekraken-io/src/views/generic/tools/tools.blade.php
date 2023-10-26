@@ -33,7 +33,7 @@
                     <span class="s-tc:accent">Don't hesitate</span> to declare an issue<br />if something does not works<br />as
                     expected.
                 </p>
-                <a class="s-btn s-color:error s-display:block s-mbe:20 s-depth:50"
+                <a class="s-btn s-color:accent s-display:block s-mbe:20 s-depth:50"
                     href="https://github.com/Coffeekraken/coffeekraken/issues" title="Declare my issue on Github"
                     target="_blank">
                     <i class="s-icon:github s-mie:10"></i> Declare an issue on Github
@@ -59,17 +59,17 @@
                 <p class="s-typo:p s-font:30 s-mbe:30">
                     Don't hesitate to tell some words<br />to your friends about us.<br />The goal is to became more and more<br /> each days to help each others...
                 </p>
-                <a href="https://www.patreon.com/coffeekraken" class="s-btn:block s-color:error s-mbe:20"
+                <a href="https://www.patreon.com/coffeekraken" class="s-btn:block s-mbe:20"
                     title="Support us on Patreon" target="_blank">
-                    <i class="s-icon:patreon s-font:50 s-mi:10"></i> Support us on Patreon!
+                    <i class="s-icon:patreon s-mi:10"></i> Support us on Patreon!
                 </a>
                 <a href="https://www.facebook.com/sharer/sharer.php?u=https://coffeekraken.io"
                     class="s-btn:block s-color:accent s-mbe:20" title="Share the love on facebook" target="_blank">
-                    <i class="s-icon:facebook s-font:50 s-mi:10"></i> Share on Facebook!
+                    <i class="s-icon:facebook s-mi:10"></i> Share on Facebook!
                 </a>
                 <a href="https://twitter.com/intent/tweet?url=https://coffeekraken.io"
                     class="s-btn:block s-color:complementary" title="Share the love on twitter" target="_blank">
-                    <i class="s-icon:twitter s-font:50 s-mi:10"></i> Make a tweet!
+                    <i class="s-icon:twitter s-mi:10"></i> Make a tweet!
                 </a>
                 {{-- <a href="#ratings"
                     class="s-btn:block s-color:main" title="Give us a note!" target="_blank">

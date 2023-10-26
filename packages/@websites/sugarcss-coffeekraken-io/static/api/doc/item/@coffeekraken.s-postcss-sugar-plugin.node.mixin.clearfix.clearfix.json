@@ -106,7 +106,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name           clearfix\n* @as              @s.clearfix\n* @namespace      node.mixin.clearfix\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin allows you to apply a clearfix depending on your preference. Here's are the clearfix methods available:\n* - overflow (default)\n* - facebook\n* - float\n* - micro\n* - after\n*\n* @return        {Css}         The generated css\n*\n* @snippet         @s.clearfix($1)\n*\n* @example        css\n* .my-element {\n*    \\@s.clearfix();\n* }\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name           clearfix\n* @as              @s.clearfix\n* @namespace      node.mixin.clearfix\n* @type           PostcssMixin\n* @platform      postcss\n* @status        stable\n*\n* This mixin allows you to apply a clearfix depending on your preference. Here's are the clearfix methods available:\n* - overflow (default)\n* - facebook\n* - float\n* - micro\n* - after\n*\n* @return        {Css}         The generated css\n*\n* @snippet         @s.clearfix($1)\n*\n* @example        css\n* .my-element {\n*    @s.clearfix();\n* }\n*\n* @since       2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.clearfix.clearfix"
         }
     ]

@@ -1,0 +1,179 @@
+{
+    "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.radio.Radio",
+    "name": "Radio",
+    "type": {
+        "types": [
+            {
+                "type": "Styleguide"
+            }
+        ],
+        "raw": "Styleguide"
+    },
+    "menu": {
+        "tree": [
+            "Styleguide",
+            "Forms"
+        ],
+        "slug": "/styleguide/forms/radio"
+    },
+    "platform": [
+        {
+            "name": "css",
+            "description": ""
+        }
+    ],
+    "description": "These classes allows you to display nice radio in your forms",
+    "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.radio",
+    "status": "stable",
+    "example": [
+        {
+            "language": "html",
+            "title": "solid lnf",
+            "code": "<label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"radio\" checked class=\"s-radio\" name=\"radio-lnf-solid\" value=\"hello 1\" checked />\n  </label>\n  <label class=\"s-mbe:30 s-label\">\n    <span>I'm disabled</span>\n    <input type=\"radio\" disabled class=\"s-radio\" name=\"radio-lnf-solid\" value=\"hello 3\" />\n  </label>"
+        },
+        {
+            "language": "html",
+            "title": "Shapes",
+            "code": "<label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"radio\" checked class=\"s-radio s-shape:default\" name=\"radio-style-color\" value=\"hello 1\" checked />\n</label>\n<label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"radio\" checked class=\"s-radio s-shape:square\" name=\"radio-style-color\" value=\"hello 1\" checked />\n</label>\n<label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"radio\" checked class=\"s-radio s-shape:pill\" name=\"radio-style-color\" value=\"hello 1\" checked />\n</label>"
+        },
+        {
+            "language": "html",
+            "title": "Colors (none-exhaustive)",
+            "code": "<label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"radio\" checked class=\"s-radio\" name=\"radio-style-color\" value=\"hello 1\" checked />\n  </label>\n  <label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"radio\" class=\"s-radio s-color:accent\" name=\"radio-style-color\" value=\"hello 2\" />\n  </label>\n  <label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"radio\" class=\"s-radio s-color:complementary\" name=\"radio-style-color\" value=\"hello 3\" />\n  </label>\n  <label class=\"s-mbe:30 s-label\">\n    <span>I'm disabled</span>\n    <input type=\"radio\" disabled class=\"s-radio s-color:error\" name=\"radio-style-color\" value=\"hello 4\" />\n  </label>"
+        },
+        {
+            "language": "html",
+            "title": "RTL",
+            "code": "<div dir=\"rtl\">\n  <label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"radio\" checked class=\"s-radio s-color:accent\" name=\"radio-style-ltr\" value=\"hello 1\" checked />\n  </label>\n</div>"
+        },
+        {
+            "language": "html",
+            "title": "Scales",
+            "code": "<label class=\"s-mbe:30 s-label s-scale:07\">\n    <span>John Doe</span>\n    <input type=\"radio\" checked class=\"s-radio s-color:accent\" name=\"radio-style-scale\" value=\"hello 1\" checked />\n  </label>\n  <label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"radio\" class=\"s-radio s-color:accent\" name=\"radio-style-scale\" value=\"hello 2\" />\n  </label>\n  <label class=\"s-mbe:30 s-label s-scale:20\">\n    <span>John Doe</span>\n    <input type=\"radio\" class=\"s-radio s-color:accent\" name=\"radio-style-scale\" value=\"hello 3\" />\n  </label>\n  <label class=\"s-mbe:30 s-label s-scale:30\">\n    <span>John Doe</span>\n    <input type=\"radio\" class=\"s-radio s-color:accent\" name=\"radio-style-scale\" value=\"hello 3\" />\n  </label>"
+        }
+    ],
+    "install": [
+        {
+            "language": "css",
+            "code": "@s.ui.radio.classes;\n\n.my-radio {\n  @s.ui.radio;\n}"
+        }
+    ],
+    "since": "2.0.0",
+    "author": {
+        "name": "Olivier Bossel",
+        "email": "olivier.bossel@gmail.com",
+        "url": "https://coffeekraken.io"
+    },
+    "filename": "index.dev.css",
+    "extension": "dev",
+    "relPath": "dist/css/index.dev.css",
+    "isDependency": false,
+    "package": {
+        "name": "@website/sugarcss-coffeekraken-io",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "version": "2.0.0-beta.1",
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+        "license": "MIT",
+        "type": "npm"
+    },
+    "path": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/sugarcss-coffeekraken-io/dist/css/index.dev.css",
+    "docblocks": [
+        {
+            "name": "Radio",
+            "namespace": "@website.sugarcss-coffeekraken-io.sugar.style.ui.radio",
+            "type": {
+                "types": [
+                    {
+                        "type": "Styleguide"
+                    }
+                ],
+                "raw": "Styleguide"
+            },
+            "menu": {
+                "tree": [
+                    "Styleguide",
+                    "Forms"
+                ],
+                "slug": "/styleguide/forms/radio"
+            },
+            "platform": [
+                {
+                    "name": "css",
+                    "description": ""
+                }
+            ],
+            "status": "stable",
+            "description": "These classes allows you to display nice radio in your forms",
+            "feature": [
+                "Support for shaping through the `s-shape:...` class",
+                "Support for scaling through the `s-scale:...` class",
+                "Support for colorizing through the `s-color:...` class"
+            ],
+            "support": [
+                {
+                    "name": "chromium",
+                    "description": ""
+                },
+                {
+                    "name": "firefox",
+                    "description": ""
+                },
+                {
+                    "name": "safari",
+                    "description": ""
+                },
+                {
+                    "name": "edge",
+                    "description": ""
+                }
+            ],
+            "install": [
+                {
+                    "language": "css",
+                    "code": "@s.ui.radio.classes;\n\n.my-radio {\n  @s.ui.radio;\n}"
+                }
+            ],
+            "cssClass": {
+                "s-radio": {
+                    "name": "s-radio",
+                    "description": "Apply the solid radio lnf"
+                }
+            },
+            "example": [
+                {
+                    "language": "html",
+                    "title": "solid lnf",
+                    "code": "<label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"radio\" checked class=\"s-radio\" name=\"radio-lnf-solid\" value=\"hello 1\" checked />\n  </label>\n  <label class=\"s-mbe:30 s-label\">\n    <span>I'm disabled</span>\n    <input type=\"radio\" disabled class=\"s-radio\" name=\"radio-lnf-solid\" value=\"hello 3\" />\n  </label>"
+                },
+                {
+                    "language": "html",
+                    "title": "Shapes",
+                    "code": "<label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"radio\" checked class=\"s-radio s-shape:default\" name=\"radio-style-color\" value=\"hello 1\" checked />\n</label>\n<label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"radio\" checked class=\"s-radio s-shape:square\" name=\"radio-style-color\" value=\"hello 1\" checked />\n</label>\n<label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"radio\" checked class=\"s-radio s-shape:pill\" name=\"radio-style-color\" value=\"hello 1\" checked />\n</label>"
+                },
+                {
+                    "language": "html",
+                    "title": "Colors (none-exhaustive)",
+                    "code": "<label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"radio\" checked class=\"s-radio\" name=\"radio-style-color\" value=\"hello 1\" checked />\n  </label>\n  <label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"radio\" class=\"s-radio s-color:accent\" name=\"radio-style-color\" value=\"hello 2\" />\n  </label>\n  <label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"radio\" class=\"s-radio s-color:complementary\" name=\"radio-style-color\" value=\"hello 3\" />\n  </label>\n  <label class=\"s-mbe:30 s-label\">\n    <span>I'm disabled</span>\n    <input type=\"radio\" disabled class=\"s-radio s-color:error\" name=\"radio-style-color\" value=\"hello 4\" />\n  </label>"
+                },
+                {
+                    "language": "html",
+                    "title": "RTL",
+                    "code": "<div dir=\"rtl\">\n  <label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"radio\" checked class=\"s-radio s-color:accent\" name=\"radio-style-ltr\" value=\"hello 1\" checked />\n  </label>\n</div>"
+                },
+                {
+                    "language": "html",
+                    "title": "Scales",
+                    "code": "<label class=\"s-mbe:30 s-label s-scale:07\">\n    <span>John Doe</span>\n    <input type=\"radio\" checked class=\"s-radio s-color:accent\" name=\"radio-style-scale\" value=\"hello 1\" checked />\n  </label>\n  <label class=\"s-mbe:30 s-label\">\n    <span>John Doe</span>\n    <input type=\"radio\" class=\"s-radio s-color:accent\" name=\"radio-style-scale\" value=\"hello 2\" />\n  </label>\n  <label class=\"s-mbe:30 s-label s-scale:20\">\n    <span>John Doe</span>\n    <input type=\"radio\" class=\"s-radio s-color:accent\" name=\"radio-style-scale\" value=\"hello 3\" />\n  </label>\n  <label class=\"s-mbe:30 s-label s-scale:30\">\n    <span>John Doe</span>\n    <input type=\"radio\" class=\"s-radio s-color:accent\" name=\"radio-style-scale\" value=\"hello 3\" />\n  </label>"
+                }
+            ],
+            "since": "2.0.0",
+            "author": {
+                "name": "Olivier Bossel",
+                "email": "olivier.bossel@gmail.com",
+                "url": "https://coffeekraken.io"
+            },
+            "raw": "/**\n*\n* @name          Radio\n* @namespace          sugar.style.ui.radio\n* @type               Styleguide\n* @menu           Styleguide / Forms        /styleguide/forms/radio\n* @platform       css\n* @status       stable\n*\n* These classes allows you to display nice radio in your forms\n*\n* @feature          Support for shaping through the `s-shape:...` class\n* @feature          Support for scaling through the `s-scale:...` class\n* @feature          Support for colorizing through the `s-color:...` class\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* @s.ui.radio.classes;\n*\n* .my-radio {\n*   @s.ui.radio;\n* }\n*\n* @cssClass     s-radio           Apply the solid radio lnf\n*\n* @example        html       solid lnf\n*   <label class=\"s-mbe:30 s-label\">\n*     <span>John Doe</span>\n*     <input type=\"radio\" checked class=\"s-radio\" name=\"radio-lnf-solid\" value=\"hello 1\" checked />\n*   </label>\n*   <label class=\"s-mbe:30 s-label\">\n*     <span>I'm disabled</span>\n*     <input type=\"radio\" disabled class=\"s-radio\" name=\"radio-lnf-solid\" value=\"hello 3\" />\n*   </label>\n*\n*\n* @example        html          Shapes\n*   <label class=\"s-mbe:30 s-label\">\n*     <span>John Doe</span>\n*     <input type=\"radio\" checked class=\"s-radio s-shape:default\" name=\"radio-style-color\" value=\"hello 1\" checked />\n* </label>\n* <label class=\"s-mbe:30 s-label\">\n*     <span>John Doe</span>\n*     <input type=\"radio\" checked class=\"s-radio s-shape:square\" name=\"radio-style-color\" value=\"hello 1\" checked />\n* </label>\n* <label class=\"s-mbe:30 s-label\">\n*     <span>John Doe</span>\n*     <input type=\"radio\" checked class=\"s-radio s-shape:pill\" name=\"radio-style-color\" value=\"hello 1\" checked />\n* </label>\n*\n* @example        html          Colors (none-exhaustive)\n*   <label class=\"s-mbe:30 s-label\">\n*     <span>John Doe</span>\n*     <input type=\"radio\" checked class=\"s-radio\" name=\"radio-style-color\" value=\"hello 1\" checked />\n*   </label>\n*   <label class=\"s-mbe:30 s-label\">\n*     <span>John Doe</span>\n*     <input type=\"radio\" class=\"s-radio s-color:accent\" name=\"radio-style-color\" value=\"hello 2\" />\n*   </label>\n*   <label class=\"s-mbe:30 s-label\">\n*     <span>John Doe</span>\n*     <input type=\"radio\" class=\"s-radio s-color:complementary\" name=\"radio-style-color\" value=\"hello 3\" />\n*   </label>\n*   <label class=\"s-mbe:30 s-label\">\n*     <span>I'm disabled</span>\n*     <input type=\"radio\" disabled class=\"s-radio s-color:error\" name=\"radio-style-color\" value=\"hello 4\" />\n*   </label>\n*\n* @example        html          RTL\n* <div dir=\"rtl\">\n*   <label class=\"s-mbe:30 s-label\">\n*     <span>John Doe</span>\n*     <input type=\"radio\" checked class=\"s-radio s-color:accent\" name=\"radio-style-ltr\" value=\"hello 1\" checked />\n*   </label>\n* </div>\n*\n* @example        html          Scales\n*   <label class=\"s-mbe:30 s-label s-scale:07\">\n*     <span>John Doe</span>\n*     <input type=\"radio\" checked class=\"s-radio s-color:accent\" name=\"radio-style-scale\" value=\"hello 1\" checked />\n*   </label>\n*   <label class=\"s-mbe:30 s-label\">\n*     <span>John Doe</span>\n*     <input type=\"radio\" class=\"s-radio s-color:accent\" name=\"radio-style-scale\" value=\"hello 2\" />\n*   </label>\n*   <label class=\"s-mbe:30 s-label s-scale:20\">\n*     <span>John Doe</span>\n*     <input type=\"radio\" class=\"s-radio s-color:accent\" name=\"radio-style-scale\" value=\"hello 3\" />\n*   </label>\n*   <label class=\"s-mbe:30 s-label s-scale:30\">\n*     <span>John Doe</span>\n*     <input type=\"radio\" class=\"s-radio s-color:accent\" name=\"radio-style-scale\" value=\"hello 3\" />\n*   </label>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.radio.Radio"
+        }
+    ]
+}

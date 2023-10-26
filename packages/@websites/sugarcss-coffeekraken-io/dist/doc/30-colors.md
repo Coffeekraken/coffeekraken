@@ -28,9 +28,9 @@ By default, the colors that are defined are these ones:
 ```js
 export default {
   current: '#808080',
-  main: '#808080',
-  accent: '#ffbb00',
-  complementary: '#8054F9',
+  main: '#818898',
+  accent: '#F7C33F',
+  complementary: '#F9656E',
   success: '#91ff00',
   warning: '#ffd500',
   error: '#ff003b',

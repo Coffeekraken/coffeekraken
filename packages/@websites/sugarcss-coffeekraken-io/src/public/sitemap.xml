@@ -64,7 +64,28 @@
 <loc>http://localhost:9191/api/doc/item/@website.sugarcss-coffeekraken-io.sugar.style.ui.avatar.Avatar</loc>
   </url>
   <url>
+<loc>http://localhost:9191/api/doc/item/@website.sugarcss-coffeekraken-io.sugar.style.ui.checkbox.Checkbox</loc>
+  </url>
+  <url>
+<loc>http://localhost:9191/api/doc/item/@website.sugarcss-coffeekraken-io.sugar.style.ui.input.Input</loc>
+  </url>
+  <url>
+<loc>http://localhost:9191/api/doc/item/@website.sugarcss-coffeekraken-io.sugar.style.ui.label.Label</loc>
+  </url>
+  <url>
 <loc>http://localhost:9191/api/doc/item/@website.sugarcss-coffeekraken-io.sugar.style.ui.list.List</loc>
+  </url>
+  <url>
+<loc>http://localhost:9191/api/doc/item/@website.sugarcss-coffeekraken-io.sugar.style.ui.radio.Radio</loc>
+  </url>
+  <url>
+<loc>http://localhost:9191/api/doc/item/@website.sugarcss-coffeekraken-io.sugar.style.ui.range.Range</loc>
+  </url>
+  <url>
+<loc>http://localhost:9191/api/doc/item/@website.sugarcss-coffeekraken-io.sugar.style.ui.select.Select</loc>
+  </url>
+  <url>
+<loc>http://localhost:9191/api/doc/item/@website.sugarcss-coffeekraken-io.sugar.style.ui.switch.Switch</loc>
   </url>
   <url>
 <loc>http://localhost:9191/api/doc/items/eyJ0eXBlIjoiU3R5bGVndWlkZSIsImlkIjoiLy4qLnN1Z2FyLnN0eWxlLmhlbHBlcnMuKi8ifQ==</loc>

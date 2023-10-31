@@ -110,18 +110,5 @@ export default function ({
         `);
     }
 
-    // wireframe
-    vars.push(`
-        @s.wireframe {
-            @s.wireframe.background;
-            @s.wireframe.border;
-
-            > tr:nth-child(even),
-            > tbody > tr:nth-child(even) {
-                @s.wireframe.surface;
-            }
-        }
-    `);
-
     return vars;
 }

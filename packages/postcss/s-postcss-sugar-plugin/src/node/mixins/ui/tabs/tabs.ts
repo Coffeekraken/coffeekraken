@@ -260,22 +260,5 @@ export default function ({
         }
     }
 
-    // wireframe
-    vars.push(`
-      & > * {
-        @s.wireframe {
-          @s.wireframe.border;
-          @s.wireframe.background;
-        }
-
-        &.active {
-          @s.wireframe {
-            @s.wireframe.surface;
-          }
-        }
-
-      }
-    `);
-
     return vars;
 }

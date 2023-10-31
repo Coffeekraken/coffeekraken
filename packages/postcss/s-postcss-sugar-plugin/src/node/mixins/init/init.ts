@@ -59,7 +59,6 @@ export default function ({
 
     const cssArray = [
         '@s.reset;',
-        `@s.theme.apply(${finalParams.variant}, ${finalParams.theme});`,
         '@s.font.faces;',
         '@s.selection;',
         `body { @s.color(main); }`,

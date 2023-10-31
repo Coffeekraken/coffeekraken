@@ -141,7 +141,6 @@ export default class SConfigAdapter {
         // calling the "onUpdate" setting callback if exists
         clearTimeout(this._updateTimeout);
         this._updateTimeout = setTimeout(() => {
-            console.log('UPDATE');
             this.settings.onUpdate?.();
         }, 1000);
     }

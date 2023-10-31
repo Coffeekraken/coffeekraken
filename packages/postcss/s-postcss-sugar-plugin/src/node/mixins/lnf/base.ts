@@ -56,16 +56,7 @@ export default function ({
         @s.font.family(default);
         @s.font.size(default);
         @s.shape(default);
-        --s-scale: s.theme(scale.default);
-
-        @s.wireframe {
-            color: rgba(0, 0, 0, 0.5);
-            @s.wireframe.background;
-
-            @s.theme dark {
-                color: rgba(255, 255, 255, 0.7);
-            }
-        }       
+        --s-scale: s.theme(scale.default);    
 
   `;
 

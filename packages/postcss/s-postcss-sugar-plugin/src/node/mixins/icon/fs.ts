@@ -46,11 +46,16 @@ export default function ({
 
     if (!sharedData.icons) {
         sharedData.icons = [];
-    }
+    
 
     let as = finalParams.as;
     if (!as) {
         as = __fileName(iconPath.split('.').slice(0, -1).join('.'));
+    }
+
+    const existingIcon = sharedData.icons.find((icon) => icon.as === as);
+    if (existingIcon) {
+        return;
     }
 
     // reading the icon file

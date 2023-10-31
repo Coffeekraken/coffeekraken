@@ -56,10 +56,12 @@ export default function ({
     params,
     atRule,
     replaceWith,
+    frontData,
 }: {
     params: Partial<IPostcssSugarPluginThemeParams>;
     atRule: any;
     replaceWith: Function;
+    frontData: any;
 }) {
     const finalParams: IPostcssSugarPluginThemeParams = {
         variant: undefined,
@@ -67,6 +69,35 @@ export default function ({
         scope: true,
         ...params,
     };
+
+    if (!finalParams.theme) {
+        finalParams.theme = frontData.theme?.theme ?? 'default';
+    }
+    if (!finalParams.variant) {
+        finalParams.variant = frontData.theme?.variant ?? 'light';
+    }
+
+    if (!frontData.theme) {
+        frontData.theme = {};
+    }
+    if (!frontData.theme?.themes) {
+        frontData.theme.themes = [];
+    }
+    const currentTheme = frontData.theme.themes.find((t) => {
+        return (
+            t.theme === finalParams.theme && t.variant === finalParams.variant
+        );
+    });
+    if (!currentTheme) {
+        frontData.theme.themes.push({
+            theme: finalParams.theme,
+            variant: finalParams.variant,
+        });
+    }
+
+    console.log(
+        `<yellow>[@s.theme.import]</yellow> Theme imported : <magenta>${finalParams.theme}-${finalParams.variant}</magenta>`,
+    );
 
     const vars = __STheme.toCssVars({
         theme: finalParams.theme,

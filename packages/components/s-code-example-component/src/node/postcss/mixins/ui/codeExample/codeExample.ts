@@ -132,16 +132,6 @@ export default function ({
         `);
     }
 
-    // wireframe
-    vars.push(`
-        .s-code-example_content {
-            @s.wireframe {
-                @s.wireframe.background;
-                @s.wireframe.border;    
-            }
-        }
-    `);
-
     if (finalParams.scope.includes('theme')) {
         vars.push(`
             @s.highlightjs.theme;

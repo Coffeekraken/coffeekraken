@@ -283,8 +283,6 @@ export default class SConfig {
 
         const duration = new __SDuration();
 
-        console.log('LOAD');
-
         const finalSettings: ISConfigLoadSettings = {
             isUpdate: false,
             clean: false,
@@ -363,6 +361,7 @@ export default class SConfig {
                             const themeId = `${this.config.theme.theme}-${this.config.theme.variant}`;
                             return this.config.theme.themes[themeId];
                         },
+                        extends: __deepMerge,
                     });
             }
         }
@@ -391,6 +390,7 @@ export default class SConfig {
                             const themeId = `${this.config.theme.theme}-${this.config.theme.variant}`;
                             return this.config.theme.themes[themeId];
                         },
+                        extends: __deepMerge,
                     });
             }
         }
@@ -502,8 +502,6 @@ export default class SConfig {
                 const { __packageRootDir } = await import(
                     '@coffeekraken/sugar/path'
                 );
-
-                // console.log('CACHE', this.integrity);
 
                 const folderPath = `${__packageRootDir()}/.local/cache/config`;
                 __fs.mkdirSync(folderPath, { recursive: true });

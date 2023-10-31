@@ -314,15 +314,5 @@ export default function ({
         }
     }
 
-    // wireframe
-    vars.push(`
-        .s-datetime-picker_picker {
-            @s.wireframe {
-                @s.wireframe.background;
-                @s.wireframe.border;
-            }
-        }
-    `);
-
     return vars;
 }

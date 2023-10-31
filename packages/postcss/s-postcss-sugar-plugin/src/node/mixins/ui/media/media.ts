@@ -63,13 +63,6 @@ export default function ({
 
     // bare
     if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
-            @s.wireframe {
-                opacity: 0;
-                pointer-events: none;
-                width: 100%;
-            }
-        `);
     }
 
     // lnf

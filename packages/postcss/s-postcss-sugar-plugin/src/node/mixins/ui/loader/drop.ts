@@ -111,15 +111,5 @@ export default function ({
     }
   `);
 
-    // wireframe
-    vars.push(`
-        @s.wireframe {
-            &:before,
-            &:after {
-                border-color: rgba(0,0,0,.5);
-            }
-        }
-    `);
-
     return vars;
 }

@@ -1205,10 +1205,6 @@ export default class SThemeBase extends __SEventEmitter {
         themeInstance.loopOnColors((colorObj) => {
             const baseVariable = colorObj.value.variable;
 
-            if (colorObj.name === 'accent') {
-                console.log('Color', colorObj);
-            }
-
             if (!colorObj.shade && colorObj.value.color) {
                 vars.push(`${baseVariable}-h: ${colorObj.value.h};`);
                 vars.push(`${baseVariable}-s: ${colorObj.value.s};`);
@@ -1492,6 +1488,7 @@ export default class SThemeBase extends __SEventEmitter {
                 this._overridedConfig,
             ),
         );
+
         return this._cachedConfig;
     }
     get(dotPath, settings: Partial<ISThemeGetSettings> = {}): any {

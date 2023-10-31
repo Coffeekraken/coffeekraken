@@ -1,3 +1,4 @@
+import __SSugarJson from '@coffeekraken/s-sugar-json';
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
@@ -33,9 +34,11 @@ class postcssSugarPluginThemeinInterface extends __SInterface {
         return {
             variant: {
                 type: 'String',
+                default: 'light',
             },
             theme: {
                 type: 'String',
+                default: 'default',
             },
             scope: {
                 type: 'Boolean',
@@ -56,10 +59,12 @@ export default function ({
     params,
     atRule,
     replaceWith,
+    frontData,
 }: {
     params: Partial<IPostcssSugarPluginThemeParams>;
     atRule: any;
     replaceWith: Function;
+    frontData: any;
 }) {
     const finalParams: IPostcssSugarPluginThemeParams = {
         variant: undefined,
@@ -67,6 +72,49 @@ export default function ({
         scope: false,
         ...params,
     };
+
+    // setting theme from sugar.json
+    const sugarJsonInstance = new __SSugarJson();
+    const sugarJson = sugarJsonInstance.current();
+    if (!finalParams.theme && sugarJson.theme?.theme) {
+        finalParams.theme = sugarJson.theme.theme;
+        console.log(
+            `<yellow>[@s.theme.apply]</yellow> Theme "<magenta>${sugarJson.theme.theme}</magenta>" applied from the <cyan>sugar.json</cyan> file...`,
+        );
+    }
+    if (!finalParams.variant && sugarJson.theme?.variant) {
+        finalParams.variant = sugarJson.theme.variant;
+        console.log(
+            `<yellow>[@s.theme.apply]</yellow> Theme variant "<magenta>${sugarJson.theme.variant}</magenta>" applied from the <cyan>sugar.json</cyan> file...`,
+        );
+    }
+
+    console.log(
+        `<yellow>[@s.theme.apply]</yellow>  Theme applied  : <magenta>${finalParams.theme}-${finalParams.variant}</magenta>`,
+    );
+
+    if (!frontData.theme) {
+        frontData.theme = {};
+    }
+    if (!frontData.theme?.themes) {
+        frontData.theme.themes = [];
+    }
+    frontData.theme.theme = finalParams.theme;
+    frontData.theme.variant = finalParams.variant;
+    const currentTheme = frontData.theme.themes.find((t) => {
+        return (
+            t.theme === finalParams.theme && t.variant === finalParams.variant
+        );
+    });
+    if (!currentTheme) {
+        frontData.theme.themes.push({
+            theme: finalParams.theme,
+            variant: finalParams.variant,
+        });
+        if (atRule.parent.type === 'root') {
+            frontData.theme.themes.at(-1).default = true;
+        }
+    }
 
     const vars = __STheme.toCssVars({
         theme: finalParams.theme,

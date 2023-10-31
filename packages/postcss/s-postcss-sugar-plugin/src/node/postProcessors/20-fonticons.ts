@@ -77,6 +77,8 @@ export default async function ({ root, sharedData, settings }) {
     __ensureDirSync(inputDir);
     __ensureDirSync(fantasticonConfig.outputDir);
 
+    console.log('ICON', sharedData.icons);
+
     // copy icons inside folder
     sharedData.icons.forEach((iconObj) => {
         __fs.copyFileSync(

@@ -96,13 +96,5 @@ export default function ({
     }
   `);
 
-    // wireframe
-    vars.push(`
-        @s.wireframe {
-            border-color: rgba(0,0,0,.5);
-            border-bottom-color: rgba(0, 0, 0, 0);
-        }
-    `);
-
     return vars;
 }

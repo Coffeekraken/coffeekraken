@@ -14,6 +14,8 @@ import { __replaceTokens } from '@coffeekraken/sugar/token';
 import __fs from 'fs';
 import __path from 'path';
 
+import { __wait } from '@coffeekraken/sugar/datetime';
+
 import { __pool } from '@coffeekraken/sugar/fs';
 
 import { __hashFromSync } from '@coffeekraken/sugar/hash';
@@ -240,7 +242,7 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                             const themeId = `${configObj.theme.theme}-${configObj.theme.variant}`;
                             return configObj.theme.themes[themeId];
                         },
-                        extends: __merge,
+                        extends: __deepMerge,
                     });
                 }
 
@@ -254,17 +256,6 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                 );
 
                 if (
-                    importedConfig.postprocess &&
-                    typeof importedConfig.postprocess === 'function'
-                ) {
-                    __SConfig.registerPostprocess(
-                        this.name,
-                        configKey,
-                        importedConfig.postprocess,
-                    );
-                }
-
-                if (
                     importedConfig.preprocess &&
                     typeof importedConfig.preprocess === 'function'
                 ) {
@@ -272,6 +263,17 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                         this.name,
                         configKey,
                         importedConfig.preprocess,
+                    );
+                }
+
+                if (
+                    importedConfig.postprocess &&
+                    typeof importedConfig.postprocess === 'function'
+                ) {
+                    __SConfig.registerPostprocess(
+                        this.name,
+                        configKey,
+                        importedConfig.postprocess,
                     );
                 }
             }

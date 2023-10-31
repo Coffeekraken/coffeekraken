@@ -597,9 +597,6 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                 );
             }
 
-            // end the bench
-            // bench.end();
-
             // mark the plugin as not pristine anymore... slut... :)
             sharedData.isPristine = false;
         },

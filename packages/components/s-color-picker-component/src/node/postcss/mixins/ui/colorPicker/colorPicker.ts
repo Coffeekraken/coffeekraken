@@ -368,15 +368,5 @@ export default function ({
         `);
     }
 
-    // wireframe
-    vars.push(`
-        .s-color-picker_picker {
-            @s.wireframe {
-                @s.wireframe.background;
-                @s.wireframe.border;
-            }
-        }
-    `);
-
     return vars;
 }

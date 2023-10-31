@@ -153,14 +153,6 @@ export default function ({
         ).code(
             `
           .s-media-container {
-
-            @s.wireframe {
-                @s.wireframe.image;
-        
-                &:has(.s-media-map) {
-                    @s.wireframe.image(map);
-                }
-            }
           }
       `,
             { type: 'CssClass' },

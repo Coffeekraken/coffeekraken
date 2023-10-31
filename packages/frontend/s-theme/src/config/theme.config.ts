@@ -16,11 +16,11 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
  */
 
 export function preprocess(api) {
-    console.log('PRE');
     // setting theme from sugar.json
     const sugarJsonInstance = new __SSugarJson();
     const sugarJson = sugarJsonInstance.current();
 
+    // theme from sugar.json
     if (sugarJson.theme) api.this.theme = sugarJson.theme;
     if (sugarJson.variant) api.this.variant = sugarJson.variant;
 
@@ -30,10 +30,10 @@ export function preprocess(api) {
         if (configObj.themeName && configObj.variants && configObj.metas) {
             Object.keys(configObj.variants).forEach((variantName) => {
                 const themeId = `${configObj.themeName}-${variantName}`;
-                if (!api.this.themes[themeId]) {
-                    api.this.themes[themeId] =
-                        api.config[configId].variants[variantName];
-                }
+                api.this.themes[themeId] = __deepMerge(
+                    api.this.themes[themeId] || {},
+                    api.config[configId].variants[variantName],
+                );
             });
         }
     });
@@ -42,7 +42,6 @@ export function preprocess(api) {
 }
 
 export function postprocess(api) {
-    console.log('POST');
     for (let [key, value] of Object.entries(api.config)) {
         if (value.themeName && value.metas) {
             for (let [themeName, themeObj] of Object.entries(api.this.themes)) {

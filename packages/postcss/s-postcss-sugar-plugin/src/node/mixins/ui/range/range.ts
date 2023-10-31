@@ -267,46 +267,5 @@ export default function ({
         }
     }
 
-    // wireframe
-    vars.push(`
-        @s.wireframe {
-            &::-webkit-slider-runnable-track {
-                @s.wireframe.background;
-                @s.wireframe.border;
-            }
-            &::-moz-range-track {
-                @s.wireframe.background;
-                @s.wireframe.border;
-            }
-            &::-ms-track {
-                @s.wireframe.background;
-                @s.wireframe.border;
-            }
-
-            &::-ms-fill-lower {
-                @s.wireframe.background;
-                @s.wireframe.border;
-            }
-
-            &::-ms-fill-upper {
-                @s.wireframe.background;
-                @s.wireframe.border;
-            }
-
-            &::-webkit-slider-thumb {
-                @s.wireframe.background;
-                @s.wireframe.border;
-            }
-            &::-moz-range-thumb {
-                @s.wireframe.background;
-                @s.wireframe.border;
-            }
-            &::-ms-thumb {
-                @s.wireframe.background;
-                @s.wireframe.border;
-            }
-        }
-    `);
-
     return vars;
 }

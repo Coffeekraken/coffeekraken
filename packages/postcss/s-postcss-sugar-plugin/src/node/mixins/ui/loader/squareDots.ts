@@ -113,26 +113,5 @@ export default function ({
     }
   `);
 
-    // wireframe
-    vars.push(`
-   @s.wireframe {
-       color: rgba(0,0,0,.5);
-       
-       &:before,
-       &:after {
-        color: rgba(0,0,0,.5);
-       }
-
-       @s.theme dark {
-            color: rgba(255,255,255,.5);
-        
-        &:before,
-        &:after {
-            color: rgba(255,255,255,.5);
-        }
-       }
-   }
-`);
-
     return vars;
 }

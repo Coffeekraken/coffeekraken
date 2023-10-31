@@ -195,13 +195,5 @@ export default function ({
         }
     }
 
-    // wireframe
-    vars.push(`
-        @s.wireframe {
-            @s.wireframe.background;
-            @s.wireframe.border;
-        }
-    `);
-
     return vars;
 }

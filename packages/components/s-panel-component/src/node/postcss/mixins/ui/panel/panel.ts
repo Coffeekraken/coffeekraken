@@ -94,22 +94,5 @@ export default function ({
         `);
     }
 
-    // wireframe
-    vars.push(`
-        @s.wireframe {
-            .s-panel_container {
-                    @s.wireframe.background;
-                    @s.wireframe.border;
-                }
-            .s-panel_backdrop {
-                background: s.color(s.wireframe.background(light), --alpha 0.7);
-
-                @s.theme dark {
-                    background: s.color(s.wireframe.background(dark), --alpha 0.7);
-                }
-            }
-        }
-    `);
-
     return vars;
 }

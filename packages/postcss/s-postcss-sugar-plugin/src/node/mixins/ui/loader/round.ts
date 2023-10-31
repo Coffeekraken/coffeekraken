@@ -99,12 +99,5 @@ export default function ({
     }
   `);
 
-    // wireframe
-    vars.push(`
-        @s.wireframe {
-           background: rgba(0,0,0,.5);
-        }
-    `);
-
     return vars;
 }

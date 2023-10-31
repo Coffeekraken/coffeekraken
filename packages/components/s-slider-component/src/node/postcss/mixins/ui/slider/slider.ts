@@ -132,54 +132,5 @@ export default function ({
         `);
     }
 
-    // wireframe
-    vars.push(`
-        @s.wireframe {
-            @s.wireframe.background;
-
-            > .s-slider_root > .s-slider_slides-wrapper:after {
-                content: '';
-                display: block;
-                position: absolute;
-                top: 0; left: 0;
-                width: 100%; height: 100%;
-                pointer-events: none;
-                @s.wireframe.border;
-            }
-
-            > .s-slider_root {
-                > .s-slider_ui {
-                    > .s-slider_nav {
-                        > * {
-                            background: rgba(0,0,0,.3);
-                        }
-                    }
-                }
-            }
-
-            > .s-slider_root > .s-slider_ui > .s-slider_progress {
-                &:before {
-                    background: rgba(0,0,0,.05);
-                }
-                > .s-slider_progress-bar {
-                    background: rgba(0,0,0,.1);
-                }
-            }
-
-            > .s-slider_root > .s-slider_ui > .s-slider_controls .s-slider_controls-next-arrow,
-            > .s-slider_root > .s-slider_ui > .s-slider_controls .s-slider_controls-previous-arrow {
-                &:before,
-                &:after {
-                    background: rgba(0,0,0,.3);
-                }
-            }
-
-            .s-media-container:after {
-                display: none;
-            }
-
-        }
-    `);
-
     return vars;
 }

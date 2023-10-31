@@ -106,25 +106,5 @@ export default function ({
         }
   `);
 
-    // wireframe
-    vars.push(`
-        @s.wireframe {
-            &::-webkit-scrollbar-track {
-                background-color: rgba(0,0,0,0.05);
-                
-                @s.theme dark {
-                    background-color: rgba(255,255,255,0.05);
-                }
-            }
-            &::-webkit-scrollbar-thumb {
-                background-color: rgba(0,0,0,0.1);
-                
-                @s.theme dark {
-                    background-color: rgba(255,255,255,0.1);
-                }
-            }
-        }
-    `);
-
     return vars;
 }

@@ -2,12 +2,12 @@
 font-display: swap;
 
     font-family: "sugar-fonticon";
-    src: url("/dist/fonts/sugar-icons/sugar-fonticon.eot?9e75ef33cee81f4bbe9000c3b459a9d6#iefix") format("embedded-opentype"),
-url("/dist/fonts/sugar-icons/sugar-fonticon.woff2?9e75ef33cee81f4bbe9000c3b459a9d6") format("woff2"),
-url("/dist/fonts/sugar-icons/sugar-fonticon.woff?9e75ef33cee81f4bbe9000c3b459a9d6") format("woff");
+    src: url("/dist/fonts/sugar-icons/sugar-fonticon.eot?23aa2b94b9bf0eac9fcc0f0d92174a47#iefix") format("embedded-opentype"),
+url("/dist/fonts/sugar-icons/sugar-fonticon.woff2?23aa2b94b9bf0eac9fcc0f0d92174a47") format("woff2"),
+url("/dist/fonts/sugar-icons/sugar-fonticon.woff?23aa2b94b9bf0eac9fcc0f0d92174a47") format("woff");
 }
 
-.s-icon-logo-coffeekraken-sugar:before,.s-icon-logo-postcss:before,.s-icon-ui-menu-grid-solid:before {
+.s-icon-logo-postcss:before {
 position: relative;
 
     font-family: sugar-fonticon !important;
@@ -20,16 +20,10 @@ position: relative;
     -moz-osx-font-smoothing: grayscale;
 }
 
-.s-icon--logo-coffeekraken-sugar:before {
+.s-icon--logo-postcss:before {
     content: "\f101";
 }
-.s-icon--logo-postcss:before {
-    content: "\f102";
-}
-.s-icon--ui-menu-grid-solid:before {
-    content: "\f103";
-}
-.s-icon-logo-coffeekraken-sugar,.s-icon-logo-postcss,.s-icon-ui-menu-grid-solid {
+.s-icon-logo-postcss {
 display: inline-block;
 line-height: 1;
 width: 1em;

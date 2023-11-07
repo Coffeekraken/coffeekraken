@@ -28,7 +28,7 @@
                     <div class="s-mbe:50">
                         <s-code-example>
                             <template language="bash">
-        npm i @coffeekraken/s-postcss-sugar-plugin
+        npm i @coffeekraken/s-sugarcss-plugin
                             </template>
                         </s-code-example>
                     </div>
@@ -40,7 +40,7 @@
     // Create a postcss.config.js file at your project root
     module.exports = {
         plugins: [
-            require('@coffeekraken/s-postcss-sugar-plugin')
+            require('@coffeekraken/s-sugarcss-plugin')
         ]
     };
                             </template>

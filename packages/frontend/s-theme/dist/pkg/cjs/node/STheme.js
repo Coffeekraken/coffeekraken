@@ -36,7 +36,7 @@ class STheme extends SThemeBase_js_1.default {
      * @static
      * @get
      *
-     * Access the settings printed inside the css by the postcssSugarPlugin postcss plugin.
+     * Access the settings printed inside the css by the sugarcssPlugin postcss plugin.
      *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

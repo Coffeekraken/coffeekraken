@@ -35,11 +35,11 @@ __metadata:
   dependencies:
     "@coffeekraken/s-dobby": 2.0.0-beta.1
     "@coffeekraken/s-gauge-component": 2.0.0-beta.1
-    "@coffeekraken/s-postcss-sugar-plugin": 2.0.0-beta.1
     "@coffeekraken/s-sherlock": 2.0.0-beta.1
     "@coffeekraken/s-specs-editor-component": 2.0.0-beta.1
     "@coffeekraken/s-store": 2.0.0-beta.1
     "@coffeekraken/s-sugar-feature": 2.0.0-beta.1
+    "@coffeekraken/s-sugarcss-plugin": 2.0.0-beta.1
     "@coffeekraken/s-vite-postcss-plugin": 2.0.0-beta.1
     "@coffeekraken/sugar": 2.0.0-beta.1
     "@electron-toolkit/preload": ^2.0.0
@@ -1320,48 +1320,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-postcss-sugar-export-plugin@workspace:packages/postcss/s-postcss-sugar-export-plugin":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/s-postcss-sugar-export-plugin@workspace:packages/postcss/s-postcss-sugar-export-plugin"
-  dependencies:
-    "@coffeekraken/s-sugar-config": ^2.0.0-beta.1
-    "@coffeekraken/sugar": ^2.0.0-beta.1
-    postcss: ^8.4.14
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/s-postcss-sugar-plugin@2.0.0-beta.1, @coffeekraken/s-postcss-sugar-plugin@^2.0.0-beta.1, @coffeekraken/s-postcss-sugar-plugin@workspace:packages/postcss/s-postcss-sugar-plugin":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/s-postcss-sugar-plugin@workspace:packages/postcss/s-postcss-sugar-plugin"
-  dependencies:
-    "@coffeekraken/s-classmap": ^2.0.0-beta.1
-    "@coffeekraken/s-duration": ^2.0.0-beta.1
-    "@coffeekraken/s-env": ^2.0.0-beta.1
-    "@coffeekraken/s-event-emitter": ^2.0.0-beta.1
-    "@coffeekraken/s-file": ^2.0.0-beta.1
-    "@coffeekraken/s-glob": ^2.0.0-beta.1
-    "@coffeekraken/s-interface": ^2.0.0-beta.1
-    "@coffeekraken/s-media": ^2.0.0-beta.1
-    "@coffeekraken/s-postcss-sugar-plugin": ^2.0.0-beta.1
-    "@coffeekraken/s-request": ^2.0.0-beta.1
-    "@coffeekraken/s-sugar-config": ^2.0.0-beta.1
-    "@coffeekraken/s-sugar-json": ^2.0.0-beta.1
-    "@coffeekraken/s-theme": ^2.0.0-beta.1
-    "@coffeekraken/sugar": ^2.0.0-beta.1
-    chokidar: ^3.5.3
-    csso: ^5.0.5
-    faker: ^5.5.3
-    fantasticon: 1.2.3
-    filehound: ^1.17.6
-    glob: ^7.2.3
-    known-css-properties: ^0.28.0
-    oslllo-svg-fixer: ^3.0.0
-    postcss: ^8.4.14
-    svg-path-bounds: ^1.0.2
-    svg-path-commander: ^2.0.8
-  languageName: unknown
-  linkType: soft
-
 "@coffeekraken/s-process@^2.0.0-beta.1, @coffeekraken/s-process@workspace:packages/core/s-process":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-process@workspace:packages/core/s-process"
@@ -1641,6 +1599,37 @@ __metadata:
     "@coffeekraken/s-interface": ^2.0.0-beta.1
     "@coffeekraken/sugar": ^2.0.0-beta.1
     glob-all: ^3.3.0
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/s-sugarcss-plugin@2.0.0-beta.1, @coffeekraken/s-sugarcss-plugin@^2.0.0-beta.1, @coffeekraken/s-sugarcss-plugin@workspace:packages/postcss/s-sugarcss-plugin":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/s-sugarcss-plugin@workspace:packages/postcss/s-sugarcss-plugin"
+  dependencies:
+    "@coffeekraken/s-classmap": ^2.0.0-beta.1
+    "@coffeekraken/s-duration": ^2.0.0-beta.1
+    "@coffeekraken/s-env": ^2.0.0-beta.1
+    "@coffeekraken/s-event-emitter": ^2.0.0-beta.1
+    "@coffeekraken/s-file": ^2.0.0-beta.1
+    "@coffeekraken/s-glob": ^2.0.0-beta.1
+    "@coffeekraken/s-interface": ^2.0.0-beta.1
+    "@coffeekraken/s-media": ^2.0.0-beta.1
+    "@coffeekraken/s-request": ^2.0.0-beta.1
+    "@coffeekraken/s-sugar-config": ^2.0.0-beta.1
+    "@coffeekraken/s-sugar-json": ^2.0.0-beta.1
+    "@coffeekraken/s-theme": ^2.0.0-beta.1
+    "@coffeekraken/sugar": ^2.0.0-beta.1
+    chokidar: ^3.5.3
+    csso: ^5.0.5
+    faker: ^5.5.3
+    fantasticon: 1.2.3
+    filehound: ^1.17.6
+    glob: ^7.2.3
+    known-css-properties: ^0.28.0
+    oslllo-svg-fixer: ^3.0.0
+    postcss: ^8.4.14
+    svg-path-bounds: ^1.0.2
+    svg-path-commander: ^2.0.8
   languageName: unknown
   linkType: soft
 
@@ -2855,8 +2844,8 @@ __metadata:
     "@coffeekraken/s-front": ^2.0.0-beta.1
     "@coffeekraken/s-google-map-component": ^2.0.0-beta.1
     "@coffeekraken/s-log": ^2.0.0-beta.1
-    "@coffeekraken/s-postcss-sugar-plugin": ^2.0.0-beta.1
     "@coffeekraken/s-sugar-feature": ^2.0.0-beta.1
+    "@coffeekraken/s-sugarcss-plugin": ^2.0.0-beta.1
     "@coffeekraken/s-views": ^2.0.0-beta.1
     "@coffeekraken/sugar": ^2.0.0-beta.1
     "@faker-js/faker": ^8.0.2
@@ -2878,8 +2867,8 @@ __metadata:
     "@coffeekraken/s-carpenter": ^2.0.0-beta.1
     "@coffeekraken/s-front": ^2.0.0-beta.1
     "@coffeekraken/s-google-map-component": ^2.0.0-beta.1
-    "@coffeekraken/s-postcss-sugar-plugin": ^2.0.0-beta.1
     "@coffeekraken/s-sugar-feature": ^2.0.0-beta.1
+    "@coffeekraken/s-sugarcss-plugin": ^2.0.0-beta.1
     "@coffeekraken/sugar": ^2.0.0-beta.1
     autoprefixer: ^10.4.12
     postcss: ^8.4.17
@@ -5017,8 +5006,8 @@ __metadata:
     "@coffeekraken/s-lit-component": ^2.0.0-beta.1
     "@coffeekraken/s-pack-essentials": ^2.0.0-beta.1
     "@coffeekraken/s-parallax-feature": ^2.0.0-beta.1
-    "@coffeekraken/s-postcss-sugar-plugin": ^2.0.0-beta.1
     "@coffeekraken/s-static-builder": ^2.0.0-beta.1
+    "@coffeekraken/s-sugarcss-plugin": ^2.0.0-beta.1
     "@coffeekraken/s-theme": ^2.0.0-beta.1
     "@coffeekraken/sugar": ^2.0.0-beta.1
   languageName: unknown
@@ -18152,7 +18141,7 @@ __metadata:
     "@coffeekraken/s-docblock": ^2.0.0-beta.1
     "@coffeekraken/s-docmap": ^2.0.0-beta.1
     "@coffeekraken/s-markdown-builder": ^2.0.0-beta.1
-    "@coffeekraken/s-postcss-sugar-plugin": ^2.0.0-beta.1
+    "@coffeekraken/s-sugarcss-plugin": ^2.0.0-beta.1
     "@types/node": ^20
     "@types/react": ^18
     "@types/react-dom": ^18

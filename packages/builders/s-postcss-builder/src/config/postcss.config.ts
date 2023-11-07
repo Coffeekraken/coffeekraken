@@ -17,7 +17,7 @@ export default function (api) {
          * @name            plugins
          * @namespace       config.postcss
          * @type            String
-         * @default         ['@coffeekraken/s-postcss-sugar-plugin','postcss-nested','postcss-atroot','postcss-extend-rule','postcss-property-lookup','autoprefixer']
+         * @default         ['@coffeekraken/s-sugarcss-plugin','postcss-nested','postcss-atroot','postcss-extend-rule','postcss-property-lookup','autoprefixer']
          *
          * Specify the plugins to use with the postcss process
          *
@@ -25,7 +25,7 @@ export default function (api) {
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         plugins: [
-            '@coffeekraken/s-postcss-sugar-plugin',
+            '@coffeekraken/s-sugarcss-plugin',
             // 'postcss-import',
             'postcss-nested',
             // 'postcss-atroot',

@@ -1,9 +1,0 @@
-import postcssSugarExportPlugin from './postcssSugarExportPlugin.js';
-export * from './postcssSugarExportPlugin.js';
-export const postcss = true;
-export default postcssSugarExportPlugin;
-if (typeof module !== 'undefined') {
-    module.exports.postcss = true;
-    module.exports = postcssSugarExportPlugin;
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sd0JBQXdCLE1BQU0sK0JBQStCLENBQUM7QUFDckUsY0FBYywrQkFBK0IsQ0FBQztBQUM5QyxNQUFNLENBQUMsTUFBTSxPQUFPLEdBQUcsSUFBSSxDQUFDO0FBQzVCLGVBQWUsd0JBQXdCLENBQUM7QUFFeEMsSUFBSSxPQUFPLE1BQU0sS0FBSyxXQUFXLEVBQUU7SUFDL0IsTUFBTSxDQUFDLE9BQU8sQ0FBQyxPQUFPLEdBQUcsSUFBSSxDQUFDO0lBQzlCLE1BQU0sQ0FBQyxPQUFPLEdBQUcsd0JBQXdCLENBQUM7Q0FDN0MifQ==

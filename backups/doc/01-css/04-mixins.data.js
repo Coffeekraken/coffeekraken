@@ -1,8 +1,8 @@
-import { getMixinsList } from "@coffeekraken/s-postcss-sugar-plugin";
+import { getMixinsList } from '@coffeekraken/s-sugarcss-plugin';
 
 export default async function () {
-  const mixins = getMixinsList();
-  return {
-    mixins,
-  };
+    const mixins = getMixinsList();
+    return {
+        mixins,
+    };
 }

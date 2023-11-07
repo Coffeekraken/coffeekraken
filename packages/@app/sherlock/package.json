@@ -23,11 +23,11 @@
   "dependencies": {
     "@coffeekraken/s-dobby": "2.0.0-beta.1",
     "@coffeekraken/s-gauge-component": "2.0.0-beta.1",
-    "@coffeekraken/s-postcss-sugar-plugin": "2.0.0-beta.1",
     "@coffeekraken/s-sherlock": "2.0.0-beta.1",
     "@coffeekraken/s-specs-editor-component": "2.0.0-beta.1",
     "@coffeekraken/s-store": "2.0.0-beta.1",
     "@coffeekraken/s-sugar-feature": "2.0.0-beta.1",
+    "@coffeekraken/s-sugarcss-plugin": "2.0.0-beta.1",
     "@coffeekraken/s-vite-postcss-plugin": "2.0.0-beta.1",
     "@coffeekraken/sugar": "2.0.0-beta.1",
     "@electron-toolkit/preload": "^2.0.0",

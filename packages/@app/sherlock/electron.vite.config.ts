@@ -1,5 +1,5 @@
-// import __postcssSugarPlugin from "@coffeekraken/s-vite-postcss-plugin";
-import __postcssSugarPlugin from '@coffeekraken/s-postcss-sugar-plugin';
+// import __sugarcssPlugin from "@coffeekraken/s-vite-postcss-plugin";
+import __sugarcssPlugin from '@coffeekraken/s-sugarcss-plugin';
 import __autoprefixr from 'autoprefixer';
 import __postcssAtroot from 'postcss-atroot';
 import __postcssNested from 'postcss-nested';
@@ -25,7 +25,7 @@ export default defineConfig({
         css: {
             postcss: {
                 plugins: [
-                    __postcssSugarPlugin(),
+                    __sugarcssPlugin(),
                     __postcssAtroot(),
                     // __postcssImport(),
                     __postcssNested(),

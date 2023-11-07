@@ -257,7 +257,7 @@ function default_1(api) {
              * @default             1
              *
              * Specify the 1 layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -270,7 +270,7 @@ function default_1(api) {
              * @default             1 2
              *
              * Specify the 2 columns layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -283,7 +283,7 @@ function default_1(api) {
              * @default             1 _ 2
              *
              * Specify the 2 columns layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -296,7 +296,7 @@ function default_1(api) {
              * @default             2 1
              *
              * Specify the 2 columns layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -309,7 +309,7 @@ function default_1(api) {
              * @default             2 _ 1
              *
              * Specify the 2 columns layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -322,7 +322,7 @@ function default_1(api) {
              * @default             1 2 3
              *
              * Specify the 3 columns layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -335,7 +335,7 @@ function default_1(api) {
              * @default             1 2 _ 3
              *
              * Specify the 3 columns layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -348,7 +348,7 @@ function default_1(api) {
              * @default             1 _ 2 3
              *
              * Specify the 3 columns layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -361,7 +361,7 @@ function default_1(api) {
              * @default             1 _ 2 _ 3
              *
              * Specify the 3 columns layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -374,7 +374,7 @@ function default_1(api) {
              * @default             3 2 1
              *
              * Specify the 3 columns layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -387,7 +387,7 @@ function default_1(api) {
              * @default             2 3 _ 1
              *
              * Specify the 3 columns layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -400,7 +400,7 @@ function default_1(api) {
              * @default             3 _ 2 1
              *
              * Specify the 3 columns layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -413,7 +413,7 @@ function default_1(api) {
              * @default             1 2 3 4
              *
              * Specify the 4 columns layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -426,7 +426,7 @@ function default_1(api) {
              * @default             1 2 _ 3 4
              *
              * Specify the 4 columns layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -439,7 +439,7 @@ function default_1(api) {
              * @default             1 2 3 _ 4
              *
              * Specify the 4 columns layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -452,7 +452,7 @@ function default_1(api) {
              * @default             1 _ 2 3 4
              *
              * Specify the 4 columns layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -465,7 +465,7 @@ function default_1(api) {
              * @default             1 _ 2 _ 3 _ 4
              *
              * Specify the 4 columns layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -478,7 +478,7 @@ function default_1(api) {
              * @default             1 2 2
              *
              * Specify the 2 columns (1/3 - 2/3) layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -491,7 +491,7 @@ function default_1(api) {
              * @default             1 2 2
              *
              * Specify the 2 columns (1/3 - 2/3) layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -504,7 +504,7 @@ function default_1(api) {
              * @default             1 1 2
              *
              * Specify the 2 columns (2/3 - 1/3) layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -517,7 +517,7 @@ function default_1(api) {
              * @default             1 1 2
              *
              * Specify the 2 columns (2/3 - 1/3) layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -530,7 +530,7 @@ function default_1(api) {
              * @default             1 2 2 2
              *
              * Specify the 2 columns (1/4 - 3/4) layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -543,7 +543,7 @@ function default_1(api) {
              * @default             1 2 2 2
              *
              * Specify the 2 columns (1/4 - 3/4) layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -556,7 +556,7 @@ function default_1(api) {
              * @default             1 1 1 2
              *
              * Specify the 2 columns (3/4 - 1/4) layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -569,7 +569,7 @@ function default_1(api) {
              * @default             1 2 2 2 2
              *
              * Specify the 2 columns (1/5 - 4/5) layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -582,7 +582,7 @@ function default_1(api) {
              * @default             1 1 1 1 2
              *
              * Specify the 2 columns (4/5 - 1/5) layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -595,7 +595,7 @@ function default_1(api) {
              * @default             2 2 2 2 1
              *
              * Specify the 2 columns (4/5 - 1/5) layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -608,7 +608,7 @@ function default_1(api) {
              * @default             1 2 2 2 2 2
              *
              * Specify the 2 columns (1/6 - 5/6) layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -621,7 +621,7 @@ function default_1(api) {
              * @default             1 1 1 1 1 2
              *
              * Specify the 2 columns (1/6 - 5/6) layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -634,7 +634,7 @@ function default_1(api) {
              * @default             1 2 3 4 5
              *
              * Specify the 5 columns layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -647,7 +647,7 @@ function default_1(api) {
              * @default             1 2 3 _ 4 5
              *
              * Specify the 5 columns layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -660,7 +660,7 @@ function default_1(api) {
              * @default             1 2 _ 3 4 5
              *
              * Specify the 5 columns layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -673,7 +673,7 @@ function default_1(api) {
              * @default             1 _ 2 3 4 5
              *
              * Specify the 5 columns layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -686,7 +686,7 @@ function default_1(api) {
              * @default             1 2 3 4 _ 5
              *
              * Specify the 5 columns layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -699,7 +699,7 @@ function default_1(api) {
              * @default             1 2 3 4 _ 5
              *
              * Specify the 5 columns layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -712,7 +712,7 @@ function default_1(api) {
              * @default             1 2 3 4 5 6
              *
              * Specify the 6 columns layout for your theme.
-             * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+             * For more information on how layouts works, check out the `@coffeekraken/s-sugarcss-plugin` "layout" mixin documentation.
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

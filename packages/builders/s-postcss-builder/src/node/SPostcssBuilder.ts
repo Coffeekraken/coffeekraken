@@ -177,27 +177,27 @@ export default class SPostcssBuilder extends __SBuilder {
             console.log(`<yellow>○</yellow> Plugins     :`);
             this.settings.postcss.plugins.forEach((pluginName) => {
                 console.log(`<yellow>|------------</yellow> : ${pluginName}`);
-                if (pluginName === '@coffeekraken/s-postcss-sugar-plugin') {
-                    const postcssSugarPluginConfig =
-                        __SSugarConfig.get('postcssSugarPlugin');
+                if (pluginName === '@coffeekraken/s-sugarcss-plugin') {
+                    const sugarcssPluginConfig =
+                        __SSugarConfig.get('sugarcssPlugin');
                     console.log(
                         `              <yellow>○</yellow> Clean variables           : ${
-                            postcssSugarPluginConfig.clean?.variables
+                            sugarcssPluginConfig.clean?.variables
                                 ? '<green>true</green>'
                                 : '<red>false</red>'
                         }`,
                     );
                     console.log(
                         `              <yellow>○</yellow> Classmap                  : ${
-                            postcssSugarPluginConfig.classmap?.enabled
+                            sugarcssPluginConfig.classmap?.enabled
                                 ? '<green>true</green>'
                                 : '<red>false</red>'
                         }`,
                     );
                     console.log(
                         `              <yellow>○</yellow> Exclude by types          : ${
-                            postcssSugarPluginConfig.excludeByTypes.length
-                                ? `<yellow>${postcssSugarPluginConfig.excludeByTypes.join(
+                            sugarcssPluginConfig.excludeByTypes.length
+                                ? `<yellow>${sugarcssPluginConfig.excludeByTypes.join(
                                       ',',
                                   )}</yellow>`
                                 : `<red>none</red>`
@@ -205,9 +205,8 @@ export default class SPostcssBuilder extends __SBuilder {
                     );
                     console.log(
                         `              <yellow>○</yellow> Exclude comments by types : ${
-                            postcssSugarPluginConfig.excludeCommentByTypes
-                                .length
-                                ? `<yellow>${postcssSugarPluginConfig.excludeCommentByTypes.join(
+                            sugarcssPluginConfig.excludeCommentByTypes.length
+                                ? `<yellow>${sugarcssPluginConfig.excludeCommentByTypes.join(
                                       ',',
                                   )}</yellow>`
                                 : `<red>none</red>`
@@ -215,8 +214,8 @@ export default class SPostcssBuilder extends __SBuilder {
                     );
                     console.log(
                         `              <yellow>○</yellow> Exclude code by types     : ${
-                            postcssSugarPluginConfig.excludeCodeByTypes.length
-                                ? `<yellow>${postcssSugarPluginConfig.excludeCodeByTypes.join(
+                            sugarcssPluginConfig.excludeCodeByTypes.length
+                                ? `<yellow>${sugarcssPluginConfig.excludeCodeByTypes.join(
                                       ',',
                                   )}</yellow>`
                                 : `<red>none</red>`
@@ -237,9 +236,7 @@ export default class SPostcssBuilder extends __SBuilder {
                     plugins.push(
                         fn({
                             plugins: this.settings.postcss.plugins.filter(
-                                (p) =>
-                                    p !==
-                                    '@coffeekraken/s-postcss-sugar-plugin',
+                                (p) => p !== '@coffeekraken/s-sugarcss-plugin',
                             ),
                             target: params.target,
                             ...options,

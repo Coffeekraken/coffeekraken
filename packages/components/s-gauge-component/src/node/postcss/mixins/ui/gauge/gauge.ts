@@ -27,7 +27,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-class postcssSugarPluginUiGaugeInterface extends __SInterface {
+class SSugarcssPluginUiGaugeInterface extends __SInterface {
     static get _definition() {
         return {
             lnf: {
@@ -47,23 +47,23 @@ class postcssSugarPluginUiGaugeInterface extends __SInterface {
     }
 }
 
-export interface IPostcssSugarPluginUiGaugeParams {
+export interface ISSugarcssPluginUiGaugeParams {
     lnf: 'solid';
     scope: string[];
 }
 
-export { postcssSugarPluginUiGaugeInterface as interface };
+export { SSugarcssPluginUiGaugeInterface as interface };
 
 export default function ({
     params,
     atRule,
     replaceWith,
 }: {
-    params: Partial<IPostcssSugarPluginUiGaugeParams>;
+    params: Partial<ISSugarcssPluginUiGaugeParams>;
     atRule: any;
     replaceWith: Function;
 }) {
-    const finalParams: IPostcssSugarPluginUiGaugeParams = {
+    const finalParams: ISSugarcssPluginUiGaugeParams = {
         lnf: 'solid',
         scope: [],
         ...params,

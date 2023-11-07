@@ -23,7 +23,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-class postcssSugarPluginUiAvatarClassesInterface extends __SInterface {
+class SSugarcssPluginUiAvatarClassesInterface extends __SInterface {
     static get _definition() {
         return {
             scope: {
@@ -38,11 +38,11 @@ class postcssSugarPluginUiAvatarClassesInterface extends __SInterface {
     }
 }
 
-export interface IPostcssSugarPluginUiAvatarClassesParams {
+export interface ISSugarcssPluginUiAvatarClassesParams {
     scope: ('bare' | 'lnf')[];
 }
 
-export { postcssSugarPluginUiAvatarClassesInterface as interface };
+export { SSugarcssPluginUiAvatarClassesInterface as interface };
 
 export default function ({
     params,
@@ -50,12 +50,12 @@ export default function ({
     CssVars,
     replaceWith,
 }: {
-    params: Partial<IPostcssSugarPluginUiAvatarClassesParams>;
+    params: Partial<ISSugarcssPluginUiAvatarClassesParams>;
     atRule: any;
     CssVars: any;
     replaceWith: Function;
 }) {
-    const finalParams: IPostcssSugarPluginUiAvatarClassesParams = {
+    const finalParams: ISSugarcssPluginUiAvatarClassesParams = {
         scope: [],
         ...params,
     };

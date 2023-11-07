@@ -45,7 +45,7 @@ export interface ISSugarFeatureProps {
  * This feature allows you to apply some "nice to have" features like having a "scrolled" class applied on the body
  * when the user has scroll in the page or having access to a `--vh` css variable that represent the exact
  * viewport innerHeight and avoid having issues with mobile different viewport height values. Note that if you use
- * the `sPostcssSugarPlugin` postcss plugin, you can use the `vh` unit as normal and if will automatically take the
+ * the `sugarcssPlugin` postcss plugin, you can use the `vh` unit as normal and if will automatically take the
  * value of the `--vh` variable if it exists.
  * More feature can be added in the future depending on the needs.
  *

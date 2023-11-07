@@ -418,7 +418,7 @@ export default class SThemeBase extends __SEventEmitter {
      * @return      {String}                        The proper css variable string that represent this value with his fallback just in case
      *
      * @example         js
-     * import { cssVar } from '@coffeekraken/s-postcss-sugar-plugin';
+     * import { cssVar } from '@coffeekraken/s-sugarcss-plugin';
      * cssVar('ui.button.padding'); // => var(--s-ui-button-padding, 1em 1.2em)
      *
      * @since       2.0.0

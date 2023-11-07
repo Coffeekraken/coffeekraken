@@ -29,17 +29,17 @@
         {
             "language": "html",
             "title": "slow",
-            "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-a2a63c78-4acd-499f-9340-e6ab210cdbda\">\n     <div class=\"s-transition:slow s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-a2a63c78-4acd-499f-9340-e6ab210cdbda > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-a2a63c78-4acd-499f-9340-e6ab210cdbda:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+            "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-6912920c-51bf-433e-9a7c-873a274ffbba\">\n     <div class=\"s-transition:slow s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-6912920c-51bf-433e-9a7c-873a274ffbba > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-6912920c-51bf-433e-9a7c-873a274ffbba:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
         },
         {
             "language": "html",
             "title": "default",
-            "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-0fb0fc09-3f81-4368-91a5-d8dd9f8ff2d1\">\n     <div class=\"s-transition s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-0fb0fc09-3f81-4368-91a5-d8dd9f8ff2d1 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-0fb0fc09-3f81-4368-91a5-d8dd9f8ff2d1:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+            "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-27c3a7a7-286e-44f8-a90c-5f3f8cf89850\">\n     <div class=\"s-transition s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-27c3a7a7-286e-44f8-a90c-5f3f8cf89850 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-27c3a7a7-286e-44f8-a90c-5f3f8cf89850:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
         },
         {
             "language": "html",
             "title": "fast",
-            "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-eb05f1ef-9a37-4b51-b5f5-037ab8375dfd\">\n     <div class=\"s-transition:fast s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-eb05f1ef-9a37-4b51-b5f5-037ab8375dfd > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-eb05f1ef-9a37-4b51-b5f5-037ab8375dfd:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+            "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-070105e7-ba54-4cff-8a90-707016bc29c9\">\n     <div class=\"s-transition:fast s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-070105e7-ba54-4cff-8a90-707016bc29c9 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-070105e7-ba54-4cff-8a90-707016bc29c9:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
         }
     ],
     "install": [
@@ -54,9 +54,9 @@
         "email": "olivier.bossel@gmail.com",
         "url": "https://coffeekraken.io"
     },
-    "filename": "index.dev.css",
-    "extension": "dev",
-    "relPath": "dist/css/index.dev.css",
+    "filename": "index.css",
+    "extension": "css",
+    "relPath": "dist/css/index.css",
     "isDependency": false,
     "package": {
         "name": "@website/sugarcss-coffeekraken-io",
@@ -136,17 +136,17 @@
                 {
                     "language": "html",
                     "title": "slow",
-                    "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-a2a63c78-4acd-499f-9340-e6ab210cdbda\">\n     <div class=\"s-transition:slow s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-a2a63c78-4acd-499f-9340-e6ab210cdbda > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-a2a63c78-4acd-499f-9340-e6ab210cdbda:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+                    "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-6912920c-51bf-433e-9a7c-873a274ffbba\">\n     <div class=\"s-transition:slow s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-6912920c-51bf-433e-9a7c-873a274ffbba > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-6912920c-51bf-433e-9a7c-873a274ffbba:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
                 },
                 {
                     "language": "html",
                     "title": "default",
-                    "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-0fb0fc09-3f81-4368-91a5-d8dd9f8ff2d1\">\n     <div class=\"s-transition s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-0fb0fc09-3f81-4368-91a5-d8dd9f8ff2d1 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-0fb0fc09-3f81-4368-91a5-d8dd9f8ff2d1:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+                    "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-27c3a7a7-286e-44f8-a90c-5f3f8cf89850\">\n     <div class=\"s-transition s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-27c3a7a7-286e-44f8-a90c-5f3f8cf89850 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-27c3a7a7-286e-44f8-a90c-5f3f8cf89850:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
                 },
                 {
                     "language": "html",
                     "title": "fast",
-                    "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-eb05f1ef-9a37-4b51-b5f5-037ab8375dfd\">\n     <div class=\"s-transition:fast s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-eb05f1ef-9a37-4b51-b5f5-037ab8375dfd > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-eb05f1ef-9a37-4b51-b5f5-037ab8375dfd:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+                    "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-070105e7-ba54-4cff-8a90-707016bc29c9\">\n     <div class=\"s-transition:fast s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-070105e7-ba54-4cff-8a90-707016bc29c9 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-070105e7-ba54-4cff-8a90-707016bc29c9:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
                 }
             ],
             "since": "2.0.0",
@@ -155,7 +155,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name          Transitions\n* @namespace          sugar.style.helpers.transition\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/transition\n* @platform       css\n* @status       stable\n*\n* These classes allows to apply some transitions on any HTMLElement.\n* These transitions are defined in the `theme.transition` theme settings.\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* @s.transition.classes;\n*\n* @cssClass             s-transition:slow            Apply the `slow` transition,\n* @cssClass             s-transition            Apply the `default` transition,\n* @cssClass             s-transition:fast            Apply the `fast` transition\n*\n* @example          html        slow\n*   <div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-a2a63c78-4acd-499f-9340-e6ab210cdbda\">\n*      <div class=\"s-transition:slow s-ratio:1 s-bc:accent s-radius:30\"></div>\n*       <style>\n*           #s-transition-s-a2a63c78-4acd-499f-9340-e6ab210cdbda > div { position: relative; left: 0; width: 100px; }\n*           #s-transition-s-a2a63c78-4acd-499f-9340-e6ab210cdbda:hover > div { left: calc(100% - 100px); )  }\n*       </style>\n*   </div>\n* @example          html        default\n*   <div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-0fb0fc09-3f81-4368-91a5-d8dd9f8ff2d1\">\n*      <div class=\"s-transition s-ratio:1 s-bc:accent s-radius:30\"></div>\n*       <style>\n*           #s-transition-s-0fb0fc09-3f81-4368-91a5-d8dd9f8ff2d1 > div { position: relative; left: 0; width: 100px; }\n*           #s-transition-s-0fb0fc09-3f81-4368-91a5-d8dd9f8ff2d1:hover > div { left: calc(100% - 100px); )  }\n*       </style>\n*   </div>\n* @example          html        fast\n*   <div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-eb05f1ef-9a37-4b51-b5f5-037ab8375dfd\">\n*      <div class=\"s-transition:fast s-ratio:1 s-bc:accent s-radius:30\"></div>\n*       <style>\n*           #s-transition-s-eb05f1ef-9a37-4b51-b5f5-037ab8375dfd > div { position: relative; left: 0; width: 100px; }\n*           #s-transition-s-eb05f1ef-9a37-4b51-b5f5-037ab8375dfd:hover > div { left: calc(100% - 100px); )  }\n*       </style>\n*   </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name          Transitions\n* @namespace          sugar.style.helpers.transition\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/transition\n* @platform       css\n* @status       stable\n*\n* These classes allows to apply some transitions on any HTMLElement.\n* These transitions are defined in the `theme.transition` theme settings.\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* @s.transition.classes;\n*\n* @cssClass             s-transition:slow            Apply the `slow` transition,\n* @cssClass             s-transition            Apply the `default` transition,\n* @cssClass             s-transition:fast            Apply the `fast` transition\n*\n* @example          html        slow\n*   <div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-6912920c-51bf-433e-9a7c-873a274ffbba\">\n*      <div class=\"s-transition:slow s-ratio:1 s-bc:accent s-radius:30\"></div>\n*       <style>\n*           #s-transition-s-6912920c-51bf-433e-9a7c-873a274ffbba > div { position: relative; left: 0; width: 100px; }\n*           #s-transition-s-6912920c-51bf-433e-9a7c-873a274ffbba:hover > div { left: calc(100% - 100px); )  }\n*       </style>\n*   </div>\n* @example          html        default\n*   <div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-27c3a7a7-286e-44f8-a90c-5f3f8cf89850\">\n*      <div class=\"s-transition s-ratio:1 s-bc:accent s-radius:30\"></div>\n*       <style>\n*           #s-transition-s-27c3a7a7-286e-44f8-a90c-5f3f8cf89850 > div { position: relative; left: 0; width: 100px; }\n*           #s-transition-s-27c3a7a7-286e-44f8-a90c-5f3f8cf89850:hover > div { left: calc(100% - 100px); )  }\n*       </style>\n*   </div>\n* @example          html        fast\n*   <div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-070105e7-ba54-4cff-8a90-707016bc29c9\">\n*      <div class=\"s-transition:fast s-ratio:1 s-bc:accent s-radius:30\"></div>\n*       <style>\n*           #s-transition-s-070105e7-ba54-4cff-8a90-707016bc29c9 > div { position: relative; left: 0; width: 100px; }\n*           #s-transition-s-070105e7-ba54-4cff-8a90-707016bc29c9:hover > div { left: calc(100% - 100px); )  }\n*       </style>\n*   </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.transition.Transitions"
         }
     ]

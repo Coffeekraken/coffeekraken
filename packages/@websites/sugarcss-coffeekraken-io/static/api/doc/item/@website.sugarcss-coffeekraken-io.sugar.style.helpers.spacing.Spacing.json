@@ -29,7 +29,7 @@
         {
             "language": "html",
             "title": "Vertical spacing",
-            "code": "<div class=\"s-spacing:40\">\n  <h1 class=\"s-typo:h1\">Hello world</h1>\n  <p class=\"s-typo:lead\">Crystal O'Hara</p>\n  <p class=\"s-typo:p\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis egestas non tortor sed aliquet. Fusce finibus erat at leo scelerisque, a lobortis purus pretium. Aliquam ornare leo id mi imperdiet.</p>\n  <a class=\"s-btn s-color:accent\">Simple Cta</a>\n</div>"
+            "code": "<div class=\"s-spacing:40\">\n  <h1 class=\"s-typo:h1\">Hello world</h1>\n  <p class=\"s-typo:lead\">Kate Dach</p>\n  <p class=\"s-typo:p\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis egestas non tortor sed aliquet. Fusce finibus erat at leo scelerisque, a lobortis purus pretium. Aliquam ornare leo id mi imperdiet.</p>\n  <a class=\"s-btn s-color:accent\">Simple Cta</a>\n</div>"
         }
     ],
     "install": [
@@ -44,9 +44,9 @@
         "email": "olivier.bossel@gmail.com",
         "url": "https://coffeekraken.io"
     },
-    "filename": "index.dev.css",
-    "extension": "dev",
-    "relPath": "dist/css/index.dev.css",
+    "filename": "index.css",
+    "extension": "css",
+    "relPath": "dist/css/index.css",
     "isDependency": false,
     "package": {
         "name": "@website/sugarcss-coffeekraken-io",
@@ -158,7 +158,7 @@
                 {
                     "language": "html",
                     "title": "Vertical spacing",
-                    "code": "<div class=\"s-spacing:40\">\n  <h1 class=\"s-typo:h1\">Hello world</h1>\n  <p class=\"s-typo:lead\">Crystal O'Hara</p>\n  <p class=\"s-typo:p\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis egestas non tortor sed aliquet. Fusce finibus erat at leo scelerisque, a lobortis purus pretium. Aliquam ornare leo id mi imperdiet.</p>\n  <a class=\"s-btn s-color:accent\">Simple Cta</a>\n</div>"
+                    "code": "<div class=\"s-spacing:40\">\n  <h1 class=\"s-typo:h1\">Hello world</h1>\n  <p class=\"s-typo:lead\">Kate Dach</p>\n  <p class=\"s-typo:p\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis egestas non tortor sed aliquet. Fusce finibus erat at leo scelerisque, a lobortis purus pretium. Aliquam ornare leo id mi imperdiet.</p>\n  <a class=\"s-btn s-color:accent\">Simple Cta</a>\n</div>"
                 }
             ],
             "since": "2.0.0",
@@ -167,7 +167,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name          Spacing\n* @namespace          sugar.style.helpers.spacing\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/spacing\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply spacing to any HTMLElement container\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* @s.spacing.classes;\n*\n* @cssClass     s-spacing:0        Apply the `0` spacing\n* @cssClass     s-spacing:10        Apply the `10` spacing\n* @cssClass     s-spacing:20        Apply the `20` spacing\n* @cssClass     s-spacing:30        Apply the `30` spacing\n* @cssClass     s-spacing:40        Apply the `40` spacing\n* @cssClass     s-spacing:50        Apply the `50` spacing\n* @cssClass     s-spacing:60        Apply the `60` spacing\n* @cssClass     s-spacing:70        Apply the `70` spacing\n* @cssClass     s-spacing:80        Apply the `80` spacing\n* @cssClass     s-spacing:90        Apply the `90` spacing\n* @cssClass     s-spacing:100        Apply the `100` spacing\n*\n*\n* @example        html          Vertical spacing\n* <div class=\"s-spacing:40\">\n*   <h1 class=\"s-typo:h1\">Hello world</h1>\n*   <p class=\"s-typo:lead\">Crystal O'Hara</p>\n*   <p class=\"s-typo:p\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis egestas non tortor sed aliquet. Fusce finibus erat at leo scelerisque, a lobortis purus pretium. Aliquam ornare leo id mi imperdiet.</p>\n*   <a class=\"s-btn s-color:accent\">Simple Cta</a>\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name          Spacing\n* @namespace          sugar.style.helpers.spacing\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/spacing\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply spacing to any HTMLElement container\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* @s.spacing.classes;\n*\n* @cssClass     s-spacing:0        Apply the `0` spacing\n* @cssClass     s-spacing:10        Apply the `10` spacing\n* @cssClass     s-spacing:20        Apply the `20` spacing\n* @cssClass     s-spacing:30        Apply the `30` spacing\n* @cssClass     s-spacing:40        Apply the `40` spacing\n* @cssClass     s-spacing:50        Apply the `50` spacing\n* @cssClass     s-spacing:60        Apply the `60` spacing\n* @cssClass     s-spacing:70        Apply the `70` spacing\n* @cssClass     s-spacing:80        Apply the `80` spacing\n* @cssClass     s-spacing:90        Apply the `90` spacing\n* @cssClass     s-spacing:100        Apply the `100` spacing\n*\n*\n* @example        html          Vertical spacing\n* <div class=\"s-spacing:40\">\n*   <h1 class=\"s-typo:h1\">Hello world</h1>\n*   <p class=\"s-typo:lead\">Kate Dach</p>\n*   <p class=\"s-typo:p\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis egestas non tortor sed aliquet. Fusce finibus erat at leo scelerisque, a lobortis purus pretium. Aliquam ornare leo id mi imperdiet.</p>\n*   <a class=\"s-btn s-color:accent\">Simple Cta</a>\n* </div>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.spacing.Spacing"
         }
     ]

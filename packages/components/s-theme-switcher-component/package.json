@@ -1,7 +1,7 @@
 {
     "name": "@coffeekraken/s-theme-switcher-component",
     "version": "2.0.0-beta.1",
-    "description": "Simple web component that let you switch theme(s) and variant(s) when using the Coffeekraken toolchain like the @coffeekraken/s-postcss-sugar-plugin, etc...",
+    "description": "Simple web component that let you switch theme(s) and variant(s) when using the Coffeekraken toolchain like the @coffeekraken/s-sugarcss-plugin, etc...",
     "type": "module",
     "homepage": "https://coffeekraken.io",
     "scripts": {

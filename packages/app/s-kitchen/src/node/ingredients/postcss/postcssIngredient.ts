@@ -28,7 +28,7 @@ import {
 const postcssIngredient: ISKitchenIngredient = {
     id: 'postcss',
     description:
-        'Add support for <yellow>postcss</yellow> and the <yellow>@coffeekraken/s-postcss-sugar-plugin</yellow> into your project',
+        'Add support for <yellow>postcss</yellow> and the <yellow>@coffeekraken/s-sugarcss-plugin</yellow> into your project',
     projectTypes: ['unknown', 'sugar', 'next'],
     async add({ ask, context }) {
         const packageRoot = __packageRootDir();
@@ -89,13 +89,13 @@ const postcssIngredient: ISKitchenIngredient = {
 
         // installing the actual plugin
         console.verbose?.(
-            `<yellow>[postcss]</yellow> Installing the actual <cyan>@coffeekraken/s-postcss-sugar-plugin</cyan> and other useful ones...`,
+            `<yellow>[postcss]</yellow> Installing the actual <cyan>@coffeekraken/s-sugarcss-plugin</cyan> and other useful ones...`,
         );
 
         const currentPackageJson = __packageJsonSync(__dirname());
 
         __addDependencies({
-            '@coffeekraken/s-postcss-sugar-plugin': `^${currentPackageJson.version}`,
+            '@coffeekraken/s-sugarcss-plugin': `^${currentPackageJson.version}`,
             postcss: '^8.4.21',
             'postcss-import': '^15.1.0',
             'postcss-nested': '^6.0.0',
@@ -106,7 +106,7 @@ const postcssIngredient: ISKitchenIngredient = {
         });
 
         const plugins = [
-            '@coffeekraken/s-postcss-sugar-plugin',
+            '@coffeekraken/s-sugarcss-plugin',
             'postcss-import',
             'postcss-nested',
             'postcss-atroot',

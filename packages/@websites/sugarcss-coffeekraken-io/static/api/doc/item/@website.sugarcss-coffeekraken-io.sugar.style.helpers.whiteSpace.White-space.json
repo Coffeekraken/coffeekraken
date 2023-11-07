@@ -29,47 +29,47 @@
         {
             "language": "html",
             "title": "Wrap",
-            "code": "<p class=\"s-white-space:wrap\">\n      Natus id dolorum temporibus. Ut corrupti ab dolores adipisci eum. Ut quo atque. Inventore minus voluptatum tenetur maxime nobis animi iusto. Minus esse ex incidunt. Soluta est eius.\n  </p>"
+            "code": "<p class=\"s-white-space:wrap\">\n      Libero voluptatem nesciunt voluptatem. Est itaque deserunt sunt dolor debitis est repudiandae illum. Sint repellendus repudiandae est dicta neque enim quisquam nostrum. Cumque consequatur enim voluptatem libero aut consectetur aliquam officia. Natus eum sunt minus. Veritatis rerum magni nihil.\n  </p>"
         },
         {
             "language": "html",
             "title": "Nowrap",
-            "code": "<p class=\"s-white-space:nowrap\">\n      Sunt tempore id quam et sint reprehenderit reiciendis. Unde dolores facere magnam eligendi id sed rerum sit aut. Accusamus quo illo temporibus reiciendis deserunt dignissimos et. Vitae et reprehenderit et officiis ut. Ea corporis et necessitatibus et dolores quaerat illum beatae. Dolores quo adipisci culpa voluptas eaque dicta repudiandae.\n  </p>"
+            "code": "<p class=\"s-white-space:nowrap\">\n      Sit repellat numquam aperiam illo animi perferendis sed. Porro dolorum autem aut. Ut aut molestiae est ut.\n  </p>"
         },
         {
             "language": "html",
             "title": "Break spaces",
-            "code": "<p class=\"s-white-space:break-spaces\">\n      Suscipit fugit a expedita magni doloremque ullam aut molestiae nobis. Voluptatem quia labore non a facilis placeat voluptas dolores necessitatibus. Magni quaerat et et nihil. Doloribus enim ducimus similique dolor nulla libero suscipit. Earum voluptatem placeat fugit officiis. Quia autem perspiciatis rem eum fugit in.\n  </p>"
+            "code": "<p class=\"s-white-space:break-spaces\">\n      Quam veritatis numquam eos fuga odit optio possimus. Autem quibusdam possimus ipsam. Pariatur nihil quidem non reprehenderit optio. Molestiae sit molestiae eligendi voluptas accusantium. Architecto accusantium quia libero id animi sit explicabo nihil.\n  </p>"
         },
         {
             "language": "html",
             "title": "Normal",
-            "code": "<p class=\"s-white-space:normal\">\n      Dolorem doloribus occaecati voluptatum est. Ratione dicta assumenda. Suscipit saepe maiores dolores quidem ex qui.\n  </p>"
+            "code": "<p class=\"s-white-space:normal\">\n      Velit illum et. Corrupti sunt et enim. Facilis nobis omnis corporis harum numquam qui. Sunt voluptatem cum commodi aut voluptatum et. Saepe inventore molestias nemo corrupti eaque. Reprehenderit nulla dolor sed tempore quasi animi fugit qui est.\n  </p>"
         },
         {
             "language": "html",
             "title": "Pre",
-            "code": "<p class=\"s-white-space:pre\">\n      Dolore dolor et aut quisquam sint quis. Enim sunt ullam quia non nihil non. Officia animi ratione expedita repellat facilis.\n  </p>"
+            "code": "<p class=\"s-white-space:pre\">\n      Id quia autem nemo doloribus quos fugit. Saepe recusandae est alias enim. Sed est sint ducimus aut recusandae ea. Adipisci fugit amet sit nostrum et a occaecati quod.\n  </p>"
         },
         {
             "language": "html",
             "title": "Pre-line",
-            "code": "<p class=\"s-white-space:pre-line\">\n      Molestiae id ad suscipit doloribus pariatur et. Voluptatem repellendus commodi laboriosam similique. Unde ut vitae error consequuntur quos deserunt iste voluptas corporis. Ducimus est vel nulla quasi quis consequatur tempora quasi blanditiis.\n  </p>"
+            "code": "<p class=\"s-white-space:pre-line\">\n      Ratione in sed ullam iure qui eos molestiae et eius. Dicta facere voluptatem eos iure earum. Quidem minima dolore illo. Quas laudantium et veritatis voluptas sit magni sed.\n  </p>"
         },
         {
             "language": "html",
             "title": "Pre-wrap",
-            "code": "<p class=\"s-white-space:pre-wrap\">\n      Voluptas ex cum beatae et a labore repellendus blanditiis. In eum voluptatem repellat iure et et porro aliquid eveniet. Sint rerum voluptatem sequi non iusto. Nesciunt repudiandae alias est. Non sunt praesentium voluptates. Maiores quas tenetur sapiente.\n  </p>"
+            "code": "<p class=\"s-white-space:pre-wrap\">\n      Et perferendis placeat. Molestiae et quis soluta repellat earum porro et. Provident excepturi nihil accusamus qui odit veniam dolores excepturi. Explicabo quia nemo ea consequuntur. Ducimus temporibus exercitationem.\n  </p>"
         },
         {
             "language": "html",
             "title": "Revert",
-            "code": "<p class=\"s-white-space:revert\">\n      Non qui eius accusamus odit voluptas animi. Beatae reprehenderit voluptatibus. Fugit vel id ex officia pariatur accusantium.\n  </p>"
+            "code": "<p class=\"s-white-space:revert\">\n      Id ipsam quia dolorem. Illum ut perspiciatis et voluptate. Sit tenetur vero consequatur a provident temporibus similique atque officia.\n  </p>"
         },
         {
             "language": "html",
             "title": "Unset",
-            "code": "<p class=\"s-white-space:unset\">\n      Et ut ut ut. Facilis ut accusamus. Est corrupti alias eveniet iusto aliquid.\n  </p>"
+            "code": "<p class=\"s-white-space:unset\">\n      Nihil ad saepe amet. Et et eveniet in omnis voluptatem. Autem provident mollitia explicabo veritatis qui.\n  </p>"
         }
     ],
     "install": [
@@ -84,9 +84,9 @@
         "email": "olivier.bossel@gmail.com",
         "url": "https://coffeekraken.io"
     },
-    "filename": "index.dev.css",
-    "extension": "dev",
-    "relPath": "dist/css/index.dev.css",
+    "filename": "index.css",
+    "extension": "css",
+    "relPath": "dist/css/index.css",
     "children": {},
     "isDependency": false,
     "package": {
@@ -191,47 +191,47 @@
                 {
                     "language": "html",
                     "title": "Wrap",
-                    "code": "<p class=\"s-white-space:wrap\">\n      Natus id dolorum temporibus. Ut corrupti ab dolores adipisci eum. Ut quo atque. Inventore minus voluptatum tenetur maxime nobis animi iusto. Minus esse ex incidunt. Soluta est eius.\n  </p>"
+                    "code": "<p class=\"s-white-space:wrap\">\n      Libero voluptatem nesciunt voluptatem. Est itaque deserunt sunt dolor debitis est repudiandae illum. Sint repellendus repudiandae est dicta neque enim quisquam nostrum. Cumque consequatur enim voluptatem libero aut consectetur aliquam officia. Natus eum sunt minus. Veritatis rerum magni nihil.\n  </p>"
                 },
                 {
                     "language": "html",
                     "title": "Nowrap",
-                    "code": "<p class=\"s-white-space:nowrap\">\n      Sunt tempore id quam et sint reprehenderit reiciendis. Unde dolores facere magnam eligendi id sed rerum sit aut. Accusamus quo illo temporibus reiciendis deserunt dignissimos et. Vitae et reprehenderit et officiis ut. Ea corporis et necessitatibus et dolores quaerat illum beatae. Dolores quo adipisci culpa voluptas eaque dicta repudiandae.\n  </p>"
+                    "code": "<p class=\"s-white-space:nowrap\">\n      Sit repellat numquam aperiam illo animi perferendis sed. Porro dolorum autem aut. Ut aut molestiae est ut.\n  </p>"
                 },
                 {
                     "language": "html",
                     "title": "Break spaces",
-                    "code": "<p class=\"s-white-space:break-spaces\">\n      Suscipit fugit a expedita magni doloremque ullam aut molestiae nobis. Voluptatem quia labore non a facilis placeat voluptas dolores necessitatibus. Magni quaerat et et nihil. Doloribus enim ducimus similique dolor nulla libero suscipit. Earum voluptatem placeat fugit officiis. Quia autem perspiciatis rem eum fugit in.\n  </p>"
+                    "code": "<p class=\"s-white-space:break-spaces\">\n      Quam veritatis numquam eos fuga odit optio possimus. Autem quibusdam possimus ipsam. Pariatur nihil quidem non reprehenderit optio. Molestiae sit molestiae eligendi voluptas accusantium. Architecto accusantium quia libero id animi sit explicabo nihil.\n  </p>"
                 },
                 {
                     "language": "html",
                     "title": "Normal",
-                    "code": "<p class=\"s-white-space:normal\">\n      Dolorem doloribus occaecati voluptatum est. Ratione dicta assumenda. Suscipit saepe maiores dolores quidem ex qui.\n  </p>"
+                    "code": "<p class=\"s-white-space:normal\">\n      Velit illum et. Corrupti sunt et enim. Facilis nobis omnis corporis harum numquam qui. Sunt voluptatem cum commodi aut voluptatum et. Saepe inventore molestias nemo corrupti eaque. Reprehenderit nulla dolor sed tempore quasi animi fugit qui est.\n  </p>"
                 },
                 {
                     "language": "html",
                     "title": "Pre",
-                    "code": "<p class=\"s-white-space:pre\">\n      Dolore dolor et aut quisquam sint quis. Enim sunt ullam quia non nihil non. Officia animi ratione expedita repellat facilis.\n  </p>"
+                    "code": "<p class=\"s-white-space:pre\">\n      Id quia autem nemo doloribus quos fugit. Saepe recusandae est alias enim. Sed est sint ducimus aut recusandae ea. Adipisci fugit amet sit nostrum et a occaecati quod.\n  </p>"
                 },
                 {
                     "language": "html",
                     "title": "Pre-line",
-                    "code": "<p class=\"s-white-space:pre-line\">\n      Molestiae id ad suscipit doloribus pariatur et. Voluptatem repellendus commodi laboriosam similique. Unde ut vitae error consequuntur quos deserunt iste voluptas corporis. Ducimus est vel nulla quasi quis consequatur tempora quasi blanditiis.\n  </p>"
+                    "code": "<p class=\"s-white-space:pre-line\">\n      Ratione in sed ullam iure qui eos molestiae et eius. Dicta facere voluptatem eos iure earum. Quidem minima dolore illo. Quas laudantium et veritatis voluptas sit magni sed.\n  </p>"
                 },
                 {
                     "language": "html",
                     "title": "Pre-wrap",
-                    "code": "<p class=\"s-white-space:pre-wrap\">\n      Voluptas ex cum beatae et a labore repellendus blanditiis. In eum voluptatem repellat iure et et porro aliquid eveniet. Sint rerum voluptatem sequi non iusto. Nesciunt repudiandae alias est. Non sunt praesentium voluptates. Maiores quas tenetur sapiente.\n  </p>"
+                    "code": "<p class=\"s-white-space:pre-wrap\">\n      Et perferendis placeat. Molestiae et quis soluta repellat earum porro et. Provident excepturi nihil accusamus qui odit veniam dolores excepturi. Explicabo quia nemo ea consequuntur. Ducimus temporibus exercitationem.\n  </p>"
                 },
                 {
                     "language": "html",
                     "title": "Revert",
-                    "code": "<p class=\"s-white-space:revert\">\n      Non qui eius accusamus odit voluptas animi. Beatae reprehenderit voluptatibus. Fugit vel id ex officia pariatur accusantium.\n  </p>"
+                    "code": "<p class=\"s-white-space:revert\">\n      Id ipsam quia dolorem. Illum ut perspiciatis et voluptate. Sit tenetur vero consequatur a provident temporibus similique atque officia.\n  </p>"
                 },
                 {
                     "language": "html",
                     "title": "Unset",
-                    "code": "<p class=\"s-white-space:unset\">\n      Et ut ut ut. Facilis ut accusamus. Est corrupti alias eveniet iusto aliquid.\n  </p>"
+                    "code": "<p class=\"s-white-space:unset\">\n      Nihil ad saepe amet. Et et eveniet in omnis voluptatem. Autem provident mollitia explicabo veritatis qui.\n  </p>"
                 }
             ],
             "since": "2.0.0",
@@ -240,7 +240,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name          White space\n* @namespace          sugar.style.helpers.whiteSpace\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/white-space\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply some white-space style on any HTMLElement\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* @s.whiteSpace.classes;\n*\n* @cssClass         s-white-space:wrap             Apply the `white-space` to `wrap`\n* @cssClass         s-white-space:nowrap             Apply the `white-space` to `nowrap`\n* @cssClass         s-white-space:break-spaces             Apply the `white-space` to `break-spaces`\n* @cssClass         s-white-space:normal             Apply the `white-space` to `normal`\n* @cssClass         s-white-space:pre             Apply the `white-space` to `pre`\n* @cssClass         s-white-space:pre-line             Apply the `white-space` to `pre-line`\n* @cssClass         s-white-space:pre-wrap             Apply the `white-space` to `pre-wrap`\n* @cssClass         s-white-space:revert             Apply the `white-space` to `revert`\n* @cssClass         s-white-space:unset             Apply the `white-space` to `unset`\n*\n* @example        html          Wrap\n*   <p class=\"s-white-space:wrap\">\n*       Natus id dolorum temporibus. Ut corrupti ab dolores adipisci eum. Ut quo atque. Inventore minus voluptatum tenetur maxime nobis animi iusto. Minus esse ex incidunt. Soluta est eius.\n*   </p>\n*\n* @example      html            Nowrap\n*   <p class=\"s-white-space:nowrap\">\n*       Sunt tempore id quam et sint reprehenderit reiciendis. Unde dolores facere magnam eligendi id sed rerum sit aut. Accusamus quo illo temporibus reiciendis deserunt dignissimos et. Vitae et reprehenderit et officiis ut. Ea corporis et necessitatibus et dolores quaerat illum beatae. Dolores quo adipisci culpa voluptas eaque dicta repudiandae.\n*   </p>\n*\n* @example          html            Break spaces\n*   <p class=\"s-white-space:break-spaces\">\n*       Suscipit fugit a expedita magni doloremque ullam aut molestiae nobis. Voluptatem quia labore non a facilis placeat voluptas dolores necessitatibus. Magni quaerat et et nihil. Doloribus enim ducimus similique dolor nulla libero suscipit. Earum voluptatem placeat fugit officiis. Quia autem perspiciatis rem eum fugit in.\n*   </p>\n*\n* @example          html                Normal\n*   <p class=\"s-white-space:normal\">\n*       Dolorem doloribus occaecati voluptatum est. Ratione dicta assumenda. Suscipit saepe maiores dolores quidem ex qui.\n*   </p>\n*\n* @example      html            Pre\n*   <p class=\"s-white-space:pre\">\n*       Dolore dolor et aut quisquam sint quis. Enim sunt ullam quia non nihil non. Officia animi ratione expedita repellat facilis.\n*   </p>\n*\n* @example      html            Pre-line\n*   <p class=\"s-white-space:pre-line\">\n*       Molestiae id ad suscipit doloribus pariatur et. Voluptatem repellendus commodi laboriosam similique. Unde ut vitae error consequuntur quos deserunt iste voluptas corporis. Ducimus est vel nulla quasi quis consequatur tempora quasi blanditiis.\n*   </p>\n*\n* @example      html            Pre-wrap\n*   <p class=\"s-white-space:pre-wrap\">\n*       Voluptas ex cum beatae et a labore repellendus blanditiis. In eum voluptatem repellat iure et et porro aliquid eveniet. Sint rerum voluptatem sequi non iusto. Nesciunt repudiandae alias est. Non sunt praesentium voluptates. Maiores quas tenetur sapiente.\n*   </p>\n*\n* @example          html            Revert\n*   <p class=\"s-white-space:revert\">\n*       Non qui eius accusamus odit voluptas animi. Beatae reprehenderit voluptatibus. Fugit vel id ex officia pariatur accusantium.\n*   </p>\n*\n* @example          html                Unset\n*   <p class=\"s-white-space:unset\">\n*       Et ut ut ut. Facilis ut accusamus. Est corrupti alias eveniet iusto aliquid.\n*   </p>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name          White space\n* @namespace          sugar.style.helpers.whiteSpace\n* @type               Styleguide\n* @menu           Styleguide / Helpers        /styleguide/helpers/white-space\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply some white-space style on any HTMLElement\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* @s.whiteSpace.classes;\n*\n* @cssClass         s-white-space:wrap             Apply the `white-space` to `wrap`\n* @cssClass         s-white-space:nowrap             Apply the `white-space` to `nowrap`\n* @cssClass         s-white-space:break-spaces             Apply the `white-space` to `break-spaces`\n* @cssClass         s-white-space:normal             Apply the `white-space` to `normal`\n* @cssClass         s-white-space:pre             Apply the `white-space` to `pre`\n* @cssClass         s-white-space:pre-line             Apply the `white-space` to `pre-line`\n* @cssClass         s-white-space:pre-wrap             Apply the `white-space` to `pre-wrap`\n* @cssClass         s-white-space:revert             Apply the `white-space` to `revert`\n* @cssClass         s-white-space:unset             Apply the `white-space` to `unset`\n*\n* @example        html          Wrap\n*   <p class=\"s-white-space:wrap\">\n*       Libero voluptatem nesciunt voluptatem. Est itaque deserunt sunt dolor debitis est repudiandae illum. Sint repellendus repudiandae est dicta neque enim quisquam nostrum. Cumque consequatur enim voluptatem libero aut consectetur aliquam officia. Natus eum sunt minus. Veritatis rerum magni nihil.\n*   </p>\n*\n* @example      html            Nowrap\n*   <p class=\"s-white-space:nowrap\">\n*       Sit repellat numquam aperiam illo animi perferendis sed. Porro dolorum autem aut. Ut aut molestiae est ut.\n*   </p>\n*\n* @example          html            Break spaces\n*   <p class=\"s-white-space:break-spaces\">\n*       Quam veritatis numquam eos fuga odit optio possimus. Autem quibusdam possimus ipsam. Pariatur nihil quidem non reprehenderit optio. Molestiae sit molestiae eligendi voluptas accusantium. Architecto accusantium quia libero id animi sit explicabo nihil.\n*   </p>\n*\n* @example          html                Normal\n*   <p class=\"s-white-space:normal\">\n*       Velit illum et. Corrupti sunt et enim. Facilis nobis omnis corporis harum numquam qui. Sunt voluptatem cum commodi aut voluptatum et. Saepe inventore molestias nemo corrupti eaque. Reprehenderit nulla dolor sed tempore quasi animi fugit qui est.\n*   </p>\n*\n* @example      html            Pre\n*   <p class=\"s-white-space:pre\">\n*       Id quia autem nemo doloribus quos fugit. Saepe recusandae est alias enim. Sed est sint ducimus aut recusandae ea. Adipisci fugit amet sit nostrum et a occaecati quod.\n*   </p>\n*\n* @example      html            Pre-line\n*   <p class=\"s-white-space:pre-line\">\n*       Ratione in sed ullam iure qui eos molestiae et eius. Dicta facere voluptatem eos iure earum. Quidem minima dolore illo. Quas laudantium et veritatis voluptas sit magni sed.\n*   </p>\n*\n* @example      html            Pre-wrap\n*   <p class=\"s-white-space:pre-wrap\">\n*       Et perferendis placeat. Molestiae et quis soluta repellat earum porro et. Provident excepturi nihil accusamus qui odit veniam dolores excepturi. Explicabo quia nemo ea consequuntur. Ducimus temporibus exercitationem.\n*   </p>\n*\n* @example          html            Revert\n*   <p class=\"s-white-space:revert\">\n*       Id ipsam quia dolorem. Illum ut perspiciatis et voluptate. Sit tenetur vero consequatur a provident temporibus similique atque officia.\n*   </p>\n*\n* @example          html                Unset\n*   <p class=\"s-white-space:unset\">\n*       Nihil ad saepe amet. Et et eveniet in omnis voluptatem. Autem provident mollitia explicabo veritatis qui.\n*   </p>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@website.sugarcss-coffeekraken-io.sugar.style.helpers.whiteSpace.White-space"
         }
     ]

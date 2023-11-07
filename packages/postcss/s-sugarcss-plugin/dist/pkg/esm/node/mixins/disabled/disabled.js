@@ -1,0 +1,50 @@
+import __SInterface from '@coffeekraken/s-interface';
+import __STheme from '@coffeekraken/s-theme';
+/**
+ * @name           disabled
+ * @as              @s.disabled
+ * @namespace      node.mixin.disabled
+ * @type           PostcssMixin
+ * @platform      postcss
+ * @status        stable
+ *
+ * This mixin allows you to apply a the disabled styling to any HTMLElement.
+ *
+ * @return        {Css}         The generated css
+ *
+ * @snippet         @s.disabled
+ *
+ * @example        css
+ * .my-element {
+ *    @s.disabled();
+ * }
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+class SSugarcssPluginDisabledInterface extends __SInterface {
+    static get _definition() {
+        return {};
+    }
+}
+export { SSugarcssPluginDisabledInterface as interface };
+export default function ({ params, atRule, replaceWith, }) {
+    const finalParams = Object.assign({}, params);
+    const vars = [];
+    vars.push(`
+        pointer-events: none;
+        opacity: ${__STheme.cssVar('helpers.disabled.opacity')} !important;
+        
+        &:hover, &:focus, &:active {
+            opacity: ${__STheme.cssVar('helpers.disabled.opacity')} !important;
+        }
+
+        &, * {
+            cursor: not-allowed !important;
+            user-select: none !important;
+        }
+
+    `);
+    return vars;
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FxQkc7QUFFSCxNQUFNLGdDQUFpQyxTQUFRLFlBQVk7SUFDdkQsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTyxFQUFFLENBQUM7SUFDZCxDQUFDO0NBQ0o7QUFJRCxPQUFPLEVBQUUsZ0NBQWdDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFekQsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsR0FLZDtJQUNHLE1BQU0sV0FBVyxxQkFDVixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixJQUFJLENBQUMsSUFBSSxDQUFDOzttQkFFSyxRQUFRLENBQUMsTUFBTSxDQUFDLDBCQUEwQixDQUFDOzs7dUJBR3ZDLFFBQVEsQ0FBQyxNQUFNLENBQUMsMEJBQTBCLENBQUM7Ozs7Ozs7O0tBUTdELENBQUMsQ0FBQztJQUVILE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==

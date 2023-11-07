@@ -182,7 +182,7 @@ export default class SMedia extends __SClass {
                 mediaQueryConfig = this._media.queries[mediaName];
                 if (!mediaQueryConfig)
                     throw new Error(
-                        `<red>[postcssSugarPlugin.media]</red> Sorry but the requested media "<yellow>${mediaName}</yellow>" does not exists in the config. Here's the available medias: ${Object.keys(
+                        `<red>[sugarcssPlugin.media]</red> Sorry but the requested media "<yellow>${mediaName}</yellow>" does not exists in the config. Here's the available medias: ${Object.keys(
                             this._media.queries,
                         )
                             .map((l) => `<green>${l}</green>`)

@@ -26,7 +26,7 @@ import __glob from 'glob';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-class postcssSugarPluginViewMixinInterface extends __SInterface {
+class SSugarcssPluginViewMixinInterface extends __SInterface {
     static get _definition() {
         return {
             viewPath: {
@@ -52,9 +52,9 @@ class postcssSugarPluginViewMixinInterface extends __SInterface {
         };
     }
 }
-export { postcssSugarPluginViewMixinInterface as interface };
+export { SSugarcssPluginViewMixinInterface as interface };
 
-export interface postcssSugarPluginViewMixinParams {
+export interface sugarcssPluginViewMixinParams {
     viewPath: string;
     lnf: string;
     scope: ('bare' | 'lnf')[];
@@ -148,14 +148,14 @@ export default function ({
     getRoot,
     postcssApi,
 }: {
-    params: Partial<postcssSugarPluginViewMixinParams>;
+    params: Partial<sugarcssPluginViewMixinParams>;
     atRule: any;
     settings: any;
     postcss: any;
     getRoot: Function;
     postcssApi: any;
 }) {
-    const finalParams = <postcssSugarPluginViewMixinParams>{
+    const finalParams = <sugarcssPluginViewMixinParams>{
         viewPath: null,
         scope: ['bare', 'lnf'],
         ...(params ?? {}),

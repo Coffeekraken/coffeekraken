@@ -29,32 +29,32 @@
         {
             "language": "html",
             "title": "dl",
-            "code": "<ul class=\"s-list:dl \">\n    <li>Global Quality Manager Kristi Wisozk</li>\n    <li>Dynamic Markets Liaison Mr. Eva Larkin</li>\n    <li>Product Communications Specialist Dana Marquardt</li>\n  </ul>"
+            "code": "<ul class=\"s-list:dl \">\n    <li>Central Assurance Consultant Donnie Champlin MD</li>\n    <li>Corporate Assurance Associate Amy Hettinger</li>\n    <li>Global Paradigm Officer Mr. Norman O'Connell</li>\n  </ul>"
         },
         {
             "language": "html",
             "title": "ul",
-            "code": "<ul class=\"s-list:ul \">\n    <li>Lead Tactics Assistant Jeannette Russel</li>\n    <li>Direct Program Coordinator Allen Leuschke</li>\n    <li>Future Research Director Geneva Feest DVM</li>\n  </ul>"
+            "code": "<ul class=\"s-list:ul \">\n    <li>Global Program Assistant Edward Schmitt</li>\n    <li>Principal Metrics Consultant Ernesto Gibson</li>\n    <li>Central Accountability Assistant Nelson Lebsack</li>\n  </ul>"
         },
         {
             "language": "html",
             "title": "ol",
-            "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>Legacy Markets Analyst Elsie Yundt</li>\n    <li>Product Data Director Cesar Schultz</li>\n    <li>Corporate Program Orchestrator Brooke Collins</li>\n  </ul>"
+            "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>Legacy Marketing Consultant Jodi Kunde</li>\n    <li>Senior Tactics Orchestrator Molly Block</li>\n    <li>Direct Optimization Supervisor Erica Harvey</li>\n  </ul>"
         },
         {
             "language": "html",
             "title": "icon",
-            "code": "<ul class=\"s-list:icon \">\n    <li><i class=\"s-icon:user\"></i>Dynamic Operations Engineer Russell Wintheiser</li>\n    <li><i class=\"s-icon:heart s-color:accent\"></i>National Brand Manager Myrtle Jerde</li>\n    <li><i class=\"s-icon:fire s-color:error\"></i>Customer Mobility Administrator Mrs. Wayne DuBuque</li>\n  </ul>"
+            "code": "<ul class=\"s-list:icon \">\n    <li><i class=\"s-icon:user\"></i>Direct Metrics Designer Catherine McLaughlin</li>\n    <li><i class=\"s-icon:heart s-color:accent\"></i>Future Data Agent Tony Spencer</li>\n    <li><i class=\"s-icon:fire s-color:error\"></i>Lead Factors Facilitator Bridget Crist</li>\n  </ul>"
         },
         {
             "language": "html",
             "title": "RTL Support",
-            "code": "<div dir=\"rtl\">\n  <ul class=\"s-list:ul s-color:accent s-mbe:30\">\n    <li>Central Branding Agent Dan Bernier</li>\n    <li>Chief Security Executive Alma Greenfelder</li>\n  </ul>\n  <ul class=\"s-list:ol s-color:accent s-mbe:30\">\n    <li>Principal Program Producer Roger Hammes</li>\n    <li>Global Creative Manager Alan Lehner</li>\n  </ul>\n  <ul class=\"s-list:icon s-color:accent s-mbe:30\">\n    <li><i class=\"s-icon:user\"></i> Regional Research Supervisor Garry Mertz</li>\n    <li><i class=\"s-icon:heart s-color:error\"></i> District Paradigm Officer Kelvin Huel</li>\n  </ul>\n</div>"
+            "code": "<div dir=\"rtl\">\n  <ul class=\"s-list:ul s-color:accent s-mbe:30\">\n    <li>Corporate Web Consultant Cynthia Pagac</li>\n    <li>Dynamic Usability Manager Doris Deckow</li>\n  </ul>\n  <ul class=\"s-list:ol s-color:accent s-mbe:30\">\n    <li>Internal Accounts Analyst Everett Walsh</li>\n    <li>Global Directives Technician Frank Kub</li>\n  </ul>\n  <ul class=\"s-list:icon s-color:accent s-mbe:30\">\n    <li><i class=\"s-icon:user\"></i> International Paradigm Liaison Eric Thiel</li>\n    <li><i class=\"s-icon:heart s-color:error\"></i> Customer Solutions Specialist Audrey Kirlin</li>\n  </ul>\n</div>"
         },
         {
             "language": "html",
             "title": "Colors (none-exhaustive)",
-            "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>Principal Marketing Consultant Miss Christie McKenzie</li>\n    <li class=\"s-color:complementary\">Global Group Administrator Joyce Grady</li>\n    <li class=\"s-color:error\">Lead Brand Executive Lora Dickens</li>\n  </ul>"
+            "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>Principal Data Producer Delbert Lebsack</li>\n    <li class=\"s-color:complementary\">Principal Interactions Manager Walter Schaden</li>\n    <li class=\"s-color:error\">Forward Group Strategist Byron Wisozk</li>\n  </ul>"
         }
     ],
     "install": [
@@ -69,9 +69,9 @@
         "email": "olivier.bossel@gmail.com",
         "url": "https://coffeekraken.io"
     },
-    "filename": "index.dev.css",
-    "extension": "dev",
-    "relPath": "dist/css/index.dev.css",
+    "filename": "index.css",
+    "extension": "css",
+    "relPath": "dist/css/index.css",
     "isDependency": false,
     "package": {
         "name": "@website/sugarcss-coffeekraken-io",
@@ -161,32 +161,32 @@
                 {
                     "language": "html",
                     "title": "dl",
-                    "code": "<ul class=\"s-list:dl \">\n    <li>Global Quality Manager Kristi Wisozk</li>\n    <li>Dynamic Markets Liaison Mr. Eva Larkin</li>\n    <li>Product Communications Specialist Dana Marquardt</li>\n  </ul>"
+                    "code": "<ul class=\"s-list:dl \">\n    <li>Central Assurance Consultant Donnie Champlin MD</li>\n    <li>Corporate Assurance Associate Amy Hettinger</li>\n    <li>Global Paradigm Officer Mr. Norman O'Connell</li>\n  </ul>"
                 },
                 {
                     "language": "html",
                     "title": "ul",
-                    "code": "<ul class=\"s-list:ul \">\n    <li>Lead Tactics Assistant Jeannette Russel</li>\n    <li>Direct Program Coordinator Allen Leuschke</li>\n    <li>Future Research Director Geneva Feest DVM</li>\n  </ul>"
+                    "code": "<ul class=\"s-list:ul \">\n    <li>Global Program Assistant Edward Schmitt</li>\n    <li>Principal Metrics Consultant Ernesto Gibson</li>\n    <li>Central Accountability Assistant Nelson Lebsack</li>\n  </ul>"
                 },
                 {
                     "language": "html",
                     "title": "ol",
-                    "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>Legacy Markets Analyst Elsie Yundt</li>\n    <li>Product Data Director Cesar Schultz</li>\n    <li>Corporate Program Orchestrator Brooke Collins</li>\n  </ul>"
+                    "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>Legacy Marketing Consultant Jodi Kunde</li>\n    <li>Senior Tactics Orchestrator Molly Block</li>\n    <li>Direct Optimization Supervisor Erica Harvey</li>\n  </ul>"
                 },
                 {
                     "language": "html",
                     "title": "icon",
-                    "code": "<ul class=\"s-list:icon \">\n    <li><i class=\"s-icon:user\"></i>Dynamic Operations Engineer Russell Wintheiser</li>\n    <li><i class=\"s-icon:heart s-color:accent\"></i>National Brand Manager Myrtle Jerde</li>\n    <li><i class=\"s-icon:fire s-color:error\"></i>Customer Mobility Administrator Mrs. Wayne DuBuque</li>\n  </ul>"
+                    "code": "<ul class=\"s-list:icon \">\n    <li><i class=\"s-icon:user\"></i>Direct Metrics Designer Catherine McLaughlin</li>\n    <li><i class=\"s-icon:heart s-color:accent\"></i>Future Data Agent Tony Spencer</li>\n    <li><i class=\"s-icon:fire s-color:error\"></i>Lead Factors Facilitator Bridget Crist</li>\n  </ul>"
                 },
                 {
                     "language": "html",
                     "title": "RTL Support",
-                    "code": "<div dir=\"rtl\">\n  <ul class=\"s-list:ul s-color:accent s-mbe:30\">\n    <li>Central Branding Agent Dan Bernier</li>\n    <li>Chief Security Executive Alma Greenfelder</li>\n  </ul>\n  <ul class=\"s-list:ol s-color:accent s-mbe:30\">\n    <li>Principal Program Producer Roger Hammes</li>\n    <li>Global Creative Manager Alan Lehner</li>\n  </ul>\n  <ul class=\"s-list:icon s-color:accent s-mbe:30\">\n    <li><i class=\"s-icon:user\"></i> Regional Research Supervisor Garry Mertz</li>\n    <li><i class=\"s-icon:heart s-color:error\"></i> District Paradigm Officer Kelvin Huel</li>\n  </ul>\n</div>"
+                    "code": "<div dir=\"rtl\">\n  <ul class=\"s-list:ul s-color:accent s-mbe:30\">\n    <li>Corporate Web Consultant Cynthia Pagac</li>\n    <li>Dynamic Usability Manager Doris Deckow</li>\n  </ul>\n  <ul class=\"s-list:ol s-color:accent s-mbe:30\">\n    <li>Internal Accounts Analyst Everett Walsh</li>\n    <li>Global Directives Technician Frank Kub</li>\n  </ul>\n  <ul class=\"s-list:icon s-color:accent s-mbe:30\">\n    <li><i class=\"s-icon:user\"></i> International Paradigm Liaison Eric Thiel</li>\n    <li><i class=\"s-icon:heart s-color:error\"></i> Customer Solutions Specialist Audrey Kirlin</li>\n  </ul>\n</div>"
                 },
                 {
                     "language": "html",
                     "title": "Colors (none-exhaustive)",
-                    "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>Principal Marketing Consultant Miss Christie McKenzie</li>\n    <li class=\"s-color:complementary\">Global Group Administrator Joyce Grady</li>\n    <li class=\"s-color:error\">Lead Brand Executive Lora Dickens</li>\n  </ul>"
+                    "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>Principal Data Producer Delbert Lebsack</li>\n    <li class=\"s-color:complementary\">Principal Interactions Manager Walter Schaden</li>\n    <li class=\"s-color:error\">Forward Group Strategist Byron Wisozk</li>\n  </ul>"
                 }
             ],
             "since": "2.0.0",
@@ -195,7 +195,7 @@
                 "email": "olivier.bossel@gmail.com",
                 "url": "https://coffeekraken.io"
             },
-            "raw": "/**\n*\n* @name          List\n* @namespace          sugar.style.ui.list\n* @type               Styleguide\n* @menu           Styleguide / UI        /styleguide/ui/lists\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply list lnfs to any ul, ol, dl, etc...\n*\n* @feature          Support for vertical rhythm through the `s-rhythm:vertical` class\n* @feature          Support for text formatting through the `s-format:text` class\n* @feature          Support for scaling through the `s-scale:...` class\n* @feature          Support for colorizing through the `s-color:...` class\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* @s.ui.list.classes;\n*\n* .my-list {\n*   @s.ui.list;\n* }\n*\n* @cssClass     s-list           Apply the dl list lnf\n* @cssClass     s-list:ul           Apply the ul list lnf\n* @cssClass     s-list:ol           Apply the ol list lnf\n* @cssClass     s-list:icon           Apply the icon list lnf\n*\n* @example        html       dl\n*   <ul class=\"s-list:dl \">\n*     <li>Global Quality Manager Kristi Wisozk</li>\n*     <li>Dynamic Markets Liaison Mr. Eva Larkin</li>\n*     <li>Product Communications Specialist Dana Marquardt</li>\n*   </ul>\n*\n* @example        html       ul\n*   <ul class=\"s-list:ul \">\n*     <li>Lead Tactics Assistant Jeannette Russel</li>\n*     <li>Direct Program Coordinator Allen Leuschke</li>\n*     <li>Future Research Director Geneva Feest DVM</li>\n*   </ul>\n*\n* @example        html       ol\n*   <ul class=\"s-list:ol s-color:accent\">\n*     <li>Legacy Markets Analyst Elsie Yundt</li>\n*     <li>Product Data Director Cesar Schultz</li>\n*     <li>Corporate Program Orchestrator Brooke Collins</li>\n*   </ul>\n*\n* @example        html       icon\n*   <ul class=\"s-list:icon \">\n*     <li><i class=\"s-icon:user\"></i>Dynamic Operations Engineer Russell Wintheiser</li>\n*     <li><i class=\"s-icon:heart s-color:accent\"></i>National Brand Manager Myrtle Jerde</li>\n*     <li><i class=\"s-icon:fire s-color:error\"></i>Customer Mobility Administrator Mrs. Wayne DuBuque</li>\n*   </ul>\n*\n*\n* @example        html          RTL Support\n* <div dir=\"rtl\">\n*   <ul class=\"s-list:ul s-color:accent s-mbe:30\">\n*     <li>Central Branding Agent Dan Bernier</li>\n*     <li>Chief Security Executive Alma Greenfelder</li>\n*   </ul>\n*   <ul class=\"s-list:ol s-color:accent s-mbe:30\">\n*     <li>Principal Program Producer Roger Hammes</li>\n*     <li>Global Creative Manager Alan Lehner</li>\n*   </ul>\n*   <ul class=\"s-list:icon s-color:accent s-mbe:30\">\n*     <li><i class=\"s-icon:user\"></i> Regional Research Supervisor Garry Mertz</li>\n*     <li><i class=\"s-icon:heart s-color:error\"></i> District Paradigm Officer Kelvin Huel</li>\n*   </ul>\n* </div>\n*\n* @example          html         Colors (none-exhaustive)\n*   <ul class=\"s-list:ol s-color:accent\">\n*     <li>Principal Marketing Consultant Miss Christie McKenzie</li>\n*     <li class=\"s-color:complementary\">Global Group Administrator Joyce Grady</li>\n*     <li class=\"s-color:error\">Lead Brand Executive Lora Dickens</li>\n*   </ul>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
+            "raw": "/**\n*\n* @name          List\n* @namespace          sugar.style.ui.list\n* @type               Styleguide\n* @menu           Styleguide / UI        /styleguide/ui/lists\n* @platform       css\n* @status       stable\n*\n* These classes allows you to apply list lnfs to any ul, ol, dl, etc...\n*\n* @feature          Support for vertical rhythm through the `s-rhythm:vertical` class\n* @feature          Support for text formatting through the `s-format:text` class\n* @feature          Support for scaling through the `s-scale:...` class\n* @feature          Support for colorizing through the `s-color:...` class\n*\n* @support          chromium\n* @support          firefox\n* @support          safari\n* @support          edge\n*\n* @install          css\n* @s.ui.list.classes;\n*\n* .my-list {\n*   @s.ui.list;\n* }\n*\n* @cssClass     s-list           Apply the dl list lnf\n* @cssClass     s-list:ul           Apply the ul list lnf\n* @cssClass     s-list:ol           Apply the ol list lnf\n* @cssClass     s-list:icon           Apply the icon list lnf\n*\n* @example        html       dl\n*   <ul class=\"s-list:dl \">\n*     <li>Central Assurance Consultant Donnie Champlin MD</li>\n*     <li>Corporate Assurance Associate Amy Hettinger</li>\n*     <li>Global Paradigm Officer Mr. Norman O'Connell</li>\n*   </ul>\n*\n* @example        html       ul\n*   <ul class=\"s-list:ul \">\n*     <li>Global Program Assistant Edward Schmitt</li>\n*     <li>Principal Metrics Consultant Ernesto Gibson</li>\n*     <li>Central Accountability Assistant Nelson Lebsack</li>\n*   </ul>\n*\n* @example        html       ol\n*   <ul class=\"s-list:ol s-color:accent\">\n*     <li>Legacy Marketing Consultant Jodi Kunde</li>\n*     <li>Senior Tactics Orchestrator Molly Block</li>\n*     <li>Direct Optimization Supervisor Erica Harvey</li>\n*   </ul>\n*\n* @example        html       icon\n*   <ul class=\"s-list:icon \">\n*     <li><i class=\"s-icon:user\"></i>Direct Metrics Designer Catherine McLaughlin</li>\n*     <li><i class=\"s-icon:heart s-color:accent\"></i>Future Data Agent Tony Spencer</li>\n*     <li><i class=\"s-icon:fire s-color:error\"></i>Lead Factors Facilitator Bridget Crist</li>\n*   </ul>\n*\n*\n* @example        html          RTL Support\n* <div dir=\"rtl\">\n*   <ul class=\"s-list:ul s-color:accent s-mbe:30\">\n*     <li>Corporate Web Consultant Cynthia Pagac</li>\n*     <li>Dynamic Usability Manager Doris Deckow</li>\n*   </ul>\n*   <ul class=\"s-list:ol s-color:accent s-mbe:30\">\n*     <li>Internal Accounts Analyst Everett Walsh</li>\n*     <li>Global Directives Technician Frank Kub</li>\n*   </ul>\n*   <ul class=\"s-list:icon s-color:accent s-mbe:30\">\n*     <li><i class=\"s-icon:user\"></i> International Paradigm Liaison Eric Thiel</li>\n*     <li><i class=\"s-icon:heart s-color:error\"></i> Customer Solutions Specialist Audrey Kirlin</li>\n*   </ul>\n* </div>\n*\n* @example          html         Colors (none-exhaustive)\n*   <ul class=\"s-list:ol s-color:accent\">\n*     <li>Principal Data Producer Delbert Lebsack</li>\n*     <li class=\"s-color:complementary\">Principal Interactions Manager Walter Schaden</li>\n*     <li class=\"s-color:error\">Forward Group Strategist Byron Wisozk</li>\n*   </ul>\n*\n* @since      2.0.0\n* @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n\n*/",
             "id": "@website.sugarcss-coffeekraken-io.sugar.style.ui.list.List"
         }
     ]

@@ -1,6 +1,6 @@
 {% if not sections or 'banner' in sections %}
 <!-- image -->
-![{{ config.package.json.name }}]({{ config.readme.layout.bannerImageUrl }})
+![{{ config.package.json.name }}]({{ config.readme.layout.bannerImageUrl }}?v={{ random() }})
 {% endif %}
 
 {% if not sections or 'header' in sections %}

@@ -3,7 +3,7 @@
      !!! Do not edit it directly... -->
 
 <!-- image -->
-![@coffeekraken/coffeekraken](https://cdnv2.coffeekraken.io/global/readme-header.png)
+![@coffeekraken/coffeekraken](https://cdnv2.coffeekraken.io/global/readme-header.png?v=1815689602)
 
 <!-- header -->
 # @coffeekraken/coffeekraken

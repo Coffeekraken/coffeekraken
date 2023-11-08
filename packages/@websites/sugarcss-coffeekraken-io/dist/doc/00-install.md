@@ -25,7 +25,7 @@ Out stylekit works on top of [PostCSS](https://postcss.org/). So you will need t
 
 ```bash
 
-npm i postcss @coffeekraken/s-postcss-sugar-plugin -D
+npm i postcss @coffeekraken/s-sugarcss-plugin -D
 
 ```
 
@@ -33,7 +33,7 @@ Then, all you need to do is to create a `postcss.config.js` file at the root of 
 
 ```js
 module.exports = {
-  plugins: [require('@coffeekraken/s-postcss-sugar-plugin')],
+  plugins: [require('@coffeekraken/s-sugarcss-plugin')],
   // all the other plugins you want here...
 };
 

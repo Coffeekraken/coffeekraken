@@ -21,7 +21,7 @@
 
 # Mixins
 
-The `postcssSugarPlugin` gives you access to a tone of useful mixins that can help you stay more coherent and clean in your css files. Here's a none exhaustive list of available mixins:
+The `sugarcssPlugin` gives you access to a tone of useful mixins that can help you stay more coherent and clean in your css files. Here's a none exhaustive list of available mixins:
 
 - `@s.color(accent);`: Apply the **accent** color to the element and his children
 - `@s.depth(50);`: Apply the **50** depth to the element

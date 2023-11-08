@@ -13,14 +13,16 @@
         </div>
 
         <div class="_illustration">
-            <img class="_cup-bkg" s-parallax amount-x="0.05" amount-y="0" src="/dist/img/cup-bkg.png" alt="Coffeekraken coffee cup background" />
+            <img class="_cup-bkg -light" s-parallax amount-x="0.05" amount-y="0" src="/dist/img/cup-bkg-light.png" alt="Coffeekraken coffee cup background" />
+            <img class="_cup-bkg -dark" s-parallax amount-x="0.05" amount-y="0" src="/dist/img/cup-bkg.png" alt="Coffeekraken coffee cup background" />
             <div class="_round _round-1" s-parallax amount-x="0.2" amount-y="0.03">
                 <i class="s-icon:display"></i>
             </div>
             <div class="_round _round-2" s-parallax amount-x="0.1" amount-y="0.1"></div>
             <div class="_round _round-6" s-parallax amount-x="0.15" amount-y="0.16"></div>
             <video class="_cup-smoke" src="/dist/video/cup-smoke.webm" s-parallax amount-x="0.03" amount-y="0" autoplay muted loop></video>
-            <img class="_cup" src="/dist/img/cup.png" s-parallax amount-x="0.03" amount-y="0" alt="Coffeekraken coffee cup" />
+            <img class="_cup -light" src="/dist/img/cup-light.png" s-parallax amount-x="0.03" amount-y="0" alt="Coffeekraken coffee cup" />
+            <img class="_cup -dark" src="/dist/img/cup.png" s-parallax amount-x="0.03" amount-y="0" alt="Coffeekraken coffee cup" />
             <div class="_round _round-3" s-parallax amount-x="0.1" amount-y="0.05"></div>
             <div class="_round _round-4" s-parallax amount-x="0.54" amount-y="0.1" amount-r="0.2">
                 <i class="s-icon:brush"></i>

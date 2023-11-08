@@ -44,6 +44,8 @@ Here's the complete list of available theme configuration files:
 - [`themeClassmap.config.ts`](/config/explorer/themeClassmap)
 - [`themeCoffeekraken.config.ts`](/config/explorer/themeCoffeekraken)
 - [`themeCoffeekrakenDark.config.ts`](/config/explorer/themeCoffeekrakenDark)
+- [`themeCoffeekrakenLight.config.ts`](/config/explorer/themeCoffeekrakenLight)
+- [`themeCoffeekrakenLight.js.config.ts`](/config/explorer/themeCoffeekrakenLight.js)
 - [`themeColor.config.ts`](/config/explorer/themeColor)
 - [`themeColorSchemaDark.config.ts`](/config/explorer/themeColorSchemaDark)
 - [`themeColorSchemaLight.config.ts`](/config/explorer/themeColorSchemaLight)

@@ -110,10 +110,18 @@
         }
 
         ._cup-bkg {
-            display: none;
-
+            &.-light {
+            }
+            &.-dark {
+                display: none;
+            }
             @s.theme dark {
-                display: inherit;
+                &.-light {
+                    display: none;
+                }
+                &.-dark {
+                    display: inherit;
+                }
             }
         }
 
@@ -197,6 +205,20 @@
             bottom: 50px;
             left: 50%;
             transform: translate(-50%, 0);
+
+            &.-light {
+            }
+            &.-dark {
+                display: none;
+            }
+            @s.theme dark {
+                &.-light {
+                    display: none;
+                }
+                &.-dark {
+                    display: inherit;
+                }
+            }
         }
         ._cup-smoke {
             position: absolute;
@@ -204,11 +226,12 @@
             bottom: 250px;
             left: calc(50% + 50px);
             transform: translate(-50%, 0);
-            opacity: 0.15;
+            opacity: 0.2;
             filter: invert(1);
 
             @s.theme dark {
                 opacity: 0.3;
+                filter: none;
             }
         }
     }

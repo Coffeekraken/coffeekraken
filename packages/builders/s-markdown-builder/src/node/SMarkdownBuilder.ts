@@ -80,7 +80,6 @@ export interface ISMarkdownBuilderResult {
     inputFile?: __SFile;
     outputFile?: __SFile;
     code: string;
-    error?: string;
 }
 
 export interface ISMarkdownBuilderTokenExtractResult {
@@ -495,9 +494,7 @@ export default class SMarkdownBuilder extends __SBuilder {
 
                     // handle error in render
                     if (viewRendererRes.error) {
-                        res.error = viewRendererRes.error;
-                        buildedFiles.push(res);
-                        continue;
+                        throw new Error(viewRendererRes.error);
                     }
 
                     currentTransformedString = viewRendererRes.value ?? '';

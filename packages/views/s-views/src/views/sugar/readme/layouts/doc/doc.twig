@@ -1,6 +1,8 @@
-{% if settings.layouts.readme.data.headerImageUrl %}
+{% if not sections or 'header' in sections|keys %}
+    {% if config.readme.layout.bannerImageUrl %}
 <!-- image -->
-![{{ config.package.name }}]({{ settings.layouts.readme.data.headerImageUrl }})
+![{{ config.package.json.name }}]({{ config.readme.layout.bannerImageUrl }})
+    {% endif %}
 {% endif %}
 
 <!-- body -->

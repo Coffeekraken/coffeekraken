@@ -34,7 +34,7 @@ function default_1(api) {
         },
         layout: {
             /**
-             * @name            headerImageUrl
+             * @name            bannerImageUrl
              * @namespace       config.readme.layout
              * @type            String
              * @default         https://cdnv2.coffeekraken.io/global/readme-header.jpg
@@ -44,7 +44,7 @@ function default_1(api) {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            get headerImageUrl() {
+            get bannerImageUrl() {
                 return `https://cdnv2.coffeekraken.io/global/readme-header.png`;
             },
         },

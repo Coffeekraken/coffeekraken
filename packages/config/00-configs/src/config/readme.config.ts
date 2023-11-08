@@ -34,7 +34,7 @@ export default function (api) {
 
         layout: {
             /**
-             * @name            headerImageUrl
+             * @name            bannerImageUrl
              * @namespace       config.readme.layout
              * @type            String
              * @default         https://cdnv2.coffeekraken.io/global/readme-header.jpg
@@ -44,7 +44,7 @@ export default function (api) {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            get headerImageUrl() {
+            get bannerImageUrl() {
                 return `https://cdnv2.coffeekraken.io/global/readme-header.png`;
             },
         },

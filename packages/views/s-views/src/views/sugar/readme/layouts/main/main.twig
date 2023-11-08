@@ -1,9 +1,9 @@
-{% if settings.layouts.readme.data.headerImageUrl %}
+{% if not sections or 'banner' in sections %}
 <!-- image -->
-![{{ config.package.json.name }}]({{ settings.layouts.readme.data.headerImageUrl }})
+![{{ config.package.json.name }}]({{ config.readme.layout.bannerImageUrl }})
 {% endif %}
 
-{% if not sections or 'header' in sections|keys %}
+{% if not sections or 'header' in sections %}
     <!-- header -->
     # {{ config.package.json.name }}
 
@@ -18,12 +18,12 @@
 
 {% endif %}
 
-{% if not sections or 'description' in sections|keys %}
+{% if not sections or 'description' in sections %}
     <!-- description -->
     {{ config.package.json.description }}
 {% endif %}
 
-{% if not sections or 'install' in sections|keys %}
+{% if not sections or 'install' in sections %}
     <!-- install -->
     ## Install
 
@@ -35,14 +35,14 @@
 <!-- body -->
 {% block body %}{% endblock %}
 
-{% if not sections or 'license' in sections|keys %}
+{% if not sections or 'license' in sections %}
     <!-- license -->    
     ## License
 
     Distributed under the **{{config.package.json.license }}** License. See **[LICENSE]({{ config.package.json.repository.url }} "{{ config.package.json.name }} license")** for more information.
 {% endif %}
 
-{% if not sections or 'contact' in sections|keys %}
+{% if not sections or 'contact' in sections %}
     <!-- contact -->
     ## Contact
 

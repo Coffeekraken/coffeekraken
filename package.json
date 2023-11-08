@@ -5,7 +5,8 @@
     "type": "module",
     "scripts": {
         "dev": "node ./src/node/tsup/start.js",
-        "deploy.cdn": "rsync -avzh --delete --progress --stats ./src/cdn/v2/ fe0mt_coffeekraken@fe0mt.ftp.infomaniak.com:~/sites/cdnv2.coffeekraken.io/global",
+        "readme.build": "sugar markdown.build -p readme",
+        "cdn.deploy": "rsync -avzh --delete --progress --stats ./src/cdn/v2/ fe0mt_coffeekraken@fe0mt.ftp.infomaniak.com:~/sites/cdnv2.coffeekraken.io/global",
         "container": "docker exec --workdir /workspaces/coffeekraken -it coffeekraken /bin/bash"
     },
     "private": true,

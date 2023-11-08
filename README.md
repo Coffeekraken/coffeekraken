@@ -1,36 +1,41 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
 
 <!-- image -->
-
-![@coffeekraken/coffeekraken](https://cdnv2.coffeekraken.io/readme-header.jpg)
-
+![@coffeekraken/coffeekraken](https://cdnv2.coffeekraken.io/global/readme-header.png)
 
 <!-- header -->
-
 # @coffeekraken/coffeekraken
-###### MIT 2.0.0-alpha.13 - [Git repository]()
 
-[![size](https://shields.io/bundlephobia/min/@coffeekraken/coffeekraken?style&#x3D;for-the-badge)](https://www.npmjs.com/package/@coffeekraken/coffeekraken)
-[![downloads](https://shields.io/npm/dm/@coffeekraken/coffeekraken?style&#x3D;for-the-badge)](https://www.npmjs.com/package/@coffeekraken/coffeekraken)
-[![license](https://shields.io/npm/l/@coffeekraken/coffeekraken?style&#x3D;for-the-badge)](./LICENSE)
-[![discord](https://shields.io/discord/Coffeekraken?style&#x3D;for-the-badge)](https://discord.gg/ERsX54UE)
+[MIT](https://github.com/Coffeekraken/coffeekraken.git "@coffeekraken/coffeekraken license") 2.0.0-beta.1 - [Git repository](https://github.com/Coffeekraken/coffeekraken.git "@coffeekraken/coffeekraken repository")
 
+<!-- shields -->
+[![downloads](https://shields.io/npm/dm/@coffeekraken/coffeekraken?style=for-the-badge)](https://www.npmjs.com/package/@coffeekraken/coffeekraken "@coffeekraken/coffeekraken downloads")
+[![license](https://shields.io/npm/l/@coffeekraken/coffeekraken?style=for-the-badge)](./LICENSE "@coffeekraken/coffeekraken license")
+[![discord](https://img.shields.io/discord/940362961682333767?color=5100FF&amp;label=Join%20us%20on%20Discord&amp;style=for-the-badge)](https://discord.gg/HzycksDJ "@coffeekraken/coffeekraken discord")
 
 
 <!-- description -->
-
 We are a young collectve of front-end creative developers with one goal in mind. Build tools to make every team working day life better
 
 
+<!-- body -->
+
+## What is Coffeekraken?
+
+Coffeekraken is an organisation that claim to produce high quality tools and resources for web developers.
+This organisation is composed of a lot of different projects that you can discover on [our website](https://coffeekraken.io), or bellow of this readme.
+Projects covers a large range of topics like:
+
+- CSS toolkit through [Sugarcss](https://sugarcss.coffeekraken.io)
+- Fully customizable webcomponents like datepicker, colorpicker, and more...
+- Javascript (typescript) toolkit through [Sugar](https://sugar.coffeekraken.io)
+- And more to come...
 
 ## Start using our tools
 
-To start discovering our tools, development stack and so one, the easiest way is to go on [our website under the get started documentation](https://coffeekraken.io/doc/get-started/get-started)
-.
-
-## Contribute to our effort
-
-To contribute to our project, make sure to follow [these instructions](https://coffeekraken.io/doc/contribute/get-started)
-.
+To start discovering our tools, development stack and so one, the easiest way is to go on [our website](https://coffeekraken.io).
 
 ## Promote our community and work
 
@@ -46,62 +51,16 @@ This also means that we need your support/contribution. Don't hesitate to join u
 - [Patreon](https://www.patreon.com/coffeekraken)
 - [Github](https://github.com/Coffeekraken/coffeekraken/issues)
 
-## Our packages
 
-Here's a small list of some of our packages (random):
+<!-- license -->
+## License
 
-#### @coffeekraken/cli
+Distributed under the **MIT** License. See **[LICENSE](https://github.com/Coffeekraken/coffeekraken.git "@coffeekraken/coffeekraken license")** for more information.
 
-Main Coffeekraken toolchain entry point that expose the sugar CLI and let you release the Kraken!
-
-[Access documentation](https://coffeekraken.io/package/@coffeekraken/cli/doc/readme)
-
-
-#### @coffeekraken/s-floating-feature
-
-Simple feature that let you define an HTMLElement as floating element. Make use of the AMAZING floating-ui package under the hood.
-
-[Access documentation](https://coffeekraken.io/package/@coffeekraken/s-floating-feature/doc/readme)
-
-
-#### @coffeekraken/s-sugar-config
-
-Powerful config management class that let you access the .config.(j|t)s files stored either at (mono)repo, package (.sugar/*) or user (.local/.sugar/*) level.
-
-[Access documentation](https://coffeekraken.io/package/@coffeekraken/s-sugar-config/doc/readme)
-
-
-#### @coffeekraken/s-env
-
-Simple class that let you access your environment variables with ease in node as well as in the browser (window.env)
-
-[Access documentation](https://coffeekraken.io/package/@coffeekraken/s-env/doc/readme)
-
-
-#### @coffeekraken/s-slider-component
-
-Powerful web component to create nice and fully customizable sliders. Support behaviors like slideable, horizontal|vertical, and more...
-
-[Access documentation](https://coffeekraken.io/package/@coffeekraken/s-slider-component/doc/readme)
-
-
-
-
-
-
-<!-- License -->
-
-### License
-
-Distributed under the **MIT** License. See **[LICENSE](./license)** for more information.
-
-
-<!-- Contact -->
-
-### Contact
+<!-- contact -->
+## Contact
 
 Here's all the ways you can contact us listed:
 
-[![discord](https://img.shields.io/badge/Join%20us%20on%20discord-Join-blueviolet?style&#x3D;[config.shieldsio.style]&amp;logo&#x3D;discord)](https://discord.gg/ERsX54UE)
-[![email](https://img.shields.io/badge/Email%20us-Go-green?style&#x3D;[config.shieldsio.style]&amp;logo&#x3D;Mail.Ru)](mailto:olivier.bossel@gmail.com)
-
+[![discord](https://img.shields.io/badge/Join%20us%20on%20discord-Join-blueviolet?style=[config.shieldsio.style]&amp;logo=discord)](https://discord.gg/HzycksDJ "discord")
+[![email](https://img.shields.io/badge/Email%20us-Go-green?style=[config.shieldsio.style]&amp;logo=Mail.Ru)](mailto:olivier.bossel@gmail.com "email")

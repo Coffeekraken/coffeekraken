@@ -4,7 +4,7 @@ export default (api) => {
     return {
         layout: {
             /**
-             * @name            headerImageUrl
+             * @name            bannerImageUrl
              * @namespace       config.license.layout
              * @type            String
              * @default         [config.serve.img.url]/doc/licenseHeader.jpg
@@ -14,7 +14,7 @@ export default (api) => {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            get headerImageUrl() {
+            get bannerImageUrl() {
                 return `${api.config.serve.img.url}/doc/licenseHeader.jpg`;
             },
         },

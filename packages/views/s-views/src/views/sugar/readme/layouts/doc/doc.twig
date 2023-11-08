@@ -1,4 +1,4 @@
-{% if not sections or 'header' in sections|keys %}
+{% if not sections or 'header' in sections %}
     {% if config.readme.layout.bannerImageUrl %}
 <!-- image -->
 ![{{ config.package.json.name }}]({{ config.readme.layout.bannerImageUrl }})

@@ -66,6 +66,14 @@ export default class STheme extends __SThemeBase {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static get theme(): string {
+        let theme = window
+            .getComputedStyle(document.body)
+            .getPropertyValue('--s-theme');
+
+        if (theme) {
+            return theme;
+        }
+
         const themeAttr = document.querySelector('html')?.getAttribute('theme');
         if (!themeAttr) {
             return __SFrontspec.get('theme.theme');
@@ -85,11 +93,19 @@ export default class STheme extends __SThemeBase {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static get variant(): string {
+        let variant = window
+            .getComputedStyle(document.body)
+            .getPropertyValue('--s-variant');
+
+        if (variant) {
+            return variant;
+        }
+
         const themeAttr = document.querySelector('html')?.getAttribute('theme');
         if (!themeAttr) {
-            return __SFrontspec.get('theme.variant');
+            return __SFrontspec.get('theme.theme');
         }
-        return themeAttr.split('-')[1];
+        return themeAttr.split('-')[0];
     }
 
     /**
@@ -364,15 +380,15 @@ export default class STheme extends __SThemeBase {
                 STheme._defaultThemeMetas.variant ??
                 __SFrontspec.get('theme.variant');
 
-        let theme = defaultTheme,
-            variant = defaultVariant;
+        let theme = this.theme,
+            variant = this.variant;
 
         if ($context) {
             const computedStyle = getComputedStyle($context);
-            // get the css setted --s-theme and --s-theme-variant variable from the $context
+            // get the css setted --s-theme and --s-variant variable from the $context
             const cssDefinedTheme = computedStyle.getPropertyValue('--s-theme'),
                 cssDefinedVariant =
-                    computedStyle.getPropertyValue('--s-theme-variant');
+                    computedStyle.getPropertyValue('--s-variant');
             if (cssDefinedTheme) {
                 theme = cssDefinedTheme.trim();
             }

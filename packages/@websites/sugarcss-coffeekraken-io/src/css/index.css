@@ -12,7 +12,6 @@ body {
     overflow-x: hidden;
     @s.depth (30);
     @s.shape pill;
-    /* background: s.color(base, background); */
 }
 
 body:not(#homepage) {

@@ -51,20 +51,20 @@ export default function (api) {
         },
 
         variants: {
-            // /**
-            //  * @name          light
-            //  * @namespace     config.themeCoffeekraken.variants
-            //  * @type          Object
-            //  * @default      config.themeCoffeekrakenLight
-            //  *
-            //  * Specify the default theme light variant
-            //  *
-            //  * @since       2.0.0
-            //  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-            //  */
-            // get light() {
-            //     return api.config.themeCoffeekrakenLight;
-            // },
+            /**
+             * @name          light
+             * @namespace     config.themeCoffeekraken.variants
+             * @type          Object
+             * @default      config.themeCoffeekrakenLight
+             *
+             * Specify the default theme light variant
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get light() {
+                return api.config.themeCoffeekrakenLight;
+            },
 
             /**
              * @name          dark

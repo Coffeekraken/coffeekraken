@@ -72,6 +72,13 @@
             stroke: s.color(accent);
         }
 
+        @s.theme light {
+            [fill='white'] {
+                fill: s.color(main, text);
+                stroke: s.color(main, text);
+            }
+        }
+
         @s.media mobile {
             height: 70px;
             margin-inline-start: 0;
@@ -100,6 +107,14 @@
 
         @s.media mobile {
             display: none;
+        }
+
+        ._cup-bkg {
+            display: none;
+
+            @s.theme dark {
+                display: inherit;
+            }
         }
 
         ._round {
@@ -189,7 +204,12 @@
             bottom: 250px;
             left: calc(50% + 50px);
             transform: translate(-50%, 0);
-            opacity: 0.3;
+            opacity: 0.15;
+            filter: invert(1);
+
+            @s.theme dark {
+                opacity: 0.3;
+            }
         }
     }
 }

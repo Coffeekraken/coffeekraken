@@ -110,7 +110,7 @@ export default function ({
         selectors.push(`[theme$="${finalParams.variant}"]`);
 
     if (finalParams.scope) {
-        vars.unshift(`${selectors.join('')} {`);
+        vars.unshift(`${selectors.join('')} body {`);
         vars.push(`@s.lnf.base;`);
         vars.push('}');
     } else if (atRule.parent.type === 'root') {

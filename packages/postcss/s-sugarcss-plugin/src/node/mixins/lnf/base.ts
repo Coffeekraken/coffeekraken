@@ -56,8 +56,7 @@ export default function ({
         @s.font.family(default);
         @s.font.size(default);
         @s.shape(default);
-        --s-scale: s.theme(scale.default);    
-
+        --s-scale: s.theme(scale.default);
   `;
 
     vars.push(css);

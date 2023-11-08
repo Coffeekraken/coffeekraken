@@ -1,5 +1,5 @@
-import __SSugarJson from '@coffeekraken/s-sugar-json';
 import __SInterface from '@coffeekraken/s-interface';
+import __SSugarJson from '@coffeekraken/s-sugar-json';
 import __STheme from '@coffeekraken/s-theme';
 
 /**

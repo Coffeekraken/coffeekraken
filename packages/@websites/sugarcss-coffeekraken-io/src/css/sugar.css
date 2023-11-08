@@ -1,7 +1,7 @@
 /* init theme */
 @s.init();
-@s.theme.apply ($theme: coffeekraken, $variant: dark);
-@s.theme.import ($variant: light);
+@s.theme.apply ($theme: coffeekraken, $variant: light);
+@s.theme.import ($theme: coffeekraken, $variant: dark);
 
 /* main sugar classes */
 /* we need to load them all to display correctly the documentation */

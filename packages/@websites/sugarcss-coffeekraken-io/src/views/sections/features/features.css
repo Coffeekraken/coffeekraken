@@ -45,12 +45,24 @@
     ._card {
         position: relative;
         padding: s.padding(50);
+        overflow: hidden;
         background: linear-gradient(
             to right bottom,
             s.color(current),
-            s.color(current, surface)
+            s.color(current, --lighten 10)
         );
-        overflow: hidden;
         @s.border.radius (30);
+
+        &,
+        * {
+            color: white;
+        }
+        @s.theme dark {
+            background: linear-gradient(
+                to right bottom,
+                s.color(current),
+                s.color(current, surface)
+            );
+        }
     }
 }

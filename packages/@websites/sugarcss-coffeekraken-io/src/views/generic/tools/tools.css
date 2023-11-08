@@ -1,6 +1,6 @@
 .tools {
     position: fixed;
-    top: s.margin(10);
+    top: s.margin(30);
     right: 0;
     z-index: 100;
 
@@ -47,7 +47,6 @@
         background-color: s.color(main, surface);
         background-position: 50% 50%;
         background-size: cover;
-        @s.depth (10);
 
         &:after {
             border-color: s.color(main, surface) transparent transparent

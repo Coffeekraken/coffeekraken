@@ -33,7 +33,7 @@
                     <span class="s-tc:accent">Don't hesitate</span> to declare an issue<br />if something does not works<br />as
                     expected.
                 </p>
-                <a class="s-btn s-color:accent s-display:block s-mbe:20 s-depth:50"
+                <a class="s-btn s-color:accent s-display:block s-mbe:20"
                     href="https://github.com/Coffeekraken/coffeekraken/issues" title="Declare my issue on Github"
                     target="_blank">
                     <i class="s-icon:github s-mie:10"></i> Declare an issue on Github

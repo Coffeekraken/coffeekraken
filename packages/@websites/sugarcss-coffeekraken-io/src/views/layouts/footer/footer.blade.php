@@ -26,22 +26,6 @@
 
 
             <div class="_columns">
-                <div></div>
-                <div>
-                    <h1 class="s-typo:h5 s-mbe:30">
-                        Links
-                    </h1>
-                    <ol class="s-list:ul s-color:accent">
-                        <li>
-                            <a href="https://github.com/Coffeekraken/coffeekraken" title="Coffeekraken on Github">Github repo</a>
-                        </li>
-                        <li>
-                            <a href="https://www.npmjs.com/search?q=%40coffeekraken"
-                                title="Coffeekraken on NPM">NPM packages</a>
-                        </li>
-                    </ol>
-                </div>
-                
                 <div>
                     <h1 class="s-typo:h5 s-mbe:30">
                         Community
@@ -67,7 +51,21 @@
                     </ol>
 
                 </div>
-
+                <div>
+                    <h1 class="s-typo:h5 s-mbe:30">
+                        Links
+                    </h1>
+                    <ol class="s-list:ul s-color:accent">
+                        <li>
+                            <a href="https://github.com/Coffeekraken/coffeekraken" title="Coffeekraken on Github">Github repo</a>
+                        </li>
+                        <li>
+                            <a href="https://www.npmjs.com/search?q=%40coffeekraken"
+                                title="Coffeekraken on NPM">NPM packages</a>
+                        </li>
+                    </ol>
+                </div>
+            
             </div>
 
         </div>

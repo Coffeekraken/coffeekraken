@@ -3,7 +3,6 @@ import __SEnv from '@coffeekraken/s-env';
 import __SFrontspec from '@coffeekraken/s-frontspec';
 import { __clearTransmations, __isInIframe } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __fastdom from 'fastdom';
 import type { ISThemeSettings as __ISThemeSettings } from '../shared/SThemeBase.js';
 import __SThemeBase from '../shared/SThemeBase.js';
 
@@ -76,7 +75,9 @@ export default class STheme extends __SThemeBase {
 
         const themeAttr = document.querySelector('html')?.getAttribute('theme');
         if (!themeAttr) {
-            return __SFrontspec.get('theme.theme');
+            return (
+                this._defaultThemeMetas.theme ?? __SFrontspec.get('theme.theme')
+            );
         }
         return themeAttr.split('-')[0];
     }
@@ -103,34 +104,12 @@ export default class STheme extends __SThemeBase {
 
         const themeAttr = document.querySelector('html')?.getAttribute('theme');
         if (!themeAttr) {
-            return __SFrontspec.get('theme.theme');
+            return (
+                this._defaultThemeMetas.variant ??
+                __SFrontspec.get('theme.theme')
+            );
         }
         return themeAttr.split('-')[0];
-    }
-
-    /**
-     * @name        cssSettings
-     * @type        Object
-     * @static
-     * @get
-     *
-     * Access the settings printed inside the css by the sugarcssPlugin postcss plugin.
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static _cssSettings;
-    static get cssSettings(): any {
-        if (this._cssSettings) {
-            return this._cssSettings;
-        }
-        const style = window.getComputedStyle(document.body, ':after');
-        let settings;
-        try {
-            settings = JSON.parse(JSON.parse(style.content.toString()));
-        } catch (e) {}
-        this._cssSettings = settings;
-        return this._cssSettings;
     }
 
     /**
@@ -208,25 +187,96 @@ export default class STheme extends __SThemeBase {
         variant?: string,
         $context: HTMLElement = <HTMLElement>document.querySelector('html'),
     ): void {
-        __fastdom.mutate(() => {
-            __clearTransmations(document.querySelector('html'), {
-                timeout: 100,
-            });
-
-            if (theme && variant) {
-                $context.setAttribute('theme', `${theme}-${variant}`);
-            } else if (theme) {
-                $context.setAttribute(
-                    'theme',
-                    `${theme}-${__SFrontspec.get('theme.variant')}`,
-                );
-            } else if (variant) {
-                $context.setAttribute(
-                    'theme',
-                    `${__SFrontspec.get('theme.theme')}-${variant}`,
-                );
-            }
+        __clearTransmations(document.querySelector('html'), {
+            timeout: 100,
         });
+
+        if (theme && variant) {
+            $context.setAttribute('theme', `${theme}-${variant}`);
+        } else if (theme) {
+            $context.setAttribute(
+                'theme',
+                `${theme}-${__SFrontspec.get('theme.variant')}`,
+            );
+        } else if (variant) {
+            $context.setAttribute(
+                'theme',
+                `${__SFrontspec.get('theme.theme')}-${variant}`,
+            );
+        }
+
+        // get the current theme instance
+        const themeInstance = this.getCurrentTheme($context);
+
+        // set the current theme in the env.SUGAR.theme property
+        if (!document.env) document.env = {};
+        if (!document.env.SUGAR) document.env.SUGAR = {};
+        document.env.SUGAR.theme = themeInstance;
+    }
+
+    /**
+     * @name        frontData
+     * @type        Function
+     * @static
+     *
+     * Access the frontData object stored in the body:after css pseudo element
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static _frontData;
+    static get frontData(): any {
+        if (this._frontData) {
+            return this._frontData;
+        }
+        const bodyStyle = window.getComputedStyle(document.body, ':after');
+        this._frontData = JSON.parse(
+            JSON.parse(bodyStyle.getPropertyValue('content')),
+        );
+        return this._frontData;
+    }
+
+    /**
+     * @name        savedThemeMetas
+     * @type        Function
+     * @static
+     *
+     * Get the savec theme metas from the localStorage
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static _savedThemeMetas;
+    static get savedThemeMetas(): any {
+        if (this._savedThemeMetas) {
+            return this._savedThemeMetas;
+        }
+        try {
+            const savedTheme = JSON.parse(localStorage.getItem('s-theme'));
+            this._savedThemeMetas = savedTheme;
+        } catch (e) {}
+        return this._savedThemeMetas;
+    }
+
+    /**
+     * @name        isDarkVariantAvailable
+     * @type        Function
+     * @static
+     *
+     * Check in the frontData.theme.themes stack to see if a dark variant is available
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static isDarkVariantAvailable(): any {
+        for (let [idx, theme] of Object.entries(
+            this.frontData?.theme?.themes ?? {},
+        )) {
+            if (theme.variant === 'dark') {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -291,18 +341,6 @@ export default class STheme extends __SThemeBase {
 
         let themeInstance;
 
-        // check if the user has defined a theme manually that has been savec in localStorage
-        let savedTheme = {};
-        try {
-            savedTheme = JSON.parse(localStorage.getItem('s-theme'));
-        } catch (e) {}
-        if (savedTheme?.theme) {
-            finalSettings.theme = savedTheme.theme;
-        }
-        if (savedTheme?.variant) {
-            finalSettings.variant = savedTheme.variant;
-        }
-
         // save default theme metas
         STheme._defaultThemeMetas = {
             theme: finalSettings.theme,
@@ -313,11 +351,6 @@ export default class STheme extends __SThemeBase {
         themeInstance = this.getCurrentTheme(finalSettings.$context, {
             ...finalSettings,
         });
-
-        // set the current theme in the env.SUGAR.theme property
-        if (!document.env) document.env = {};
-        if (!document.env.SUGAR) document.env.SUGAR = {};
-        document.env.SUGAR.theme = themeInstance;
 
         // apply the theme
         STheme.applyTheme(
@@ -383,7 +416,9 @@ export default class STheme extends __SThemeBase {
         let theme = this.theme,
             variant = this.variant;
 
-        if ($context) {
+        // if the context is not the HTML root element
+        const isContextHtml = $context === document.querySelector('html');
+        if ($context && isContextHtml && !this.savedThemeMetas) {
             const computedStyle = getComputedStyle($context);
             // get the css setted --s-theme and --s-variant variable from the $context
             const cssDefinedTheme = computedStyle.getPropertyValue('--s-theme'),
@@ -396,6 +431,22 @@ export default class STheme extends __SThemeBase {
                 variant = cssDefinedVariant.trim();
             }
         }
+
+        // hande preferer dark mode
+        if (!this.savedThemeMetas) {
+            if (this.preferDark() && this.isDarkVariantAvailable()) {
+                variant = 'dark';
+            }
+        } else {
+            if (this.savedThemeMetas.theme) {
+                theme = this.savedThemeMetas.theme;
+            }
+            if (this.savedThemeMetas.variant) {
+                variant = this.savedThemeMetas.variant;
+            }
+        }
+
+        console.log('theme', theme, variant);
 
         const name = `${theme ?? defaultTheme}-${variant ?? defaultVariant}`;
         const metas = __SFrontspec.get(`theme.themes.${name}`) ?? {};
@@ -454,6 +505,26 @@ export default class STheme extends __SThemeBase {
         for (let [key, value] of Object.entries(vars.properties)) {
             // @ts-ignore
             $context.style.setProperty(key, value);
+        }
+    }
+
+    /**
+     * @name            toggleDarkMode
+     * @type            Function
+     * @static
+     *
+     * This static method allows you to toggle between the dark and light mode.
+     * Does nothing if the dark mode is not available
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static toggleDarkMode($context = document.querySelector('html')): void {
+        if (!this.isDarkVariantAvailable()) return;
+        if (this.variant === 'dark') {
+            this.setThemeVariant('light', $context);
+        } else {
+            this.setThemeVariant('dark', $context);
         }
     }
 

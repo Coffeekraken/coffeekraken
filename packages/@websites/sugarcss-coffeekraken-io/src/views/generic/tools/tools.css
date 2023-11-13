@@ -18,9 +18,16 @@
     }
 
     ._btn {
+        display: block;
         padding: s.padding(20);
         background: s.color(main, surface);
         opacity: 0.3;
+        aspect-ratio: 1;
+        width: 3em;
+        height: 3em;
+        text-align: center;
+        justify-content: center;
+        @s.shape();
 
         &:hover {
             opacity: 1;
@@ -39,6 +46,20 @@
 
     i {
         color: s.color(#fff);
+    }
+
+    &_variant-switcher ._btn {
+        background: s.color(main, --darken 20) !important;
+        color: white;
+
+        @s.when dark {
+            background: s.color(main, --lighten 30) !important;
+            color: s.color(main, --darken 20);
+        }
+    }
+    &_variant-switcher .s-tooltip {
+        padding: s.padding(20) !important;
+        width: auto !important;
     }
 
     .s-tooltip {

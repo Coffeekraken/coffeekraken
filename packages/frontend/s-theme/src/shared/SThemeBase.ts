@@ -78,11 +78,8 @@ export interface ISThemeLodSettings {
     stylesheet: string | HTMLLinkElement;
 }
 
-export interface ISThemeCssSettings {}
-
 export interface ISThemeSettings {
     lod: Partial<ISThemeLodSettings>;
-    css: Partial<ISThemeCssSettings>;
 }
 
 export interface ISThemeDefaultStaticSettings {

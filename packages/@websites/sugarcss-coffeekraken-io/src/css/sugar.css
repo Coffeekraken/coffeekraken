@@ -73,6 +73,7 @@
 @s.truncate.classes;
 @s.shape.classes;
 @s.width.classes;
+@s.when.classes;
 @s.whitespace.classes;
 
 /* UI's */
@@ -99,7 +100,9 @@
   fa:file
   fa:heart
   fa:bugs
+  fa:moon
   fa:angle-up
+  fa:lightbulb
   fa:user
   fa:display
   fa:brush

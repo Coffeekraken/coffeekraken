@@ -1,5 +1,20 @@
 <div class="tools s-until:media:mobile">
 
+    <div class="tools_variant-switcher s-tooltip-container">
+        <button class="_btn" aria-label="Dark mode switcher" onclick="javascript: document.env.SUGAR.theme.constructor.toggleDarkMode()">
+            <span class="s-when:light">
+                <i class="s-icon:moon"></i>
+            </span>
+            <span class="s-when:dark">
+                <i class="s-icon:lightbulb"></i>
+            </span>
+        </button>
+        <div s-floating placement="left" class="s-bare s-tooltip">
+            <span class="s-when:dark">Light mode</span>
+            <span class="s-when:light">Dark mode</span>
+        </div>
+    </div>
+    
     <div class="tools_hotkeys s-tooltip-container">
         <button class="_btn" aria-label="Hotkeys">
             <i class="s-icon:keyboard"></i>

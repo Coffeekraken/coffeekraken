@@ -9,9 +9,6 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 
 import { ISFrontspec } from '@coffeekraken/s-frontspec';
 
-import type { ISClassmapSettings } from '@coffeekraken/s-classmap';
-import __SClassmap from '@coffeekraken/s-classmap';
-
 import __SFrontspec from '@coffeekraken/s-frontspec';
 
 import __SStdio, {
@@ -58,7 +55,6 @@ if (import.meta?.hot) {
  * @event       s-front.legal.disagree         Dispatched when the user has disagree the legal terms throug the `front.disagreeLegal` method
  * @event       s-front.legal.change             Dispatched when the user legal has been changed
  * @event       s-front.lod.change          Dispatched when the lod leven has been changed
- * @event       s-front.wireframe.change        Dispatched when the wireframe mode has been activated or desactivated
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -69,15 +65,9 @@ export interface ISFrontLegalSettings {
     defaultMetas: any;
 }
 
-export interface ISFrontWireframeSettings {
-    enabled: boolean;
-}
-
 export interface ISFrontInitSettings {
     id: string;
     frontspec: any;
-    classmap: ISClassmapSettings;
-    wireframe: Partial<ISFrontWireframeSettings>;
     legal: Partial<ISFrontLegalSettings>;
     theme: __STheme | Partial<ISThemeInitSettings>;
     logs: undefined | boolean;
@@ -120,8 +110,6 @@ export default class SFront extends __SClass {
         const finalSettings = <ISFrontInitSettings>{
             id: 'default',
             lod: {},
-            classmap: {},
-            wireframe: {},
             legal: {},
             partytown: {},
             theme: {},
@@ -203,17 +191,6 @@ export default class SFront extends __SClass {
     frontspec: ISFrontspec;
 
     /**
-     * @name        classmap
-     * @type        SClassmap
-     *
-     * Store the current classmap instance
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    classmap: __SClassmap;
-
-    /**
      * @name        state
      * @type        Object
      *
@@ -225,9 +202,6 @@ export default class SFront extends __SClass {
     _originalState = {
         lod: {
             level: undefined,
-        },
-        wireframe: {
-            enabled: undefined,
         },
     };
     state = Object.assign({}, this._originalState);
@@ -291,11 +265,6 @@ export default class SFront extends __SClass {
                     `<yellow>[SFront]</yellow> Project "<cyan>${document.env.PACKAGE.name}</cyan>" in version "<yellow>${document.env.PACKAGE.version}</yellow>"`,
                 );
             }
-            if (document.env?.CLASSMAP) {
-                console.log(
-                    `<yellow>[SFront]</yellow> Using <yellow>classmap</yellow>"`,
-                );
-            }
         }
 
         // init frontspec and theme
@@ -304,14 +273,6 @@ export default class SFront extends __SClass {
             frontspec = settings?.frontspec;
         } else {
             frontspec = __SFrontspec.init(settings?.frontspec);
-        }
-
-        // classmap
-        let classmap;
-        if (settings.classmap instanceof __SClassmap) {
-            classmap = settings.classmap;
-        } else if (frontspec.get('classmap.enabled')) {
-            classmap = __SClassmap.init(settings.classmap);
         }
 
         // init theme
@@ -328,13 +289,9 @@ export default class SFront extends __SClass {
                     id: 'default',
                     google: frontspec.get('google') ?? {},
                     partytown: frontspec.get('partytown') ?? {},
-                    classmap: frontspec.get('classmap') ?? {},
                     lod: {
                         stylesheet: 'link#global',
                         ...(frontspec.get('lod') ?? {}),
-                    },
-                    wireframe: {
-                        enabled: undefined,
                     },
                     legal: {
                         cookieName: 's-legal',
@@ -345,7 +302,6 @@ export default class SFront extends __SClass {
             ),
         );
 
-        this.classmap = classmap;
         this.frontspec = frontspec;
         this.theme = theme;
 
@@ -373,83 +329,8 @@ export default class SFront extends __SClass {
             this._initLod();
         }
 
-        // handle wireframe
-        if (
-            this.state.wireframe?.enabled ||
-            (this.settings.wireframe.enabled &&
-                this.state.wireframe.enabled === undefined)
-        ) {
-            this.setWireframe(true);
-        }
-
         // init the tracking
         this._initTracking();
-    }
-
-    /**
-     * @name      wireframe
-     * @type      { active: boolean }
-     *
-     * Get the current wireframe state
-     *
-     * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get wireframe(): {
-        enabled: boolean;
-    } {
-        return {
-            enabled:
-                this.state.wireframe?.enabled !== undefined
-                    ? this.state.wireframe.enabled
-                    : this.settings.wireframe.enabled,
-        };
-    }
-
-    /**
-     * @name            setWireframe
-     * @type            Function
-     *
-     * This method allows you to apply the wireframe mode
-     *
-     * @param              {Boolean}            enabled              true if want to activate the wireframe mode, false if want to desactivate it
-     * @return          {STheme}                                    The STheme instance that represent the current applied theme
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    setWireframe(enabled: boolean): void {
-        if (this.state.wireframe?.enabled !== enabled) {
-            console.verbose?.(
-                `<yellow>[wireframe]</yellow> ${
-                    enabled
-                        ? '<green>Activate</green>'
-                        : '<red>Desactivate</red>'
-                } the wireframe mode`,
-            );
-
-            // save in state
-            if (!this.state.wireframe) {
-                this.state.wireframe = {};
-            }
-            this.state.wireframe.enabled = enabled;
-            this.save();
-
-            // dispatch a change event
-            document.dispatchEvent(
-                new CustomEvent('s-front.wireframe.change', {
-                    detail: {
-                        enabled,
-                        theme: this,
-                    },
-                }),
-            );
-        }
-
-        // update the dom
-        document
-            .querySelector('html')
-            .classList[enabled ? 'add' : 'remove']('s-wireframe');
     }
 
     /**
@@ -673,7 +554,8 @@ export default class SFront extends __SClass {
         if (!this.isLegalAgree()) {
             if (!__SEnv.is('production') && !__isInIframe()) {
                 console.log(
-                    `<yellow>[SFront]</yellow> You have a <magenta>google tag manager (gtm)</magenta> setted but the <cyan>legal terms</cyan> are not agreed. Tracking <red>disabled</red>.`,
+                    `<yellow>[SFront]</yellow> You have a <magenta>google tag manager (gtm)</magenta> setted but the <cyan>legal terms</cyan> are not agreed.`,
+                    `<yellow>[SFront]</yellow> Tracking <red>disabled</red>`,
                 );
             }
             return;

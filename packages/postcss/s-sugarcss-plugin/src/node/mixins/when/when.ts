@@ -98,11 +98,21 @@ export default function ({
             }
             break;
         case 'dark':
-            selector = `@media (prefers-color-scheme: dark)`;
-            break;
+            return atRule.replaceWith(
+                new postcssApi.AtRule({
+                    name: 's.theme.when',
+                    params: 'dark',
+                    nodes: atRule.nodes,
+                }),
+            );
         case 'light':
-            selector = `@media (prefers-color-scheme: light)`;
-            break;
+            return atRule.replaceWith(
+                new postcssApi.AtRule({
+                    name: 's.theme.when',
+                    params: 'light',
+                    nodes: atRule.nodes,
+                }),
+            );
     }
 
     const wrapperRule = new postcssApi.Rule({

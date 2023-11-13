@@ -55,7 +55,6 @@ export default function ({
         background-color: s.color(main, background);
         @s.font.family(default);
         @s.font.size(default);
-        @s.shape(default);
         --s-scale: s.theme(scale.default);
   `;
 

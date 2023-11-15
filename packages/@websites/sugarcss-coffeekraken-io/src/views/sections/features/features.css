@@ -6,6 +6,10 @@
         margin-top: 0;
     }
 
+    strong {
+        color: s.color(main, --darken 20) !important;
+    }
+
     ._cards {
         @s.layout (1 2 3);
         gap: s.margin(50);
@@ -49,7 +53,7 @@
         background: linear-gradient(
             to right bottom,
             s.color(current),
-            s.color(current, --lighten 10)
+            s.color(current, --lighten 5)
         );
         @s.border.radius (30);
 
@@ -57,7 +61,7 @@
         * {
             color: white;
         }
-        @s.theme dark {
+        @s.when dark {
             background: linear-gradient(
                 to right bottom,
                 s.color(current),

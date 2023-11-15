@@ -89,8 +89,6 @@ export default function ({
         --track-border-width: s.theme(ui.form.borderWidth);
         --track-border-color: s.color(current, border);
 
-        --thumb-position: 0%;
-
         --thumb-transition-duration: s.theme(ui.form.transition);
         
         -webkit-appearance: none !important;
@@ -126,8 +124,7 @@ export default function ({
             top: 50%; left: 0;
         }
 
-
-        --thumb-position: calc(--thumb-size) / 2);
+        --thumb-position: calc(var(--thumb-size) / 2);
         @s.direction.rtl {
             --thumb-position: calc(100% - var(--thumb-size) / 2);
         }

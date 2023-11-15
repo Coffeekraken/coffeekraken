@@ -14,8 +14,6 @@
  *
  * @snippet         __expandPleasantCssClassname($1)
  *
- * @feature         Support the classmap feature throught the SClassmap class inited from the SFront class
- *
  * @example         js
  * import { __expandPleasantCssClassname } from '@coffeekraken/sugar/html';
  * __expandPleasantCssClassname('...');
@@ -59,13 +57,6 @@ export default function __expandPleasantCssClassname(
             });
         }
     });
-
-    // classmap
-    if (document.env?.SUGAR?.classmap) {
-        classesArray = classesArray.map((cls) =>
-            document.env.SUGAR.classmap.resolve(cls),
-        );
-    }
 
     return classesArray.join(' ');
 }

@@ -120,25 +120,25 @@ export default function ({
                 lnf === finalParams.defaultLnf ? '' : `:${lnf}`
             }">
             *     <span>John Doe</span>
-            *     <input type="text" class="s-input s-width:60" placeholder="Type something!" />
+            *     <input type="text" class="s-input" placeholder="Type something!" />
             *   </label>
             *   <label class="s-label:responsive${
                 lnf === finalParams.defaultLnf ? '' : `:${lnf}`
             }">
             *     <span>John Doe</span>
-            *     <textarea class="s-input s-width:60" placeholder="Type something!" rows="3"></textarea>
+            *     <textarea class="s-input" placeholder="Type something!" rows="3"></textarea>
             *   </label>
             *   <label class=" s-label:responsive${
                 lnf === finalParams.defaultLnf ? '' : `:${lnf}`
             }">
             *     <span>Support RTL</span>
-            *     <input type="text" class="s-input s-width:60" placeholder="Type something!" />
+            *     <input type="text" class="s-input" placeholder="Type something!" />
             *   </label>
             *   <label class="s-label:responsive${
                 lnf === finalParams.defaultLnf ? '' : `:${lnf}`
             } s-color:accent">
             *     <span>With the accent color</span>
-            *     <input type="text" class="s-input s-width:60" placeholder="Type something!" />
+            *     <input type="text" class="s-input" placeholder="Type something!" />
             *   </label>
             * </div>
             * `;

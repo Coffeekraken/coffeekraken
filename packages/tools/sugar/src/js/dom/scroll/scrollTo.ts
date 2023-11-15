@@ -45,7 +45,6 @@ export interface IScrollToSettings {
     $elm: HTMLElement;
     duration: number;
     easing: Function;
-    offset: number;
     offsetX: number;
     offsetY: number;
     align: 'start' | 'center' | 'end';
@@ -64,7 +63,6 @@ export default function __scrollTo(
             duration:
                 document.env?.SUGAR?.theme?.get?.('scroll')?.duration ?? 500,
             easing: easeInOutQuad,
-            offset: 0,
             offsetX: document.env?.SUGAR?.theme?.get?.('scroll')?.offsetX,
             offsetY: document.env?.SUGAR?.theme?.get?.('scroll')?.offsetY,
             align: 'start',
@@ -140,8 +138,8 @@ export default function __scrollTo(
             };
         }
 
-        const offsetY = settings.offsetY ?? settings.offset;
-        const offsetX = settings.offsetX ?? settings.offset;
+        const offsetY = settings.offsetY ?? 0;
+        const offsetX = settings.offsetX ?? 0;
 
         if (target === 'top') {
             targetY = 0;

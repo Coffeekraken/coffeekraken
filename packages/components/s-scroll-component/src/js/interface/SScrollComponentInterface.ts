@@ -34,12 +34,6 @@ export default class SScrollComponentInterface extends __SInterface {
                 type: 'number',
                 default: __STheme.get('scroll.duration'),
             },
-            offset: {
-                description:
-                    'Specify the offset of the scroll in px. Usefull if you have a sticky header, etc...',
-                type: 'number',
-                default: __STheme.get('scroll.offset'),
-            },
             offsetX: {
                 description:
                     'Specify the offset of the scroll x in px. Usefull if you have a sticky header, etc...',

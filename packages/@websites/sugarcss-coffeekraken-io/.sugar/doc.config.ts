@@ -10,7 +10,7 @@ export default function (api) {
                     id: '@website.sugarcss-coffeekraken-io.doc.**',
                 },
             },
-            styleguideComponents: {
+            components: {
                 title: 'Components',
                 description: 'All the available components, etc...',
                 filters: {
@@ -18,7 +18,7 @@ export default function (api) {
                     id: '/.*.sugar.style.ui.*/',
                 },
             },
-            styleguideHelpers: {
+            helpers: {
                 title: 'Helpers',
                 description: 'All the available helpers, etc...',
                 filters: {
@@ -31,7 +31,7 @@ export default function (api) {
                 description: 'All the available mixins',
                 filters: {
                     type: 'PostcssMixin',
-                    id: '@coffeekraken.s-postcss-sugar-plugin.**',
+                    id: '@coffeekraken.s-sugarcss-plugin.**',
                 },
             },
             functions: {
@@ -39,25 +39,9 @@ export default function (api) {
                 description: 'All the available functions',
                 filters: {
                     type: 'PostcssFunction',
-                    id: '@coffeekraken.s-postcss-sugar-plugin.**',
+                    id: '@coffeekraken.s-sugarcss-plugin.**',
                 },
             },
-            // uiClasses: {
-            //     title: 'UI classes',
-            //     description: 'All the available UI classes',
-            //     filters: {
-            //         type: 'PostcssMixin',
-            //         id: '/@coffeekraken.s-postcss-sugar-plugin..*.ui..*.classes$/',
-            //     },
-            // },
-            // uiMixins: {
-            //     title: 'UI mixins',
-            //     description: 'All the available UI mixins',
-            //     filters: {
-            //         type: 'PostcssMixin',
-            //         id: '/@coffeekraken.s-postcss-sugar-plugin..*.ui..*(?<!.classes)$/',
-            //     },
-            // },
             theming: {
                 title: 'Theming',
                 description: 'All the available theming configs',
@@ -71,7 +55,7 @@ export default function (api) {
                 description: 'All the available configs',
                 filters: {
                     type: 'Config',
-                    id: '@coffeekraken.s-postcss-sugar-plugin.**',
+                    id: '@coffeekraken.s-sugarcss-plugin.**',
                 },
             },
         },

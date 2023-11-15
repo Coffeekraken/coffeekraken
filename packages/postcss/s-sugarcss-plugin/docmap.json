@@ -293,7 +293,7 @@
                         "description": ""
                     }
                 ],
-                "description": "This mixin generate all the sugar classes like utilities for colors, fonts, margins, etc...",
+                "description": "This mixin generate all the sugar classes like utilities for colors, fonts, margins, etc:\n\n- ```@s.border.classes;```\n- ```@s.clearfix.classes;```\n- ```@s.color.classes;```\n- ```@s.container.classes;```\n- ```@s.cursor.classes;```\n- ```@s.depth.classes;```\n- ```@s.disabled.classes;```\n- ```@s.display.classes;```\n- ```@s.fit.classes;```\n- ```@s.flex.classes;```\n- ```@s.float.classes;```\n- ```@s.font.classes;```\n- ```@s.format.classes;```\n- ```@s.gap.classes;```\n- ```@s.gradient.classes;```\n- ```@s.grid.classes;```\n- ```@s.group.classes;```\n- ```@s.grow.classes;```\n- ```@s.hide.classes;```\n- ```@s.layout.classes;```\n- ```@s.link.classes;```\n- ```@s.margin.classes;```\n- ```@s.offsize.classes;```\n- ```@s.opacity.classes;```\n- ```@s.order.classes;```\n- ```@s.overflow.classes;```\n- ```@s.padding.classes;```\n- ```@s.pointer.classes;```\n- ```@s.position.classes;```\n- ```@s.ratio.classes;```\n- ```@s.scale.classes;```\n- ```@s.scrollbar.classes;```\n- ```@s.shape.classes;```\n- ```@s.shrink.classes;```\n- ```@s.spacing.classes;```\n- ```@s.text.classes;```\n- ```@s.transition.classes;```\n- ```@s.truncate.classes;```\n- ```@s.typo.classes;```\n- ```@s.until.classes;```\n- ```@s.userSelect.classes;```\n- ```@s.visibility.classes;```\n- ```@s.visually.classes;```\n- ```@s.when.classes;```\n- ```@s.whiteSpace.classes;```\n- ```@s.width.classes;```",
                 "namespace": "@coffeekraken.s-sugarcss-plugin.node.mixin",
                 "status": "stable",
                 "snippet": {

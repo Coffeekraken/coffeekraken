@@ -8,6 +8,8 @@ import { __camelCase } from '@coffeekraken/sugar/string';
 
 import { __base64 } from '@coffeekraken/sugar/crypto';
 
+import { marked as __marked } from 'marked';
+
 import { __escapeQueue, __hotkey } from '@coffeekraken/sugar/keyboard';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, unsafeCSS } from 'lit';
@@ -94,6 +96,7 @@ export default class SDocComponent extends __SLitComponent {
     _item: any;
     _items: any = {};
     _searchValue: string;
+    _loadedCategoriesIds: string[] = [];
 
     _$body: HTMLElement;
     _$menuBtn: HTMLElement;
@@ -178,16 +181,11 @@ export default class SDocComponent extends __SLitComponent {
     /**
      * Go to a specific doc item
      */
-    async _goTo(itemObj: any): void {
-        this._loadItem(itemObj);
-        await __wait(100);
-        document.activeElement?.blur?.();
-        __scrollTo(this._$body, {
-            offset: 100,
-        });
+    async _goTo(itemObj: any, refocus = false): void {
+        this._loadItem(itemObj, refocus);
     }
 
-    async _loadItem(itemObj): Promise<void> {
+    async _loadItem(itemObj, refocus = false): Promise<void> {
         // request the item if needed
         if (!itemObj.cache) {
             // set the item loading state
@@ -212,24 +210,47 @@ export default class SDocComponent extends __SLitComponent {
 
         // reset the current item
         // this is to make sure the s-code-example update itself correctly
-        this._item = null;
+        this._refresh = true;
         this.requestUpdate();
 
         // wait a loop and set the new item
         setTimeout(() => {
+            this._refresh = false;
             itemObj.loading = false;
             this._status.loading = false;
             this._item = itemObj.cache;
             this.requestUpdate();
 
-            // scroll top body
-            this._$body?.scrollTo?.({
-                top: 0,
-                behavior: 'smooth',
-            });
+            if (!refocus) {
+                return;
+            }
+
+            setTimeout(() => {
+                document.activeElement?.blur?.();
+                __scrollTo(this._$body, {
+                    offset: 100,
+                });
+
+                setTimeout(() => {
+                    this._refocusSelectedItem(
+                        this.querySelector(
+                            `#s-doc-item-${this._itemIdToHash(itemObj.id)}`,
+                        ),
+                    );
+                }, 500);
+            }, 100);
         });
     }
 
+    _itemIdToHash(id: string): string {
+        return __base64.encrypt(id).replace(/\=/gm, '');
+    }
+
+    _getFirstCategoryObj(): any {
+        return this._categories[Object.keys(this._categories)[0]];
+    }
+
+    _loadedCategoriesCount = 0;
     async _loadCategoryItems(
         category: any,
         loadFirstItem = false,
@@ -251,6 +272,10 @@ export default class SDocComponent extends __SLitComponent {
             ),
             items = await request.json();
 
+        // mark category as loaded
+        category._loaded = true;
+        this._loadedCategoriesCount++;
+
         // save in global stack
         this._items = {
             ...this._items,
@@ -258,18 +283,23 @@ export default class SDocComponent extends __SLitComponent {
         };
 
         const potentialItem =
-            items[document.location.hash?.replace?.(/^#/, '')];
+            this._items[document.location.hash?.replace?.(/^#/, '')];
         if (potentialItem) {
-            this._goTo(potentialItem);
+            this._goTo(potentialItem, true);
         }
 
         // save in category
         category.items = items;
 
         // load first item if needed
-        if (!potentialItem && loadFirstItem) {
-            const firstItemId = Object.keys(items)[0];
-            this._loadItem(items[firstItemId]);
+        if (
+            !potentialItem &&
+            this._loadedCategoriesCount >= Object.keys(this._categories).length
+        ) {
+            const firstCategory = this._getFirstCategoryObj();
+            const firstItem =
+                firstCategory.items[Object.keys(firstCategory.items)[0]];
+            this._goTo(firstItem);
         } else {
             this._status.loading = false;
             this.requestUpdate();
@@ -322,6 +352,13 @@ export default class SDocComponent extends __SLitComponent {
         }
     }
 
+    _refocusSelectedItem($target): void {
+        __scrollTo($target, {
+            $elm: this._$explorer,
+            offsetY: this._$searchInput.getBoundingClientRect().height + 100,
+        });
+    }
+
     _renderItems(items: any): any {
         let searchReg;
         if (this._searchValue) {
@@ -361,6 +398,9 @@ export default class SDocComponent extends __SLitComponent {
                                     ? 'active'
                                     : ''}"
                                 tabindex="0"
+                                id="s-doc-item-${this._itemIdToHash(
+                                    itemObj.id,
+                                )}"
                                 @pointerup=${async (e) => {
                                     e.stopPropagation();
                                     document.location.hash = itemObj.id;
@@ -463,9 +503,10 @@ export default class SDocComponent extends __SLitComponent {
                     : ''}
                 ${itemObj.description
                     ? html`
-                <p class="${this.utils.cls('_description', 's-mbe-30')}">${
-                          itemObj.description
-                      }</h1>
+                <p class="${this.utils.cls(
+                    '_description',
+                    's-mbe-30 s-format:text',
+                )}">${unsafeHTML(__marked.parse(itemObj.description))}</h1>
             `
                     : ''}
             </header>
@@ -484,8 +525,13 @@ export default class SDocComponent extends __SLitComponent {
                         ${configObj.type?.raw ?? configObj.type}
                     </div>
                 </div>
-                <p class="${this.utils.cls('_param-description')}">
-                    ${configObj.description}
+                <p
+                    class="${this.utils.cls(
+                        '_param-description',
+                        's-format-text',
+                    )}"
+                >
+                    ${unsafeHTML(__marked.parse(configObj.description))}
                 </p>
             </div>
         `;
@@ -696,13 +742,18 @@ export default class SDocComponent extends __SLitComponent {
                             role="treeitem"
                             class="${this.utils.cls(
                                 '_category',
-                            )} ${categoryObj.selected || this._searchValue
+                            )} ${categoryObj.selected ||
+                            this._searchValue ||
+                            categoryObj?.items?.[this._item?.id]
                                 ? 'active'
                                 : ''}"
                             tabindex="0"
                             @pointerup=${(e) => {
                                 e.stopPropagation();
                                 categoryObj.selected = !categoryObj.selected;
+                                setTimeout(() => {
+                                    this._refocusSelectedItem(e.target);
+                                });
                                 this.requestUpdate();
                             }}
                         >
@@ -721,7 +772,9 @@ export default class SDocComponent extends __SLitComponent {
                                           'group',
                                       )}
                                   `
-                                : (categoryObj.selected || this._searchValue) &&
+                                : (categoryObj.selected ||
+                                      this._searchValue ||
+                                      categoryObj?.items?.[this._item?.id]) &&
                                   categoryObj.items
                                 ? html`
                                       ${this._renderItems(categoryObj.items)}
@@ -771,7 +824,9 @@ export default class SDocComponent extends __SLitComponent {
 
             <div class="${this.utils.cls('_content')}">
                 <div class="${this.utils.cls('_body')}" tabindex="0">
-                    ${this._item ? html` ${this._renderItem(this._item)} ` : ''}
+                    ${!this._refresh && this._item
+                        ? html` ${this._renderItem(this._item)} `
+                        : ''}
                 </div>
                 <div class="${this.utils.cls('_toolbar')}">
                     ${this.props.features.fullscreen

@@ -166,7 +166,6 @@ export default class SDoc extends __SClass {
                         __base64.decrypt(req.params.filters),
                     ),
                     result = await this._docmap.search(filters);
-
                 res.status(200);
                 res.type('application/json');
                 res.send(result.items ?? {});
@@ -181,7 +180,6 @@ export default class SDoc extends __SClass {
             cors,
             async (req, res) => {
                 const id = req.params.id;
-
                 const item = this._docmapJson.map[id];
 
                 if (!item) {
@@ -204,7 +202,8 @@ export default class SDoc extends __SClass {
                     const docblock = new __SDocblock(item.path);
                     await docblock.parse();
                     item.docblocks = docblock.toObject().filter((db) => {
-                        return db.id === id;
+                        return true;
+                        // return db.id === id;
                     });
                 }
 

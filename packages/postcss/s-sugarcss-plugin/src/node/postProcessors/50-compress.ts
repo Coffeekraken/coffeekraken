@@ -4,5 +4,4 @@ export default function ({
     postcssApi,
     settings,
     cacheDir,
-    classmap,
 }) {}

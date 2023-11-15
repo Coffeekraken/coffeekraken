@@ -9,7 +9,54 @@ import __SInterface from '@coffeekraken/s-interface';
  * @interface       ./classes
  * @status        stable
  *
- * This mixin generate all the sugar classes like utilities for colors, fonts, margins, etc...
+ * This mixin generate all the sugar classes like utilities for colors, fonts, margins, etc:
+ *
+ * - ```@s.border.classes;```
+ * - ```@s.clearfix.classes;```
+ * - ```@s.color.classes;```
+ * - ```@s.container.classes;```
+ * - ```@s.cursor.classes;```
+ * - ```@s.depth.classes;```
+ * - ```@s.disabled.classes;```
+ * - ```@s.display.classes;```
+ * - ```@s.fit.classes;```
+ * - ```@s.flex.classes;```
+ * - ```@s.float.classes;```
+ * - ```@s.font.classes;```
+ * - ```@s.format.classes;```
+ * - ```@s.gap.classes;```
+ * - ```@s.gradient.classes;```
+ * - ```@s.grid.classes;```
+ * - ```@s.group.classes;```
+ * - ```@s.grow.classes;```
+ * - ```@s.hide.classes;```
+ * - ```@s.layout.classes;```
+ * - ```@s.link.classes;```
+ * - ```@s.margin.classes;```
+ * - ```@s.offsize.classes;```
+ * - ```@s.opacity.classes;```
+ * - ```@s.order.classes;```
+ * - ```@s.overflow.classes;```
+ * - ```@s.padding.classes;```
+ * - ```@s.pointer.classes;```
+ * - ```@s.position.classes;```
+ * - ```@s.ratio.classes;```
+ * - ```@s.scale.classes;```
+ * - ```@s.scrollbar.classes;```
+ * - ```@s.shape.classes;```
+ * - ```@s.shrink.classes;```
+ * - ```@s.spacing.classes;```
+ * - ```@s.text.classes;```
+ * - ```@s.transition.classes;```
+ * - ```@s.truncate.classes;```
+ * - ```@s.typo.classes;```
+ * - ```@s.until.classes;```
+ * - ```@s.userSelect.classes;```
+ * - ```@s.visibility.classes;```
+ * - ```@s.visually.classes;```
+ * - ```@s.when.classes;```
+ * - ```@s.whiteSpace.classes;```
+ * - ```@s.width.classes;```
  *
  * @param           {Boolean}           [ui=true]           Specify if you want to generate also the ui classes (avatar, etc...)
  * @return        {Css}         The generated css
@@ -55,52 +102,52 @@ export default async function ({
     };
 
     const cssArray: string[] = [
-        '@s.typo.classes;',
-        '@s.container.classes;',
-        '@s.grid.classes;',
-        '@s.group.classes;',
-        '@s.gradient.classes;',
-        '@s.layout.classes;',
+        '@s.border.classes;',
         '@s.clearfix.classes;',
-        '@s.cursor.classes;',
         '@s.color.classes;',
-        '@s.fit.classes;',
-        '@s.format.classes;',
-        '@s.link.classes;',
-        '@s.gap.classes;',
-        '@s.grow.classes;',
-        '@s.shrink.classes;',
-        '@s.hide.classes;',
-        '@s.text.classes;',
-        '@s.font.classes;',
+        '@s.container.classes;',
+        '@s.cursor.classes;',
         '@s.depth.classes;',
         '@s.disabled.classes;',
+        '@s.display.classes;',
+        '@s.fit.classes;',
         '@s.flex.classes;',
         '@s.float.classes;',
-        '@s.ratio.classes;',
-        '@s.border.classes;',
-        '@s.display.classes;',
-        '@s.overflow.classes;',
-        '@s.position.classes;',
-        '@s.pointer.classes;',
-        '@s.transition.classes;',
+        '@s.font.classes;',
+        '@s.format.classes;',
+        '@s.gap.classes;',
+        '@s.gradient.classes;',
+        '@s.grid.classes;',
+        '@s.group.classes;',
+        '@s.grow.classes;',
+        '@s.hide.classes;',
+        '@s.layout.classes;',
+        '@s.link.classes;',
         '@s.margin.classes;',
         '@s.offsize.classes;',
-        '@s.order.classes;',
         '@s.opacity.classes;',
-        '@s.scale.classes;',
+        '@s.order.classes;',
+        '@s.overflow.classes;',
         '@s.padding.classes;',
+        '@s.pointer.classes;',
+        '@s.position.classes;',
+        '@s.ratio.classes;',
+        '@s.scale.classes;',
+        '@s.scrollbar.classes;',
+        '@s.shape.classes;',
+        '@s.shrink.classes;',
         '@s.spacing.classes;',
+        '@s.text.classes;',
+        '@s.transition.classes;',
+        '@s.truncate.classes;',
+        '@s.typo.classes;',
+        '@s.until.classes;',
         '@s.userSelect.classes;',
         '@s.visibility.classes;',
         '@s.visually.classes;',
-        '@s.truncate.classes;',
-        '@s.until.classes;',
         '@s.when.classes;',
-        '@s.scrollbar.classes;',
-        '@s.shape.classes;',
-        '@s.width.classes;',
         '@s.whiteSpace.classes;',
+        '@s.width.classes;',
     ];
 
     if (finalParams.ui) {

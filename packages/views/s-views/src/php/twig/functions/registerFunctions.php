@@ -32,10 +32,6 @@ function registerFunctions($twig)
     $toObject = require __DIR__ . '/cast/toObject.php';
     $twig->addFunction($toObject);
 
-    // Classmap
-    $readClassmap = require __DIR__ . '/classmap/readClassmap.php';
-    $twig->addFunction($readClassmap);
-
     // Css
     $classes = require __DIR__ . '/css/classes.php';
     $twig->addFunction($classes);

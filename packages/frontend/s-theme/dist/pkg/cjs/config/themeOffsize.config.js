@@ -5,7 +5,7 @@
  * @namespace               config
  * @type                    Config
  * @plateform               node
- * @status                  beta
+ * @status                  stable
  *
  * Specify the @coffeekraken/s-theme offsize available configurations
  *

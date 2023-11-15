@@ -7,7 +7,7 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
  * @namespace               config
  * @type                    Config
  * @plateform               node
- * @status                  beta
+ * @status                  stable
  *
  * Specify the @coffeekraken/s-theme available configurations
  *

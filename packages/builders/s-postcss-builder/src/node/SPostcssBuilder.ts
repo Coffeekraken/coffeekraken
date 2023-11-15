@@ -188,13 +188,6 @@ export default class SPostcssBuilder extends __SBuilder {
                         }`,
                     );
                     console.log(
-                        `              <yellow>○</yellow> Classmap                  : ${
-                            sugarcssPluginConfig.classmap?.enabled
-                                ? '<green>true</green>'
-                                : '<red>false</red>'
-                        }`,
-                    );
-                    console.log(
                         `              <yellow>○</yellow> Exclude by types          : ${
                             sugarcssPluginConfig.excludeByTypes.length
                                 ? `<yellow>${sugarcssPluginConfig.excludeByTypes.join(

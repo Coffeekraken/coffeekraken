@@ -63,6 +63,15 @@ if (isset($frontspec)) {
 <html lang="{{ $lang }}" dir="{{ $dir }}" class="{{ $lodClasses }}">
 <head>
 
+     <!-- saved s-theme -->
+    <script>
+        var savedTheme = localStorage.getItem('s-theme'), theme = 'default', variant = 'light';
+        if (savedTheme) savedTheme = JSON.parse(savedTheme);
+        if (savedTheme && savedTheme.theme) theme = savedTheme.theme;
+        if (savedTheme && savedTheme.variant) variant = savedTheme.variant;
+        document.querySelector('html').setAttribute('theme', `${theme}-${variant}`);
+    </script>
+
     <!-- metas -->
     {!! \Sugar\frontspec\metas($frontspec, $env) !!}
 
@@ -108,9 +117,6 @@ if (isset($frontspec)) {
         @endif
         @if (isset($frontspec))
             document.env.FRONTSPEC = {!! json_encode(\Sugar\object\deepDiff(\Sugar\frontspec\readFrontspec(), $frontspec)) !!};
-        @endif
-        @if (isset($classmap))
-            document.env.CLASSMAP = {!! json_encode(\Sugar\object\deepDiff(\Sugar\classmap\readClassmap(), $classmap)) !!};
         @endif
     </script>
     @endif

@@ -7,7 +7,7 @@ import { __upperFirst } from '@coffeekraken/sugar/string';
  * @namespace               config
  * @type                    Config
  * @plateform               node
- * @status                  beta
+ * @status                  stable
  *
  * Specify the @coffeekraken/s-theme typo available configurations
  *
@@ -63,7 +63,7 @@ export default (api) => {
          * @name          h1
          * @namespace     config.themeTypo
          * @type          Object
-         * @default      {}
+         * @default      {...}
          *
          * Specify the css object for the h1 typo element
          *
@@ -91,7 +91,7 @@ export default (api) => {
          * @name          h2
          * @namespace     config.themeTypo
          * @type          Object
-         * @default      {}
+         * @default      {...}
          *
          * Specify the css object for the h2 typo element
          *
@@ -119,7 +119,7 @@ export default (api) => {
          * @name          h3
          * @namespace     config.themeTypo
          * @type          Object
-         * @default      {}
+         * @default      {...}
          *
          * Specify the css object for the h3 typo element
          *
@@ -147,7 +147,7 @@ export default (api) => {
          * @name          h4
          * @namespace     config.themeTypo
          * @type          Object
-         * @default      {}
+         * @default      {...}
          *
          * Specify the css object for the h4 typo element
          *
@@ -175,7 +175,7 @@ export default (api) => {
          * @name          h5
          * @namespace     config.themeTypo
          * @type          Object
-         * @default      {}
+         * @default      {...}
          *
          * Specify the css object for the h5 typo element
          *
@@ -203,7 +203,7 @@ export default (api) => {
          * @name          h6
          * @namespace     config.themeTypo
          * @type          Object
-         * @default      {}
+         * @default      {...}
          *
          * Specify the css object for the h6 typo element
          *
@@ -231,7 +231,7 @@ export default (api) => {
          * @name          p
          * @namespace     config.themeTypo
          * @type          Object
-         * @default      {}
+         * @default      {...}
          *
          * Specify the css object for the p typo element
          *
@@ -258,7 +258,7 @@ export default (api) => {
          * @name          lead
          * @namespace     config.themeTypo
          * @type          Object
-         * @default      {}
+         * @default      {...}
          *
          * Specify the css object for the lead typo element
          *
@@ -286,7 +286,7 @@ export default (api) => {
          * @name          hr
          * @namespace     config.themeTypo
          * @type          Object
-         * @default      {}
+         * @default      {...}
          *
          * Specify the css object for the hr typo element
          *
@@ -314,7 +314,7 @@ export default (api) => {
          * @name          pre
          * @namespace     config.themeTypo
          * @type          Object
-         * @default      {}
+         * @default      {...}
          *
          * Specify the css object for the pre typo element
          *
@@ -351,7 +351,7 @@ export default (api) => {
          * @name          code
          * @namespace     config.themeTypo
          * @type          Object
-         * @default      {}
+         * @default      {...}
          *
          * Specify the css object for the code typo element
          *
@@ -379,7 +379,7 @@ export default (api) => {
          * @name          blockquote
          * @namespace     config.themeTypo
          * @type          Object
-         * @default      {}
+         * @default      {...}
          *
          * Specify the css object for the blockquote typo element
          *
@@ -414,7 +414,7 @@ export default (api) => {
          * @name          a
          * @namespace     config.themeTypo
          * @type          Object
-         * @default      {}
+         * @default      {...}
          *
          * Specify the css object for the a typo element
          *
@@ -436,7 +436,7 @@ export default (api) => {
          * @name          quote
          * @namespace     config.themeTypo
          * @type          Object
-         * @default      {}
+         * @default      {...}
          *
          * Specify the css object for the quote typo element
          *
@@ -460,7 +460,7 @@ export default (api) => {
          * @name          bold
          * @namespace     config.themeTypo
          * @type          Object
-         * @default      {}
+         * @default      {...}
          *
          * Specify the css object for the bold typo element
          *
@@ -481,10 +481,25 @@ export default (api) => {
             },
         },
         /**
+         * @name          strong
+         * @namespace     config.themeTypo
+         * @type          Object
+         * @default      api.config.themeTypo.bold
+         *
+         * Specify the css object for the strong typo element
+         *
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        get strong() {
+            return this.bold;
+        },
+
+        /**
          * @name          italic
          * @namespace     config.themeTypo
          * @type          Object
-         * @default      {}
+         * @default      {...}
          *
          * Specify the css object for the italic typo element
          *
@@ -508,7 +523,7 @@ export default (api) => {
          * @name          large
          * @namespace     config.themeTypo
          * @type          Object
-         * @default      {}
+         * @default      {...}
          *
          * Specify the css object for the large typo element
          *
@@ -532,7 +547,7 @@ export default (api) => {
          * @name          larger
          * @namespace     config.themeTypo
          * @type          Object
-         * @default      {}
+         * @default      {...}
          *
          * Specify the css object for the larger typo element
          *
@@ -556,7 +571,7 @@ export default (api) => {
          * @name          largest
          * @namespace     config.themeTypo
          * @type          Object
-         * @default      {}
+         * @default      {...}
          *
          * Specify the css object for the largest typo element
          *
@@ -580,7 +595,7 @@ export default (api) => {
          * @name          small
          * @namespace     config.themeTypo
          * @type          Object
-         * @default      {}
+         * @default      {...}
          *
          * Specify the css object for the small typo element
          *
@@ -604,7 +619,7 @@ export default (api) => {
          * @name          smaller
          * @namespace     config.themeTypo
          * @type          Object
-         * @default      {}
+         * @default      {...}
          *
          * Specify the css object for the small typo element
          *
@@ -628,7 +643,7 @@ export default (api) => {
          * @name          smallest
          * @namespace     config.themeTypo
          * @type          Object
-         * @default      {}
+         * @default      {...}
          *
          * Specify the css object for the small typo element
          *
@@ -652,7 +667,7 @@ export default (api) => {
          * @name          mark
          * @namespace     config.themeTypo
          * @type          Object
-         * @default      {}
+         * @default      {...}
          *
          * Specify the css object for the mark typo element
          *
@@ -675,7 +690,7 @@ export default (api) => {
          * @name          del
          * @namespace     config.themeTypo
          * @type          Object
-         * @default      {}
+         * @default      {...}
          *
          * Specify the css object for the del typo element
          *
@@ -699,7 +714,7 @@ export default (api) => {
          * @name          ins
          * @namespace     config.themeTypo
          * @type          Object
-         * @default      {}
+         * @default      {...}
          *
          * Specify the css object for the ins typo element
          *
@@ -723,7 +738,7 @@ export default (api) => {
          * @name          sub
          * @namespace     config.themeTypo
          * @type          Object
-         * @default      {}
+         * @default      {...}
          *
          * Specify the css object for the sub typo element
          *
@@ -749,7 +764,7 @@ export default (api) => {
          * @name          sup
          * @namespace     config.themeTypo
          * @type          Object
-         * @default      {}
+         * @default      {...}
          *
          * Specify the css object for the sup typo element
          *

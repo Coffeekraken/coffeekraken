@@ -38,6 +38,13 @@
 <!DOCTYPE html>
 <html lang="{{ lang }}" dir="{{ dir }}" class="{{ lodClasses }}">
 <head>
+
+    <!-- saved s-theme -->
+    <script>
+        var savedTheme = localStorage.getItem('s-theme');
+        console.log('SA', savedTheme);
+    </script>
+
     <!-- metas -->
     {{ __frontspecMetas(frontspec)|raw }}
     
@@ -64,6 +71,7 @@
 
 </head>
 <body class="{{ bodyAttributes.class }} initial-loading loading" s-sugar {{ __attrs(bodyAttributes, ['class'])|raw }}>
+
     {% if page and page.uid %}
         {{ __pageDataTemplate(page)|raw }}
     {% endif %}

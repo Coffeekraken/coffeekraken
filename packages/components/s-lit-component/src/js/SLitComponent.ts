@@ -13,37 +13,6 @@ import { LitElement, html as __html } from 'lit';
 
 export { __html as html };
 
-// export function html(...args) {
-//     args = args.map((arg, i) => {
-//         if (i === 0) {
-//             const raw = arg.raw;
-//             arg = arg.map((str, i) => {
-//                 // return str;
-//                 // if (typeof str !== 'string') {
-//                 //     return str;
-//                 // }
-//                 // // handle classes if a SClassmap instance exists in the document.env.SUGAR stack
-//                 // if (document.env?.SUGAR?.classmap) {
-//                 //     // str = document.env.SUGAR.classmap.patchHtml(str);
-//                 //     // console.log('new', str);
-//                 // }
-//                 // // return the patched string
-//                 return str;
-//             });
-//             arg.raw = raw;
-
-//             return arg;
-//         } else {
-//             if (typeof arg === 'string') {
-//                 // arg += ' coco';
-//             }
-//             return arg;
-//         }
-//     });
-
-//     return __html(...args);
-// }
-
 export interface ISLitComponentSettings extends ISComponentUtilsSettings {
     interface?: typeof __SInterface;
     rootNode?: HTMLElement;
@@ -399,16 +368,9 @@ export default class SLitComponent extends LitElement {
 
     firstUpdated() {
         super.firstUpdated();
-        if (document.env?.SUGAR?.classmap) {
-            document.env.SUGAR.classmap.patchDom(this);
-        }
     }
 
-    updated() {
-        if (document.env?.SUGAR?.classmap) {
-            document.env.SUGAR.classmap.patchDom(this);
-        }
-    }
+    updated() {}
 
     _getDocumentFromElement($elm) {
         while ($elm.parentNode) {

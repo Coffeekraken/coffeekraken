@@ -5,7 +5,7 @@
  * @namespace               config
  * @type                    Config
  * @plateform               node
- * @status                  wip
+ * @status                  beta
  *
  * Specify the @coffeekraken/s-theme gradients available configurations
  *

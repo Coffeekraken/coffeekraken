@@ -4,7 +4,7 @@
  * @namespace               config
  * @type                    Config
  * @plateform               node
- * @status                  beta
+ * @status                  stable
  *
  * Specify the @coffeekraken/s-theme scroll available configurations
  *
@@ -20,7 +20,7 @@ export default function (api) {
          * @type                Number
          * @default             300
          *
-         * Specify the scroll duration in ms for your theme
+         * Specify the scroll duration in `ms` for your theme
          *
          * @since               2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -33,7 +33,7 @@ export default function (api) {
          * @type                Number
          * @default             500
          *
-         * Specify the scroll delay in ms for your theme
+         * Specify the scroll delay in `ms` for your theme
          *
          * @since               2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -41,25 +41,12 @@ export default function (api) {
         delay: 500,
 
         /**
-         * @name                offset
-         * @namespace           config.themeScroll
-         * @type                Number
-         * @default             0
-         *
-         * Specify the scroll offset for your theme
-         *
-         * @since               2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-         */
-        offset: 0,
-
-        /**
          * @name                offsetX
          * @namespace           config.themeScroll
          * @type                Number
          * @default             0
          *
-         * Specify the scroll offset x for your theme
+         * Specify the scroll offset x in `px` for your theme
          *
          * @since               2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -72,7 +59,7 @@ export default function (api) {
          * @type                Number
          * @default             200
          *
-         * Specify the scroll offset y for your theme
+         * Specify the scroll offset y in `px` for your theme
          *
          * @since               2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

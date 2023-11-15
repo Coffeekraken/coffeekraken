@@ -42,8 +42,7 @@ window._console = {};
 
 export interface ISThemeInitSettings {
     $context: HTMLElement;
-    theme: string;
-    variant: string;
+    id: string;
 }
 
 export interface ISThemeSettings
@@ -52,6 +51,11 @@ export interface ISThemeSettings
 
 export default class STheme extends __SThemeBase {
     static _defaultThemeMetas = {};
+
+    static _settings: ISThemeSettings = {
+        $context: document.querySelector('html'),
+        id: 's-theme',
+    };
 
     /**
      * @name      theme
@@ -135,36 +139,26 @@ export default class STheme extends __SThemeBase {
         // apply the theme on context
         STheme.applyTheme(theme, variant, $context);
 
-        // save the theme in localstorage
-        localStorage.setItem(
-            's-theme',
-            JSON.stringify({
-                theme,
-                variant,
-            }),
-        );
-
         // get the current theme instance
-        const currentTheme = this.getCurrentTheme($context);
+        // const currentTheme = this.getCurrentTheme($context);
 
-        // set the theme in state
-        if (variant) {
-            currentTheme.state.variant = variant;
-        }
+        console.log('SS', theme, variant);
+
+        // const currentTheme = this.getTheme(theme, variant);
 
         // save
-        currentTheme.save();
+        // currentTheme.save();
 
         // dispatch a change event
         document.dispatchEvent(
             new CustomEvent('s-theme.change', {
                 detail: {
-                    theme: currentTheme,
+                    // theme: currentTheme,
                 },
             }),
         );
 
-        return currentTheme;
+        // return currentTheme;
     }
 
     /**
@@ -187,31 +181,29 @@ export default class STheme extends __SThemeBase {
         variant?: string,
         $context: HTMLElement = <HTMLElement>document.querySelector('html'),
     ): void {
-        __clearTransmations(document.querySelector('html'), {
-            timeout: 100,
-        });
-
-        if (theme && variant) {
-            $context.setAttribute('theme', `${theme}-${variant}`);
-        } else if (theme) {
-            $context.setAttribute(
-                'theme',
-                `${theme}-${__SFrontspec.get('theme.variant')}`,
-            );
-        } else if (variant) {
-            $context.setAttribute(
-                'theme',
-                `${__SFrontspec.get('theme.theme')}-${variant}`,
-            );
-        }
-
+        // __clearTransmations(document.querySelector('html'), {
+        //     timeout: 100,
+        // });
+        // if (theme && variant) {
+        //     $context.setAttribute('theme', `${theme}-${variant}`);
+        // } else if (theme) {
+        //     $context.setAttribute(
+        //         'theme',
+        //         `${theme}-${__SFrontspec.get('theme.variant')}`,
+        //     );
+        // } else if (variant) {
+        //     $context.setAttribute(
+        //         'theme',
+        //         `${__SFrontspec.get('theme.theme')}-${variant}`,
+        //     );
+        // }
+        // console.log('SETTED', theme, variant);
         // get the current theme instance
-        const themeInstance = this.getCurrentTheme($context);
-
-        // set the current theme in the env.SUGAR.theme property
-        if (!document.env) document.env = {};
-        if (!document.env.SUGAR) document.env.SUGAR = {};
-        document.env.SUGAR.theme = themeInstance;
+        // const themeInstance = this.getCurrentTheme($context);
+        // // set the current theme in the env.SUGAR.theme property
+        // if (!document.env) document.env = {};
+        // if (!document.env.SUGAR) document.env.SUGAR = {};
+        // document.env.SUGAR.theme = themeInstance;
     }
 
     /**
@@ -252,7 +244,9 @@ export default class STheme extends __SThemeBase {
             return this._savedThemeMetas;
         }
         try {
-            const savedTheme = JSON.parse(localStorage.getItem('s-theme'));
+            const savedTheme = JSON.parse(
+                localStorage.getItem(this._settings.id),
+            );
             this._savedThemeMetas = savedTheme;
         } catch (e) {}
         return this._savedThemeMetas;
@@ -334,18 +328,29 @@ export default class STheme extends __SThemeBase {
     static init(settings?: Partial<ISThemeInitSettings>): STheme {
         const finalSettings = <ISThemeInitSettings>{
             $context: document.querySelector('html'),
-            theme: undefined,
-            variant: undefined,
+            id: 's-theme',
             ...(settings ?? {}),
         };
 
-        let themeInstance;
+        this._settings = {
+            ...this._settings,
+            ...finalSettings,
+        };
+
+        let themeInstance, theme, variant;
 
         // save default theme metas
         STheme._defaultThemeMetas = {
-            theme: finalSettings.theme,
-            variant: finalSettings.variant,
+            theme: 'default',
+            variant: 'light',
         };
+
+        // if we have a saved theme
+        if (this.savedThemeMetas) {
+            theme = this._savedThemeMetas.theme;
+            variant = this._savedThemeMetas.variant;
+        } else {
+        }
 
         // get the current theme instance
         themeInstance = this.getCurrentTheme(finalSettings.$context, {
@@ -358,6 +363,11 @@ export default class STheme extends __SThemeBase {
             themeInstance.variant,
             finalSettings.$context,
         );
+
+        // apply theme from css if no theme restored
+        // if (!this.state.theme) {
+        //     this._setThemeFromFrontData();
+        // }
 
         // return the current theme
         return themeInstance;
@@ -388,6 +398,19 @@ export default class STheme extends __SThemeBase {
             return false;
         }
         return true;
+    }
+
+    /**
+     * This method will try to get the theme from the frontData object and
+     * set it as the current theme
+     */
+    static _setThemeFromFrontData(): void {
+        if (this.frontData.theme?.theme) {
+            this.setTheme(
+                this.frontData.theme.theme,
+                this.frontData.theme.variant,
+            );
+        }
     }
 
     /**
@@ -445,8 +468,6 @@ export default class STheme extends __SThemeBase {
                 variant = this.savedThemeMetas.variant;
             }
         }
-
-        console.log('theme', theme, variant);
 
         const name = `${theme ?? defaultTheme}-${variant ?? defaultVariant}`;
         const metas = __SFrontspec.get(`theme.themes.${name}`) ?? {};
@@ -538,6 +559,8 @@ export default class STheme extends __SThemeBase {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     state = {
+        theme: undefined,
+        variant: undefined,
         overridedConfigs: {},
     };
 
@@ -683,11 +706,6 @@ export default class STheme extends __SThemeBase {
         );
         this._applyOverridedConfigs(properties, $context);
 
-        // // lod
-        // if (this.state.lodLevel !== undefined) {
-        //     this.setLod(this.state.lodLevel);
-        // }
-
         return this;
     }
 
@@ -740,10 +758,10 @@ export default class STheme extends __SThemeBase {
         clearTimeout(this._saveTimeout);
         this._saveTimeout = setTimeout(() => {
             this.state.overridedConfigs = this._overridedConfig;
-            console.log('save', this.state);
+            console.log('SAVE', this.state);
             // save in localStorage
             localStorage.setItem(
-                `s-theme-${this.theme}`,
+                `${this.settings.id}-${this.theme}`,
                 JSON.stringify(this.state),
             );
             // emit saved event
@@ -770,7 +788,8 @@ export default class STheme extends __SThemeBase {
         try {
             savedState = JSON.parse(
                 // @ts-ignore
-                localStorage.getItem(`s-theme-${this.theme}`) ?? '{}',
+                localStorage.getItem(`${this.settings.id}-${this.theme}`) ??
+                    '{}',
             );
             // @ts-ignore
             this.state = savedState ?? {};
@@ -784,6 +803,7 @@ export default class STheme extends __SThemeBase {
 
         // apply the configs
         this.applyState();
+
         // maintain chainability
         return this;
     }
@@ -801,7 +821,7 @@ export default class STheme extends __SThemeBase {
      */
     clear(): STheme {
         // delete the local storage
-        localStorage.removeItem(`s-theme-${this.theme}`);
+        localStorage.removeItem(`${this.settings.id}-${this.theme}`);
         // clear in super class
         super.clear();
         // clear the state

@@ -5,7 +5,7 @@
  * @namespace               config
  * @type                    Config
  * @plateform               node
- * @status                  beta
+ * @status                  stable
  *
  * Specify the @coffeekraken/s-theme UI available configurations
  *
@@ -154,7 +154,7 @@ exports.default = (api) => {
              * @name          paddingInline
              * @namespace     config.themeUi.menu
              * @type          String
-             * @default      [theme.padding.50]
+             * @default      [theme.padding.40]
              *
              * Specify the default padding inline for code ui
              *

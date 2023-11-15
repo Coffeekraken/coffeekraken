@@ -12,7 +12,7 @@ const object_1 = require("@coffeekraken/sugar/object");
  * @namespace               config
  * @type                    Config
  * @plateform               node
- * @status                  beta
+ * @status                  stable
  *
  * Specify the @coffeekraken/s-theme available configurations
  *

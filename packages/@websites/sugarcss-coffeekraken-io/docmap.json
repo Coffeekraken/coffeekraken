@@ -869,17 +869,17 @@
                     {
                         "language": "html",
                         "title": "Inline",
-                        "code": "<p class=\"s-bc:accent s-radius s-p:30 s-mbe:20\">Terri Heaney</p>\n  <p class=\"s-bc:complementary s-radius s-mi:50 s-mbe:20 s-p:30\">Miss Keith Cole</p>\n  <p class=\"s-bc:main s-mie:100 s-radius s-mbe:20 s-p:30\">Beth Gulgowski II</p>\n  <p class=\"s-bc:error s-mie:30 s-radius s-p:30\">Rogelio Vandervort</p>"
+                        "code": "<p class=\"s-bc:accent s-radius s-p:30 s-mbe:20\">Brooke Rowe</p>\n  <p class=\"s-bc:complementary s-radius s-mi:50 s-mbe:20 s-p:30\">Cory Konopelski II</p>\n  <p class=\"s-bc:main s-mie:100 s-radius s-mbe:20 s-p:30\">Tracey Wolf</p>\n  <p class=\"s-bc:error s-mie:30 s-radius s-p:30\">Laura Moore</p>"
                     },
                     {
                         "language": "html",
                         "title": "Block",
-                        "code": "<div class=\"s-bc:accent s-radius s-mbe:40 s-p:30 s-text:center\">Henry Dietrich</div>\n  <div class=\"s-bc:complementary s-radius s-mbe:20 s-p:30 s-text:center\">Ms. Beulah Heaney</div>\n  <div class=\"s-bc:main s-radius s-mbe:50 s-p:30 s-text:center\">Lora VonRueden</div>\n  <div class=\"s-bc:error s-radius s-p:30 s-text:center\">Philip Roberts</div>"
+                        "code": "<div class=\"s-bc:accent s-radius s-mbe:40 s-p:30 s-text:center\">Lawrence Walter IV</div>\n  <div class=\"s-bc:complementary s-radius s-mbe:20 s-p:30 s-text:center\">Angelina Casper</div>\n  <div class=\"s-bc:main s-radius s-mbe:50 s-p:30 s-text:center\">Dr. Judy Kuphal</div>\n  <div class=\"s-bc:error s-radius s-p:30 s-text:center\">Tracy Hegmann</div>"
                     },
                     {
                         "language": "html",
                         "title": "RTL",
-                        "code": "<div dir=\"rtl\">\n  <p class=\"s-bc:accent s-radius s-p:30 s-mbe:20\">Gerardo Little</p>\n  <p class=\"s-bc:complementary s-radius s-mi:50 s-mbe:20 s-p:30\">Gregg Auer</p>\n  <p class=\"s-bc:main s-radius s-mie:100 s-mbe:20 s-p:30\">Bertha Barton</p>\n  <p class=\"s-bc:error s-radius s-mie:30 s-p:30\">Tommie Dickinson</p>\n</div>"
+                        "code": "<div dir=\"rtl\">\n  <p class=\"s-bc:accent s-radius s-p:30 s-mbe:20\">Thomas Padberg</p>\n  <p class=\"s-bc:complementary s-radius s-mi:50 s-mbe:20 s-p:30\">Marion McKenzie</p>\n  <p class=\"s-bc:main s-radius s-mie:100 s-mbe:20 s-p:30\">Dr. Allison Monahan</p>\n  <p class=\"s-bc:error s-radius s-mie:30 s-p:30\">Cathy Reichel</p>\n</div>"
                     }
                 ],
                 "install": [
@@ -929,17 +929,17 @@
                     {
                         "language": "html",
                         "title": "Inline",
-                        "code": "<p class=\"s-bc:accent s-radius s-pi:30 s-pb:30 s-mbe:20\">Dr. Erika McLaughlin</p>\n  <p class=\"s-bc:complementary s-radius s-pis:50 s-pb:30 s-mbe:20\">Crystal Beer</p>\n  <p class=\"s-bc:main s-radius s-pis:80 s-pb:30 s-mbe:20\">Dwayne Schultz</p>\n  <p class=\"s-bc:error s-radius s-pis:100 s-pb:30 s-mbe:20\">Bradford Hodkiewicz</p>"
+                        "code": "<p class=\"s-bc:accent s-radius s-pi:30 s-pb:30 s-mbe:20\">Pedro Carroll</p>\n  <p class=\"s-bc:complementary s-radius s-pis:50 s-pb:30 s-mbe:20\">George Krajcik</p>\n  <p class=\"s-bc:main s-radius s-pis:80 s-pb:30 s-mbe:20\">Lynette Bergstrom</p>\n  <p class=\"s-bc:error s-radius s-pis:100 s-pb:30 s-mbe:20\">Willie Schaefer DDS</p>"
                     },
                     {
                         "language": "html",
                         "title": "Block",
-                        "code": "<div class=\"s-bc:accent s-radius s-pbs:30 s-pbe:40 s-text:center s-mbe:20\">Alberta Rowe</div>\n  <div class=\"s-bc:complementary s-radius s-pb:30 s-text:center s-mbe:20\">Jody Thiel IV</div>\n  <div class=\"s-bc:main s-radius s-pbs:50 s-pbe:30 s-text:center s-mbe:20\">Yolanda Beatty</div>\n  <div class=\"s-bc:error s-radius s-pbs:100 s-pbe:60 s-text:center s-mbe:20\">Blanca O'Keefe</div>"
+                        "code": "<div class=\"s-bc:accent s-radius s-pbs:30 s-pbe:40 s-text:center s-mbe:20\">Maurice Turcotte PhD</div>\n  <div class=\"s-bc:complementary s-radius s-pb:30 s-text:center s-mbe:20\">Oscar Stoltenberg</div>\n  <div class=\"s-bc:main s-radius s-pbs:50 s-pbe:30 s-text:center s-mbe:20\">Madeline Bogisich</div>\n  <div class=\"s-bc:error s-radius s-pbs:100 s-pbe:60 s-text:center s-mbe:20\">Mike Trantow</div>"
                     },
                     {
                         "language": "html",
                         "title": "RTL",
-                        "code": "<div dir=\"rtl\">\n  <p class=\"s-bc:accent s-radius s-pi:30 s-pb:30 s-mbe:20\">Leon Zieme</p>\n  <p class=\"s-bc:complementary s-radius s-pis:50 s-pb:30 s-mbe:20\">Sophia Walker</p>\n  <p class=\"s-bc:main s-radius s-pis:80 s-pb:30 s-mbe:20\">Chad Harvey PhD</p>\n  <p class=\"s-bc:error s-radius s-pis:100 s-pb:30 s-mbe:20\">Miss Joel Nader</p>\n</div>"
+                        "code": "<div dir=\"rtl\">\n  <p class=\"s-bc:accent s-radius s-pi:30 s-pb:30 s-mbe:20\">Sandra Okuneva</p>\n  <p class=\"s-bc:complementary s-radius s-pis:50 s-pb:30 s-mbe:20\">Duane Hegmann</p>\n  <p class=\"s-bc:main s-radius s-pis:80 s-pb:30 s-mbe:20\">Boyd Gerhold</p>\n  <p class=\"s-bc:error s-radius s-pis:100 s-pb:30 s-mbe:20\">Lyle Muller</p>\n</div>"
                     }
                 ],
                 "install": [
@@ -989,17 +989,17 @@
                     {
                         "language": "html",
                         "title": "Default",
-                        "code": "<div class=\"s-flex:align-center:wrap s-gap:20 s-font:70\">\n  <div class=\"s-avatar\">\n      <img src=\"https://i.pravatar.cc/300?v=89057\" />\n  </div>\n      <div class=\"s-avatar s-color:accent\">\n      <img src=\"https://i.pravatar.cc/300?v=87358\" />\n  </div>\n  <div class=\"s-avatar s-color:complementary\">\n      <img src=\"https://i.pravatar.cc/300?v=24411\" />\n  </div>\n  <div class=\"s-avatar s-color:info\">\n      <img src=\"https://i.pravatar.cc/300?v=48984\" />\n  </div>\n  <div class=\"s-avatar s-color:success\">\n      <img src=\"https://i.pravatar.cc/300?v=54773\" />\n  </div>\n  <div class=\"s-avatar s-color:error\">\n     <img src=\"https://i.pravatar.cc/300?v=3979\" />\n  </div>\n</div>"
+                        "code": "<div class=\"s-flex:align-center:wrap s-gap:20 s-font:70\">\n  <div class=\"s-avatar\">\n      <img src=\"https://i.pravatar.cc/300?v=65872\" />\n  </div>\n      <div class=\"s-avatar s-color:accent\">\n      <img src=\"https://i.pravatar.cc/300?v=70199\" />\n  </div>\n  <div class=\"s-avatar s-color:complementary\">\n      <img src=\"https://i.pravatar.cc/300?v=28221\" />\n  </div>\n  <div class=\"s-avatar s-color:info\">\n      <img src=\"https://i.pravatar.cc/300?v=91276\" />\n  </div>\n  <div class=\"s-avatar s-color:success\">\n      <img src=\"https://i.pravatar.cc/300?v=78235\" />\n  </div>\n  <div class=\"s-avatar s-color:error\">\n     <img src=\"https://i.pravatar.cc/300?v=78699\" />\n  </div>\n</div>"
                     },
                     {
                         "language": "html",
                         "title": "Notifications",
-                        "code": "<div class=\"s-flex:wrap:align-center s-gap:20 s-font:70\">\n  <div class=\"s-avatar notifications=\"10\">\n     <img src=\"https://i.pravatar.cc/300?v=26098\" />\n  </div>\n  <div class=\"s-avatar s-color:accent\" notifications=\"10\">\n      <img src=\"https://i.pravatar.cc/300?v=36082\" />\n  </div>\n  <div class=\"s-avatar s-color:complementary\" notifications=\"10\">\n      <img src=\"https://i.pravatar.cc/300?v=39673\" />\n  </div>\n  <div class=\"s-avatar s-color:info\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=94587\" />\n  </div>\n  <div class=\"s-avatar s-color:success\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=79784\" />\n  </div>\n  <div class=\"s-avatar s-color:error\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=42661\" />\n  </div>\n</div>"
+                        "code": "<div class=\"s-flex:wrap:align-center s-gap:20 s-font:70\">\n  <div class=\"s-avatar notifications=\"10\">\n     <img src=\"https://i.pravatar.cc/300?v=47500\" />\n  </div>\n  <div class=\"s-avatar s-color:accent\" notifications=\"10\">\n      <img src=\"https://i.pravatar.cc/300?v=92690\" />\n  </div>\n  <div class=\"s-avatar s-color:complementary\" notifications=\"10\">\n      <img src=\"https://i.pravatar.cc/300?v=46375\" />\n  </div>\n  <div class=\"s-avatar s-color:info\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=66942\" />\n  </div>\n  <div class=\"s-avatar s-color:success\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=41830\" />\n  </div>\n  <div class=\"s-avatar s-color:error\" notifications>\n      <img src=\"https://i.pravatar.cc/300?v=29625\" />\n  </div>\n</div>"
                     },
                     {
                         "language": "html",
                         "title": "Interactive",
-                        "code": "<div class=\"s-flex:wrap:align-center s-gap:20 s-font:70\">\n  <div class=\"s-avatar:interactive\">\n       <img src=\"https://i.pravatar.cc/300?v=97234\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:accent\">\n      <img src=\"https://i.pravatar.cc/300?v=74940\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:complementary\">\n      <img src=\"https://i.pravatar.cc/300?v=19799\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:info\">\n      <img src=\"https://i.pravatar.cc/300?v=5060\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:success\">\n      <img src=\"https://i.pravatar.cc/300?v=32702\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:error\">\n      <img src=\"https://i.pravatar.cc/300?v=80305\" />\n  </div>\n</div>"
+                        "code": "<div class=\"s-flex:wrap:align-center s-gap:20 s-font:70\">\n  <div class=\"s-avatar:interactive\">\n       <img src=\"https://i.pravatar.cc/300?v=32280\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:accent\">\n      <img src=\"https://i.pravatar.cc/300?v=72328\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:complementary\">\n      <img src=\"https://i.pravatar.cc/300?v=30780\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:info\">\n      <img src=\"https://i.pravatar.cc/300?v=59190\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:success\">\n      <img src=\"https://i.pravatar.cc/300?v=52145\" />\n  </div>\n  <div class=\"s-avatar:interactive s-color:error\">\n      <img src=\"https://i.pravatar.cc/300?v=71428\" />\n  </div>\n</div>"
                     }
                 ],
                 "install": [
@@ -1189,17 +1189,17 @@
                     {
                         "language": "html",
                         "title": "inline lnf",
-                        "code": "<form class=\"s-flex:column s-gap:30\">\n  <label class=\"s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive\">\n    <span>John Doe</span>\n    <textarea class=\"s-input s-width:60\" placeholder=\"Type something!\" rows=\"3\"></textarea>\n  </label>\n  <label class=\" s-label:responsive\">\n    <span>Support RTL</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive s-color:accent\">\n    <span>With the accent color</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n</div>"
+                        "code": "<form class=\"s-flex:column s-gap:30\">\n  <label class=\"s-label:responsive\">\n    <span>John Doe</span>\n    <input type=\"text\" class=\"s-input\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive\">\n    <span>John Doe</span>\n    <textarea class=\"s-input\" placeholder=\"Type something!\" rows=\"3\"></textarea>\n  </label>\n  <label class=\" s-label:responsive\">\n    <span>Support RTL</span>\n    <input type=\"text\" class=\"s-input\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive s-color:accent\">\n    <span>With the accent color</span>\n    <input type=\"text\" class=\"s-input\" placeholder=\"Type something!\" />\n  </label>\n</div>"
                     },
                     {
                         "language": "html",
                         "title": "block lnf",
-                        "code": "<form class=\"s-flex:column s-gap:30\">\n  <label class=\"s-label:responsive:block\">\n    <span>John Doe</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive:block\">\n    <span>John Doe</span>\n    <textarea class=\"s-input s-width:60\" placeholder=\"Type something!\" rows=\"3\"></textarea>\n  </label>\n  <label class=\" s-label:responsive:block\">\n    <span>Support RTL</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive:block s-color:accent\">\n    <span>With the accent color</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n</div>"
+                        "code": "<form class=\"s-flex:column s-gap:30\">\n  <label class=\"s-label:responsive:block\">\n    <span>John Doe</span>\n    <input type=\"text\" class=\"s-input\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive:block\">\n    <span>John Doe</span>\n    <textarea class=\"s-input\" placeholder=\"Type something!\" rows=\"3\"></textarea>\n  </label>\n  <label class=\" s-label:responsive:block\">\n    <span>Support RTL</span>\n    <input type=\"text\" class=\"s-input\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive:block s-color:accent\">\n    <span>With the accent color</span>\n    <input type=\"text\" class=\"s-input\" placeholder=\"Type something!\" />\n  </label>\n</div>"
                     },
                     {
                         "language": "html",
                         "title": "float lnf",
-                        "code": "<form class=\"s-flex:column s-gap:30\">\n  <label class=\"s-label:responsive:float\">\n    <span>John Doe</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive:float\">\n    <span>John Doe</span>\n    <textarea class=\"s-input s-width:60\" placeholder=\"Type something!\" rows=\"3\"></textarea>\n  </label>\n  <label class=\" s-label:responsive:float\">\n    <span>Support RTL</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive:float s-color:accent\">\n    <span>With the accent color</span>\n    <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"Type something!\" />\n  </label>\n</div>"
+                        "code": "<form class=\"s-flex:column s-gap:30\">\n  <label class=\"s-label:responsive:float\">\n    <span>John Doe</span>\n    <input type=\"text\" class=\"s-input\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive:float\">\n    <span>John Doe</span>\n    <textarea class=\"s-input\" placeholder=\"Type something!\" rows=\"3\"></textarea>\n  </label>\n  <label class=\" s-label:responsive:float\">\n    <span>Support RTL</span>\n    <input type=\"text\" class=\"s-input\" placeholder=\"Type something!\" />\n  </label>\n  <label class=\"s-label:responsive:float s-color:accent\">\n    <span>With the accent color</span>\n    <input type=\"text\" class=\"s-input\" placeholder=\"Type something!\" />\n  </label>\n</div>"
                     }
                 ],
                 "install": [
@@ -1249,32 +1249,32 @@
                     {
                         "language": "html",
                         "title": "dl",
-                        "code": "<ul class=\"s-list:dl \">\n    <li>Central Assurance Consultant Donnie Champlin MD</li>\n    <li>Corporate Assurance Associate Amy Hettinger</li>\n    <li>Global Paradigm Officer Mr. Norman O'Connell</li>\n  </ul>"
+                        "code": "<ul class=\"s-list:dl \">\n    <li>Dynamic Paradigm Planner Dana Kassulke</li>\n    <li>District Data Architect Nancy Cummings</li>\n    <li>National Accountability Producer Marianne Daugherty</li>\n  </ul>"
                     },
                     {
                         "language": "html",
                         "title": "ul",
-                        "code": "<ul class=\"s-list:ul \">\n    <li>Global Program Assistant Edward Schmitt</li>\n    <li>Principal Metrics Consultant Ernesto Gibson</li>\n    <li>Central Accountability Assistant Nelson Lebsack</li>\n  </ul>"
+                        "code": "<ul class=\"s-list:ul \">\n    <li>Senior Usability Designer Kimberly Orn</li>\n    <li>Future Interactions Producer Floyd Leuschke</li>\n    <li>Dynamic Usability Liaison Dwayne Lehner</li>\n  </ul>"
                     },
                     {
                         "language": "html",
                         "title": "ol",
-                        "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>Legacy Marketing Consultant Jodi Kunde</li>\n    <li>Senior Tactics Orchestrator Molly Block</li>\n    <li>Direct Optimization Supervisor Erica Harvey</li>\n  </ul>"
+                        "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>District Intranet Liaison Christina Haley</li>\n    <li>Dynamic Tactics Coordinator Lydia Marks Sr.</li>\n    <li>Human Data Technician Moses Homenick</li>\n  </ul>"
                     },
                     {
                         "language": "html",
                         "title": "icon",
-                        "code": "<ul class=\"s-list:icon \">\n    <li><i class=\"s-icon:user\"></i>Direct Metrics Designer Catherine McLaughlin</li>\n    <li><i class=\"s-icon:heart s-color:accent\"></i>Future Data Agent Tony Spencer</li>\n    <li><i class=\"s-icon:fire s-color:error\"></i>Lead Factors Facilitator Bridget Crist</li>\n  </ul>"
+                        "code": "<ul class=\"s-list:icon \">\n    <li><i class=\"s-icon:user\"></i>Legacy Division Administrator Malcolm Reinger</li>\n    <li><i class=\"s-icon:heart s-color:accent\"></i>Dynamic Infrastructure Supervisor Jeanette Bartell</li>\n    <li><i class=\"s-icon:fire s-color:error\"></i>Dynamic Integration Agent Mr. Jim Hauck</li>\n  </ul>"
                     },
                     {
                         "language": "html",
                         "title": "RTL Support",
-                        "code": "<div dir=\"rtl\">\n  <ul class=\"s-list:ul s-color:accent s-mbe:30\">\n    <li>Corporate Web Consultant Cynthia Pagac</li>\n    <li>Dynamic Usability Manager Doris Deckow</li>\n  </ul>\n  <ul class=\"s-list:ol s-color:accent s-mbe:30\">\n    <li>Internal Accounts Analyst Everett Walsh</li>\n    <li>Global Directives Technician Frank Kub</li>\n  </ul>\n  <ul class=\"s-list:icon s-color:accent s-mbe:30\">\n    <li><i class=\"s-icon:user\"></i> International Paradigm Liaison Eric Thiel</li>\n    <li><i class=\"s-icon:heart s-color:error\"></i> Customer Solutions Specialist Audrey Kirlin</li>\n  </ul>\n</div>"
+                        "code": "<div dir=\"rtl\">\n  <ul class=\"s-list:ul s-color:accent s-mbe:30\">\n    <li>Direct Data Consultant Alonzo Bernier</li>\n    <li>Senior Configuration Officer Frank Nolan</li>\n  </ul>\n  <ul class=\"s-list:ol s-color:accent s-mbe:30\">\n    <li>Central Infrastructure Representative Jeffrey Shanahan</li>\n    <li>Regional Identity Assistant Robin Goyette</li>\n  </ul>\n  <ul class=\"s-list:icon s-color:accent s-mbe:30\">\n    <li><i class=\"s-icon:user\"></i> Dynamic Markets Manager Kristie Feil III</li>\n    <li><i class=\"s-icon:heart s-color:error\"></i> Lead Solutions Agent Ms. Darnell Kovacek</li>\n  </ul>\n</div>"
                     },
                     {
                         "language": "html",
                         "title": "Colors (none-exhaustive)",
-                        "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>Principal Data Producer Delbert Lebsack</li>\n    <li class=\"s-color:complementary\">Principal Interactions Manager Walter Schaden</li>\n    <li class=\"s-color:error\">Forward Group Strategist Byron Wisozk</li>\n  </ul>"
+                        "code": "<ul class=\"s-list:ol s-color:accent\">\n    <li>Corporate Branding Representative Isaac Brakus Sr.</li>\n    <li class=\"s-color:complementary\">Chief Metrics Supervisor Al Legros</li>\n    <li class=\"s-color:error\">Dynamic Accounts Strategist Luz Muller</li>\n  </ul>"
                     }
                 ],
                 "install": [
@@ -1464,37 +1464,37 @@
                     {
                         "language": "html",
                         "title": "solid lnf",
-                        "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select\" name=\"select-lnf-solid\">\n      <option value=\"value1\">Bryan Reinger</option>\n      <option value=\"value2\">Dave Murphy</option>\n      <option value=\"value3\">Lawrence Jacobs</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>I'm disabled</span>\n    <select disabled class=\"s-select\" name=\"select-lnf-solid\">\n      <option value=\"value1\">Sam Wintheiser</option>\n      <option value=\"value2\">Dwayne McLaughlin</option>\n      <option value=\"value3\">Dave Rodriguez</option>\n    </select>\n  </label>"
+                        "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select\" name=\"select-lnf-solid\">\n      <option value=\"value1\">Morris Quitzon</option>\n      <option value=\"value2\">Tim Kirlin</option>\n      <option value=\"value3\">Ruby Cormier</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>I'm disabled</span>\n    <select disabled class=\"s-select\" name=\"select-lnf-solid\">\n      <option value=\"value1\">Dwight Sporer</option>\n      <option value=\"value2\">Joseph Goodwin</option>\n      <option value=\"value3\">Terrance Turcotte</option>\n    </select>\n  </label>"
                     },
                     {
                         "language": "html",
                         "title": "underline lnf",
-                        "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select:underline\" name=\"select-lnf-underline\">\n      <option value=\"value1\">Dan Murazik</option>\n      <option value=\"value2\">Ella Parker</option>\n      <option value=\"value3\">Guadalupe Walsh</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>I'm disabled</span>\n    <select disabled class=\"s-select:underline\" name=\"select-lnf-underline\">\n      <option value=\"value1\">Herbert Donnelly V</option>\n      <option value=\"value2\">Abraham Klein</option>\n      <option value=\"value3\">Lucia Bernier</option>\n    </select>\n  </label>"
+                        "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select:underline\" name=\"select-lnf-underline\">\n      <option value=\"value1\">Claude Pagac</option>\n      <option value=\"value2\">Eddie West</option>\n      <option value=\"value3\">Clayton Terry</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>I'm disabled</span>\n    <select disabled class=\"s-select:underline\" name=\"select-lnf-underline\">\n      <option value=\"value1\">Jennifer Hoppe</option>\n      <option value=\"value2\">Lynn Reichel</option>\n      <option value=\"value3\">Jaime Hamill</option>\n    </select>\n  </label>"
                     },
                     {
                         "language": "html",
                         "title": "Shapes",
-                        "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-shape:default\" name=\"select-color-accent\">\n      <option value=\"value1\">Andre Schuster</option>\n      <option value=\"value2\">Robin Larson</option>\n      <option value=\"value3\">Elizabeth Luettgen</option>\n    </select>\n</label>\n<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-shape:square\" name=\"select-color-accent\">\n      <option value=\"value1\">Michael Huel</option>\n      <option value=\"value2\">Vera Tremblay</option>\n      <option value=\"value3\">Allen Veum</option>\n    </select>\n</label>\n<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-shape:pill\" name=\"select-color-accent\">\n      <option value=\"value1\">Jasmine Kris</option>\n      <option value=\"value2\">Kurt Hahn</option>\n      <option value=\"value3\">Lewis Sanford IV</option>\n    </select>\n</label>"
+                        "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-shape:default\" name=\"select-color-accent\">\n      <option value=\"value1\">Lindsey Labadie</option>\n      <option value=\"value2\">Dora Swaniawski III</option>\n      <option value=\"value3\">Preston Cassin</option>\n    </select>\n</label>\n<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-shape:square\" name=\"select-color-accent\">\n      <option value=\"value1\">Diana Parker</option>\n      <option value=\"value2\">Enrique Kris MD</option>\n      <option value=\"value3\">Joey Konopelski</option>\n    </select>\n</label>\n<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-shape:pill\" name=\"select-color-accent\">\n      <option value=\"value1\">Dr. Vanessa Schimmel</option>\n      <option value=\"value2\">Patsy Mayert</option>\n      <option value=\"value3\">Jeanne Ward</option>\n    </select>\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "Colors (none-exhaustive)",
-                        "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Nora Koepp</option>\n      <option value=\"value2\">Sylvia McKenzie</option>\n      <option value=\"value3\">Dr. Terrell Predovic</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" name=\"select-color-complementary\">\n      <option value=\"value1\">Edith McClure Sr.</option>\n      <option value=\"value2\">Courtney Prohaska</option>\n      <option value=\"value3\">Elmer Kozey</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:complementary\" name=\"select-color-error\">\n      <option value=\"value1\">William Wolf</option>\n      <option value=\"value2\">Maurice Feest</option>\n      <option value=\"value3\">Elijah Gutmann</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:error\" name=\"select-color-error\" disabled>\n      <option value=\"value1\">Kenneth Johns</option>\n      <option value=\"value2\">Franklin Rice</option>\n      <option value=\"value3\">Suzanne Zemlak</option>\n    </select>\n  </label>"
+                        "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select\" name=\"select-color-accent\">\n      <option value=\"value1\">Francis Welch</option>\n      <option value=\"value2\">Marshall Keeling</option>\n      <option value=\"value3\">Clayton Connelly</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" name=\"select-color-complementary\">\n      <option value=\"value1\">Dr. Essie Treutel</option>\n      <option value=\"value2\">Miss Marsha Waters</option>\n      <option value=\"value3\">Laura Morar I</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:complementary\" name=\"select-color-error\">\n      <option value=\"value1\">Wade Bergnaum IV</option>\n      <option value=\"value2\">Tommy Jacobi</option>\n      <option value=\"value3\">Jeremy Lynch</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:error\" name=\"select-color-error\" disabled>\n      <option value=\"value1\">Jose Hyatt</option>\n      <option value=\"value2\">Ebony Toy</option>\n      <option value=\"value3\">Tricia Kunze</option>\n    </select>\n  </label>"
                     },
                     {
                         "language": "html",
                         "title": "Multiple",
-                        "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" multiple name=\"select-color-accent\">\n      <option value=\"value1\">Gerard Rodriguez</option>\n      <option value=\"value2\">Julia Bartell</option>\n      <option value=\"value3\">Ken Kertzmann</option>\n    </select>\n  </label>"
+                        "code": "<label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" multiple name=\"select-color-accent\">\n      <option value=\"value1\">Amber Stehr</option>\n      <option value=\"value2\">Roland Kiehn</option>\n      <option value=\"value3\">Edith Koss</option>\n    </select>\n  </label>"
                     },
                     {
                         "language": "html",
                         "title": "RTL",
-                        "code": "<div dir=\"rtl\">\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" name=\"select-color-accent\">\n      <option value=\"value1\">Tracy Dibbert</option>\n      <option value=\"value2\">Theresa Gorczany</option>\n      <option value=\"value3\">Dianne Stoltenberg</option>\n    </select>\n  </label>\n</div>"
+                        "code": "<div dir=\"rtl\">\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" name=\"select-color-accent\">\n      <option value=\"value1\">Jordan Leuschke I</option>\n      <option value=\"value2\">Marco Spinka</option>\n      <option value=\"value3\">Judith Thompson Jr.</option>\n    </select>\n  </label>\n</div>"
                     },
                     {
                         "language": "html",
                         "title": "Scales",
-                        "code": "<label class=\"s-mbe:30 s-label:responsive s-scale:07\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" name=\"select-color-accent\">\n      <option value=\"value1\">Freda O'Hara</option>\n      <option value=\"value2\">Lonnie Huels DDS</option>\n      <option value=\"value3\">Vera Nicolas</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" name=\"select-color-accent\">\n      <option value=\"value1\">Cindy Heidenreich PhD</option>\n      <option value=\"value2\">Gina Rice DVM</option>\n      <option value=\"value3\">Angel Bartell V</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive s-scale:13\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" name=\"select-color-accent\">\n      <option value=\"value1\">Helen Strosin</option>\n      <option value=\"value2\">Samantha Lemke</option>\n      <option value=\"value3\">Rebecca Schuster</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive s-scale:16\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" name=\"select-color-accent\">\n      <option value=\"value1\">Pat Kautzer III</option>\n      <option value=\"value2\">Lisa Mosciski</option>\n      <option value=\"value3\">Raul Walker</option>\n    </select>\n  </label>"
+                        "code": "<label class=\"s-mbe:30 s-label:responsive s-scale:07\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" name=\"select-color-accent\">\n      <option value=\"value1\">Carole Jones</option>\n      <option value=\"value2\">Benny Carter</option>\n      <option value=\"value3\">Rebecca Weissnat</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" name=\"select-color-accent\">\n      <option value=\"value1\">Mrs. Eva Rath</option>\n      <option value=\"value2\">Alejandro Bode</option>\n      <option value=\"value3\">Cornelius Skiles</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive s-scale:13\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" name=\"select-color-accent\">\n      <option value=\"value1\">Bryan Keeling</option>\n      <option value=\"value2\">Thomas Pfeffer</option>\n      <option value=\"value3\">Mr. Victor Shanahan</option>\n    </select>\n  </label>\n  <label class=\"s-mbe:30 s-label:responsive s-scale:16\">\n    <span>John Doe</span>\n    <select class=\"s-select s-color:accent\" name=\"select-color-accent\">\n      <option value=\"value1\">Marguerite Ward V</option>\n      <option value=\"value2\">Jim Heaney</option>\n      <option value=\"value3\">Jody Rempel</option>\n    </select>\n  </label>"
                     }
                 ],
                 "install": [
@@ -1833,17 +1833,17 @@
                     {
                         "language": "html",
                         "title": "Aligns",
-                        "code": "<div class=\"s-text:left s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (left) Kristopher White MD\n  </div>\n  <div class=\"s-text:right s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (right) Ms. Whitney Lynch\n  </div>\n  <div class=\"s-text:center s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (center) Ms. Miranda Hickle\n  </div>\n  <div class=\"s-text:start s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (start) Gloria Johnston V\n  </div>\n  <div class=\"s-text:end s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (end) Van Schoen\n  </div>"
+                        "code": "<div class=\"s-text:left s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (left) Meredith Rogahn\n  </div>\n  <div class=\"s-text:right s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (right) Emma Hudson\n  </div>\n  <div class=\"s-text:center s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (center) Mrs. Doreen Rogahn\n  </div>\n  <div class=\"s-text:start s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (start) Ms. Emilio King\n  </div>\n  <div class=\"s-text:end s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (end) Eric Aufderhar\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Decorations",
-                        "code": "<div class=\"s-text:overline s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (overline) Salvatore Haley\n  </div>\n  <div class=\"s-text:underline s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (underline) Bruce Strosin\n  </div>\n  <div class=\"s-text:line-through s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (line-through) Colleen Wisoky DVM\n  </div>"
+                        "code": "<div class=\"s-text:overline s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (overline) Randall O'Kon\n  </div>\n  <div class=\"s-text:underline s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (underline) Archie Collins V\n  </div>\n  <div class=\"s-text:line-through s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (line-through) Merle Lindgren\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Transforms",
-                        "code": "<div class=\"s-text:lowercase s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (lowercase) Tonya Nikolaus\n  </div>\n  <div class=\"s-text:uppercase s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (uppercase) Lauren Carroll\n  </div>\n  <div class=\"s-text:capitalize s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (capitalize) Stanley Moore\n  </div>"
+                        "code": "<div class=\"s-text:lowercase s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (lowercase) Margie Bruen\n  </div>\n  <div class=\"s-text:uppercase s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (uppercase) Katrina Schneider\n  </div>\n  <div class=\"s-text:capitalize s-bc:main s-p:20 s-mbe:30 s-radius\">\n      (capitalize) Michele Grant\n  </div>"
                     }
                 ],
                 "install": [
@@ -1893,22 +1893,22 @@
                     {
                         "language": "html",
                         "title": "Simple grid",
-                        "code": "<div class=\"s-flex:row:wrap\">\n    <div class=\"s-bc:main s-width:50 s-p:30\">Stephanie Ruecker Jr.</div>\n    <div class=\"s-bc:accent s-width:50 s-p:30\">Barbara Grimes I</div>\n    <div class=\"s-bc:complementary s-width:50 s-p:30\">Sammy Hickle</div>\n    <div class=\"s-bc:info s-width:50 s-p:30\">Michelle Breitenberg</div>\n  </div>"
+                        "code": "<div class=\"s-flex:row:wrap\">\n    <div class=\"s-bc:main s-width:50 s-p:30\">Willie Weimann</div>\n    <div class=\"s-bc:accent s-width:50 s-p:30\">Diana Hodkiewicz</div>\n    <div class=\"s-bc:complementary s-width:50 s-p:30\">Ross Schiller III</div>\n    <div class=\"s-bc:info s-width:50 s-p:30\">Melanie Quigley</div>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Grow",
-                        "code": "<div class=\"s-flex:row\">\n    <div class=\"s-grow s-bc:main s-p:30\">Vicky Hodkiewicz</div>\n    <div class=\"s-bc:accent s-p:30\">Percy Witting</div>\n    <div class=\"s-bc:complementary s-p:30\">Alberto Gusikowski</div>\n  </div>"
+                        "code": "<div class=\"s-flex:row\">\n    <div class=\"s-grow s-bc:main s-p:30\">Melissa Thompson</div>\n    <div class=\"s-bc:accent s-p:30\">Kathleen Yost</div>\n    <div class=\"s-bc:complementary s-p:30\">Kelley Gaylord Jr.</div>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Orders",
-                        "code": "<div class=\"s-flex:row\">\n    <div class=\"s-order:3 s-bc:main s-p:30\">Erik Schmitt</div>\n    <div class=\"s-bc:accent s-p:30\">Darrin Schimmel</div>\n    <div class=\"s-bc:complementary s-p:30\">Lamar Weber</div>\n  </div>"
+                        "code": "<div class=\"s-flex:row\">\n    <div class=\"s-order:3 s-bc:main s-p:30\">Dianne Stokes MD</div>\n    <div class=\"s-bc:accent s-p:30\">Essie Leffler MD</div>\n    <div class=\"s-bc:complementary s-p:30\">Ms. Danny Raynor</div>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Aligns",
-                        "code": "<div class=\"s-flex:row:align-end\">\n    <div class=\"s-bc:main s-p:30\">Lori Greenholt</div>\n    <div class=\"s-bc:accent s-p:30\">Daniel Kuphal II<br />Conrad Klein<br />Monica Huels<br />Elmer Kreiger<br />Penny Bernier</div>\n    <div class=\"s-bc:complementary s-p:30\">Wesley Willms</div>\n  </div>"
+                        "code": "<div class=\"s-flex:row:align-end\">\n    <div class=\"s-bc:main s-p:30\">Robert Dare</div>\n    <div class=\"s-bc:accent s-p:30\">Juanita Rice<br />Tami Crona<br />Mrs. Gregg Hauck<br />Darren Hodkiewicz<br />Sheri Gaylord</div>\n    <div class=\"s-bc:complementary s-p:30\">Mattie Quigley</div>\n  </div>"
                     }
                 ],
                 "install": [
@@ -2182,7 +2182,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<!-- 10 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 10</h3>\n  <div class=\"s-scale:10\">\n      <a class=\"s-btn\">Amber Spencer</a>\n  </div>\n</div>\n\n<!-- 11 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 11</h3>\n  <div class=\"s-scale:11\">\n      <a class=\"s-btn\">Jeanne Stroman</a>\n  </div>\n</div>\n\n<!-- 12 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 12</h3>\n  <div class=\"s-scale:12\">\n      <a class=\"s-btn\">Charles Harvey</a>\n  </div>\n</div>\n\n<!-- 13 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 13</h3>\n  <div class=\"s-scale:13\">\n      <a class=\"s-btn\">Ricky Towne</a>\n  </div>\n</div>\n\n<!-- 14 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 14</h3>\n  <div class=\"s-scale:14\">\n      <a class=\"s-btn\">Penny Ondricka</a>\n  </div>\n</div>\n\n<!-- 15 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 15</h3>\n  <div class=\"s-scale:15\">\n      <a class=\"s-btn\">Tracey Braun</a>\n  </div>\n</div>\n\n<!-- 16 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 16</h3>\n  <div class=\"s-scale:16\">\n      <a class=\"s-btn\">Lucas Rosenbaum</a>\n  </div>\n</div>\n\n<!-- 17 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 17</h3>\n  <div class=\"s-scale:17\">\n      <a class=\"s-btn\">Lance Hane</a>\n  </div>\n</div>\n\n<!-- 18 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 18</h3>\n  <div class=\"s-scale:18\">\n      <a class=\"s-btn\">Tomas Simonis DDS</a>\n  </div>\n</div>\n\n<!-- 19 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 19</h3>\n  <div class=\"s-scale:19\">\n      <a class=\"s-btn\">Gustavo Carroll</a>\n  </div>\n</div>\n\n<!-- 20 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 20</h3>\n  <div class=\"s-scale:20\">\n      <a class=\"s-btn\">Misty Gislason</a>\n  </div>\n</div>\n\n<!-- 21 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 21</h3>\n  <div class=\"s-scale:21\">\n      <a class=\"s-btn\">Jeffrey Gislason</a>\n  </div>\n</div>\n\n<!-- 22 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 22</h3>\n  <div class=\"s-scale:22\">\n      <a class=\"s-btn\">Tim Bergstrom</a>\n  </div>\n</div>\n\n<!-- 23 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 23</h3>\n  <div class=\"s-scale:23\">\n      <a class=\"s-btn\">Levi Vandervort</a>\n  </div>\n</div>\n\n<!-- 24 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 24</h3>\n  <div class=\"s-scale:24\">\n      <a class=\"s-btn\">Nick O'Conner</a>\n  </div>\n</div>\n\n<!-- 25 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 25</h3>\n  <div class=\"s-scale:25\">\n      <a class=\"s-btn\">Mrs. Clint Schneider</a>\n  </div>\n</div>\n\n<!-- 26 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 26</h3>\n  <div class=\"s-scale:26\">\n      <a class=\"s-btn\">Ms. Ignacio Kunde</a>\n  </div>\n</div>\n\n<!-- 27 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 27</h3>\n  <div class=\"s-scale:27\">\n      <a class=\"s-btn\">Rogelio Klein</a>\n  </div>\n</div>\n\n<!-- 28 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 28</h3>\n  <div class=\"s-scale:28\">\n      <a class=\"s-btn\">Stella Kulas</a>\n  </div>\n</div>\n\n<!-- 29 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 29</h3>\n  <div class=\"s-scale:29\">\n      <a class=\"s-btn\">Angie Bogisich</a>\n  </div>\n</div>\n\n<!-- 30 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 30</h3>\n  <div class=\"s-scale:30\">\n      <a class=\"s-btn\">Brenda Hudson</a>\n  </div>\n</div>\n\n<!-- default scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale default</h3>\n  <div class=\"s-scale:default\">\n      <a class=\"s-btn\">Mrs. Mindy Zboncak</a>\n  </div>\n</div>\n\n<!-- 01 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 01</h3>\n  <div class=\"s-scale:01\">\n      <a class=\"s-btn\">Byron Schroeder</a>\n  </div>\n</div>\n\n<!-- 02 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 02</h3>\n  <div class=\"s-scale:02\">\n      <a class=\"s-btn\">Patricia Boyle</a>\n  </div>\n</div>\n\n<!-- 03 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 03</h3>\n  <div class=\"s-scale:03\">\n      <a class=\"s-btn\">Adrian D'Amore</a>\n  </div>\n</div>\n\n<!-- 04 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 04</h3>\n  <div class=\"s-scale:04\">\n      <a class=\"s-btn\">Jasmine Watsica</a>\n  </div>\n</div>\n\n<!-- 05 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 05</h3>\n  <div class=\"s-scale:05\">\n      <a class=\"s-btn\">Gerard Jakubowski</a>\n  </div>\n</div>\n\n<!-- 06 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 06</h3>\n  <div class=\"s-scale:06\">\n      <a class=\"s-btn\">Corey Ullrich</a>\n  </div>\n</div>\n\n<!-- 07 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 07</h3>\n  <div class=\"s-scale:07\">\n      <a class=\"s-btn\">Dominick Spencer III</a>\n  </div>\n</div>\n\n<!-- 08 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 08</h3>\n  <div class=\"s-scale:08\">\n      <a class=\"s-btn\">Brian Walker</a>\n  </div>\n</div>\n\n<!-- 09 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 09</h3>\n  <div class=\"s-scale:09\">\n      <a class=\"s-btn\">Ian Marquardt</a>\n  </div>\n</div>"
+                        "code": "<!-- 10 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 10</h3>\n  <div class=\"s-scale:10\">\n      <a class=\"s-btn\">Abraham Marquardt</a>\n  </div>\n</div>\n\n<!-- 11 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 11</h3>\n  <div class=\"s-scale:11\">\n      <a class=\"s-btn\">Myron Swift</a>\n  </div>\n</div>\n\n<!-- 12 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 12</h3>\n  <div class=\"s-scale:12\">\n      <a class=\"s-btn\">Ryan Jacobs</a>\n  </div>\n</div>\n\n<!-- 13 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 13</h3>\n  <div class=\"s-scale:13\">\n      <a class=\"s-btn\">Joel Zboncak</a>\n  </div>\n</div>\n\n<!-- 14 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 14</h3>\n  <div class=\"s-scale:14\">\n      <a class=\"s-btn\">Heather Boyer</a>\n  </div>\n</div>\n\n<!-- 15 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 15</h3>\n  <div class=\"s-scale:15\">\n      <a class=\"s-btn\">Mr. Holly Moore</a>\n  </div>\n</div>\n\n<!-- 16 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 16</h3>\n  <div class=\"s-scale:16\">\n      <a class=\"s-btn\">Dr. Mable Ratke</a>\n  </div>\n</div>\n\n<!-- 17 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 17</h3>\n  <div class=\"s-scale:17\">\n      <a class=\"s-btn\">Kara Raynor</a>\n  </div>\n</div>\n\n<!-- 18 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 18</h3>\n  <div class=\"s-scale:18\">\n      <a class=\"s-btn\">Armando Keeling</a>\n  </div>\n</div>\n\n<!-- 19 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 19</h3>\n  <div class=\"s-scale:19\">\n      <a class=\"s-btn\">Mr. Alex Bednar</a>\n  </div>\n</div>\n\n<!-- 20 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 20</h3>\n  <div class=\"s-scale:20\">\n      <a class=\"s-btn\">Derek Renner</a>\n  </div>\n</div>\n\n<!-- 21 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 21</h3>\n  <div class=\"s-scale:21\">\n      <a class=\"s-btn\">Allan Crist</a>\n  </div>\n</div>\n\n<!-- 22 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 22</h3>\n  <div class=\"s-scale:22\">\n      <a class=\"s-btn\">Nick Koelpin</a>\n  </div>\n</div>\n\n<!-- 23 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 23</h3>\n  <div class=\"s-scale:23\">\n      <a class=\"s-btn\">Marcus Senger</a>\n  </div>\n</div>\n\n<!-- 24 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 24</h3>\n  <div class=\"s-scale:24\">\n      <a class=\"s-btn\">Angel Langworth II</a>\n  </div>\n</div>\n\n<!-- 25 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 25</h3>\n  <div class=\"s-scale:25\">\n      <a class=\"s-btn\">Nadine Klein</a>\n  </div>\n</div>\n\n<!-- 26 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 26</h3>\n  <div class=\"s-scale:26\">\n      <a class=\"s-btn\">Arlene Gottlieb</a>\n  </div>\n</div>\n\n<!-- 27 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 27</h3>\n  <div class=\"s-scale:27\">\n      <a class=\"s-btn\">Jorge Miller</a>\n  </div>\n</div>\n\n<!-- 28 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 28</h3>\n  <div class=\"s-scale:28\">\n      <a class=\"s-btn\">Christine Weissnat</a>\n  </div>\n</div>\n\n<!-- 29 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 29</h3>\n  <div class=\"s-scale:29\">\n      <a class=\"s-btn\">Katherine Emard</a>\n  </div>\n</div>\n\n<!-- 30 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 30</h3>\n  <div class=\"s-scale:30\">\n      <a class=\"s-btn\">Rita Kuvalis V</a>\n  </div>\n</div>\n\n<!-- default scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale default</h3>\n  <div class=\"s-scale:default\">\n      <a class=\"s-btn\">Antonio Berge</a>\n  </div>\n</div>\n\n<!-- 01 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 01</h3>\n  <div class=\"s-scale:01\">\n      <a class=\"s-btn\">Julian Baumbach</a>\n  </div>\n</div>\n\n<!-- 02 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 02</h3>\n  <div class=\"s-scale:02\">\n      <a class=\"s-btn\">Frederick Altenwerth</a>\n  </div>\n</div>\n\n<!-- 03 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 03</h3>\n  <div class=\"s-scale:03\">\n      <a class=\"s-btn\">Sheila Jacobson DDS</a>\n  </div>\n</div>\n\n<!-- 04 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 04</h3>\n  <div class=\"s-scale:04\">\n      <a class=\"s-btn\">Penny Greenholt</a>\n  </div>\n</div>\n\n<!-- 05 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 05</h3>\n  <div class=\"s-scale:05\">\n      <a class=\"s-btn\">Mr. Nelson Schinner</a>\n  </div>\n</div>\n\n<!-- 06 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 06</h3>\n  <div class=\"s-scale:06\">\n      <a class=\"s-btn\">Krista Hodkiewicz</a>\n  </div>\n</div>\n\n<!-- 07 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 07</h3>\n  <div class=\"s-scale:07\">\n      <a class=\"s-btn\">Terrell Larson</a>\n  </div>\n</div>\n\n<!-- 08 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 08</h3>\n  <div class=\"s-scale:08\">\n      <a class=\"s-btn\">Erin Klocko</a>\n  </div>\n</div>\n\n<!-- 09 scale -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scale 09</h3>\n  <div class=\"s-scale:09\">\n      <a class=\"s-btn\">Whitney Mohr</a>\n  </div>\n</div>"
                     }
                 ],
                 "install": [
@@ -2382,42 +2382,42 @@
                     {
                         "language": "html",
                         "title": "Block",
-                        "code": "<div class=\"s-display:block\">\n    <p class=\"s-typo:p\">Jacqueline Kulas V</p>\n    <p class=\"s-typo:p\">Hubert Schaden</p>\n    <p class=\"s-typo:p\">Terri Langworth</p>\n  </div>"
+                        "code": "<div class=\"s-display:block\">\n    <p class=\"s-typo:p\">Glenda Barton</p>\n    <p class=\"s-typo:p\">Mr. Leona Herman</p>\n    <p class=\"s-typo:p\">Frances Smitham</p>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Inline-block",
-                        "code": "<div class=\"s-display:inline-block\">\n    <p class=\"s-typo:p\">Kelli Klein</p>\n    <p class=\"s-typo:p\">Victoria Reilly</p>\n    <p class=\"s-typo:p\">Annette McKenzie</p>\n  </div>"
+                        "code": "<div class=\"s-display:inline-block\">\n    <p class=\"s-typo:p\">Gilbert Klein</p>\n    <p class=\"s-typo:p\">Larry Gibson</p>\n    <p class=\"s-typo:p\">Julia Rohan</p>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Contents",
-                        "code": "<div class=\"s-display:contents\">\n    <p class=\"s-typo:p\">Rosie Dare</p>\n    <p class=\"s-typo:p\">Shelia Adams</p>\n    <p class=\"s-typo:p\">Megan Quigley</p>\n  </div>"
+                        "code": "<div class=\"s-display:contents\">\n    <p class=\"s-typo:p\">Dallas Schmitt</p>\n    <p class=\"s-typo:p\">Patty Treutel</p>\n    <p class=\"s-typo:p\">Sonia Glover</p>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Flex",
-                        "code": "<div class=\"s-display:flex\">\n    <p class=\"s-typo:p\">Dolores Bogan</p>\n    <p class=\"s-typo:p\">Frances Kemmer</p>\n    <p class=\"s-typo:p\">Rufus O'Conner</p>\n  </div>"
+                        "code": "<div class=\"s-display:flex\">\n    <p class=\"s-typo:p\">Dianne Rohan</p>\n    <p class=\"s-typo:p\">Cecil Wisozk PhD</p>\n    <p class=\"s-typo:p\">Mrs. Sue Moen</p>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Grid",
-                        "code": "<div class=\"s-display:grid\">\n    <p class=\"s-typo:p\">Neil Hintz</p>\n    <p class=\"s-typo:p\">Darla Keebler</p>\n    <p class=\"s-typo:p\">Kristy Murphy</p>\n  </div>"
+                        "code": "<div class=\"s-display:grid\">\n    <p class=\"s-typo:p\">Elaine Tromp</p>\n    <p class=\"s-typo:p\">Lynette King</p>\n    <p class=\"s-typo:p\">Darren Witting</p>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Inline-flex",
-                        "code": "<div class=\"s-display:inline-flex\">\n    <p class=\"s-typo:p\">Gretchen Fadel</p>\n    <p class=\"s-typo:p\">Willie Dickinson</p>\n    <p class=\"s-typo:p\">Regina Considine</p>\n  </div>"
+                        "code": "<div class=\"s-display:inline-flex\">\n    <p class=\"s-typo:p\">Lindsey Cassin</p>\n    <p class=\"s-typo:p\">Hazel Boyer</p>\n    <p class=\"s-typo:p\">Nicholas Konopelski</p>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "Inline-grid",
-                        "code": "<div class=\"s-display:inline-grid\">\n    <p class=\"s-typo:p\">Evan Mohr</p>\n    <p class=\"s-typo:p\">Rodolfo Maggio</p>\n    <p class=\"s-typo:p\">Jo Gerlach</p>\n  </div>"
+                        "code": "<div class=\"s-display:inline-grid\">\n    <p class=\"s-typo:p\">Miss Lydia Rohan</p>\n    <p class=\"s-typo:p\">Mandy Runte</p>\n    <p class=\"s-typo:p\">Conrad Muller</p>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "None",
-                        "code": "<div class=\"s-display:none\">\n    <p class=\"s-typo:p\">Elsie Ferry</p>\n    <p class=\"s-typo:p\">Charlene Schuster</p>\n    <p class=\"s-typo:p\">Mr. Joyce Schulist</p>\n  </div>"
+                        "code": "<div class=\"s-display:none\">\n    <p class=\"s-typo:p\">Stanley McKenzie</p>\n    <p class=\"s-typo:p\">George Buckridge</p>\n    <p class=\"s-typo:p\">Adrienne Will</p>\n  </div>"
                     }
                 ],
                 "install": [
@@ -2687,17 +2687,17 @@
                     {
                         "language": "html",
                         "title": "slow",
-                        "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-6912920c-51bf-433e-9a7c-873a274ffbba\">\n     <div class=\"s-transition:slow s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-6912920c-51bf-433e-9a7c-873a274ffbba > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-6912920c-51bf-433e-9a7c-873a274ffbba:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+                        "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-4a405d11-50d6-465b-8d12-4b322995a116\">\n     <div class=\"s-transition:slow s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-4a405d11-50d6-465b-8d12-4b322995a116 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-4a405d11-50d6-465b-8d12-4b322995a116:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "default",
-                        "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-27c3a7a7-286e-44f8-a90c-5f3f8cf89850\">\n     <div class=\"s-transition s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-27c3a7a7-286e-44f8-a90c-5f3f8cf89850 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-27c3a7a7-286e-44f8-a90c-5f3f8cf89850:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+                        "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-3f1895ed-3cb7-40d8-ba9e-400b36164886\">\n     <div class=\"s-transition s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-3f1895ed-3cb7-40d8-ba9e-400b36164886 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-3f1895ed-3cb7-40d8-ba9e-400b36164886:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
                     },
                     {
                         "language": "html",
                         "title": "fast",
-                        "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-070105e7-ba54-4cff-8a90-707016bc29c9\">\n     <div class=\"s-transition:fast s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-070105e7-ba54-4cff-8a90-707016bc29c9 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-070105e7-ba54-4cff-8a90-707016bc29c9:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
+                        "code": "<div class=\"s-bc:main-surface s-radius:30\" id=\"s-transition-s-8eb91728-256c-4d8c-94d9-1ff354835433\">\n     <div class=\"s-transition:fast s-ratio:1 s-bc:accent s-radius:30\"></div>\n      <style>\n          #s-transition-s-8eb91728-256c-4d8c-94d9-1ff354835433 > div { position: relative; left: 0; width: 100px; }\n          #s-transition-s-8eb91728-256c-4d8c-94d9-1ff354835433:hover > div { left: calc(100% - 100px); )  }\n      </style>\n  </div>"
                     }
                 ],
                 "install": [
@@ -2797,7 +2797,7 @@
                     {
                         "language": "html",
                         "title": "Vertical spacing",
-                        "code": "<div class=\"s-spacing:40\">\n  <h1 class=\"s-typo:h1\">Hello world</h1>\n  <p class=\"s-typo:lead\">Kate Dach</p>\n  <p class=\"s-typo:p\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis egestas non tortor sed aliquet. Fusce finibus erat at leo scelerisque, a lobortis purus pretium. Aliquam ornare leo id mi imperdiet.</p>\n  <a class=\"s-btn s-color:accent\">Simple Cta</a>\n</div>"
+                        "code": "<div class=\"s-spacing:40\">\n  <h1 class=\"s-typo:h1\">Hello world</h1>\n  <p class=\"s-typo:lead\">Ms. Celia Denesik</p>\n  <p class=\"s-typo:p\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis egestas non tortor sed aliquet. Fusce finibus erat at leo scelerisque, a lobortis purus pretium. Aliquam ornare leo id mi imperdiet.</p>\n  <a class=\"s-btn s-color:accent\">Simple Cta</a>\n</div>"
                     }
                 ],
                 "install": [
@@ -2847,22 +2847,22 @@
                     {
                         "language": "html",
                         "title": "All",
-                        "code": "<p class=\"s-user-select:all\">\n      Suscipit commodi magni animi. Sed distinctio qui ut consequatur. Nesciunt et doloribus in et eos officia. Ullam modi id possimus et minus.\n  </p>"
+                        "code": "<p class=\"s-user-select:all\">\n      Quia quia nam quo sit. Necessitatibus blanditiis laborum. Reprehenderit enim ut suscipit qui.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "auto",
-                        "code": "<p class=\"s-user-select:auto\">\n      Eius et dolor nulla. Libero ex voluptas atque harum explicabo distinctio voluptate a quia. In facilis enim vero earum vero aut. Debitis cumque eum. Hic aut aliquam suscipit sequi dolor eaque a. Inventore quis aut minima non omnis recusandae dicta aut.\n  </p>"
+                        "code": "<p class=\"s-user-select:auto\">\n      Deleniti delectus ipsa numquam consequuntur. Vel voluptas consequatur ea aut et. Itaque ad nam aut quo cupiditate.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "none",
-                        "code": "<p class=\"s-user-select:none\">\n      Deserunt repellat enim sunt. Consequatur ut iure soluta. Velit illum velit quidem dicta doloremque modi. Harum incidunt necessitatibus voluptas repudiandae. Fuga neque optio iusto mollitia aut soluta molestias error quia. Et qui ut inventore consequatur.\n  </p>"
+                        "code": "<p class=\"s-user-select:none\">\n      Eum non non delectus cumque quasi asperiores. Ipsum ducimus veritatis. Aut sed et beatae.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "text",
-                        "code": "<p class=\"s-user-select:text\">\n      Quidem et libero ad qui. Doloribus sit ea voluptatum similique. Qui iste nisi dolores qui unde mollitia et quis dolore. Vitae tempore et vero sint ut. Voluptates libero omnis et placeat assumenda fuga. Nulla laborum id fuga nihil pariatur qui ducimus.\n  </p>"
+                        "code": "<p class=\"s-user-select:text\">\n      Id suscipit placeat quaerat. Saepe ipsa dolores corporis. Exercitationem magni pariatur sit qui eaque officia.\n  </p>"
                     }
                 ],
                 "install": [
@@ -3012,52 +3012,52 @@
                     {
                         "language": "html",
                         "title": "1 line",
-                        "code": "<p class=\"s-typo:p s-truncate:1\">Ipsum est provident asperiores incidunt quia repudiandae fugit.<br />Quisquam distinctio ratione excepturi.<br />Praesentium exercitationem dolorem maiores dolorum nostrum qui.<br />Commodi eveniet eos earum odit porro quis ea.<br />Fugit est provident sequi sit aut iste illo.<br />Quas ratione est ut labore aliquid quis perferendis similique deleniti.<br />Saepe unde dolorem illum.<br />Aut facere eligendi corporis consequatur et corrupti et.<br />Molestiae tempore in suscipit.<br />Illo et repudiandae rem est repellendus odio dignissimos.<br />Praesentium dolor quia asperiores voluptas et.<br />Molestiae eius voluptate ab.<br />Aperiam qui hic facere qui voluptas reiciendis consequatur voluptatem similique.<br />Praesentium cum dolore itaque.<br />Quo recusandae animi recusandae.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:1\">Nobis at corrupti voluptatem.<br />Voluptas non facere non quidem.<br />Nemo sapiente perspiciatis consequatur doloremque sequi.<br />Voluptas aut mollitia autem blanditiis.<br />Quas et esse itaque.<br />Dignissimos explicabo natus veritatis officiis.<br />Laborum commodi natus.<br />Laudantium similique reiciendis.<br />Sit tenetur a qui vero.<br />Qui autem voluptatem.<br />Alias vitae ut quisquam alias quia labore perferendis.<br />Vero fugiat amet rerum id blanditiis error rem.<br />Exercitationem ipsa consectetur saepe.<br />Quidem placeat rem quod error optio explicabo optio.<br />A aliquid quia modi explicabo voluptas.</p>"
                     },
                     {
                         "language": "html",
                         "title": "2 line",
-                        "code": "<p class=\"s-typo:p s-truncate:2\">Ipsa illo dolore id quia numquam ut officia doloribus hic.<br />Quia harum consequatur adipisci iste.<br />Maiores repellendus enim voluptatem a ut ex doloremque eos nobis.<br />Voluptate similique atque corporis impedit molestiae ut ipsam.<br />Et recusandae nesciunt aut quidem aliquid molestiae aliquid et cupiditate.<br />In sit et.<br />Eveniet libero beatae placeat eveniet assumenda.<br />Et maxime sit.<br />Qui qui perspiciatis omnis.<br />Aut nemo optio atque ab ipsum et.<br />Aliquid quidem corrupti debitis.<br />Consequatur dicta ipsam magni dolor voluptatem voluptatem.<br />Aliquam et quo.<br />Perspiciatis esse qui consequatur distinctio voluptate eaque odit quia.<br />Facere tempora eum similique est est.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:2\">Omnis aut hic asperiores quo.<br />Placeat facilis rem dignissimos molestias.<br />Adipisci recusandae odio quisquam ad qui harum.<br />Dolorum quo qui ea sed enim.<br />Beatae excepturi blanditiis tempore enim expedita illum est et.<br />Tempora et impedit modi repellat voluptate vero vel.<br />Possimus asperiores et.<br />Fugiat qui aperiam.<br />Ut exercitationem quas consectetur quas.<br />Libero eos possimus aut et qui et placeat nisi.<br />Aut ipsum quis quia culpa et veritatis consectetur nihil.<br />Ratione ut autem quis.<br />Maiores corporis blanditiis.<br />Est necessitatibus sint aperiam.<br />Non consequatur fugiat asperiores.</p>"
                     },
                     {
                         "language": "html",
                         "title": "3 lines",
-                        "code": "<p class=\"s-typo:p s-truncate:3\">Reprehenderit officia magni cum qui explicabo aut ut unde sequi.<br />Voluptatem tempore molestiae fugiat adipisci reiciendis.<br />Est ipsa non quam.<br />Modi quam praesentium pariatur facere odio deleniti.<br />Ea officia aliquid ipsam tempora vero sunt saepe.<br />Voluptatem perferendis aut sequi modi pariatur non praesentium.<br />Omnis quia non repellat error.<br />Eligendi soluta praesentium.<br />Tenetur sed reiciendis alias aut dolore ut rem quo rerum.<br />Consequatur sit voluptas et illum.<br />Sunt ut est voluptas voluptatem minima voluptatum nihil.<br />Et aut similique.<br />Occaecati autem porro.<br />Beatae voluptatibus qui molestiae.<br />Aliquid quia nulla vel quaerat ipsa.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:3\">Sed dolores nobis dolor blanditiis et.<br />Autem enim repellat aliquid autem quisquam aliquam est itaque.<br />Reiciendis similique iste.<br />Quidem impedit et repellat qui quo consequatur.<br />Dolore a ut officiis a.<br />Eos recusandae quas ipsum quis odio delectus corrupti dolorum optio.<br />Consequatur dolore ipsum debitis sunt officia incidunt quia necessitatibus soluta.<br />Reprehenderit voluptatem dolor praesentium debitis est aliquam.<br />Nesciunt omnis ipsam voluptatem est maxime consequatur saepe et laudantium.<br />Sapiente optio rerum deleniti ut sint natus adipisci.<br />Dolor voluptas consectetur.<br />Qui distinctio qui ut.<br />Et quia qui.<br />Quo qui omnis nostrum.<br />Iure reprehenderit sunt voluptate velit.</p>"
                     },
                     {
                         "language": "html",
                         "title": "4 lines",
-                        "code": "<p class=\"s-typo:p s-truncate:4\">Provident ut assumenda magni sunt doloremque.<br />Voluptate blanditiis numquam amet voluptatibus tempore suscipit ut velit velit.<br />Adipisci possimus perferendis voluptatum ad odit adipisci molestias iusto neque.<br />Id at ratione omnis sit et commodi est et illum.<br />In in omnis facilis nisi et ut.<br />Facilis dolore accusantium qui voluptatem omnis exercitationem sed quo.<br />Ipsum iure placeat placeat libero aperiam.<br />Animi cupiditate perspiciatis voluptatum veniam.<br />Et sint possimus aliquam hic et officiis a.<br />Dignissimos praesentium est quia velit perferendis voluptatem blanditiis quod.<br />Fuga tenetur iste accusamus ullam debitis.<br />Est dignissimos aut repellat laudantium et minus.<br />Sit quo repellendus maxime nisi.<br />Beatae ipsa in quae soluta in.<br />Cum molestiae deleniti at molestias fugit.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:4\">Necessitatibus quo animi minima iste animi ducimus natus architecto est.<br />Omnis error omnis nulla.<br />Nemo hic qui eos nam magnam quis accusamus voluptas.<br />Repellat asperiores quia error amet veniam ipsum.<br />Assumenda amet veniam nihil iste.<br />Modi sit corporis non deleniti adipisci illo ipsam illum blanditiis.<br />Quis tempore vero repudiandae odio ad accusamus cupiditate ducimus.<br />Eum et dolorem hic non illo voluptatibus vel corrupti fuga.<br />Recusandae accusamus delectus quia aliquam.<br />Quidem necessitatibus aut blanditiis nihil maxime ducimus in quia.<br />Sint praesentium ipsum asperiores iste quisquam eius consequatur repellendus.<br />Est ut impedit nihil voluptatem sit.<br />Minima ad delectus voluptas voluptas commodi.<br />Rerum ea soluta possimus dolorem aperiam et sed quidem.<br />Consequuntur possimus saepe voluptatem rerum vel dolor ea animi veritatis.</p>"
                     },
                     {
                         "language": "html",
                         "title": "5 lines",
-                        "code": "<p class=\"s-typo:p s-truncate:5\">Debitis molestiae consequatur.<br />Enim quibusdam id.<br />Eos alias dolor.<br />Aut id est eos dolorem in iste molestias.<br />Omnis quos qui sint impedit ullam.<br />Ut veritatis aut.<br />Est a dolor iste aliquam inventore iusto.<br />Cumque veritatis molestiae libero enim error rem et.<br />Dicta nihil autem voluptas quia.<br />Magnam maxime ut fugiat suscipit.<br />Placeat nemo similique expedita quo id dolor libero officia id.<br />Aut fugiat magni neque ut.<br />Occaecati natus perspiciatis.<br />Vitae ex ad ut distinctio quo qui rerum.<br />Molestias in dolores aut omnis iusto et eaque.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:5\">Et dolor consequatur quis.<br />Quis incidunt aut possimus inventore quia cupiditate voluptas eligendi ut.<br />Officia pariatur adipisci.<br />Soluta consequuntur optio blanditiis ipsa fugit inventore ex cumque.<br />Id voluptate corporis consequuntur laudantium dolores architecto magni.<br />Rerum velit eos fugit qui consequatur.<br />Libero sit illum perferendis et.<br />Ullam sint ex ut hic odit.<br />Rerum ut facere et possimus quam aliquid.<br />Dolore et cum qui.<br />Ut est aut rerum quam dolores inventore eaque.<br />Dolore necessitatibus ut dolores modi est porro adipisci.<br />Omnis similique unde itaque ut ut cupiditate quis optio quia.<br />Nam quia quas voluptatem unde velit excepturi.<br />Temporibus ipsam reiciendis accusantium sit.</p>"
                     },
                     {
                         "language": "html",
                         "title": "6 lines",
-                        "code": "<p class=\"s-typo:p s-truncate:6\">Qui voluptas molestiae quis ducimus.<br />Vitae qui quas praesentium qui et deleniti aliquam neque.<br />Quaerat rerum ipsa omnis similique incidunt atque nobis aliquid quisquam.<br />Quia nostrum in possimus quibusdam.<br />Voluptatem sunt est eum.<br />Id et voluptatem dicta deleniti eveniet officia.<br />Praesentium itaque eveniet omnis iure.<br />Impedit voluptatum repudiandae ad sint et omnis magnam perferendis dolorem.<br />Soluta sunt dolore nemo.<br />Dolorum incidunt ut laboriosam aut odit voluptatum quia sint eligendi.<br />Quo magni non eos rem rerum dolor cum odit.<br />Amet doloribus quia officiis enim omnis quidem ipsa aut tempora.<br />Aut optio totam possimus voluptatem aliquid et id.<br />Mollitia quisquam laborum distinctio repellat ipsa excepturi magnam corporis.<br />Nostrum aperiam laudantium.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:6\">Ad aliquid et nostrum at iusto aliquam totam hic.<br />Voluptatem et explicabo quaerat.<br />Minus illum iste et est qui nisi.<br />Corrupti eos vel possimus.<br />Nihil possimus consequatur incidunt.<br />Veniam illo unde aut commodi eius rem provident.<br />Maiores nisi tempore.<br />Voluptas qui ipsa perferendis.<br />Iste iste voluptatem quisquam.<br />Temporibus tempore aperiam.<br />Explicabo nulla necessitatibus ipsa.<br />Voluptatem ea odit ea quo laudantium nisi laudantium reiciendis aliquam.<br />Nihil nostrum aliquam blanditiis sint.<br />Unde corrupti neque autem optio veritatis.<br />Ipsum voluptas voluptas.</p>"
                     },
                     {
                         "language": "html",
                         "title": "7 lines",
-                        "code": "<p class=\"s-typo:p s-truncate:7\">Aut recusandae ipsa ipsum voluptatem aperiam ratione asperiores voluptates.<br />Maiores porro ea id quia.<br />Nobis delectus et ab voluptatibus et in dolorem nesciunt.<br />Ex soluta fugiat nihil voluptatem deleniti.<br />Qui porro recusandae.<br />Sit ratione nihil ipsum soluta iste architecto ipsa aut aut.<br />Atque in quasi neque commodi.<br />Ipsum et qui commodi accusantium soluta.<br />Sequi consequatur nemo dolor sit est corporis quia qui.<br />Ipsam praesentium adipisci et.<br />Id consequatur pariatur sit blanditiis nisi.<br />Voluptas et in consequatur et totam voluptatem.<br />Amet voluptatem eos vel iusto ut fugit dolorum voluptatem.<br />Ab quo debitis voluptate.<br />Aut repellat a et.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:7\">Ducimus ratione consequuntur saepe consequuntur ducimus sequi.<br />Accusamus rerum omnis temporibus labore magni est est quod voluptatem.<br />Velit beatae non et doloremque magni iste.<br />Quo repellendus saepe libero nemo.<br />Consectetur unde quisquam aut consequatur quia ipsa dolorem atque.<br />Et rerum labore quae enim maxime accusantium laborum.<br />Voluptas voluptates corrupti autem.<br />Explicabo quo et.<br />Et tempora perspiciatis est molestias nisi mollitia et libero porro.<br />Temporibus iste aut accusantium.<br />Delectus quidem deserunt cumque maxime explicabo voluptates similique repellendus.<br />Eligendi eos aut et quis laudantium impedit qui mollitia.<br />Voluptas atque voluptate est aperiam.<br />Facere molestias qui aspernatur vitae voluptate dolor dolor.<br />Sunt sed aut consequatur labore eveniet eum id.</p>"
                     },
                     {
                         "language": "html",
                         "title": "8 lines",
-                        "code": "<p class=\"s-typo:p s-truncate:8\">Voluptatem earum pariatur non culpa qui repellat est.<br />Eum quia dolores dolor ea at dolor minima iste.<br />Velit sit aperiam ratione et odio est vel atque ut.<br />Quibusdam et eaque temporibus nostrum dolores praesentium alias perferendis.<br />Omnis aut et voluptatem sed.<br />Maxime ex eius reiciendis sint ea.<br />Dolore quod quisquam.<br />Sequi voluptatem alias officia commodi.<br />Atque dolorum at nam quaerat.<br />Et repellat voluptas quasi sint optio voluptatem beatae.<br />Esse ex amet et aut in aliquid et.<br />Voluptatibus sequi et quod aliquam quae vitae quia qui.<br />Beatae sed est eveniet suscipit repudiandae sunt in sint et.<br />Rerum et mollitia doloremque minus incidunt harum.<br />Est deleniti velit repellat voluptatibus non.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:8\">Fugiat accusantium rerum minima placeat aut id delectus et.<br />Minus ratione veniam voluptatum excepturi.<br />Tempore vitae dignissimos qui atque adipisci fuga est.<br />Rerum ex voluptatem velit alias repellendus aut voluptas.<br />Vel porro non.<br />Dolor commodi perferendis.<br />Autem laborum quia soluta non commodi exercitationem explicabo adipisci.<br />Fugiat non sunt consequuntur quam numquam illum non.<br />Quam amet qui architecto temporibus consequatur officia.<br />Deserunt dignissimos atque fuga.<br />Iste consequatur voluptas ut nostrum ipsam quasi quia quasi.<br />Quas officiis dolores aut eum dolores.<br />Occaecati vero aperiam adipisci fuga.<br />Aut voluptatum mollitia cumque.<br />Atque rerum sequi quam exercitationem animi amet et eos.</p>"
                     },
                     {
                         "language": "html",
                         "title": "9 lines",
-                        "code": "<p class=\"s-typo:p s-truncate:9\">Amet qui laborum.<br />Omnis et debitis accusamus aliquam nobis voluptates quam architecto.<br />Temporibus doloremque sunt.<br />Tempore qui quo eos maiores voluptatem odio placeat adipisci qui.<br />Voluptas sit eius rerum accusantium earum aspernatur saepe et.<br />Maiores dolorem molestiae rerum voluptates enim aspernatur nam tenetur.<br />Alias et doloremque.<br />Rerum voluptas est ut ipsum dolorem aut quisquam veniam sunt.<br />Aut unde provident velit nihil quasi.<br />Ea quaerat excepturi fugiat qui nemo aliquid.<br />Repellat ratione nobis nihil asperiores.<br />Ut ut necessitatibus esse recusandae ad qui.<br />Ratione et est.<br />Eos temporibus deserunt corrupti quod natus repellendus.<br />Odio voluptatum unde facilis ad et ab eos.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:9\">Nesciunt labore modi eius et.<br />Animi neque enim dignissimos quia iste magni.<br />In fuga aut voluptatem hic.<br />Rem qui et ratione sapiente harum enim.<br />Est quisquam consequatur dolores officia reprehenderit aut eos molestiae.<br />Et nobis suscipit voluptas eum.<br />In officia non quisquam id eos recusandae quidem ea.<br />Occaecati esse minus officiis et illo deleniti amet sed velit.<br />Quis numquam voluptatem est.<br />Autem aut eveniet aut aut totam unde tempora distinctio voluptas.<br />Odit consequatur nemo rerum dolorem et et illo architecto.<br />Sunt ut placeat sed magnam dignissimos et et.<br />Recusandae quis cumque quod et suscipit.<br />Molestias est unde laboriosam iure repellendus autem vero.<br />Ut id iure ipsam ut eius sunt.</p>"
                     },
                     {
                         "language": "html",
                         "title": "10 lines",
-                        "code": "<p class=\"s-typo:p s-truncate:10\">Eius repellendus quos sed aut est commodi officiis soluta dolore.<br />Porro dignissimos animi quas in.<br />Doloribus repellat veritatis quia.<br />Consequuntur et et sunt.<br />Vero ipsa est aliquam asperiores maxime vero rerum earum.<br />Odio amet blanditiis alias officia vel animi atque.<br />Aut quod consequuntur voluptates.<br />Deleniti voluptatem doloremque neque.<br />Sit et eveniet voluptatem quia aliquam dolorem accusantium animi aspernatur.<br />Odit et laborum facilis voluptas delectus ut nobis id vero.<br />Veniam sed velit perspiciatis dolores qui.<br />Doloremque consectetur in.<br />Id voluptatibus et.<br />Consequatur qui et aut nulla.<br />Necessitatibus molestiae voluptates non occaecati.</p>"
+                        "code": "<p class=\"s-typo:p s-truncate:10\">Et ab optio voluptatem nulla.<br />Hic rerum deleniti aut ut sit repellat.<br />Velit dolores quaerat ut quisquam.<br />Facere maxime sed reprehenderit veritatis culpa odio aspernatur eum iste.<br />Ipsam ipsum consequatur commodi sunt eos officia.<br />Velit voluptatem in soluta.<br />Magni non quisquam assumenda aut ex provident accusantium.<br />Iure sapiente ex iusto qui dicta nulla eligendi.<br />Et rerum fuga ipsum.<br />Ab enim et dolorem enim illum ut commodi eius sit.<br />Magnam quia occaecati neque.<br />At ea repellendus eum et.<br />Recusandae qui ad aliquam qui iure.<br />Asperiores odit expedita atque.<br />Distinctio earum impedit libero cumque accusamus voluptas.</p>"
                     }
                 ],
                 "install": [
@@ -3207,47 +3207,47 @@
                     {
                         "language": "html",
                         "title": "Wrap",
-                        "code": "<p class=\"s-white-space:wrap\">\n      Libero voluptatem nesciunt voluptatem. Est itaque deserunt sunt dolor debitis est repudiandae illum. Sint repellendus repudiandae est dicta neque enim quisquam nostrum. Cumque consequatur enim voluptatem libero aut consectetur aliquam officia. Natus eum sunt minus. Veritatis rerum magni nihil.\n  </p>"
+                        "code": "<p class=\"s-white-space:wrap\">\n      Iste repellendus voluptatem eveniet quod animi quia. Temporibus porro qui aspernatur voluptate ut debitis. Culpa corrupti recusandae expedita aut quod non aut debitis.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "Nowrap",
-                        "code": "<p class=\"s-white-space:nowrap\">\n      Sit repellat numquam aperiam illo animi perferendis sed. Porro dolorum autem aut. Ut aut molestiae est ut.\n  </p>"
+                        "code": "<p class=\"s-white-space:nowrap\">\n      Repudiandae ut magnam dicta vitae aut. Facilis accusantium eligendi. Explicabo pariatur ea natus quo in ea.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "Break spaces",
-                        "code": "<p class=\"s-white-space:break-spaces\">\n      Quam veritatis numquam eos fuga odit optio possimus. Autem quibusdam possimus ipsam. Pariatur nihil quidem non reprehenderit optio. Molestiae sit molestiae eligendi voluptas accusantium. Architecto accusantium quia libero id animi sit explicabo nihil.\n  </p>"
+                        "code": "<p class=\"s-white-space:break-spaces\">\n      Nobis quasi sit nesciunt aspernatur repellendus dolores optio perspiciatis. Modi veritatis voluptates molestiae atque est maiores hic. Non ipsam quos eligendi sunt cum repellendus omnis consequuntur. Aspernatur enim impedit iste.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "Normal",
-                        "code": "<p class=\"s-white-space:normal\">\n      Velit illum et. Corrupti sunt et enim. Facilis nobis omnis corporis harum numquam qui. Sunt voluptatem cum commodi aut voluptatum et. Saepe inventore molestias nemo corrupti eaque. Reprehenderit nulla dolor sed tempore quasi animi fugit qui est.\n  </p>"
+                        "code": "<p class=\"s-white-space:normal\">\n      Laborum quam deserunt. Voluptatem eos et tempore et iusto necessitatibus ut et officiis. Et a quibusdam et et autem aperiam. Aut est aut optio tempore sit vel ut. Distinctio adipisci sequi iure error. Quod dolorem similique omnis distinctio a voluptates veniam esse ut.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "Pre",
-                        "code": "<p class=\"s-white-space:pre\">\n      Id quia autem nemo doloribus quos fugit. Saepe recusandae est alias enim. Sed est sint ducimus aut recusandae ea. Adipisci fugit amet sit nostrum et a occaecati quod.\n  </p>"
+                        "code": "<p class=\"s-white-space:pre\">\n      Enim repellendus iure necessitatibus eligendi non. Aut alias voluptas esse quia dolore modi molestiae voluptatem. Ipsam ipsa doloremque voluptatem qui sed facere officiis laudantium necessitatibus. Nostrum a occaecati aut ut aut voluptas sed. Dolor labore quas perferendis ea.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "Pre-line",
-                        "code": "<p class=\"s-white-space:pre-line\">\n      Ratione in sed ullam iure qui eos molestiae et eius. Dicta facere voluptatem eos iure earum. Quidem minima dolore illo. Quas laudantium et veritatis voluptas sit magni sed.\n  </p>"
+                        "code": "<p class=\"s-white-space:pre-line\">\n      Ut unde facilis et voluptatem. Quia eum voluptates. Et quia distinctio fuga nesciunt assumenda in cupiditate voluptatem. Iste et dolore eveniet. Voluptas fuga magni iste deserunt consequatur. Rerum excepturi iure aliquam ut qui.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "Pre-wrap",
-                        "code": "<p class=\"s-white-space:pre-wrap\">\n      Et perferendis placeat. Molestiae et quis soluta repellat earum porro et. Provident excepturi nihil accusamus qui odit veniam dolores excepturi. Explicabo quia nemo ea consequuntur. Ducimus temporibus exercitationem.\n  </p>"
+                        "code": "<p class=\"s-white-space:pre-wrap\">\n      Nihil omnis dolore similique. Ea qui tempora. Aut consequatur sed. Odit rerum nisi est doloremque nemo aut atque excepturi voluptatem. Laudantium necessitatibus error magnam. Nostrum occaecati eos ipsam repellat velit reprehenderit.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "Revert",
-                        "code": "<p class=\"s-white-space:revert\">\n      Id ipsam quia dolorem. Illum ut perspiciatis et voluptate. Sit tenetur vero consequatur a provident temporibus similique atque officia.\n  </p>"
+                        "code": "<p class=\"s-white-space:revert\">\n      Doloribus est quas perferendis accusantium eos doloremque dolores aut. Dignissimos sed placeat consequatur nobis. Nesciunt adipisci dignissimos numquam enim voluptatem et adipisci. Dolores est ad est sunt nulla a sapiente. Hic et aperiam id occaecati dolorum quod. Ducimus quidem incidunt illo accusamus et architecto libero.\n  </p>"
                     },
                     {
                         "language": "html",
                         "title": "Unset",
-                        "code": "<p class=\"s-white-space:unset\">\n      Nihil ad saepe amet. Et et eveniet in omnis voluptatem. Autem provident mollitia explicabo veritatis qui.\n  </p>"
+                        "code": "<p class=\"s-white-space:unset\">\n      Illum sunt aut culpa sint molestiae qui doloremque et error. Amet dolorem recusandae et consequatur voluptatem. Ab enim harum sit deleniti ea sint. Recusandae dolorem delectus excepturi nobis eligendi.\n  </p>"
                     }
                 ],
                 "install": [

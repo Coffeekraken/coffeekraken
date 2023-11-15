@@ -22,8 +22,6 @@ const externalPackagesHashes: string[] = [];
 let packageHash = __folderHashSync(__path.dirname(__dirname()));
 let loadedPromise, compileFileTimeout;
 
-import type { ISClassmapSettings } from '@coffeekraken/s-classmap';
-
 const sharedData = {
     isPristine: true,
     scope: {
@@ -56,7 +54,6 @@ export interface ISSugarcssPluginCleanSettings {
 export interface ISSugarcssPluginSettings {
     outDir: string;
     lod: ISSugarcssPluginLodSettings;
-    classmap: ISClassmapSettings | false;
     clean: Partial<ISSugarcssPluginCleanSettings>;
     excludeByTypes?: string[];
     excludeCommentByTypes?: string[];
@@ -116,7 +113,6 @@ const plugin = (settings: ISSugarcssPluginSettings = {}) => {
             excludeCommentByTypes: [],
             excludeCodeByTypes: [],
             lod: {},
-            classmap: {},
             clean: {
                 variables: undefined,
             },
@@ -145,7 +141,6 @@ const plugin = (settings: ISSugarcssPluginSettings = {}) => {
                 'sugarcssPlugin.excludeCodeByTypes',
             ),
             viewsRootDirs: __SSugarConfig.get('sugarcssPlugin.viewsRootDirs'),
-            classmap: __SSugarConfig.get('sugarcssPlugin.classmap'),
             clean: __SSugarConfig.get('sugarcssPlugin.clean'),
             lod: __STheme.get('lod'),
         });

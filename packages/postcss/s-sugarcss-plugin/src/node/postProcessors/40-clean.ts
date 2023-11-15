@@ -1,4 +1,4 @@
-export default function ({ root, sharedData, settings, cacheDir, classmap }) {
+export default function ({ root, sharedData, settings, cacheDir }) {
     const usedVars: string[] = [];
 
     if (!settings.clean?.variables) {

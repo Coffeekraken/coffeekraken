@@ -5,7 +5,7 @@
  * @namespace               config
  * @type                    Config
  * @plateform               node
- * @status                  beta
+ * @status                  stable
  *
  * Specify the @coffeekraken/s-theme scroll available configurations
  *
@@ -21,7 +21,7 @@ function default_1(api) {
          * @type                Number
          * @default             300
          *
-         * Specify the scroll duration in ms for your theme
+         * Specify the scroll duration in `ms` for your theme
          *
          * @since               2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -33,31 +33,19 @@ function default_1(api) {
          * @type                Number
          * @default             500
          *
-         * Specify the scroll delay in ms for your theme
+         * Specify the scroll delay in `ms` for your theme
          *
          * @since               2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         delay: 500,
         /**
-         * @name                offset
-         * @namespace           config.themeScroll
-         * @type                Number
-         * @default             0
-         *
-         * Specify the scroll offset for your theme
-         *
-         * @since               2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-         */
-        offset: 0,
-        /**
          * @name                offsetX
          * @namespace           config.themeScroll
          * @type                Number
          * @default             0
          *
-         * Specify the scroll offset x for your theme
+         * Specify the scroll offset x in `px` for your theme
          *
          * @since               2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -69,7 +57,7 @@ function default_1(api) {
          * @type                Number
          * @default             200
          *
-         * Specify the scroll offset y for your theme
+         * Specify the scroll offset y in `px` for your theme
          *
          * @since               2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -78,4 +66,4 @@ function default_1(api) {
     };
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQTs7Ozs7Ozs7Ozs7O0dBWUc7O0FBRUgsbUJBQXlCLEdBQUc7SUFDeEIsT0FBTztRQUNIOzs7Ozs7Ozs7O1dBVUc7UUFDSCxRQUFRLEVBQUUsR0FBRztRQUViOzs7Ozs7Ozs7O1dBVUc7UUFDSCxLQUFLLEVBQUUsR0FBRztRQUVWOzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQUUsQ0FBQztRQUVUOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsQ0FBQztRQUVWOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsR0FBRztLQUNmLENBQUM7QUFDTixDQUFDO0FBbkVELDRCQW1FQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQTs7Ozs7Ozs7Ozs7O0dBWUc7O0FBRUgsbUJBQXlCLEdBQUc7SUFDeEIsT0FBTztRQUNIOzs7Ozs7Ozs7O1dBVUc7UUFDSCxRQUFRLEVBQUUsR0FBRztRQUViOzs7Ozs7Ozs7O1dBVUc7UUFDSCxLQUFLLEVBQUUsR0FBRztRQUVWOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsQ0FBQztRQUVWOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsR0FBRztLQUNmLENBQUM7QUFDTixDQUFDO0FBdERELDRCQXNEQyJ9

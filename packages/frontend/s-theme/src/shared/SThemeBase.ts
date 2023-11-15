@@ -232,6 +232,9 @@ export interface ISThemeColor {
     [key: string]: any;
 }
 
+window._themes = {};
+console.log('DDDDDDDDD');
+
 export default class SThemeBase extends __SEventEmitter {
     /**
      * @name            sortMedia
@@ -469,16 +472,28 @@ export default class SThemeBase extends __SEventEmitter {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static _instanciatedThemes: Record<string, SThemeBase> = {};
-    static _firstGetedThemeSettings: any;
+    static _firstGettedThemeSettings: any;
+
+    static i = 0;
+
     static getTheme(
         theme: string,
         variant: string,
         settings?: Partial<ISThemeSettings>,
     ): SThemeBase {
+        if (this.i >= 10) {
+            return;
+        }
+        this.i++;
+
+        if (!theme || !variant) {
+            // console.log('NOT', theme, variant);
+        }
+
         const themesNames = Object.keys(__SSugarConfig.get('theme.themes'));
 
-        theme = theme ?? this._firstGetedThemeSettings?.theme;
-        variant = variant ?? this._firstGetedThemeSettings?.variant;
+        theme = theme ?? this._firstGettedThemeSettings?.theme;
+        variant = variant ?? this._firstGettedThemeSettings?.variant;
 
         if (!theme) {
             theme = __SSugarConfig.get('theme.theme');
@@ -492,26 +507,28 @@ export default class SThemeBase extends __SEventEmitter {
             variant = __SSugarConfig.get('theme.variant');
         }
 
-        if (!this._firstGetedThemeSettings) {
-            this._firstGetedThemeSettings = {
+        if (!this._firstGettedThemeSettings) {
+            this._firstGettedThemeSettings = {
                 theme,
                 variant,
                 settings,
             };
         }
 
-        if (this._instanciatedThemes[`${theme}-${variant}`]) {
-            return this._instanciatedThemes[`${theme}-${variant}`];
-        }
+        console.log('AAAAA', window._themes[`${theme}-${variant}`]);
 
-        if (!themesNames[`${theme}-${variant}`]) {
-            this._instanciatedThemes[`${theme}-${variant}`] = new this(
-                theme,
-                variant,
-                settings,
-            );
+        if (window._themes[`${theme}-${variant}`]) {
+            console.log('THTHTHTHTHTHTHTHTHTHT');
+            return window._themes[`${theme}-${variant}`];
         }
-        return this._instanciatedThemes[`${theme}-${variant}`];
+        console.log('TTT', `${theme}-${variant}`);
+
+        window._themes[`${theme}-${variant}`] = new this(
+            theme,
+            variant,
+            settings,
+        );
+        return window._themes[`${theme}-${variant}`];
     }
 
     /**

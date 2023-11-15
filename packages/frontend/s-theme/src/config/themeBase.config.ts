@@ -4,7 +4,7 @@
  * @namespace               config
  * @type                    Config
  * @plateform               node
- * @status                  beta
+ * @status                  stable
  *
  * Specify the @coffeekraken/s-theme base available configurations
  * This is the base theme configuration that aggregate all the others like the themeColors, etc...
@@ -28,21 +28,6 @@ export default function (api) {
          */
         get color() {
             return api.config.themeColor;
-        },
-
-        /**
-         * @name            classmap
-         * @namespace        config.themeBase
-         * @type            String
-         * @default         config.themeClassmap
-         *
-         * Specify classmap settings to be used in the theme
-         *
-         * @since           2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-         */
-        get classmap() {
-            return api.config.themeClassmap;
         },
 
         /**
@@ -433,21 +418,6 @@ export default function (api) {
          */
         get typo() {
             return api.config.themeTypo;
-        },
-
-        /**
-         * @name            wireframe
-         * @namespace       config.themeBase
-         * @type            Object
-         * @default         config.themeWireframe
-         *
-         * Reference the "themeWireframe" config for wireframe elements definition
-         *
-         * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-         */
-        get wireframe() {
-            return api.config.themeWireframe;
         },
     };
 }

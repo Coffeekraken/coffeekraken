@@ -1,10 +1,4 @@
-export default async function ({
-    root,
-    sharedData,
-    settings,
-    cacheDir,
-    classmap,
-}) {
+export default async function ({ root, sharedData, settings, cacheDir }) {
     root.walkAtRules('sugar.utils.removeprops', (atRule) => {
         const props = atRule.params
             .replace(/^\'/, '')

@@ -54,21 +54,6 @@ export default function (api) {
         },
 
         /**
-         * @name            classmap
-         * @namespace       config.sugarcssPlugin
-         * @type            {ISClassmapSettings | false}
-         * @default         api.theme.classmap.enabled ? {} : false
-         *
-         * Specigy some SClassmap settings, of false if you dont want to use classmap at all.
-         *
-         * @since           2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-         */
-        get classmap() {
-            return api.theme.classmap.enabled ? {} : false;
-        },
-
-        /**
          * @name            excludeByTypes
          * @namespace       config.sugarcssPlugin
          * @type            String[]

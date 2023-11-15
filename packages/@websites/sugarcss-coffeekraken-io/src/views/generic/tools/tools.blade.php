@@ -6,7 +6,7 @@
                 <i class="s-icon:moon"></i>
             </span>
             <span class="s-when:dark">
-                <i class="s-icon:lightbulb"></i>
+                <i class="s-icon:sun"></i>
             </span>
         </button>
         <div s-floating placement="left" class="s-bare s-tooltip">

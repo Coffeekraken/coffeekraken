@@ -49,7 +49,7 @@ export default function ({
 
     const vars = new CssVars();
 
-    const layoutConfig = __STheme.get('layout');
+    const layoutConfig = __STheme.current.get('layout');
 
     const grids = layoutConfig.grid;
     Object.keys(grids).forEach((id) => {

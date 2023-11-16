@@ -30,7 +30,7 @@ class SSugarcssPluginFontSizeInterface extends __SInterface {
         return {
             size: {
                 type: 'String|Number',
-                values: Object.keys(__STheme.get('font.size')),
+                values: Object.keys(__STheme.current.get('fontSize')),
                 required: true,
             },
         };

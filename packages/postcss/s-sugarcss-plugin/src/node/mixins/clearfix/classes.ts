@@ -27,7 +27,7 @@ class SSugarcssPluginClearfixClassesInterface extends __SInterface {
         return {
             defaultClearfix: {
                 type: 'String',
-                default: __STheme.get('helpers.clearfix.default'),
+                default: __STheme.current.get('helpers.clearfix.default'),
             },
         };
     }

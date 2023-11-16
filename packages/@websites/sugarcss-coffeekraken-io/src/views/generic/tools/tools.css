@@ -68,6 +68,7 @@
         background-color: s.color(main, surface);
         background-position: 50% 50%;
         background-size: cover;
+        @s.border.radius (40);
 
         &:after {
             border-color: s.color(main, surface) transparent transparent

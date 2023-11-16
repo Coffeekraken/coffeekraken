@@ -50,7 +50,7 @@ export default function ({
 
     const vars = new CssVars();
 
-    const offsizeObj = __STheme.get('offsize');
+    const offsizeObj = __STheme.current.get('offsize');
     const offsizeKeys = __keysFirst(Object.keys(offsizeObj), ['default']);
 
     vars.comment(

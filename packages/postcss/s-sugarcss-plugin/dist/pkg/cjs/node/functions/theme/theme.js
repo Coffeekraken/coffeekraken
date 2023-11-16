@@ -16,8 +16,8 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  * @interface       ./theme
  * @status        beta
  *
- * This function allows you to get a theme value using dot path like "font.family.fontFamily", etc...
- * Usually the best way to access theme config is to use dedicated functions/mixins like "sugar.margin", "sugar.font.family", etc...
+ * This function allows you to get a theme value using dot path like "fontFamily.code.fontFamily", etc...
+ * Usually the best way to access theme config is to use dedicated functions/mixins like "s.margin", "s.font.family", etc...
  *
  * @param       {String}        dotPath      The dot path to the theme config value you want back
  * @param       {Boolean}       [scalable=false]        Specify if you want to value back to be scalable. Work only for number config as well
@@ -29,7 +29,7 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  *
  * @example       css
  * .my-element {
- *    font-family: s.theme(font.family.fontFamily);
+ *    font-family: s.theme(fontFamily.code.fontFamily);
  * }
  *
  * @since     2.0.0
@@ -63,20 +63,20 @@ function theme({ params, }) {
     const finalParams = Object.assign({}, params);
     if (finalParams.return === 'var') {
         if (finalParams.scalable) {
-            return `s.scalable(${s_theme_1.default.cssVar(finalParams.dotPath, finalParams.fallback)})`;
+            return `s.scalable(${s_theme_1.default.current.cssVar(finalParams.dotPath, finalParams.fallback)})`;
         }
         else {
-            return s_theme_1.default.cssVar(finalParams.dotPath, finalParams.fallback);
+            return s_theme_1.default.current.cssVar(finalParams.dotPath, finalParams.fallback);
         }
     }
     else {
         if (finalParams.scalable) {
-            return `s.scalable(${s_theme_1.default.get(finalParams.dotPath)})`;
+            return `s.scalable(${s_theme_1.default.current.get(finalParams.dotPath)})`;
         }
         else {
-            return s_theme_1.default.get(finalParams.dotPath);
+            return s_theme_1.default.current.get(finalParams.dotPath);
         }
     }
 }
 exports.default = theme;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7QUFFZCw0RUFBcUQ7QUFDckQsb0VBQTZDO0FBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EyQkc7QUFFSCxNQUFNLDZCQUE4QixTQUFRLHFCQUFZO0lBQ3BELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxPQUFPLEVBQUU7Z0JBQ0wsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsUUFBUSxFQUFFLElBQUk7YUFDakI7WUFDRCxRQUFRLEVBQUU7Z0JBQ04sSUFBSSxFQUFFLFNBQVM7Z0JBQ2YsT0FBTyxFQUFFLEtBQUs7YUFDakI7WUFDRCxNQUFNLEVBQUU7Z0JBQ0osSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsTUFBTSxFQUFFLENBQUMsS0FBSyxFQUFFLE9BQU8sQ0FBQztnQkFDeEIsT0FBTyxFQUFFLEtBQUs7YUFDakI7WUFDRCxRQUFRLEVBQUU7Z0JBQ04sSUFBSSxFQUFFLFNBQVM7Z0JBQ2YsT0FBTyxFQUFFLElBQUk7YUFDaEI7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBQ3lDLGtEQUFTO0FBU25ELFNBQXdCLEtBQUssQ0FBQyxFQUMxQixNQUFNLEdBR1Q7SUFDRyxNQUFNLFdBQVcscUJBQ1YsTUFBTSxDQUNaLENBQUM7SUFFRixJQUFJLFdBQVcsQ0FBQyxNQUFNLEtBQUssS0FBSyxFQUFFO1FBQzlCLElBQUksV0FBVyxDQUFDLFFBQVEsRUFBRTtZQUN0QixPQUFPLGNBQWMsaUJBQVEsQ0FBQyxNQUFNLENBQ2hDLFdBQVcsQ0FBQyxPQUFPLEVBQ25CLFdBQVcsQ0FBQyxRQUFRLENBQ3ZCLEdBQUcsQ0FBQztTQUNSO2FBQU07WUFDSCxPQUFPLGlCQUFRLENBQUMsTUFBTSxDQUFDLFdBQVcsQ0FBQyxPQUFPLEVBQUUsV0FBVyxDQUFDLFFBQVEsQ0FBQyxDQUFDO1NBQ3JFO0tBQ0o7U0FBTTtRQUNILElBQUksV0FBVyxDQUFDLFFBQVEsRUFBRTtZQUN0QixPQUFPLGNBQWMsaUJBQVEsQ0FBQyxHQUFHLENBQUMsV0FBVyxDQUFDLE9BQU8sQ0FBQyxHQUFHLENBQUM7U0FDN0Q7YUFBTTtZQUNILE9BQU8saUJBQVEsQ0FBQyxHQUFHLENBQUMsV0FBVyxDQUFDLE9BQU8sQ0FBQyxDQUFDO1NBQzVDO0tBQ0o7QUFDTCxDQUFDO0FBekJELHdCQXlCQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7QUFFZCw0RUFBcUQ7QUFDckQsb0VBQTZDO0FBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EyQkc7QUFFSCxNQUFNLDZCQUE4QixTQUFRLHFCQUFZO0lBQ3BELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxPQUFPLEVBQUU7Z0JBQ0wsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsUUFBUSxFQUFFLElBQUk7YUFDakI7WUFDRCxRQUFRLEVBQUU7Z0JBQ04sSUFBSSxFQUFFLFNBQVM7Z0JBQ2YsT0FBTyxFQUFFLEtBQUs7YUFDakI7WUFDRCxNQUFNLEVBQUU7Z0JBQ0osSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsTUFBTSxFQUFFLENBQUMsS0FBSyxFQUFFLE9BQU8sQ0FBQztnQkFDeEIsT0FBTyxFQUFFLEtBQUs7YUFDakI7WUFDRCxRQUFRLEVBQUU7Z0JBQ04sSUFBSSxFQUFFLFNBQVM7Z0JBQ2YsT0FBTyxFQUFFLElBQUk7YUFDaEI7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBQ3lDLGtEQUFTO0FBU25ELFNBQXdCLEtBQUssQ0FBQyxFQUMxQixNQUFNLEdBR1Q7SUFDRyxNQUFNLFdBQVcscUJBQ1YsTUFBTSxDQUNaLENBQUM7SUFFRixJQUFJLFdBQVcsQ0FBQyxNQUFNLEtBQUssS0FBSyxFQUFFO1FBQzlCLElBQUksV0FBVyxDQUFDLFFBQVEsRUFBRTtZQUN0QixPQUFPLGNBQWMsaUJBQVEsQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUN4QyxXQUFXLENBQUMsT0FBTyxFQUNuQixXQUFXLENBQUMsUUFBUSxDQUN2QixHQUFHLENBQUM7U0FDUjthQUFNO1lBQ0gsT0FBTyxpQkFBUSxDQUFDLE9BQU8sQ0FBQyxNQUFNLENBQzFCLFdBQVcsQ0FBQyxPQUFPLEVBQ25CLFdBQVcsQ0FBQyxRQUFRLENBQ3ZCLENBQUM7U0FDTDtLQUNKO1NBQU07UUFDSCxJQUFJLFdBQVcsQ0FBQyxRQUFRLEVBQUU7WUFDdEIsT0FBTyxjQUFjLGlCQUFRLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxXQUFXLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQztTQUNyRTthQUFNO1lBQ0gsT0FBTyxpQkFBUSxDQUFDLE9BQU8sQ0FBQyxHQUFHLENBQUMsV0FBVyxDQUFDLE9BQU8sQ0FBQyxDQUFDO1NBQ3BEO0tBQ0o7QUFDTCxDQUFDO0FBNUJELHdCQTRCQyJ9

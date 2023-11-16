@@ -31,7 +31,7 @@ class SSugarcssPluginBorderWidthFunctionInterface extends __SInterface {
         return {
             width: {
                 type: 'String',
-                values: Object.keys(__STheme.get('border.width')),
+                values: Object.keys(__STheme.current.get('borderWidth')),
                 default: 'default',
                 required: true,
             },
@@ -65,22 +65,29 @@ export default function ({
     const width = finalParams.width;
 
     const widthes = width.split(' ').map((s) => {
-        s = themeValueProxy(s);
+        let size = themeValueProxy(s);
 
-        const val = __STheme.getSafe(`border.width.${s}`);
+        const val = __STheme.current.getSafe(`borderWidth.${s}`);
         if (val !== undefined) {
-            s = val;
+            size = val;
         }
 
-        // default return simply his value
-        if (`${s}`.match(/[a-zA-Z]+$/)) {
-            // @ts-ignore
+        if (
+            isNaN(parseFloat(size)) &&
+            size.match(/[a-zA-Z0-9]+\.[a-zA-Z0-9]+/) &&
+            !size.match(/^s\./)
+        ) {
+            return `s.theme(${size}, ${finalParams.scalable})`;
+        } else if (`${size}`.match(/[a-zA-Z]+$/)) {
             if (finalParams.scalable) {
-                return `s.scalable(${s})`;
+                return `s.scalable(${size})`;
             }
-            return `${s}`;
+            return `${size}`;
         } else {
-            return `calc(s.theme(border.width.default, ${finalParams.scalable}) * ${s})`;
+            if (finalParams.scalable) {
+                return `calc(s.scalable(${size}) * 1px)`;
+            }
+            return `${size}px`;
         }
     });
 

@@ -71,7 +71,7 @@ export default function ({ params, atRule, replaceWith, }) {
         vars.push(`
             @s.depth(ui.table.depth);
             position: relative;
-            box-shadow: 0 0 0 s.theme(ui.table.borderWidth) s.color(current, border);
+            box-shadow: 0 0 0 s.border.width(ui.table.borderWidth) s.color(current, border);
             overflow: hidden;
             @s.shape();
 

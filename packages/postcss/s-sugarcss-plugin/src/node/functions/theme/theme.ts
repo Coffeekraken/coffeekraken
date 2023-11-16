@@ -12,8 +12,8 @@ import __STheme from '@coffeekraken/s-theme';
  * @interface       ./theme
  * @status        beta
  *
- * This function allows you to get a theme value using dot path like "font.family.fontFamily", etc...
- * Usually the best way to access theme config is to use dedicated functions/mixins like "sugar.margin", "sugar.font.family", etc...
+ * This function allows you to get a theme value using dot path like "fontFamily.code.fontFamily", etc...
+ * Usually the best way to access theme config is to use dedicated functions/mixins like "s.margin", "s.font.family", etc...
  *
  * @param       {String}        dotPath      The dot path to the theme config value you want back
  * @param       {Boolean}       [scalable=false]        Specify if you want to value back to be scalable. Work only for number config as well
@@ -25,7 +25,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @example       css
  * .my-element {
- *    font-family: s.theme(font.family.fontFamily);
+ *    font-family: s.theme(fontFamily.code.fontFamily);
  * }
  *
  * @since     2.0.0
@@ -75,18 +75,21 @@ export default function theme({
 
     if (finalParams.return === 'var') {
         if (finalParams.scalable) {
-            return `s.scalable(${__STheme.cssVar(
+            return `s.scalable(${__STheme.current.cssVar(
                 finalParams.dotPath,
                 finalParams.fallback,
             )})`;
         } else {
-            return __STheme.cssVar(finalParams.dotPath, finalParams.fallback);
+            return __STheme.current.cssVar(
+                finalParams.dotPath,
+                finalParams.fallback,
+            );
         }
     } else {
         if (finalParams.scalable) {
-            return `s.scalable(${__STheme.get(finalParams.dotPath)})`;
+            return `s.scalable(${__STheme.current.get(finalParams.dotPath)})`;
         } else {
-            return __STheme.get(finalParams.dotPath);
+            return __STheme.current.get(finalParams.dotPath);
         }
     }
 }

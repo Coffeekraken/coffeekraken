@@ -189,7 +189,7 @@ export default class SAppearFeature extends __SFeature {
                 [s-appear-id="${appearId}"] {
                     animation: s-appear-${appearId} ${
                 duration / 1000
-            }s ${__STheme.get('easing.default')} forwards;
+            }s ${__STheme.current.get('easing.default')} forwards;
                 }
             `;
 

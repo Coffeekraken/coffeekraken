@@ -49,7 +49,7 @@ export default function ({
         ...params,
     };
 
-    const transitionObj = __STheme.get('transition');
+    const transitionObj = __STheme.current.get('transition');
 
     const vars = new CssVars();
 

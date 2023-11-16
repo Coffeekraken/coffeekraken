@@ -119,8 +119,8 @@ export default function ({
         ).code(
             `@s.rhythm.vertical {
                 .s-rating {
-                    ${__STheme.jsObjectToCssProperties(
-                        __STheme.get('ui.rating.rhythmVertical'),
+                    ${__STheme.current.jsObjectToCssProperties(
+                        __STheme.current.get('ui.rating.rhythmVertical'),
                     )}
                 } 
             }

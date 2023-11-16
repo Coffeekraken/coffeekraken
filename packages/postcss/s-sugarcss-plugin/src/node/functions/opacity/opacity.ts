@@ -31,7 +31,7 @@ class SSugarcssPluginOpacityFunctionInterface extends __SInterface {
         return {
             opacity: {
                 type: 'String',
-                values: Object.keys(__STheme.get('opacity')),
+                values: Object.keys(__STheme.current.get('opacity')),
                 default: '100',
                 required: true,
             },
@@ -56,10 +56,10 @@ export default function ({
 
     const opacity = finalParams.opacity;
 
-    if (__STheme.get('opacity')[opacity] === undefined) return opacity;
+    if (__STheme.current.get('opacity')[opacity] === undefined) return opacity;
 
     const opacityRes = opacity.split(' ').map((s) => {
-        const size = __STheme.get(`opacity.${s}`);
+        const size = __STheme.current.get(`opacity.${s}`);
         if (!size) return size;
         return `var(${`--s-opacity-${s}`}, ${size})`;
     });

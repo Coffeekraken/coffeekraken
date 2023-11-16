@@ -79,7 +79,7 @@ export default class SThemeSwitcherComponent extends __SLitComponent {
     }
 
     _toggleDarkMode(): void {
-        if (__STheme.isDark()) {
+        if (__STheme.current.isDark()) {
             __STheme.setThemeVariant('light');
         } else {
             __STheme.setThemeVariant('dark');
@@ -99,8 +99,8 @@ export default class SThemeSwitcherComponent extends __SLitComponent {
 
     render() {
         const themesKeys = Object.keys(this._themes),
-            themeMetas = __STheme.getThemeMetas(),
-            activeTheme = __STheme.theme;
+            themeMetas = __STheme.current.getMetas(),
+            activeTheme = __STheme.current.theme;
 
         return html`
             <div class="${this.utils.cls('_root')}">
@@ -110,7 +110,7 @@ export default class SThemeSwitcherComponent extends __SLitComponent {
                               type="checkbox"
                               @change=${() => this._toggleDarkMode()}
                               class="${this.utils.cls('_switch', 's-switch')}"
-                              ?checked=${__STheme.isDark()}
+                              ?checked=${__STheme.current.isDark()}
                           />
                           ${this.props.darkModeIcon
                               ? html`
@@ -175,7 +175,7 @@ export default class SThemeSwitcherComponent extends __SLitComponent {
                                                           '_switch',
                                                           's-switch',
                                                       )}"
-                                                      ?checked=${__STheme.isDark()}
+                                                      ?checked=${__STheme.current.isDark()}
                                                   />
                                                   ${this.props.darkModeIcon
                                                       ? html`

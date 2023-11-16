@@ -33,7 +33,7 @@ class SSugarcssPluginUiButtonInterface extends __SInterface {
             lnf: {
                 type: 'String',
                 values: ['solid', 'gradient', 'outline', 'text', 'loading'],
-                default: __STheme.get('ui.button.defaultLnf'),
+                default: __STheme.current.get('ui.button.defaultLnf'),
             },
             scope: {
                 type: {
@@ -157,9 +157,9 @@ export default function ({
                     background: none !important;
                     color: s.color(current, foreground) !important;
                     transition: s.theme(ui.button.transition);
-                    border: s.color(current, border) solid s.theme(ui.button.borderWidth);
+                    border: s.color(current, border) solid s.border.width(ui.button.borderWidth);
 
-                    --borderWidth: s.theme(ui.button.borderWidth);
+                    --borderWidth: s.border.width(ui.button.borderWidth);
 
                     & > * {
                       position: relative;
@@ -202,7 +202,7 @@ export default function ({
             case 'outline':
                 vars.push(`
                 background-color: s.color(current, --alpha 0);
-                border: s.color(current) solid s.theme(ui.button.borderWidth);
+                border: s.color(current) solid s.border.width(ui.button.borderWidth);
                 color: s.color(current) !important;
                 transition: s.theme(ui.button.transition);
 
@@ -215,7 +215,7 @@ export default function ({
             case 'text':
                 vars.push(`
                   background: none !important;
-                  border: rgba(0,0,0,0) solid s.theme(ui.button.borderWidth);
+                  border: rgba(0,0,0,0) solid s.border.width(ui.button.borderWidth);
                   color: s.color(current) !important;
                   box-shadow: none !important;
                   transition: s.theme(ui.button.transition);
@@ -263,7 +263,7 @@ export default function ({
             default:
                 vars.push(`
                   background-color: s.color(current);
-                  border: s.color(current, border) solid s.theme(ui.button.borderWidth);
+                  border: s.color(current, border) solid s.border.width(ui.button.borderWidth);
                   color: s.color(current, foreground) !important;
                   transition: s.theme(ui.button.transition);
 

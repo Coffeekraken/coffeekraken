@@ -394,8 +394,8 @@ export default function ({
         `
         @s.rhythm.vertical {
           table, .s-table {
-              ${__STheme.jsObjectToCssProperties(
-                  __STheme.get('ui.table.rhythmVertical'),
+              ${__STheme.current.jsObjectToCssProperties(
+                  __STheme.current.get('ui.table.rhythmVertical'),
               )}
           }
         } 

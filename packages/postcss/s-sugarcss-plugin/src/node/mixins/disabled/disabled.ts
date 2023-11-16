@@ -51,10 +51,14 @@ export default function ({
 
     vars.push(`
         pointer-events: none;
-        opacity: ${__STheme.cssVar('helpers.disabled.opacity')} !important;
+        opacity: ${__STheme.current.cssVar(
+            'helpers.disabled.opacity',
+        )} !important;
         
         &:hover, &:focus, &:active {
-            opacity: ${__STheme.cssVar('helpers.disabled.opacity')} !important;
+            opacity: ${__STheme.current.cssVar(
+                'helpers.disabled.opacity',
+            )} !important;
         }
 
         &, * {

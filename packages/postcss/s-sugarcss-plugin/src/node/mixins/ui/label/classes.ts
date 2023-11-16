@@ -37,7 +37,7 @@ class SSugarcssPluginUiLabelClassesInterface extends __SInterface {
             defaultLnf: {
                 type: 'String',
                 values: ['inline', 'block', 'float'],
-                default: __STheme.get('ui.label.defaultLnf'),
+                default: __STheme.current.get('ui.label.defaultLnf'),
             },
             scope: {
                 type: {

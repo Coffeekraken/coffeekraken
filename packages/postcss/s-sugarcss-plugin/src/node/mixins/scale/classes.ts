@@ -49,7 +49,7 @@ export default function ({
         ...params,
     };
 
-    const scaleObj = __STheme.get('scale');
+    const scaleObj = __STheme.current.get('scale');
 
     const vars = new CssVars();
 

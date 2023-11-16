@@ -33,7 +33,7 @@ class SSugarcssPluginUiLabelInterface extends __SInterface {
             lnf: {
                 type: 'String',
                 values: ['inline', 'block', 'float'],
-                default: __STheme.get('ui.label.defaultLnf'),
+                default: __STheme.current.get('ui.label.defaultLnf'),
             },
             scope: {
                 type: {
@@ -63,7 +63,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: ISSugarcssPluginUiLabelParams = {
-        lnf: __STheme.get('ui.label.defaultLnf'),
+        lnf: __STheme.current.get('ui.label.defaultLnf'),
         scope: ['bare', 'lnf'],
         ...params,
     };

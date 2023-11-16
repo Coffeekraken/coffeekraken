@@ -63,9 +63,9 @@ export default function ({
 
     const vars = new CssVars();
 
-    const typosObj = __STheme.get('typo'),
+    const typosObj = __STheme.current.get('typo'),
         typoObj = typosObj[finalParams.typo],
-        css = __STheme.jsObjectToCssProperties(typoObj.style ?? {}, {});
+        css = __STheme.current.jsObjectToCssProperties(typoObj.style ?? {}, {});
 
     vars.code(
         () => `

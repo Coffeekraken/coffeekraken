@@ -313,7 +313,7 @@ export default class SWysiwygComponent extends __SLitComponent {
                         } else {
                             $button.textContent = label;
                         }
-                        const style = __STheme.jsObjectToCssProperties(
+                        const style = __STheme.current.jsObjectToCssProperties(
                             typoObj.button?.style ?? {},
                         );
                         $button.style = style;

@@ -337,7 +337,8 @@ export default class STheme extends __SThemeBase {
             ...finalSettings,
         };
 
-        let themeInstance, theme, variant;
+        let theme = this.theme,
+            variant = this.variant;
 
         // save default theme metas
         STheme._defaultThemeMetas = {
@@ -349,18 +350,17 @@ export default class STheme extends __SThemeBase {
         if (this.savedThemeMetas) {
             theme = this._savedThemeMetas.theme;
             variant = this._savedThemeMetas.variant;
-        } else {
         }
 
-        // get the current theme instance
-        themeInstance = this.getCurrentTheme(finalSettings.$context, {
-            ...finalSettings,
-        });
+        // instanciate the current theme instance
+        if (!document.env) document.env = {};
+        if (!document.env.SUGAR) document.env.SUGAR = {};
+        document.env.SUGAR.theme = new this(theme, variant, finalSettings);
 
         // apply the theme
         STheme.applyTheme(
-            themeInstance.theme,
-            themeInstance.variant,
+            this.current.theme,
+            this.current.variant,
             finalSettings.$context,
         );
 
@@ -370,7 +370,7 @@ export default class STheme extends __SThemeBase {
         // }
 
         // return the current theme
-        return themeInstance;
+        return this.current;
     }
 
     /**
@@ -404,14 +404,14 @@ export default class STheme extends __SThemeBase {
      * This method will try to get the theme from the frontData object and
      * set it as the current theme
      */
-    static _setThemeFromFrontData(): void {
-        if (this.frontData.theme?.theme) {
-            this.setTheme(
-                this.frontData.theme.theme,
-                this.frontData.theme.variant,
-            );
-        }
-    }
+    // static _setThemeFromFrontData(): void {
+    //     if (this.frontData.theme?.theme) {
+    //         this.setTheme(
+    //             this.frontData.theme.theme,
+    //             this.frontData.theme.variant,
+    //         );
+    //     }
+    // }
 
     /**
      * @name            getThemeMetas
@@ -479,29 +479,6 @@ export default class STheme extends __SThemeBase {
                 variant: variant ?? defaultVariant,
             },
             metas,
-        );
-    }
-
-    /**
-     * @name            getCurrentTheme
-     * @type            Function
-     * @static
-     *
-     * This method allows you to get the current applied theme STheme instance
-     *
-     * @return          {STheme}                                    The STheme instance that represent the current applied theme
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    // @ts-ignore
-    static getCurrentTheme(
-        $context: HTMLElement = document.querySelector('html'),
-        settings?: Partial<ISThemeSettings>,
-    ): STheme {
-        const themeMetas = STheme.getThemeMetas($context);
-        return <STheme>(
-            this.getTheme(themeMetas.theme, themeMetas.variant, settings)
         );
     }
 
@@ -587,8 +564,8 @@ export default class STheme extends __SThemeBase {
             );
         }
 
-        // restore the theme
-        this.restore();
+        // // restore the theme
+        // this.restore();
 
         if (!__SEnv.is('production') && !__isInIframe()) {
             console.log(
@@ -701,7 +678,7 @@ export default class STheme extends __SThemeBase {
      */
     applyState($context: HTMLElement = document.body): STheme {
         // overrided configs (css)
-        const properties = __SThemeBase.jsConfigObjectToCssProperties(
+        const properties = this.jsConfigObjectToCssProperties(
             this.getOverridedConfig(),
         );
         this._applyOverridedConfigs(properties, $context);

@@ -75,10 +75,10 @@ export default function ({
     };
 
     // @ts-ignore
-    const configObj = __STheme.get(params.dotPath);
+    const configObj = __STheme.current.get(params.dotPath);
 
     const vars: string[] = [
-        __STheme.jsObjectToCssProperties(configObj, {
+        __STheme.current.jsObjectToCssProperties(configObj, {
             exclude: finalParams.exclude,
             only: finalParams.only,
         }),

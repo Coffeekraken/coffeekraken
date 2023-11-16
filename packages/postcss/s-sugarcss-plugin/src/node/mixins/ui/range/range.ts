@@ -33,7 +33,7 @@ class SSugarcssPluginUiRangeInterface extends __SInterface {
             lnf: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.get('ui.form.defaultLnf'),
+                default: __STheme.current.get('ui.form.defaultLnf'),
             },
             scope: {
                 type: {
@@ -75,17 +75,17 @@ export default function ({
         --track-color: s.color(main, ui, --alpha 0.5);
         --thumb-color: s.color(current);
 
-        --focus-spread: s.theme(ui.outline.borderWidth);
+        --focus-spread: s.border.width(ui.outline.borderWidth);
 
         --thumb-radius: var(--s-shape, s.border.radius(ui.form.borderRadius));
         --thumb-height: 1em;
         --thumb-width: 1em;
-        --thumb-border-width: s.theme(ui.form.borderWidth);
+        --thumb-border-width: s.border.width(ui.form.borderWidth);
         --thumb-border-color: s.color(current, border);
 
         --track-width: 100%;
         --track-height: 0.2em;
-        --track-border-width: s.theme(ui.form.borderWidth);
+        --track-border-width: s.border.width(ui.form.borderWidth);
         --track-border-color: s.color(current, --alpha 0.2);
 
         --track-radius: var(--s-shape, s.border.radius(ui.form.borderRadius));
@@ -200,7 +200,7 @@ export default function ({
             -webkit-appearance: none;
             background: transparent;
 
-            margin-block: s.padding(s.theme(ui.form.paddingBlock));
+            margin-block: s.padding(ui.form.paddingBlock);
 
             &::-moz-focus-outer {
                 border: 0;

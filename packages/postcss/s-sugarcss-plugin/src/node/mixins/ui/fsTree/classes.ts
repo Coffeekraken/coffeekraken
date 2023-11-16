@@ -187,7 +187,7 @@ export default function ({
             * @namespace          sugar.style.ui.fsTree
             * @type           CssClass
             * 
-            * This class represent an "<yellow>${__STheme.get(
+            * This class represent an "<yellow>${__STheme.current.get(
                 'ui.fsTree.defaultLnf',
             )}</yellow>" filesystem tree
             * 

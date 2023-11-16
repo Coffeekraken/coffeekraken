@@ -33,7 +33,7 @@ class SSugarcssPluginUiGaugeInterface extends __SInterface {
             lnf: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.get('ui.gauge.defaultLnf'),
+                default: __STheme.current.get('ui.gauge.defaultLnf'),
             },
             scope: {
                 type: {

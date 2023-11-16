@@ -47,7 +47,7 @@ export default function ({
         ...params,
     };
 
-    const count = __STheme.get('helpers.order.count');
+    const count = __STheme.current.get('helpers.order.count');
     const vars = new CssVars();
 
     vars.comment(

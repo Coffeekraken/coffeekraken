@@ -32,13 +32,13 @@ class SSugarcssPluginMarginFunctionInterface extends __SInterface {
         return {
             margin: {
                 type: 'String',
-                values: Object.keys(__STheme.get('margin')),
+                values: Object.keys(__STheme.current.get('margin')),
                 default: 'default',
                 required: true,
             },
             scalable: {
                 type: 'Boolean',
-                default: __STheme.get('scalable.margin'),
+                default: __STheme.current.get('scalable.margin'),
             },
         };
     }
@@ -68,23 +68,30 @@ export default function ({
         let val;
 
         // theme value
-        s = themeValueProxy(s);
+        let size = themeValueProxy(s);
 
         // try to get the margin with the pased
-        val = __STheme.getSafe(`margin.${s}`);
+        val = __STheme.current.getSafe(`margin.${size}`);
         if (val !== undefined) {
-            s = val;
+            size = val;
         }
 
-        // default return simply his value
-        if (`${s}`.match(/[a-zA-Z]+$/)) {
-            // @ts-ignore
+        if (
+            isNaN(parseFloat(size)) &&
+            size.match(/[a-zA-Z0-9]+\.[a-zA-Z0-9]+/) &&
+            !size.match(/^s\./)
+        ) {
+            return `s.theme(${size}, ${finalParams.scalable})`;
+        } else if (`${size}`.match(/[a-zA-Z]+$/)) {
             if (finalParams.scalable) {
-                return `s.scalable(${s})`;
+                return `s.scalable(${size})`;
             }
-            return `${s}`;
+            return `${size}`;
         } else {
-            return `calc(s.theme(margin.default, ${finalParams.scalable}) * ${s} * 1px)`;
+            if (finalParams.scalable) {
+                return `calc(s.scalable(${size}) * 1px)`;
+            }
+            return `${size}px`;
         }
     });
 

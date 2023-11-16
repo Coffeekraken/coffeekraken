@@ -32,13 +32,13 @@ class SSugarcssPluginOffsizeFunctionInterface extends __SInterface {
         return {
             offsize: {
                 type: 'String',
-                values: Object.keys(__STheme.get('offsize')),
+                values: Object.keys(__STheme.current.get('offsize')),
                 default: 'default',
                 required: true,
             },
             scalable: {
                 type: 'Boolean',
-                default: __STheme.get('scalable.offsize'),
+                default: __STheme.current.get('scalable.offsize'),
             },
         };
     }
@@ -64,50 +64,32 @@ export default function ({
     const offsize = finalParams.offsize;
     let offsizes = offsize.split(' ').map((s) => {
         let registeredValue,
-            factor = '';
+            size = s;
 
         // try to get the padding with the pased
-        try {
-            registeredValue = __STheme.get(`offsize.${s}`);
-        } catch (e) {}
-
-        // default return simply his value
-        if (s === 'default') {
-            // @ts-ignore
-            factor = '1';
-        } else if (registeredValue !== undefined) {
-            factor = `s.theme(offsize.${s}, ${finalParams.scalable})`;
-        } else if (
-            isNaN(parseFloat(s)) &&
-            s.match(/[a-zA-Z0-9]+\.[a-zA-Z0-9]+/)
-        ) {
-            // support dotPath
-            factor = `s.theme(${s}, ${finalParams.scalable})`;
-        } else if (!isNaN(parseFloat(s))) {
-            // support simple number
-            factor = `${s}`;
-        } else {
-            throw new Error(
-                `<yellow>[s-postcss-sugar-plugin]</yellow> Offsize "<cyan>${s}</cyan>" is not a valid value`,
-            );
+        let val = __STheme.current.getSafe(`offsize.${size}`);
+        if (val !== undefined) {
+            size = val;
         }
-        // generate css value
-        return `calc(s.theme(offsize.default) * ${factor})`;
+
+        if (
+            isNaN(parseFloat(size)) &&
+            size.match(/[a-zA-Z0-9]+\.[a-zA-Z0-9]+/) &&
+            !size.match(/^s\./)
+        ) {
+            return `s.theme(${size}, ${finalParams.scalable})`;
+        } else if (`${size}`.match(/[a-zA-Z]+$/)) {
+            if (finalParams.scalable) {
+                return `s.scalable(${size})`;
+            }
+            return `${size}`;
+        } else {
+            if (finalParams.scalable) {
+                return `calc(s.scalable(${size}) * 1px)`;
+            }
+            return `${size}px`;
+        }
     });
 
     return offsizes.join(' ');
-
-    // const offsize = finalParams.offsize;
-    // let offsizes = offsize.split(' ').map((s) => {
-    //     // support dotPath
-    //     if (s.match(/\./)) {
-    //         s = `s.theme(${s}, ${finalParams.scalable})`;
-    //     } else {
-    //         s = `s.theme(offsize.${s}, ${finalParams.scalable})`;
-    //     }
-    //     // generate css value
-    //     return `calc(s.theme(offsize.default) * ${s})`;
-    // });
-
-    // return offsizes.join(' ');
 }

@@ -30,15 +30,15 @@ class SSugarcssPluginScrollbarInterface extends __SInterface {
         return {
             color: {
                 type: 'String',
-                default: __STheme.get('ui.scrollbar.color'),
+                default: __STheme.current.get('ui.scrollbar.color'),
             },
             background: {
                 type: 'String',
-                default: __STheme.get('ui.scrollbar.color'),
+                default: __STheme.current.get('ui.scrollbar.color'),
             },
             size: {
                 type: 'String',
-                default: __STheme.get('ui.scrollbar.size'),
+                default: __STheme.current.get('ui.scrollbar.size'),
             },
         };
     }

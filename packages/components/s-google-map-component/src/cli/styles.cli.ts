@@ -21,7 +21,9 @@ export default (stringArgs = '') => {
                 elementType: 'geometry.stroke',
                 stylers: [
                     {
-                        color: new __SColor(__STheme.get('color.main')).toHex(),
+                        color: new __SColor(
+                            __STheme.current.get('color.main'),
+                        ).toHex(),
                     },
                 ],
             },
@@ -157,7 +159,9 @@ export default (stringArgs = '') => {
                 stylers: [
                     {
                         color: '#c8d7d4',
-                        color: new __SColor(__STheme.get('color.main')).toHex(),
+                        color: new __SColor(
+                            __STheme.current.get('color.main'),
+                        ).toHex(),
                     },
                     {
                         lightness: 30,
@@ -206,7 +210,9 @@ export default (stringArgs = '') => {
                     },
                     {
                         color: '#000000',
-                        color: new __SColor(__STheme.get('color.base')).toHex(),
+                        color: new __SColor(
+                            __STheme.current.get('color.base'),
+                        ).toHex(),
                     },
                     {
                         lightness: 100,
@@ -223,7 +229,7 @@ export default (stringArgs = '') => {
                     },
                     // {
                     //     color: '#000000',
-                    //     color: new __SColor(__STheme.get('color.base')).toHex(),
+                    //     color: new __SColor(__STheme.current.get('color.base')).toHex(),
                     // },
                     // {
                     //     lightness: 16,
@@ -246,7 +252,9 @@ export default (stringArgs = '') => {
                 stylers: [
                     {
                         color: '#000000',
-                        color: new __SColor(__STheme.get('color.base')).toHex(),
+                        color: new __SColor(
+                            __STheme.current.get('color.base'),
+                        ).toHex(),
                     },
                     {
                         lightness: 20,
@@ -260,7 +268,9 @@ export default (stringArgs = '') => {
                 stylers: [
                     {
                         color: '#000000',
-                        color: new __SColor(__STheme.get('color.base')).toHex(),
+                        color: new __SColor(
+                            __STheme.current.get('color.base'),
+                        ).toHex(),
                     },
                     {
                         lightness: 17,
@@ -277,7 +287,9 @@ export default (stringArgs = '') => {
                 stylers: [
                     {
                         color: '#e5c163',
-                        color: new __SColor(__STheme.get('color.base')).toHex(),
+                        color: new __SColor(
+                            __STheme.current.get('color.base'),
+                        ).toHex(),
                     },
                     {
                         lightness: 100,
@@ -290,7 +302,9 @@ export default (stringArgs = '') => {
                 stylers: [
                     {
                         color: '#c4c4c4',
-                        color: new __SColor(__STheme.get('color.base')).toHex(),
+                        color: new __SColor(
+                            __STheme.current.get('color.base'),
+                        ).toHex(),
                     },
                     {
                         lightness: 100,
@@ -303,7 +317,9 @@ export default (stringArgs = '') => {
                 stylers: [
                     {
                         color: '#e5c163',
-                        color: new __SColor(__STheme.get('color.base')).toHex(),
+                        color: new __SColor(
+                            __STheme.current.get('color.base'),
+                        ).toHex(),
                     },
                     {
                         lightness: 100,
@@ -316,7 +332,9 @@ export default (stringArgs = '') => {
                 stylers: [
                     {
                         color: '#000000',
-                        color: new __SColor(__STheme.get('color.base')).toHex(),
+                        color: new __SColor(
+                            __STheme.current.get('color.base'),
+                        ).toHex(),
                     },
                     {
                         lightness: 5,
@@ -330,7 +348,9 @@ export default (stringArgs = '') => {
                 stylers: [
                     {
                         color: '#000000',
-                        color: new __SColor(__STheme.get('color.base')).toHex(),
+                        color: new __SColor(
+                            __STheme.current.get('color.base'),
+                        ).toHex(),
                     },
                     {
                         lightness: 5,
@@ -357,7 +377,7 @@ export default (stringArgs = '') => {
                     {
                         color: '#e5c163',
                         color: new __SColor(
-                            __STheme.get('color.accent'),
+                            __STheme.current.get('color.accent'),
                         ).toHex(),
                     },
                     {
@@ -401,7 +421,9 @@ export default (stringArgs = '') => {
                 stylers: [
                     {
                         color: '#000000',
-                        color: new __SColor(__STheme.get('color.base')).toHex(),
+                        color: new __SColor(
+                            __STheme.current.get('color.base'),
+                        ).toHex(),
                     },
                     {
                         lightness: 6,
@@ -445,7 +467,9 @@ export default (stringArgs = '') => {
                 stylers: [
                     {
                         color: '#000000',
-                        color: new __SColor(__STheme.get('color.base')).toHex(),
+                        color: new __SColor(
+                            __STheme.current.get('color.base'),
+                        ).toHex(),
                     },
                     {
                         lightness: 6,
@@ -468,7 +492,9 @@ export default (stringArgs = '') => {
                 stylers: [
                     {
                         color: '#000000',
-                        color: new __SColor(__STheme.get('color.base')).toHex(),
+                        color: new __SColor(
+                            __STheme.current.get('color.base'),
+                        ).toHex(),
                     },
                     {
                         lightness: 8,
@@ -482,7 +508,9 @@ export default (stringArgs = '') => {
                 stylers: [
                     {
                         color: '#000000',
-                        color: new __SColor(__STheme.get('color.base')).toHex(),
+                        color: new __SColor(
+                            __STheme.current.get('color.base'),
+                        ).toHex(),
                     },
                     {
                         lightness: -65,

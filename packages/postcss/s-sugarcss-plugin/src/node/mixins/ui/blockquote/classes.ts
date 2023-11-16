@@ -268,8 +268,8 @@ export default function ({
             `
             @s.rhythm.vertical {
                 blockquote, .s-blockquote {
-                    ${__STheme.jsObjectToCssProperties(
-                        __STheme.get('ui.default.rhythmVertical'),
+                    ${__STheme.current.jsObjectToCssProperties(
+                        __STheme.current.get('ui.default.rhythmVertical'),
                     )}
                 } 
             }

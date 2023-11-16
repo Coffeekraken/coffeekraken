@@ -34,7 +34,7 @@ class SSugarcssPluginBorderwidthMixinInterface extends __SInterface {
             width: {
                 type: 'Number|String',
                 required: true,
-                default: __STheme.get('border.width.default'),
+                default: __STheme.current.get('borderWidth.default'),
             },
         };
     }

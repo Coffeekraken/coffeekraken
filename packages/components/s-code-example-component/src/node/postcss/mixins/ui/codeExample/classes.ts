@@ -142,8 +142,8 @@ export default function ({
         ).code(
             `@s.rhythm.vertical {
                 .s-code-example {
-                    ${__STheme.jsObjectToCssProperties(
-                        __STheme.get('ui.codeExample.rhythmVertical'),
+                    ${__STheme.current.jsObjectToCssProperties(
+                        __STheme.current.get('ui.codeExample.rhythmVertical'),
                     )}
                 } 
             }

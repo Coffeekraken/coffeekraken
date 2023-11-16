@@ -36,7 +36,7 @@ export default function views({
             layout: undefined,
         };
 
-        const theme = new __STheme(),
+        const theme = __STheme.current,
             bench = new __SBench('handlers.generic');
 
         bench.step('beforeViewsRendering');

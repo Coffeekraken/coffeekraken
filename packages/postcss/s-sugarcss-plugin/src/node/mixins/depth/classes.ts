@@ -48,7 +48,7 @@ export default function ({
         ...params,
     };
 
-    const depthsObj = __STheme.get('depth');
+    const depthsObj = __STheme.current.get('depth');
     const depthsArray = __keysFirst(Object.keys(depthsObj), ['default']);
 
     const vars = new CssVars();

@@ -74,8 +74,8 @@ export default function ({
 
     if (params.themePath) {
         themeGeneratedCss = [
-            __STheme.jsObjectToCssProperties(
-                __STheme.get(params.themePath) ?? {},
+            __STheme.current.jsObjectToCssProperties(
+                __STheme.current.get(params.themePath) ?? {},
             ),
         ];
     }

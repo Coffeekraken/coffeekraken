@@ -51,7 +51,7 @@ export default function ({
 
     const vars = new CssVars();
 
-    const marginsObj = __STheme.get('margin');
+    const marginsObj = __STheme.current.get('margin');
     const marginsKeys = __keysFirst(Object.keys(marginsObj), ['default']);
 
     vars.comment(

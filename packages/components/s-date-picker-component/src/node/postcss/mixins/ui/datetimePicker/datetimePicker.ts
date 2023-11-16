@@ -7,7 +7,7 @@ class postcssUiDatetimePickerInterface extends __SInterface {
             lnf: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.get('ui.datetimePicker.defaultLnf'),
+                default: __STheme.current.get('ui.datetimePicker.defaultLnf'),
             },
             scope: {
                 type: {
@@ -60,7 +60,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiDatetimePickerParams = {
-        lnf: __STheme.get('ui.datetimePicker.defaultLnf'),
+        lnf: __STheme.current.get('ui.datetimePicker.defaultLnf'),
         scope: ['bare', 'lnf'],
         ...params,
     };

@@ -142,7 +142,7 @@ const plugin = (settings: ISSugarcssPluginSettings = {}) => {
             ),
             viewsRootDirs: __SSugarConfig.get('sugarcssPlugin.viewsRootDirs'),
             clean: __SSugarConfig.get('sugarcssPlugin.clean'),
-            lod: __STheme.get('lod'),
+            lod: __STheme.current.get('lod'),
         });
 
         // clean if set to undefined and target is production
@@ -170,7 +170,7 @@ const plugin = (settings: ISSugarcssPluginSettings = {}) => {
         settingsHash = __objectHash(settings);
 
         // set theme hash
-        themeHash = __STheme.hash();
+        themeHash = __STheme.current.hash();
 
         if (settings.excludeByTypes?.length) {
             __CssVars.excludeByTypes(settings.excludeByTypes);
@@ -394,12 +394,12 @@ const plugin = (settings: ISSugarcssPluginSettings = {}) => {
             delete params.help;
 
             function themeValueProxy(dotPathOrValue: string): any {
-                const value = __STheme.getSafe(dotPathOrValue);
+                const value = __STheme.current.getSafe(dotPathOrValue);
                 if (value !== undefined) {
                     return value;
                 }
                 if (dotPathOrValue.match(/^ui\.[a-zA-Z0-9]+\./)) {
-                    const defaultValue = __STheme.getSafe(
+                    const defaultValue = __STheme.current.getSafe(
                         dotPathOrValue.replace(
                             /^ui\.[a-zA-Z0-9]+\./,
                             'ui.default.',

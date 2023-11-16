@@ -33,7 +33,7 @@ class SSugarcssPluginUiBadgeInterface extends __SInterface {
             lnf: {
                 type: 'String',
                 values: ['solid', 'outline'],
-                default: __STheme.get('ui.badge.defaultLnf'),
+                default: __STheme.current.get('ui.badge.defaultLnf'),
             },
             scope: {
                 type: {

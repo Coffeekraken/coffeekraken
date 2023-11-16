@@ -47,7 +47,9 @@ class SSugarcssPluginMediaClassesMixinInterface extends __SInterface {
         return {
             query: {
                 type: 'String',
-                default: Object.keys(__STheme.get('media.queries')).join(','),
+                default: Object.keys(
+                    __STheme.current.get('media.queries'),
+                ).join(','),
             },
         };
     }
@@ -83,7 +85,7 @@ export default function ({
         ...params,
     };
 
-    const mediaConfig = __STheme.get('media');
+    const mediaConfig = __STheme.current.get('media');
 
     const medias = finalParams.query
         ? finalParams.query.split(/[\s,\,]/gm).map((l) => l.trim())

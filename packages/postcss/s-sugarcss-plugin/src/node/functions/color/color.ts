@@ -100,16 +100,7 @@ export default function color({
         ...params,
     };
 
-    // const colorObj = __STheme.resolveColor(
-    //     finalParams.color,
-    //     finalParams.shade,
-    //     finalParams.modifier,
-    //     {
-    //         return: 'object',
-    //     },
-    // );
-
-    return `${__STheme.resolveColor(
+    return `${__STheme.current.resolveColor(
         finalParams.color,
         finalParams.shade,
         finalParams.modifier,

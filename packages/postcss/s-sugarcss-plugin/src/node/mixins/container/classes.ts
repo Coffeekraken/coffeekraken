@@ -49,7 +49,7 @@ export default function ({
 
     const vars = new CssVars();
 
-    const layoutConfig = __STheme.get('layout');
+    const layoutConfig = __STheme.current.get('layout');
 
     const containers = layoutConfig.container;
     Object.keys(containers).forEach((containerName) => {

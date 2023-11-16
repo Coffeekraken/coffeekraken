@@ -60,12 +60,12 @@ export default function ({
             color: s.color(main, text);
             background-color: s.color(main, uiBackground);
             font-size: s.scalable(1rem);
-            border: s.color(current, --alpha 0.2) solid s.theme(ui.${
+            border: s.color(current, --alpha 0.2) solid s.border.width(ui.${
                 finalParams.name
             }.borderWidth);
             border-radius: s.border.radius(ui.${finalParams.name}.borderRadius);
             transition: s.theme(ui.${finalParams.name}.transition);
-            @s.depth(${__STheme.get(`ui.${finalParams.name}.depth`)});
+            @s.depth(${__STheme.current.get(`ui.${finalParams.name}.depth`)});
             cursor: auto !important;
 
             &::placeholder {

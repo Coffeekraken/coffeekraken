@@ -132,8 +132,8 @@ export default function ({
         ).code(
             `@s.rhythm.vertical {
                 .s-slider {
-                    ${__STheme.jsObjectToCssProperties(
-                        __STheme.get('ui.slider.rhythmVertical'),
+                    ${__STheme.current.jsObjectToCssProperties(
+                        __STheme.current.get('ui.slider.rhythmVertical'),
                     )}
                 } 
             }

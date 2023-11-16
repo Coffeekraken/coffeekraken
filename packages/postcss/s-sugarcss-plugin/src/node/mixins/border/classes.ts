@@ -46,9 +46,9 @@ export default function ({
     const finalParams: ISSugarcssPluginBorderRadiusClassesMixinParams = {
         ...params,
     };
-    const radiusesObj = __STheme.get('border.radius');
+    const radiusesObj = __STheme.current.get('borderRadius');
     const radiusesKeys = __keysFirst(Object.keys(radiusesObj), ['default']);
-    const widthsObj = __STheme.get('border.width');
+    const widthsObj = __STheme.current.get('borderWidth');
     const widthsKeys = __keysFirst(Object.keys(widthsObj), ['default']);
 
     const vars = new CssVars();
@@ -172,7 +172,7 @@ export default function ({
         * @support      safari          
         * @support      edge           
         * 
-        ${Object.keys(__STheme.getTheme().baseColors())
+        ${Object.keys(__STheme.current.baseColors())
             .map((colorName) => {
                 if (colorName === 'default') return '';
                 return ` * @cssClass      s-border:${colorName}      Apply the border color ${colorName} to any HTMLElement`;
@@ -184,7 +184,7 @@ export default function ({
         * 
         * @example             html         Border color
         * <div class="s-flex:wrap s-gap:20">
-        ${Object.keys(__STheme.getTheme().baseColors())
+        ${Object.keys(__STheme.current.baseColors())
             .map((colorName) => {
                 return ` * <div class="s-width:20 s-flex:center s-ratio:1 s-border:${colorName}:20">
               *     ${colorName}
@@ -256,7 +256,7 @@ export default function ({
         );
     });
 
-    Object.keys(__STheme.getTheme().baseColors()).forEach((colorName) => {
+    Object.keys(__STheme.current.baseColors()).forEach((colorName) => {
         const cls = `s-border:${colorName}`.replace(':default', '');
         const clsName = `s-border-${colorName}`.replace('-default', '');
         vars.comment(

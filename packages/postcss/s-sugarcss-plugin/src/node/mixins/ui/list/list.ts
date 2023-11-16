@@ -33,7 +33,7 @@ class SSugarcssPluginUiListInterface extends __SInterface {
             lnf: {
                 type: 'String',
                 values: ['dl', 'ul', 'ol', 'icon'],
-                default: __STheme.get('ui.list.defaultLnf'),
+                default: __STheme.current.get('ui.list.defaultLnf'),
             },
             scope: {
                 type: {
@@ -156,7 +156,9 @@ export default function ({
                 vars.push(`
                     & > * {
                         ${bulletSelector} {
-                            content: "${__STheme.get('ui.list.bulletChar')}";
+                            content: "${__STheme.current.get(
+                                'ui.list.bulletChar',
+                            )}";
                             margin-top: 0.25em;
                             font-size: 0.7em;
                         }

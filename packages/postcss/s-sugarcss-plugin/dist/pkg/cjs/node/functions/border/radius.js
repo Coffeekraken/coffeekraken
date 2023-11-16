@@ -37,7 +37,7 @@ class SSugarcssPluginBorderRadiusFunctionInterface extends s_interface_1.default
             radius: {
                 type: 'String',
                 values: [
-                    ...Object.keys(s_theme_1.default.get('border.radius')),
+                    ...Object.keys(s_theme_1.default.current.get('borderRadius')),
                     'shape',
                 ],
                 default: 'default',
@@ -45,7 +45,7 @@ class SSugarcssPluginBorderRadiusFunctionInterface extends s_interface_1.default
             },
             scalable: {
                 type: 'Boolean',
-                default: s_theme_1.default.get('scalable.padding'),
+                default: s_theme_1.default.current.get('scalable.padding'),
             },
         };
     }
@@ -56,28 +56,31 @@ function default_1({ params, themeValueProxy, }) {
     let radiuses = finalParams.radius.split(' ').map((s) => {
         let val;
         // theme value
-        s = themeValueProxy(s);
+        let size = themeValueProxy(s);
         // try to get the padding with the pased
-        val = s_theme_1.default.getSafe(`border.radius.${s}`);
+        val = s_theme_1.default.current.getSafe(`borderRadius.${s}`);
         if (val !== undefined) {
-            s = val;
+            size = val;
         }
         // default return simply his value
-        if (s === 'shape') {
-            return `var(--s-shape, s.theme(border.radius.default, ${finalParams.scalable}))`;
+        if (size === 'shape') {
+            return `var(--s-shape, s.theme(borderRadius.default, ${finalParams.scalable}))`;
         }
-        else if (`${s}`.match(/[a-zA-Z]+$/)) {
+        else if (`${size}`.match(/[a-zA-Z]+$/)) {
             // @ts-ignore
             if (finalParams.scalable) {
-                return `s.scalable(${s})`;
+                return `s.scalable(${size})`;
             }
-            return `${s}`;
+            return `${size}`;
         }
         else {
-            return `calc(s.theme(border.radius.default, ${finalParams.scalable}) * ${s})`;
+            if (finalParams.scalable) {
+                return `calc(s.scalable(${size}) * 1px)`;
+            }
+            return `${size}px`;
         }
     });
     return radiuses.join(' ');
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUNyRCxvRUFBNkM7QUFFN0M7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUVILE1BQU0sNENBQTZDLFNBQVEscUJBQVk7SUFDbkUsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILE1BQU0sRUFBRTtnQkFDSixJQUFJLEVBQUUsUUFBUTtnQkFDZCxNQUFNLEVBQUU7b0JBQ0osR0FBRyxNQUFNLENBQUMsSUFBSSxDQUFDLGlCQUFRLENBQUMsR0FBRyxDQUFDLGVBQWUsQ0FBQyxDQUFDO29CQUM3QyxPQUFPO2lCQUNWO2dCQUNELE9BQU8sRUFBRSxTQUFTO2dCQUNsQixRQUFRLEVBQUUsSUFBSTthQUNqQjtZQUNELFFBQVEsRUFBRTtnQkFDTixJQUFJLEVBQUUsU0FBUztnQkFDZixPQUFPLEVBQUUsaUJBQVEsQ0FBQyxHQUFHLENBQUMsa0JBQWtCLENBQUM7YUFDNUM7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBQ3dELGlFQUFTO0FBT2xFLG1CQUF5QixFQUNyQixNQUFNLEVBQ04sZUFBZSxHQUlsQjtJQUNHLE1BQU0sV0FBVyxtQkFDYixNQUFNLEVBQUUsRUFBRSxFQUNWLFFBQVEsRUFBRSxJQUFJLElBQ1gsTUFBTSxDQUNaLENBQUM7SUFFRixJQUFJLFFBQVEsR0FBRyxXQUFXLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLEVBQUUsRUFBRTtRQUNuRCxJQUFJLEdBQUcsQ0FBQztRQUVSLGNBQWM7UUFDZCxDQUFDLEdBQUcsZUFBZSxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBRXZCLHdDQUF3QztRQUN4QyxHQUFHLEdBQUcsaUJBQVEsQ0FBQyxPQUFPLENBQUMsaUJBQWlCLENBQUMsRUFBRSxDQUFDLENBQUM7UUFFN0MsSUFBSSxHQUFHLEtBQUssU0FBUyxFQUFFO1lBQ25CLENBQUMsR0FBRyxHQUFHLENBQUM7U0FDWDtRQUVELGtDQUFrQztRQUNsQyxJQUFJLENBQUMsS0FBSyxPQUFPLEVBQUU7WUFDZixPQUFPLGlEQUFpRCxXQUFXLENBQUMsUUFBUSxJQUFJLENBQUM7U0FDcEY7YUFBTSxJQUFJLEdBQUcsQ0FBQyxFQUFFLENBQUMsS0FBSyxDQUFDLFlBQVksQ0FBQyxFQUFFO1lBQ25DLGFBQWE7WUFDYixJQUFJLFdBQVcsQ0FBQyxRQUFRLEVBQUU7Z0JBQ3RCLE9BQU8sY0FBYyxDQUFDLEdBQUcsQ0FBQzthQUM3QjtZQUNELE9BQU8sR0FBRyxDQUFDLEVBQUUsQ0FBQztTQUNqQjthQUFNO1lBQ0gsT0FBTyx1Q0FBdUMsV0FBVyxDQUFDLFFBQVEsT0FBTyxDQUFDLEdBQUcsQ0FBQztTQUNqRjtJQUNMLENBQUMsQ0FBQyxDQUFDO0lBRUgsT0FBTyxRQUFRLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0FBQzlCLENBQUM7QUF6Q0QsNEJBeUNDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUNyRCxvRUFBNkM7QUFFN0M7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUVILE1BQU0sNENBQTZDLFNBQVEscUJBQVk7SUFDbkUsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILE1BQU0sRUFBRTtnQkFDSixJQUFJLEVBQUUsUUFBUTtnQkFDZCxNQUFNLEVBQUU7b0JBQ0osR0FBRyxNQUFNLENBQUMsSUFBSSxDQUFDLGlCQUFRLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxjQUFjLENBQUMsQ0FBQztvQkFDcEQsT0FBTztpQkFDVjtnQkFDRCxPQUFPLEVBQUUsU0FBUztnQkFDbEIsUUFBUSxFQUFFLElBQUk7YUFDakI7WUFDRCxRQUFRLEVBQUU7Z0JBQ04sSUFBSSxFQUFFLFNBQVM7Z0JBQ2YsT0FBTyxFQUFFLGlCQUFRLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxrQkFBa0IsQ0FBQzthQUNwRDtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFDd0QsaUVBQVM7QUFPbEUsbUJBQXlCLEVBQ3JCLE1BQU0sRUFDTixlQUFlLEdBSWxCO0lBQ0csTUFBTSxXQUFXLG1CQUNiLE1BQU0sRUFBRSxFQUFFLEVBQ1YsUUFBUSxFQUFFLElBQUksSUFDWCxNQUFNLENBQ1osQ0FBQztJQUVGLElBQUksUUFBUSxHQUFHLFdBQVcsQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsRUFBRSxFQUFFO1FBQ25ELElBQUksR0FBRyxDQUFDO1FBRVIsY0FBYztRQUNkLElBQUksSUFBSSxHQUFHLGVBQWUsQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUU5Qix3Q0FBd0M7UUFDeEMsR0FBRyxHQUFHLGlCQUFRLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxnQkFBZ0IsQ0FBQyxFQUFFLENBQUMsQ0FBQztRQUNwRCxJQUFJLEdBQUcsS0FBSyxTQUFTLEVBQUU7WUFDbkIsSUFBSSxHQUFHLEdBQUcsQ0FBQztTQUNkO1FBRUQsa0NBQWtDO1FBQ2xDLElBQUksSUFBSSxLQUFLLE9BQU8sRUFBRTtZQUNsQixPQUFPLGdEQUFnRCxXQUFXLENBQUMsUUFBUSxJQUFJLENBQUM7U0FDbkY7YUFBTSxJQUFJLEdBQUcsSUFBSSxFQUFFLENBQUMsS0FBSyxDQUFDLFlBQVksQ0FBQyxFQUFFO1lBQ3RDLGFBQWE7WUFDYixJQUFJLFdBQVcsQ0FBQyxRQUFRLEVBQUU7Z0JBQ3RCLE9BQU8sY0FBYyxJQUFJLEdBQUcsQ0FBQzthQUNoQztZQUNELE9BQU8sR0FBRyxJQUFJLEVBQUUsQ0FBQztTQUNwQjthQUFNO1lBQ0gsSUFBSSxXQUFXLENBQUMsUUFBUSxFQUFFO2dCQUN0QixPQUFPLG1CQUFtQixJQUFJLFVBQVUsQ0FBQzthQUM1QztZQUNELE9BQU8sR0FBRyxJQUFJLElBQUksQ0FBQztTQUN0QjtJQUNMLENBQUMsQ0FBQyxDQUFDO0lBRUgsT0FBTyxRQUFRLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0FBQzlCLENBQUM7QUEzQ0QsNEJBMkNDIn0=

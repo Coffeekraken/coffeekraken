@@ -116,7 +116,7 @@ export default function ({
         }
     }
 
-    const vars = __STheme.toCssVars({
+    const vars = __STheme.current.toCssVars({
         theme: finalParams.theme,
         variant: finalParams.variant,
     });

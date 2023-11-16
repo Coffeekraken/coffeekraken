@@ -55,31 +55,31 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
         *   @s.color(accent);
         * }                   
         * 
-        ${Object.keys(__STheme.getTheme().baseColors())
+        ${Object.keys(__STheme.current.baseColors())
             .map((colorName) => {
                 return ` * @cssClass            s-color:${colorName}       Apply the ${colorName} color for the "current" color`;
             })
             .join('\n')}
-        ${Object.keys(__STheme.getTheme().baseColors())
+        ${Object.keys(__STheme.current.baseColors())
             .map((colorName) => {
                 return ` * @cssClass            s-tc:${colorName}       Apply the ${colorName} text color`;
             })
             .join('\n')}
-        ${Object.keys(__STheme.getTheme().baseColors())
+        ${Object.keys(__STheme.current.baseColors())
             .map((colorName) => {
                 return ` * @cssClass            s-bc:${colorName}       Apply the ${colorName} background color`;
             })
             .join('\n')}
         *
         * @example        html          Text color
-        ${Object.keys(__STheme.getTheme().baseColors())
+        ${Object.keys(__STheme.current.baseColors())
             .map((colorName) => {
                 return ` * <div class="s-tc:${colorName} s-mb:30">${colorName}</div>`;
             })
             .join('\n')}
         *
         * @example        html          Background color
-        ${Object.keys(__STheme.getTheme().baseColors())
+        ${Object.keys(__STheme.current.baseColors())
             .map((colorName) => {
                 return ` * <div class="s-bc:${colorName} s-p:10 s-mb:30 s-radius">${colorName}</div>`;
             })
@@ -91,7 +91,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
     `,
     );
 
-    Object.keys(__STheme.getTheme().baseColors()).forEach((colorName) => {
+    Object.keys(__STheme.current.baseColors()).forEach((colorName) => {
         cssArray
             .comment(
                 () => `
@@ -155,7 +155,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             );
     });
 
-    __STheme.getTheme().loopOnColors((colorObj) => {
+    __STheme.current.loopOnColors((colorObj) => {
         const colorName = colorObj.name;
 
         if (colorObj.shade) {

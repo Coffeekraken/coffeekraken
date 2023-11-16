@@ -117,8 +117,8 @@ export default function ({
         ).code(
             `@s.rhythm.vertical {
                 .s-color-picker[inline] {
-                    ${__STheme.jsObjectToCssProperties(
-                        __STheme.get('ui.colorPicker.rhythmVertical'),
+                    ${__STheme.current.jsObjectToCssProperties(
+                        __STheme.current.get('ui.colorPicker.rhythmVertical'),
                     )}
                 } 
             }

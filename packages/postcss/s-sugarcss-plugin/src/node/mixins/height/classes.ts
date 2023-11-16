@@ -49,7 +49,7 @@ export default function ({
 
     const vars = new CssVars();
 
-    const heightObj = __STheme.get('height');
+    const heightObj = __STheme.current.get('height');
 
     vars.comment(
         `

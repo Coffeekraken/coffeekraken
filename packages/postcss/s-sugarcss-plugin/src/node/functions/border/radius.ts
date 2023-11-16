@@ -33,7 +33,7 @@ class SSugarcssPluginBorderRadiusFunctionInterface extends __SInterface {
             radius: {
                 type: 'String',
                 values: [
-                    ...Object.keys(__STheme.get('border.radius')),
+                    ...Object.keys(__STheme.current.get('borderRadius')),
                     'shape',
                 ],
                 default: 'default',
@@ -41,7 +41,7 @@ class SSugarcssPluginBorderRadiusFunctionInterface extends __SInterface {
             },
             scalable: {
                 type: 'Boolean',
-                default: __STheme.get('scalable.padding'),
+                default: __STheme.current.get('scalable.padding'),
             },
         };
     }
@@ -70,26 +70,28 @@ export default function ({
         let val;
 
         // theme value
-        s = themeValueProxy(s);
+        let size = themeValueProxy(s);
 
         // try to get the padding with the pased
-        val = __STheme.getSafe(`border.radius.${s}`);
-
+        val = __STheme.current.getSafe(`borderRadius.${s}`);
         if (val !== undefined) {
-            s = val;
+            size = val;
         }
 
         // default return simply his value
-        if (s === 'shape') {
-            return `var(--s-shape, s.theme(border.radius.default, ${finalParams.scalable}))`;
-        } else if (`${s}`.match(/[a-zA-Z]+$/)) {
+        if (size === 'shape') {
+            return `var(--s-shape, s.theme(borderRadius.default, ${finalParams.scalable}))`;
+        } else if (`${size}`.match(/[a-zA-Z]+$/)) {
             // @ts-ignore
             if (finalParams.scalable) {
-                return `s.scalable(${s})`;
+                return `s.scalable(${size})`;
             }
-            return `${s}`;
+            return `${size}`;
         } else {
-            return `calc(s.theme(border.radius.default, ${finalParams.scalable}) * ${s})`;
+            if (finalParams.scalable) {
+                return `calc(s.scalable(${size}) * 1px)`;
+            }
+            return `${size}px`;
         }
     });
 

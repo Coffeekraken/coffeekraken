@@ -38,7 +38,7 @@ class SSugarcssPluginUiTooltipClassesInterface extends __SInterface {
             defaultLnf: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.get('ui.tooltip.defaultLnf'),
+                default: __STheme.current.get('ui.tooltip.defaultLnf'),
             },
             scope: {
                 type: {

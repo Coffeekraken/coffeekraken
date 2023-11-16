@@ -33,7 +33,7 @@ class SSugarcssPluginUiCheckboxInterface extends __SInterface {
             lnf: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.get('ui.form.defaultLnf'),
+                default: __STheme.current.get('ui.form.defaultLnf'),
             },
             scope: {
                 type: {
@@ -93,7 +93,7 @@ export default function ({
                 vars.push(`
 
                     transition: s.theme(ui.form.transition);
-                    border: s.theme(ui.form.borderWidth) solid s.color(current);
+                    border: s.border.width(ui.form.borderWidth) solid s.color(current);
                     background-color: transparent;
                     transition: s.theme(ui.form.transition);
                     box-shadow: 0 0 0 0 s.color(current, --alpha 0.2);
@@ -135,7 +135,7 @@ export default function ({
                     }
 
                     &:focus:not(:hover):not(:active):not(:disabled) {
-                        box-shadow: 0 0 0 s.theme(ui.outline.borderWidth) s.color(current, --alpha 0.3);
+                        box-shadow: 0 0 0 s.border.width(ui.outline.borderWidth) s.color(current, --alpha 0.3);
                     }
  
         `);

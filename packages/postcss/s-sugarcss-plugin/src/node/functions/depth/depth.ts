@@ -54,14 +54,14 @@ export default function depth({
     };
 
     // try to get the padding with the pased
-    const val = __STheme.getSafe(`depth.${finalParams.depth}`);
+    const val = __STheme.current.getSafe(`depth.${finalParams.depth}`);
     if (val !== undefined) {
         finalParams.depth = val;
     }
 
     // 0 - 20 - 100 - ...
     if (`${finalParams.depth}`.match(/^[0-9]+$/)) {
-        return __STheme.cssVar(`depth.${finalParams.depth}`);
+        return __STheme.current.cssVar(`depth.${finalParams.depth}`);
     }
 
     // dotPath
@@ -69,7 +69,9 @@ export default function depth({
         typeof finalParams.depth === 'string' &&
         finalParams.depth.match(/^[a-zA-Z0-9\.]+$/)
     ) {
-        return __STheme.cssVar(`depth.${__STheme.get(finalParams.depth)}`);
+        return __STheme.current.cssVar(
+            `depth.${__STheme.current.get(finalParams.depth)}`,
+        );
     }
 
     // passed string

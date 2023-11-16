@@ -52,8 +52,8 @@ export default function ({
         ...params,
     };
 
-    const queries = __STheme.get('media.queries');
-    const states = __STheme.get('helpers.states');
+    const queries = __STheme.current.get('media.queries');
+    const states = __STheme.current.get('helpers.states');
 
     const vars = new CssVars();
 

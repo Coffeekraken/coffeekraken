@@ -142,8 +142,8 @@ export default function ({
         ).code(
             `@s.rhythm.vertical {
                 .s-specs-editor {
-                    ${__STheme.jsObjectToCssProperties(
-                        __STheme.get('ui.specsEditor.rhythmVertical'),
+                    ${__STheme.current.jsObjectToCssProperties(
+                        __STheme.current.get('ui.specsEditor.rhythmVertical'),
                     )}
                 } 
             }

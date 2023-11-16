@@ -93,7 +93,7 @@ export default class SScrollComponent extends __SLitComponent {
         });
     }
     _scrollTo(target: string) {
-        const scrollConfig = __STheme.get('scroll');
+        const scrollConfig = __STheme.current.get('scroll');
         const duration = this.props.duration || scrollConfig?.duration || 300;
         const offset = this.props.offset || scrollConfig.offset || 0;
         const offsetX = this.props.offsetX || scrollConfig.offsetX || offset;

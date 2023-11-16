@@ -35,12 +35,12 @@ class SSugarcssPluginUiTooltipInterface extends __SInterface {
             lnf: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.get('ui.tooltip.defaultLnf'),
+                default: __STheme.current.get('ui.tooltip.defaultLnf'),
             },
             position: {
                 type: 'String',
                 values: ['top', 'right', 'bottom', 'left'],
-                default: __STheme.get('ui.tooltip.defaultPosition'),
+                default: __STheme.current.get('ui.tooltip.defaultPosition'),
             },
             interactive: {
                 type: 'Boolean',

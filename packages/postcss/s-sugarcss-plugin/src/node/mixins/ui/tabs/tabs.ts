@@ -54,7 +54,7 @@ class SSugarcssPluginUiTabInterface extends __SInterface {
                 type: 'Boolean',
                 description:
                     'Specify if you want your tabs to have an outline on focus',
-                default: __STheme.get('ui.tabs.outline'),
+                default: __STheme.current.get('ui.tabs.outline'),
             },
             scope: {
                 type: {

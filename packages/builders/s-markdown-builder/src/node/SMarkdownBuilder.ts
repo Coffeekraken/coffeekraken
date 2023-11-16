@@ -357,7 +357,7 @@ export default class SMarkdownBuilder extends __SBuilder {
                 // take some datas like packagejson, etc...
                 const viewData = __deepMerge(
                     {
-                        theme: __STheme.get('.'),
+                        theme: __STheme.current.get('.'),
                         config: __SSugarConfig.get('.'),
                         settings: this.settings,
                         params,

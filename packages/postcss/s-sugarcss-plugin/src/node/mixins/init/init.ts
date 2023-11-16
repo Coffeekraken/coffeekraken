@@ -52,8 +52,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams = {
-        theme: __STheme.theme,
-        variant: __STheme.variant,
+        theme: __STheme.current.theme,
+        variant: __STheme.current.variant,
         ...(params ?? {}),
     };
 

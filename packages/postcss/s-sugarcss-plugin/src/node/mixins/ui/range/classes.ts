@@ -37,7 +37,7 @@ class SSugarcssPluginUiRangeClassesInterface extends __SInterface {
             defaultLnf: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.get('ui.range.defaultLnf'),
+                default: __STheme.current.get('ui.range.defaultLnf'),
             },
             scope: {
                 type: {

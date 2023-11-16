@@ -41,23 +41,6 @@ export default class STheme extends __SThemeBase {
     }
 
     /**
-     * @name            getCurrentTheme
-     * @type            Function
-     * @static
-     *
-     * This method allows you to get the current applied theme STheme instance
-     *
-     * @return          {STheme}                                    The STheme instance that represent the current applied theme
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static getCurrentTheme(): STheme {
-        // @ts-ignore
-        return this.getTheme();
-    }
-
-    /**
      * @name            getColor
      * @type            Function
      *

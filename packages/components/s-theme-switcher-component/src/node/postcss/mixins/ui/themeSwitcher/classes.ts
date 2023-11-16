@@ -119,8 +119,8 @@ export default function ({
         ).code(
             `@s.rhythm.vertical {
                 .s-theme-switcher {
-                    ${__STheme.jsObjectToCssProperties(
-                        __STheme.get('ui.themeSwitcher.rhythmVertical'),
+                    ${__STheme.current.jsObjectToCssProperties(
+                        __STheme.current.get('ui.themeSwitcher.rhythmVertical'),
                     )}
                 } 
             }

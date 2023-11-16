@@ -51,7 +51,7 @@ export default function ({
 
     const vars = new CssVars();
 
-    const spacingsObj = __STheme.get('space');
+    const spacingsObj = __STheme.current.get('space');
     const spacingsKeys = __keysFirst(Object.keys(spacingsObj), ['default']);
 
     vars.comment(

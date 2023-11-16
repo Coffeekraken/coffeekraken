@@ -58,7 +58,7 @@ export default function ({
     postcssApi: any;
     registerPostProcessor: Function;
 }) {
-    const mediaConfig = __STheme.get('media');
+    const mediaConfig = __STheme.current.get('media');
 
     const finalParams = {
         containerName: null, // __uniqid().split('-').slice(0, 2).join('-')

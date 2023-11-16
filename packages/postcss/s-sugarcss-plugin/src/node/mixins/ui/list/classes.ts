@@ -38,7 +38,7 @@ class SSugarcssPluginUiListClassesInterface extends __SInterface {
             defaultLnf: {
                 type: 'String',
                 values: ['dl', 'ul', 'ol', 'icon'],
-                default: __STheme.get('ui.list.defaultLnf') ?? 'dl',
+                default: __STheme.current.get('ui.list.defaultLnf') ?? 'dl',
             },
             scope: {
                 type: {
@@ -478,8 +478,8 @@ export default function ({
             @s.rhythm.vertical {
                 ul, .s-list-ul,
                 ol, .s-list-ol {
-                    ${__STheme.jsObjectToCssProperties(
-                        __STheme.get('ui.list.rhythmVertical'),
+                    ${__STheme.current.jsObjectToCssProperties(
+                        __STheme.current.get('ui.list.rhythmVertical'),
                     )}
                 } 
             }

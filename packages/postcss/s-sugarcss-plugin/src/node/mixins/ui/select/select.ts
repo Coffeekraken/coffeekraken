@@ -33,7 +33,7 @@ class SSugarcssPluginUiFormSelectInterface extends __SInterface {
             lnf: {
                 type: 'String',
                 values: ['solid', 'underline'],
-                default: __STheme.get('ui.form.defaultLnf'),
+                default: __STheme.current.get('ui.form.defaultLnf'),
             },
             scope: {
                 type: {

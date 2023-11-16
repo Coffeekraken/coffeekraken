@@ -33,7 +33,7 @@ class SSugarcssPluginUiSwitchMixinInterface extends __SInterface {
             lnf: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.get('ui.form.defaultLnf'),
+                default: __STheme.current.get('ui.form.defaultLnf'),
             },
             scope: {
                 type: {
@@ -80,13 +80,13 @@ export default function ({
         --thumb-size: 1em;
         --thumb-color-active: s.color(current);
         --thumb-color-inactive: s.color(current, --desaturate 80);
-        --thumb-border-width: s.theme(ui.form.borderWidth);
+        --thumb-border-width: s.border.width(ui.form.borderWidth);
         --thumb-border-color: s.color(current, border);
 
         --track-size: 0.5em;
         --track-color-active: s.color(current, --alpha 0.3);
         --track-color-inactive: s.color(main, ui, --alpha 0.2 --desaturate 80);
-        --track-border-width: s.theme(ui.form.borderWidth);
+        --track-border-width: s.border.width(ui.form.borderWidth);
         --track-border-color: s.color(current, border);
 
         --thumb-transition-duration: s.theme(ui.form.transition);

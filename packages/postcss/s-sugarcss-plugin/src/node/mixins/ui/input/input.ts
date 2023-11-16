@@ -33,11 +33,11 @@ class SSugarcssPluginUiFormInputInterface extends __SInterface {
             lnf: {
                 type: 'String',
                 values: ['solid', 'underline'],
-                default: __STheme.get('ui.form.defaultLnf'),
+                default: __STheme.current.get('ui.form.defaultLnf'),
             },
             outline: {
                 type: 'Boolean',
-                default: __STheme.get('ui.form.outline'),
+                default: __STheme.current.get('ui.form.outline'),
             },
             scope: {
                 type: {

@@ -36,7 +36,7 @@ class SSugarcssPluginUiFormClassesInterface extends __SInterface {
             },
             defaultLnf: {
                 type: 'String',
-                default: __STheme.get('ui.form.defaultLnf'),
+                default: __STheme.current.get('ui.form.defaultLnf'),
             },
             scope: {
                 type: {

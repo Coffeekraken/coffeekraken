@@ -232,9 +232,6 @@ export interface ISThemeColor {
     [key: string]: any;
 }
 
-window._themes = {};
-console.log('DDDDDDDDD');
-
 export default class SThemeBase extends __SEventEmitter {
     /**
      * @name            sortMedia
@@ -269,6 +266,144 @@ export default class SThemeBase extends __SEventEmitter {
         media.queries = queries;
 
         return media;
+    }
+
+    /**
+     * @name      current
+     * @type      STheme
+     * @static
+     *
+     * Access the current theme
+     *
+     * @since     2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static get current(): STheme {
+        if (document) {
+            if (!document.env?.SUGAR?.theme) {
+                if (!document.env) document.env = {};
+                if (!document.env.SUGAR) document.env.SUGAR = {};
+                document.env.SUGAR.theme = new this();
+            }
+            return document.env?.SUGAR?.theme;
+        } else if (process) {
+            if (!process.env?.SUGAR?.theme) {
+                if (!process.env) process.env = {};
+                if (!process.env.SUGAR) process.env.SUGAR = {};
+                process.env.SUGAR.theme = new this();
+            }
+            return process.env?.SUGAR?.theme;
+        } else {
+            throw new Error(
+                `<red>[STheme]</red> It seems that you are trying to access the current theme outside of a browser or nodejs context...`,
+            );
+        }
+    }
+
+    /**
+     * @name            getCurrentTheme
+     * @type            Function
+     * @static
+     *
+     * This method allows you to get the current applied theme STheme instance
+     *
+     * @return          {STheme}                                    The STheme instance that represent the current applied theme
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static getCurrentTheme(): STheme {
+        return this.current;
+    }
+
+    /**
+     * @name      themesNames
+     * @type      Object
+     * @static
+     *
+     * Access the defined themes names
+     *
+     * @since     2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static get themesNames(): string[] {
+        return Object.keys(__SSugarConfig.get('theme.themes'));
+    }
+
+    /**
+     * @name      themes
+     * @type      Object
+     * @static
+     *
+     * Access the defined themes
+     *
+     * @since     2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static get themes(): Object {
+        const themes = __SSugarConfig.get('theme.themes');
+        const returnedThemes = {};
+        for (let [themeName, themeObj] of Object.entries(themes)) {
+            const parts = themeName.split('-'),
+                name = parts[0],
+                variant = parts[1] ?? 'light';
+            if (!returnedThemes[name]) {
+                returnedThemes[name] = {
+                    metas: themeObj.metas ?? {},
+                    variants: {},
+                };
+            }
+            if (!returnedThemes[name].variants[variant]) {
+                returnedThemes[name].variants[variant] = themeObj;
+            }
+        }
+
+        return returnedThemes;
+    }
+
+    /**
+     * @name        getTheme
+     * @type        Function
+     * @static
+     *
+     * This static method allows you to get quicky an STheme instance of the passed theme.
+     * It will also check if an instance already exists for this theme and return it if so...
+     *
+     * @param     {String}    theme       The name of theme you want an STheme instance back for
+     * @param       {String}    variant         The theme variant you want an STheme instance back for
+     * @return    {STheme}              An instance of the STheme class representing the requested theme
+     *
+     * @since     2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static _instanciatedThemes: Record<string, SThemeBase> = {};
+    static getTheme(
+        theme: string,
+        variant: string,
+        settings?: Partial<ISThemeSettings>,
+    ): SThemeBase {
+        const themesNames = Object.keys(__SSugarConfig.get('theme.themes'));
+
+        if (!themesNames.includes(`${theme}-${variant}`)) {
+            throw new Error(
+                `<red>[STheme]</red> The requested theme "<yellow>${theme}</yellow>" with the variant "<yellow>${variant}</yellow>" does not exists...`,
+            );
+        }
+
+        if (this._instanciatedThemes[`${theme}-${variant}`]) {
+            return this._instanciatedThemes[`${theme}-${variant}`];
+        }
+        console.log('TTT', `${theme}-${variant}`);
+
+        this._instanciatedThemes[`${theme}-${variant}`] = new this(
+            theme,
+            variant,
+            settings,
+        );
+
+        console.log('NEW', `${theme}-${variant}`);
+
+        return this._instanciatedThemes[`${theme}-${variant}`];
     }
 
     /**
@@ -319,51 +454,52 @@ export default class SThemeBase extends __SEventEmitter {
     }
 
     /**
-     * @name      theme
-     * @type      String
-     * @static
+     * @name            metas
+     * @type            Object
      *
-     * Store the current theme setted in the config.theme namespace
+     * Access the theme metas object
      *
-     * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static get theme(): string {
-        return __SSugarConfig.get('theme.theme');
+    _metas: {};
+    get metas(): any {
+        return this.get('metas') ?? {};
+    }
+    set metas(v) {
+        this._metas = v;
     }
 
     /**
-     * @name      variant
-     * @type      String
-     * @static
+     * @name        constructor
+     * @type        Function
+     * @constructor
      *
-     * Store the current variant setted in the config.variant namespace
+     * Constructor
      *
-     * @since     2.0.0
+     * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static get variant(): string {
-        return __SSugarConfig.get('theme.variant');
-    }
+    constructor(
+        theme?: string,
+        variant?: string,
+        settings?: Partial<ISThemeSettings>,
+    ) {
+        super(__deepMerge({}, settings ?? {}));
 
-    /**
-     * @name      themesNames
-     * @type      Object
-     * @static
-     *
-     * Access the defined themes names
-     *
-     * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static get themesNames(): string[] {
-        return Object.keys(__SSugarConfig.get('theme.themes'));
+        this.theme = theme ?? __SSugarConfig.get('theme.theme');
+        this.variant = variant ?? __SSugarConfig.get('theme.variant');
+
+        if (!__SSugarConfig.get(`theme.themes.${this.theme}-${this.variant}`)) {
+            throw new Error(
+                `Sorry but the requested theme "<yellow>${this.theme}-${this.variant}</yellow>" does not exists...`,
+            );
+        }
     }
 
     /**
      * @name            isDark
      * @type            Function
-     * @static
      *
      * This method returns true if the theme variant is dark, false if not
      *
@@ -372,14 +508,13 @@ export default class SThemeBase extends __SEventEmitter {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static isDark(): boolean {
+    isDark(): boolean {
         return this.variant === 'dark';
     }
 
     /**
      * @name            isMobileFirst
      * @type            Function
-     * @static
      *
      * This method returns true if the theme is configured to be mobile first.
      * Mobile first is true when the "config.theme.media.defaultAction" is set to "<="
@@ -389,14 +524,13 @@ export default class SThemeBase extends __SEventEmitter {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static isMobileFirst(): boolean {
+    isMobileFirst(): boolean {
         return this.getSafe('media.defaultAction') === '>=';
     }
 
     /**
-     * @name            getThemeMetas
+     * @name            getMetas
      * @type            Function
-     * @static
      *
      * This method allows you to get the theme metas like "name", "theme" and "variant" from the passed HTMLElement
      *
@@ -405,354 +539,15 @@ export default class SThemeBase extends __SEventEmitter {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static getThemeMetas(): any {
-        let defaultTheme = __SSugarConfig.get('theme.theme'),
-            defaultVariant = __SSugarConfig.get('theme.variant');
-
-        let theme = defaultTheme,
-            variant = defaultVariant;
-
-        const metas =
-            __SSugarConfig.get(`theme.themes.${theme}-${variant}.metas`) ?? {};
-
-        return __deepMerge(
-            {
-                name: `${theme ?? defaultTheme}-${variant ?? defaultVariant}`,
-                theme: theme ?? defaultTheme,
-                variant: variant ?? defaultVariant,
-            },
-            metas,
-        );
-    }
-
-    /**
-     * @name      themes
-     * @type      Object
-     * @static
-     *
-     * Access the defined themes
-     *
-     * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static get themes(): Object {
-        const themes = __SSugarConfig.get('theme.themes');
-        const returnedThemes = {};
-        for (let [themeName, themeObj] of Object.entries(themes)) {
-            const parts = themeName.split('-'),
-                name = parts[0],
-                variant = parts[1] ?? 'light';
-            if (!returnedThemes[name]) {
-                returnedThemes[name] = {
-                    metas: themeObj.metas ?? {},
-                    variants: {},
-                };
-            }
-            if (!returnedThemes[name].variants[variant]) {
-                returnedThemes[name].variants[variant] = themeObj;
-            }
-        }
-
-        return returnedThemes;
-    }
-
-    /**
-     * @name        getTheme
-     * @type        Function
-     * @static
-     *
-     * This static method allows you to get quicky an STheme instance of the passed theme.
-     * It will also check if an instance already exists for this theme and return it if so...
-     *
-     * @param     {String}    theme       The name of theme you want an STheme instance back for
-     * @param       {String}    variant         The theme variant you want an STheme instance back for
-     * @return    {STheme}              An instance of the STheme class representing the requested theme
-     *
-     * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static _instanciatedThemes: Record<string, SThemeBase> = {};
-    static _firstGettedThemeSettings: any;
-
-    static i = 0;
-
-    static getTheme(
-        theme: string,
-        variant: string,
-        settings?: Partial<ISThemeSettings>,
-    ): SThemeBase {
-        if (this.i >= 10) {
-            return;
-        }
-        this.i++;
-
-        if (!theme || !variant) {
-            // console.log('NOT', theme, variant);
-        }
-
-        const themesNames = Object.keys(__SSugarConfig.get('theme.themes'));
-
-        theme = theme ?? this._firstGettedThemeSettings?.theme;
-        variant = variant ?? this._firstGettedThemeSettings?.variant;
-
-        if (!theme) {
-            theme = __SSugarConfig.get('theme.theme');
-        }
-        if (!variant) {
-            variant = __SSugarConfig.get('theme.variant');
-        }
-
-        if (!themesNames.includes(`${theme}-${variant}`)) {
-            theme = __SSugarConfig.get('theme.theme');
-            variant = __SSugarConfig.get('theme.variant');
-        }
-
-        if (!this._firstGettedThemeSettings) {
-            this._firstGettedThemeSettings = {
-                theme,
-                variant,
-                settings,
-            };
-        }
-
-        console.log('AAAAA', window._themes[`${theme}-${variant}`]);
-
-        if (window._themes[`${theme}-${variant}`]) {
-            console.log('THTHTHTHTHTHTHTHTHTHT');
-            return window._themes[`${theme}-${variant}`];
-        }
-        console.log('TTT', `${theme}-${variant}`);
-
-        window._themes[`${theme}-${variant}`] = new this(
-            theme,
-            variant,
-            settings,
-        );
-        return window._themes[`${theme}-${variant}`];
-    }
-
-    /**
-     * @name            hash
-     * @type            String
-     * @static
-     *
-     * This hash accessor gives you access to the actual theme configuration hash.
-     * You can specify a dot path to get the hash of a sub configuration
-     *
-     * @param           {String}            [dotPath='']            The dot path of the config you want to hash
-     * @return          {String}                                    The generated hash for this config
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static hash(
-        dotPath: string = '',
-        settings?: Partial<ISThemeDefaultStaticSettings>,
-    ): string {
-        const config = this.get(dotPath, settings);
-        return __objectHash(config);
-    }
-
-    /**
-     * @name        resolveFontSize
-     * @type        Function
-     * @static
-     *
-     * This method allows you to get back the actual final font-size value of the passed one
-     *
-     * @param       {any}           size        The size you want to resolve
-     * @return      {any}                       The final resolved size
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static resolveFontSize(
-        size: any,
-        settings?: Partial<ISThemeDefaultStaticSettings>,
-    ): any {
-        // get the theme instance
-        const theme = this.getTheme(settings?.theme, settings?.variant);
-
-        // resolve font size
-        return theme.resolveFontSize(size);
-    }
-
-    /**
-     * @name        resolvePadding
-     * @type        Function
-     * @static
-     *
-     * This method allows you to get back the actual final padding value of the passed one
-     *
-     * @param       {any}           size        The size you want to resolve
-     * @return      {any}                       The final resolved size
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static resolvePadding(
-        size: any,
-        settings?: Partial<ISThemeDefaultStaticSettings>,
-    ): any {
-        // get the theme instance
-        const theme = this.getTheme(settings?.theme, settings?.variant);
-
-        // resolve font size
-        return theme.resolvePadding(size);
-    }
-
-    /**
-     * @name        resolveMargin
-     * @type        Function
-     * @static
-     *
-     * This method allows you to get back the actual final margin value of the passed one
-     *
-     * @param       {any}           size        The size you want to resolve
-     * @return      {any}                       The final resolved size
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static resolveMargin(
-        size: any,
-        settings?: Partial<ISThemeDefaultStaticSettings>,
-    ): any {
-        // get the theme instance
-        const theme = this.getTheme(settings?.theme, settings?.variant);
-
-        // resolve font size
-        return theme.resolveMargin(size);
-    }
-
-    /**
-     * @name        resolveBorderRadius
-     * @type        Function
-     * @static
-     *
-     * This method allows you to get back the actual final border-radius value of the passed one
-     *
-     * @param       {any}           size        The size you want to resolve
-     * @return      {any}                       The final resolved size
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static resolveBorderRadius(
-        size: any,
-        settings?: Partial<ISThemeDefaultStaticSettings>,
-    ): any {
-        // get the theme instance
-        const theme = this.getTheme(settings?.theme, settings?.variant);
-
-        // resolve font size
-        return theme.resolveBorderRadius(size);
-    }
-
-    /**
-     * @name        resolveBorderWidth
-     * @type        Function
-     * @static
-     *
-     * This method allows you to get back the actual final border-width value of the passed one
-     *
-     * @param       {any}           size        The size you want to resolve
-     * @return      {any}                       The final resolved size
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static resolveBorderWidth(
-        size: any,
-        settings?: Partial<ISThemeDefaultStaticSettings>,
-    ): any {
-        // get the theme instance
-        const theme = this.getTheme(settings?.theme, settings?.variant);
-
-        // resolve font size
-        return theme.resolveBorderWidth(size);
-    }
-
-    /**
-     * @name        resolveColor
-     * @type        Function
-     * @static
-     *
-     * This method allows you to get back the actual final value of a color with
-     * his shade and modifier.
-     * You can get back either a css variable or the actual color value by specifying
-     * the "settings.return" setting.
-     *
-     * @param       {String}            color       The color you want to resolve
-     * @param       {String}            [shade=null]      The color shade you want
-     * @param       {String}            [modifier=null]     The modifier you want to apply. Can be something like "--darken 30%", etc...
-     * @param       {ISThemeColorResolveColorSettings}      [settings={}]           Some settings
-     * @return      {any}                       The final resolved color
-     *
-     * @setting         {'var'|'value'}         [return='value']        The return format you want
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static resolveColor(
-        color: string,
-        shade?: string,
-        modifier?: string,
-        settings?: Partial<ISThemeResolveColorSettings>,
-    ): string {
-        const theme = this.getTheme(settings?.theme, settings?.variant);
-        return theme.resolveColor(color, shade, modifier, settings);
-    }
-
-    /**
-     * @name        cssVar
-     * @type        Function
-     *
-     * This function take a simple theme dot path and returns the proper
-     * variable string with the value fallback.
-     *
-     * @param       {String}        dotPath         The dot path theme variable you want
-     * @return      {String}                        The proper css variable string that represent this value with his fallback just in case
-     *
-     * @example         js
-     * import { cssVar } from '@coffeekraken/s-sugarcss-plugin';
-     * cssVar('ui.button.padding'); // => var(--s-ui-button-padding, 1em 1.2em)
-     *
-     * @since       2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static cssVar(
-        dotPath: string,
-        fallback = true,
-        settings?: Partial<ISThemeDefaultStaticSettings>,
-    ): string {
-        // get the theme instance
-        const theme = this.getTheme(settings?.theme, settings?.variant);
-
-        // proxy non existint dotPath
-        dotPath = theme.proxyNonExistingUiDotpath(dotPath);
-
-        // prepare final variable name
-        let varName = `s-${dotPath
-            .replace(/\./gm, '-')
-            .replace(/:/gm, '-')
-            .replace(/\?/gm, '')
-            .replace(/--/gm, '-')}`;
-        varName = `--${__dashCase(varName)}`;
-
-        let fb = theme.get(dotPath);
-        if (!fallback || (typeof fb === 'string' && fb.includes(','))) fb = 0;
-
-        const v = `var(${varName}, ${fb})`;
-        return v;
+    getMetas(): any {
+        return this.metas;
     }
 
     /**
      * @name                resolveCssPropertyValue
      * @type                Function
-     * @static
      *
-     * This static method allows you to pass a css property with a value and get back his final value
+     * This method allows you to pass a css property with a value and get back his final value
      * resolved depending on the theme configuration.
      *
      * @param       {String}            property        The css property to resolve
@@ -762,7 +557,7 @@ export default class SThemeBase extends __SEventEmitter {
      * @since       2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static resolveCssPropertyValue(
+    resolveCssPropertyValue(
         property: string,
         value: any,
         settings?: Partial<ISThemeDefaultStaticSettings>,
@@ -770,11 +565,8 @@ export default class SThemeBase extends __SEventEmitter {
         const dashProp = __dashCase(property);
         switch (dashProp) {
             case 'font-family':
-                const fontObj = this.get(`font.family.${value}`);
+                const fontObj = this.get(`fontFamily.${value}`);
                 return fontObj?.fontFamily ?? value;
-                break;
-            case 'font-size':
-                return this.resolveFontSize(value, settings) ?? value;
                 break;
             case 'color':
             case 'background-color':
@@ -797,44 +589,8 @@ export default class SThemeBase extends __SEventEmitter {
                     }) ?? value
                 );
                 break;
-            case 'border-radius':
-            case 'border-top-left-radius':
-            case 'border-top-right-radius':
-            case 'border-bottom-right-radius':
-            case 'border-bottom-left-radius':
-                return this.resolveBorderRadius(value) ?? value;
-                break;
-            case 'border-width':
-                return this.resolveBorderWidth(value) ?? value;
-                break;
             case 'transition':
                 return this.getSafe(`transition.${value}`) ?? value;
-                break;
-            case 'margin-inline':
-            case 'margin-block':
-            case 'margin-inline-start':
-            case 'margin-inline-end':
-            case 'margin-block-start':
-            case 'margin-block-end':
-            case 'margin':
-            case 'margin-top':
-            case 'margin-bottom':
-            case 'margin-left':
-            case 'margin-right':
-                return this.resolveMargin(value) ?? value;
-                break;
-            case 'padding-inline':
-            case 'padding-block':
-            case 'padding-inline-start':
-            case 'padding-inline-end':
-            case 'padding-block-start':
-            case 'padding-block-end':
-            case 'padding':
-            case 'padding-top':
-            case 'padding-bottom':
-            case 'padding-left':
-            case 'padding-right':
-                return this.resolvePadding(value) ?? value;
                 break;
             case 'depth':
                 return this.getSafe(`depth.${value}`, settings) ?? value;
@@ -848,9 +604,8 @@ export default class SThemeBase extends __SEventEmitter {
     /**
      * @name                resolveCssObjectPropertiesValues
      * @type                Function
-     * @static
      *
-     * This static method allows you to passe a js object with some css properties and to
+     * This method allows you to passe a js object with some css properties and to
      * resolve each of these properties values using the `resolveCssPropertyValue` method
      *
      * @param       {Object}            object      The css properties object to resolve values from
@@ -859,7 +614,7 @@ export default class SThemeBase extends __SEventEmitter {
      * @since       2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static resolveCssObjectPropertiesValues(
+    resolveCssObjectPropertiesValues(
         object: any,
         settings?: Partial<ISThemeDefaultStaticSettings>,
     ): any {
@@ -874,9 +629,8 @@ export default class SThemeBase extends __SEventEmitter {
      * @name                jsObjectToCssProperties
      * @type                Function
      * @status              beta
-     * @static
      *
-     * This static method allows you to pass a javascript object that contain css properties
+     * This method allows you to pass a javascript object that contain css properties
      * and it will returns the processed css string. Some properties can accept internal theme configuration
      * settings like `font-size`, `color`, etc...:
      *
@@ -898,7 +652,7 @@ export default class SThemeBase extends __SEventEmitter {
      * @since       2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static jsObjectToCssProperties(
+    jsObjectToCssProperties(
         jsObject: any,
         settings?: Partial<IJsObjectToCssProperties>,
     ): string {
@@ -1033,7 +787,7 @@ export default class SThemeBase extends __SEventEmitter {
         return propsStack.join('\n');
     }
 
-    static jsConfigObjectToCssProperties(obj: any): string[] {
+    jsConfigObjectToCssProperties(obj: any): string[] {
         let vars: string[] = [];
 
         for (let [key, value] of Object.entries(__flatten(obj))) {
@@ -1066,9 +820,8 @@ export default class SThemeBase extends __SEventEmitter {
      * @name                remapCssColor
      * @type                Function
      * @status              beta
-     * @static
      *
-     * This static method allows you to remap a color to another and returns the needed css
+     * This method allows you to remap a color to another and returns the needed css
      * variables string.
      *
      * @param           {String}            from            The color name you want to remap
@@ -1078,7 +831,7 @@ export default class SThemeBase extends __SEventEmitter {
      * @since       2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static remapCssColor(
+    remapCssColor(
         from: string,
         to: string,
         settings?: Partial<ISThemeDefaultStaticSettings>,
@@ -1112,74 +865,72 @@ export default class SThemeBase extends __SEventEmitter {
             let fromVariable = `--s-color-${fromColorName}`,
                 toVariable = `--s-color-${toColorName}`;
 
-            this.getTheme(settings?.theme, settings?.variant).loopOnColors(
-                (colorObj) => {
-                    if (colorObj.name === toColorName) {
-                        if (toColorVariant) {
-                            if (colorObj.shade === toColorVariant) {
-                                result.vars.push(
-                                    `${fromVariable}-saturation-offset: var(${toVariable}-${colorObj.shadeDash}-saturation-offset, 0);`,
-                                );
-                                result.properties[
-                                    `${fromVariable}-saturation-offset`
-                                ] = `var(${toVariable}-${colorObj.shadeDash}-saturation-offset, 0)`;
-                                result.vars.push(
-                                    `${fromVariable}-lightness-offset: var(${toVariable}-${colorObj.shadeDash}-lightness-offset, 0);`,
-                                );
-                                result.properties[
-                                    `${fromVariable}-lightness-offset`
-                                ] = `var(${toVariable}-${colorObj.shadeDash}-lightness-offset, 0)`;
-                                result.vars.push(
-                                    `${fromVariable}-a: var(${toVariable}-a, 1);`,
-                                );
-                                result.properties[
-                                    `${fromVariable}-a`
-                                ] = `var(${toVariable}-a, 1)`;
-                            }
+            this.loopOnColors((colorObj) => {
+                if (colorObj.name === toColorName) {
+                    if (toColorVariant) {
+                        if (colorObj.shade === toColorVariant) {
+                            result.vars.push(
+                                `${fromVariable}-saturation-offset: var(${toVariable}-${colorObj.shadeDash}-saturation-offset, 0);`,
+                            );
+                            result.properties[
+                                `${fromVariable}-saturation-offset`
+                            ] = `var(${toVariable}-${colorObj.shadeDash}-saturation-offset, 0)`;
+                            result.vars.push(
+                                `${fromVariable}-lightness-offset: var(${toVariable}-${colorObj.shadeDash}-lightness-offset, 0);`,
+                            );
+                            result.properties[
+                                `${fromVariable}-lightness-offset`
+                            ] = `var(${toVariable}-${colorObj.shadeDash}-lightness-offset, 0)`;
+                            result.vars.push(
+                                `${fromVariable}-a: var(${toVariable}-a, 1);`,
+                            );
+                            result.properties[
+                                `${fromVariable}-a`
+                            ] = `var(${toVariable}-a, 1)`;
+                        }
+                    } else {
+                        if (!colorObj.shade && colorObj.value.color) {
+                            result.vars.push(
+                                `${fromVariable}-h: var(${toVariable}-h);`,
+                            );
+                            result.properties[
+                                `${fromVariable}-h`
+                            ] = `var(${toVariable}-h)`;
+                            result.vars.push(
+                                `${fromVariable}-s: var(${toVariable}-s);`,
+                            );
+                            result.properties[
+                                `${fromVariable}-s`
+                            ] = `var(${toVariable}-s)`;
+                            result.vars.push(
+                                `${fromVariable}-l: var(${toVariable}-l);`,
+                            );
+                            result.properties[
+                                `${fromVariable}-l`
+                            ] = `var(${toVariable}-l)`;
                         } else {
-                            if (!colorObj.shade && colorObj.value.color) {
-                                result.vars.push(
-                                    `${fromVariable}-h: var(${toVariable}-h);`,
-                                );
-                                result.properties[
-                                    `${fromVariable}-h`
-                                ] = `var(${toVariable}-h)`;
-                                result.vars.push(
-                                    `${fromVariable}-s: var(${toVariable}-s);`,
-                                );
-                                result.properties[
-                                    `${fromVariable}-s`
-                                ] = `var(${toVariable}-s)`;
-                                result.vars.push(
-                                    `${fromVariable}-l: var(${toVariable}-l);`,
-                                );
-                                result.properties[
-                                    `${fromVariable}-l`
-                                ] = `var(${toVariable}-l)`;
-                            } else {
-                                result.vars.push(
-                                    `${fromVariable}-${colorObj.shadeDash}-saturation-offset: var(${toVariable}-${colorObj.shadeDash}-saturation-offset, 0);`,
-                                );
-                                result.properties[
-                                    `${fromVariable}-${colorObj.shadeDash}-saturation-offset`
-                                ] = `var(${toVariable}-${colorObj.shadeDash}-saturation-offset, 0)`;
-                                result.vars.push(
-                                    `${fromVariable}-${colorObj.shadeDash}-lightness-offset: var(${toVariable}-${colorObj.shadeDash}-lightness-offset, 0);`,
-                                );
-                                result.properties[
-                                    `${fromVariable}-${colorObj.shadeDash}-lightness-offset`
-                                ] = `var(${toVariable}-${colorObj.shadeDash}-lightness-offset, 0)`;
-                                result.vars.push(
-                                    `${fromVariable}-a: var(${toVariable}-a, 1);`,
-                                );
-                                result.properties[
-                                    `${fromVariable}-a`
-                                ] = `var(${toVariable}-a, 1)`;
-                            }
+                            result.vars.push(
+                                `${fromVariable}-${colorObj.shadeDash}-saturation-offset: var(${toVariable}-${colorObj.shadeDash}-saturation-offset, 0);`,
+                            );
+                            result.properties[
+                                `${fromVariable}-${colorObj.shadeDash}-saturation-offset`
+                            ] = `var(${toVariable}-${colorObj.shadeDash}-saturation-offset, 0)`;
+                            result.vars.push(
+                                `${fromVariable}-${colorObj.shadeDash}-lightness-offset: var(${toVariable}-${colorObj.shadeDash}-lightness-offset, 0);`,
+                            );
+                            result.properties[
+                                `${fromVariable}-${colorObj.shadeDash}-lightness-offset`
+                            ] = `var(${toVariable}-${colorObj.shadeDash}-lightness-offset, 0)`;
+                            result.vars.push(
+                                `${fromVariable}-a: var(${toVariable}-a, 1);`,
+                            );
+                            result.properties[
+                                `${fromVariable}-a`
+                            ] = `var(${toVariable}-a, 1)`;
                         }
                     }
-                },
-            );
+                }
+            });
         }
 
         return result;
@@ -1188,9 +939,8 @@ export default class SThemeBase extends __SEventEmitter {
     /**
      * @name            toCssVars
      * @type            Function
-     * @static
      *
-     * This static method allows you to transform a theme/variant into css variables
+     * This method allows you to transform a theme/variant into css variables
      *
      * @param       {String}        theme           The theme name you want to transform
      * @param       {String}        variant         The theme variant you want to transform
@@ -1199,24 +949,14 @@ export default class SThemeBase extends __SEventEmitter {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static toCssVars(
-        settings?: Partial<ISThemeDefaultStaticSettings>,
-    ): string[] {
-        // @ts-ignore
-
-        const themeInstance = this.getTheme(settings?.theme, settings?.variant);
-        if (!themeInstance)
-            throw new Error(
-                `Sorry but the requested theme "<yellow>${settings.theme}-${settings.variant}</yellow>" does not exists...`,
-            );
-
+    toCssVars(settings?: Partial<ISThemeDefaultStaticSettings>): string[] {
         let vars: string[] = [
-            `--s-theme: ${themeInstance.theme};`,
-            `--s-variant: ${themeInstance.variant};`,
+            `--s-theme: ${this.theme};`,
+            `--s-variant: ${this.variant};`,
         ];
 
         // handle colors
-        themeInstance.loopOnColors((colorObj) => {
+        this.loopOnColors((colorObj) => {
             const baseVariable = colorObj.value.variable;
 
             if (!colorObj.shade && colorObj.value.color) {
@@ -1262,7 +1002,7 @@ export default class SThemeBase extends __SEventEmitter {
         });
 
         // others than colors
-        const themeObjWithoutColors = Object.assign({}, themeInstance.get('.'));
+        const themeObjWithoutColors = Object.assign({}, this.get('.'));
         delete themeObjWithoutColors.color;
         const flattenedTheme = __flatten(themeObjWithoutColors);
 
@@ -1318,114 +1058,6 @@ export default class SThemeBase extends __SEventEmitter {
         });
 
         return vars;
-    }
-
-    /**
-     * @name            getSafe
-     * @type            Function
-     * @static
-     *
-     * This static method allows you to access the active theme config without throwing an error if it not exists
-     *
-     * @param       {String}        dotPath           The dot path of the config you want
-     * @return      {any}                        The getted theme config
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static getSafe(
-        dotPath: string,
-        settings?: Partial<ISThemeDefaultStaticSettings>,
-    ): any {
-        const instance = this.getTheme(settings?.theme, settings?.variant);
-        return instance.get(dotPath, {
-            preventThrow: true,
-        });
-    }
-
-    /**
-     * @name            get
-     * @type            Function
-     * @static
-     *
-     * This static method allows you to access the active theme config
-     *
-     * @param       {String}        dotPath           The dot path of the config you want
-     * @return      {any}                        The getted theme config
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static get(
-        dotPath: string,
-        settings?: Partial<ISThemeDefaultStaticSettings>,
-    ): any {
-        const instance = this.getTheme(settings?.theme, settings?.variant);
-        return instance.get(dotPath);
-    }
-
-    /**
-     * @name            set
-     * @type            Function
-     * @static
-     *
-     * This static method allows you to set values of the active theme config
-     *
-     * @param       {String}        dotPath           The dot path of the config you want to set
-     * @param       {any}         value             The value you want to set
-     * @return      {STheme}                        The current theme instance
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static set(
-        dotPath: string,
-        value: any,
-        settings?: Partial<ISThemeDefaultStaticSettings>,
-    ): any {
-        const instance = this.getTheme(settings?.theme, settings?.variant);
-        return instance.set(dotPath, value);
-    }
-
-    /**
-     * @name        constructor
-     * @type        Function
-     * @constructor
-     *
-     * Constructor
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    constructor(
-        theme?: string,
-        variant?: string,
-        settings?: Partial<ISThemeSettings>,
-    ) {
-        super(__deepMerge({}, settings ?? {}));
-
-        this.theme = theme ?? __SSugarConfig.get('theme.theme');
-        this.variant = variant ?? __SSugarConfig.get('theme.variant');
-
-        if (!__SSugarConfig.get(`theme.themes.${this.theme}-${this.variant}`)) {
-            throw new Error(
-                `Sorry but the requested theme "<yellow>${this.theme}-${this.variant}</yellow>" does not exists...`,
-            );
-        }
-    }
-
-    /**
-     * @name        themes
-     * @type        String
-     * @get
-     *
-     * Store the themes configuration
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get themes() {
-        return __SSugarConfig.get('theme.themes');
     }
 
     /**
@@ -1548,6 +1180,46 @@ export default class SThemeBase extends __SEventEmitter {
      */
     getOverridedConfig(): any {
         return this._overridedConfig;
+    }
+
+    /**
+     * @name        cssVar
+     * @type        Function
+     *
+     * This function take a simple theme dot path and returns the proper
+     * variable string with the value fallback.
+     *
+     * @param       {String}        dotPath         The dot path theme variable you want
+     * @return      {String}                        The proper css variable string that represent this value with his fallback just in case
+     *
+     * @example         js
+     * import { cssVar } from '@coffeekraken/s-sugarcss-plugin';
+     * cssVar('ui.button.padding'); // => var(--s-ui-button-padding, 1em 1.2em)
+     *
+     * @since       2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    cssVar(
+        dotPath: string,
+        fallback = true,
+        settings?: Partial<ISThemeDefaultStaticSettings>,
+    ): string {
+        // proxy non existint dotPath
+        dotPath = this.proxyNonExistingUiDotpath(dotPath);
+
+        // prepare final variable name
+        let varName = `s-${dotPath
+            .replace(/\./gm, '-')
+            .replace(/:/gm, '-')
+            .replace(/\?/gm, '')
+            .replace(/--/gm, '-')}`;
+        varName = `--${__dashCase(varName)}`;
+
+        let fb = this.get(dotPath);
+        if (!fallback || (typeof fb === 'string' && fb.includes(','))) fb = 0;
+
+        const v = `var(${varName}, ${fb})`;
+        return v;
     }
 
     /**
@@ -1708,166 +1380,6 @@ export default class SThemeBase extends __SEventEmitter {
             };
         }
         return map;
-    }
-
-    /**
-     * @name        resolveFontSize
-     * @type        Function
-     *
-     * This method allows you to get back the actual final font-size value of the passed one
-     *
-     * @param       {any}           size        The size you want to resolve
-     * @return      {any}                       The final resolved size
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    resolveFontSize(size: any): any {
-        const defaultSize = this.get('font.size.default');
-
-        // try to get the padding with the pased
-        const registeredValue = this.getSafe(`font.size.${size}`);
-
-        // if we have a registered value corresponding
-        if (registeredValue !== undefined) {
-            // int
-            if (typeof registeredValue === 'number') {
-                return `${defaultSize * registeredValue}px`;
-            }
-        } else if (typeof size === 'number') {
-            return `${defaultSize * size}`;
-        }
-
-        // by default, return the passed size
-        return registeredValue ?? size;
-    }
-
-    /**
-     * @name        resolvePadding
-     * @type        Function
-     *
-     * This method allows you to get back the actual final padding value of the passed one
-     *
-     * @param       {any}           size        The size you want to resolve
-     * @return      {any}                       The final resolved size
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    resolvePadding(size: any): any {
-        const defaultSize = this.get('padding.default');
-
-        // try to get the padding with the pased
-        const registeredValue = this.getSafe(`padding.${size}`);
-
-        // if we have a registered value corresponding
-        if (registeredValue !== undefined) {
-            // int
-            if (typeof registeredValue === 'number') {
-                return `${defaultSize * registeredValue}px`;
-            }
-        } else if (typeof size === 'number') {
-            return `${defaultSize * size}px`;
-        }
-
-        // by default, return the passed size
-        return registeredValue ?? size;
-    }
-
-    /**
-     * @name        resolveMargin
-     * @type        Function
-     *
-     * This method allows you to get back the actual final margin value of the passed one
-     *
-     * @param       {any}           size        The size you want to resolve
-     * @return      {any}                       The final resolved size
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    resolveMargin(size: any): any {
-        const defaultSize = this.get('margin.default');
-
-        // try to get the padding with the pased
-        const registeredValue = this.getSafe(`margin.${size}`);
-
-        // if we have a registered value corresponding
-        if (registeredValue !== undefined) {
-            // int
-            if (typeof registeredValue === 'number') {
-                return `${defaultSize * registeredValue}px`;
-            }
-        } else if (typeof size === 'number') {
-            return `${defaultSize * size}px`;
-        }
-
-        // by default, return the passed size
-        return registeredValue ?? size;
-    }
-
-    /**
-     * @name        resolveBorderRadius
-     * @type        Function
-     *
-     * This method allows you to get back the actual final border-radius value of the passed one
-     *
-     * @param       {any}           size        The size you want to resolve
-     * @return      {any}                       The final resolved size
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    resolveBorderRadius(size: any): any {
-        const defaultSize = this.get('border.radius.default');
-
-        // try to get the padding with the pased
-        const registeredValue = this.getSafe(`border.radius.${size}`);
-
-        // if we have a registered value corresponding
-        if (registeredValue !== undefined) {
-            // int
-            if (typeof registeredValue === 'number') {
-                return `${defaultSize * registeredValue}px`;
-            }
-        } else if (typeof size === 'number') {
-            return `${defaultSize * size}px`;
-        }
-
-        // by default, return the passed size
-        return registeredValue ?? size;
-    }
-
-    /**
-     * @name        resolveBorderWidth
-     * @type        Function
-     *
-     * This method allows you to get back the actual final border-radius value of the passed one
-     *
-     * @param       {any}           size        The size you want to resolve
-     * @return      {any}                       The final resolved size
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    resolveBorderWidth(size: any): any {
-        const defaultSize = this.get('border.width.default');
-
-        // try to get the padding with the pased
-        const registeredValue = this.getSafe(`border.width.${size}`);
-
-        // if we have a registered value corresponding
-        if (registeredValue !== undefined) {
-            // int
-            if (typeof registeredValue === 'number') {
-                return `${defaultSize * registeredValue}px`;
-            }
-        } else if (typeof size === 'number') {
-            return `${defaultSize * size}px`;
-        }
-
-        // by default, return the passed size
-        return registeredValue ?? size;
     }
 
     /**

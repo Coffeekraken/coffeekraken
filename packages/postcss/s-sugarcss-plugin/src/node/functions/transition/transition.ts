@@ -31,7 +31,7 @@ class SSugarcssPluginTransitionFunctionInterface extends __SInterface {
         return {
             name: {
                 type: 'String',
-                values: Object.keys(__STheme.get('transition')),
+                values: Object.keys(__STheme.current.get('transition')),
                 default: 'default',
                 required: true,
             },
@@ -63,7 +63,7 @@ export default function ({
     val = themeValueProxy(transition);
 
     // try to get the transition with the pased
-    const newVal = __STheme.getSafe(`transition.${val}`);
+    const newVal = __STheme.current.getSafe(`transition.${val}`);
     if (newVal !== undefined) {
         val = newVal;
     }

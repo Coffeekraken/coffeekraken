@@ -286,33 +286,63 @@ export default function (api) {
         },
 
         /**
-         * @name            font
+         * @name            fontFamily
          * @namespace       config.themeBase
          * @type            Object
          * @default         config.themeFont
          *
-         * Reference the "themeFont" config
+         * Reference the "themeFontFamily" config
          *
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        get font() {
-            return api.config.themeFont;
+        get fontFamily() {
+            return api.config.themeFontFamily;
         },
 
         /**
-         * @name            border
+         * @name            fontSize
+         * @namespace       config.themeBase
+         * @type            Object
+         * @default         config.themeFont
+         *
+         * Reference the "themeFontSize" config
+         *
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        get fontSize() {
+            return api.config.themeFontSize;
+        },
+
+        /**
+         * @name            borderWidth
          * @namespace       config.themeBase
          * @type            Object
          * @default         config.themeBorder
          *
-         * Reference the "themeBorder" config
+         * Reference the "themeBorderWidth" config
          *
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        get border() {
-            return api.config.themeBorder;
+        get borderWidth() {
+            return api.config.themeBorderWidth;
+        },
+
+        /**
+         * @name            borderRadius
+         * @namespace       config.themeBase
+         * @type            Object
+         * @default         config.themeBorder
+         *
+         * Reference the "themeBorderRadius" config
+         *
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        get borderRadius() {
+            return api.config.themeBorderRadius;
         },
 
         /**

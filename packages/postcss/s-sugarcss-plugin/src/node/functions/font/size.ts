@@ -37,7 +37,7 @@ class SSugarcssPluginFontSizeInterface extends __SInterface {
             },
             scalable: {
                 type: 'Boolean',
-                default: __STheme.get('scalable.font'),
+                default: __STheme.current.get('scalable.font'),
             },
         };
     }
@@ -61,37 +61,31 @@ export default function ({
     };
 
     let sizes = finalParams.size.split(' ').map((s) => {
-        let registeredValue,
-            factor = '';
+        let size = s;
 
         // try to get the padding with the pased
-        try {
-            registeredValue = __STheme.get(`font.size.${s}`);
-        } catch (e) {}
-
-        // default return simply his value
-        if (s === 'default') {
-            // @ts-ignore
-            factor = '1';
-        } else if (registeredValue !== undefined) {
-            // direct value
-            factor = `s.theme(font.size.${s}, ${finalParams.scalable})`;
-        } else if (
-            isNaN(parseFloat(s)) &&
-            s.match(/[a-zA-Z0-9]+\.[a-zA-Z0-9]+/)
-        ) {
-            // support dotPath
-            factor = `s.theme(${s}, ${finalParams.scalable})`;
-        } else if (!isNaN(parseFloat(s))) {
-            // support simple number
-            factor = `${s}`;
-        } else {
-            throw new Error(
-                `<yellow>[s-postcss-sugar-plugin]</yellow> Font size "<cyan>${s}</cyan>" is not a valid value`,
-            );
+        let val = __STheme.current.getSafe(`fontSize.${size}`);
+        if (val !== undefined) {
+            size = val;
         }
-        // generate css value
-        return `calc(s.theme(font.size.default) * ${factor} * 1px)`;
+
+        if (
+            isNaN(parseFloat(size)) &&
+            size.match(/[a-zA-Z0-9]+\.[a-zA-Z0-9]+/) &&
+            !size.match(/^s\./)
+        ) {
+            return `s.theme(${size}, ${finalParams.scalable})`;
+        } else if (`${size}`.match(/[a-zA-Z]+$/)) {
+            if (finalParams.scalable) {
+                return `s.scalable(${size})`;
+            }
+            return `${size}`;
+        } else {
+            if (finalParams.scalable) {
+                return `calc(s.scalable(${size}) * 1px)`;
+            }
+            return `${size}px`;
+        }
     });
 
     return sizes.join(' ');

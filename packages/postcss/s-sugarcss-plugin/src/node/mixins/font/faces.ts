@@ -10,7 +10,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @status        beta
  *
  * This mixin generate all the @font-face needed depending on the declared
- * fonts in the config.theme.font.family stack
+ * fonts in the config.theme.fontFamily stack
  *
  * @return        {Css}         The generated css
  *
@@ -50,7 +50,7 @@ export default function ({
 
     const vars = new CssVars();
 
-    const fontsFamiliesObj = __STheme.get('font.family');
+    const fontsFamiliesObj = __STheme.current.get('fontFamily');
 
     Object.keys(fontsFamiliesObj).forEach((fontName) => {
         const fontObj = fontsFamiliesObj[fontName];

@@ -119,10 +119,10 @@ export default function (api) {
                                 button: value.button ?? {},
                                 editor: value.editor ?? {},
                                 style: {
-                                    ...__STheme.resolveCssObjectPropertiesValues(
+                                    ...__STheme.current.resolveCssObjectPropertiesValues(
                                         finalStyle,
                                     ),
-                                    ...__STheme.resolveCssObjectPropertiesValues(
+                                    ...__STheme.current.resolveCssObjectPropertiesValues(
                                         value.rhythmVertical ?? {},
                                     ),
                                 },
@@ -134,14 +134,14 @@ export default function (api) {
 
                             if (value.editorStyle) {
                                 typoObj[finalKey].editorStyle =
-                                    __STheme.resolveCssObjectPropertiesValues(
+                                    __STheme.current.resolveCssObjectPropertiesValues(
                                         value.editorStyle,
                                     );
                             }
 
                             if (value.buttonStyle) {
                                 typoObj[finalKey].buttonStyle =
-                                    __STheme.resolveCssObjectPropertiesValues(
+                                    __STheme.current.resolveCssObjectPropertiesValues(
                                         value.buttonStyle,
                                     );
                             }

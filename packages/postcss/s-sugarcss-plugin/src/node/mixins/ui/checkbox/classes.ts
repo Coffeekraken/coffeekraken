@@ -37,7 +37,7 @@ class SSugarcssPluginUiCheckboxClassesInterface extends __SInterface {
             defaultLnf: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.get('ui.form.defaultLnf'),
+                default: __STheme.current.get('ui.form.defaultLnf'),
             },
             scope: {
                 type: {
@@ -329,8 +329,8 @@ export default function ({
             `
             @s.rhythm.vertical {
                 input[type="checkbox"], .s-checkbox {
-                    ${__STheme.jsObjectToCssProperties(
-                        __STheme.get('ui.form.rhythmVertical'),
+                    ${__STheme.current.jsObjectToCssProperties(
+                        __STheme.current.get('ui.form.rhythmVertical'),
                     )}
                 } 
             }

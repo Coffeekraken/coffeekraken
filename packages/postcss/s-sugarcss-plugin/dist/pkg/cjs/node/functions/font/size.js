@@ -41,7 +41,7 @@ class SSugarcssPluginFontSizeInterface extends s_interface_1.default {
             },
             scalable: {
                 type: 'Boolean',
-                default: s_theme_1.default.get('scalable.font'),
+                default: s_theme_1.default.current.get('scalable.font'),
             },
         };
     }
@@ -50,37 +50,31 @@ exports.interface = SSugarcssPluginFontSizeInterface;
 function default_1({ params, }) {
     const finalParams = Object.assign({ size: '', scalable: false }, params);
     let sizes = finalParams.size.split(' ').map((s) => {
-        let registeredValue, factor = '';
+        let size = s;
         // try to get the padding with the pased
-        try {
-            registeredValue = s_theme_1.default.get(`font.size.${s}`);
+        let val = s_theme_1.default.current.getSafe(`fontSize.${size}`);
+        if (val !== undefined) {
+            size = val;
         }
-        catch (e) { }
-        // default return simply his value
-        if (s === 'default') {
-            // @ts-ignore
-            factor = '1';
+        if (isNaN(parseFloat(size)) &&
+            size.match(/[a-zA-Z0-9]+\.[a-zA-Z0-9]+/) &&
+            !size.match(/^s\./)) {
+            return `s.theme(${size}, ${finalParams.scalable})`;
         }
-        else if (registeredValue !== undefined) {
-            // direct value
-            factor = `s.theme(font.size.${s}, ${finalParams.scalable})`;
-        }
-        else if (isNaN(parseFloat(s)) &&
-            s.match(/[a-zA-Z0-9]+\.[a-zA-Z0-9]+/)) {
-            // support dotPath
-            factor = `s.theme(${s}, ${finalParams.scalable})`;
-        }
-        else if (!isNaN(parseFloat(s))) {
-            // support simple number
-            factor = `${s}`;
+        else if (`${size}`.match(/[a-zA-Z]+$/)) {
+            if (finalParams.scalable) {
+                return `s.scalable(${size})`;
+            }
+            return `${size}`;
         }
         else {
-            throw new Error(`<yellow>[s-postcss-sugar-plugin]</yellow> Font size "<cyan>${s}</cyan>" is not a valid value`);
+            if (finalParams.scalable) {
+                return `calc(s.scalable(${size}) * 1px)`;
+            }
+            return `${size}px`;
         }
-        // generate css value
-        return `calc(s.theme(font.size.default) * ${factor} * 1px)`;
     });
     return sizes.join(' ');
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUNyRCxvRUFBNkM7QUFFN0M7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUVILE1BQU0sZ0NBQWlDLFNBQVEscUJBQVk7SUFDdkQsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILElBQUksRUFBRTtnQkFDRixJQUFJLEVBQUUsUUFBUTtnQkFDZCxRQUFRLEVBQUUsSUFBSTtnQkFDZCxLQUFLLEVBQUUsR0FBRzthQUNiO1lBQ0QsUUFBUSxFQUFFO2dCQUNOLElBQUksRUFBRSxTQUFTO2dCQUNmLE9BQU8sRUFBRSxpQkFBUSxDQUFDLEdBQUcsQ0FBQyxlQUFlLENBQUM7YUFDekM7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBQzRDLHFEQUFTO0FBT3RELG1CQUF5QixFQUNyQixNQUFNLEdBR1Q7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsSUFBSSxFQUFFLEVBQUUsRUFDUixRQUFRLEVBQUUsS0FBSyxJQUNaLE1BQU0sQ0FDWixDQUFDO0lBRUYsSUFBSSxLQUFLLEdBQUcsV0FBVyxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxFQUFFLEVBQUU7UUFDOUMsSUFBSSxlQUFlLEVBQ2YsTUFBTSxHQUFHLEVBQUUsQ0FBQztRQUVoQix3Q0FBd0M7UUFDeEMsSUFBSTtZQUNBLGVBQWUsR0FBRyxpQkFBUSxDQUFDLEdBQUcsQ0FBQyxhQUFhLENBQUMsRUFBRSxDQUFDLENBQUM7U0FDcEQ7UUFBQyxPQUFPLENBQUMsRUFBRSxHQUFFO1FBRWQsa0NBQWtDO1FBQ2xDLElBQUksQ0FBQyxLQUFLLFNBQVMsRUFBRTtZQUNqQixhQUFhO1lBQ2IsTUFBTSxHQUFHLEdBQUcsQ0FBQztTQUNoQjthQUFNLElBQUksZUFBZSxLQUFLLFNBQVMsRUFBRTtZQUN0QyxlQUFlO1lBQ2YsTUFBTSxHQUFHLHFCQUFxQixDQUFDLEtBQUssV0FBVyxDQUFDLFFBQVEsR0FBRyxDQUFDO1NBQy9EO2FBQU0sSUFDSCxLQUFLLENBQUMsVUFBVSxDQUFDLENBQUMsQ0FBQyxDQUFDO1lBQ3BCLENBQUMsQ0FBQyxLQUFLLENBQUMsNEJBQTRCLENBQUMsRUFDdkM7WUFDRSxrQkFBa0I7WUFDbEIsTUFBTSxHQUFHLFdBQVcsQ0FBQyxLQUFLLFdBQVcsQ0FBQyxRQUFRLEdBQUcsQ0FBQztTQUNyRDthQUFNLElBQUksQ0FBQyxLQUFLLENBQUMsVUFBVSxDQUFDLENBQUMsQ0FBQyxDQUFDLEVBQUU7WUFDOUIsd0JBQXdCO1lBQ3hCLE1BQU0sR0FBRyxHQUFHLENBQUMsRUFBRSxDQUFDO1NBQ25CO2FBQU07WUFDSCxNQUFNLElBQUksS0FBSyxDQUNYLDhEQUE4RCxDQUFDLCtCQUErQixDQUNqRyxDQUFDO1NBQ0w7UUFDRCxxQkFBcUI7UUFDckIsT0FBTyxxQ0FBcUMsTUFBTSxTQUFTLENBQUM7SUFDaEUsQ0FBQyxDQUFDLENBQUM7SUFFSCxPQUFPLEtBQUssQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7QUFDM0IsQ0FBQztBQTlDRCw0QkE4Q0MifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUNyRCxvRUFBNkM7QUFFN0M7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUVILE1BQU0sZ0NBQWlDLFNBQVEscUJBQVk7SUFDdkQsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILElBQUksRUFBRTtnQkFDRixJQUFJLEVBQUUsUUFBUTtnQkFDZCxRQUFRLEVBQUUsSUFBSTtnQkFDZCxLQUFLLEVBQUUsR0FBRzthQUNiO1lBQ0QsUUFBUSxFQUFFO2dCQUNOLElBQUksRUFBRSxTQUFTO2dCQUNmLE9BQU8sRUFBRSxpQkFBUSxDQUFDLE9BQU8sQ0FBQyxHQUFHLENBQUMsZUFBZSxDQUFDO2FBQ2pEO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQUM0QyxxREFBUztBQU90RCxtQkFBeUIsRUFDckIsTUFBTSxHQUdUO0lBQ0csTUFBTSxXQUFXLG1CQUNiLElBQUksRUFBRSxFQUFFLEVBQ1IsUUFBUSxFQUFFLEtBQUssSUFDWixNQUFNLENBQ1osQ0FBQztJQUVGLElBQUksS0FBSyxHQUFHLFdBQVcsQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsRUFBRSxFQUFFO1FBQzlDLElBQUksSUFBSSxHQUFHLENBQUMsQ0FBQztRQUViLHdDQUF3QztRQUN4QyxJQUFJLEdBQUcsR0FBRyxpQkFBUSxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUMsWUFBWSxJQUFJLEVBQUUsQ0FBQyxDQUFDO1FBQ3ZELElBQUksR0FBRyxLQUFLLFNBQVMsRUFBRTtZQUNuQixJQUFJLEdBQUcsR0FBRyxDQUFDO1NBQ2Q7UUFFRCxJQUNJLEtBQUssQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDdkIsSUFBSSxDQUFDLEtBQUssQ0FBQyw0QkFBNEIsQ0FBQztZQUN4QyxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsTUFBTSxDQUFDLEVBQ3JCO1lBQ0UsT0FBTyxXQUFXLElBQUksS0FBSyxXQUFXLENBQUMsUUFBUSxHQUFHLENBQUM7U0FDdEQ7YUFBTSxJQUFJLEdBQUcsSUFBSSxFQUFFLENBQUMsS0FBSyxDQUFDLFlBQVksQ0FBQyxFQUFFO1lBQ3RDLElBQUksV0FBVyxDQUFDLFFBQVEsRUFBRTtnQkFDdEIsT0FBTyxjQUFjLElBQUksR0FBRyxDQUFDO2FBQ2hDO1lBQ0QsT0FBTyxHQUFHLElBQUksRUFBRSxDQUFDO1NBQ3BCO2FBQU07WUFDSCxJQUFJLFdBQVcsQ0FBQyxRQUFRLEVBQUU7Z0JBQ3RCLE9BQU8sbUJBQW1CLElBQUksVUFBVSxDQUFDO2FBQzVDO1lBQ0QsT0FBTyxHQUFHLElBQUksSUFBSSxDQUFDO1NBQ3RCO0lBQ0wsQ0FBQyxDQUFDLENBQUM7SUFFSCxPQUFPLEtBQUssQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7QUFDM0IsQ0FBQztBQXhDRCw0QkF3Q0MifQ==

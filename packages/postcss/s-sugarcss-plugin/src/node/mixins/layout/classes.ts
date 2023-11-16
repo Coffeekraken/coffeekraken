@@ -50,7 +50,7 @@ export default function ({
 
     const vars = new CssVars();
 
-    const layoutConfig = __STheme.get('layout');
+    const layoutConfig = __STheme.current.get('layout');
 
     const layouts = layoutConfig.layout;
     Object.keys(layouts).forEach((id) => {

@@ -38,7 +38,7 @@ class SSugarcssPluginUiLoaderSquareDotsMixinInterface extends __SInterface {
             },
             duration: {
                 type: 'String',
-                default: __STheme.get('ui.loader.duration'),
+                default: __STheme.current.get('ui.loader.duration'),
             },
         };
     }

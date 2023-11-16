@@ -59,5 +59,5 @@ export default function ({
         return name;
     }
 
-    return `s.theme(font.family.${name}.fontFamily)`;
+    return `s.theme(fontFamily.${name}.fontFamily)`;
 }

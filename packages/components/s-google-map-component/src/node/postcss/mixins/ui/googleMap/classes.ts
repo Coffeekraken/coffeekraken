@@ -119,8 +119,8 @@ export default function ({
         ).code(
             `@s.rhythm.vertical {
                 .s-google-map {
-                    ${__STheme.jsObjectToCssProperties(
-                        __STheme.get('ui.googleMap.rhythmVertical'),
+                    ${__STheme.current.jsObjectToCssProperties(
+                        __STheme.current.get('ui.googleMap.rhythmVertical'),
                     )}
                 } 
             }

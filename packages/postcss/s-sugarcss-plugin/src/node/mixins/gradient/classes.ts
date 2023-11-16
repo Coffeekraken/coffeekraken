@@ -91,14 +91,14 @@ export default function ({
         * @install          css
         * @s.gradient.classes;
         * 
-        ${Object.keys(__STheme.get('color'))
+        ${Object.keys(__STheme.current.get('color'))
             .map((color) => {
                 return ` * @cssClass         s-gradient:${color}         Apply the ${color} gradient
                          * @cssClass         s-gradient:text:${color}    Apply the ${color} text gradient`;
             })
             .join('\n')}
         *
-        ${Object.keys(__STheme.get('color'))
+        ${Object.keys(__STheme.current.get('color'))
             .map((color) => {
                 return ` *
                     * @example       html       ${color} gradient
@@ -122,7 +122,7 @@ export default function ({
         * @example       html       Radial gradient with position
         * <div class="s-gradient:radial:complementary:x-10:y-90 s-radius" style="height: 250px"></div>
         *
-        ${Object.keys(__STheme.get('color'))
+        ${Object.keys(__STheme.current.get('color'))
             .map((color) => {
                 return ` *
                     * @example       html       ${color} text gradient
@@ -165,7 +165,7 @@ export default function ({
     );
 
     for (let [name, colorObj] of Object.entries(
-        __STheme.getTheme().baseColors(),
+        __STheme.current.baseColors(),
     )) {
         // linear gradients
         vars.comment(
@@ -196,13 +196,13 @@ export default function ({
           .s-gradient-${name}:not(.s-gradient-text):not(.s-gradient-radial) {
               @s.gradient(
                   $start: sugar.color(${name}, ${__argsToString(
-                __STheme.get('gradient.defaultModifierStart') ?? {},
+                __STheme.current.get('gradient.defaultModifierStart') ?? {},
             )}),
                   $end: sugar.color(${name}, ${__argsToString(
-                __STheme.get('gradient.defaultModifierEnd') ?? {},
+                __STheme.current.get('gradient.defaultModifierEnd') ?? {},
             )}),
                   $type: linear,
-                  $angle: ${__STheme.get('gradient.defaultAngle')}
+                  $angle: ${__STheme.current.get('gradient.defaultAngle')}
               );
           }
       `,
@@ -238,14 +238,14 @@ export default function ({
           .s-gradient-${name}.s-gradient-radial:not(.s-gradient-text) {
               @s.gradient(
                   $start: sugar.color(${name}, ${__argsToString(
-                __STheme.get('gradient.defaultModifierEnd') ?? {},
+                __STheme.current.get('gradient.defaultModifierEnd') ?? {},
             )}) ,
                   $end: sugar.color(${name}, ${__argsToString(
-                __STheme.get('gradient.defaultModifierStart') ?? {},
+                __STheme.current.get('gradient.defaultModifierStart') ?? {},
             )}),
                   $type: radial,
-                  $x: ${__STheme.get('gradient.defaultX')},
-                  $y: ${__STheme.get('gradient.defaultY')}
+                  $x: ${__STheme.current.get('gradient.defaultX')},
+                  $y: ${__STheme.current.get('gradient.defaultY')}
               );
           }
       `,
@@ -281,12 +281,12 @@ export default function ({
           .s-gradient-${name}.s-gradient-text:not(.s-gradient-radial) {
               @s.gradient.text(
                   $start: sugar.color(${name}, text, ${__argsToString(
-                __STheme.get('gradient.defaultTextModifierStart') ?? {},
+                __STheme.current.get('gradient.defaultTextModifierStart') ?? {},
             )}),
                   $end: sugar.color(${name}, text, ${__argsToString(
-                __STheme.get('gradient.defaultTextModifierEnd') ?? {},
+                __STheme.current.get('gradient.defaultTextModifierEnd') ?? {},
             )}),
-                  $angle: ${__STheme.get('gradient.defaultTextAngle')}
+                  $angle: ${__STheme.current.get('gradient.defaultTextAngle')}
               );
           }
       `,
@@ -322,10 +322,10 @@ export default function ({
           .s-gradient-${name}.s-gradient-text.s-gradient-radial {
               @s.gradient.text(
                   $start: sugar.color(${name}, text, ${__argsToString(
-                __STheme.get('gradient.defaultTextModifierStart') ?? {},
+                __STheme.current.get('gradient.defaultTextModifierStart') ?? {},
             )}),
                   $end: sugar.color(${name}, text, ${__argsToString(
-                __STheme.get('gradient.defaultTextModifierEnd') ?? {},
+                __STheme.current.get('gradient.defaultTextModifierEnd') ?? {},
             )}),
                   $type: radial
               );

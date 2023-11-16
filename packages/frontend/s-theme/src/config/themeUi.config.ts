@@ -19,43 +19,51 @@ export default (api) => {
              * @name          paddingInline
              * @namespace     config.themeUi.default
              * @type          String
-             * @default      1.25
+             * @default      theme.space.30
              *
              * Specify the default padding inline for ui's
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: 1.25,
+            get paddingInline() {
+                return api.theme.space['30'];
+            },
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.default
              * @type          String
-             * @default      0.75
+             * @default      theme.space.20
              *
              * Specify the default padding block for ui's
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingBlock: 0.75,
+            get paddingBlock() {
+                return api.theme.space['20'];
+            },
+
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.default
              * @type          String
-             * @default      1
+             * @default      theme.borderRadius.default
              *
              * Specify the default border radius for ui's
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderRadius: 1,
+            get borderRadius() {
+                return api.theme.borderRadius.default;
+            },
+
             /**
              * @name          borderWidth
              * @namespace     config.themeUi.default
              * @type          String
-             * @default      [theme.border.width.default]
+             * @default      [theme.borderWidth.default]
              *
              * Specify the default border width for ui's
              *
@@ -63,7 +71,7 @@ export default (api) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get borderWidth() {
-                return api.theme.border.width.default;
+                return api.theme.borderWidth.default;
             },
 
             /**
@@ -322,38 +330,46 @@ export default (api) => {
              * @name          paddingInline
              * @namespace     config.themeUi.form
              * @type          String
-             * @default      1
+             * @default      theme.space.30
              *
-             * Specify the default padding inline for form items
+             * Specify the default padding inline for ui's
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: 1,
+            get paddingInline() {
+                return api.theme.space['30'];
+            },
+
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.form
              * @type          String
-             * @default      0.75
+             * @default      theme.space.20
              *
-             * Specify the default padding block for form items
+             * Specify the default padding block for ui's
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingBlock: 0.75,
+            get paddingBlock() {
+                return api.theme.space['20'];
+            },
+
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.form
              * @type          String
-             * @default      1
+             * @default      theme.borderRadius.default
              *
              * Specify the default border radius for form items
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderRadius: 1,
+            get borderRadius() {
+                return api.theme.borderRadius.default;
+            },
 
             /**
              * @name          transition

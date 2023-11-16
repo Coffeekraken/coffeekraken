@@ -72,7 +72,7 @@ function default_1({ params, atRule, replaceWith, }) {
                 background-color: s.color(current);
                 border-color: s.color(current);
                 border-style: solid;
-                border-width: s.theme(ui.avatar.borderWidth);
+                border-width: s.border.width(ui.avatar.borderWidth);
                 border-radius: 9999px;
             }
         `);

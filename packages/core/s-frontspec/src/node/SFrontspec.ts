@@ -150,7 +150,7 @@ export default class SFrontspec extends __SClass {
     }
 
     defaultFrontspec(): ISFrontspec {
-        const media = __STheme.get('media');
+        const media = __STheme.current.get('media');
         console.log('Media', media);
         return {};
     }

@@ -50,8 +50,8 @@ export default function ({
 
     const vars = new CssVars();
 
-    const fontsFamiliesObj = __STheme.get('font.family'),
-        fontSizesObj = __STheme.get('font.size'),
+    const fontsFamiliesObj = __STheme.current.get('fontFamily'),
+        fontSizesObj = __STheme.current.get('fontSize'),
         fontStretchProps = [
             'ultra-condensed',
             'extra-condensed',

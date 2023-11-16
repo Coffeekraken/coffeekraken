@@ -115,8 +115,10 @@ export default function ({
         ).code(
             `@s.rhythm.vertical {
                 .s-filtrable-input {
-                    ${__STheme.jsObjectToCssProperties(
-                        __STheme.get('ui.filtrableInput.rhythmVertical'),
+                    ${__STheme.current.jsObjectToCssProperties(
+                        __STheme.current.get(
+                            'ui.filtrableInput.rhythmVertical',
+                        ),
                     )}
                 } 
             }

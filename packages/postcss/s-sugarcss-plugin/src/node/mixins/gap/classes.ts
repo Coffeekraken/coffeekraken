@@ -47,7 +47,7 @@ export default function ({
     const finalParams: ISSugarcssPluginGapClassesParams = {
         ...params,
     };
-    const spacesKeys = __keysFirst(Object.keys(__STheme.get('space')), [
+    const spacesKeys = __keysFirst(Object.keys(__STheme.current.get('space')), [
         'default',
     ]);
 

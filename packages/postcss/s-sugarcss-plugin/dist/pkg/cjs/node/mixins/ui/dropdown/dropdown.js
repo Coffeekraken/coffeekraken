@@ -83,7 +83,7 @@ function default_1({ params, atRule, replaceWith, }) {
         `);
         vars.push(`
             background-color: s.color(main, background);
-            border: s.theme(ui.dropdown.borderWidth) solid s.color(current, border);
+            border: s.border.width(ui.dropdown.borderWidth) solid s.color(current, border);
             @s.border.radius(ui.dropdown.borderRadius);
             padding-inline: s.padding(ui.dropdown.paddingInline);
             padding-block: s.padding(ui.dropdown.paddingBlock);

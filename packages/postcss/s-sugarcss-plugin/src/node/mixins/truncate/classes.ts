@@ -13,7 +13,7 @@ import __faker from 'faker';
  * This mixin generate all the truncate classes like s-truncate, s-truncate:2, etc...
  * The number of truncate classes generated is defined in the theme.helpers.truncate.count settings
  *
- * @param           {Number}            [count=__STheme.get('helpers.truncate.count')]          Specify how many s-truncate:{lines} classes you want to generate
+ * @param           {Number}            [count=__STheme.current.get('helpers.truncate.count')]          Specify how many s-truncate:{lines} classes you want to generate
  * @return        {Css}         The generated css
  *
  * @snippet         @s.truncate.classes
@@ -30,7 +30,7 @@ class SSugarcssPluginRatioClassesInterface extends __SInterface {
         return {
             count: {
                 type: 'Number',
-                default: __STheme.get('helpers.truncate.count'),
+                default: __STheme.current.get('helpers.truncate.count'),
             },
         };
     }

@@ -37,7 +37,8 @@ class SSugarcssPluginUiButtonClassesInterface extends __SInterface {
             defaultLnf: {
                 type: 'String',
                 values: ['solid', 'outline', 'text', 'loading'],
-                default: __STheme.get('ui.button.defaultLnf') ?? 'solid',
+                default:
+                    __STheme.current.get('ui.button.defaultLnf') ?? 'solid',
             },
             scope: {
                 type: {
@@ -324,8 +325,8 @@ export default function ({
             `
             @s.rhythm.vertical {
                 button, .s-btn {
-                    ${__STheme.jsObjectToCssProperties(
-                        __STheme.get('ui.button.rhythmVertical'),
+                    ${__STheme.current.jsObjectToCssProperties(
+                        __STheme.current.get('ui.button.rhythmVertical'),
                     )}
                 } 
             }

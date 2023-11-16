@@ -38,7 +38,7 @@ class SSugarcssPluginUiSwitchClassesMixinInterface extends __SInterface {
             defaultLnf: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.get('ui.form.defaultLnf') ?? 'solid',
+                default: __STheme.current.get('ui.form.defaultLnf') ?? 'solid',
             },
             scope: {
                 type: {

@@ -44,15 +44,15 @@ class SSugarcssPluginGradientInterface extends __SInterface {
             },
             x: {
                 type: 'String',
-                default: __STheme.get('gradient.defaultX'),
+                default: __STheme.current.get('gradient.defaultX'),
             },
             y: {
                 type: 'String',
-                default: __STheme.get('gradient.defaultY'),
+                default: __STheme.current.get('gradient.defaultY'),
             },
             angle: {
                 type: 'Number | String',
-                default: __STheme.get('gradient.defaultAngle'),
+                default: __STheme.current.get('gradient.defaultAngle'),
             },
             size: {
                 type: 'String',
@@ -97,7 +97,7 @@ export default function ({
     let startColorValue = finalParams.start,
         endColorValue = finalParams.end;
 
-    const themeColorsObj = __STheme.get('color');
+    const themeColorsObj = __STheme.current.get('color');
 
     if (
         startColorValue.match(/^[a-zA-Z0-9:_-]+$/) &&

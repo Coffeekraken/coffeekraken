@@ -51,7 +51,7 @@ export default function ({
 
     const vars = new CssVars();
 
-    const typosObj = __STheme.get('typo');
+    const typosObj = __STheme.current.get('typo');
 
     vars.comment(
         () => `
@@ -102,7 +102,10 @@ export default function ({
         const typoObj = typosObj[typoName];
         const cls = `s-typo:${typoName}`;
 
-        const css = __STheme.jsObjectToCssProperties(typoObj.style ?? {}, {});
+        const css = __STheme.current.jsObjectToCssProperties(
+            typoObj.style ?? {},
+            {},
+        );
 
         vars.comment(
             () => `/**
@@ -181,7 +184,7 @@ export default function ({
             `
         @s.rhythm.vertical {
             ${typoName}, .${typoName} {
-                ${__STheme.jsObjectToCssProperties(
+                ${__STheme.current.jsObjectToCssProperties(
                     typoObj.rhythmVertical ?? {},
                 )}
             }

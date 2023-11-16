@@ -35,7 +35,7 @@ class SSugarcssPluginClearfixInterface extends __SInterface {
             clearfix: {
                 type: 'String',
                 values: ['overflow', 'facebook', 'micro', 'after'],
-                default: __STheme.get('helpers.clearfix.default'),
+                default: __STheme.current.get('helpers.clearfix.default'),
             },
         };
     }

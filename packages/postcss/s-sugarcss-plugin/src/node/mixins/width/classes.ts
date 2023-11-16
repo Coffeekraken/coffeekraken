@@ -51,7 +51,7 @@ export default function ({
 
     const vars = new CssVars();
 
-    const widthObj = __STheme.get('width');
+    const widthObj = __STheme.current.get('width');
 
     vars.comment(`
       /**

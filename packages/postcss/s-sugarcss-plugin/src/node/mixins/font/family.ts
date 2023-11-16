@@ -12,7 +12,7 @@ import { __dashCase } from '@coffeekraken/sugar/string';
  *
  * This mixin generate the css needed to apply a particular font in your css.
  * The font parameter accept any defined font family from the
- * config.theme.font.family stack
+ * config.theme.fontFamily stack
  *
  * @return        {Css}         The generated css
  *
@@ -32,7 +32,7 @@ class SSugarcssPluginFontFamilyInterface extends __SInterface {
         return {
             font: {
                 type: 'String',
-                values: Object.keys(__STheme.get('font.family')),
+                values: Object.keys(__STheme.current.get('fontFamily')),
                 required: true,
             },
         };
@@ -63,7 +63,9 @@ export default function ({
 
     const vars = new CssVars();
 
-    const fontFamilyObj = __STheme.get(`font.family.${finalParams.font}`);
+    const fontFamilyObj = __STheme.current.get(
+        `fontFamily.${finalParams.font}`,
+    );
 
     Object.keys(fontFamilyObj).forEach((prop) => {
         const dashProp = __dashCase(prop);

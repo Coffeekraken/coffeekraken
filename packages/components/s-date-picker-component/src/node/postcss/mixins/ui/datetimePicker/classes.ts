@@ -13,7 +13,8 @@ class postcssUiDatetimePickerClassesInterface extends __SInterface {
                 type: 'String',
                 values: ['solid'],
                 default:
-                    __STheme.get('ui.datetimePicker.defaultLnf') ?? 'solid',
+                    __STheme.current.get('ui.datetimePicker.defaultLnf') ??
+                    'solid',
             },
             scope: {
                 type: {
@@ -135,8 +136,10 @@ export default function ({
         ).code(
             `@s.rhythm.vertical {
                 .s-datetime-picker[inline] {
-                    ${__STheme.jsObjectToCssProperties(
-                        __STheme.get('ui.datetimePicker.rhythmVertical'),
+                    ${__STheme.current.jsObjectToCssProperties(
+                        __STheme.current.get(
+                            'ui.datetimePicker.rhythmVertical',
+                        ),
                     )}
                 } 
             }

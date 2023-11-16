@@ -31,7 +31,7 @@ class SSugarcssPluginSpaceFunctionInterface extends __SInterface {
         return {
             space: {
                 type: 'String',
-                values: Object.keys(__STheme.get('space')),
+                values: Object.keys(__STheme.current.get('space')),
                 default: 'default',
                 required: true,
             },
@@ -56,10 +56,10 @@ export default function ({
 
     const space = finalParams.space;
 
-    if (__STheme.get('space')[space] === undefined) return space;
+    if (__STheme.current.get('space')[space] === undefined) return space;
 
     const spaces = space.split(' ').map((s) => {
-        const size = __STheme.get(`space.${s}`);
+        const size = __STheme.current.get(`space.${s}`);
         if (!size) return size;
         return `var(${`--s-space-${s}`}, ${size})`;
     });

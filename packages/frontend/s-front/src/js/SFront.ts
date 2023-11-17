@@ -275,14 +275,6 @@ export default class SFront extends __SClass {
             frontspec = __SFrontspec.init(settings?.frontspec);
         }
 
-        // init theme
-        let theme;
-        if (settings?.theme instanceof __STheme) {
-            theme = settings?.theme;
-        } else {
-            theme = __STheme.init(settings?.theme);
-        }
-
         super(
             __deepMerge(
                 {

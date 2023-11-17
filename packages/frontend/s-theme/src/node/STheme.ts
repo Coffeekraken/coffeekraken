@@ -1,5 +1,6 @@
 import __SColor from '@coffeekraken/s-color';
 import __SThemeBase from '../shared/SThemeBase.js';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name            STheme
@@ -39,7 +40,7 @@ export default class STheme extends __SThemeBase {
      */
     static _theme: string;
     static get theme(): string {
-        return this._theme;
+        return this._theme ?? __SSugarConfig.get('theme.theme');
     }
 
     /**
@@ -55,7 +56,7 @@ export default class STheme extends __SThemeBase {
      */
     static _variant: string;
     static get variant(): string {
-        return this._variant;
+        return this._variant ?? __SSugarConfig.get('theme.variant');
     }
 
     /**

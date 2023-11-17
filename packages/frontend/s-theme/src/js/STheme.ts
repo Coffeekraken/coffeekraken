@@ -52,9 +52,14 @@ export interface ISThemeSettings
 export default class STheme extends __SThemeBase {
     static _defaultThemeMetas = {};
 
-    static _settings: ISThemeSettings = {
+    static globalSettings: ISThemeSettings = {
         $context: document.querySelector('html'),
         id: 's-theme',
+    };
+
+    static globalState = {
+        theme: undefined,
+        variant: undefined,
     };
 
     /**
@@ -117,6 +122,32 @@ export default class STheme extends __SThemeBase {
     }
 
     /**
+     * @name            restore
+     * @type            Function
+     * @static
+     *
+     * This method allows you to restore locally the current theme with the changes applied using the `set` method.
+     *
+     * @return      {STheme}                                The current theme instance
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static restore(): STheme {
+        let savedState = this.savedThemeMetas;
+        if (savedState?.theme && savedState?.variant) {
+            this.setTheme(savedState.theme, savedState.variant);
+        } else {
+            if (this.preferDark() && this.isDarkVariantAvailable()) {
+                this.setThemeVariant('dark');
+            }
+        }
+
+        // maintain chainability
+        return this;
+    }
+
+    /**
      * @name            setTheme
      * @type            Function
      * @static
@@ -145,8 +176,17 @@ export default class STheme extends __SThemeBase {
             variant ?? this.variant,
         );
 
+        // set the state
+        this.globalState.theme = theme ?? this.theme;
+        this.globalState.variant = variant ?? this.variant;
+
         // save
         currentTheme.save();
+
+        // set the current theme in the env.SUGAR.theme property
+        if (!document.env) document.env = {};
+        if (!document.env.SUGAR) document.env.SUGAR = {};
+        document.env.SUGAR.theme = currentTheme;
 
         // dispatch a change event
         document.dispatchEvent(
@@ -196,13 +236,6 @@ export default class STheme extends __SThemeBase {
                 `${__SFrontspec.get('theme.theme')}-${variant}`,
             );
         }
-        // console.log('SETTED', theme, variant);
-        // get the current theme instance
-        // const themeInstance = this.getCurrentTheme($context);
-        // // set the current theme in the env.SUGAR.theme property
-        // if (!document.env) document.env = {};
-        // if (!document.env.SUGAR) document.env.SUGAR = {};
-        // document.env.SUGAR.theme = themeInstance;
     }
 
     /**
@@ -244,7 +277,7 @@ export default class STheme extends __SThemeBase {
         }
         try {
             const savedTheme = JSON.parse(
-                localStorage.getItem(this._settings.id),
+                localStorage.getItem(this.globalSettings.id),
             );
             this._savedThemeMetas = savedTheme;
         } catch (e) {}
@@ -331,13 +364,16 @@ export default class STheme extends __SThemeBase {
             ...(settings ?? {}),
         };
 
-        this._settings = {
-            ...this._settings,
+        this.globalSettings = {
+            ...this.globalSettings,
             ...finalSettings,
         };
 
-        let theme = this.savedThemeMetas?.theme ?? this.theme,
-            variant = this.savedThemeMetas?.variant ?? this.variant;
+        // restore
+        this.restore();
+
+        let theme = this.globalState?.theme ?? this.theme,
+            variant = this.globalState?.variant ?? this.variant;
 
         // instanciate the current theme instance
         if (!document.env) document.env = {};
@@ -345,16 +381,7 @@ export default class STheme extends __SThemeBase {
         document.env.SUGAR.theme = new this(theme, variant, finalSettings);
 
         // apply the theme
-        STheme.applyTheme(
-            this.current.theme,
-            this.current.variant,
-            finalSettings.$context,
-        );
-
-        // apply theme from css if no theme restored
-        // if (!this.state.theme) {
-        //     this._setThemeFromFrontData();
-        // }
+        STheme.applyTheme(theme, variant, finalSettings.$context);
 
         // return the current theme
         return this.current;
@@ -385,88 +412,6 @@ export default class STheme extends __SThemeBase {
             return false;
         }
         return true;
-    }
-
-    /**
-     * This method will try to get the theme from the frontData object and
-     * set it as the current theme
-     */
-    // static _setThemeFromFrontData(): void {
-    //     if (this.frontData.theme?.theme) {
-    //         this.setTheme(
-    //             this.frontData.theme.theme,
-    //             this.frontData.theme.variant,
-    //         );
-    //     }
-    // }
-
-    /**
-     * @name            getThemeMetas
-     * @type            Function
-     * @static
-     *
-     * This method allows you to get the theme metas like "name", "theme" and "variant" from the passed HTMLElement
-     *
-     * @param       {HTMLElement}       [$context=document.querySelector('html')]        The context from which to get the theme metas
-     * @return      {any}                               The theme metas object containing the "name", "theme" and "variant" properties
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static getThemeMetas(
-        $context: HTMLElement = document.querySelector('html'),
-    ): any {
-        let defaultTheme =
-                STheme._defaultThemeMetas.theme ??
-                __SFrontspec.get('theme.theme'),
-            defaultVariant =
-                STheme._defaultThemeMetas.variant ??
-                __SFrontspec.get('theme.variant');
-
-        let theme = this.theme,
-            variant = this.variant;
-
-        // if the context is not the HTML root element
-        const isContextHtml = $context === document.querySelector('html');
-        if ($context && isContextHtml && !this.savedThemeMetas) {
-            const computedStyle = getComputedStyle($context);
-            // get the css setted --s-theme and --s-variant variable from the $context
-            const cssDefinedTheme = computedStyle.getPropertyValue('--s-theme'),
-                cssDefinedVariant =
-                    computedStyle.getPropertyValue('--s-variant');
-            if (cssDefinedTheme) {
-                theme = cssDefinedTheme.trim();
-            }
-            if (cssDefinedVariant) {
-                variant = cssDefinedVariant.trim();
-            }
-        }
-
-        // hande preferer dark mode
-        if (!this.savedThemeMetas) {
-            if (this.preferDark() && this.isDarkVariantAvailable()) {
-                variant = 'dark';
-            }
-        } else {
-            if (this.savedThemeMetas.theme) {
-                theme = this.savedThemeMetas.theme;
-            }
-            if (this.savedThemeMetas.variant) {
-                variant = this.savedThemeMetas.variant;
-            }
-        }
-
-        const name = `${theme ?? defaultTheme}-${variant ?? defaultVariant}`;
-        const metas = __SFrontspec.get(`theme.themes.${name}`) ?? {};
-
-        return __deepMerge(
-            {
-                name,
-                theme: theme ?? defaultTheme,
-                variant: variant ?? defaultVariant,
-            },
-            metas,
-        );
     }
 
     /**
@@ -524,8 +469,6 @@ export default class STheme extends __SThemeBase {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     state = {
-        theme: undefined,
-        variant: undefined,
         overridedConfigs: {},
     };
 
@@ -554,6 +497,8 @@ export default class STheme extends __SThemeBase {
 
         // // restore the theme
         // this.restore();
+
+        console.trace('coco');
 
         if (!__SEnv.is('production') && !__isInIframe()) {
             console.log(
@@ -722,11 +667,14 @@ export default class STheme extends __SThemeBase {
     save(): STheme {
         clearTimeout(this._saveTimeout);
         this._saveTimeout = setTimeout(() => {
-            this.state.overridedConfigs = this._overridedConfig;
-            console.log('SAVE', this.state);
+            this.state.overridedConfigs = this.getOverridedConfig();
             // save in localStorage
             localStorage.setItem(
-                `${this.settings.id}-${this.theme}`,
+                `${this.constructor.globalSettings.id}`,
+                JSON.stringify(this.constructor.globalState),
+            );
+            localStorage.setItem(
+                `${this.constructor.globalSettings.id}-${this.theme}-${this.variant}`,
                 JSON.stringify(this.state),
             );
             // emit saved event
@@ -753,8 +701,9 @@ export default class STheme extends __SThemeBase {
         try {
             savedState = JSON.parse(
                 // @ts-ignore
-                localStorage.getItem(`${this.settings.id}-${this.theme}`) ??
-                    '{}',
+                localStorage.getItem(
+                    `${this.constructor.globalSettings.id}-${this.theme}`,
+                ) ?? '{}',
             );
             // @ts-ignore
             this.state = savedState ?? {};

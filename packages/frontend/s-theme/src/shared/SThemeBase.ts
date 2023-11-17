@@ -1127,10 +1127,6 @@ export default class SThemeBase extends __SEventEmitter {
      */
     _cachedConfig;
     get _config() {
-        // if (this._cachedConfig) {
-        //     return this._cachedConfig;
-        // }
-        // @ts-ignore
         this._cachedConfig = Object.assign(
             {},
             __deepMerge(
@@ -1239,7 +1235,6 @@ export default class SThemeBase extends __SEventEmitter {
      */
     emitSavedEvent(): SThemeBase {
         // emit event
-        // @ts-ignore
         this.emit('saved', {
             theme: this.theme,
             variant: this.variant,
@@ -1327,11 +1322,7 @@ export default class SThemeBase extends __SEventEmitter {
             this._overridedConfig,
             configs ?? {},
         );
-        // emit an "update" event
-        // @ts-ignore
-        this.emit('restored', {
-            overridedConfigs: Object.assign({}, this._overridedConfig),
-        });
+
         // maintain chainability
         return this;
     }

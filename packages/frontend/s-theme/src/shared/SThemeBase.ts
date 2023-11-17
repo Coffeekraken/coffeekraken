@@ -279,6 +279,13 @@ export default class SThemeBase extends __SEventEmitter {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static get current(): STheme {
+        let theme = this.theme,
+            variant = this.variant;
+
+        const themeInstance = this.getTheme(theme, variant);
+
+        return themeInstance;
+
         if (document) {
             if (!document.env?.SUGAR?.theme) {
                 if (!document.env) document.env = {};
@@ -393,15 +400,12 @@ export default class SThemeBase extends __SEventEmitter {
         if (this._instanciatedThemes[`${theme}-${variant}`]) {
             return this._instanciatedThemes[`${theme}-${variant}`];
         }
-        console.log('TTT', `${theme}-${variant}`);
 
         this._instanciatedThemes[`${theme}-${variant}`] = new this(
             theme,
             variant,
             settings,
         );
-
-        console.log('NEW', `${theme}-${variant}`);
 
         return this._instanciatedThemes[`${theme}-${variant}`];
     }

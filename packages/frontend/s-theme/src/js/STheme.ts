@@ -140,25 +140,24 @@ export default class STheme extends __SThemeBase {
         STheme.applyTheme(theme, variant, $context);
 
         // get the current theme instance
-        // const currentTheme = this.getCurrentTheme($context);
-
-        console.log('SS', theme, variant);
-
-        // const currentTheme = this.getTheme(theme, variant);
+        const currentTheme = this.getTheme(
+            theme ?? this.theme,
+            variant ?? this.variant,
+        );
 
         // save
-        // currentTheme.save();
+        currentTheme.save();
 
         // dispatch a change event
         document.dispatchEvent(
             new CustomEvent('s-theme.change', {
                 detail: {
-                    // theme: currentTheme,
+                    theme: currentTheme,
                 },
             }),
         );
 
-        // return currentTheme;
+        return currentTheme;
     }
 
     /**
@@ -181,22 +180,22 @@ export default class STheme extends __SThemeBase {
         variant?: string,
         $context: HTMLElement = <HTMLElement>document.querySelector('html'),
     ): void {
-        // __clearTransmations(document.querySelector('html'), {
-        //     timeout: 100,
-        // });
-        // if (theme && variant) {
-        //     $context.setAttribute('theme', `${theme}-${variant}`);
-        // } else if (theme) {
-        //     $context.setAttribute(
-        //         'theme',
-        //         `${theme}-${__SFrontspec.get('theme.variant')}`,
-        //     );
-        // } else if (variant) {
-        //     $context.setAttribute(
-        //         'theme',
-        //         `${__SFrontspec.get('theme.theme')}-${variant}`,
-        //     );
-        // }
+        __clearTransmations(document.querySelector('html'), {
+            timeout: 100,
+        });
+        if (theme && variant) {
+            $context.setAttribute('theme', `${theme}-${variant}`);
+        } else if (theme) {
+            $context.setAttribute(
+                'theme',
+                `${theme}-${__SFrontspec.get('theme.variant')}`,
+            );
+        } else if (variant) {
+            $context.setAttribute(
+                'theme',
+                `${__SFrontspec.get('theme.theme')}-${variant}`,
+            );
+        }
         // console.log('SETTED', theme, variant);
         // get the current theme instance
         // const themeInstance = this.getCurrentTheme($context);
@@ -337,20 +336,8 @@ export default class STheme extends __SThemeBase {
             ...finalSettings,
         };
 
-        let theme = this.theme,
-            variant = this.variant;
-
-        // save default theme metas
-        STheme._defaultThemeMetas = {
-            theme: 'default',
-            variant: 'light',
-        };
-
-        // if we have a saved theme
-        if (this.savedThemeMetas) {
-            theme = this._savedThemeMetas.theme;
-            variant = this._savedThemeMetas.variant;
-        }
+        let theme = this.savedThemeMetas?.theme ?? this.theme,
+            variant = this.savedThemeMetas?.variant ?? this.variant;
 
         // instanciate the current theme instance
         if (!document.env) document.env = {};
@@ -519,6 +506,7 @@ export default class STheme extends __SThemeBase {
      */
     static toggleDarkMode($context = document.querySelector('html')): void {
         if (!this.isDarkVariantAvailable()) return;
+        console.log('th', this.variant);
         if (this.variant === 'dark') {
             this.setThemeVariant('light', $context);
         } else {
@@ -801,14 +789,8 @@ export default class STheme extends __SThemeBase {
         localStorage.removeItem(`${this.settings.id}-${this.theme}`);
         // clear in super class
         super.clear();
-        // clear the state
-        // @ts-ignore
-        this.state = {};
         // apply the configs
         this.applyState();
-        // set theme again to dispatch event
-        // @ts-ignore
-        this.constructor.setTheme();
         // maintain chainability
         return this;
     }

@@ -27,6 +27,38 @@ import __SThemeBase from '../shared/SThemeBase.js';
  */
 export default class STheme extends __SThemeBase {
     /**
+     * @name      theme
+     * @type      String
+     * @static
+     * @get
+     *
+     * Store the current theme applied
+     *
+     * @since     2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static _theme: string;
+    static get theme(): string {
+        return this._theme;
+    }
+
+    /**
+     * @name      variant
+     * @type      String
+     * @static
+     * @get
+     *
+     * Store the current variant applied from the html tag context or from the config
+     *
+     * @since     2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static _variant: string;
+    static get variant(): string {
+        return this._variant;
+    }
+
+    /**
      * @name        constructor
      * @type        Function
      * @constructor

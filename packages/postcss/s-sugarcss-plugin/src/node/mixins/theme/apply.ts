@@ -116,10 +116,12 @@ export default function ({
         }
     }
 
-    const vars = __STheme.current.toCssVars({
-        theme: finalParams.theme,
-        variant: finalParams.variant,
-    });
+    const vars = __STheme
+        .getTheme(finalParams.theme, finalParams.variant)
+        .toCssVars({
+            theme: finalParams.theme,
+            variant: finalParams.variant,
+        });
 
     const selectors: string[] = [];
     if (finalParams.theme) selectors.push(`[theme^="${finalParams.theme}"]`);

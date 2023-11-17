@@ -104,7 +104,7 @@ body:has(.s-doc-fullscreen) {
 }
 
 .s-doc {
-    max-height: 80vh;
+    max-height: 90vh;
     max-width: 100vw;
     /* width: 90vw; */
     display: flex;

@@ -1,6 +1,7 @@
 // generic
 import __SDashboard from '@coffeekraken/s-dashboard';
 import __SFront from '@coffeekraken/s-front';
+import __STheme from '@coffeekraken/s-theme';
 import __SPackEssentials from '@coffeekraken/s-pack-essentials';
 
 // website related
@@ -40,6 +41,7 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
     });
 
     __SFront.init();
+    __STheme.init();
 
     // essentials
     __SPackEssentials();

@@ -47,7 +47,7 @@ export default class SFloatingFeatureInterface extends __SInterface {
             shift: {
                 description: 'Specify a space between the floating element and the viewport side to respect',
                 type: 'Number',
-                default: 10,
+                default: 30,
             },
             offset: {
                 description: 'Specify a space between the floating element and the reference one to respect',

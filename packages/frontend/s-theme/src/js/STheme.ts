@@ -5,6 +5,7 @@ import { __clearTransmations, __isInIframe } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import type { ISThemeSettings as __ISThemeSettings } from '../shared/SThemeBase.js';
 import __SThemeBase from '../shared/SThemeBase.js';
+import { __hotkey } from '@coffeekraken/sugar/keyboard';
 
 window._console = {};
 ['log', 'warn', 'error', 'success'].forEach((key) => {
@@ -41,7 +42,6 @@ window._console = {};
  */
 
 export interface ISThemeInitSettings {
-    $context: HTMLElement;
     id: string;
 }
 
@@ -53,7 +53,6 @@ export default class STheme extends __SThemeBase {
     static _defaultThemeMetas = {};
 
     static globalSettings: ISThemeSettings = {
-        $context: document.querySelector('html'),
         id: 's-theme',
     };
 
@@ -61,6 +60,8 @@ export default class STheme extends __SThemeBase {
         theme: undefined,
         variant: undefined,
     };
+
+    static _isHotkeyRegistered = false;
 
     /**
      * @name      theme
@@ -156,19 +157,14 @@ export default class STheme extends __SThemeBase {
      *
      * @param               {String}            theme           The theme name to apply
      * @param               {String}            variant         The theme variant to apply
-     * @param               {HTMLElement}       [$context=document.querySelector('html')]            The context element on which to apply the theme
      * @return          {STheme}                                    The STheme instance that represent the current applied theme
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static setTheme(
-        theme?: string,
-        variant?: string,
-        $context = document.querySelector('html'),
-    ): STheme {
+    static setTheme(theme?: string, variant?: string): STheme {
         // apply the theme on context
-        STheme.applyTheme(theme, variant, $context);
+        STheme.applyTheme(theme, variant);
 
         // get the current theme instance
         const currentTheme = this.getTheme(
@@ -209,17 +205,14 @@ export default class STheme extends __SThemeBase {
      *
      * @param               {String}            theme           The theme name to apply
      * @param               {String}            variant         The theme variant to apply
-     * @param               {HTMLElement}       [$context=document.querySelector('html')]            The context element on which to apply the theme
      * @return          {STheme}                                    The STheme instance that represent the current applied theme
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static applyTheme(
-        theme?: string,
-        variant?: string,
-        $context: HTMLElement = <HTMLElement>document.querySelector('html'),
-    ): void {
+    static applyTheme(theme?: string, variant?: string): void {
+        const $context = document.querySelector('html');
+
         __clearTransmations(document.querySelector('html'), {
             timeout: 100,
         });
@@ -332,17 +325,13 @@ export default class STheme extends __SThemeBase {
      * This method allows you to set the current applied theme variant and get back an STheme instance
      *
      * @param               {String}            variant         The theme variant to apply
-     * @param               {HTMLElement}       [$context=document.querySelector('html')]            The context element on which to apply the theme
      * @return          {STheme}                                    The STheme instance that represent the current applied theme
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static setThemeVariant(
-        variant: string,
-        $context = document.querySelector('html'),
-    ): STheme {
-        return this.setTheme(undefined, variant, $context);
+    static setThemeVariant(variant: string): STheme {
+        return this.setTheme(undefined, variant);
     }
 
     /**
@@ -359,21 +348,31 @@ export default class STheme extends __SThemeBase {
      */
     static init(settings?: Partial<ISThemeInitSettings>): STheme {
         const finalSettings = <ISThemeInitSettings>{
-            $context: document.querySelector('html'),
             id: 's-theme',
             ...(settings ?? {}),
         };
+
+        // hotkey
+        if (!this._isHotkeyRegistered) {
+            __hotkey('ctrl+m').on('press', () => {
+                this.toggleDarkMode();
+            });
+        }
 
         this.globalSettings = {
             ...this.globalSettings,
             ...finalSettings,
         };
 
-        // restore
+        // restore from localStorage
         this.restore();
 
         let theme = this.globalState?.theme ?? this.theme,
             variant = this.globalState?.variant ?? this.variant;
+
+        if (document.env?.SUGAR?.theme) {
+            return document.env.SUGAR.theme;
+        }
 
         // instanciate the current theme instance
         if (!document.env) document.env = {};
@@ -381,7 +380,7 @@ export default class STheme extends __SThemeBase {
         document.env.SUGAR.theme = new this(theme, variant, finalSettings);
 
         // apply the theme
-        STheme.applyTheme(theme, variant, finalSettings.$context);
+        STheme.applyTheme(theme, variant);
 
         // return the current theme
         return this.current;
@@ -449,13 +448,12 @@ export default class STheme extends __SThemeBase {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static toggleDarkMode($context = document.querySelector('html')): void {
+    static toggleDarkMode(): void {
         if (!this.isDarkVariantAvailable()) return;
-        console.log('th', this.variant);
         if (this.variant === 'dark') {
-            this.setThemeVariant('light', $context);
+            this.setThemeVariant('light');
         } else {
-            this.setThemeVariant('dark', $context);
+            this.setThemeVariant('dark');
         }
     }
 
@@ -495,10 +493,8 @@ export default class STheme extends __SThemeBase {
             );
         }
 
-        // // restore the theme
-        // this.restore();
-
-        console.trace('coco');
+        // restore the theme
+        this.restore();
 
         if (!__SEnv.is('production') && !__isInIframe()) {
             console.log(
@@ -580,21 +576,6 @@ export default class STheme extends __SThemeBase {
         const color = new __SColor(style.backgroundColor);
         $wrapper.remove();
         return color;
-    }
-
-    /**
-     * @name            isDarkMode
-     * @type            Function
-     *
-     * This method returns true if the theme variant is dark, false if not
-     *
-     * @return      {Boolean}               true if variant is dark, false otherwise
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    isDark(): boolean {
-        return this.variant === 'dark';
     }
 
     /**
@@ -702,7 +683,7 @@ export default class STheme extends __SThemeBase {
             savedState = JSON.parse(
                 // @ts-ignore
                 localStorage.getItem(
-                    `${this.constructor.globalSettings.id}-${this.theme}`,
+                    `${this.constructor.globalSettings.id}-${this.theme}-${this.variant}`,
                 ) ?? '{}',
             );
             // @ts-ignore
@@ -712,7 +693,6 @@ export default class STheme extends __SThemeBase {
         }
 
         // restore configs
-        // @ts-ignore
         super.restore(savedState.overridedConfigs);
 
         // apply the configs
@@ -735,7 +715,9 @@ export default class STheme extends __SThemeBase {
      */
     clear(): STheme {
         // delete the local storage
-        localStorage.removeItem(`${this.settings.id}-${this.theme}`);
+        localStorage.removeItem(
+            `${this.constructor.globalSettings.id}-${this.theme}-${this.variant}`,
+        );
         // clear in super class
         super.clear();
         // apply the configs

@@ -88,23 +88,27 @@ export default function ({
             t.theme === finalParams.theme && t.variant === finalParams.variant
         );
     });
+
+    const themeInstance = __STheme.getTheme(
+            finalParams.theme,
+            finalParams.variant,
+        ),
+        vars = themeInstance.toCssVars({
+            theme: finalParams.theme,
+            variant: finalParams.variant,
+        });
+
     if (!currentTheme) {
         frontData.theme.themes.push({
             theme: finalParams.theme,
             variant: finalParams.variant,
+            config: themeInstance.get('.'),
         });
     }
 
     console.log(
         `<yellow>[@s.theme.import]</yellow> Theme imported : <magenta>${finalParams.theme}-${finalParams.variant}</magenta>`,
     );
-
-    const vars = __STheme
-        .getTheme(finalParams.theme, finalParams.variant)
-        .toCssVars({
-            theme: finalParams.theme,
-            variant: finalParams.variant,
-        });
 
     const selectors: string[] = [];
     if (finalParams.theme) selectors.push(`[theme^="${finalParams.theme}"]`);

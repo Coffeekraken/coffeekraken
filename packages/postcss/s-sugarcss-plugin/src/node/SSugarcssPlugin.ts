@@ -4,7 +4,11 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import __STheme from '@coffeekraken/s-theme';
 import { __dirname, __folderHashSync } from '@coffeekraken/sugar/fs';
-import { __deepMerge, __objectHash } from '@coffeekraken/sugar/object';
+import {
+    __deepMerge,
+    __deepMap,
+    __objectHash,
+} from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import { __unquote } from '@coffeekraken/sugar/string';
 import { __replaceTokens } from '@coffeekraken/sugar/token';
@@ -13,6 +17,8 @@ import __glob from 'glob';
 import __path from 'path';
 import __postcss from 'postcss';
 import __getRoot from './utils/getRoot.js';
+
+import { __copy } from '@coffeekraken/sugar/clipboard';
 
 import __CssVars from './CssVars.js';
 
@@ -570,6 +576,10 @@ const plugin = (settings: ISSugarcssPluginSettings = {}) => {
 
             // front data only in the main file
             if (Object.keys(frontData).length) {
+                __copy(JSON.stringify(frontData));
+
+                const rawFrontData = JSON.parse(JSON.stringify(frontData));
+
                 root.nodes.push(
                     __postcss.rule({
                         selector: 'body:after',
@@ -577,7 +587,17 @@ const plugin = (settings: ISSugarcssPluginSettings = {}) => {
                             .parse(
                                 `
                     display: none;
-                    content: '${JSON.stringify(frontData ?? {})}';
+                    content: '${JSON.stringify(
+                        __deepMap(
+                            rawFrontData ?? {},
+                            ({ object, prop, value, path }) => {
+                                if (typeof value === 'string') {
+                                    return value.replace(/\"/gm, '\\"');
+                                }
+                                return value;
+                            },
+                        ),
+                    )}';
                 `,
                             )
                             .nodes.map((decl) => {

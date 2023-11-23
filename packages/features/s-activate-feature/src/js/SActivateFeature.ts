@@ -333,6 +333,8 @@ export default class SActivateFeature extends __SFeature {
                     switch (what) {
                         case 'click':
                             document.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
                                 this.unactivate();
                             });
                             break;

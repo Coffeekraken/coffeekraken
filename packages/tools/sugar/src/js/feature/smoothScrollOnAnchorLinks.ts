@@ -79,9 +79,6 @@ export default function __smoothScrollOnAnchorLinks(
             // preventing the link to behave as he wants
             e.preventDefault();
 
-            // append the hash to the history in the url
-            history.pushState({}, null, linkUrl.hash);
-
             // all seems to be good, we can scroll to the target
             setTimeout(() => {
                 __scrollTo($target, settings.scroll);

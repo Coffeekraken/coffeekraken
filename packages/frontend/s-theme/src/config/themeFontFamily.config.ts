@@ -26,7 +26,7 @@ export default function (api) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            fontFamily: '"Roboto"',
+            fontFamily: 'Roboto',
             /**
              * @name            fontWeight
              * @namespace       config.themeFontFamily.default
@@ -65,7 +65,7 @@ export default function (api) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            fontFamily: '"Roboto"',
+            fontFamily: 'Roboto',
             /**
              * @name            fontWeight
              * @namespace       config.themeFontFamily.title
@@ -104,7 +104,7 @@ export default function (api) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            fontFamily: '"Palatino, Times, Georgia, serif"',
+            fontFamily: 'Palatino, Times, Georgia, serif',
             /**
              * @name            fontWeight
              * @namespace       config.themeFontFamily.quote

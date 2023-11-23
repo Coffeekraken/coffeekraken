@@ -335,7 +335,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    _buffer: ISEventEmitterEventObj[] = [];
+    private _buffer: ISEventEmitterEventObj[] = [];
 
     /**
      * @name          _eventsStacks
@@ -347,7 +347,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    _eventsStacks: any = {};
+    private _eventsStacks: any = {};
 
     /**
      * @name          _onStackById
@@ -359,10 +359,10 @@ class SEventEmitter extends SClass implements ISEventEmitter {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    _onStackById: any = {};
+    private _onStackById: any = {};
 
     // @ts-ignore
-    settings: ISEventEmitterSettings;
+    public settings: ISEventEmitterSettings;
 
     /**
      * @name                  constructor

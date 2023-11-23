@@ -18,9 +18,6 @@ import __SStdio, {
 
 import { __speedIndex } from '@coffeekraken/sugar/perf';
 
-import type { ISThemeInitSettings } from '@coffeekraken/s-theme';
-import __STheme from '@coffeekraken/s-theme';
-
 // @ts-ignore
 if (import.meta?.hot) {
     // @ts-ignore
@@ -42,7 +39,7 @@ if (import.meta?.hot) {
  * @platform        js
  * @status          wip
  *
- * Central class to handle frontend stuffs like theme, google, etc...
+ * Central class to handle frontend stuffs like legal, google, etc...
  *
  * @snippet              __SFront($1)
  *
@@ -69,13 +66,12 @@ export interface ISFrontInitSettings {
     id: string;
     frontspec: any;
     legal: Partial<ISFrontLegalSettings>;
-    theme: __STheme | Partial<ISThemeInitSettings>;
     logs: undefined | boolean;
 }
 
 export interface ISFrontSettings extends ISFrontInitSettings {}
 
-export interface ISThemeSetLodSettings {
+export interface ISFrontSetLodSettings {
     enabled: boolean;
     $context: HTMLElement;
 }
@@ -112,7 +108,6 @@ export default class SFront extends __SClass {
             lod: {},
             legal: {},
             partytown: {},
-            theme: {},
             ...(settings ?? {}),
         };
 
@@ -167,17 +162,6 @@ export default class SFront extends __SClass {
     static get instance(): SFront {
         return this._defaultInstance;
     }
-
-    /**
-     * @name        theme
-     * @type        __STheme
-     *
-     * Store the current theme instance
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    theme: __STheme;
 
     /**
      * @name        frontspec
@@ -267,7 +251,7 @@ export default class SFront extends __SClass {
             }
         }
 
-        // init frontspec and theme
+        // init frontspec
         let frontspec;
         if (settings?.frontspec instanceof __SFrontspec) {
             frontspec = settings?.frontspec;
@@ -295,7 +279,6 @@ export default class SFront extends __SClass {
         );
 
         this.frontspec = frontspec;
-        this.theme = theme;
 
         // save the default instance to access it using the SFront.instance static property
         if (
@@ -352,15 +335,14 @@ export default class SFront extends __SClass {
      * This method allows you to set the level of details you want on any HTMLElement context
      *
      * @param               {String|Number}     level           The level you want to set
-     * @param               {Partial<ISThemeSetLodSettings>}        Some settings to configure your action
-     * @return          {STheme}                                    The STheme instance that represent the current applied theme
+     * @param               {Partial<ISFrontSetLodSettings>}        Some settings to configure your action
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     setLod(
         level: string | number,
-        settings?: Partial<ISThemeSetLodSettings>,
+        settings?: Partial<ISFrontSetLodSettings>,
     ): void {
         const lodSettings = this.frontspec.get('lod');
 
@@ -368,7 +350,7 @@ export default class SFront extends __SClass {
             return;
         }
 
-        const finalSettings = <ISThemeSetLodSettings>{
+        const finalSettings = <ISFrontSetLodSettings>{
             $context: document.querySelector('html'),
             ...(settings ?? {}),
         };
@@ -447,7 +429,6 @@ export default class SFront extends __SClass {
             new CustomEvent('s-front.lod.change', {
                 detail: {
                     level,
-                    theme: this,
                 },
             }),
         );

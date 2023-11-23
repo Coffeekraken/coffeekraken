@@ -248,7 +248,10 @@ export default class STheme extends __SThemeBase {
         }
         const bodyStyle = window.getComputedStyle(document.body, ':after');
         this._frontData = JSON.parse(
-            JSON.parse(bodyStyle.getPropertyValue('content')),
+            JSON.parse(bodyStyle.getPropertyValue('content'))
+                .trim()
+                .replace(/^\"/, '')
+                .replace(/\"$/, ''),
         );
         return this._frontData;
     }
@@ -367,16 +370,25 @@ export default class STheme extends __SThemeBase {
         // restore from localStorage
         this.restore();
 
+        // get the current theme and variant
         let theme = this.globalState?.theme ?? this.theme,
             variant = this.globalState?.variant ?? this.variant;
 
+        // make sure the env.SUGAR.theme property exists
+        if (!document.env) document.env = {};
+        if (!document.env.SUGAR) document.env.SUGAR = {};
+
+        // save the available themes
+        if (!document.env.SUGAR.themes) {
+            document.env.SUGAR.themes = this.frontData.theme.themes;
+        }
+
+        // make sure the theme is available
         if (document.env?.SUGAR?.theme) {
             return document.env.SUGAR.theme;
         }
 
         // instanciate the current theme instance
-        if (!document.env) document.env = {};
-        if (!document.env.SUGAR) document.env.SUGAR = {};
         document.env.SUGAR.theme = new this(theme, variant, finalSettings);
 
         // apply the theme

@@ -1080,7 +1080,7 @@ export default class SThemeBase extends __SEventEmitter {
      */
     proxyNonExistingUiDotpath(dotPath: string): string {
         // try to get the value
-        let value = __get(this._config, dotPath);
+        let value = __get(this.config, dotPath);
 
         // if the dotpath starts with "ui...." and that we don't have
         // a value for now, try to get the value from "ui.default..." instead
@@ -1125,17 +1125,22 @@ export default class SThemeBase extends __SEventEmitter {
      * @since         2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    _cachedConfig;
-    get _config() {
-        this._cachedConfig = Object.assign(
-            {},
-            __deepMerge(
-                __SSugarConfig.get('theme.themes')[this.id],
-                this._overridedConfig,
-            ),
-        );
+    get config() {
+        // get config from frontData
+        if (this.constructor.frontData?.theme?.themes) {
+            const currentTheme = this.constructor.frontData.theme.themes.find(
+                (t) => {
+                    return t.theme === this.theme && t.variant === this.variant;
+                },
+            );
+            return __deepMerge(currentTheme.config, this._overridedConfig);
+        }
 
-        return this._cachedConfig;
+        // return from config directly
+        return __deepMerge(
+            __SSugarConfig.get('theme.themes')[this.id],
+            this._overridedConfig,
+        );
     }
     get(dotPath, settings: Partial<ISThemeGetSettings> = {}): any {
         const finalSettings: ISThemeGetSettings = __deepMerge(
@@ -1150,7 +1155,7 @@ export default class SThemeBase extends __SEventEmitter {
         dotPath = this.proxyNonExistingUiDotpath(dotPath);
 
         // get the value
-        let value = __get(this._config, dotPath);
+        let value = __get(this.config, dotPath);
 
         if (value && dotPath === 'media') {
             // sort the media requested

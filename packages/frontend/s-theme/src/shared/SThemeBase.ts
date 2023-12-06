@@ -70,17 +70,7 @@ class shadesNameInterface extends __SInterface {
     }
 }
 
-export interface ISThemeLodSettings {
-    enabled: boolean;
-    level: number;
-    botLevel: number;
-    method: 'class' | 'file';
-    stylesheet: string | HTMLLinkElement;
-}
-
-export interface ISThemeSettings {
-    lod: Partial<ISThemeLodSettings>;
-}
+export interface ISThemeSettings {}
 
 export interface ISThemeDefaultStaticSettings {
     theme: string;

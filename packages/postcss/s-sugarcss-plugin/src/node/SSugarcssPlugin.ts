@@ -5,8 +5,8 @@ import __SSugarJson from '@coffeekraken/s-sugar-json';
 import __STheme from '@coffeekraken/s-theme';
 import { __dirname, __folderHashSync } from '@coffeekraken/sugar/fs';
 import {
-    __deepMerge,
     __deepMap,
+    __deepMerge,
     __objectHash,
 } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
@@ -48,10 +48,10 @@ export interface ISSugarcssPluginSharedData {
     [key: string]: any;
 }
 
-export interface ISSugarcssPluginLodSettings {
-    enabled: boolean;
-    method: 'class' | 'file';
-}
+// export interface ISSugarcssPluginLodSettings {
+//     enabled: boolean;
+//     method: 'class' | 'file';
+// }
 
 export interface ISSugarcssPluginCleanSettings {
     variables: boolean;
@@ -59,7 +59,7 @@ export interface ISSugarcssPluginCleanSettings {
 
 export interface ISSugarcssPluginSettings {
     outDir: string;
-    lod: ISSugarcssPluginLodSettings;
+    // lod: ISSugarcssPluginLodSettings;
     clean: Partial<ISSugarcssPluginCleanSettings>;
     excludeByTypes?: string[];
     excludeCommentByTypes?: string[];
@@ -118,7 +118,7 @@ const plugin = (settings: ISSugarcssPluginSettings = {}) => {
             excludeByTypes: [],
             excludeCommentByTypes: [],
             excludeCodeByTypes: [],
-            lod: {},
+            // lod: {},
             clean: {
                 variables: undefined,
             },
@@ -148,7 +148,7 @@ const plugin = (settings: ISSugarcssPluginSettings = {}) => {
             ),
             viewsRootDirs: __SSugarConfig.get('sugarcssPlugin.viewsRootDirs'),
             clean: __SSugarConfig.get('sugarcssPlugin.clean'),
-            lod: __STheme.current.get('lod'),
+            // lod: __STheme.current.get('lod'),
         });
 
         // clean if set to undefined and target is production
@@ -158,19 +158,19 @@ const plugin = (settings: ISSugarcssPluginSettings = {}) => {
             }
         }
 
-        // lod method if the target is not production
-        if (settings.target !== 'production') {
-            if (
-                settings.lod.method !== 'class' &&
-                !_configLoaded &&
-                sharedData.isPristine
-            ) {
-                console.log(
-                    `<yellow>[sugarcssPlugin]</yellow> You're lod.method setting has been updated to "<magenta>class</magenta>" cause the "<yellow>${settings.lod.method}</yellow>" method is only available for "<cyan>production</cyan>" target...`,
-                );
-            }
-            settings.lod.method = 'class';
-        }
+        // // lod method if the target is not production
+        // if (settings.target !== 'production') {
+        //     if (
+        //         settings.lod.method !== 'class' &&
+        //         !_configLoaded &&
+        //         sharedData.isPristine
+        //     ) {
+        //         console.log(
+        //             `<yellow>[sugarcssPlugin]</yellow> You're lod.method setting has been updated to "<magenta>class</magenta>" cause the "<yellow>${settings.lod.method}</yellow>" method is only available for "<cyan>production</cyan>" target...`,
+        //         );
+        //     }
+        //     settings.lod.method = 'class';
+        // }
 
         // set the settings hash
         settingsHash = __objectHash(settings);

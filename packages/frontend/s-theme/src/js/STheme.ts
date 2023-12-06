@@ -2,15 +2,10 @@ import __SColor from '@coffeekraken/s-color';
 import __SEnv from '@coffeekraken/s-env';
 import __SFrontspec from '@coffeekraken/s-frontspec';
 import { __clearTransmations, __isInIframe } from '@coffeekraken/sugar/dom';
+import { __hotkey } from '@coffeekraken/sugar/keyboard';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import type { ISThemeSettings as __ISThemeSettings } from '../shared/SThemeBase.js';
 import __SThemeBase from '../shared/SThemeBase.js';
-import { __hotkey } from '@coffeekraken/sugar/keyboard';
-
-window._console = {};
-['log', 'warn', 'error', 'success'].forEach((key) => {
-    window._console[key] = console[key];
-});
 
 /**
  * @name            STheme
@@ -134,7 +129,7 @@ export default class STheme extends __SThemeBase {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static restore(): STheme {
+    static restore(): typeof STheme {
         let savedState = this.savedThemeMetas;
         if (savedState?.theme && savedState?.variant) {
             this.setTheme(savedState.theme, savedState.variant);
@@ -170,7 +165,7 @@ export default class STheme extends __SThemeBase {
         const currentTheme = this.getTheme(
             theme ?? this.theme,
             variant ?? this.variant,
-        );
+        ) as STheme;
 
         // set the state
         this.globalState.theme = theme ?? this.theme;
@@ -210,7 +205,7 @@ export default class STheme extends __SThemeBase {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static applyTheme(theme?: string, variant?: string): void {
+    static applyTheme(theme?: string, variant?: string): typeof STheme {
         const $context = document.querySelector('html');
 
         __clearTransmations(document.querySelector('html'), {
@@ -229,6 +224,8 @@ export default class STheme extends __SThemeBase {
                 `${__SFrontspec.get('theme.theme')}-${variant}`,
             );
         }
+
+        return this;
     }
 
     /**

@@ -1,7 +1,7 @@
 import __STheme from '@coffeekraken/s-theme';
 import { __readJson } from '@coffeekraken/sugar/fs';
 import { __ipAddress } from '@coffeekraken/sugar/network';
-import { __deepMerge } from '@coffeekraken/sugar/object';
+import { __deepMerge, __diff } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
 import __path from 'path';
@@ -72,7 +72,6 @@ export default function (api) {
                     type: 'object',
                     get value() {
                         const packageRootDir = __packageRootDir();
-
                         return {
                             rootDir: `./${__path.relative(
                                 packageRootDir,
@@ -147,39 +146,31 @@ export default function (api) {
                             }
                         }
 
-                        const themesObj = {};
+                        const themes = [];
                         Object.keys(api.config.theme.themes).forEach((name) => {
-                            themesObj[name] = {
-                                title:
-                                    api.config.theme.themes[name].metas
-                                        ?.title ?? name,
-                                description:
-                                    api.config.theme.themes[name].metas
-                                        ?.description ?? '',
-                            };
+                            themes.push({
+                                theme: name.split('-')[0],
+                                variant: name.split('-')[1],
+                                metas:
+                                    api.config.theme.themes[name].metas ?? {},
+                                config: __diff(
+                                    api.config.theme.themes[
+                                        `${api.config.theme.theme}-${api.config.theme.variant}`
+                                    ] ?? {},
+                                    api.config.theme.themes[name],
+                                ),
+                            });
+                            delete themes.at(-1).config.metas;
                         });
 
                         return {
                             theme: api.config.theme.theme,
                             variant: api.config.theme.variant,
-                            themes: themesObj,
-                            lnf: {
-                                margin: api.theme.margin,
-                                padding: api.theme.padding,
-                                font: api.theme.font,
-                                layout: api.theme.layout,
-                                typo: typoObj,
-                            },
+                            config: api.config.theme.themes[
+                                `${api.config.theme.theme}-${api.config.theme.variant}`
+                            ],
+                            themes,
                         };
-                    },
-                },
-                media: {
-                    title: 'Media',
-                    description:
-                        'Specify the responsive specifications like the queries (breakpoints), default action, etc...',
-                    type: 'object',
-                    get value() {
-                        return __STheme.sortMedia(api.theme.media);
                     },
                 },
                 views: {
@@ -213,20 +204,20 @@ export default function (api) {
                 //         return lodConfig;
                 //     },
                 // },
-                // partytown: {
-                //     title: 'Partytown',
-                //     description:
-                //         'Specify if the project make uses of "partytown" and his settings',
-                //     type: 'object',
-                //     get value() {
-                //         const partytownConfig = Object.assign(
-                //             {},
-                //             api.theme.partytown,
-                //         );
-                //         delete partytownConfig.cssProperties;
-                //         return partytownConfig;
-                //     },
-                // },
+                partytown: {
+                    title: 'Partytown',
+                    description:
+                        'Specify if the project make uses of "partytown" and his settings',
+                    type: 'object',
+                    get value() {
+                        const partytownConfig = Object.assign(
+                            {},
+                            api.config.partytown,
+                        );
+                        delete partytownConfig.cssProperties;
+                        return partytownConfig;
+                    },
+                },
             },
         },
 

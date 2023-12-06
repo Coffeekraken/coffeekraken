@@ -3,11 +3,10 @@ export interface ISFrontspec {
     assets?: ISFrontspecAssets;
     favicon?: ISFrontspecFavicon;
     theme?: ISFrontspecTheme;
-    media?: ISFrontspecMedia;
     views?: ISFrontspecViews;
     specs?: ISFrontspecSpecs;
     google?: ISFrontspecGoogle;
-    lod?: ISFrontspecLod;
+    // lod?: ISFrontspecLod;
     partytown?: ISFrontspecPartytown;
     package?: ISFrontspecPackage;
 }

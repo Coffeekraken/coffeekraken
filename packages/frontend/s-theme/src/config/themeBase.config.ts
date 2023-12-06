@@ -35,15 +35,16 @@ export default function (api) {
          * @namespace        config.themeBase
          * @type            String
          * @default         config.themeLod
+         * @status         beta
          *
          * Specify the level of details to be used in the theme
          *
          * @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        get lod() {
-            return api.config.themeLod;
-        },
+        // get lod() {
+        //     return api.config.themeLod;
+        // },
 
         /**
          * @name            easing
@@ -73,21 +74,6 @@ export default function (api) {
          */
         get scroll() {
             return api.config.themeScroll;
-        },
-
-        /**
-         * @name            partytown
-         * @namespace       config.themeBase
-         * @type            Object
-         * @default         config.themePartytown
-         *
-         * Reference the "themePartytown" config
-         *
-         * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-         */
-        get partytown() {
-            return api.config.themePartytown;
         },
 
         /**

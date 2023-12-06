@@ -1,12 +1,11 @@
 // @ts-nocheck
 
-import {
+import type {
     ISFrontspec,
     ISFrontspecAssets,
     ISFrontspecFavicon,
     ISFrontspecGoogle,
-    ISFrontspecLod,
-    ISFrontspecMedia,
+    // ISFrontspecLod,
     ISFrontspecMetas,
     ISFrontspecPackage,
     ISFrontspecPartytown,
@@ -52,30 +51,6 @@ export default class SFrontspec implements ISFrontspec {
     _defaultFrontspecInstance;
 
     /**
-     * @name            init
-     * @type            Function
-     * @static
-     *
-     * This method allows you to init the your SFrontspec instance and store it into the document.env.SUGAR.frontspec property
-     *
-     * @return          {SFrontspec}                                    The SFrontspec instance that represent the frontspec.json file
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static init(frontspec?: ISFrontspec): SFrontspec {
-        let frontspecInstance = new this(frontspec);
-
-        // set the front in the env.SUGAR.front property
-        if (!document.env) document.env = {};
-        if (!document.env.SUGAR) document.env.SUGAR = {};
-        document.env.SUGAR.frontspec = frontspecInstance;
-
-        // return the frontspec instance
-        return frontspecInstance;
-    }
-
-    /**
      * @name        get
      * @type        Function
      * @static
@@ -90,7 +65,7 @@ export default class SFrontspec implements ISFrontspec {
      */
     static get(dotpath: string = '.'): any {
         if (!this._defaultFrontspecInstance) {
-            this._defaultFrontspecInstance = SFrontspec.init();
+            this._defaultFrontspecInstance = new SFrontspec();
         }
         return this._defaultFrontspecInstance.get(dotpath);
     }
@@ -110,7 +85,7 @@ export default class SFrontspec implements ISFrontspec {
     /**
      * @name        metas
      * @type        ISFrontspecMetas
-     * @private
+     * @public
      *
      * Store the frontspec metas object
      *
@@ -124,7 +99,7 @@ export default class SFrontspec implements ISFrontspec {
     /**
      * @name        package
      * @type        ISFrontspecPackage
-     * @private
+     * @public
      *
      * Store the frontspec package object
      *
@@ -138,7 +113,7 @@ export default class SFrontspec implements ISFrontspec {
     /**
      * @name        assets
      * @type        ISFrontspecAssets
-     * @private
+     * @public
      *
      * Store the frontspec assets object
      *
@@ -152,7 +127,7 @@ export default class SFrontspec implements ISFrontspec {
     /**
      * @name        favicon
      * @type        ISFrontspecFavicon
-     * @private
+     * @public
      *
      * Store the frontspec favicon object
      *
@@ -166,7 +141,7 @@ export default class SFrontspec implements ISFrontspec {
     /**
      * @name        theme
      * @type        ISFrontspecTheme
-     * @private
+     * @public
      *
      * Store the frontspec theme object
      *
@@ -178,23 +153,9 @@ export default class SFrontspec implements ISFrontspec {
     }
 
     /**
-     * @name        media
-     * @type        ISFrontspecMedia
-     * @private
-     *
-     * Store the frontspec media object
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get media(): ISFrontspecMedia {
-        return this._frontspec.media;
-    }
-
-    /**
      * @name        views
      * @type        ISFrontspecViews
-     * @private
+     * @public
      *
      * Store the frontspec views object
      *
@@ -208,7 +169,7 @@ export default class SFrontspec implements ISFrontspec {
     /**
      * @name        specs
      * @type        ISFrontspecSpecs
-     * @private
+     * @public
      *
      * Store the frontspec specs object
      *
@@ -222,7 +183,7 @@ export default class SFrontspec implements ISFrontspec {
     /**
      * @name        google
      * @type        ISFrontspecGoogle
-     * @private
+     * @public
      *
      * Store the frontspec google object
      *
@@ -236,21 +197,21 @@ export default class SFrontspec implements ISFrontspec {
     /**
      * @name        lod
      * @type        ISFrontspecLod
-     * @private
+     * @public
      *
      * Store the frontspec lod object
      *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    get lod(): ISFrontspecLod {
-        return this._frontspec.lod;
-    }
+    // get lod(): ISFrontspecLod {
+    //     return this._frontspec.lod;
+    // }
 
     /**
      * @name        partytown
      * @type        ISFrontspecPartytown
-     * @private
+     * @public
      *
      * Store the frontspec partytown object
      *
@@ -272,6 +233,11 @@ export default class SFrontspec implements ISFrontspec {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(frontspec: ISFrontspec = {}) {
+        // set the front in the env.SUGAR.front property
+        if (!document.env) document.env = {};
+        if (!document.env.SUGAR) document.env.SUGAR = {};
+        document.env.SUGAR.frontspec = this;
+
         this.constructor._defaultFrontspecInstance = this;
         this._frontspec = __deepMerge(
             document.env?.FRONTSPEC ? document.env.FRONTSPEC : {},

@@ -1,12 +1,12 @@
 /**
- * @name                    themePartytown
+ * @name                    partytown
  * @as                      Partytown
  * @namespace               config
  * @type                    Config
  * @plateform               node
  * @status                  stable
  *
- * Specify the @coffeekraken/s-theme partytown available configurations
+ * Specify the @coffeekraken/s-front partytown available configurations
  *
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -16,7 +16,7 @@ export default function (api) {
     return {
         /**
          * @name          enabled
-         * @namespace     config.themePartytown
+         * @namespace     config.partytown
          * @type          Boolean
          * @default      false
          *
@@ -30,7 +30,7 @@ export default function (api) {
 
         /**
          * @name          forward
-         * @namespace     config.themePartytown
+         * @namespace     config.partytown
          * @type          Boolean
          * @default      []
          *

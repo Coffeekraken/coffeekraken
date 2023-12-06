@@ -77,7 +77,7 @@ export default function __diff(object1, object2, settings = {}) {
                 __isPlainObject(object1[_prop]) &&
                 __isPlainObject(object2[_prop])
             ) {
-                finalObj[_prop] = diff(
+                finalObj[_prop] = __diff(
                     object1[_prop],
                     object2[_prop],
                     settings,

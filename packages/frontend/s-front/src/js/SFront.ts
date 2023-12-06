@@ -4,7 +4,6 @@ import __SEnv from '@coffeekraken/s-env';
 import __SLog from '@coffeekraken/s-log';
 import { __getCookie, __setCookie } from '@coffeekraken/sugar/cookie';
 import { __isInIframe, __reloadStylesheets } from '@coffeekraken/sugar/dom';
-import { __isCrawler } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 
 import { ISFrontspec } from '@coffeekraken/s-frontspec';
@@ -15,8 +14,6 @@ import __SStdio, {
     __SStdioBasicAdapter,
     __SStdioConsoleSource,
 } from '@coffeekraken/s-stdio';
-
-import { __speedIndex } from '@coffeekraken/sugar/perf';
 
 // @ts-ignore
 if (import.meta?.hot) {
@@ -46,12 +43,10 @@ if (import.meta?.hot) {
  * @example         js
  * import __SFront from '@coffeekraken/s-front';
  * const front = new __SFront();
- * front.setLod(3);
  *
  * @event       s-front.legal.agree         Dispatched when the user has agree the legal terms throug the `front.agreeLegal` method
  * @event       s-front.legal.disagree         Dispatched when the user has disagree the legal terms throug the `front.disagreeLegal` method
  * @event       s-front.legal.change             Dispatched when the user legal has been changed
- * @event       s-front.lod.change          Dispatched when the lod leven has been changed
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -71,10 +66,10 @@ export interface ISFrontInitSettings {
 
 export interface ISFrontSettings extends ISFrontInitSettings {}
 
-export interface ISFrontSetLodSettings {
-    enabled: boolean;
-    $context: HTMLElement;
-}
+// export interface ISFrontSetLodSettings {
+//     enabled: boolean;
+//     $context: HTMLElement;
+// }
 
 export default class SFront extends __SClass {
     /**
@@ -105,7 +100,7 @@ export default class SFront extends __SClass {
     static init(settings?: Partial<ISFrontInitSettings>): SFront {
         const finalSettings = <ISFrontInitSettings>{
             id: 'default',
-            lod: {},
+            // lod: {},
             legal: {},
             partytown: {},
             ...(settings ?? {}),
@@ -184,9 +179,9 @@ export default class SFront extends __SClass {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _originalState = {
-        lod: {
-            level: undefined,
-        },
+        // lod: {
+        //     level: undefined,
+        // },
     };
     state = Object.assign({}, this._originalState);
 
@@ -256,7 +251,7 @@ export default class SFront extends __SClass {
         if (settings?.frontspec instanceof __SFrontspec) {
             frontspec = settings?.frontspec;
         } else {
-            frontspec = __SFrontspec.init(settings?.frontspec);
+            frontspec = new __SFrontspec(settings?.frontspec);
         }
 
         super(
@@ -265,10 +260,10 @@ export default class SFront extends __SClass {
                     id: 'default',
                     google: frontspec.get('google') ?? {},
                     partytown: frontspec.get('partytown') ?? {},
-                    lod: {
-                        stylesheet: 'link#global',
-                        ...(frontspec.get('lod') ?? {}),
-                    },
+                    // lod: {
+                    //     stylesheet: 'link#global',
+                    //     ...(frontspec.get('lod') ?? {}),
+                    // },
                     legal: {
                         cookieName: 's-legal',
                         defaultMetas: {},
@@ -300,9 +295,9 @@ export default class SFront extends __SClass {
         this.restore();
 
         // handle lod
-        if (this.frontspec.get('lod.enabled')) {
-            this._initLod();
-        }
+        // if (this.frontspec.get('lod.enabled')) {
+        //     this._initLod();
+        // }
 
         // init the tracking
         this._initTracking();
@@ -317,16 +312,16 @@ export default class SFront extends __SClass {
      * @since     2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    get lod(): {
-        level: number;
-    } {
-        return {
-            level:
-                this.state.lod?.level !== undefined
-                    ? this.state.lod.level
-                    : this.frontspec.get('lod.defaultLevel'),
-        };
-    }
+    // get lod(): {
+    //     level: number;
+    // } {
+    //     return {
+    //         level:
+    //             this.state.lod?.level !== undefined
+    //                 ? this.state.lod.level
+    //                 : this.frontspec.get('lod.defaultLevel'),
+    //     };
+    // }
 
     /**
      * @name            setLod
@@ -340,99 +335,99 @@ export default class SFront extends __SClass {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    setLod(
-        level: string | number,
-        settings?: Partial<ISFrontSetLodSettings>,
-    ): void {
-        const lodSettings = this.frontspec.get('lod');
+    // setLod(
+    //     level: string | number,
+    //     settings?: Partial<ISFrontSetLodSettings>,
+    // ): void {
+    //     const lodSettings = this.frontspec.get('lod');
 
-        if (!lodSettings?.enabled) {
-            return;
-        }
+    //     if (!lodSettings?.enabled) {
+    //         return;
+    //     }
 
-        const finalSettings = <ISFrontSetLodSettings>{
-            $context: document.querySelector('html'),
-            ...(settings ?? {}),
-        };
+    //     const finalSettings = <ISFrontSetLodSettings>{
+    //         $context: document.querySelector('html'),
+    //         ...(settings ?? {}),
+    //     };
 
-        console.verbose?.(
-            `<yellow>[lod]</yellow> Set lod (level of details) to <cyan>${level}</cyan>`,
-        );
+    //     console.verbose?.(
+    //         `<yellow>[lod]</yellow> Set lod (level of details) to <cyan>${level}</cyan>`,
+    //     );
 
-        // @ts-ignore
-        level = parseInt(`${level}`);
+    //     // @ts-ignore
+    //     level = parseInt(`${level}`);
 
-        // save in state
-        this.state.lod.level = level;
-        this.save();
+    //     // save in state
+    //     this.state.lod.level = level;
+    //     this.save();
 
-        let lodStylesheets = [],
-            $stylesheet;
+    //     let lodStylesheets = [],
+    //         $stylesheet;
 
-        if (lodSettings?.method === 'file') {
-            lodStylesheets = Array.from(
-                document.querySelectorAll('link[s-lod]'),
-            );
+    //     if (lodSettings?.method === 'file') {
+    //         lodStylesheets = Array.from(
+    //             document.querySelectorAll('link[s-lod]'),
+    //         );
 
-            if (lodSettings.stylesheet instanceof HTMLLinkElement) {
-                $stylesheet = lodSettings.stylesheet;
-            } else if (typeof lodSettings.stylesheet === 'string') {
-                $stylesheet = document.querySelector(lodSettings.stylesheet);
-            }
+    //         if (lodSettings.stylesheet instanceof HTMLLinkElement) {
+    //             $stylesheet = lodSettings.stylesheet;
+    //         } else if (typeof lodSettings.stylesheet === 'string') {
+    //             $stylesheet = document.querySelector(lodSettings.stylesheet);
+    //         }
 
-            // remove all none used stylesheets
-            lodStylesheets.forEach(($link) => {
-                const l = parseInt($link.getAttribute('s-lod'));
-                if (l > <number>level) {
-                    $link.remove();
-                }
-            });
-        }
+    //         // remove all none used stylesheets
+    //         lodStylesheets.forEach(($link) => {
+    //             const l = parseInt($link.getAttribute('s-lod'));
+    //             if (l > <number>level) {
+    //                 $link.remove();
+    //             }
+    //         });
+    //     }
 
-        // remove all the lod classes above the wanted level
-        for (let i = 0; i <= 10; i++) {
-            if (i > level) {
-                finalSettings.$context.classList.remove(`s-lod-${i}`);
-            }
-        }
+    //     // remove all the lod classes above the wanted level
+    //     for (let i = 0; i <= 10; i++) {
+    //         if (i > level) {
+    //             finalSettings.$context.classList.remove(`s-lod-${i}`);
+    //         }
+    //     }
 
-        // add the new classes
-        for (let i = 0; i <= level; i++) {
-            finalSettings.$context.classList.add('s-lod', `s-lod-${i}`);
+    //     // add the new classes
+    //     for (let i = 0; i <= level; i++) {
+    //         finalSettings.$context.classList.add('s-lod', `s-lod-${i}`);
 
-            if (lodSettings?.method === 'file' && $stylesheet) {
-                if (
-                    i > 0 &&
-                    !lodStylesheets.filter(($link) => {
-                        const l = parseInt($link.getAttribute('s-lod'));
-                        return l === i;
-                    }).length
-                ) {
-                    const $lodLink = $stylesheet.cloneNode();
-                    $lodLink.setAttribute(
-                        'href',
-                        $stylesheet
-                            .getAttribute('href')
-                            .replace(
-                                /([a-zA-Z0-9_-]+)\.css(\?.*)?/,
-                                `lod/$1.lod-${i}.css`,
-                            ),
-                    );
-                    $lodLink.setAttribute('s-lod', i);
-                    document.head.appendChild($lodLink);
-                }
-            }
-        }
+    //         if (lodSettings?.method === 'file' && $stylesheet) {
+    //             if (
+    //                 i > 0 &&
+    //                 !lodStylesheets.filter(($link) => {
+    //                     const l = parseInt($link.getAttribute('s-lod'));
+    //                     return l === i;
+    //                 }).length
+    //             ) {
+    //                 const $lodLink = $stylesheet.cloneNode();
+    //                 $lodLink.setAttribute(
+    //                     'href',
+    //                     $stylesheet
+    //                         .getAttribute('href')
+    //                         .replace(
+    //                             /([a-zA-Z0-9_-]+)\.css(\?.*)?/,
+    //                             `lod/$1.lod-${i}.css`,
+    //                         ),
+    //                 );
+    //                 $lodLink.setAttribute('s-lod', i);
+    //                 document.head.appendChild($lodLink);
+    //             }
+    //         }
+    //     }
 
-        // dispatch a change event
-        document.dispatchEvent(
-            new CustomEvent('s-front.lod.change', {
-                detail: {
-                    level,
-                },
-            }),
-        );
-    }
+    //     // dispatch a change event
+    //     document.dispatchEvent(
+    //         new CustomEvent('s-front.lod.change', {
+    //             detail: {
+    //                 level,
+    //             },
+    //         }),
+    //     );
+    // }
 
     /**
      * @name      lodConfig
@@ -443,74 +438,74 @@ export default class SFront extends __SClass {
      * @since     2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    _lodConfig: any;
-    get lodConfig(): any {
-        if (!this._lodConfig) {
-            this._lodConfig = this.frontspec.get('lod');
-        }
-        return this._lodConfig;
-    }
+    // _lodConfig: any;
+    // get lodConfig(): any {
+    //     if (!this._lodConfig) {
+    //         this._lodConfig = this.frontspec.get('lod');
+    //     }
+    //     return this._lodConfig;
+    // }
 
     /**
      * This method takes care of initializing the lod (level of details) features
      * like the "botLevel", lod by speedIndex, etc...
      */
-    private _initLod() {
-        // setTimeout(() => {
-        if (!__SEnv.is('production') && !__isInIframe()) {
-            console.log(
-                '<yellow>[SFront]</yellow> Initializing <magenta>lod</magenta> (level of details) with these settings',
-                this.frontspec.get('lod'),
-            );
-        }
+    // private _initLod() {
+    //     // setTimeout(() => {
+    //     if (!__SEnv.is('production') && !__isInIframe()) {
+    //         console.log(
+    //             '<yellow>[SFront]</yellow> Initializing <magenta>lod</magenta> (level of details) with these settings',
+    //             this.frontspec.get('lod'),
+    //         );
+    //     }
 
-        // check if is a crawler
-        const isCrawler = __isCrawler();
+    //     // check if is a crawler
+    //     const isCrawler = __isCrawler();
 
-        // check if is a crawler and that we have a botLevel config
-        if (isCrawler && this.lodConfig.botLevel !== undefined) {
-            this.setLod(this.lodConfig.botLevel);
-        }
+    //     // check if is a crawler and that we have a botLevel config
+    //     if (isCrawler && this.lodConfig.botLevel !== undefined) {
+    //         this.setLod(this.lodConfig.botLevel);
+    //     }
 
-        // is a lod is saved in state
-        if (
-            this.state.lod.level !== undefined &&
-            this.state.lod.level !== null
-        ) {
-            this.setLod(this.state.lod.level);
-            return;
-        }
+    //     // is a lod is saved in state
+    //     if (
+    //         this.state.lod.level !== undefined &&
+    //         this.state.lod.level !== null
+    //     ) {
+    //         this.setLod(this.state.lod.level);
+    //         return;
+    //     }
 
-        // set lod level
-        this.setLod(this.frontspec.lod.defaultLevel);
+    //     // set lod level
+    //     this.setLod(this.frontspec.lod.defaultLevel);
 
-        // if the user does not have selected a specific lod
-        // we check which lod is the most suited for his
-        // computer using the "speedIndex" calculated value
-        if (
-            !isCrawler &&
-            this.state.lod.level === undefined &&
-            this.frontspec.lod.defaultLevel === undefined
-        ) {
-            const speedIndex = __speedIndex();
-            let suitedLod = 0;
+    //     // if the user does not have selected a specific lod
+    //     // we check which lod is the most suited for his
+    //     // computer using the "speedIndex" calculated value
+    //     if (
+    //         !isCrawler &&
+    //         this.state.lod.level === undefined &&
+    //         this.frontspec.lod.defaultLevel === undefined
+    //     ) {
+    //         const speedIndex = __speedIndex();
+    //         let suitedLod = 0;
 
-            // get the higher lod depending on the speedIndex
-            for (let [lod, lodObj] of Object.entries(
-                this.lodConfig.levels ?? {},
-            )) {
-                if (lodObj.speedIndex > speedIndex) {
-                    break;
-                }
-                suitedLod = parseInt(lod);
-            }
+    //         // get the higher lod depending on the speedIndex
+    //         for (let [lod, lodObj] of Object.entries(
+    //             this.lodConfig.levels ?? {},
+    //         )) {
+    //             if (lodObj.speedIndex > speedIndex) {
+    //                 break;
+    //             }
+    //             suitedLod = parseInt(lod);
+    //         }
 
-            // set the suited calculated lod
-            this.setLod(suitedLod);
-            return;
-        }
-        // });
-    }
+    //         // set the suited calculated lod
+    //         this.setLod(suitedLod);
+    //         return;
+    //     }
+    //     // });
+    // }
 
     /**
      * Check if the tracking has been inited or not

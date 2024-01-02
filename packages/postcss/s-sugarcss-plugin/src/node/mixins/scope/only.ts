@@ -66,9 +66,5 @@ export default function ({
     };
 
     atRule.name = 'media';
-    atRule.params = `s-scope-only:${finalParams.scope.join(',')}`;
-
-    registerPostProcessor(() => {
-        atRule.replaceWith(atRule.nodes);
-    });
+    atRule.params = `s-scope-only-${finalParams.scope.join(',')}`;
 }

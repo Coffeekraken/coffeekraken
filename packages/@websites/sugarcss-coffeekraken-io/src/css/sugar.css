@@ -6,31 +6,29 @@
 /* main sugar classes */
 /* we need to load them all to display correctly the documentation */
 
-@s.scope.only 'bare' {
-    @s.ui.tooltip.classes;
-    @s.ui.dropdown.classes;
-    @s.ui.badge.classes;
-    @s.ui.tabs.classes;
-    @s.ui.button.classes;
-    @s.ui.gauge.classes;
-    @s.ui.avatar.classes;
-    @s.ui.backdrop.classes;
-    @s.ui.blockquote.classes;
-    @s.ui.checkbox.classes;
-    @s.ui.fstree.classes;
-    @s.ui.input.classes;
-    @s.ui.inputcontainer.classes;
-    @s.ui.label.classes;
-    @s.ui.list.classes;
-    @s.ui.loader.classes;
-    @s.ui.media.classes;
-    @s.ui.radio.classes;
-    @s.ui.range.classes;
-    @s.ui.select.classes;
-    @s.ui.switch.classes;
-    @s.ui.table.classes;
-    @s.ui.toggle.classes;
-}
+@s.ui.avatar.classes;
+@s.ui.dropdown.classes;
+@s.ui.tooltip.classes;
+@s.ui.badge.classes;
+@s.ui.tabs.classes;
+@s.ui.button.classes;
+@s.ui.gauge.classes;
+@s.ui.backdrop.classes;
+@s.ui.blockquote.classes;
+@s.ui.checkbox.classes;
+@s.ui.fstree.classes;
+@s.ui.input.classes;
+@s.ui.inputcontainer.classes;
+@s.ui.label.classes;
+@s.ui.list.classes;
+@s.ui.loader.classes;
+@s.ui.media.classes;
+@s.ui.radio.classes;
+@s.ui.range.classes;
+@s.ui.select.classes;
+@s.ui.switch.classes;
+@s.ui.table.classes;
+@s.ui.toggle.classes;
 
 @s.container.classes;
 @s.disabled.classes;
@@ -83,10 +81,10 @@
 @s.ui.clipboardcopy;
 
 /* mobile specific classes */
-@s.media.classes mobile {
+/* @s.media.classes mobile {
     @s.layout.classes;
     @s.typo.classes;
-}
+} */
 
 /* icons */
 @s.icon.classes (

@@ -60,10 +60,11 @@ export default function ({
     replaceWith: Function;
     sharedData: any;
 }) {
-    const finalParams = <SSugarcssPluginScopeExcludeMixinParams>{
+    const finalParams = <SSugarcssPluginScopeOnlyMixinParams>{
         scope: [],
         ...(params ?? {}),
     };
 
-    atRule._scopeExclude = atRule._scopeExclude ?? finalParams.scope;
+    atRule.name = 'media';
+    atRule.params = `s-scope-exclude:${finalParams.scope.join(',')}`;
 }

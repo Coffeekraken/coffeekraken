@@ -113,7 +113,7 @@ export default function ({
     `);
 
     vars.push(`
-        @s-scope 'lnf' {
+        @s.scope 'lnf' {
             &[notifications] {
                 &:after {
                     background: s.color(current);

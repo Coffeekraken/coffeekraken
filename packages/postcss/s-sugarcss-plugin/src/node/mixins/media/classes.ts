@@ -145,7 +145,7 @@ export default function ({
             .replace('@media ', '')}`;
         newRule._sMedia = media;
         refNode.parent.insertAfter(refNode, newRule);
-        if (refNode.name.startsWith('sugar')) {
+        if (refNode.name.startsWith('s.')) {
             refNode.remove();
         }
         refNode = newRule;

@@ -67,22 +67,31 @@ export default function ({
     };
 
     atRule.name = 'media';
-    atRule.params = `s-scope:${finalParams.scope.join(',')}`;
+    atRule.params = `s-scope-${finalParams.scope.join(',')}`;
 
     registerPostProcessor((root) => {
         let currentRule = atRule.parent;
 
-        while (currentRule !== root) {
+        while (currentRule && currentRule !== root) {
             if (!currentRule.name) {
                 currentRule = currentRule.parent;
                 continue;
             }
-            if (currentRule.params.startsWith('s-scope:only:')) {
+            if (currentRule.params.startsWith('s-scope-only-')) {
                 const onlyArray = currentRule.params
                     .trim()
-                    .replace('s-scope:only:', '')
+                    .replace('s-scope-only-', '')
                     .split(',');
+
                 if (!__intersection(finalParams.scope, onlyArray).length) {
+                    atRule.remove();
+                }
+            } else if (currentRule.params.startsWith('s-scope-exclude-')) {
+                const excludeArray = currentRule.params
+                    .trim()
+                    .replace('s-scope-exclude-', '')
+                    .split(',');
+                if (__intersection(finalParams.scope, excludeArray).length) {
                     atRule.remove();
                 }
             }

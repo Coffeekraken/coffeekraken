@@ -98,7 +98,7 @@ function default_1({ params, atRule, replaceWith, }) {
         }
     `);
     vars.push(`
-        @s-scope 'lnf' {
+        @s.scope 'lnf' {
             &[notifications] {
                 &:after {
                     background: s.color(current);

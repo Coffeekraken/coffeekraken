@@ -188,11 +188,14 @@ export default function ({
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
-    ).code(
+    );
+
+    vars.code(`@s.scope 'bare' {`);
+    vars.code(
         `
-            @s.scope.exclude 'interactive' {
-                .s-avatar {
-                    @s.ui.avatar;
+            .s-avatar {
+                @s.scope.only 'bare' {
+                    @s.ui.avatar();
                 }
             }
     `,
@@ -200,6 +203,7 @@ export default function ({
             type: 'CssClass',
         },
     );
+    vars.code(`}`);
 
     vars.code(`@s.scope 'interactive' {`);
     vars.comment(
@@ -221,7 +225,9 @@ export default function ({
     ).code(
         `
           .s-avatar-interactive {
+            @s.scope.only 'interactive' {
               @s.ui.avatar();
+            }
           }
       `,
         { type: 'CssClass' },

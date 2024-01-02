@@ -257,7 +257,9 @@ export default function ({
         ).code(
             `
         .${cls} {
-            @s.ui.checkbox($lnf: ${lnf});
+            @s.scope.only 'lnf' {
+                @s.ui.checkbox($lnf: ${lnf});
+            }
         }
         `,
             {

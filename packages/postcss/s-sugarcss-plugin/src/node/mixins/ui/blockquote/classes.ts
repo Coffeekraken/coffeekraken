@@ -144,7 +144,9 @@ export default function ({
         `
             @s.scope 'bare' {
                 .s-blockquote {
-                    @s.ui.blockquote;
+                    @s.scope.only 'bare' {
+                        @s.ui.blockquote;
+                    }
                 }
             }
     `,

@@ -166,9 +166,8 @@ export default function ({
         `
         @s.scope 'bare' {
             .s-btn {
-                @s.scope.only 'bare' {
+                
                     @s.ui.button;
-                }
             }
         }
     `,
@@ -230,7 +229,9 @@ export default function ({
         ).code(
             `
                 .${cls} {
-                    @s.ui.button($lnf: ${lnf});
+                    @s.scope.only 'lnf' {
+                        @s.ui.button($lnf: ${lnf});
+                    }
                 }`,
             {
                 type: 'CssClass',

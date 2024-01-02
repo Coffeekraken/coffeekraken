@@ -312,7 +312,9 @@ export default function ({
     vars.code(
         () => `
             .s-tooltip {
-                @s.ui.tooltip;
+                @s.scope.only 'bare' {
+                    @s.ui.tooltip;
+                }
             }
         `,
         { type: 'CssClass' },
@@ -348,7 +350,9 @@ export default function ({
         vars.code(
             () => `
                 .s-tooltip${finalParams.defaultLnf === lnf ? '' : `-${lnf}`} {
-                    @s.ui.tooltip($lnf: ${lnf});
+                    @s.scope.only 'lnf' {
+                        @s.ui.tooltip($lnf: ${lnf});
+                    }
                 }
             `,
             { type: 'CssClass' },
@@ -414,7 +418,9 @@ export default function ({
         () => `
         .s-tooltip[position="top"],
         .s-tooltip {
-            @s.ui.tooltip($position: top);
+            @s.scope.only 'position' {
+                @s.ui.tooltip($position: top);
+            }
         }
     `,
         { type: 'CssClass' },
@@ -443,7 +449,9 @@ export default function ({
         () => `
         .s-tooltip[position="right"],
         .s-tooltip-right {
-            @s.ui.tooltip($position: right);
+            @s.scope.only 'position' {
+                @s.ui.tooltip($position: right);
+            }
         }
     `,
         { type: 'CssClass' },
@@ -472,7 +480,9 @@ export default function ({
         () => `
         .s-tooltip[position="left"],
         .s-tooltip-left {
-            @s.ui.tooltip($position: left);
+            @s.scope.only 'position' {
+                @s.ui.tooltip($position: left);
+            }
         }
     `,
         { type: 'CssClass' },
@@ -501,7 +511,9 @@ export default function ({
         () => `
         .s-tooltip[position="bottom"],
         .s-tooltip-bottom {
-            @s.ui.tooltip($position: bottom);
+            @s.scope.only 'position' {
+                @s.ui.tooltip($position: bottom);
+            }
         }
     `,
         { type: 'CssClass' },

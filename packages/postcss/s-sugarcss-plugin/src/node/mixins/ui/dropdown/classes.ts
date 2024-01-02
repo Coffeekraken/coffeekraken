@@ -238,7 +238,9 @@ export default function ({
     ).code(
         `
             .s-dropdown {
-                @s.ui.dropdown;
+                @s.scope.only 'bare' {
+                    @s.ui.dropdown;
+                }
             }
             `,
         {
@@ -274,7 +276,9 @@ export default function ({
     ).code(
         `
             .s-dropdown {
-                @s.ui.dropdown;
+                @s.scope.only 'lnf' {
+                    @s.ui.dropdown;
+                }
             }
             `,
         {
@@ -283,7 +287,10 @@ export default function ({
     );
     vars.code('}');
 
-    vars.code(`@s.scope 'position' {`);
+    vars.code(`
+        @s.scope 'position' {
+            @s.scope.only 'position' {        
+    `);
 
     vars.comment(
         () => `/**
@@ -494,7 +501,10 @@ export default function ({
             type: 'CssClass',
         },
     );
-    vars.code('}');
+    vars.code(`
+            }
+        }
+    `);
 
     vars.code(`@s.scope 'bare' {`);
 

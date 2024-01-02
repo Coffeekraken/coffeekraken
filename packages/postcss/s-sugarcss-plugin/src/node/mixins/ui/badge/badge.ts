@@ -13,8 +13,10 @@ import __STheme from '@coffeekraken/s-theme';
  * This mixin allows you to generate the "badge" UI component css.
  *
  * @param       {'default'|'outline'}       [lnf='solid']]       The lnf you want to generate
- * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.badge
  *
@@ -35,21 +37,12 @@ class SSugarcssPluginUiBadgeInterface extends __SInterface {
                 values: ['solid', 'outline'],
                 default: __STheme.current.get('ui.badge.defaultLnf'),
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
         };
     }
 }
 
 export interface ISSugarcssPluginUiBadgeParams {
     lnf: 'solid' | 'outline';
-    scope: ('bare' | 'lnf')[];
 }
 
 export { SSugarcssPluginUiBadgeInterface as interface };
@@ -64,41 +57,39 @@ export default function ({
 }) {
     const finalParams: ISSugarcssPluginUiBadgeParams = {
         lnf: 'solid',
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars: string[] = [];
 
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`   
-        display: inline-flex;
-        align-items: center;
-        line-height: 1;
-        white-space: nowrap;
-        user-select: none;
+    vars.push(`   
+        @s.scope 'bare' {
+            display: inline-flex;
+            align-items: center;
+            line-height: 1;
+            white-space: nowrap;
+            user-select: none;
+        }
     `);
-    }
 
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
-            font-size: s.scalable(0.75em);
-            padding-inline: s.padding(20);
-            padding-block: s.padding(10);
-            vertical-align: baseline;
-            font-weight: bold;
-            text-rendering: optimizeLegibility;
-            @s.shape();
+    vars.push(`@s.scope 'lnf' {`);
+    vars.push(`
+                font-size: s.scalable(0.75em);
+                padding-inline: s.padding(20);
+                padding-block: s.padding(10);
+                vertical-align: baseline;
+                font-weight: bold;
+                text-rendering: optimizeLegibility;
+                @s.shape();
 
-            & > * {
-                @s.color(main);
-            }
-
+                & > * {
+                    @s.color(main);
+                }
         `);
 
-        switch (finalParams.lnf) {
-            case 'outline':
-                vars.push(`
+    switch (finalParams.lnf) {
+        case 'outline':
+            vars.push(`
                 position: relative;
                 color: s.color(current);
                 background: none !important;
@@ -116,15 +107,16 @@ export default function ({
                     @s.shape();
                 }
             `);
-                break;
-            default:
-                vars.push(`
+            break;
+        default:
+            vars.push(`
                      color: s.color(current, foreground);
                      background-color: s.color(current);
                 `);
-                break;
-        }
+            break;
     }
+
+    vars.push(`}`);
 
     return vars;
 }

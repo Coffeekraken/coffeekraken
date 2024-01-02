@@ -15,8 +15,11 @@ import { __keysFirst } from '@coffeekraken/sugar/array';
  *
  * @param       {('solid'|'underline')[]}                           [lnfs=['solid','underline']]         The lnf(s) you want to generate
  * @param       {'solid'}                [defaultLnf='theme.ui.form.defaultLnf']           The default lnf you want
- * @param       {('bare'|'lnf'|'vr')[]}        [scope=['bare', 'lnf', 'vr']]      The scope you want to generate
  * @return      {String}            The generated css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
+ * @scope       vr              Vertical rhythm css
  *
  * @snippet         @s.ui.input.classes
  *
@@ -38,14 +41,6 @@ class SSugarcssPluginUiFormClassesInterface extends __SInterface {
                 type: 'String',
                 default: __STheme.current.get('ui.form.defaultLnf'),
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'vr'],
-                default: ['bare', 'lnf', 'vr'],
-            },
         };
     }
 }
@@ -53,7 +48,6 @@ class SSugarcssPluginUiFormClassesInterface extends __SInterface {
 export interface ISSugarcssPluginUiFormClassesParams {
     lnfs: string[];
     defaultLnf: 'solid' | 'underline';
-    scope: ('bare' | 'lnf' | 'vr')[];
 }
 
 export { SSugarcssPluginUiFormClassesInterface as interface };
@@ -72,7 +66,6 @@ export default function ({
     const finalParams: ISSugarcssPluginUiFormClassesParams = {
         lnfs: [],
         defaultLnf: 'solid',
-        scope: [],
         ...params,
     };
 
@@ -179,9 +172,9 @@ export default function ({
     `,
     );
 
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(
-            () => `/**
+    vars.code(`@s.scope 'bare' {`);
+    vars.comment(
+        () => `/**
         * @name           s-input
         * @namespace          sugar.style.ui.input
         * @type           CssClass
@@ -195,27 +188,29 @@ export default function ({
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `,
-        ).code(
-            `
+    ).code(
+        `
         .s-input {
-            @s.ui.input($scope: bare);
+            @s.scope.only 'bare' {
+                @s.ui.input;
+            }
         }
         `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.includes('lnf')) {
-        finalParams.lnfs.forEach((lnf) => {
-            const isDefaultStyle = finalParams.defaultLnf === lnf;
+    vars.code(`@s.scope 'lnf' {`);
+    finalParams.lnfs.forEach((lnf) => {
+        const isDefaultStyle = finalParams.defaultLnf === lnf;
 
-            const styleCls = isDefaultStyle ? '' : `.s-input-${lnf}`;
-            const cls = `.s-input${styleCls}`;
+        const styleCls = isDefaultStyle ? '' : `.s-input-${lnf}`;
+        const cls = `.s-input${styleCls}`;
 
-            vars.comment(
-                () => `/**
+        vars.comment(
+            () => `/**
             * @name           ${cls}
             * @namespace          sugar.style.ui.input
             * @type           CssClass
@@ -228,18 +223,20 @@ export default function ({
             * @since      2.0.0
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
-            ).code(
-                [
-                    `${cls}:not(.s-bare) {`,
-                    ` @s.ui.input($lnf: ${lnf}, $scope: lnf);`,
-                    `}`,
-                ].join('\n'),
-                {
-                    type: 'CssClass',
-                },
-            );
-        });
-    }
+        ).code(
+            [
+                `${cls} {`,
+                `   @s.scope.only 'lnf' {`,
+                `       @s.ui.input($lnf: ${lnf});`,
+                `   }`,
+                `}`,
+            ].join('\n'),
+            {
+                type: 'CssClass',
+            },
+        );
+    });
+    vars.code('}');
 
     return vars;
 }

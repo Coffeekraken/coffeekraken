@@ -77,11 +77,6 @@ class SSugarcssPluginLayoutInterface extends __SInterface {
                 values: ['start', 'end', 'center', 'stretch'],
                 default: 'stretch',
             },
-            scope: {
-                type: 'Array<String>',
-                values: ['bare', 'lnf', 'gap', 'align', 'justify'],
-                default: ['bare', 'lnf', 'gap', 'align', 'justify'],
-            },
         };
     }
 }
@@ -94,7 +89,6 @@ export interface ISSugarcssPluginLayoutParams {
     gapBetween: boolean;
     align: 'start' | 'end' | 'center' | 'stretch';
     justify: 'start' | 'end' | 'center' | 'stretch';
-    scope: string[];
 }
 
 export { SSugarcssPluginLayoutInterface as interface };
@@ -220,45 +214,45 @@ export default function ({
 
     const vars: string[] = [];
 
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(
-            `
+    vars.push(`@s.scope 'bare' {`);
+
+    vars.push(
+        `
         display: grid;
         grid-template-columns: ${colsStatement.join(' ')};
         grid-template-rows: auto;
       `,
-        );
-    }
+    );
 
-    if (finalParams.scope.indexOf('align') !== -1) {
+    if (finalParams.align) {
         vars.push(`
-      align-items: ${finalParams.align};
-    `);
+                align-items: ${finalParams.align};
+            `);
     }
 
-    if (finalParams.scope.indexOf('justify') !== -1) {
+    if (finalParams.justify) {
         vars.push(`
       justify-items: ${finalParams.justify};
     `);
     }
 
-    if (finalParams.scope.indexOf('gap') !== -1) {
-        if (finalParams.gap) {
-            vars.push(`
+    if (finalParams.gap) {
+        vars.push(`
                 gap: s.margin(${finalParams.gap});
             `);
-        }
-        if (finalParams.columnGap) {
-            vars.push(`
+    }
+    if (finalParams.columnGap) {
+        vars.push(`
                 column-gap: s.margin(${finalParams.columnGap});
             `);
-        }
-        if (finalParams.rowGap) {
-            vars.push(`
+    }
+    if (finalParams.rowGap) {
+        vars.push(`
                 row-gap: s.margin(${finalParams.rowGap});
             `);
-        }
     }
+
+    vars.push('}');
 
     const decls = postcssApi.parse(vars.join('\n'));
 
@@ -272,22 +266,18 @@ export default function ({
 
     atRule.replaceWith(decls);
 
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        areas.forEach((areaId) => {
-            // let selector = `.coco:nth-child(${areaId})`;
-            // const newSelectors: string[] = [];
-            const newRule = new postcssApi.Rule({
-                selector: `> *:nth-child(${areaId})`,
-                nodes: postcssApi.parse(`
+    areas.forEach((areaId) => {
+        const newRule = new postcssApi.Rule({
+            selector: `> *:nth-child(${areaId})`,
+            nodes: postcssApi.parse(`
                     grid-column-start: ${colsStartByArea[areaId]};
                     grid-column-end: ${colsEndByArea[areaId] + 1};
                     grid-row-start: ${rowsStartByArea[areaId]};
                     grid-row-end: ${rowsEndByArea[areaId] + 1};
 
                 `).nodes,
-            });
-
-            parentNode.prepend(newRule);
         });
-    }
+
+        parentNode.prepend(newRule);
+    });
 }

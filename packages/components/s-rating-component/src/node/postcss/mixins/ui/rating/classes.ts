@@ -3,22 +3,11 @@ import __STheme from '@coffeekraken/s-theme';
 
 class postcssUiRatingClassesInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'vr'],
-                default: ['bare', 'lnf', 'vr'],
-            },
-        };
+        return {};
     }
 }
 
-export interface IPostcssUiRatingClassesParams {
-    scope: ('bare' | 'lnf' | 'vr')[];
-}
+export interface IPostcssUiRatingClassesParams {}
 
 export { postcssUiRatingClassesInterface as interface };
 
@@ -30,6 +19,10 @@ export { postcssUiRatingClassesInterface as interface };
  * @status              beta
  *
  * This mixin represent rating
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
+ * @scope       vr              Vertical rhythm css
  *
  * @snippet      @s.ui.rating.classes($1);
  *
@@ -52,28 +45,29 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiRatingClassesParams = {
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars = new CssVars();
 
-    if (finalParams.scope.includes('bare')) {
-        vars.code(
-            `
+    vars.code(`@s.scope 'bare' {`);
+    vars.code(
+        `
         .s-rating {
-            @s.ui.rating($scope: bare);
+            @s.scope.only 'bare' {
+                @s.ui.rating;
+            }
         }
     `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.includes('lnf')) {
-        vars.comment(
-            `/**
+    vars.code(`@s.scope 'lnf' {`);
+    vars.comment(
+        `/**
             * @name          .s-rating[lnf="default"]
             * @namespace          sugar.style.ui.rating
             * @type           CssClass
@@ -86,20 +80,22 @@ export default function ({
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
-        ).code(
-            `
-            .s-rating[lnf="default"]:not(.s-bare) {
-                @s.ui.rating($scope: lnf);
+    ).code(
+        `
+            .s-rating[lnf="default"] {
+                @s.scope.only 'lnf' {
+                    @s.ui.rating;
+                }
             }`,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.comment(
-            `/**
+    vars.code(`@s.scope 'vr' {`);
+    vars.comment(
+        `/**
             * @name           s-rhythm:vertical
             * @namespace          sugar.style.ui.rating
             * @type           CssClass
@@ -116,8 +112,8 @@ export default function ({
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
-        ).code(
-            `@s.rhythm.vertical {
+    ).code(
+        `@s.rhythm.vertical {
                 .s-rating {
                     ${__STheme.current.jsObjectToCssProperties(
                         __STheme.current.get('ui.rating.rhythmVertical'),
@@ -125,11 +121,11 @@ export default function ({
                 } 
             }
         `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
     return vars;
 }

@@ -2,22 +2,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class postcssUiDatetimePickerInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'theme'],
-                default: ['bare', 'lnf', 'theme'],
-            },
-        };
+        return {};
     }
 }
 
-export interface IPostcssUiDatetimePickerParams {
-    scope: ('bare' | 'lnf' | 'theme')[];
-}
+export interface IPostcssUiDatetimePickerParams {}
 
 export { postcssUiDatetimePickerInterface as interface };
 
@@ -29,6 +18,10 @@ export { postcssUiDatetimePickerInterface as interface };
  * @status        beta
  *
  * Apply the datetime picker style to any s-datetime-picker element
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
+ * @scope       theme           The highlightjs theme css
  *
  * @snippet         @s.ui.codeExample($1);
  *
@@ -53,15 +46,14 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiDatetimePickerParams = {
-        scope: ['bare', 'lnf', 'theme'],
         ...params,
     };
 
     const vars: string[] = [];
 
     // bare
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
+    vars.push(`@s.scope 'bare' {`);
+    vars.push(`
 
             .s-code-example_content {
                 --paddingBlock: s.padding(ui.codeExample.paddingBlock);
@@ -89,14 +81,12 @@ export default function ({
             }
 
     `);
-    }
+    vars.push('}');
 
     // lnf
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
-        `);
+    vars.push(`@s.scope 'lnf' {`);
 
-        vars.push(`
+    vars.push(`
             @s.color(main);
 
                 .s-code-example_content {
@@ -130,13 +120,14 @@ export default function ({
                 }
 
         `);
-    }
 
-    if (finalParams.scope.includes('theme')) {
-        vars.push(`
-            @s.highlightjs.theme;
+    vars.push('}');
+
+    vars.push(`
+            @s.scope 'theme' {
+                @s.highlightjs.theme;
+            }
         `);
-    }
 
     return vars;
 }

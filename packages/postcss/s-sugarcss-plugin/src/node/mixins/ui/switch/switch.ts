@@ -13,8 +13,10 @@ import __STheme from '@coffeekraken/s-theme';
  * Apply the switch style to any element
  *
  * @param       {'solid'}                           [style='theme.ui.form.defaultLnf']         The style you want to generate
- * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.switch
  *
@@ -35,21 +37,12 @@ class SSugarcssPluginUiSwitchMixinInterface extends __SInterface {
                 values: ['solid'],
                 default: __STheme.current.get('ui.form.defaultLnf'),
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
         };
     }
 }
 
 export interface ISSugarcssPluginUiSwitchMixinParams {
     lnf: 'solid';
-    scope: ('bare' | 'lnf')[];
 }
 
 export { SSugarcssPluginUiSwitchMixinInterface as interface };
@@ -65,15 +58,14 @@ export default function ({
 }) {
     const finalParams: ISSugarcssPluginUiSwitchMixinParams = {
         lnf: 'solid',
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars: string[] = [];
 
     // bare
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
+    vars.push(`@s.scope 'bare' {`);
+    vars.push(`
         
         font-size: clamp(s.scalable(20px), s.scalable(1rem), 999rem);
 
@@ -152,12 +144,12 @@ export default function ({
         }
 
     `);
-    }
+    vars.push('}');
 
     switch (finalParams.lnf) {
         default:
-            if (finalParams.scope.indexOf('lnf') !== -1) {
-                vars.push(`
+            vars.push(`@s.scope 'lnf' {`);
+            vars.push(`
              
                     &:before {
                         background: var(--track-color-inactive);
@@ -179,20 +171,20 @@ export default function ({
                     }
 
                 `);
-            }
+            vars.push('}');
 
             break;
     }
 
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
+    vars.push(`@s.scope 'lnf' {`);
+    vars.push(`
                     @s.shape();
                     &:after,
                     &:before {
                         @s.shape();
                     }
                 `);
-    }
+    vars.push('}');
 
     return vars;
 }

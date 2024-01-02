@@ -1,6 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 
-class SSugarcssPluginScopeExcludeMixinInterface extends __SInterface {
+class SSugarcssPluginScopEexcludeMixinInterface extends __SInterface {
     static get _definition() {
         return {
             scope: {
@@ -9,13 +9,13 @@ class SSugarcssPluginScopeExcludeMixinInterface extends __SInterface {
                     splitChars: [',', ' '],
                 },
                 description:
-                    "Specify the scope(s) you don't want to generate for the enclosed mixins calls",
+                    "Specify the scope(s) you don't want to generate for the enclosed css",
                 required: true,
             },
         };
     }
 }
-export { SSugarcssPluginScopeExcludeMixinInterface as interface };
+export { SSugarcssPluginScopEexcludeMixinInterface as interface };
 
 export interface SSugarcssPluginScopeExcludeMixinParams {
     scope: string[];
@@ -29,7 +29,7 @@ export interface SSugarcssPluginScopeExcludeMixinParams {
  * @platform      postcss
  * @status        beta
  *
- * This mixin allows you to set the "scope(s)" you dont't want to all the called mixins that have a "$scope" parameter like `@s.ui.button`, `@s.ui.avatar`, etc...
+ * This mixin allows you to set the "scope(s)" you don't want to all the enclosed css
  *
  * @return      {Css}         The generated css
  *
@@ -52,31 +52,18 @@ export default function ({
     atRule,
     registerPostProcessor,
     replaceWith,
+    sharedData,
 }: {
     params: Partial<SSugarcssPluginScopeExcludeMixinParams>;
     atRule: any;
     registerPostProcessor: Function;
     replaceWith: Function;
+    sharedData: any;
 }) {
     const finalParams = <SSugarcssPluginScopeExcludeMixinParams>{
         scope: [],
         ...(params ?? {}),
     };
 
-    registerPostProcessor((root) => {
-        root.walkAtRules(/sugar\.scope/, (at) => {
-            at.replaceWith(at.nodes);
-        });
-    });
-
-    atRule.walkAtRules((n) => {
-        // console.log('d', n.name);
-        if (n.type !== 'atrule' || !n.name.startsWith('sugar.')) {
-            return;
-        }
-        // save the unwanted scope(s) inside the atRule.
-        // this will be handled by the SSugarcssPlugin main file
-        // to compute the final "scope" param to pass
-        n._scopeExclude = finalParams.scope;
-    });
+    atRule._scopeExclude = atRule._scopeExclude ?? finalParams.scope;
 }

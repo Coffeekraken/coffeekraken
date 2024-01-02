@@ -59,7 +59,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
        */
       `).code(`
       .s-layout-${id} {
-        @s.layout(${layout}, $scope: bare);
+        @s.layout(${layout});
       }
     `, { type: 'CssClass' });
     });

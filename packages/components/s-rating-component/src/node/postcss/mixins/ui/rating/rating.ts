@@ -2,22 +2,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class postcssUiRatingInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
-        };
+        return {};
     }
 }
 
-export interface IPostcssUiRatingParams {
-    scope: ('bare' | 'lnf')[];
-}
+export interface IPostcssUiRatingParams {}
 
 export { postcssUiRatingInterface as interface };
 
@@ -29,6 +18,9 @@ export { postcssUiRatingInterface as interface };
  * @status        beta
  *
  * Apply the datetime picker style to any s-rating element
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.rating($1);
  *
@@ -53,22 +45,16 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiRatingParams = {
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars: string[] = [];
 
     // bare
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
-
-    `);
-    }
 
     // lnf
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
+    vars.push(`@s.scope 'lnf' {`);
+    vars.push(`
 
             .s-rating_icons-wrapper {
                 font-size: s.scalable(1em);
@@ -87,7 +73,7 @@ export default function ({
             }
 
         `);
-    }
+    vars.push('}');
 
     return vars;
 }

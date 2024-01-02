@@ -12,8 +12,10 @@ import __STheme from '@coffeekraken/s-theme';
  * Apply the select style to any HTMLSelectElement
  *
  * @param       {'solid'|'underline'}                           [style='theme.ui.form.defaultLnf']         The lnf you want to generate
- * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.select
  *
@@ -33,86 +35,82 @@ class SSugarcssPluginUiFormSelectInterface extends __SInterface {
                 values: ['solid', 'underline'],
                 default: __STheme.current.get('ui.form.defaultLnf'),
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
         };
     }
 }
 export { SSugarcssPluginUiFormSelectInterface as interface };
 export default function ({ params, atRule, replaceWith, }) {
-    const finalParams = Object.assign({ lnf: 'solid', scope: ['bare', 'lnf'], outline: true }, params);
+    const finalParams = Object.assign({ lnf: 'solid', outline: true }, params);
     const vars = [];
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
-            @s.ui.base(select, $scope: bare);
-            position: relative;
-            -webkit-appearance: none;
-            appearance: none;
-            line-height: 1;
-            outline: 0;
+    vars.push(`@s.scope 'bare' {`);
+    vars.push(`
+        @s.scope.only 'bare' {
+            @s.ui.base(select);
+        }
+        position: relative;
+        -webkit-appearance: none;
+        appearance: none;
+        line-height: 1;
+        outline: 0;
             `);
-    }
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        if (finalParams.outline) {
-            vars.push(`
+    vars.push('}');
+    vars.push(`@s.scope 'lnf' {`);
+    if (finalParams.outline) {
+        vars.push(`
                 &:focus:not(:hover) {
                     @s.outline;
                 }
             `);
+    }
+    vars.push(`
+        @s.scope.only 'bare' {
+            @s.ui.base(select);
         }
-        vars.push(`
-            @s.ui.base(select, $scope: lnf);
-            @s.shape();
-            overflow: hidden;
+        @s.shape();
+        overflow: hidden;
 
-            &.placeholder,
-            &:invalid {
-                color: s.color(main, text, --alpha 0.3);
+        &.placeholder,
+        &:invalid {
+            color: s.color(main, text, --alpha 0.3);
+        }
+
+        &[multiple] option:checked,
+        &[multiple] option[selected] {
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            appearance: none;
+            background: s.color(current, --alpha 0.5);
+            color: s.color(current, uiForeground);
+        }
+        &[multiple]:focus option:checked,
+        &[multiple]:focus option[selected] {
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            appearance: none;
+            background: s.color(current, ui);
+            color: s.color(current, uiForeground);
+        }
+
+        &:not([multiple]) {
+            padding-inline-end: calc(s.padding(ui.form.paddingInline) + 1.5em);
+
+            --padding-inline: s.padding(ui.form.paddingInline);
+
+            background-repeat: no-repeat;
+            background-image: linear-gradient(45deg, transparent 50%, s.color(current) 50%), linear-gradient(135deg, s.color(current) 50%, transparent 50%);
+            background-position: right calc(var(--padding-inline) + 5px) top 50%, right var(--padding-inline) top 50%;
+            background-size: s.scalable(5px) s.scalable(5px), s.scalable(5px) s.scalable(5px);
+        
+            [dir="rtl"] &,
+            &[dir="rtl"] {
+                background-position: left var(--padding-inline) top 50%, left calc(var(--padding-inline) + s.scalable(5px)) top 50%;
             }
-
-            &[multiple] option:checked,
-            &[multiple] option[selected] {
-                -moz-appearance: none;
-                -webkit-appearance: none;
-                appearance: none;
-                background: s.color(current, --alpha 0.5);
-                color: s.color(current, uiForeground);
-            }
-            &[multiple]:focus option:checked,
-            &[multiple]:focus option[selected] {
-                -moz-appearance: none;
-                -webkit-appearance: none;
-                appearance: none;
-                background: s.color(current, ui);
-                color: s.color(current, uiForeground);
-            }
-
-            &:not([multiple]) {
-                padding-inline-end: calc(s.padding(ui.form.paddingInline) + 1.5em);
-
-                --padding-inline: s.padding(ui.form.paddingInline);
-
-                background-repeat: no-repeat;
-                background-image: linear-gradient(45deg, transparent 50%, s.color(current) 50%), linear-gradient(135deg, s.color(current) 50%, transparent 50%);
-                background-position: right calc(var(--padding-inline) + 5px) top 50%, right var(--padding-inline) top 50%;
-                background-size: s.scalable(5px) s.scalable(5px), s.scalable(5px) s.scalable(5px);
-            
-                [dir="rtl"] &,
-                &[dir="rtl"] {
-                    background-position: left var(--padding-inline) top 50%, left calc(var(--padding-inline) + s.scalable(5px)) top 50%;
-                }
-            }
+        }
 
         `);
-        switch (finalParams.lnf) {
-            case 'underline':
-                vars.push(`
+    switch (finalParams.lnf) {
+        case 'underline':
+            vars.push(`
                     background-color: s.color(current, --alpha 0);
                     border-top: none !important;
                     border-left: none !important;
@@ -125,12 +123,12 @@ export default function ({ params, atRule, replaceWith, }) {
                         background-color: s.color(current, --alpha 0.1);
                     }
                 `);
-                break;
-            case 'default':
-            default:
-                break;
-        }
+            break;
+        case 'default':
+        default:
+            break;
     }
+    vars.push('}');
     return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFFSCxNQUFNLG9DQUFxQyxTQUFRLFlBQVk7SUFDM0QsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILEdBQUcsRUFBRTtnQkFDRCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxNQUFNLEVBQUUsQ0FBQyxPQUFPLEVBQUUsV0FBVyxDQUFDO2dCQUM5QixPQUFPLEVBQUUsUUFBUSxDQUFDLE9BQU8sQ0FBQyxHQUFHLENBQUMsb0JBQW9CLENBQUM7YUFDdEQ7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFO29CQUNGLElBQUksRUFBRSxlQUFlO29CQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDO2lCQUN6QjtnQkFDRCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxDQUFDO2dCQUN2QixPQUFPLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxDQUFDO2FBQzNCO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQVFELE9BQU8sRUFBRSxvQ0FBb0MsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUU3RCxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sV0FBVyxHQUtkO0lBQ0csTUFBTSxXQUFXLG1CQUNiLEdBQUcsRUFBRSxPQUFPLEVBQ1osS0FBSyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssQ0FBQyxFQUN0QixPQUFPLEVBQUUsSUFBSSxJQUNWLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDMUMsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7OzthQU9MLENBQUMsQ0FBQztLQUNWO0lBRUQsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUN6QyxJQUFJLFdBQVcsQ0FBQyxPQUFPLEVBQUU7WUFDckIsSUFBSSxDQUFDLElBQUksQ0FBQzs7OzthQUlULENBQUMsQ0FBQztTQUNOO1FBRUQsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztTQTJDVCxDQUFDLENBQUM7UUFFSCxRQUFRLFdBQVcsQ0FBQyxHQUFHLEVBQUU7WUFDckIsS0FBSyxXQUFXO2dCQUNaLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7OztpQkFZVCxDQUFDLENBQUM7Z0JBQ0gsTUFBTTtZQUNWLEtBQUssU0FBUyxDQUFDO1lBQ2Y7Z0JBQ0ksTUFBTTtTQUNiO0tBQ0o7SUFFRCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUVILE1BQU0sb0NBQXFDLFNBQVEsWUFBWTtJQUMzRCxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsR0FBRyxFQUFFO2dCQUNELElBQUksRUFBRSxRQUFRO2dCQUNkLE1BQU0sRUFBRSxDQUFDLE9BQU8sRUFBRSxXQUFXLENBQUM7Z0JBQzlCLE9BQU8sRUFBRSxRQUFRLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxvQkFBb0IsQ0FBQzthQUN0RDtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFPRCxPQUFPLEVBQUUsb0NBQW9DLElBQUksU0FBUyxFQUFFLENBQUM7QUFFN0QsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsR0FLZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixHQUFHLEVBQUUsT0FBTyxFQUNaLE9BQU8sRUFBRSxJQUFJLElBQ1YsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsSUFBSSxDQUFDLElBQUksQ0FBQyxtQkFBbUIsQ0FBQyxDQUFDO0lBRS9CLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7OzthQVNELENBQUMsQ0FBQztJQUNYLElBQUksQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7SUFFZixJQUFJLENBQUMsSUFBSSxDQUFDLGtCQUFrQixDQUFDLENBQUM7SUFDOUIsSUFBSSxXQUFXLENBQUMsT0FBTyxFQUFFO1FBQ3JCLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7YUFJTCxDQUFDLENBQUM7S0FDVjtJQUVELElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztTQTZDTCxDQUFDLENBQUM7SUFFUCxRQUFRLFdBQVcsQ0FBQyxHQUFHLEVBQUU7UUFDckIsS0FBSyxXQUFXO1lBQ1osSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7O2lCQVlMLENBQUMsQ0FBQztZQUNQLE1BQU07UUFDVixLQUFLLFNBQVMsQ0FBQztRQUNmO1lBQ0ksTUFBTTtLQUNiO0lBQ0QsSUFBSSxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsQ0FBQztJQUVmLE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==

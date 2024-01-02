@@ -12,8 +12,11 @@ import __SInterface from '@coffeekraken/s-interface';
  * Apply the dropdown style to any element
  *
  * @param       {'top'|'top-start'|'top-end'|'bottom'|'bottom-start'|'bottom-end'}          [position='bottom']         The position of the dropdown
- * @param       {('bare'|'lnf'|'position')[]}        [scope=['bare', 'lnf', 'position']]      The scope you want to generate
  * @return      {String}            The generated css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
+ * @scope       position        Position css
  *
  * @snippet         @s.ui.dropdown
  *
@@ -41,14 +44,6 @@ class SSugarcssPluginUiDropdownInterface extends __SInterface {
                 ],
                 default: 'bottom',
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'position'],
-                default: ['bare', 'lnf', 'position'],
-            },
         };
     }
 }
@@ -61,7 +56,6 @@ export interface ISSugarcssPluginUiDropdownParams {
         | 'bottom'
         | 'bottom-start'
         | 'bottom-end';
-    scope: ('bare' | 'lnf' | 'position')[];
 }
 
 export { SSugarcssPluginUiDropdownInterface as interface };
@@ -77,36 +71,32 @@ export default function ({
 }) {
     const finalParams: ISSugarcssPluginUiDropdownParams = {
         position: 'bottom',
-        scope: [],
         ...params,
     };
 
     const vars: string[] = [];
 
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
-            font-size: s.scalable(1rem);
-          position: absolute;
-          -webkit-appearance: none;
-          appearance: none;
-          line-height: 1;
-          outline: 0;
-          white-space: nowrap;
-          cursor: auto;
-          z-index: 50;
+    vars.push(`
+            @s.scope 'bare' {
+                font-size: s.scalable(1rem);
+                position: absolute;
+                -webkit-appearance: none;
+                appearance: none;
+                line-height: 1;
+                outline: 0;
+                white-space: nowrap;
+                cursor: auto;
+                z-index: 50;
 
-            @s.state.disabled {
-                @s.disabled;
-                opacity: 0 !important;
+                @s.state.disabled {
+                    @s.disabled;
+                    opacity: 0 !important;
+                }
             }
       `);
-    }
 
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
-        `);
-
-        vars.push(`
+    vars.push(`@s.scope 'lnf' {`);
+    vars.push(`
             background-color: s.color(main, background);
             border: s.border.width(ui.dropdown.borderWidth) solid s.color(current, border);
             @s.border.radius(ui.dropdown.borderRadius);
@@ -115,20 +105,20 @@ export default function ({
             @s.depth(ui.dropdown.depth);
             @s.transition(fast);
         `);
-    }
+    vars.push('}');
 
-    if (finalParams.scope.indexOf('position') !== -1) {
-        switch (finalParams.position) {
-            case 'top':
-                vars.push(`
+    vars.push(`@s.scope 'position' {`);
+    switch (finalParams.position) {
+        case 'top':
+            vars.push(`
                     bottom: 100%;
                     top: auto;
                     left: 50%;
                     transform: translateX(-50%);
                 `);
-                break;
-            case 'top-end':
-                vars.push(`
+            break;
+        case 'top-end':
+            vars.push(`
                     bottom: 100%;
                     top: auto;
                     left: auto;
@@ -142,9 +132,9 @@ export default function ({
                     }
 
                 `);
-                break;
-            case 'top-start':
-                vars.push(`
+            break;
+        case 'top-start':
+            vars.push(`
                     bottom: 100%;
                     top: auto;
                     left: 0;
@@ -156,9 +146,9 @@ export default function ({
                         left: auto;
                     }
                 `);
-                break;
-            case 'bottom-start':
-                vars.push(`
+            break;
+        case 'bottom-start':
+            vars.push(`
                     top: 100%;
                     left: 0;
                     transform: none;
@@ -169,9 +159,9 @@ export default function ({
                         left: auto;
                     }
                 `);
-                break;
-            case 'bottom-end':
-                vars.push(`
+            break;
+        case 'bottom-end':
+            vars.push(`
                     top: 100%;
                     right: 0;
                     left: auto;
@@ -183,17 +173,17 @@ export default function ({
                         left: 0;
                     }
                 `);
-                break;
-            case 'bottom':
-            default:
-                vars.push(`
+            break;
+        case 'bottom':
+        default:
+            vars.push(`
                     top: 100%;
                     left: 50%;
                     transform: translateX(-50%);
                 `);
-                break;
-        }
+            break;
     }
+    vars.push('}');
 
     return vars;
 }

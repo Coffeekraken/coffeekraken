@@ -12,8 +12,10 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Generate the blockquote classes
  *
- * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.blockquote.classes
  *
@@ -26,22 +28,11 @@ import __STheme from '@coffeekraken/s-theme';
 
 class SSugarcssPluginUiBlockquoteClassesInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'vr', 'tf'],
-                default: ['bare', 'lnf', 'vr', 'tf'],
-            },
-        };
+        return {};
     }
 }
 
-export interface ISSugarcssPluginUiBlockquoteClassesParams {
-    scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
-}
+export interface ISSugarcssPluginUiBlockquoteClassesParams {}
 
 export { SSugarcssPluginUiBlockquoteClassesInterface as interface };
 
@@ -149,134 +140,59 @@ export default function ({
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
-    );
-
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(
-            () => `/**
-        * @name           s-blockquote
-        * @namespace          sugar.style.ui.blockquote
-        * @type           CssClass
-        * 
-        * This class represent a <span class="s-tc:accent">bare</span> blockquote
-        * 
-        * @example        html
-        * <blockquote class="s-blockquote">
-        *   <p>Hello world</p>
-        * </blockquote>
-        * 
-        * @since      2.0.0
-        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-      */
-     `,
-        ).code(
-            `
-        .s-blockquote {
-            @s.ui.blockquote($scope: bare);
-        }`,
-            { type: 'CssClass' },
-        );
-    }
-
-    vars.comment(
-        () => `/**
-    * @name           s-blockquote
-    * @namespace          sugar.style.ui.blockquote
-    * @type           CssClass
-    * 
-    * This class represent a blockquote
-    * 
-    * @example        html
-    * <blockquote class="s-blockquote">
-    *   <p>Hello world</p>
-    * </blockquote>
-    * 
-    * @since      2.0.0
-    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-*/
-`,
     ).code(
         `
-    .s-blockquote:not(.s-bare) {
-        @s.ui.blockquote($scope: lnf);
-    } `,
+            @s.scope 'bare' {
+                .s-blockquote {
+                    @s.ui.blockquote;
+                }
+            }
+    `,
+        {
+            type: 'CssClass',
+        },
+    );
+
+    vars.code(
+        `
+        @s.scope 'lnf' {
+            .s-blockquote {
+                @s.scope.only 'lnf' {
+                    @s.ui.blockquote;
+                }
+            }
+        }`,
         { type: 'CssClass' },
     );
 
-    if (finalParams.scope.indexOf('tf') !== -1) {
-        vars.comment(
-            () => `/**
-            * @name           s-format:text bloquote
-            * @namespace          sugar.style.ui.blockquote
-            * @type           CssClass
-            * 
-            * This class represent a simple blockquote tag in the s-format:text scope
-            * 
-            * @example        html
-            * <div class="s-format:text">
-            *   <blockquote>
-            *       <p>Hello world</p>
-            *   </blockquote>
-            * </div>
-            * 
-            * @since      2.0.0
-            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */
-       `,
-        ).code(
-            `
-            @s.format.text {
-                blockquote {
-                    @s.color(accent);
-                    @s.ui.blockquote($scope: '${finalParams.scope.join(',')}');
-                } 
+    vars.code(
+        `
+            @s.scope 'tf' {
+                @s.format.text {
+                    blockquote {
+                        @s.color(accent);
+                        @s.ui.blockquote;
+                    } 
+                }
             }
         `,
-            { type: 'CssClass' },
-        );
-    }
+        { type: 'CssClass' },
+    );
 
-    if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.comment(
-            () => `/**
-            * @name           s-rhythm:vertical
-            * @namespace          sugar.style.ui.blockquote
-            * @type           CssClass
-            * 
-            * This class represent some blockquotes in the s-rhythm:vertical scope
-            * 
-            * @feature      Vertical rhythm
-            * 
-            * @example        html
-            * <div class="s-rhythm:vertical">
-            *   <blockquote class="s-blockquote">
-            *       <p>Hello world</p>
-            *   </blockquote>
-            *   <blockquote class="s-blockquote">
-            *       <p>Hello world</p>
-            *   </blockquote>
-            *   <blockquote class="s-blockquote">
-            *       <p>Hello world</p>
-            *   </blockquote>
-            * </div>
-            * 
-            * @since      2.0.0
-            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */
-       `,
-        ).code(
-            `
-            @s.rhythm.vertical {
-                blockquote, .s-blockquote {
-                    ${__STheme.current.jsObjectToCssProperties(
-                        __STheme.current.get('ui.default.rhythmVertical'),
-                    )}
-                } 
+    vars.code(
+        `
+            @s.scope 'vr' {
+                @s.rhythm.vertical {
+                    blockquote, .s-blockquote {
+                        ${__STheme.current.jsObjectToCssProperties(
+                            __STheme.current.get('ui.default.rhythmVertical'),
+                        )}
+                    } 
+                }
             }
         `,
-            { type: 'CssClass' },
-        );
-    }
+        { type: 'CssClass' },
+    );
 
     return vars;
 }

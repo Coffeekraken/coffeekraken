@@ -12,8 +12,10 @@ import __SInterface from '@coffeekraken/s-interface';
  * Apply an input container style like "button", "addon", etc...
  *
  * @param       {'addon'|'group'}                           lnf         The style you want to apply
- * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.inputContainer
  *
@@ -34,21 +36,12 @@ class SSugarcssPluginUiFormInputInterface extends __SInterface {
                 values: ['addon', 'group'],
                 required: true,
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
         };
     }
 }
 
 export interface ISSugarcssPluginUiFormInputParams {
     lnf: 'addon' | 'group';
-    scope: string[];
 }
 
 export { SSugarcssPluginUiFormInputInterface as interface };
@@ -64,94 +57,84 @@ export default function ({
 }) {
     const finalParams: ISSugarcssPluginUiFormInputParams = {
         lnf: 'group',
-        scope: [],
         ...params,
     };
 
     const vars: string[] = [];
-
-    if (finalParams.scope.includes('bare')) {
-        vars.push(`
+    vars.push(`
+        @s.scope 'bare' {
             width: 100%;
-        `);
-    }
+        }
+    `);
 
+    vars.push(`@s.scope 'bare' {`);
     switch (finalParams.lnf) {
         case 'addon':
-            if (finalParams.scope.includes('bare')) {
-                vars.push(`
-                    display: block;
-                    position: relative;
+            vars.push(`
+                display: block;
+                position: relative;
 
-                    & > *:first-child {
-                        width: 100%;
-                        padding-inline-end: 3em;
-                    }
+                & > *:first-child {
+                    width: 100%;
+                    padding-inline-end: 3em;
+                }
+                & > *:first-child + * {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: absolute;
+                    height: 100%;
+                    aspect-ratio: 1;
+                    top: 0; right: 0;
+                }
+
+                [dir="rtl"] &, &[dir="rtl"] {
                     & > *:first-child + * {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        position: absolute;
-                        height: 100%;
-                        aspect-ratio: 1;
-                        top: 0; right: 0;
+                        right: auto;
+                        left: 0;
                     }
-
-                    [dir="rtl"] &, &[dir="rtl"] {
-                        & > *:first-child + * {
-                            right: auto;
-                            left: 0;
-                        }
-                    }
-
+                }
                 `);
-            }
-            if (finalParams.scope.includes('lnf')) {
-            }
-
             break;
         case 'group':
         default:
-            if (finalParams.scope.includes('bare')) {
-                vars.push(`
-                    display: flex;
+            vars.push(`
+                display: flex;
 
-                    &:not([dir="rtl"] &):not([dir="rtl"]) {
-                        & > *:first-child,
-                        & > .s-input-container > *:first-child {
-                            border-top-right-radius: 0;
-                            border-bottom-right-radius: 0;
-                        }
-                        & > *:last-child,
-                        & > .s-input-container > *:last-child {
-                            border-top-left-radius: 0;
-                            border-bottom-left-radius: 0;
-                        }
+                &:not([dir="rtl"] &):not([dir="rtl"]) {
+                    & > *:first-child,
+                    & > .s-input-container > *:first-child {
+                        border-top-right-radius: 0;
+                        border-bottom-right-radius: 0;
                     }
-                    [dir="rtl"] &, &[dir="rtl"] {
-                        & > *:first-child,
-                        & > .s-input-container > *:first-child {
-                            border-top-left-radius: 0;
-                            border-bottom-left-radius: 0;
-                        }
-                        & > *:last-child,
-                        & > .s-input-container > *:last-child {
-                            border-top-right-radius: 0;
-                            border-bottom-right-radius: 0;
-                        }
+                    & > *:last-child,
+                    & > .s-input-container > *:last-child {
+                        border-top-left-radius: 0;
+                        border-bottom-left-radius: 0;
                     }
+                }
+                [dir="rtl"] &, &[dir="rtl"] {
+                    & > *:first-child,
+                    & > .s-input-container > *:first-child {
+                        border-top-left-radius: 0;
+                        border-bottom-left-radius: 0;
+                    }
+                    & > *:last-child,
+                    & > .s-input-container > *:last-child {
+                        border-top-right-radius: 0;
+                        border-bottom-right-radius: 0;
+                    }
+                }
 
-                    & > *:not(:first-child, :last-child),
-                    & > .s-input-container > *:not(:first-child, :last-child) {
-                        border-radius: 0;
-                    }
-                `);
-            }
-            if (finalParams.scope.includes('lnf')) {
-            }
-
+                & > *:not(:first-child, :last-child),
+                & > .s-input-container > *:not(:first-child, :last-child) {
+                    border-radius: 0;
+                }
+            `);
             break;
     }
+
+    vars.push('}');
 
     return vars;
 }

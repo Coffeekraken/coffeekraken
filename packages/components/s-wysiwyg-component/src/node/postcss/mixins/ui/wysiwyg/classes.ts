@@ -2,23 +2,13 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class postcssUiWysiwygClassesInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
-        };
+        return {};
     }
 }
 
 export interface IPostcssUiWysiwygClassesParams {
     lnfs: 'solid'[];
     defaultLnf: 'solid';
-    scope: ('bare' | 'lnf')[];
 }
 export { postcssUiWysiwygClassesInterface as interface };
 
@@ -55,29 +45,28 @@ export default function ({
     const finalParams: IPostcssUiWysiwygClassesParams = {
         lnfs: ['solid'],
         defaultLnf: 'solid',
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars = new CssVars();
 
-    if (finalParams.scope.includes('bare')) {
-        vars.code(
-            `
+    vars.code(`@s.scope 'bare' {`);
+    vars.code(
+        `
         .s-wysiwyg {
-            @s.ui.wysiwyg($scope: bare);
+            @s.scope.only 'bare' {
+                @s.ui.wysiwyg;
+            }
         }
     `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
-    if (
-        finalParams.lnfs.includes(finalParams.defaultLnf) &&
-        finalParams.scope.includes('lnf')
-    ) {
+    if (finalParams.lnfs.includes(finalParams.defaultLnf)) {
+        vars.code(`@s.scope 'lnf' {`);
         vars.comment(
             `/**
             * @name          .s-wysiwyg[lnf="default"]
@@ -94,14 +83,17 @@ export default function ({
         */`,
         ).code(
             `
-            .s-wysiwyg[lnf="default"]:not(.s-bare) {
-                @s.ui.wysiwyg($lnf: ${finalParams.defaultLnf}, $scope: lnf);
+            .s-wysiwyg[lnf="default"] {
+                @s.scope.only 'lnf' {
+                    @s.ui.wysiwyg($lnf: ${finalParams.defaultLnf});
+                }
             }
             `,
             {
                 type: 'CssClass',
             },
         );
+        vars.code('}');
     }
 
     return vars;

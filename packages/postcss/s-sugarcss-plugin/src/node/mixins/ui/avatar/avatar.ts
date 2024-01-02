@@ -11,8 +11,12 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * This mixin allows you to generate the "avatar" UI component css.
  *
- * @param       {('bare'|'lnf'|'interactive'|'notifications')[]}        [scope=['bare','lnf','interactive','notifications']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
+ * @scope       interactive         Interactive css
+ * @scope       notification        Notification css
  *
  * @snippet         @s.ui.avatar
  *
@@ -27,22 +31,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class SSugarcssPluginUiAvatarInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'interactive', 'notifications'],
-                default: ['bare', 'lnf', 'interactive', 'notifications'],
-            },
-        };
+        return {};
     }
 }
 
-export interface ISSugarcssPluginUiBadgeParams {
-    scope: ('bare' | 'lnf' | 'interactive' | 'notifications')[];
-}
+export interface ISSugarcssPluginUiBadgeParams {}
 
 export { SSugarcssPluginUiAvatarInterface as interface };
 export default function ({
@@ -55,15 +48,14 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: ISSugarcssPluginUiBadgeParams = {
-        scope: ['bare', 'lnf', 'interactive', 'notifications'],
         ...params,
     };
 
     const vars: string[] = [];
 
     // bare
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
+    vars.push(`
+        @s.scope 'bare' {
             position: relative;
             display: inline-block;
             width: s.scalable(1em);
@@ -77,12 +69,12 @@ export default function ({
                 border-radius: 50%;
                 overflow: hidden;
             }
-        `);
-    }
+        }
+    `);
 
     // lnf
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
+    vars.push(`
+        @s.scope 'lnf' {
             img {
                 background-color: s.color(current);
                 border-color: s.color(current);
@@ -90,54 +82,49 @@ export default function ({
                 border-width: s.border.width(ui.avatar.borderWidth);
                 border-radius: 9999px;
             }
-        `);
-    }
+        }
+    `);
 
     // interactive
-    if (finalParams.scope.indexOf('interactive') !== -1) {
-        vars.push(`
+    vars.push(`
+        @s.scope 'interactive' {
             cursor: pointer;
-        `);
 
-        vars.push(`
             &:hover img {
                 @s.outline($where: element);
                 position: absolute;
             }
-        `);
-    }
-
-    // notifications
-    if (finalParams.scope.indexOf('notifications') !== -1) {
-        if (finalParams.scope.includes('bare')) {
-            vars.push(`
-                &[notifications] {
-                    &:after {
-                        content: attr(notifications);
-                        position: absolute;
-                        top: 0.2em; right: 0.2em;
-                        font-size: s.scalable(0.15em);
-                        min-width: 1.5em;
-                        min-height: 1.5em;
-                    }
-                }
-            `);
         }
+    `);
 
-        if (finalParams.scope.includes('lnf')) {
-            vars.push(`
-                &[notifications] {
-                    &:after {
-                        background: s.color(current);
-                        color: s.color(current, foreground);
-                        border-radius: 9999px;
-                        padding: 0.33em;
-                        font-weight: bold;
-                    }
+    vars.push(`
+        @s.scope 'notification' {
+            &[notifications] {
+                &:after {
+                    content: attr(notifications);
+                    position: absolute;
+                    top: 0.2em; right: 0.2em;
+                    font-size: s.scalable(0.15em);
+                    min-width: 1.5em;
+                    min-height: 1.5em;
                 }
-            `);
+            }
         }
-    }
+    `);
+
+    vars.push(`
+        @s-scope 'lnf' {
+            &[notifications] {
+                &:after {
+                    background: s.color(current);
+                    color: s.color(current, foreground);
+                    border-radius: 9999px;
+                    padding: 0.33em;
+                    font-weight: bold;
+                }
+            }
+        }
+    `);
 
     return vars;
 }

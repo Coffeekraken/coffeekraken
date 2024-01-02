@@ -3,22 +3,11 @@ import __STheme from '@coffeekraken/s-theme';
 
 class postcssUiSliderClassesInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'vr', 'behavior'],
-                default: ['bare', 'lnf', 'vr', 'behavior'],
-            },
-        };
+        return {};
     }
 }
 
-export interface IPostcssUiSliderClassesParams {
-    scope: ('bare' | 'lnf' | 'behavior' | 'vr')[];
-}
+export interface IPostcssUiSliderClassesParams {}
 
 export { postcssUiSliderClassesInterface as interface };
 
@@ -30,6 +19,10 @@ export { postcssUiSliderClassesInterface as interface };
  * @status              beta
  *
  * This mixin represent a color picker
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
+ * @scope       behavior        Behavior css
  *
  * @snippet      @s.ui.slider.classes($1);
  *
@@ -52,28 +45,29 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiSliderClassesParams = {
-        scope: ['bare', 'lnf', 'behavior'],
         ...params,
     };
 
     const vars = new CssVars();
 
-    if (finalParams.scope.includes('bare')) {
-        vars.code(
-            `
+    vars.code(`@s.scope 'bare' {`);
+    vars.code(
+        `
         .s-slider {
-            @s.ui.slider($scope: bare);
+            @s.scope.only 'bare' {
+                @s.ui.slider;
+            }
         }
     `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code(`}`);
 
-    if (finalParams.scope.includes('lnf')) {
-        vars.comment(
-            `/**
+    vars.code(`@s.scope 'lnf' {`);
+    vars.comment(
+        `/**
             * @name          .s-slider[lnf*="default"]
             * @namespace          sugar.style.ui.slider
             * @type           CssClass
@@ -86,33 +80,37 @@ export default function ({
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
-        ).code(
-            `
-            .s-slider[lnf*="default"]:not(.s-bare) {
-                @s.ui.slider($scope: lnf);
+    ).code(
+        `
+            .s-slider[lnf*="default"] {
+                @s.scope.only 'lnf' {
+                    @s.ui.slider;
+                }
             }
             `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.includes('behavior')) {
-        vars.code(
-            `
+    vars.code(`@s.scope 'behavior' {`);
+    vars.code(
+        `
             .s-slider[behavior*="default"] {
-                @s.ui.slider($scope: behavior);
+                @s.scope.only 'behavior' {
+                    @s.ui.slider;
+                }
             }`,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.comment(
-            `/**
+    vars.code(`@s.scope 'vr' {`);
+    vars.comment(
+        `/**
             * @name           s-rhythm:vertical
             * @namespace          sugar.style.ui.slider
             * @type           CssClass
@@ -129,8 +127,8 @@ export default function ({
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
-        ).code(
-            `@s.rhythm.vertical {
+    ).code(
+        `@s.rhythm.vertical {
                 .s-slider {
                     ${__STheme.current.jsObjectToCssProperties(
                         __STheme.current.get('ui.slider.rhythmVertical'),
@@ -138,11 +136,11 @@ export default function ({
                 } 
             }
         `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
     return vars;
 }

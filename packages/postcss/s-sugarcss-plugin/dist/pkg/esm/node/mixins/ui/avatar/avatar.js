@@ -10,8 +10,12 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * This mixin allows you to generate the "avatar" UI component css.
  *
- * @param       {('bare'|'lnf'|'interactive'|'notifications')[]}        [scope=['bare','lnf','interactive','notifications']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
+ * @scope       interactive         Interactive css
+ * @scope       notification        Notification css
  *
  * @snippet         @s.ui.avatar
  *
@@ -25,25 +29,16 @@ import __SInterface from '@coffeekraken/s-interface';
  */
 class SSugarcssPluginUiAvatarInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'interactive', 'notifications'],
-                default: ['bare', 'lnf', 'interactive', 'notifications'],
-            },
-        };
+        return {};
     }
 }
 export { SSugarcssPluginUiAvatarInterface as interface };
 export default function ({ params, atRule, replaceWith, }) {
-    const finalParams = Object.assign({ scope: ['bare', 'lnf', 'interactive', 'notifications'] }, params);
+    const finalParams = Object.assign({}, params);
     const vars = [];
     // bare
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
+    vars.push(`
+        @s.scope 'bare' {
             position: relative;
             display: inline-block;
             width: s.scalable(1em);
@@ -57,11 +52,11 @@ export default function ({ params, atRule, replaceWith, }) {
                 border-radius: 50%;
                 overflow: hidden;
             }
-        `);
-    }
+        }
+    `);
     // lnf
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
+    vars.push(`
+        @s.scope 'lnf' {
             img {
                 background-color: s.color(current);
                 border-color: s.color(current);
@@ -69,50 +64,46 @@ export default function ({ params, atRule, replaceWith, }) {
                 border-width: s.border.width(ui.avatar.borderWidth);
                 border-radius: 9999px;
             }
-        `);
-    }
+        }
+    `);
     // interactive
-    if (finalParams.scope.indexOf('interactive') !== -1) {
-        vars.push(`
+    vars.push(`
+        @s.scope 'interactive' {
             cursor: pointer;
-        `);
-        vars.push(`
+
             &:hover img {
                 @s.outline($where: element);
                 position: absolute;
             }
-        `);
-    }
-    // notifications
-    if (finalParams.scope.indexOf('notifications') !== -1) {
-        if (finalParams.scope.includes('bare')) {
-            vars.push(`
-                &[notifications] {
-                    &:after {
-                        content: attr(notifications);
-                        position: absolute;
-                        top: 0.2em; right: 0.2em;
-                        font-size: s.scalable(0.15em);
-                        min-width: 1.5em;
-                        min-height: 1.5em;
-                    }
-                }
-            `);
         }
-        if (finalParams.scope.includes('lnf')) {
-            vars.push(`
-                &[notifications] {
-                    &:after {
-                        background: s.color(current);
-                        color: s.color(current, foreground);
-                        border-radius: 9999px;
-                        padding: 0.33em;
-                        font-weight: bold;
-                    }
+    `);
+    vars.push(`
+        @s.scope 'notification' {
+            &[notifications] {
+                &:after {
+                    content: attr(notifications);
+                    position: absolute;
+                    top: 0.2em; right: 0.2em;
+                    font-size: s.scalable(0.15em);
+                    min-width: 1.5em;
+                    min-height: 1.5em;
                 }
-            `);
+            }
         }
-    }
+    `);
+    vars.push(`
+        @s-scope 'lnf' {
+            &[notifications] {
+                &:after {
+                    background: s.color(current);
+                    color: s.color(current, foreground);
+                    border-radius: 9999px;
+                    padding: 0.33em;
+                    font-weight: bold;
+                }
+            }
+        }
+    `);
     return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBRXJEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUVILE1BQU0sZ0NBQWlDLFNBQVEsWUFBWTtJQUN2RCxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsS0FBSyxFQUFFO2dCQUNILElBQUksRUFBRTtvQkFDRixJQUFJLEVBQUUsZUFBZTtvQkFDckIsVUFBVSxFQUFFLENBQUMsR0FBRyxFQUFFLEdBQUcsQ0FBQztpQkFDekI7Z0JBQ0QsTUFBTSxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxhQUFhLEVBQUUsZUFBZSxDQUFDO2dCQUN2RCxPQUFPLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLGFBQWEsRUFBRSxlQUFlLENBQUM7YUFDM0Q7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBTUQsT0FBTyxFQUFFLGdDQUFnQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBQ3pELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsS0FBSyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxhQUFhLEVBQUUsZUFBZSxDQUFDLElBQ25ELE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLE9BQU87SUFDUCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQzFDLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7O1NBY1QsQ0FBQyxDQUFDO0tBQ047SUFFRCxNQUFNO0lBQ04sSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUN6QyxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7OztTQVFULENBQUMsQ0FBQztLQUNOO0lBRUQsY0FBYztJQUNkLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsYUFBYSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDakQsSUFBSSxDQUFDLElBQUksQ0FBQzs7U0FFVCxDQUFDLENBQUM7UUFFSCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7OztTQUtULENBQUMsQ0FBQztLQUNOO0lBRUQsZ0JBQWdCO0lBQ2hCLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsZUFBZSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDbkQsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxNQUFNLENBQUMsRUFBRTtZQUNwQyxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7OzthQVdULENBQUMsQ0FBQztTQUNOO1FBRUQsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxLQUFLLENBQUMsRUFBRTtZQUNuQyxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7O2FBVVQsQ0FBQyxDQUFDO1NBQ047S0FDSjtJQUVELE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBRXJEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EyQkc7QUFFSCxNQUFNLGdDQUFpQyxTQUFRLFlBQVk7SUFDdkQsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTyxFQUFFLENBQUM7SUFDZCxDQUFDO0NBQ0o7QUFJRCxPQUFPLEVBQUUsZ0NBQWdDLElBQUksU0FBUyxFQUFFLENBQUM7QUFDekQsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsR0FLZDtJQUNHLE1BQU0sV0FBVyxxQkFDVixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixPQUFPO0lBQ1AsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7OztLQWdCVCxDQUFDLENBQUM7SUFFSCxNQUFNO0lBQ04sSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7OztLQVVULENBQUMsQ0FBQztJQUVILGNBQWM7SUFDZCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7S0FTVCxDQUFDLENBQUM7SUFFSCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7O0tBYVQsQ0FBQyxDQUFDO0lBRUgsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7O0tBWVQsQ0FBQyxDQUFDO0lBRUgsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQyJ9

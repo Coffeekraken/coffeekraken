@@ -11,8 +11,10 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * Generate the backdrop classes
  *
- * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.backdrop.classes
  *
@@ -25,22 +27,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class SSugarcssPluginUiBackdropClassesInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
-        };
+        return {};
     }
 }
 
-export interface ISSugarcssPluginUiBackdropClassesParams {
-    scope: ('bare' | 'lnf')[];
-}
+export interface ISSugarcssPluginUiBackdropClassesParams {}
 
 export { SSugarcssPluginUiBackdropClassesInterface as interface };
 
@@ -92,57 +83,11 @@ export default function ({
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
-    );
-
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(
-            () => `/**
-        * @name           s-backdrop
-        * @namespace          sugar.style.ui.backdrop
-        * @type           CssClass
-        * 
-        * This class represent a <span class="s-tc:accent">bare</span> backdrop
-        * 
-        * @example        html
-        * <div class="s-backdrop"></div>
-        * 
-        * @since      2.0.0
-        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-      */
-     `,
-        ).code(
-            `
-        .s-backdrop {
-            @s.ui.backdrop($scope: bare);
-        }`,
-            { type: 'CssClass' },
-        );
-    }
-
-    if (finalParams.scope.includes('lnf')) {
-        vars.comment(
-            () => `/**
-            * @name           s-backdrop
-            * @namespace          sugar.style.ui.backdrop
-            * @type           CssClass
-            * 
-            * This class represent a backdrop
-            * 
-            * @example        html
-            * <div class="s-backdrop"></div>
-            * 
-            * @since      2.0.0
-            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */
-       `,
-        ).code(
-            `
-            .s-backdrop:not(.s-bare) {
-                @s.ui.backdrop($scope: lnf);
-            } `,
-            { type: 'CssClass' },
-        );
-    }
+    ).code(`
+            .s-backdrop {
+                @s.ui.backdrop;
+            }
+    `);
 
     return vars;
 }

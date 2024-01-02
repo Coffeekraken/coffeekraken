@@ -1,4 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
+import { __intersection } from '@coffeekraken/sugar/array';
 
 class SSugarcssPluginScopeMixinInterface extends __SInterface {
     static get _definition() {
@@ -52,31 +53,43 @@ export default function ({
     atRule,
     registerPostProcessor,
     replaceWith,
+    sharedData,
 }: {
     params: Partial<SSugarcssPluginScopeMixinParams>;
     atRule: any;
     registerPostProcessor: Function;
     replaceWith: Function;
+    sharedData: any;
 }) {
     const finalParams = <SSugarcssPluginScopeMixinParams>{
         scope: [],
         ...(params ?? {}),
     };
 
-    registerPostProcessor((root) => {
-        root.walkAtRules(/sugar\.scope/, (at) => {
-            at.replaceWith(at.nodes);
-        });
-    });
+    atRule.name = 'media';
+    atRule.params = `s-scope:${finalParams.scope.join(',')}`;
 
-    atRule.walkAtRules((n) => {
-        // console.log('d', n.name);
-        if (n.type !== 'atrule' || !n.name.startsWith('sugar.')) {
-            return;
+    registerPostProcessor((root) => {
+        let currentRule = atRule.parent;
+
+        while (currentRule !== root) {
+            if (!currentRule.name) {
+                currentRule = currentRule.parent;
+                continue;
+            }
+            if (currentRule.params.startsWith('s-scope:only:')) {
+                const onlyArray = currentRule.params
+                    .trim()
+                    .replace('s-scope:only:', '')
+                    .split(',');
+                if (!__intersection(finalParams.scope, onlyArray).length) {
+                    atRule.remove();
+                }
+            }
+
+            currentRule = currentRule.parent;
         }
-        // save the wanted scope(s) inside the atRule.
-        // this will be handled by the SSugarcssPlugin main file
-        // to compute the final "scope" param to pass
-        n._scope = finalParams.scope;
+
+        atRule.replaceWith(atRule.nodes);
     });
 }

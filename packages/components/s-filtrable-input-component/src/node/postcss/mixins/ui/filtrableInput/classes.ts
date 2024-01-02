@@ -3,22 +3,11 @@ import __STheme from '@coffeekraken/s-theme';
 
 class postcssUiFiltrableInputClassesInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'vr'],
-                default: ['bare', 'lnf', 'vr'],
-            },
-        };
+        return {};
     }
 }
 
-export interface IPostcssUiFiltrableInputClassesParams {
-    scope: ('bare' | 'lnf' | 'vr')[];
-}
+export interface IPostcssUiFiltrableInputClassesParams {}
 
 export { postcssUiFiltrableInputClassesInterface as interface };
 
@@ -30,6 +19,10 @@ export { postcssUiFiltrableInputClassesInterface as interface };
  * @status              beta
  *
  * This mixin represent a filtrable input
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
+ * @scope       vr              Vertical rhythm css
  *
  * @snippet      @s.ui.filtrableInput.classes($1);
  *
@@ -52,7 +45,6 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiFiltrableInputClassesParams = {
-        scope: ['bare', 'lnf', 'vr'],
         ...params,
     };
 
@@ -61,7 +53,7 @@ export default function ({
     vars.code(
         `
         .s-filtrable-input[lnf="default"] {
-            @s.ui.filtrableInput($scope: bare);
+            @s.ui.filtrableInput;
         }
         `,
         {
@@ -69,35 +61,10 @@ export default function ({
         },
     );
 
+    vars.code(`@s.scope 'vr' {`);
     // @TODO            example
     vars.comment(
         `/**
-            * @name           .s-filtrable-input[lnf="default"]
-            * @namespace          sugar.style.ui.filtrableInput
-            * @type           CssClass
-            * 
-            * This class represent a(n) "<s-color="accent">default</s-color>" filtrable input
-            * 
-            * @example        html
-            * Example not available for now...
-            * 
-            * @since    2.0.0
-            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */`,
-    ).code(
-        `
-                .s-filtrable-input[lnf="default"]:not(.s-bare) {
-                    @s.ui.filtrableInput($lnf: solid, $scope: lnf);
-                }`,
-        {
-            type: 'CssClass',
-        },
-    );
-
-    if (finalParams.scope.indexOf('vr') !== -1) {
-        // @TODO            example
-        vars.comment(
-            `/**
             * @name           s-rhythm:vertical
             * @namespace          sugar.style.ui.filtrableInput
             * @type           CssClass
@@ -112,8 +79,8 @@ export default function ({
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
-        ).code(
-            `@s.rhythm.vertical {
+    ).code(
+        `@s.rhythm.vertical {
                 .s-filtrable-input {
                     ${__STheme.current.jsObjectToCssProperties(
                         __STheme.current.get(
@@ -123,11 +90,11 @@ export default function ({
                 } 
             }
         `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
     return vars;
 }

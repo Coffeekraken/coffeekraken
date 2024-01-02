@@ -15,8 +15,10 @@ import __faker from 'faker';
  *
  * @param       {('solid')[]}                           [lnfs=['solid']]         The style(s) you want to generate
  * @param       {'solid'}                [defaultLnf='theme.ui.form.defaultLnf']           The default style you want
- * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.switch.classes
  *
@@ -40,14 +42,6 @@ class SSugarcssPluginUiSwitchClassesMixinInterface extends __SInterface {
                 values: ['solid'],
                 default: __STheme.current.get('ui.form.defaultLnf') ?? 'solid',
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
         };
     }
 }
@@ -55,7 +49,6 @@ class SSugarcssPluginUiSwitchClassesMixinInterface extends __SInterface {
 export interface ISSugarcssPluginUiSwitchClassesMixinParams {
     lnfs: 'solid'[];
     defaultLnf: 'solid';
-    scope: ('bare' | 'lnf')[];
 }
 
 export { SSugarcssPluginUiSwitchClassesMixinInterface as interface };
@@ -74,7 +67,6 @@ export default function ({
     const finalParams: ISSugarcssPluginUiSwitchClassesMixinParams = {
         lnfs: [],
         defaultLnf: 'solid',
-        scope: [],
         ...params,
     };
 
@@ -193,9 +185,9 @@ export default function ({
     `,
     );
 
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(
-            () => `/**
+    vars.code(`@s.scope 'bare' {`);
+    vars.comment(
+        () => `/**
             * @name           s-switch
             * @namespace          sugar.style.ui.switch
             * @type           CssClass
@@ -214,25 +206,27 @@ export default function ({
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(
-            `
+    ).code(
+        `
         .s-switch {
-            @s.ui.switch($scope: bare);
+            @s.scope.only 'bare' {
+                @s.ui.switch;
+            }
         }
         `,
-            { type: 'CssClass' },
-        );
-    }
+        { type: 'CssClass' },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.includes('lnf')) {
-        finalParams.lnfs.forEach((lnf) => {
-            let cls = `s-switch`;
-            if (lnf !== finalParams.defaultLnf) {
-                cls += `\n${lnf}`;
-            }
+    vars.code(`@s.scope 'lnf' {`);
+    finalParams.lnfs.forEach((lnf) => {
+        let cls = `s-switch`;
+        if (lnf !== finalParams.defaultLnf) {
+            cls += `\n${lnf}`;
+        }
 
-            vars.comment(
-                () => `/**
+        vars.comment(
+            () => `/**
                 * @name           ${cls}
                 * @namespace          sugar.style.ui.switch
                 * @type           CssClass
@@ -253,16 +247,18 @@ export default function ({
                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
            `,
-            ).code(
-                `
-            .${cls.replace('\n', '-')}:not(.s-bare) {
-                @s.ui.switch($lnf: ${lnf}, $scope: lnf);
+        ).code(
+            `
+            .${cls.replace('\n', '-')} {
+                @s.scope.only 'lnf' {
+                    @s.ui.switch($lnf: ${lnf});
+                }
             }
         `,
-                { type: 'CssClass' },
-            );
-        });
-    }
+            { type: 'CssClass' },
+        );
+    });
+    vars.code('}');
 
     return vars;
 }

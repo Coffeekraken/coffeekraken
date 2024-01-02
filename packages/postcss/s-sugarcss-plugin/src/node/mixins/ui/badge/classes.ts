@@ -14,8 +14,10 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @param       {('solid'|'outline')[]}                           [lnfs=['solid','outline']]         The lnf(s) you want to generate
  * @param       {'solid'|'outline'}                [defaultLnf='theme.ui.badge.defaultLnf']           The default lnf you want
- * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.badge.classes
  *
@@ -39,14 +41,6 @@ class SSugarcssPluginUiBadgeClassesInterface extends __SInterface {
                 values: ['solid', 'outline'],
                 default: __STheme.current.get('ui.badge.defaultLnf'),
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
         };
     }
 }
@@ -54,7 +48,6 @@ class SSugarcssPluginUiBadgeClassesInterface extends __SInterface {
 export interface ISSugarcssPluginUiBadgeClassesParams {
     lnfs: ('solid' | 'outline')[];
     defaultLnf: 'solid' | 'outline';
-    scope: ('bare' | 'lnf')[];
 }
 
 export { SSugarcssPluginUiBadgeClassesInterface as interface };
@@ -73,7 +66,6 @@ export default function ({
     const finalParams: ISSugarcssPluginUiBadgeClassesParams = {
         lnfs: [],
         defaultLnf: 'solid',
-        scope: [],
         ...params,
     };
 
@@ -156,65 +148,49 @@ export default function ({
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
+    ).code(
+        `
+            @s.scope.only 'bare' {
+                .s-badge {
+                    @s.ui.badge
+                }
+            }
+    `,
+        { type: 'CssClass' },
     );
 
-    if (finalParams.scope.includes('bare')) {
+    vars.code(`@s.scope 'lnf' {`);
+    finalParams.lnfs.forEach((lnf) => {
         vars.comment(
             () => `/**
-            * @name           s-badge
-            * @namespace          sugar.style.ui.badge
-            * @type           CssClass
-            * 
-            * This class represent a(n) "<s-color="accent">bare</s-color>" badge
-            * 
-            * @example        html
-            * <a class="s-badge">I'm a cool badge</a>
-            * 
-            * @since    2.0.0
-            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */`,
+        * @name           s-badge${
+            finalParams.defaultLnf === lnf ? '' : `:${lnf}`
+        }
+        * @namespace          sugar.style.ui.badge
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<s-color="accent">outline</s-color>" badge
+        * 
+        * @example        html
+        * <a class="s-badge${
+            finalParams.defaultLnf === lnf ? '' : `:${lnf}`
+        }">I'm a cool ${lnf} badge</a>
+        * 
+        * @since    2.0.0
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+    */`,
         ).code(
             `
-            .s-badge {
-                @s.ui.badge($scope: bare);
+            @s.scope.only 'lnf' {
+                .s-badge${lnf === finalParams.defaultLnf ? '' : `-${lnf}`} {
+                    @s.ui.badge($lnf: ${lnf});
+                }
             }
-        `,
+    `,
             { type: 'CssClass' },
         );
-    }
-
-    if (finalParams.scope.includes('lnf')) {
-        finalParams.lnfs.forEach((lnf) => {
-            vars.comment(
-                () => `/**
-            * @name           s-badge${
-                finalParams.defaultLnf === lnf ? '' : `:${lnf}`
-            }
-            * @namespace          sugar.style.ui.badge
-            * @type           CssClass
-            * 
-            * This class represent a(n) "<s-color="accent">outline</s-color>" badge
-            * 
-            * @example        html
-            * <a class="s-badge${
-                finalParams.defaultLnf === lnf ? '' : `:${lnf}`
-            }">I'm a cool ${lnf} badge</a>
-            * 
-            * @since    2.0.0
-            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */`,
-            ).code(
-                `
-            .s-badge${
-                lnf === finalParams.defaultLnf ? '' : `-${lnf}`
-            }:not(.s-bare) {
-                @s.ui.badge($lnf: ${lnf}, $scope: lnf);
-            }
-        `,
-                { type: 'CssClass' },
-            );
-        });
-    }
+    });
+    vars.code('}');
 
     return vars;
 }

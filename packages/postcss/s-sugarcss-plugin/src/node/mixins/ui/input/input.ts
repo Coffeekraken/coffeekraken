@@ -13,8 +13,10 @@ import __STheme from '@coffeekraken/s-theme';
  * Apply the input style to any element
  *
  * @param       {'solid'|'underline'}                           [style='theme.ui.form.defaultLnf']         The lnf you want to generate
- * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.input
  *
@@ -39,14 +41,6 @@ class SSugarcssPluginUiFormInputInterface extends __SInterface {
                 type: 'Boolean',
                 default: __STheme.current.get('ui.form.outline'),
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
         };
     }
 }
@@ -54,7 +48,6 @@ class SSugarcssPluginUiFormInputInterface extends __SInterface {
 export interface ISSugarcssPluginUiFormInputParams {
     lnf: 'solid' | 'underline';
     outline: boolean;
-    scope: string[];
 }
 
 export { SSugarcssPluginUiFormInputInterface as interface };
@@ -71,54 +64,55 @@ export default function ({
     const finalParams: ISSugarcssPluginUiFormInputParams = {
         lnf: 'solid',
         outline: true,
-        scope: [],
         ...params,
     };
 
     const vars: string[] = [];
 
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        if (finalParams.outline) {
-            vars.push(`
+    vars.push(`@s.scope 'lnf' {`);
+
+    if (finalParams.outline) {
+        vars.push(`
                 &:focus:not(:hover) {
                     @s.outline;
                 }
             `);
-        }
+    }
 
-        vars.push(`
+    vars.push(`
             @s.ui.base(input);
             @s.shape();
   `);
-    }
+    vars.push('}');
 
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
+    vars.push(`
+        @s.scope 'bare' {
             width: 100%;
-        `);
-    }
+        }
+    `);
 
+    vars.push(`@s.scope 'lnf' {`);
     switch (finalParams.lnf) {
         case 'underline':
-            if (finalParams.scope.indexOf('lnf') !== -1) {
-                vars.push(`
-                    background-color: s.color(current, --alpha 0);
-                    border-top: none !important;
-                    border-left: none !important;
-                    border-right: none !important;
-                    border-bottom: s.color(current, --alpha 0.3) solid s.border.width(ui.form.borderWidth) !important;
-                    padding-inline: 1ch !important;
+            vars.push(`
+                background-color: s.color(current, --alpha 0);
+                border-top: none !important;
+                border-left: none !important;
+                border-right: none !important;
+                border-bottom: s.color(current, --alpha 0.3) solid s.border.width(ui.form.borderWidth) !important;
+                padding-inline: 1ch !important;
 
-                    &:hover, &:focus {
-                        border-bottom: s.color(current, --alpha 1) solid s.border.width(ui.form.borderWidth) !important;
-                        background-color: s.color(current, --alpha 0.1);
-                    }
+                &:hover, &:focus {
+                    border-bottom: s.color(current, --alpha 1) solid s.border.width(ui.form.borderWidth) !important;
+                    background-color: s.color(current, --alpha 0.1);
+                }
                 `);
-            }
             break;
         default:
             break;
     }
+
+    vars.push('}');
 
     return vars;
 }

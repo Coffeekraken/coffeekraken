@@ -11,8 +11,10 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * This mixin allows you to generate the "blockquote" UI component css.
  *
- * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.blockquote
  *
@@ -27,22 +29,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class SSugarcssPluginUiBlockquoteInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
-        };
+        return {};
     }
 }
 
-export interface ISSugarcssPluginUiBlockquoteParams {
-    scope: ('bare' | 'lnf')[];
-}
+export interface ISSugarcssPluginUiBlockquoteParams {}
 
 export { SSugarcssPluginUiBlockquoteInterface as interface };
 
@@ -56,34 +47,29 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: ISSugarcssPluginUiBlockquoteParams = {
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars: string[] = [];
 
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
-            font-size: s.scalable(1rem);
+    vars.push(`
+            @s.scope 'bare' {
+                font-size: s.scalable(1rem);
+                display: block;
+                padding-inline: s.padding(ui.blockquote.paddingInline);
+                padding-block: s.padding(ui.blockquote.paddingBlock);
+            }
         `);
-    }
 
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
-            display: block;
-            padding-inline: s.padding(ui.blockquote.paddingInline);
-            padding-block: s.padding(ui.blockquote.paddingBlock);
+    vars.push(`
+            @s.scope 'lnf' {
+                border-inline-start: s.border.width(ui.blockquote.borderWidth) solid s.color(current);
+                color: s.color(current, foreground);
+                background-color: s.color(main, surface, --alpha 0.5);
+                border-radius: s.border.radius();
+                @s.font.family(quote);
+            }
     `);
-    }
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
-            border-inline-start: s.border.width(ui.blockquote.borderWidth) solid s.color(current);
-            color: s.color(current, foreground);
-            background-color: s.color(main, surface, --alpha 0.5);
-            border-radius: s.border.radius();
-            @s.font.family(quote);
-    `);
-    }
 
     return vars;
 }

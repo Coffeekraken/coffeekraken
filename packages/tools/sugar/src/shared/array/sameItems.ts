@@ -42,7 +42,7 @@ export default function __sameItems(...args): any[] {
         let newArray = arrays[0];
 
         arrays.forEach((currentArray) => {
-            newArray = sameItems(newArray, currentArray, settings);
+            newArray = __sameItems(newArray, currentArray, settings);
         });
 
         return __unique(newArray);

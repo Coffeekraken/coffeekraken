@@ -11,8 +11,12 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * Generate the avatar classes
  *
- * @param       {('bare'|'lnf'|'shape'|'interactive'|'notifications')[]}        [scope=['bare','lnf','shape','interactive','notifications']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
+ * @scope       interactive         Interactive css
+ * @scope       notification        Notification css
  *
  * @snippet         @s.ui.avatar.classes
  *
@@ -25,22 +29,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class SSugarcssPluginUiAvatarClassesInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'interactive', 'notifications'],
-                default: ['bare', 'lnf', , 'interactive', 'notifications'],
-            },
-        };
+        return {};
     }
 }
 
-export interface ISSugarcssPluginUiAvatarClassesParams {
-    scope: ('bare' | 'lnf' | 'interactive' | 'notifications')[];
-}
+export interface ISSugarcssPluginUiAvatarClassesParams {}
 
 export { SSugarcssPluginUiAvatarClassesInterface as interface };
 
@@ -195,63 +188,20 @@ export default function ({
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
+    ).code(
+        `
+            @s.scope.exclude 'interactive' {
+                .s-avatar {
+                    @s.ui.avatar;
+                }
+            }
+    `,
+        {
+            type: 'CssClass',
+        },
     );
 
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(
-            () => `/**
-          * @name           s-avatar
-          * @namespace          sugar.style.ui.avatar
-          * @type           CssClass
-          * 
-          * This class represent a(n) "<s-color="accent">bare</s-color>" avatar
-          * 
-          * @example        html
-          * <span class="s-avatar">
-          *   <img src="https://www.gravatar.com/avatar/b5df60055b6287bb7c90c0078ce20a5f" />
-          * </span>
-          * 
-          * @since    2.0.0
-          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */
-       `,
-        ).code(
-            `
-          .s-avatar {
-            @s.ui.avatar($scope: 'bare,notifications');
-          }
-      `,
-            { type: 'CssClass' },
-        );
-    }
-
-    if (finalParams.scope.includes('lnf')) {
-        vars.comment(
-            () => `/**
-        * @name           s-avatar
-        * @namespace          sugar.style.ui.avatar
-        * @type           CssClass
-        * 
-        * This class represent a(n) "<s-color="accent">default</s-color>" avatar
-        * 
-        * @example        html
-        * <span class="s-avatar">
-        *   <img src="https://www.gravatar.com/avatar/b5df60055b6287bb7c90c0078ce20a5f" />
-        * </span>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */`,
-        ).code(
-            `
-        .s-avatar:not(.s-bare) {
-            @s.ui.avatar($scope: 'lnf,notifications');
-        }
-    `,
-            { type: 'CssClass' },
-        );
-    }
-
+    vars.code(`@s.scope 'interactive' {`);
     vars.comment(
         () => `/**
           * @name           s-avatar:interactive
@@ -271,11 +221,12 @@ export default function ({
     ).code(
         `
           .s-avatar-interactive {
-              @s.ui.avatar($scope: 'interactive');
+              @s.ui.avatar();
           }
       `,
         { type: 'CssClass' },
     );
+    vars.code('}');
 
     return vars;
 }

@@ -11,8 +11,10 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * Generate the media classes
  *
- * @param       {('bare'|'lnf')[]}        [scope=['bare','lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.media.classes
  *
@@ -25,22 +27,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class SSugarcssPluginUiMediaClassesInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
-        };
+        return {};
     }
 }
 
-export interface ISSugarcssPluginUiMediaClassesParams {
-    scope: ('bare' | 'lnf')[];
-}
+export interface ISSugarcssPluginUiMediaClassesParams {}
 
 export { SSugarcssPluginUiMediaClassesInterface as interface };
 
@@ -56,7 +47,6 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: ISSugarcssPluginUiMediaClassesParams = {
-        scope: [],
         ...params,
     };
 
@@ -102,9 +92,9 @@ export default function ({
     `,
     );
 
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(
-            () => `/**
+    vars.code(`@s.scope 'bare' {`);
+    vars.comment(
+        () => `/**
           * @name           s-media
           * @namespace          sugar.style.ui.media
           * @type           CssClass
@@ -122,17 +112,19 @@ export default function ({
           * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(
-            `
+    ).code(
+        `
           .s-media {
-            @s.ui.media($scope: 'bare');
+            @s.scope.only 'bare' {
+                @s.ui.media;
+            }
           }
       `,
-            { type: 'CssClass' },
-        );
+        { type: 'CssClass' },
+    );
 
-        vars.comment(
-            () => `/**
+    vars.comment(
+        () => `/**
           * @name           s-media-container
           * @namespace          sugar.style.ui.media
           * @type           CssClass
@@ -150,18 +142,18 @@ export default function ({
           * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(
-            `
+    ).code(
+        `
           .s-media-container {
           }
       `,
-            { type: 'CssClass' },
-        );
-    }
+        { type: 'CssClass' },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.includes('lnf')) {
-        vars.comment(
-            () => `/**
+    vars.code(`@s.scope 'lnf' {`);
+    vars.comment(
+        () => `/**
         * @name           s-media
         * @namespace          sugar.style.ui.media
         * @type           CssClass
@@ -178,15 +170,17 @@ export default function ({
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
-        ).code(
-            `
-        .s-media:not(.s-bare) {
-            @s.ui.media($scope: 'lnf');
+    ).code(
+        `
+        .s-media {
+            @s.scope.only 'lnf' {
+                @s.ui.media;
+            }
         }
     `,
-            { type: 'CssClass' },
-        );
-    }
+        { type: 'CssClass' },
+    );
+    vars.code('}');
 
     return vars;
 }

@@ -16,14 +16,6 @@ class postcssUiDatetimePickerClassesInterface extends __SInterface {
                     __STheme.current.get('ui.datetimePicker.defaultLnf') ??
                     'solid',
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'vr'],
-                default: ['bare', 'lnf', 'vr'],
-            },
         };
     }
 }
@@ -31,7 +23,6 @@ class postcssUiDatetimePickerClassesInterface extends __SInterface {
 export interface IPostcssUiDatetimePickerInputClassesParams {
     styles: 'solid'[];
     defaultLnf: 'solid';
-    scope: ('bare' | 'lnf' | 'vr')[];
 }
 
 export { postcssUiDatetimePickerClassesInterface as interface };
@@ -44,6 +35,10 @@ export { postcssUiDatetimePickerClassesInterface as interface };
  * @status        beta
  *
  * Represent a date picker
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
+ * @scope       vr              Vertical rhythm css
  *
  * @snippet         @s.ui.datePicker.classes($1);
  *
@@ -68,29 +63,25 @@ export default function ({
     const finalParams: IPostcssUiDatetimePickerInputClassesParams = {
         styles: ['solid'],
         defaultLnf: 'solid',
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars = new CssVars();
 
-    if (finalParams.scope.includes('bare')) {
-        vars.code(
-            `
+    vars.code(`@s.scope 'bare' {`);
+    vars.code(
+        `
         .s-datetime-picker {
-            @s.ui.datetimePicker($scope: bare);
+            @s.ui.datetimePicker;
         }
     `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
 
-    if (
-        finalParams.styles.includes(finalParams.defaultLnf) &&
-        finalParams.scope.includes('lnf')
-    ) {
+    if (finalParams.styles.includes(finalParams.defaultLnf)) {
+        vars.code(`@s.scope 'lnf' {`);
         vars.comment(
             `/**
             * @name           .s-datetime-picker[lnf="default"]
@@ -106,18 +97,19 @@ export default function ({
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
         ).code(
-            `.s-datetime-picker[lnf="default"]:not(.s-bare) {
-                @s.ui.datetimePicker($lnf: ${finalParams.defaultLnf}, $scope: lnf);
+            `.s-datetime-picker[lnf="default"] {
+                @s.ui.datetimePicker($lnf: ${finalParams.defaultLnf});
             }`,
             {
                 type: 'CssClass',
             },
         );
+        vars.code('}');
     }
 
-    if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.comment(
-            `/**
+    vars.code(`@s.scope 'vr' {`);
+    vars.comment(
+        `/**
             * @name           s-rhythm:vertical
             * @namespace          sugar.style.ui.datetimePicker
             * @type           CssClass
@@ -133,8 +125,8 @@ export default function ({
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
-        ).code(
-            `@s.rhythm.vertical {
+    ).code(
+        `@s.rhythm.vertical {
                 .s-datetime-picker[inline] {
                     ${__STheme.current.jsObjectToCssProperties(
                         __STheme.current.get(
@@ -144,11 +136,11 @@ export default function ({
                 } 
             }
         `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
     return vars;
 }

@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
+const array_1 = require("@coffeekraken/sugar/array");
 class SSugarcssPluginScopeMixinInterface extends s_interface_1.default {
     static get _definition() {
         return {
@@ -46,23 +47,30 @@ exports.interface = SSugarcssPluginScopeMixinInterface;
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function default_1({ params, atRule, registerPostProcessor, replaceWith, }) {
+function default_1({ params, atRule, registerPostProcessor, replaceWith, sharedData, }) {
     const finalParams = Object.assign({ scope: [] }, (params !== null && params !== void 0 ? params : {}));
+    atRule.name = 'media';
+    atRule.params = `s-scope:${finalParams.scope.join(',')}`;
     registerPostProcessor((root) => {
-        root.walkAtRules(/sugar\.scope/, (at) => {
-            at.replaceWith(at.nodes);
-        });
-    });
-    atRule.walkAtRules((n) => {
-        // console.log('d', n.name);
-        if (n.type !== 'atrule' || !n.name.startsWith('sugar.')) {
-            return;
+        let currentRule = atRule.parent;
+        while (currentRule !== root) {
+            if (!currentRule.name) {
+                currentRule = currentRule.parent;
+                continue;
+            }
+            if (currentRule.params.startsWith('s-scope:only:')) {
+                const onlyArray = currentRule.params
+                    .trim()
+                    .replace('s-scope:only:', '')
+                    .split(',');
+                if (!(0, array_1.__intersection)(finalParams.scope, onlyArray).length) {
+                    atRule.remove();
+                }
+            }
+            currentRule = currentRule.parent;
         }
-        // save the wanted scope(s) inside the atRule.
-        // this will be handled by the SSugarcssPlugin main file
-        // to compute the final "scope" param to pass
-        n._scope = finalParams.scope;
+        atRule.replaceWith(atRule.nodes);
     });
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRCxNQUFNLGtDQUFtQyxTQUFRLHFCQUFZO0lBQ3pELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFO29CQUNGLElBQUksRUFBRSxVQUFVO29CQUNoQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDO2lCQUN6QjtnQkFDRCxXQUFXLEVBQ1AseUVBQXlFO2dCQUM3RSxRQUFRLEVBQUUsSUFBSTthQUNqQjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFDOEMsdURBQVM7QUFNeEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F5Qkc7QUFDSCxtQkFBeUIsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixxQkFBcUIsRUFDckIsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLEdBQUcsZ0JBQ2hCLEtBQUssRUFBRSxFQUFFLElBQ04sQ0FBQyxNQUFNLGFBQU4sTUFBTSxjQUFOLE1BQU0sR0FBSSxFQUFFLENBQUMsQ0FDcEIsQ0FBQztJQUVGLHFCQUFxQixDQUFDLENBQUMsSUFBSSxFQUFFLEVBQUU7UUFDM0IsSUFBSSxDQUFDLFdBQVcsQ0FBQyxjQUFjLEVBQUUsQ0FBQyxFQUFFLEVBQUUsRUFBRTtZQUNwQyxFQUFFLENBQUMsV0FBVyxDQUFDLEVBQUUsQ0FBQyxLQUFLLENBQUMsQ0FBQztRQUM3QixDQUFDLENBQUMsQ0FBQztJQUNQLENBQUMsQ0FBQyxDQUFDO0lBRUgsTUFBTSxDQUFDLFdBQVcsQ0FBQyxDQUFDLENBQUMsRUFBRSxFQUFFO1FBQ3JCLDRCQUE0QjtRQUM1QixJQUFJLENBQUMsQ0FBQyxJQUFJLEtBQUssUUFBUSxJQUFJLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsUUFBUSxDQUFDLEVBQUU7WUFDckQsT0FBTztTQUNWO1FBQ0QsOENBQThDO1FBQzlDLHdEQUF3RDtRQUN4RCw2Q0FBNkM7UUFDN0MsQ0FBQyxDQUFDLE1BQU0sR0FBRyxXQUFXLENBQUMsS0FBSyxDQUFDO0lBQ2pDLENBQUMsQ0FBQyxDQUFDO0FBQ1AsQ0FBQztBQWhDRCw0QkFnQ0MifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUNyRCxxREFBMkQ7QUFFM0QsTUFBTSxrQ0FBbUMsU0FBUSxxQkFBWTtJQUN6RCxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsS0FBSyxFQUFFO2dCQUNILElBQUksRUFBRTtvQkFDRixJQUFJLEVBQUUsVUFBVTtvQkFDaEIsVUFBVSxFQUFFLENBQUMsR0FBRyxFQUFFLEdBQUcsQ0FBQztpQkFDekI7Z0JBQ0QsV0FBVyxFQUNQLHlFQUF5RTtnQkFDN0UsUUFBUSxFQUFFLElBQUk7YUFDakI7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBQzhDLHVEQUFTO0FBTXhEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBeUJHO0FBQ0gsbUJBQXlCLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04scUJBQXFCLEVBQ3JCLFdBQVcsRUFDWCxVQUFVLEdBT2I7SUFDRyxNQUFNLFdBQVcsR0FBRyxnQkFDaEIsS0FBSyxFQUFFLEVBQUUsSUFDTixDQUFDLE1BQU0sYUFBTixNQUFNLGNBQU4sTUFBTSxHQUFJLEVBQUUsQ0FBQyxDQUNwQixDQUFDO0lBRUYsTUFBTSxDQUFDLElBQUksR0FBRyxPQUFPLENBQUM7SUFDdEIsTUFBTSxDQUFDLE1BQU0sR0FBRyxXQUFXLFdBQVcsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUM7SUFFekQscUJBQXFCLENBQUMsQ0FBQyxJQUFJLEVBQUUsRUFBRTtRQUMzQixJQUFJLFdBQVcsR0FBRyxNQUFNLENBQUMsTUFBTSxDQUFDO1FBRWhDLE9BQU8sV0FBVyxLQUFLLElBQUksRUFBRTtZQUN6QixJQUFJLENBQUMsV0FBVyxDQUFDLElBQUksRUFBRTtnQkFDbkIsV0FBVyxHQUFHLFdBQVcsQ0FBQyxNQUFNLENBQUM7Z0JBQ2pDLFNBQVM7YUFDWjtZQUNELElBQUksV0FBVyxDQUFDLE1BQU0sQ0FBQyxVQUFVLENBQUMsZUFBZSxDQUFDLEVBQUU7Z0JBQ2hELE1BQU0sU0FBUyxHQUFHLFdBQVcsQ0FBQyxNQUFNO3FCQUMvQixJQUFJLEVBQUU7cUJBQ04sT0FBTyxDQUFDLGVBQWUsRUFBRSxFQUFFLENBQUM7cUJBQzVCLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQztnQkFDaEIsSUFBSSxDQUFDLElBQUEsc0JBQWMsRUFBQyxXQUFXLENBQUMsS0FBSyxFQUFFLFNBQVMsQ0FBQyxDQUFDLE1BQU0sRUFBRTtvQkFDdEQsTUFBTSxDQUFDLE1BQU0sRUFBRSxDQUFDO2lCQUNuQjthQUNKO1lBRUQsV0FBVyxHQUFHLFdBQVcsQ0FBQyxNQUFNLENBQUM7U0FDcEM7UUFFRCxNQUFNLENBQUMsV0FBVyxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUNyQyxDQUFDLENBQUMsQ0FBQztBQUNQLENBQUM7QUE1Q0QsNEJBNENDIn0=

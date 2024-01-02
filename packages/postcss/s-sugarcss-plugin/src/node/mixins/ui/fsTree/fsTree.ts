@@ -11,8 +11,10 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * Apply the fsTree style to any element
  *
- * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.fsTree
  *
@@ -27,22 +29,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class SSugarcssPluginUiFsTreeInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
-        };
+        return {};
     }
 }
 
-export interface ISSugarcssPluginUiFsTreeParams {
-    scope: string[];
-}
+export interface ISSugarcssPluginUiFsTreeParams {}
 
 export { SSugarcssPluginUiFsTreeInterface as interface };
 
@@ -58,7 +49,6 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: ISSugarcssPluginUiFsTreeParams = {
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
@@ -70,33 +60,8 @@ export default function ({
         }
     `);
 
-    // &:after {
-    //     content: '';
-    //     display: block;
-    //     font-weight:bold;
-    //     position: absolute;
-    //     z-index: -1;
-    //     bottom: 0;
-    //     left: calc(0.5em * var(--s-fs-tree-inline-space-ratio, 1));
-    //     width: 1em;
-    //     height: 1px;
-    //     background-color: s.color(current, border);
-    // }
-
-    // &:before {
-    //     content: '';
-    //     display: block;
-    //     font-weight:bold;
-    //     position: absolute;
-    //     z-index: -1;
-    //     top: 0;
-    //     left: 0.5em;
-    //     width: 1px; height: 100%;
-    //     background-color: s.color(current, border);
-    // }
-
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
+    vars.push(`@s.scope 'bare' {`);
+    vars.push(`
             font-size: s.font.size(30);
             user-select: none;
 
@@ -191,21 +156,21 @@ export default function ({
             }
 
         `);
-    }
+    vars.push('}');
 
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
-            
+    vars.push(`
+           @s.scope 'lnf' { 
         `);
 
-        vars.push(`
+    vars.push(`
             li:not(.s-disabled) {
                 > div:hover {
                     background-color: s.color(current, surface);
                 }
             }
         `);
-    }
+
+    vars.push('}');
 
     return vars;
 }

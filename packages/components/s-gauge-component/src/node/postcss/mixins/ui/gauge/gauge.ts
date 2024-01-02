@@ -13,8 +13,10 @@ import __STheme from '@coffeekraken/s-theme';
  * Apply the gauge style to any element
  *
  * @param       {'solid'}                           [style='theme.ui.gauge.defaultLnf']         The lnf you want to generate
- * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.gauge
  *
@@ -35,21 +37,12 @@ class SSugarcssPluginUiGaugeInterface extends __SInterface {
                 values: ['solid'],
                 default: __STheme.current.get('ui.gauge.defaultLnf'),
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
         };
     }
 }
 
 export interface ISSugarcssPluginUiGaugeParams {
     lnf: 'solid';
-    scope: string[];
 }
 
 export { SSugarcssPluginUiGaugeInterface as interface };
@@ -65,21 +58,15 @@ export default function ({
 }) {
     const finalParams: ISSugarcssPluginUiGaugeParams = {
         lnf: 'solid',
-        scope: [],
         ...params,
     };
 
     const vars: string[] = [];
 
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
-        `);
-    }
-
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        switch (finalParams.lnf) {
-            default:
-                vars.push(`
+    vars.push(`@s.scope 'lnf' {`);
+    switch (finalParams.lnf) {
+        default:
+            vars.push(`
 
                     @keyframes s-gauge-track-in {
                         0% {
@@ -145,9 +132,9 @@ export default function ({
                     }
                 
                 `);
-                break;
-        }
+            break;
     }
+    vars.push('}');
 
     return vars;
 }

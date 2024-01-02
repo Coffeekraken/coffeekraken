@@ -83,7 +83,7 @@ export default function ({
         ).code(
             `
       .s-layout-${id} {
-        @s.layout(${layout}, $scope: bare);
+        @s.layout(${layout});
       }
     `,
             { type: 'CssClass' },

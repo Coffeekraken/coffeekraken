@@ -15,8 +15,12 @@ import __faker from 'faker';
  *
  * @param       {('solid'|'underline')[]}                           [lnfs=['solid','underline']]         The style(s) you want to generate
  * @param       {'solid'}                [defaultLnf='theme.ui.form.defaultLnf']           The default style you want
- * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
+ * @scope       vr              Vertical rhythm css
+ * @scope       tf              Text format css
  *
  * @snippet         @s.ui.select.classes
  *
@@ -39,14 +43,6 @@ class SSugarcssPluginUiFormSelectClassesInterface extends __SInterface {
                 values: ['solid'],
                 default: __STheme.current.get('ui.form.defaultLnf'),
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'vr', 'tf'],
-                default: ['bare', 'lnf', 'vr', 'tf'],
-            },
         };
     }
 }
@@ -54,7 +50,6 @@ class SSugarcssPluginUiFormSelectClassesInterface extends __SInterface {
 export interface ISSugarcssPluginUiFormSelectClassesParams {
     lnfs: ('solid' | 'underline')[];
     defaultLnf: 'solid';
-    scope: ('bare' | 'lnf' | 'tf' | 'vr')[];
 }
 
 export { SSugarcssPluginUiFormSelectClassesInterface as interface };
@@ -73,7 +68,6 @@ export default function ({
     const finalParams: ISSugarcssPluginUiFormSelectClassesParams = {
         lnfs: [],
         defaultLnf: 'solid',
-        scope: [],
         ...params,
     };
 
@@ -264,9 +258,9 @@ export default function ({
     `,
     );
 
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(
-            () => `/**
+    vars.code(`@s.scope 'bare' {`);
+    vars.comment(
+        () => `/**
             * @name           s-select
             * @namespace          sugar.style.ui.select
             * @type           CssClass
@@ -282,25 +276,25 @@ export default function ({
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
-        );
-        vars.code(
-            () => `
+    );
+    vars.code(
+        () => `
                 .s-select {
-                    @s.ui.select($scope: bare);
+                    @s.ui.select;
                 }`,
-            { type: 'CssClass' },
-        );
-    }
+        { type: 'CssClass' },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.includes('lnf')) {
-        finalParams.lnfs.forEach((lnf) => {
-            const isDefaultStyle = finalParams.defaultLnf === lnf;
+    vars.code(`@s.scope 'lnf' {`);
+    finalParams.lnfs.forEach((lnf) => {
+        const isDefaultStyle = finalParams.defaultLnf === lnf;
 
-            const styleCls = isDefaultStyle ? '' : `.s-select-${lnf}`;
-            const cls = `.s-select${styleCls}`;
+        const styleCls = isDefaultStyle ? '' : `.s-select-${lnf}`;
+        const cls = `.s-select${styleCls}`;
 
-            vars.comment(
-                () => `/**
+        vars.comment(
+            () => `/**
             * @name           s-select${isDefaultStyle ? '' : `:${lnf}`}
             * @namespace          sugar.style.ui.select
             * @type           CssClass
@@ -316,20 +310,20 @@ export default function ({
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
-            );
-            vars.code(
-                () => `
-                ${cls}:not(.s-bare) {
-                    @s.ui.select($lnf: ${lnf}, $scope: lnf);
+        );
+        vars.code(
+            () => `
+                ${cls} {
+                    @s.ui.select($lnf: ${lnf});
                 }`,
-                { type: 'CssClass' },
-            );
-        });
-    }
+            { type: 'CssClass' },
+        );
+    });
+    vars.code('}');
 
-    if (finalParams.scope.indexOf('tf') !== -1) {
-        vars.comment(
-            () => `/**
+    vars.code(`@s.scope 'tf' {`);
+    vars.comment(
+        () => `/**
             * @name           s-format:text select
             * @namespace          sugar.style.ui.select
             * @type           CssClass
@@ -349,21 +343,21 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(
-            `
+    ).code(
+        `
             @s.format.text {
                 select {
-                    @s.ui.select($scope: '${finalParams.scope.join(',')}');
+                    @s.ui.select;
                 } 
             }
         `,
-            { type: 'CssClass' },
-        );
-    }
+        { type: 'CssClass' },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.comment(
-            () => `/**
+    vars.code(`@s.scope 'vr' {`);
+    vars.comment(
+        () => `/**
             * @name           s-rhythm:vertical
             * @namespace          sugar.style.ui.select
             * @type           CssClass
@@ -395,8 +389,8 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(
-            `
+    ).code(
+        `
             @s.rhythm.vertical {
                 select, .s-select {
                     ${__STheme.current.jsObjectToCssProperties(
@@ -405,9 +399,9 @@ export default function ({
                 } 
             }
         `,
-            { type: 'CssClass' },
-        );
-    }
+        { type: 'CssClass' },
+    );
+    vars.code('}');
 
     return vars;
 }

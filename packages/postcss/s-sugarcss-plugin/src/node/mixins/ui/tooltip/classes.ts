@@ -15,8 +15,11 @@ import __faker from 'faker';
  *
  * @param       {('solid')[]}                           [lnfs=['solid']]         The lnf(s) you want to generate
  * @param       {'solid'}                [defaultLnf='theme.ui.tooltip.defaultLnf']           The default lnf you want
- * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
+ *
+ * @scope       bare                Structural css
+ * @scope       lnf                 Look and feel css
+ * @scope       position            Positioning css
  *
  * @snippet         @s.ui.tooltip.classes
  *
@@ -40,14 +43,6 @@ class SSugarcssPluginUiTooltipClassesInterface extends __SInterface {
                 values: ['solid'],
                 default: __STheme.current.get('ui.tooltip.defaultLnf'),
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
         };
     }
 }
@@ -55,7 +50,6 @@ class SSugarcssPluginUiTooltipClassesInterface extends __SInterface {
 export interface ISSugarcssPluginUiTooltipClassesParams {
     lnfs: 'solid'[];
     defaultLnf: 'solid';
-    scope: ('bare' | 'lnf')[];
 }
 
 export { SSugarcssPluginUiTooltipClassesInterface as interface };
@@ -74,7 +68,6 @@ export default function ({
     const finalParams: ISSugarcssPluginUiTooltipClassesParams = {
         lnfs: [],
         defaultLnf: 'solid',
-        scope: [],
         ...params,
     };
 
@@ -221,9 +214,10 @@ export default function ({
     `,
     );
 
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(
-            () => `/**
+    vars.code(`@s.scope 'bare' {`);
+
+    vars.comment(
+        () => `/**
             * @name           s-toolip-container
             * @namespace          sugar.style.ui.tooltip
             * @type           CssClass
@@ -240,9 +234,9 @@ export default function ({
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */`,
-        );
-        vars.code(
-            () => `
+    );
+    vars.code(
+        () => `
             .s-tooltip-container {
                 position: relative;
                 display: inline-block;
@@ -274,10 +268,11 @@ export default function ({
                 }
             }
         `,
-            { type: 'CssClass' },
-        );
-        vars.comment(
-            () => `/**
+        { type: 'CssClass' },
+    );
+
+    vars.comment(
+        () => `/**
             * @name           s-toolip-container:active
             * @namespace          sugar.style.ui.tooltip
             * @type           CssClass
@@ -293,13 +288,11 @@ export default function ({
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */`,
-        );
-        // no need to write a class here cause this is handled in the tooltip.ts file directly...
-    }
+    );
+    // no need to write a class here cause this is handled in the tooltip.ts file directly...
 
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(
-            () => `/**
+    vars.comment(
+        () => `/**
             * @name           s-tooltip
             * @namespace          sugar.style.ui.tooltip
             * @type           CssClass
@@ -315,21 +308,23 @@ export default function ({
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */`,
-        );
-        vars.code(
-            () => `
+    );
+    vars.code(
+        () => `
             .s-tooltip {
-                @s.ui.tooltip($scope: bare);
+                @s.ui.tooltip;
             }
         `,
-            { type: 'CssClass' },
-        );
-    }
+        { type: 'CssClass' },
+    );
 
-    if (finalParams.scope.includes('lnf')) {
-        finalParams.lnfs.forEach((lnf) => {
-            vars.comment(
-                () => `/**
+    vars.code('}');
+
+    vars.code(`@s.scope 'lnf' {`);
+
+    finalParams.lnfs.forEach((lnf) => {
+        vars.comment(
+            () => `/**
                 * @name           s-tooltip${
                     finalParams.defaultLnf === lnf ? '' : `:${lnf}`
                 }
@@ -349,21 +344,21 @@ export default function ({
                 * @since    2.0.0
                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                 */`,
-            );
-            vars.code(
-                () => `
-                .s-tooltip${
-                    finalParams.defaultLnf === lnf ? '' : `-${lnf}`
-                }:not(.s-bare) {
-                    @s.ui.tooltip($lnf: ${lnf}, $scope: lnf);
+        );
+        vars.code(
+            () => `
+                .s-tooltip${finalParams.defaultLnf === lnf ? '' : `-${lnf}`} {
+                    @s.ui.tooltip($lnf: ${lnf});
                 }
             `,
-                { type: 'CssClass' },
-            );
-        });
-    }
+            { type: 'CssClass' },
+        );
+    });
 
-    // Interactive
+    vars.code('}');
+
+    vars.code(`@s.scope 'bare' {`);
+
     vars.comment(
         () => `/**
         * @name           s-tooltip-interactive
@@ -385,12 +380,16 @@ export default function ({
     );
     vars.code(
         () => `
-        .s-tooltip-interactive {
-            @s.ui.tooltip($interactive: true, $scope: 'interactive');
-        }
+            .s-tooltip-interactive {
+                @s.ui.tooltip($interactive: true);
+            }
     `,
         { type: 'CssClass' },
     );
+
+    vars.code('}');
+
+    vars.code(`@s.scope 'position' {`);
 
     // TOP
     vars.comment(
@@ -413,9 +412,9 @@ export default function ({
     );
     vars.code(
         () => `
-        .s-tooltip[placement="top"],
+        .s-tooltip[position="top"],
         .s-tooltip {
-            @s.ui.tooltip($position: top, $scope: position);
+            @s.ui.tooltip($position: top);
         }
     `,
         { type: 'CssClass' },
@@ -442,9 +441,9 @@ export default function ({
     );
     vars.code(
         () => `
-        .s-tooltip[placement="right"],
+        .s-tooltip[position="right"],
         .s-tooltip-right {
-            @s.ui.tooltip($position: right, $scope: position);
+            @s.ui.tooltip($position: right);
         }
     `,
         { type: 'CssClass' },
@@ -471,9 +470,9 @@ export default function ({
     );
     vars.code(
         () => `
-        .s-tooltip[placement="left"],
+        .s-tooltip[position="left"],
         .s-tooltip-left {
-            @s.ui.tooltip($position: left, $scope: position);
+            @s.ui.tooltip($position: left);
         }
     `,
         { type: 'CssClass' },
@@ -500,13 +499,15 @@ export default function ({
     );
     vars.code(
         () => `
-        .s-tooltip[placement="bottom"],
+        .s-tooltip[position="bottom"],
         .s-tooltip-bottom {
-            @s.ui.tooltip($position: bottom, $scope: position);
+            @s.ui.tooltip($position: bottom);
         }
     `,
         { type: 'CssClass' },
     );
+
+    vars.code('}');
 
     return vars;
 }

@@ -3,22 +3,11 @@ import __STheme from '@coffeekraken/s-theme';
 
 class postcssUiCodeExampleClassesInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'vr', 'theme'],
-                default: ['bare', 'lnf', 'vr', 'theme'],
-            },
-        };
+        return {};
     }
 }
 
-export interface IPostcssUiCodeExampleClassesParams {
-    scope: ('bare' | 'lnf' | 'vr' | 'theme')[];
-}
+export interface IPostcssUiCodeExampleClassesParams {}
 
 export { postcssUiCodeExampleClassesInterface as interface };
 
@@ -30,6 +19,11 @@ export { postcssUiCodeExampleClassesInterface as interface };
  * @status              beta
  *
  * This mixin represent a code example
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
+ * @scope       vr              Vertical rhythm css
+ * @scope       theme           The highlightjs theme css
  *
  * @snippet      @s.ui.codeExample.classes($1);
  *
@@ -52,28 +46,27 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiCodeExampleClassesParams = {
-        scope: ['bare', 'lnf', 'theme'],
         ...params,
     };
 
     const vars = new CssVars();
 
-    if (finalParams.scope.includes('bare')) {
-        vars.code(
-            `
-        .s-code-example {
-            @s.ui.codeExample($scope: bare);
-        }
+    vars.code(
+        `
+            @s.scope 'bare' {
+                .s-code-example {
+                    @s.ui.codeExample;
+                }
+            }
     `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
 
-    if (finalParams.scope.includes('lnf')) {
-        vars.comment(
-            `/**
+    vars.code(`@s.scope 'lnf' {`);
+    vars.comment(
+        `/**
             * @name           .s-code-example[lnf="default"]
             * @namespace          sugar.style.ui.codeExample
             * @type           CssClass
@@ -90,32 +83,32 @@ export default function ({
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
-        ).code(
-            `.s-code-example[lnf="default"]:not(.s-bare) {
-                @s.ui.codeExample($scope: lnf);
+    ).code(
+        `.s-code-example[lnf="default"] {
+                @s.ui.codeExample;
             }`,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.includes('theme')) {
-        vars.code(
-            `
-            .s-code-example:not(.s-bare) {
+    vars.code(`@s.scope 'theme' {`);
+    vars.code(
+        `
+            .s-code-example {
                 @s.highlightjs.theme;
             }
         `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.comment(
-            `/**
+    vars.code(`@s.scope 'vr' {`);
+    vars.comment(
+        `/**
             * @name           s-rhythm:vertical
             * @namespace          sugar.style.ui.codeExample
             * @type           CssClass
@@ -139,8 +132,8 @@ export default function ({
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
-        ).code(
-            `@s.rhythm.vertical {
+    ).code(
+        `@s.rhythm.vertical {
                 .s-code-example {
                     ${__STheme.current.jsObjectToCssProperties(
                         __STheme.current.get('ui.codeExample.rhythmVertical'),
@@ -148,11 +141,11 @@ export default function ({
                 } 
             }
         `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
     return vars;
 }

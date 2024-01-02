@@ -2,22 +2,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class postcssUiGoogleMapMarkerClassesInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
-        };
+        return {};
     }
 }
 
-export interface IPostcssUiGoogleMapClassesParams {
-    scope: ('bare' | 'lnf')[];
-}
+export interface IPostcssUiGoogleMapClassesParams {}
 
 export { postcssUiGoogleMapMarkerClassesInterface as interface };
 
@@ -29,6 +18,9 @@ export { postcssUiGoogleMapMarkerClassesInterface as interface };
  * @status              beta
  *
  * This mixin represent a google map marker
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet      @s.ui.googleMapMarker.classes($1);
  *
@@ -51,28 +43,29 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiGoogleMapClassesParams = {
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars = new CssVars();
 
-    if (finalParams.scope.includes('bare')) {
-        vars.code(
-            `
+    vars.code(`@s.scope 'bare' {`);
+    vars.code(
+        `
         .s-google-map-marker {
-            @s.ui.googleMapMarker($scope: bare);
+            @s.scope.only 'bare' {
+                @s.ui.googleMapMarker;
+            }
         }
     `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.includes('lnf')) {
-        vars.comment(
-            `/**
+    vars.code(`@s.scope 'lnf' {`);
+    vars.comment(
+        `/**
             * @name          .s-google-map[lnf="default"] .s-google-map-marker
             * @namespace          sugar.style.ui.googleMapMarker
             * @type           CssClass
@@ -96,16 +89,18 @@ export default function ({
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
-        ).code(
-            `
-            .s-google-map[lnf="default"]:not(.s-bare) .s-google-map-marker:not(.s-bare) {
-                @s.ui.googleMapMarker($scope: lnf);
+    ).code(
+        `
+            .s-google-map[lnf="default"] .s-google-map-marker {
+                @s.scope.only 'lnf' {
+                    @s.ui.googleMapMarker;
+                }
             }`,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
     return vars;
 }

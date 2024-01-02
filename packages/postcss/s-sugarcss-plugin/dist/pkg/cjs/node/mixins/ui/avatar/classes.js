@@ -16,8 +16,12 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  *
  * Generate the avatar classes
  *
- * @param       {('bare'|'lnf'|'shape'|'interactive'|'notifications')[]}        [scope=['bare','lnf','shape','interactive','notifications']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
+ * @scope       interactive         Interactive css
+ * @scope       notification        Notification css
  *
  * @snippet         @s.ui.avatar.classes
  *
@@ -29,16 +33,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  */
 class SSugarcssPluginUiAvatarClassesInterface extends s_interface_1.default {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'interactive', 'notifications'],
-                default: ['bare', 'lnf', , 'interactive', 'notifications'],
-            },
-        };
+        return {};
     }
 }
 exports.interface = SSugarcssPluginUiAvatarClassesInterface;
@@ -140,50 +135,16 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
-    `);
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(() => `/**
-          * @name           s-avatar
-          * @namespace          sugar.style.ui.avatar
-          * @type           CssClass
-          * 
-          * This class represent a(n) "<s-color="accent">bare</s-color>" avatar
-          * 
-          * @example        html
-          * <span class="s-avatar">
-          *   <img src="https://www.gravatar.com/avatar/b5df60055b6287bb7c90c0078ce20a5f" />
-          * </span>
-          * 
-          * @since    2.0.0
-          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */
-       `).code(`
-          .s-avatar {
-            @s.ui.avatar($scope: 'bare,notifications');
-          }
-      `, { type: 'CssClass' });
-    }
-    if (finalParams.scope.includes('lnf')) {
-        vars.comment(() => `/**
-        * @name           s-avatar
-        * @namespace          sugar.style.ui.avatar
-        * @type           CssClass
-        * 
-        * This class represent a(n) "<s-color="accent">default</s-color>" avatar
-        * 
-        * @example        html
-        * <span class="s-avatar">
-        *   <img src="https://www.gravatar.com/avatar/b5df60055b6287bb7c90c0078ce20a5f" />
-        * </span>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */`).code(`
-        .s-avatar:not(.s-bare) {
-            @s.ui.avatar($scope: 'lnf,notifications');
-        }
-    `, { type: 'CssClass' });
-    }
+    `).code(`
+            @s.scope.exclude 'interactive' {
+                .s-avatar {
+                    @s.ui.avatar;
+                }
+            }
+    `, {
+        type: 'CssClass',
+    });
+    vars.code(`@s.scope 'interactive' {`);
     vars.comment(() => `/**
           * @name           s-avatar:interactive
           * @namespace          sugar.style.ui.avatar
@@ -200,10 +161,11 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
           * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`
           .s-avatar-interactive {
-              @s.ui.avatar($scope: 'interactive');
+              @s.ui.avatar();
           }
       `, { type: 'CssClass' });
+    vars.code('}');
     return vars;
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBRUgsTUFBTSx1Q0FBd0MsU0FBUSxxQkFBWTtJQUM5RCxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsS0FBSyxFQUFFO2dCQUNILElBQUksRUFBRTtvQkFDRixJQUFJLEVBQUUsZUFBZTtvQkFDckIsVUFBVSxFQUFFLENBQUMsR0FBRyxFQUFFLEdBQUcsQ0FBQztpQkFDekI7Z0JBQ0QsTUFBTSxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxhQUFhLEVBQUUsZUFBZSxDQUFDO2dCQUN2RCxPQUFPLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLEFBQUQsRUFBRyxhQUFhLEVBQUUsZUFBZSxDQUFDO2FBQzdEO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQU1tRCw0REFBUztBQUU3RCxtQkFBeUIsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixPQUFPLEVBQ1AsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLG1CQUNiLEtBQUssRUFBRSxFQUFFLElBQ04sTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBRyxJQUFJLE9BQU8sRUFBRSxDQUFDO0lBRTNCLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O3dEQTZCMEMsSUFBSSxDQUFDLEtBQUssQ0FDdEQsSUFBSSxDQUFDLE1BQU0sRUFBRSxHQUFHLEtBQUssQ0FDeEI7Ozt3REFHK0MsSUFBSSxDQUFDLEtBQUssQ0FDdEQsSUFBSSxDQUFDLE1BQU0sRUFBRSxHQUFHLEtBQUssQ0FDeEI7Ozt3REFHK0MsSUFBSSxDQUFDLEtBQUssQ0FDdEQsSUFBSSxDQUFDLE1BQU0sRUFBRSxHQUFHLEtBQUssQ0FD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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXlCRztBQUVILE1BQU0sdUNBQXdDLFNBQVEscUJBQVk7SUFDOUQsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTyxFQUFFLENBQUM7SUFDZCxDQUFDO0NBQ0o7QUFJbUQsNERBQVM7QUFFN0QsbUJBQXlCLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sT0FBTyxFQUNQLFdBQVcsR0FNZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixLQUFLLEVBQUUsRUFBRSxJQUNOLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQUcsSUFBSSxPQUFPLEVBQUUsQ0FBQztJQUUzQixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozt3REE2QjBDLElBQUksQ0FBQyxLQUFLLENBQ3RELElBQUksQ0FBQyxNQUFNLEVBQUUsR0FBRyxLQUFLLENBQ3hCOzs7d0RBRytDLElBQUksQ0FBQyxLQUFLLENBQ3RELElBQUksQ0FBQyxNQUFNLEVBQUUsR0FBRyxLQUFLLENBQ3hCOzs7d0RBRytDLElBQUksQ0FBQyxLQUFLLENBQ3RELElBQUksQ0FBQyxNQUFNLEVBQUUsR0FBRyxLQUFLLENBQ3hCOzs7d0RBRytDLElBQUksQ0FBQyxLQUFLLENBQ3RELElBQUksQ0FBQyxNQUFNLEVBQUUsR0FBRyxLQUFLLENBQ3hCOzs7d0RBRytDLElBQUksQ0FBQyxLQUFLLENBQ3RELElBQUksQ0FBQyxNQUFNLEVBQUUsR0FBRyxLQUFLLENBQ3hCOzs7dURBRzhDLElBQUksQ0FBQyxLQUFLLENBQ3JELElBQUksQ0FBQyxNQUFNLEVBQUUsR0FBRyxLQUFLLENBQ3hCOzs7Ozs7O3VEQU84QyxJQUFJLENBQUMsS0FBSyxDQUNyRCxJQUFJLENBQUMsTUFBTSxFQUFFLEdBQUcsS0FBSyxDQUN4Qjs7O3dEQUcrQyxJQUFJLENBQUMsS0FBSyxDQUN0RCxJQUFJLENBQUMsTUFBTSxFQUFFLEdBQUcsS0FBSyxDQUN4Qjs7O3dEQUcrQyxJQUFJLENBQUMsS0FBSyxDQUN0RCxJQUFJLENBQUMsTUFBTSxFQUFFLEdBQUcsS0FBSyxDQUN4Qjs7O3dEQUcrQyxJQUFJLENBQUMsS0FBSyxDQUN0RCxJQUFJLENBQUMsTUFBTSxFQUFFLEdBQUcsS0FBSyxDQUN4Qjs7O3dEQUcrQyxJQUFJLENBQUMsS0FBSyxDQUN0RCxJQUFJLENBQUMsTUFBTSxFQUFFLEdBQUcsS0FBSyxDQUN4Qjs7O3dEQUcrQyxJQUFJLENBQUMsS0FBSyxDQUN0RCxJQUFJLENBQUMsTUFBTSxFQUFFLEdBQUcsS0FBSyxDQUN4Qjs7Ozs7Ozt5REFPZ0QsSUFBSSxDQUFDLEtBQUssQ0FDdkQsSUFBSSxDQUFDLE1BQU0sRUFBRSxHQUFHLEtBQUssQ0FDeEI7Ozt3REFHK0MsSUFBSSxDQUFDLEtBQUssQ0FDdEQsSUFBSSxDQUFDLE1BQU0sRUFBRSxHQUFHLEtBQUssQ0FDeEI7Ozt3REFHK0MsSUFBSSxDQUFDLEtBQUssQ0FDdEQsSUFBSSxDQUFDLE1BQU0sRUFBRSxHQUFHLEtBQUssQ0FDeEI7Ozt3REFHK0MsSUFBSSxDQUFDLEtBQUssQ0FDdEQsSUFBSSxDQUFDLE1BQU0sRUFBRSxHQUFHLEtBQUssQ0FDeEI7Ozt3REFHK0MsSUFBSSxDQUFDLEtBQUssQ0FDdEQsSUFBSSxDQUFDLE1BQU0sRUFBRSxHQUFHLEtBQUssQ0FDeEI7Ozt3REFHK0MsSUFBSSxDQUFDLEtBQUssQ0FDdEQsSUFBSSxDQUFDLE1BQU0sRUFBRSxHQUFHLEtBQUssQ0FDeEI7Ozs7Ozs7S0FPSixDQUNBLENBQUMsSUFBSSxDQUNGOzs7Ozs7S0FNSCxFQUNHO1FBQ0ksSUFBSSxFQUFFLFVBQVU7S0FDbkIsQ0FDSixDQUFDO0lBRUYsSUFBSSxDQUFDLElBQUksQ0FBQywwQkFBMEIsQ0FBQyxDQUFDO0lBQ3RDLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7O1dBY0gsQ0FDTixDQUFDLElBQUksQ0FDRjs7OztPQUlELEVBQ0MsRUFBRSxJQUFJLEVBQUUsVUFBVSxFQUFFLENBQ3ZCLENBQUM7SUFDRixJQUFJLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0lBRWYsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQztBQWhNRCw0QkFnTUMifQ==

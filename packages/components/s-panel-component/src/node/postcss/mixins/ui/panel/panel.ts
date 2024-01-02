@@ -2,22 +2,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class postcssUiPanelInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
-        };
+        return {};
     }
 }
 
-export interface IPostcssUiPanelMapParams {
-    scope: ('bare' | 'lnf')[];
-}
+export interface IPostcssUiPanelMapParams {}
 
 export { postcssUiPanelInterface as interface };
 
@@ -29,6 +18,9 @@ export { postcssUiPanelInterface as interface };
  * @status        beta
  *
  * Apply the panel style to any s-panel element
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.panel($1);
  *
@@ -53,22 +45,16 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiPanelMapParams = {
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars: string[] = [];
 
     // bare
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
-           
-    `);
-    }
 
     // lnf
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
+    vars.push(`@s.scope 'lnf' {`);
+    vars.push(`
 
             .s-panel_container {
                 transition: s.theme(ui.panel.transition);
@@ -92,7 +78,7 @@ export default function ({
             }
 
         `);
-    }
+    vars.push('}');
 
     return vars;
 }

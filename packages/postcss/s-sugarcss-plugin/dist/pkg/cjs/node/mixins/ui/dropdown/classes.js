@@ -16,8 +16,11 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  *
  * Generate the dropdown classes
  *
- * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
+ * @scope       positiion       Position css
  *
  * @snippet         @s.ui.dropdown.classes
  *
@@ -29,21 +32,12 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  */
 class SSugarcssPluginUiDropdownClassesInterface extends s_interface_1.default {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
-        };
+        return {};
     }
 }
 exports.interface = SSugarcssPluginUiDropdownClassesInterface;
 function default_1({ params, atRule, CssVars, replaceWith, }) {
-    const finalParams = Object.assign({ scope: ['bare', 'lnf'] }, params);
+    const finalParams = Object.assign({}, params);
     const vars = new CssVars();
     vars.comment(() => `
       /**
@@ -200,8 +194,8 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(() => `/**
+    vars.code(`@s.scope 'bare' {`);
+    vars.comment(() => `/**
             * @name           s-dropdown
             * @namespace          sugar.style.ui.dropdown
             * @type           CssClass
@@ -224,14 +218,14 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         */
        `).code(`
             .s-dropdown {
-                @s.ui.dropdown($scope: bare);
+                @s.ui.dropdown;
             }
             `, {
-            type: 'CssClass',
-        });
-    }
-    if (finalParams.scope.includes('lnf')) {
-        vars.comment(() => `/**
+        type: 'CssClass',
+    });
+    vars.code('}');
+    vars.code(`@s.scope 'lnf' {`);
+    vars.comment(() => `/**
             * @name           s-dropdown
             * @namespace          sugar.style.ui.dropdown
             * @type           CssClass
@@ -253,13 +247,14 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `).code(`
-            .s-dropdown:not(.s-bare) {
-                @s.ui.dropdown($scope: lnf);
+            .s-dropdown {
+                @s.ui.dropdown;
             }
             `, {
-            type: 'CssClass',
-        });
-    }
+        type: 'CssClass',
+    });
+    vars.code('}');
+    vars.code(`@s.scope 'position' {`);
     vars.comment(() => `/**
         * @name           s-dropdown
         * @namespace          sugar.style.ui.dropdown
@@ -284,7 +279,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
       */
      `).code(`
         .s-dropdown {
-            @s.ui.dropdown($position: bottom, $scope: position);
+            @s.ui.dropdown($position: bottom);
         }
         `, {
         type: 'CssClass',
@@ -313,7 +308,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
       */
      `).code(`
         .s-dropdown-bottom-start {
-            @s.ui.dropdown($position: bottom-start, $scope: position);
+            @s.ui.dropdown($position: bottom-start);
         }
         `, {
         type: 'CssClass',
@@ -342,7 +337,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
       */
      `).code(`
         .s-dropdown-bottom-end {
-            @s.ui.dropdown($position: bottom-end, $scope: position);
+            @s.ui.dropdown($position: bottom-end);
         }
         `, {
         type: 'CssClass',
@@ -371,7 +366,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
       */
      `).code(`
         .s-dropdown-top {
-            @s.ui.dropdown($position: top, $scope: position);
+            @s.ui.dropdown($position: top);
         }
         `, {
         type: 'CssClass',
@@ -400,7 +395,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
       */
      `).code(`
         .s-dropdown-top-start {
-            @s.ui.dropdown($position: top-start, $scope: position);
+            @s.ui.dropdown($position: top-start);
         }
         `, {
         type: 'CssClass',
@@ -429,13 +424,14 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
       */
      `).code(`
         .s-dropdown-top-end {
-            @s.ui.dropdown($position: top-end, $scope: position);
+            @s.ui.dropdown($position: top-end);
         }
         `, {
         type: 'CssClass',
     });
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(() => `/**
+    vars.code('}');
+    vars.code(`@s.scope 'bare' {`);
+    vars.comment(() => `/**
             * @name           s-dropdown-container
             * @namespace          sugar.style.ui.dropdown
             * @type           CssClass
@@ -461,7 +457,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */`);
-        vars.code(() => `
+    vars.code(() => `
             .s-dropdown-container {
                 position: relative;
                 display: inline-block;
@@ -484,10 +480,10 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
                 }
             }
         `, {
-            type: 'CssClass',
-        });
-    }
+        type: 'CssClass',
+    });
+    vars.code('}');
     return vars;
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBRUgsTUFBTSx5Q0FBMEMsU0FBUSxxQkFBWTtJQUNoRSxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsS0FBSyxFQUFFO2dCQUNILElBQUksRUFBRTtvQkFDRixJQUFJLEVBQUUsZUFBZTtvQkFDckIsVUFBVSxFQUFFLENBQUMsR0FBRyxFQUFFLEdBQUcsQ0FBQztpQkFDekI7Z0JBQ0QsTUFBTSxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssQ0FBQztnQkFDdkIsT0FBTyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssQ0FBQzthQUMzQjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFNcUQsOERBQVM7QUFFL0QsbUJBQXlCLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sT0FBTyxFQUNQLFdBQVcsR0FNZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixLQUFLLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxDQUFDLElBQ25CLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQUcsSUFBSSxPQUFPLEVBQUUsQ0FBQztJQUUzQixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0tBMEpULENBQ0EsQ0FBQztJQUVGLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxRQUFRLENBQUMsTUFBTSxDQUFDLEVBQUU7UUFDcEMsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O1FBcUJWLENBQ0MsQ0FBQyxJQUFJLENBQ0Y7Ozs7YUFJQyxFQUNEO1lBQ0ksSUFBSSxFQUFFLFVBQVU7U0FDbkIsQ0FDSixDQUFDO0tBQ0w7SUFFRCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLEtBQUssQ0FBQyxFQUFFO1FBQ25DLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztRQXFCVixDQUNDLENBQUMsSUFBSSxDQUNGOzs7O2FBSUMsRUFDRDtZQUNJLElBQUksRUFBRSxVQUFVO1NBQ25CLENBQ0osQ0FBQztLQUNMO0lBRUQsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztNQXNCUixDQUNELENBQUMsSUFBSSxDQUNGOzs7O1NBSUMsRUFDRDtRQUNJLElBQUksRUFBRSxVQUFVO0tBQ25CLENBQ0osQ0FBQztJQUVGLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7TUFzQlIsQ0FDRCxDQUFDLElBQUksQ0FDRjs7OztTQUlDLEVBQ0Q7UUFDSSxJQUFJLEVBQUUsVUFBVTtLQUNuQixDQUNKLENBQUM7SUFFRixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O01Bc0JSLENBQ0QsQ0FBQyxJQUFJLENBQ0Y7Ozs7U0FJQyxFQUNEO1FBQ0ksSUFBSSxFQUFFLFVBQVU7S0FDbkIsQ0FDSixDQUFDO0lBRUYsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztNQXNCUixDQUNELENBQUMsSUFBSSxDQUNGOzs7O1NBSUMsRUFDRDtRQUNJLElBQUksRUFBRSxVQUFVO0tBQ25CLENBQ0osQ0FBQztJQUVGLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7TUFzQlIsQ0FDRCxDQUFDLElBQUksQ0FDRjs7OztTQUlDLEVBQ0Q7UUFDSSxJQUFJLEVBQUUsVUFBVTtLQUNuQixDQUNKLENBQUM7SUFFRixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O01Bc0JSLENBQ0QsQ0FBQyxJQUFJLENBQ0Y7Ozs7U0FJQyxFQUNEO1FBQ0ksSUFBSSxFQUFFLFVBQVU7S0FDbkIsQ0FDSixDQUFDO0lBRUYsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxNQUFNLENBQUMsRUFBRTtRQUNwQyxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O2VBeUJILENBQ04sQ0FBQztRQUNGLElBQUksQ0FBQyxJQUFJLENBQ0wsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7U0FzQlQsRUFDRztZQUNJLElBQUksRUFBRSxVQUFVO1NBQ25CLENBQ0osQ0FBQztLQUNMO0lBRUQsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQztBQXRnQkQsNEJBc2dCQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBRUgsTUFBTSx5Q0FBMEMsU0FBUSxxQkFBWTtJQUNoRSxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPLEVBQUUsQ0FBQztJQUNkLENBQUM7Q0FDSjtBQUlxRCw4REFBUztBQUUvRCxtQkFBeUIsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixPQUFPLEVBQ1AsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLHFCQUNWLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQUcsSUFBSSxPQUFPLEVBQUUsQ0FBQztJQUUzQixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0tBMEpULENBQ0EsQ0FBQztJQUVGLElBQUksQ0FBQyxJQUFJLENBQUMsbUJBQW1CLENBQUMsQ0FBQztJQUMvQixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7UUFxQk4sQ0FDSCxDQUFDLElBQUksQ0FDRjs7OzthQUlLLEVBQ0w7UUFDSSxJQUFJLEVBQUUsVUFBVTtLQUNuQixDQUNKLENBQUM7SUFDRixJQUFJLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0lBRWYsSUFBSSxDQUFDLElBQUksQ0FBQyxrQkFBa0IsQ0FBQyxDQUFDO0lBQzlCLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztRQXFCTixDQUNILENBQUMsSUFBSSxDQUNGOzs7O2FBSUssRUFDTDtRQUNJLElBQUksRUFBRSxVQUFVO0tBQ25CLENBQ0osQ0FBQztJQUNGLElBQUksQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7SUFFZixJQUFJLENBQUMsSUFBSSxDQUFDLHVCQUF1QixDQUFDLENBQUM7SUFFbkMsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztNQXNCUixDQUNELENBQUMsSUFBSSxDQUNGOzs7O1NBSUMsRUFDRDtRQUNJLElBQUksRUFBRSxVQUFVO0tBQ25CLENBQ0osQ0FBQztJQUVGLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7TUFzQlIsQ0FDRCxDQUFDLElBQUksQ0FDRjs7OztTQUlDLEVBQ0Q7UUFDSSxJQUFJLEVBQUUsVUFBVTtLQUNuQixDQUNKLENBQUM7SUFFRixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O01Bc0JSLENBQ0QsQ0FBQyxJQUFJLENBQ0Y7Ozs7U0FJQyxFQUNEO1FBQ0ksSUFBSSxFQUFFLFVBQVU7S0FDbkIsQ0FDSixDQUFDO0lBRUYsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztNQXNCUixDQUNELENBQUMsSUFBSSxDQUNGOzs7O1NBSUMsRUFDRDtRQUNJLElBQUksRUFBRSxVQUFVO0tBQ25CLENBQ0osQ0FBQztJQUVGLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7TUFzQlIsQ0FDRCxDQUFDLElBQUksQ0FDRjs7OztTQUlDLEVBQ0Q7UUFDSSxJQUFJLEVBQUUsVUFBVTtLQUNuQixDQUNKLENBQUM7SUFFRixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O01Bc0JSLENBQ0QsQ0FBQyxJQUFJLENBQ0Y7Ozs7U0FJQyxFQUNEO1FBQ0ksSUFBSSxFQUFFLFVBQVU7S0FDbkIsQ0FDSixDQUFDO0lBQ0YsSUFBSSxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsQ0FBQztJQUVmLElBQUksQ0FBQyxJQUFJLENBQUMsbUJBQW1CLENBQUMsQ0FBQztJQUUvQixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O2VBeUJDLENBQ1YsQ0FBQztJQUNGLElBQUksQ0FBQyxJQUFJLENBQ0wsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7U0FzQkwsRUFDRDtRQUNJLElBQUksRUFBRSxVQUFVO0tBQ25CLENBQ0osQ0FBQztJQUVGLElBQUksQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7SUFFZixPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDO0FBMWdCRCw0QkEwZ0JDIn0=

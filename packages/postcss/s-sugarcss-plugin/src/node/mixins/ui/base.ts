@@ -8,17 +8,12 @@ class SSugarcssPluginUiBaseInterface extends __SInterface {
                 type: 'String',
                 required: true,
             },
-            scope: {
-                type: 'String',
-                default: ['bare', 'lnf'],
-            },
         };
     }
 }
 
 export interface ISSugarcssPluginUiBaseParams {
     name: string;
-    scope: string[];
 }
 
 export { SSugarcssPluginUiBaseInterface as interface };
@@ -34,7 +29,6 @@ export default function ({
 }) {
     const finalParams: ISSugarcssPluginUiBaseParams = {
         name: '',
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
@@ -43,8 +37,8 @@ export default function ({
     const vars: string[] = [];
 
     // bare
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
+    vars.push(`@s.scope 'bare' {`);
+    vars.push(`
             font-size: s.scalable(1rem);
             display: inline-block;
             padding-inline: s.padding(ui.${finalParams.name}.paddingInline);
@@ -52,11 +46,11 @@ export default function ({
 
 
         `);
-    }
+    vars.push('}');
 
     // lnf
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
+    vars.push(`@s.scope 'lnf' {`);
+    vars.push(`
             color: s.color(main, text);
             background-color: s.color(main, uiBackground);
             font-size: s.scalable(1rem);
@@ -95,7 +89,7 @@ export default function ({
                 border: s.color(current, --alpha 0.4) solid 1px;
             }
     `);
-    }
+    vars.push('}');
 
     return vars;
 }

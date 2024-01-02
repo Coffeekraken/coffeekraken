@@ -17,8 +17,10 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * Apply an input container style like "button", "addon", etc...
  *
  * @param       {'addon'|'group'}                           lnf         The style you want to apply
- * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.inputContainer
  *
@@ -38,101 +40,86 @@ class SSugarcssPluginUiFormInputInterface extends s_interface_1.default {
                 values: ['addon', 'group'],
                 required: true,
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
         };
     }
 }
 exports.interface = SSugarcssPluginUiFormInputInterface;
 function default_1({ params, atRule, replaceWith, }) {
-    const finalParams = Object.assign({ lnf: 'group', scope: [] }, params);
+    const finalParams = Object.assign({ lnf: 'group' }, params);
     const vars = [];
-    if (finalParams.scope.includes('bare')) {
-        vars.push(`
+    vars.push(`
+        @s.scope 'bare' {
             width: 100%;
-        `);
-    }
+        }
+    `);
+    vars.push(`@s.scope 'bare' {`);
     switch (finalParams.lnf) {
         case 'addon':
-            if (finalParams.scope.includes('bare')) {
-                vars.push(`
-                    display: block;
-                    position: relative;
+            vars.push(`
+                display: block;
+                position: relative;
 
-                    & > *:first-child {
-                        width: 100%;
-                        padding-inline-end: 3em;
-                    }
+                & > *:first-child {
+                    width: 100%;
+                    padding-inline-end: 3em;
+                }
+                & > *:first-child + * {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: absolute;
+                    height: 100%;
+                    aspect-ratio: 1;
+                    top: 0; right: 0;
+                }
+
+                [dir="rtl"] &, &[dir="rtl"] {
                     & > *:first-child + * {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        position: absolute;
-                        height: 100%;
-                        aspect-ratio: 1;
-                        top: 0; right: 0;
+                        right: auto;
+                        left: 0;
                     }
-
-                    [dir="rtl"] &, &[dir="rtl"] {
-                        & > *:first-child + * {
-                            right: auto;
-                            left: 0;
-                        }
-                    }
-
+                }
                 `);
-            }
-            if (finalParams.scope.includes('lnf')) {
-            }
             break;
         case 'group':
         default:
-            if (finalParams.scope.includes('bare')) {
-                vars.push(`
-                    display: flex;
+            vars.push(`
+                display: flex;
 
-                    &:not([dir="rtl"] &):not([dir="rtl"]) {
-                        & > *:first-child,
-                        & > .s-input-container > *:first-child {
-                            border-top-right-radius: 0;
-                            border-bottom-right-radius: 0;
-                        }
-                        & > *:last-child,
-                        & > .s-input-container > *:last-child {
-                            border-top-left-radius: 0;
-                            border-bottom-left-radius: 0;
-                        }
+                &:not([dir="rtl"] &):not([dir="rtl"]) {
+                    & > *:first-child,
+                    & > .s-input-container > *:first-child {
+                        border-top-right-radius: 0;
+                        border-bottom-right-radius: 0;
                     }
-                    [dir="rtl"] &, &[dir="rtl"] {
-                        & > *:first-child,
-                        & > .s-input-container > *:first-child {
-                            border-top-left-radius: 0;
-                            border-bottom-left-radius: 0;
-                        }
-                        & > *:last-child,
-                        & > .s-input-container > *:last-child {
-                            border-top-right-radius: 0;
-                            border-bottom-right-radius: 0;
-                        }
+                    & > *:last-child,
+                    & > .s-input-container > *:last-child {
+                        border-top-left-radius: 0;
+                        border-bottom-left-radius: 0;
                     }
+                }
+                [dir="rtl"] &, &[dir="rtl"] {
+                    & > *:first-child,
+                    & > .s-input-container > *:first-child {
+                        border-top-left-radius: 0;
+                        border-bottom-left-radius: 0;
+                    }
+                    & > *:last-child,
+                    & > .s-input-container > *:last-child {
+                        border-top-right-radius: 0;
+                        border-bottom-right-radius: 0;
+                    }
+                }
 
-                    & > *:not(:first-child, :last-child),
-                    & > .s-input-container > *:not(:first-child, :last-child) {
-                        border-radius: 0;
-                    }
-                `);
-            }
-            if (finalParams.scope.includes('lnf')) {
-            }
+                & > *:not(:first-child, :last-child),
+                & > .s-input-container > *:not(:first-child, :last-child) {
+                    border-radius: 0;
+                }
+            `);
             break;
     }
+    vars.push('}');
     return vars;
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBRUgsTUFBTSxtQ0FBb0MsU0FBUSxxQkFBWTtJQUMxRCxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsR0FBRyxFQUFFO2dCQUNELElBQUksRUFBRSxRQUFRO2dCQUNkLE1BQU0sRUFBRSxDQUFDLE9BQU8sRUFBRSxPQUFPLENBQUM7Z0JBQzFCLFFBQVEsRUFBRSxJQUFJO2FBQ2pCO1lBQ0QsS0FBSyxFQUFFO2dCQUNILElBQUksRUFBRTtvQkFDRixJQUFJLEVBQUUsZUFBZTtvQkFDckIsVUFBVSxFQUFFLENBQUMsR0FBRyxFQUFFLEdBQUcsQ0FBQztpQkFDekI7Z0JBQ0QsTUFBTSxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssQ0FBQztnQkFDdkIsT0FBTyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssQ0FBQzthQUMzQjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFPK0Msd0RBQVM7QUFFekQsbUJBQXlCLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sV0FBVyxHQUtkO0lBQ0csTUFBTSxXQUFXLG1CQUNiLEdBQUcsRUFBRSxPQUFPLEVBQ1osS0FBSyxFQUFFLEVBQUUsSUFDTixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLE1BQU0sQ0FBQyxFQUFFO1FBQ3BDLElBQUksQ0FBQyxJQUFJLENBQUM7O1NBRVQsQ0FBQyxDQUFDO0tBQ047SUFFRCxRQUFRLFdBQVcsQ0FBQyxHQUFHLEVBQUU7UUFDckIsS0FBSyxPQUFPO1lBQ1IsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxNQUFNLENBQUMsRUFBRTtnQkFDcEMsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztpQkF5QlQsQ0FBQyxDQUFDO2FBQ047WUFDRCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLEtBQUssQ0FBQyxFQUFFO2FBQ3RDO1lBRUQsTUFBTTtRQUNWLEtBQUssT0FBTyxDQUFDO1FBQ2I7WUFDSSxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLE1BQU0sQ0FBQyxFQUFFO2dCQUNwQyxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztpQkFnQ1QsQ0FBQyxDQUFDO2FBQ047WUFDRCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLEtBQUssQ0FBQyxFQUFFO2FBQ3RDO1lBRUQsTUFBTTtLQUNiO0lBRUQsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQztBQXJHRCw0QkFxR0MifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EwQkc7QUFFSCxNQUFNLG1DQUFvQyxTQUFRLHFCQUFZO0lBQzFELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxHQUFHLEVBQUU7Z0JBQ0QsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsTUFBTSxFQUFFLENBQUMsT0FBTyxFQUFFLE9BQU8sQ0FBQztnQkFDMUIsUUFBUSxFQUFFLElBQUk7YUFDakI7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBTStDLHdEQUFTO0FBRXpELG1CQUF5QixFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsR0FLZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixHQUFHLEVBQUUsT0FBTyxJQUNULE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBQzFCLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7S0FJVCxDQUFDLENBQUM7SUFFSCxJQUFJLENBQUMsSUFBSSxDQUFDLG1CQUFtQixDQUFDLENBQUM7SUFDL0IsUUFBUSxXQUFXLENBQUMsR0FBRyxFQUFFO1FBQ3JCLEtBQUssT0FBTztZQUNSLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztpQkF3QkwsQ0FBQyxDQUFDO1lBQ1AsTUFBTTtRQUNWLEtBQUssT0FBTyxDQUFDO1FBQ2I7WUFDSSxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OzthQWdDVCxDQUFDLENBQUM7WUFDSCxNQUFNO0tBQ2I7SUFFRCxJQUFJLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0lBRWYsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQztBQTNGRCw0QkEyRkMifQ==

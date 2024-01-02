@@ -2,22 +2,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class postcssUiColorPickerInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
-        };
+        return {};
     }
 }
 
-export interface IPostcssUiColorPickerParams {
-    scope: ('bare' | 'lnf')[];
-}
+export interface IPostcssUiColorPickerParams {}
 
 export { postcssUiColorPickerInterface as interface };
 
@@ -29,6 +18,9 @@ export { postcssUiColorPickerInterface as interface };
  * @status        beta
  *
  * Apply the color picker style to any s-color-picker element
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.colorPicker($1);
  *
@@ -53,15 +45,14 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiColorPickerParams = {
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars: string[] = [];
 
     // bare
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
+    vars.push(`@s.scope 'bare' {`);
+    vars.push(`
 
         @s.media <=mobile {
             position: unset;
@@ -146,15 +137,15 @@ export default function ({
         }
 
     `);
-    }
+    vars.push('}');
 
     // lnf
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
+    vars.push(`@s.scope 'lnf' {`);
+    vars.push(`
             color: s.color(text);
         `);
 
-        vars.push(`
+    vars.push(`
 
                 .s-color-picker_picker {
                     @s.depth (100);
@@ -366,7 +357,7 @@ export default function ({
                 }
 
         `);
-    }
+    vars.push('}');
 
     return vars;
 }

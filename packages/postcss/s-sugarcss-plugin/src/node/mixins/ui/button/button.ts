@@ -13,8 +13,10 @@ import __getRoot from '../../../utils/getRoot.js';
  * This mixin allows you to generate the "button" UI component css.
  *
  * @param       {'solid'|'gradient'|'outline'|'text'|'loading'}                           [lnf='theme.ui.button.defaultLnf']         The lnf you want to generate
- * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet     @s.ui.button
  *
@@ -35,21 +37,12 @@ class SSugarcssPluginUiButtonInterface extends __SInterface {
                 values: ['solid', 'gradient', 'outline', 'text', 'loading'],
                 default: __STheme.current.get('ui.button.defaultLnf'),
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
         };
     }
 }
 
 export interface ISSugarcssPluginUiButtonParams {
     lnf: 'solid' | 'gradient' | 'outline' | 'text' | 'loading';
-    scope: ('bare' | 'lnf')[];
 }
 
 export { SSugarcssPluginUiButtonInterface as interface };
@@ -69,79 +62,79 @@ export default function ({
 }) {
     const finalParams: ISSugarcssPluginUiButtonParams = {
         lnf: 'solid',
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars: string[] = [];
 
+    vars.push(`@s.scope 'bare' {`);
+
     // bare
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
-          --s-btn-padding-inline: s.padding(ui.button.paddingInline);
-          --s-btn-padding-block: s.padding(ui.button.paddingBlock);
-          
-          --s-btn-confirm-width: auto;
+    vars.push(`
+            --s-btn-padding-inline: s.padding(ui.button.paddingInline);
+            --s-btn-padding-block: s.padding(ui.button.paddingBlock);
+            
+            --s-btn-confirm-width: auto;
 
-          font-size: s.scalable(1rem);
-          line-height: 1;
-          text-decoration: none !important;
-          position: relative;
-          display: inline-flex;
-          
-          cursor: pointer;
-          user-select: none;
-          white-space: nowrap;
-          vertical-align: middle;
-          padding-inline: s.padding(ui.button.paddingInline);
-          padding-block: s.padding(ui.button.paddingBlock);
-          gap: s.margin(20);
-          align-items: center;
-          justify-content: center;
+            font-size: s.scalable(1rem);
+            line-height: 1;
+            text-decoration: none !important;
+            position: relative;
+            display: inline-flex;
+            
+            cursor: pointer;
+            user-select: none;
+            white-space: nowrap;
+            vertical-align: middle;
+            padding-inline: s.padding(ui.button.paddingInline);
+            padding-block: s.padding(ui.button.paddingBlock);
+            gap: s.margin(20);
+            align-items: center;
+            justify-content: center;
 
-          & > * {
-            pointer-events: none;
-          }
-
-          &[confirm] {
-            width: calc(var(--s-btn-confirm-width) * var(--s-scale, 1));
-
-            &:after {
-              content: attr(confirm);
-              position: absolute;
-              top: 0; left: 0;
-              opacity: 0;
-              width: calc(var(--s-btn-confirm-width) * var(--s-scale, 1));
-              height: 100%;
-              overflow: hidden;
-              display: flex;
-              align-items: center;
-              justify-content: center;
+            & > * {
               pointer-events: none;
-              padding-inline: calc(var(--s-btn-padding-inline) * 0.5);
             }
 
-            &:focus:after,
-            &:focus-within:after {
-                opacity: 1;
+            &[confirm] {
+              width: calc(var(--s-btn-confirm-width) * var(--s-scale, 1));
+
+              &:after {
+                content: attr(confirm);
+                position: absolute;
+                top: 0; left: 0;
+                opacity: 0;
+                width: calc(var(--s-btn-confirm-width) * var(--s-scale, 1));
+                height: 100%;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                pointer-events: none;
+                padding-inline: calc(var(--s-btn-padding-inline) * 0.5);
+              }
+
+              &:focus:after,
+              &:focus-within:after {
+                  opacity: 1;
+              }
+
             }
-
-          }
-
     `);
 
-        switch (finalParams.lnf) {
-            case 'text':
-                vars.push(`
+    switch (finalParams.lnf) {
+        case 'text':
+            vars.push(`
               padding-inline: calc(s.padding(ui.button.paddingInline) * 0.3);
               `);
-                break;
-        }
+            break;
     }
 
+    vars.push('}');
+
     // lnf
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
+    vars.push(`@s.scope 'lnf' {`);
+    vars.push(`
           font-size: s.scalable(1rem);
           text-decoration: none;
           @s.shape;
@@ -151,9 +144,9 @@ export default function ({
           }
         `);
 
-        switch (finalParams.lnf) {
-            case 'gradient':
-                vars.push(`
+    switch (finalParams.lnf) {
+        case 'gradient':
+            vars.push(`
                     background: none !important;
                     color: s.color(current, foreground) !important;
                     transition: s.theme(ui.button.transition);
@@ -198,9 +191,9 @@ export default function ({
                     }
                 `);
 
-                break;
-            case 'outline':
-                vars.push(`
+            break;
+        case 'outline':
+            vars.push(`
                 background-color: s.color(current, --alpha 0);
                 border: s.color(current) solid s.border.width(ui.button.borderWidth);
                 color: s.color(current) !important;
@@ -211,20 +204,20 @@ export default function ({
                   color: s.color(current, foreground) !important;
                 }
               `);
-                break;
-            case 'text':
-                vars.push(`
+            break;
+        case 'text':
+            vars.push(`
                   background: none !important;
                   border: rgba(0,0,0,0) solid s.border.width(ui.button.borderWidth);
                   color: s.color(current) !important;
                   box-shadow: none !important;
                   transition: s.theme(ui.button.transition);
                 `);
-                break;
-            case 'loading':
-                const root = __getRoot(atRule);
-                root.append(
-                    postcssApi.parse(`
+            break;
+        case 'loading':
+            const root = __getRoot(atRule);
+            root.append(
+                postcssApi.parse(`
                       @keyframes s-btn-loading {
                         from {
                             transform: rotate(0deg);
@@ -234,9 +227,9 @@ export default function ({
                         }
                     }
                   `),
-                );
+            );
 
-                vars.push(`
+            vars.push(`
                   position: relative;
                   pointer-events: none !important;
           
@@ -258,10 +251,10 @@ export default function ({
                       animation: s-btn-loading 0.4s linear infinite;
                   }
                 `);
-                break;
-            case 'solid':
-            default:
-                vars.push(`
+            break;
+        case 'solid':
+        default:
+            vars.push(`
                   background-color: s.color(current);
                   border: s.color(current, border) solid s.border.width(ui.button.borderWidth);
                   color: s.color(current, foreground) !important;
@@ -285,19 +278,19 @@ export default function ({
                   }
 
         `);
-                break;
-        }
+            break;
+    }
 
-        // disabled
-        vars.push(`
+    // disabled
+    vars.push(`
           &:disabled {
             opacity: 0.3;
             pointer-events: none;
           }
         `);
 
-        // confirm
-        vars.push(`
+    // confirm
+    vars.push(`
           &[confirm] {
             @s.transition (fast);
 
@@ -320,13 +313,14 @@ export default function ({
           }
         `);
 
-        // outline
-        vars.push(`
+    // outline
+    vars.push(`
               &:focus:not(:hover) {
                 @s.outline;
               }
           `);
-    }
+
+    vars.push(`}`);
 
     return vars;
 }

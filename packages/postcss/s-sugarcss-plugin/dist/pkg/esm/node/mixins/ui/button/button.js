@@ -12,8 +12,10 @@ import __getRoot from '../../../utils/getRoot.js';
  * This mixin allows you to generate the "button" UI component css.
  *
  * @param       {'solid'|'gradient'|'outline'|'text'|'loading'}                           [lnf='theme.ui.button.defaultLnf']         The lnf you want to generate
- * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet     @s.ui.button
  *
@@ -33,86 +35,77 @@ class SSugarcssPluginUiButtonInterface extends __SInterface {
                 values: ['solid', 'gradient', 'outline', 'text', 'loading'],
                 default: __STheme.current.get('ui.button.defaultLnf'),
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
         };
     }
 }
 export { SSugarcssPluginUiButtonInterface as interface };
 export default function ({ params, atRule, postcssApi, sharedData, replaceWith, }) {
-    const finalParams = Object.assign({ lnf: 'solid', scope: ['bare', 'lnf'] }, params);
+    const finalParams = Object.assign({ lnf: 'solid' }, params);
     const vars = [];
+    vars.push(`@s.scope 'bare' {`);
     // bare
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
-          --s-btn-padding-inline: s.padding(ui.button.paddingInline);
-          --s-btn-padding-block: s.padding(ui.button.paddingBlock);
-          
-          --s-btn-confirm-width: auto;
+    vars.push(`
+            --s-btn-padding-inline: s.padding(ui.button.paddingInline);
+            --s-btn-padding-block: s.padding(ui.button.paddingBlock);
+            
+            --s-btn-confirm-width: auto;
 
-          font-size: s.scalable(1rem);
-          line-height: 1;
-          text-decoration: none !important;
-          position: relative;
-          display: inline-flex;
-          
-          cursor: pointer;
-          user-select: none;
-          white-space: nowrap;
-          vertical-align: middle;
-          padding-inline: s.padding(ui.button.paddingInline);
-          padding-block: s.padding(ui.button.paddingBlock);
-          gap: s.margin(20);
-          align-items: center;
-          justify-content: center;
+            font-size: s.scalable(1rem);
+            line-height: 1;
+            text-decoration: none !important;
+            position: relative;
+            display: inline-flex;
+            
+            cursor: pointer;
+            user-select: none;
+            white-space: nowrap;
+            vertical-align: middle;
+            padding-inline: s.padding(ui.button.paddingInline);
+            padding-block: s.padding(ui.button.paddingBlock);
+            gap: s.margin(20);
+            align-items: center;
+            justify-content: center;
 
-          & > * {
-            pointer-events: none;
-          }
-
-          &[confirm] {
-            width: calc(var(--s-btn-confirm-width) * var(--s-scale, 1));
-
-            &:after {
-              content: attr(confirm);
-              position: absolute;
-              top: 0; left: 0;
-              opacity: 0;
-              width: calc(var(--s-btn-confirm-width) * var(--s-scale, 1));
-              height: 100%;
-              overflow: hidden;
-              display: flex;
-              align-items: center;
-              justify-content: center;
+            & > * {
               pointer-events: none;
-              padding-inline: calc(var(--s-btn-padding-inline) * 0.5);
             }
 
-            &:focus:after,
-            &:focus-within:after {
-                opacity: 1;
+            &[confirm] {
+              width: calc(var(--s-btn-confirm-width) * var(--s-scale, 1));
+
+              &:after {
+                content: attr(confirm);
+                position: absolute;
+                top: 0; left: 0;
+                opacity: 0;
+                width: calc(var(--s-btn-confirm-width) * var(--s-scale, 1));
+                height: 100%;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                pointer-events: none;
+                padding-inline: calc(var(--s-btn-padding-inline) * 0.5);
+              }
+
+              &:focus:after,
+              &:focus-within:after {
+                  opacity: 1;
+              }
+
             }
-
-          }
-
     `);
-        switch (finalParams.lnf) {
-            case 'text':
-                vars.push(`
+    switch (finalParams.lnf) {
+        case 'text':
+            vars.push(`
               padding-inline: calc(s.padding(ui.button.paddingInline) * 0.3);
               `);
-                break;
-        }
+            break;
     }
+    vars.push('}');
     // lnf
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
+    vars.push(`@s.scope 'lnf' {`);
+    vars.push(`
           font-size: s.scalable(1rem);
           text-decoration: none;
           @s.shape;
@@ -121,9 +114,9 @@ export default function ({ params, atRule, postcssApi, sharedData, replaceWith, 
             @s.shape;
           }
         `);
-        switch (finalParams.lnf) {
-            case 'gradient':
-                vars.push(`
+    switch (finalParams.lnf) {
+        case 'gradient':
+            vars.push(`
                     background: none !important;
                     color: s.color(current, foreground) !important;
                     transition: s.theme(ui.button.transition);
@@ -167,9 +160,9 @@ export default function ({ params, atRule, postcssApi, sharedData, replaceWith, 
                       }
                     }
                 `);
-                break;
-            case 'outline':
-                vars.push(`
+            break;
+        case 'outline':
+            vars.push(`
                 background-color: s.color(current, --alpha 0);
                 border: s.color(current) solid s.border.width(ui.button.borderWidth);
                 color: s.color(current) !important;
@@ -180,19 +173,19 @@ export default function ({ params, atRule, postcssApi, sharedData, replaceWith, 
                   color: s.color(current, foreground) !important;
                 }
               `);
-                break;
-            case 'text':
-                vars.push(`
+            break;
+        case 'text':
+            vars.push(`
                   background: none !important;
                   border: rgba(0,0,0,0) solid s.border.width(ui.button.borderWidth);
                   color: s.color(current) !important;
                   box-shadow: none !important;
                   transition: s.theme(ui.button.transition);
                 `);
-                break;
-            case 'loading':
-                const root = __getRoot(atRule);
-                root.append(postcssApi.parse(`
+            break;
+        case 'loading':
+            const root = __getRoot(atRule);
+            root.append(postcssApi.parse(`
                       @keyframes s-btn-loading {
                         from {
                             transform: rotate(0deg);
@@ -202,7 +195,7 @@ export default function ({ params, atRule, postcssApi, sharedData, replaceWith, 
                         }
                     }
                   `));
-                vars.push(`
+            vars.push(`
                   position: relative;
                   pointer-events: none !important;
           
@@ -224,10 +217,10 @@ export default function ({ params, atRule, postcssApi, sharedData, replaceWith, 
                       animation: s-btn-loading 0.4s linear infinite;
                   }
                 `);
-                break;
-            case 'solid':
-            default:
-                vars.push(`
+            break;
+        case 'solid':
+        default:
+            vars.push(`
                   background-color: s.color(current);
                   border: s.color(current, border) solid s.border.width(ui.button.borderWidth);
                   color: s.color(current, foreground) !important;
@@ -251,17 +244,17 @@ export default function ({ params, atRule, postcssApi, sharedData, replaceWith, 
                   }
 
         `);
-                break;
-        }
-        // disabled
-        vars.push(`
+            break;
+    }
+    // disabled
+    vars.push(`
           &:disabled {
             opacity: 0.3;
             pointer-events: none;
           }
         `);
-        // confirm
-        vars.push(`
+    // confirm
+    vars.push(`
           &[confirm] {
             @s.transition (fast);
 
@@ -283,13 +276,13 @@ export default function ({ params, atRule, postcssApi, sharedData, replaceWith, 
 
           }
         `);
-        // outline
-        vars.push(`
+    // outline
+    vars.push(`
               &:focus:not(:hover) {
                 @s.outline;
               }
           `);
-    }
+    vars.push(`}`);
     return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBQzdDLE9BQU8sU0FBUyxNQUFNLDJCQUEyQixDQUFDO0FBRWxEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUVILE1BQU0sZ0NBQWlDLFNBQVEsWUFBWTtJQUN2RCxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsR0FBRyxFQUFFO2dCQUNELElBQUksRUFBRSxRQUFRO2dCQUNkLE1BQU0sRUFBRSxDQUFDLE9BQU8sRUFBRSxVQUFVLEVBQUUsU0FBUyxFQUFFLE1BQU0sRUFBRSxTQUFTLENBQUM7Z0JBQzNELE9BQU8sRUFBRSxRQUFRLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxzQkFBc0IsQ0FBQzthQUN4RDtZQUNELEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUU7b0JBQ0YsSUFBSSxFQUFFLGVBQWU7b0JBQ3JCLFVBQVUsRUFBRSxDQUFDLEdBQUcsRUFBRSxHQUFHLENBQUM7aUJBQ3pCO2dCQUNELE1BQU0sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUM7Z0JBQ3ZCLE9BQU8sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUM7YUFDM0I7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBT0QsT0FBTyxFQUFFLGdDQUFnQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRXpELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixVQUFVLEVBQ1YsVUFBVSxFQUNWLFdBQVcsR0FPZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixHQUFHLEVBQUUsT0FBTyxFQUNaLEtBQUssRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUMsSUFDbkIsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsT0FBTztJQUNQLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDMUMsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0tBbURiLENBQUMsQ0FBQztRQUVDLFFBQVEsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUNyQixLQUFLLE1BQU07Z0JBQ1AsSUFBSSxDQUFDLElBQUksQ0FBQzs7ZUFFWCxDQUFDLENBQUM7Z0JBQ0QsTUFBTTtTQUNiO0tBQ0o7SUFFRCxNQUFNO0lBQ04sSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUN6QyxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7OztTQVFULENBQUMsQ0FBQztRQUVILFFBQVEsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUNyQixLQUFLLFVBQVU7Z0JBQ1gsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztpQkEyQ1QsQ0FBQyxDQUFDO2dCQUVILE1BQU07WUFDVixLQUFLLFNBQVM7Z0JBQ1YsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7OztlQVVYLENBQUMsQ0FBQztnQkFDRCxNQUFNO1lBQ1YsS0FBSyxNQUFNO2dCQUNQLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7OztpQkFNVCxDQUFDLENBQUM7Z0JBQ0gsTUFBTTtZQUNWLEtBQUssU0FBUztnQkFDVixNQUFNLElBQUksR0FBRyxTQUFTLENBQUMsTUFBTSxDQUFDLENBQUM7Z0JBQy9CLElBQUksQ0FBQyxNQUFNLENBQ1AsVUFBVSxDQUFDLEtBQUssQ0FBQzs7Ozs7Ozs7O21CQVNsQixDQUFDLENBQ0gsQ0FBQztnQkFFRixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7aUJBcUJULENBQUMsQ0FBQztnQkFDSCxNQUFNO1lBQ1YsS0FBSyxPQUFPLENBQUM7WUFDYjtnQkFDSSxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztTQXVCakIsQ0FBQyxDQUFDO2dCQUNLLE1BQU07U0FDYjtRQUVELFdBQVc7UUFDWCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7OztTQUtULENBQUMsQ0FBQztRQUVILFVBQVU7UUFDVixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7U0FxQlQsQ0FBQyxDQUFDO1FBRUgsVUFBVTtRQUNWLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7V0FJUCxDQUFDLENBQUM7S0FDUjtJQUVELE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBQzdDLE9BQU8sU0FBUyxNQUFNLDJCQUEyQixDQUFDO0FBRWxEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBeUJHO0FBRUgsTUFBTSxnQ0FBaUMsU0FBUSxZQUFZO0lBQ3ZELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxHQUFHLEVBQUU7Z0JBQ0QsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsTUFBTSxFQUFFLENBQUMsT0FBTyxFQUFFLFVBQVUsRUFBRSxTQUFTLEVBQUUsTUFBTSxFQUFFLFNBQVMsQ0FBQztnQkFDM0QsT0FBTyxFQUFFLFFBQVEsQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDLHNCQUFzQixDQUFDO2FBQ3hEO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQU1ELE9BQU8sRUFBRSxnQ0FBZ0MsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUV6RCxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sVUFBVSxFQUNWLFVBQVUsRUFDVixXQUFXLEdBT2Q7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsR0FBRyxFQUFFLE9BQU8sSUFDVCxNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixJQUFJLENBQUMsSUFBSSxDQUFDLG1CQUFtQixDQUFDLENBQUM7SUFFL0IsT0FBTztJQUNQLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0tBa0RULENBQUMsQ0FBQztJQUVILFFBQVEsV0FBVyxDQUFDLEdBQUcsRUFBRTtRQUNyQixLQUFLLE1BQU07WUFDUCxJQUFJLENBQUMsSUFBSSxDQUFDOztlQUVQLENBQUMsQ0FBQztZQUNMLE1BQU07S0FDYjtJQUVELElBQUksQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7SUFFZixNQUFNO0lBQ04sSUFBSSxDQUFDLElBQUksQ0FBQyxrQkFBa0IsQ0FBQyxDQUFDO0lBQzlCLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7O1NBUUwsQ0FBQyxDQUFDO0lBRVAsUUFBUSxXQUFXLENBQUMsR0FBRyxFQUFFO1FBQ3JCLEtBQUssVUFBVTtZQUNYLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7aUJBMkNMLENBQUMsQ0FBQztZQUVQLE1BQU07UUFDVixLQUFLLFNBQVM7WUFDVixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7O2VBVVAsQ0FBQyxDQUFDO1lBQ0wsTUFBTTtRQUNWLEtBQUssTUFBTTtZQUNQLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7OztpQkFNTCxDQUFDLENBQUM7WUFDUCxNQUFNO1FBQ1YsS0FBSyxTQUFTO1lBQ1YsTUFBTSxJQUFJLEdBQUcsU0FBUyxDQUFDLE1BQU0sQ0FBQyxDQUFDO1lBQy9CLElBQUksQ0FBQyxNQUFNLENBQ1AsVUFBVSxDQUFDLEtBQUssQ0FBQzs7Ozs7Ozs7O21CQVNkLENBQUMsQ0FDUCxDQUFDO1lBRUYsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O2lCQXFCTCxDQUFDLENBQUM7WUFDUCxNQUFNO1FBQ1YsS0FBSyxPQUFPLENBQUM7UUFDYjtZQUNJLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O1NBdUJiLENBQUMsQ0FBQztZQUNDLE1BQU07S0FDYjtJQUVELFdBQVc7SUFDWCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7OztTQUtMLENBQUMsQ0FBQztJQUVQLFVBQVU7SUFDVixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7U0FxQkwsQ0FBQyxDQUFDO0lBRVAsVUFBVTtJQUNWLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7V0FJSCxDQUFDLENBQUM7SUFFVCxJQUFJLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0lBRWYsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQyJ9

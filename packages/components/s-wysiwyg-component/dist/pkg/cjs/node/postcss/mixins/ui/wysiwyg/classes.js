@@ -7,16 +7,7 @@ exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 class postcssUiWysiwygClassesInterface extends s_interface_1.default {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
-        };
+        return {};
     }
 }
 exports.interface = postcssUiWysiwygClassesInterface;
@@ -39,19 +30,21 @@ exports.interface = postcssUiWysiwygClassesInterface;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function default_1({ params, atRule, CssVars, replaceWith, }) {
-    const finalParams = Object.assign({ lnfs: ['solid'], defaultLnf: 'solid', scope: ['bare', 'lnf'] }, params);
+    const finalParams = Object.assign({ lnfs: ['solid'], defaultLnf: 'solid' }, params);
     const vars = new CssVars();
-    if (finalParams.scope.includes('bare')) {
-        vars.code(`
+    vars.code(`@s.scope 'bare' {`);
+    vars.code(`
         .s-wysiwyg {
-            @s.ui.wysiwyg($scope: bare);
+            @s.scope.only 'bare' {
+                @s.ui.wysiwyg;
+            }
         }
     `, {
-            type: 'CssClass',
-        });
-    }
-    if (finalParams.lnfs.includes(finalParams.defaultLnf) &&
-        finalParams.scope.includes('lnf')) {
+        type: 'CssClass',
+    });
+    vars.code('}');
+    if (finalParams.lnfs.includes(finalParams.defaultLnf)) {
+        vars.code(`@s.scope 'lnf' {`);
         vars.comment(`/**
             * @name          .s-wysiwyg[lnf="default"]
             * @namespace          sugar.style.ui.wysiwyg
@@ -65,14 +58,17 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`
-            .s-wysiwyg[lnf="default"]:not(.s-bare) {
-                @s.ui.wysiwyg($lnf: ${finalParams.defaultLnf}, $scope: lnf);
+            .s-wysiwyg[lnf="default"] {
+                @s.scope.only 'lnf' {
+                    @s.ui.wysiwyg($lnf: ${finalParams.defaultLnf});
+                }
             }
             `, {
             type: 'CssClass',
         });
+        vars.code('}');
     }
     return vars;
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRCxNQUFNLGdDQUFpQyxTQUFRLHFCQUFZO0lBQ3ZELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFO29CQUNGLElBQUksRUFBRSxlQUFlO29CQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDO2lCQUN6QjtnQkFDRCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxDQUFDO2dCQUN2QixPQUFPLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxDQUFDO2FBQzNCO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQU80QyxxREFBUztBQUV0RDs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FpQkc7QUFFSCxtQkFBeUIsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixPQUFPLEVBQ1AsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLG1CQUNiLElBQUksRUFBRSxDQUFDLE9BQU8sQ0FBQyxFQUNmLFVBQVUsRUFBRSxPQUFPLEVBQ25CLEtBQUssRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUMsSUFDbkIsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBRyxJQUFJLE9BQU8sRUFBRSxDQUFDO0lBRTNCLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxRQUFRLENBQUMsTUFBTSxDQUFDLEVBQUU7UUFDcEMsSUFBSSxDQUFDLElBQUksQ0FDTDs7OztLQUlQLEVBQ087WUFDSSxJQUFJLEVBQUUsVUFBVTtTQUNuQixDQUNKLENBQUM7S0FDTDtJQUVELElBQ0ksV0FBVyxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsV0FBVyxDQUFDLFVBQVUsQ0FBQztRQUNqRCxXQUFXLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxLQUFLLENBQUMsRUFDbkM7UUFDRSxJQUFJLENBQUMsT0FBTyxDQUNSOzs7Ozs7Ozs7Ozs7V0FZRCxDQUNGLENBQUMsSUFBSSxDQUNGOztzQ0FFMEIsV0FBVyxDQUFDLFVBQVU7O2FBRS9DLEVBQ0Q7WUFDSSxJQUFJLEVBQUUsVUFBVTtTQUNuQixDQUNKLENBQUM7S0FDTDtJQUVELE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUM7QUFoRUQsNEJBZ0VDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRCxNQUFNLGdDQUFpQyxTQUFRLHFCQUFZO0lBQ3ZELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU8sRUFBRSxDQUFDO0lBQ2QsQ0FBQztDQUNKO0FBTTRDLHFEQUFTO0FBRXREOzs7Ozs7Ozs7Ozs7Ozs7OztHQWlCRztBQUVILG1CQUF5QixFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLE9BQU8sRUFDUCxXQUFXLEdBTWQ7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsSUFBSSxFQUFFLENBQUMsT0FBTyxDQUFDLEVBQ2YsVUFBVSxFQUFFLE9BQU8sSUFDaEIsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBRyxJQUFJLE9BQU8sRUFBRSxDQUFDO0lBRTNCLElBQUksQ0FBQyxJQUFJLENBQUMsbUJBQW1CLENBQUMsQ0FBQztJQUMvQixJQUFJLENBQUMsSUFBSSxDQUNMOzs7Ozs7S0FNSCxFQUNHO1FBQ0ksSUFBSSxFQUFFLFVBQVU7S0FDbkIsQ0FDSixDQUFDO0lBQ0YsSUFBSSxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsQ0FBQztJQUVmLElBQUksV0FBVyxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsV0FBVyxDQUFDLFVBQVUsQ0FBQyxFQUFFO1FBQ25ELElBQUksQ0FBQyxJQUFJLENBQUMsa0JBQWtCLENBQUMsQ0FBQztRQUM5QixJQUFJLENBQUMsT0FBTyxDQUNSOzs7Ozs7Ozs7Ozs7V0FZRCxDQUNGLENBQUMsSUFBSSxDQUNGOzs7MENBRzhCLFdBQVcsQ0FBQyxVQUFVOzs7YUFHbkQsRUFDRDtZQUNJLElBQUksRUFBRSxVQUFVO1NBQ25CLENBQ0osQ0FBQztRQUNGLElBQUksQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7S0FDbEI7SUFFRCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDO0FBbEVELDRCQWtFQyJ9

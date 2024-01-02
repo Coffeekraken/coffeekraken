@@ -13,8 +13,10 @@ import __STheme from '@coffeekraken/s-theme';
  * Apply the radio style to any element
  *
  * @param       {'solid'}                           [lnf='theme.ui.form.defaultLnf']         The lnf you want to generate
- * @param       {('bare'|'lnf'')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.radio
  *
@@ -35,21 +37,12 @@ class SSugarcssPluginUiRadioInterface extends __SInterface {
                 values: ['solid'],
                 default: __STheme.current.get('ui.form.defaultLnf'),
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
         };
     }
 }
 
 export interface ISSugarcssPluginUiRadioParams {
     lnf: 'solid';
-    scope: ('bare' | 'lnf')[];
 }
 
 export { SSugarcssPluginUiRadioInterface as interface };
@@ -64,7 +57,6 @@ export default function ({
 }) {
     const finalParams: ISSugarcssPluginUiRadioParams = {
         lnf: 'solid',
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
@@ -75,8 +67,8 @@ export default function ({
     ];
 
     // bare
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
+    vars.push(`@s.scope 'bare' {`);
+    vars.push(`
                 
                 appearance: none !important;
                 -moz-appearance: none !important;
@@ -89,13 +81,13 @@ export default function ({
                     @s.disabled;
                 }
             `);
-    }
+    vars.push('}');
 
+    vars.push(`@s.scope 'lnf' {`);
     switch (finalParams.lnf) {
         default:
             // lnf
-            if (finalParams.scope.indexOf('lnf') !== -1) {
-                vars.push(`
+            vars.push(`
                 
                     transition: s.theme(ui.form.transition);
                     border: s.border.width(ui.form.borderWidth) solid s.color(current);
@@ -133,8 +125,8 @@ export default function ({
                     }
  
         `);
-            }
     }
+    vars.push('}');
 
     return vars;
 }

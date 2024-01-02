@@ -14,8 +14,11 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @param       {('inline'|'block'|'float')[]}                           [lnfs=['inline','block','float']]         The style(s) you want to generate
  * @param       {'inline'|'block'|'float'}                [defaultLnf='theme.ui.label.defaultLnf']           The default style you want
- * @param       {('bare'|'lnf'|'vr')[]}        [scope=['bare', 'lnf', 'vr']]      The scope you want to generate
  * @return      {String}            The generated css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
+ * @scope       vr              Vertical rhythm css
  *
  * @snippet         @s.ui.label.classes
  *
@@ -39,14 +42,6 @@ class SSugarcssPluginUiLabelClassesInterface extends __SInterface {
                 values: ['inline', 'block', 'float'],
                 default: __STheme.current.get('ui.label.defaultLnf'),
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'vr'],
-                default: ['bare', 'lnf', 'vr'],
-            },
         };
     }
 }
@@ -54,7 +49,6 @@ class SSugarcssPluginUiLabelClassesInterface extends __SInterface {
 export interface ISSugarcssPluginUiLabelClassesParams {
     lnfs: ('inline' | 'float' | 'block')[];
     defaultLnf: 'inline' | 'float' | 'block';
-    scope: ('bare' | 'lnf' | 'vr')[];
 }
 
 export { SSugarcssPluginUiLabelClassesInterface as interface };
@@ -73,7 +67,6 @@ export default function ({
     const finalParams: ISSugarcssPluginUiLabelClassesParams = {
         lnfs: [],
         defaultLnf: 'inline',
-        scope: [],
         ...params,
     };
 
@@ -177,32 +170,33 @@ export default function ({
         `,
         );
 
-        if (finalParams.scope.includes('bare')) {
-            vars.code(
-                `.s-label${finalParams.defaultLnf === lnf ? '' : `-${lnf}`} {
-                @s.ui.label($lnf: ${lnf}, $scope: bare);
+        vars.code(`@s.scope 'bare' {`);
+        vars.code(
+            `.s-label${finalParams.defaultLnf === lnf ? '' : `-${lnf}`} {
+                @s.ui.label($lnf: ${lnf});
             } 
             `,
-                {
-                    type: 'CssClass',
-                },
-            );
-        }
+            {
+                type: 'CssClass',
+            },
+        );
+        vars.code('}');
 
-        if (finalParams.scope.includes('lnf')) {
-            vars.code(
-                () => `
-                .${cls.replace(':', '-')}:not(.s-bare) {
-                    @s.ui.label($lnf: ${lnf}, $scope: lnf);
+        vars.code(`@s.scope 'lnf' {`);
+        vars.code(
+            () => `
+                .${cls.replace(':', '-')} {
+                    @s.ui.label($lnf: ${lnf});
                 } 
             `,
-                {
-                    type: 'CssClass',
-                },
-            );
-        }
+            {
+                type: 'CssClass',
+            },
+        );
+        vars.code('}');
     });
 
+    vars.code(`@s.scope 'bare' {`);
     vars.comment(
         () => `/**
         * @name           s-label:responsive
@@ -237,7 +231,9 @@ export default function ({
             }
 
             @s.media(<=mobile) {
-                @s.ui.label($lnf: block, $scope: bare);
+                @s.scope.only 'bare' {
+                    @s.ui.label($lnf: block);
+                }
 
                 > * {
                     width: 100% !important;
@@ -249,6 +245,7 @@ export default function ({
             type: 'CssClass',
         },
     );
+    vars.code('}');
 
     return vars;
 }

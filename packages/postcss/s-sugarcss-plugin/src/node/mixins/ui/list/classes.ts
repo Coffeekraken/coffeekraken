@@ -15,8 +15,12 @@ import __faker from 'faker';
  *
  * @param       {('dl'|'ul'|'ol'|'icon')[]}                           [lnfs=['dl','ul','ol','icon']]         The style(s) you want to generate
  * @param       {'dl'|'ul'|'ol'|'icon'}                [defaultLnf='theme.ui.list.defaultLnf']           The default style you want
- * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
+ * @scope       vr              Vertical rhythm css
+ * @scope       tf              Text format css
  *
  * @snippet         @s.ui.list.classes
  *
@@ -40,14 +44,6 @@ class SSugarcssPluginUiListClassesInterface extends __SInterface {
                 values: ['dl', 'ul', 'ol', 'icon'],
                 default: __STheme.current.get('ui.list.defaultLnf') ?? 'dl',
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'tf', 'vr'],
-                default: ['bare', 'lnf', 'tf', 'vr'],
-            },
         };
     }
 }
@@ -55,7 +51,6 @@ class SSugarcssPluginUiListClassesInterface extends __SInterface {
 export interface ISSugarcssPluginUiListClassesParams {
     lnfs: ('dl' | 'ul' | 'ol' | 'icon')[];
     defaultLnf: 'dl' | 'ul' | 'ol' | 'icon';
-    scope: ('bare' | 'lnf' | 'tf' | 'vr')[];
 }
 
 export { SSugarcssPluginUiListClassesInterface as interface };
@@ -74,7 +69,6 @@ export default function ({
     const finalParams: ISSugarcssPluginUiListClassesParams = {
         lnfs: [],
         defaultLnf: 'dl',
-        scope: [],
         ...params,
     };
 
@@ -170,9 +164,9 @@ export default function ({
     `,
     );
 
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(
-            () => `/**
+    vars.code(`@s.scope 'bare' {`);
+    vars.comment(
+        () => `/**
             * @name           s-list
             * @namespace          sugar.style.ui.list
             * @type           CssClass
@@ -191,22 +185,23 @@ export default function ({
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(
-            `
+    ).code(
+        `
         .s-list {
-            @s.ui.list($scope: bare);
+            @s.ui.list();
         }
     `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.includes('lnf')) {
-        finalParams.lnfs.forEach((lnf) => {
-            vars.comment(
-                () => `/**
+    vars.code(`@s.scope 'lnf' {`);
+
+    finalParams.lnfs.forEach((lnf) => {
+        vars.comment(
+            () => `/**
                 * @name           s-list${
                     finalParams.defaultLnf === lnf ? '' : `:${lnf}`
                 }
@@ -229,20 +224,18 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
            `,
-            ).code(
-                `
-            .s-list${
-                finalParams.defaultLnf === lnf ? '' : `-${lnf}`
-            }:not(.s-bare) {
-                @s.ui.list($scope: lnf);
+        ).code(
+            `
+            .s-list${finalParams.defaultLnf === lnf ? '' : `-${lnf}`} {
+                @s.ui.list();
             }
         `,
-                {
-                    type: 'CssClass',
-                },
-            );
-        });
-    }
+            {
+                type: 'CssClass',
+            },
+        );
+    });
+    vars.code('}');
 
     // ul
     vars.comment(
@@ -268,7 +261,7 @@ export default function ({
     ).code(
         `
       .s-list-ul {
-        @s.ui.list($lnf: ul, $scope: '${finalParams.scope.join(',')}');
+        @s.ui.list($lnf: ul);
       }
   `,
         {
@@ -300,7 +293,7 @@ export default function ({
     vars.code(
         () => `
       .s-list-icon {
-          @s.ui.list($lnf: icon, $scope: '${finalParams.scope.join(',')}');
+          @s.ui.list($lnf: icon);
       }`,
         {
             type: 'CssClass',
@@ -331,7 +324,7 @@ export default function ({
     ).code(
         `
       .s-list-ol {
-        @s.ui.list($lnf: ol, $scope: '${finalParams.scope.join(',')}');
+        @s.ui.list($lnf: ol);
       }   
   `,
         {
@@ -363,7 +356,7 @@ export default function ({
     ).code(
         `
       .s-list-dl {
-        @s.ui.list($lnf: dl, $scope: '${finalParams.scope.join(',')}');
+        @s.ui.list($lnf: dl);
       }   
   `,
         {
@@ -371,9 +364,9 @@ export default function ({
         },
     );
 
-    if (finalParams.scope.indexOf('tf') !== -1) {
-        vars.comment(
-            () => `/**
+    vars.code(`@.s.scope 'tf' {`);
+    vars.comment(
+        () => `/**
             * @name           s-format:text ul
             * @namespace          sugar.style.ui.list
             * @type           CssClass
@@ -393,23 +386,21 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(
-            `
+    ).code(
+        `
             @s.format.text {
                 ul {
-                    @s.ui.list($lnf: ul, $scope: '${finalParams.scope.join(
-                        ',',
-                    )}');
+                    @s.ui.list($lnf: ul);
                 } 
             }
         `,
-            {
-                type: 'CssClass',
-            },
-        );
+        {
+            type: 'CssClass',
+        },
+    );
 
-        vars.comment(
-            () => `/**
+    vars.comment(
+        () => `/**
             * @name           s-format:text ol
             * @namespace          sugar.style.ui.list
             * @type           CssClass
@@ -429,25 +420,23 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(
-            `
+    ).code(
+        `
             @s.format.text {
                 ol {
-                    @s.ui.list($lnf: ol, $scope: '${finalParams.scope.join(
-                        ',',
-                    )}');
+                    @s.ui.list($lnf: ol);
                 } 
             }
         `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.comment(
-            () => `/**
+    vars.code(`@s.scope 'vr' {`);
+    vars.comment(
+        () => `/**
             * @name           s-rhythm:vertical
             * @namespace          sugar.style.ui.list
             * @type           CssClass
@@ -474,7 +463,7 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(`
+    ).code(`
             @s.rhythm.vertical {
                 ul, .s-list-ul,
                 ol, .s-list-ol {
@@ -484,7 +473,7 @@ export default function ({
                 } 
             }
         `);
-    }
+    vars.code('}');
 
     return vars;
 }

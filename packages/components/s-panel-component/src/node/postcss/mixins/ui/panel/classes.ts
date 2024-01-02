@@ -2,22 +2,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class postcssUiPanelClassesInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
-        };
+        return {};
     }
 }
 
-export interface IPostcssUiPanelClassesParams {
-    scope: ('bare' | 'lnf')[];
-}
+export interface IPostcssUiPanelClassesParams {}
 
 export { postcssUiPanelClassesInterface as interface };
 
@@ -29,6 +18,9 @@ export { postcssUiPanelClassesInterface as interface };
  * @status              beta
  *
  * This mixin represent a panel
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet      @s.ui.panel.classes($1);
  *
@@ -51,28 +43,30 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiPanelClassesParams = {
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars = new CssVars();
 
-    if (finalParams.scope.includes('bare')) {
-        vars.code(
-            `
+    vars.code(`@s.scope 'bare' {`);
+
+    vars.code(
+        `
         .s-panel {
-            @s.ui.panel($scope: bare);
+            @s.scope.only 'bare' {
+                @s.ui.panel;
+            }
         }
     `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.includes('lnf')) {
-        vars.comment(
-            `/**
+    vars.code(`@s.scope 'lnf' {`);
+    vars.comment(
+        `/**
             * @name          .s-panel[lnf="default"]
             * @namespace          sugar.style.ui.panel
             * @type           CssClass
@@ -89,17 +83,19 @@ export default function ({
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
-        ).code(
-            `
-            .s-panel[lnf="default"]:not(.s-bare) {
-                @s.ui.panel($scope: lnf);
+    ).code(
+        `
+            .s-panel[lnf="default"] {
+                @s.scope.only 'lnf' {
+                    @s.ui.panel;
+                }
             }
         `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.push('}');
 
     return vars;
 }

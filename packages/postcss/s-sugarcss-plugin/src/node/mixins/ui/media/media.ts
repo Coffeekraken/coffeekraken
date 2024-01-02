@@ -11,8 +11,10 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * This mixin allows you to generate the "media" UI component css.
  *
- * @param       {('bare'|'lnf')[]}        [scope=['bare','lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.media
  *
@@ -27,22 +29,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class SSugarcssPluginUiMediaInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
-        };
+        return {};
     }
 }
 
-export interface ISSugarcssPluginUiMediaParams {
-    scope: ('bare' | 'lnf')[];
-}
+export interface ISSugarcssPluginUiMediaParams {}
 
 export { SSugarcssPluginUiMediaInterface as interface };
 export default function ({
@@ -55,22 +46,14 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: ISSugarcssPluginUiMediaParams = {
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars: string[] = [];
 
     // bare
-    if (finalParams.scope.indexOf('bare') !== -1) {
-    }
 
     // lnf
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
-            
-        `);
-    }
 
     return vars;
 }

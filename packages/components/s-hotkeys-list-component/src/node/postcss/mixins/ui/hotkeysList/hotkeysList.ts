@@ -2,22 +2,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class postcssUiHotkeysListInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
-        };
+        return {};
     }
 }
 
-export interface IPostcssUiHotkeysListParams {
-    scope: ('bare' | 'lnf')[];
-}
+export interface IPostcssUiHotkeysListParams {}
 
 export { postcssUiHotkeysListInterface as interface };
 
@@ -29,6 +18,9 @@ export { postcssUiHotkeysListInterface as interface };
  * @status        beta
  *
  * Apply the theme-switcher style to any s-theme-switcher element
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.hotkeysList($1);
  *
@@ -53,29 +45,10 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiHotkeysListParams = {
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars: string[] = [];
-
-    // bare
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
-
-    `);
-    }
-
-    // lnf
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
-
-        `);
-
-        vars.push(`
-
-        `);
-    }
 
     return vars;
 }

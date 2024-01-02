@@ -2,22 +2,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class postcssUiThemeSwitcherInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
-        };
+        return {};
     }
 }
 
-export interface IPostcssUiThemeSwitcherParams {
-    scope: ('bare' | 'lnf')[];
-}
+export interface IPostcssUiThemeSwitcherParams {}
 
 export { postcssUiThemeSwitcherInterface as interface };
 
@@ -29,6 +18,9 @@ export { postcssUiThemeSwitcherInterface as interface };
  * @status        beta
  *
  * Apply the theme-switcher style to any s-theme-switcher element
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.themeSwitcher($1);
  *
@@ -53,26 +45,19 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiThemeSwitcherParams = {
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars: string[] = [];
 
     // bare
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
-
-    `);
-    }
 
     // lnf
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
-
+    vars.push(`
+            @s.scope 'lnf' {
         `);
 
-        vars.push(`
+    vars.push(`
 
             .s-theme-switcher_dropdown-item {
                 gap: s.margin(30);
@@ -95,7 +80,7 @@ export default function ({
             }
 
         `);
-    }
+    vars.push('}');
 
     return vars;
 }

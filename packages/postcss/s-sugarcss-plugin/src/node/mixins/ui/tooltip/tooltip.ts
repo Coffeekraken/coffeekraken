@@ -15,8 +15,11 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {'solid'}                           [style='theme.ui.tooltip.defaultLnf']         The style you want to generate
  * @param       {'top'|'right'|'bottom'|'left'}            [position='theme.ui.tooltip.defaultPosition']         The position you want to generate
  * @param      {Boolean}                                [interactive=false]                 Specify if the tooltip is interactive or not
- * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
+ *
+ * @scope       bare                Structural css
+ * @scope       lnf                 Look and feel css
+ * @scope       position            Positioning css
  *
  * @snippet         @s.ui.tooltip
  *
@@ -46,14 +49,6 @@ class SSugarcssPluginUiTooltipInterface extends __SInterface {
                 type: 'Boolean',
                 default: false,
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'position', 'interactive'],
-                default: ['bare', 'lnf', 'position', 'interactive'],
-            },
         };
     }
 }
@@ -62,7 +57,6 @@ export interface ISSugarcssPluginUiTooltipParams {
     lnf: 'solid';
     position: 'top' | 'right' | 'bottom' | 'left';
     interactive: Boolean;
-    scope: ('bare' | 'lnf' | 'position' | 'interactive' | 'vr')[];
 }
 
 export { SSugarcssPluginUiTooltipInterface as interface };
@@ -79,14 +73,13 @@ export default function ({
         lnf: 'solid',
         position: 'top',
         interactive: false,
-        scope: ['bare', 'lnf', 'position', 'interactive'],
         ...params,
     };
 
     const vars: string[] = [];
 
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
+    vars.push(`
+        @s.scope 'bare' {
             font-size: s.scalable(1rem);
             position: absolute;
             z-index: 50;
@@ -100,8 +93,8 @@ export default function ({
                 position: absolute;
                 background: rgba(0,0,0,0);
             }
+        }
       `);
-    }
 
     vars.push(`
         .s-tooltip-container-active > & {
@@ -109,31 +102,32 @@ export default function ({
         }
     `);
 
-    if (finalParams.scope.indexOf('interactive') !== -1) {
-        if (finalParams.interactive) {
-            vars.push(`
-                &:not(.s-tooltip-container > .s-tooltip),
-                .s-tooltip-container-active > &,
-                .s-tooltip-container:focus > &,
-                .s-tooltip-container:focus-within > &,
-                .s-tooltip-container &:focus,
-                .s-tooltip-container:hover > & {
-                    pointer-events: all;
+    if (finalParams.interactive) {
+        vars.push(`
+                @s.scope 'interactive' {
+                    &:not(.s-tooltip-container > .s-tooltip),
+                    .s-tooltip-container-active > &,
+                    .s-tooltip-container:focus > &,
+                    .s-tooltip-container:focus-within > &,
+                    .s-tooltip-container &:focus,
+                    .s-tooltip-container:hover > & {
+                        pointer-events: all;
+                    }
                 }
             `);
-        }
     }
 
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
-          background-color: s.color(current);
-          color: s.color(current, foreground);
-          transition: s.theme(ui.tooltip.transition);
-          transition-property: opacity;
-          padding-inline: s.padding(ui.tooltip.paddingInline);
-          padding-block: s.padding(ui.tooltip.paddingBlock);
-          @s.border.radius(ui.tooltip.borderRadius);
-          @s.depth(ui.tooltip.depth);
+    // if (finalParams.scope.indexOf('lnf') !== -1) {
+    vars.push(`
+        @s.scope 'lnf' {
+            background-color: s.color(current);
+            color: s.color(current, foreground);
+            transition: s.theme(ui.tooltip.transition);
+            transition-property: opacity;
+            padding-inline: s.padding(ui.tooltip.paddingInline);
+            padding-block: s.padding(ui.tooltip.paddingBlock);
+            @s.border.radius(ui.tooltip.borderRadius);
+            @s.depth(ui.tooltip.depth);
 
             &:not([s-floating]) {
                 &:after {
@@ -143,17 +137,21 @@ export default function ({
                     border-color: s.color(current) transparent transparent transparent;
                 }
             }
+
+        }
       `);
-    }
+    // }
 
     // not s-floating tooltips
+
+    vars.push(`@s.scope 'position' {`);
+
     vars.push(`&:not([s-floating]) {`);
 
-    if (finalParams.scope.indexOf('position') !== -1) {
-        switch (finalParams.position) {
-            // RIGHT
-            case 'right':
-                vars.push(`  
+    switch (finalParams.position) {
+        // RIGHT
+        case 'right':
+            vars.push(`  
                 top: 50%;
                 left: calc(100% + s.theme(ui.tooltip.arrowSize));
                 right: auto;    
@@ -170,10 +168,10 @@ export default function ({
                     transform: rotate(90deg);
                 }
             `);
-                break;
-            // LEFT
-            case 'left':
-                vars.push(`  
+            break;
+        // LEFT
+        case 'left':
+            vars.push(`  
                 top: 50%;
                 right: calc(100% + s.theme(ui.tooltip.arrowSize));
                 left: auto;    
@@ -190,9 +188,9 @@ export default function ({
                     transform: rotate(-90deg);
                 }
             `);
-                break;
-            case 'bottom':
-                vars.push(`  
+            break;
+        case 'bottom':
+            vars.push(`  
                 bottom: auto;
                 right: auto;
                 left: 50%;
@@ -209,10 +207,10 @@ export default function ({
                     transform: rotate(180deg);
                 }
             `);
-                break;
-            case 'top':
-            default:
-                vars.push(`  
+            break;
+        case 'top':
+        default:
+            vars.push(`  
                 bottom: calc(100% + s.theme(ui.tooltip.arrowSize));
                 left: 50%;
                 transform: translateX(-50%);
@@ -224,18 +222,15 @@ export default function ({
                     border-width: calc(s.theme(ui.tooltip.arrowSize) / 2);
                 }
             `);
-                break;
-        }
+            break;
     }
 
-    // not s-floating tooltips
-    vars.push(`}`);
+    vars.push('}');
 
-    if (finalParams.scope.indexOf('position') !== -1) {
-        switch (finalParams.position) {
-            // RIGHT
-            case 'right':
-                vars.push(`  
+    switch (finalParams.position) {
+        // RIGHT
+        case 'right':
+            vars.push(`  
                 &:before {
                   height: 100%;
                   width: s.theme(ui.tooltip.arrowSize);
@@ -245,10 +240,10 @@ export default function ({
                   top: 0;
                 }
             `);
-                break;
-            // LEFT
-            case 'left':
-                vars.push(`  
+            break;
+        // LEFT
+        case 'left':
+            vars.push(`  
                 &:before {
                   height: 100%;
                   width: s.theme(ui.tooltip.arrowSize);
@@ -258,9 +253,9 @@ export default function ({
                   top: 0;
                 }
             `);
-                break;
-            case 'bottom':
-                vars.push(`  
+            break;
+        case 'bottom':
+            vars.push(`  
                 &:before {
                   width: 100%;
                   height: s.theme(ui.tooltip.arrowSize);
@@ -269,10 +264,10 @@ export default function ({
                   left: 0;
                 }
             `);
-                break;
-            case 'top':
-            default:
-                vars.push(`  
+            break;
+        case 'top':
+        default:
+            vars.push(`  
                 &:before {
                   width: 100%;
                   height: s.theme(ui.tooltip.arrowSize);
@@ -280,9 +275,10 @@ export default function ({
                   left: 0;
                 }
             `);
-                break;
-        }
+            break;
     }
+
+    vars.push('}');
 
     return vars;
 }

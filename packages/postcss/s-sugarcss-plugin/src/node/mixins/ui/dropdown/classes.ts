@@ -11,8 +11,11 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * Generate the dropdown classes
  *
- * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
+ * @scope       positiion       Position css
  *
  * @snippet         @s.ui.dropdown.classes
  *
@@ -25,22 +28,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class SSugarcssPluginUiDropdownClassesInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
-        };
+        return {};
     }
 }
 
-export interface ISSugarcssPluginUiDropdownClassesParams {
-    scope: ('bare' | 'lnf')[];
-}
+export interface ISSugarcssPluginUiDropdownClassesParams {}
 
 export { SSugarcssPluginUiDropdownClassesInterface as interface };
 
@@ -56,7 +48,6 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: ISSugarcssPluginUiDropdownClassesParams = {
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
@@ -220,9 +211,9 @@ export default function ({
     `,
     );
 
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(
-            () => `/**
+    vars.code(`@s.scope 'bare' {`);
+    vars.comment(
+        () => `/**
             * @name           s-dropdown
             * @namespace          sugar.style.ui.dropdown
             * @type           CssClass
@@ -244,21 +235,21 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(
-            `
+    ).code(
+        `
             .s-dropdown {
-                @s.ui.dropdown($scope: bare);
+                @s.ui.dropdown;
             }
             `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.includes('lnf')) {
-        vars.comment(
-            () => `/**
+    vars.code(`@s.scope 'lnf' {`);
+    vars.comment(
+        () => `/**
             * @name           s-dropdown
             * @namespace          sugar.style.ui.dropdown
             * @type           CssClass
@@ -280,17 +271,19 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(
-            `
-            .s-dropdown:not(.s-bare) {
-                @s.ui.dropdown($scope: lnf);
+    ).code(
+        `
+            .s-dropdown {
+                @s.ui.dropdown;
             }
             `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
+
+    vars.code(`@s.scope 'position' {`);
 
     vars.comment(
         () => `/**
@@ -319,7 +312,7 @@ export default function ({
     ).code(
         `
         .s-dropdown {
-            @s.ui.dropdown($position: bottom, $scope: position);
+            @s.ui.dropdown($position: bottom);
         }
         `,
         {
@@ -354,7 +347,7 @@ export default function ({
     ).code(
         `
         .s-dropdown-bottom-start {
-            @s.ui.dropdown($position: bottom-start, $scope: position);
+            @s.ui.dropdown($position: bottom-start);
         }
         `,
         {
@@ -389,7 +382,7 @@ export default function ({
     ).code(
         `
         .s-dropdown-bottom-end {
-            @s.ui.dropdown($position: bottom-end, $scope: position);
+            @s.ui.dropdown($position: bottom-end);
         }
         `,
         {
@@ -424,7 +417,7 @@ export default function ({
     ).code(
         `
         .s-dropdown-top {
-            @s.ui.dropdown($position: top, $scope: position);
+            @s.ui.dropdown($position: top);
         }
         `,
         {
@@ -459,7 +452,7 @@ export default function ({
     ).code(
         `
         .s-dropdown-top-start {
-            @s.ui.dropdown($position: top-start, $scope: position);
+            @s.ui.dropdown($position: top-start);
         }
         `,
         {
@@ -494,17 +487,19 @@ export default function ({
     ).code(
         `
         .s-dropdown-top-end {
-            @s.ui.dropdown($position: top-end, $scope: position);
+            @s.ui.dropdown($position: top-end);
         }
         `,
         {
             type: 'CssClass',
         },
     );
+    vars.code('}');
 
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(
-            () => `/**
+    vars.code(`@s.scope 'bare' {`);
+
+    vars.comment(
+        () => `/**
             * @name           s-dropdown-container
             * @namespace          sugar.style.ui.dropdown
             * @type           CssClass
@@ -530,9 +525,9 @@ export default function ({
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */`,
-        );
-        vars.code(
-            () => `
+    );
+    vars.code(
+        () => `
             .s-dropdown-container {
                 position: relative;
                 display: inline-block;
@@ -555,11 +550,12 @@ export default function ({
                 }
             }
         `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+
+    vars.code('}');
 
     return vars;
 }

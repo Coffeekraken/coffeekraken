@@ -2,22 +2,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class postcssUiGoogleMapMarkerInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
-        };
+        return {};
     }
 }
 
-export interface IPostcssUiGoogleMapMarkerParams {
-    scope: ('bare' | 'lnf')[];
-}
+export interface IPostcssUiGoogleMapMarkerParams {}
 
 export { postcssUiGoogleMapMarkerInterface as interface };
 
@@ -29,6 +18,9 @@ export { postcssUiGoogleMapMarkerInterface as interface };
  * @status        beta
  *
  * Apply the google map style to any s-google-map element
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.googleMapMarker($1);
  *
@@ -53,15 +45,14 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiGoogleMapMarkerParams = {
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars: string[] = [];
 
     // bare
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
+    vars.push(`@s.scope 'bare' {`);
+    vars.push(`
             position: relative;
 
             .s-google-map-marker_icon {
@@ -93,11 +84,11 @@ export default function ({
                 transform: translateX(-50%) translateY(0);
             }
     `);
-    }
+    vars.push('}');
 
     // lnf
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
+    vars.push(`@s.scope 'lnf' {`);
+    vars.push(`
             .s-google-map-marker_content {
                 @s.transition (ui.googleMapMarker.transition);
             }
@@ -106,7 +97,7 @@ export default function ({
                 @s.transition (ui.googleMapMarker.transition);
             }
         `);
-    }
+    vars.push('}');
 
     return vars;
 }

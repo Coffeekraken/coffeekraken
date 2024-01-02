@@ -13,8 +13,12 @@ import __faker from 'faker';
  *
  * Generate the table classes
  *
- * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
+ * @scope       vr              Vertical rhythm css
+ * @scope       tf              Text format css
  *
  * @snippet         @s.ui.table.classes
  *
@@ -27,22 +31,11 @@ import __faker from 'faker';
 
 class SSugarcssPluginUiTableClassesInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'tf', 'vr'],
-                default: ['bare', 'lnf', 'tf', 'vr'],
-            },
-        };
+        return {};
     }
 }
 
-export interface ISSugarcssPluginUiTableClassesParams {
-    scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
-}
+export interface ISSugarcssPluginUiTableClassesParams {}
 
 export { SSugarcssPluginUiTableClassesInterface as interface };
 
@@ -58,7 +51,6 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: ISSugarcssPluginUiTableClassesParams = {
-        scope: [],
         ...params,
     };
 
@@ -227,9 +219,9 @@ export default function ({
     `,
     );
 
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(
-            () => `/**
+    vars.code(`@s.scope 'bare' {`);
+    vars.comment(
+        () => `/**
             * @name           s-table
             * @namespace          sugar.style.ui.table
             * @type           CssClass
@@ -255,19 +247,21 @@ export default function ({
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
-        );
-        vars.code(
-            () => `
+    );
+    vars.code(
+        () => `
                 .s-table {
-                    @s.ui.table($scope: bare);
+                    @s.scope.only 'bare' {
+                        @s.ui.table;
+                    }
                 }`,
-            { type: 'CssClass' },
-        );
-    }
+        { type: 'CssClass' },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.includes('lnf')) {
-        vars.comment(
-            () => `/**
+    vars.code(`@s.scope 'lnf' {`);
+    vars.comment(
+        () => `/**
             * @name           s-table
             * @namespace          sugar.style.ui.table
             * @type           CssClass
@@ -293,16 +287,19 @@ export default function ({
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
-        );
-        vars.code(
-            () => `
-                .s-table:not(.s-bare) {
-                    @s.ui.table($scope: lnf);
+    );
+    vars.code(
+        () => `
+                .s-table {
+                    @s.scope.only 'lnf' {
+                        @s.ui.table;
+                    }
                 }`,
-            { type: 'CssClass' },
-        );
-    }
+        { type: 'CssClass' },
+    );
+    vars.code('}');
 
+    vars.code(`@s.scope 'tf' {`);
     vars.comment(
         () => `/**
         * @name           s-format:text
@@ -343,7 +340,9 @@ export default function ({
     `,
         { type: 'CssClass' },
     );
+    vars.code('}');
 
+    vars.code(`@s.scope 'vr' {`);
     vars.comment(
         () => `/**
         * @name           s-rhythm:vertical
@@ -402,6 +401,7 @@ export default function ({
     `,
         { type: 'CssClass' },
     );
+    vars.code('}');
 
     return vars;
 }

@@ -31,8 +31,10 @@ export { SSugarcssPluginBackdropInterface as interface };
  *
  * This mixin allows you to apply the backdrop lnf to any HTMLEment
  *
- * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.backdrop
  *
@@ -63,20 +65,24 @@ export default function ({
 
     if (finalParams.scope.includes('bare')) {
         vars.code(`
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 200vw;
-        height: 200vh;
-        z-index: 100;
-        transform: translate(-50%, -50%);
+        @s.scope 'bare' {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200vw;
+            height: 200vh;
+            z-index: 100;
+            transform: translate(-50%, -50%);
+        }
     `);
     }
 
     if (finalParams.scope.includes('lnf')) {
         vars.code(`
-                    background: s.color(main, background, --alpha 0.7);
-                    backdrop-filter: blur(5px);
+            @s.scope 'lnf' {
+                background: s.color(main, background, --alpha 0.7);
+                backdrop-filter: blur(5px);
+            }
                 `);
     }
 

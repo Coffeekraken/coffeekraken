@@ -14,8 +14,10 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @param       {('solid')[]}                           [lnfs=['solid']]         The style(s) you want to generate
  * @param       {'solid'}                [defaultLnf='theme.ui.range.defaultLnf']           The default style you want
- * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.range.classes
  *
@@ -39,14 +41,6 @@ class SSugarcssPluginUiRangeClassesInterface extends __SInterface {
                 values: ['solid'],
                 default: __STheme.current.get('ui.range.defaultLnf'),
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
         };
     }
 }
@@ -54,7 +48,6 @@ class SSugarcssPluginUiRangeClassesInterface extends __SInterface {
 export interface ISSugarcssPluginUiRangeClassesParams {
     lnfs: 'solid'[];
     defaultLnf: 'solid';
-    scope: ('bare' | 'lnf')[];
 }
 
 export { SSugarcssPluginUiRangeClassesInterface as interface };
@@ -73,7 +66,6 @@ export default function ({
     const finalParams: ISSugarcssPluginUiRangeClassesParams = {
         lnfs: [],
         defaultLnf: 'solid',
-        scope: [],
         ...params,
     };
 
@@ -226,9 +218,9 @@ export default function ({
     `,
     );
 
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(
-            () => `/**
+    vars.code(`@s.scope 'bare' {`);
+    vars.comment(
+        () => `/**
         * @name           s-range
         * @namespace          sugar.style.ui.range
         * @type           CssClass
@@ -242,25 +234,27 @@ export default function ({
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `,
-        ).code(
-            `
+    ).code(
+        `
         .s-range {
-            @s.ui.range($scope: bare);
+            @s.scope.only 'bare' {
+                @s.ui.range;
+            }
         }
         `,
-            { type: 'CssClass' },
-        );
-    }
+        { type: 'CssClass' },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.includes('lnf')) {
-        finalParams.lnfs.forEach((lnf) => {
-            let cls = `s-range`;
-            if (lnf !== finalParams.defaultLnf) {
-                cls += `-${lnf}`;
-            }
+    vars.code(`@s.scope 'lnf' {`);
+    finalParams.lnfs.forEach((lnf) => {
+        let cls = `s-range`;
+        if (lnf !== finalParams.defaultLnf) {
+            cls += `-${lnf}`;
+        }
 
-            vars.comment(
-                () => `/**
+        vars.comment(
+            () => `/**
             * @name           ${cls}
             * @namespace          sugar.style.ui.range
             * @type           CssClass
@@ -276,16 +270,18 @@ export default function ({
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-            ).code(
-                `
-            .${cls}:not(.s-bare) {
-                @s.ui.range($lnf: ${lnf}, $scope: lnf);
+        ).code(
+            `
+            .${cls} {
+                @s.scope.only 'lnf' {
+                    @s.ui.range($lnf: ${lnf});
+                }
             }
             `,
-                { type: 'CssClass' },
-            );
-        });
-    }
+            { type: 'CssClass' },
+        );
+    });
+    vars.code('}');
 
     return vars;
 }

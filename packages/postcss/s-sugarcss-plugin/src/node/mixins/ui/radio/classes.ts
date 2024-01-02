@@ -14,8 +14,12 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @param       {('solid')[]}                           [lnfs=['solid']]         The lnf(s) you want to generate
  * @param       {'solid'}                [defaultLnf='theme.ui.form.defaultLnf']           The default lnf you want
- * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
+ * @scope       vr              Vertical rhythm css
+ * @scope       tf              Text format css
  *
  * @snippet         @s.ui.radio.classes
  *
@@ -39,14 +43,6 @@ class SSugarcssPluginUiRadioClassesInterface extends __SInterface {
                 values: ['solid'],
                 default: __STheme.current.get('ui.form.defaultLnf'),
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'vr', 'tf'],
-                default: ['bare', 'lnf', 'vr', 'tf'],
-            },
         };
     }
 }
@@ -54,7 +50,6 @@ class SSugarcssPluginUiRadioClassesInterface extends __SInterface {
 export interface ISSugarcssPluginUiRangeClassesParams {
     lnfs: 'solid'[];
     defaultLnf: 'solid';
-    scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
 }
 
 export { SSugarcssPluginUiRadioClassesInterface as interface };
@@ -73,7 +68,6 @@ export default function ({
     const finalParams: ISSugarcssPluginUiRangeClassesParams = {
         lnfs: [],
         defaultLnf: 'solid',
-        scope: [],
         ...params,
     };
 
@@ -194,9 +188,9 @@ export default function ({
     `,
     );
 
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(
-            () => `/**
+    vars.code(`@s.scope 'bare' {`);
+    vars.comment(
+        () => `/**
             * @name           s-radio
             * @namespace          sugar.style.ui.radio
             * @type           CssClass
@@ -212,27 +206,27 @@ export default function ({
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(
-            `
+    ).code(
+        `
             .s-radio {
-                @s.ui.radio($scope: bare);
+                @s.ui.radio;
             }
             `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.includes('lnf')) {
-        finalParams.lnfs.forEach((lnf) => {
-            let cls = `s-radio`;
-            if (lnf !== finalParams.defaultLnf) {
-                cls += `--${lnf}`;
-            }
+    vars.code(`@s.scope 'lnf' {`);
+    finalParams.lnfs.forEach((lnf) => {
+        let cls = `s-radio`;
+        if (lnf !== finalParams.defaultLnf) {
+            cls += `--${lnf}`;
+        }
 
-            vars.comment(
-                () => `/**
+        vars.comment(
+            () => `/**
             * @name           ${cls}
             * @namespace          sugar.style.ui.radio
             * @type           CssClass
@@ -254,22 +248,22 @@ export default function ({
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-            ).code(
-                `
-            .${cls}:not(.s-bare) {
-                @s.ui.radio($lnf: ${lnf}, $scope: lnf);
+        ).code(
+            `
+            .${cls} {
+                @s.ui.radio($lnf: ${lnf});
             }
             `,
-                {
-                    type: 'CssClass',
-                },
-            );
-        });
-    }
+            {
+                type: 'CssClass',
+            },
+        );
+    });
+    vars.code('}');
 
-    if (finalParams.scope.indexOf('tf') !== -1) {
-        vars.comment(
-            () => `/**
+    vars.code(`@s.scope 'tf' {`);
+    vars.comment(
+        () => `/**
             * @name           s-format:text input[type="radio"]
             * @namespace          sugar.style.ui.radio
             * @type           CssClass
@@ -287,23 +281,23 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(
-            `
+    ).code(
+        `
             @s.format.text {
                 input[type="radio"] {
-                    @s.ui.radio($scope: '${finalParams.scope.join(',')}');
+                    @s.ui.radio;
                 } 
             }
         `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.comment(
-            () => `/**
+    vars.code(`@s.scope 'vr' {`);
+    vars.comment(
+        () => `/**
             * @name           s-rhythm:vertical
             * @namespace          sugar.style.ui.radio
             * @type           CssClass
@@ -323,8 +317,8 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(
-            `
+    ).code(
+        `
             @s.rhythm.vertical {
                 input[type="radio"], .s-radio {
                     ${__STheme.current.jsObjectToCssProperties(
@@ -333,11 +327,11 @@ export default function ({
                 } 
             }
         `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
     return vars;
 }

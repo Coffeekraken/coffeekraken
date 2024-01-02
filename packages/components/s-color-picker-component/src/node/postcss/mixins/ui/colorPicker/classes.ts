@@ -3,22 +3,11 @@ import __STheme from '@coffeekraken/s-theme';
 
 class postcssUiColorPickerClassesInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'vr'],
-                default: ['bare', 'lnf', 'vr'],
-            },
-        };
+        return {};
     }
 }
 
-export interface IPostcssUiColorPickerClassesParams {
-    scope: ('bare' | 'lnf' | 'vr')[];
-}
+export interface IPostcssUiColorPickerClassesParams {}
 
 export { postcssUiColorPickerClassesInterface as interface };
 
@@ -30,6 +19,10 @@ export { postcssUiColorPickerClassesInterface as interface };
  * @status              beta
  *
  * This mixin represent a color picker
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
+ * @scope       vr              Vertical rhythm css
  *
  * @snippet      @s.ui.colorPicker.classes($1);
  *
@@ -52,28 +45,28 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiColorPickerClassesParams = {
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars = new CssVars();
 
-    if (finalParams.scope.includes('bare')) {
-        vars.code(
-            `
+    vars.code(`@s.scope 'bare' {`);
+
+    vars.code(
+        `
         .s-color-picker {
-            @s.ui.colorPicker($scope: bare);
+            @s.ui.colorPicker;
         }
     `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.includes('lnf')) {
-        vars.comment(
-            `/**
+    vars.code(`@s.scope 'lnf' {`);
+    vars.comment(
+        `/**
             * @name           .s-color-picker[lnf="default"]
             * @namespace          sugar.style.ui.colorPicker
             * @type           CssClass
@@ -86,19 +79,19 @@ export default function ({
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
-        ).code(
-            `.s-color-picker[lnf="default"]:not(.s-bare) {
-                @s.ui.colorPicker($scope: lnf);
+    ).code(
+        `.s-color-picker[lnf="default"] {
+                @s.ui.colorPicker;
             }`,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.comment(
-            `/**
+    vars.code(`@s.scope 'vr' {`);
+    vars.comment(
+        `/**
             * @name           s-rhythm:vertical
             * @namespace          sugar.style.ui.colorPicker
             * @type           CssClass
@@ -114,8 +107,8 @@ export default function ({
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
-        ).code(
-            `@s.rhythm.vertical {
+    ).code(
+        `@s.rhythm.vertical {
                 .s-color-picker[inline] {
                     ${__STheme.current.jsObjectToCssProperties(
                         __STheme.current.get('ui.colorPicker.rhythmVertical'),
@@ -123,11 +116,11 @@ export default function ({
                 } 
             }
         `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
     return vars;
 }

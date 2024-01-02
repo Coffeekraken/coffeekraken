@@ -13,8 +13,10 @@ import __STheme from '@coffeekraken/s-theme';
  * Apply the range style to any HTMLInputElement
  *
  * @param       {'solid'}                           [style='theme.ui.form.defaultLnf']         The lnf you want to generate
- * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.range
  *
@@ -35,21 +37,12 @@ class SSugarcssPluginUiRangeInterface extends __SInterface {
                 values: ['solid'],
                 default: __STheme.current.get('ui.form.defaultLnf'),
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
         };
     }
 }
 
 export interface ISSugarcssPluginUiButtonParams {
     lnf: 'solid';
-    scope: ('bare' | 'lnf')[];
 }
 
 export { SSugarcssPluginUiRangeInterface as interface };
@@ -64,7 +57,6 @@ export default function ({
 }) {
     const finalParams: ISSugarcssPluginUiButtonParams = {
         lnf: 'solid',
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
@@ -114,8 +106,8 @@ export default function ({
     `;
 
     // lnf
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
+    vars.push(`@s.scope 'lnf' {`);
+    vars.push(`
             &:hover,
             &:focus {
 
@@ -192,11 +184,11 @@ export default function ({
                 border-radius: calc(var(--track-radius) * 2);
             }
     `);
-    }
+    vars.push('}');
 
     // bare
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
+    vars.push(`@s.scope 'bare' {`);
+    vars.push(`
             -webkit-appearance: none;
             background: transparent;
 
@@ -255,17 +247,7 @@ export default function ({
             }
 
     `);
-    }
-
-    // style
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        switch (finalParams.lnf) {
-            default:
-                vars.push(`
-                `);
-                break;
-        }
-    }
+    vars.push('}');
 
     return vars;
 }

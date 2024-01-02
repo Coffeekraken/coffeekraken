@@ -14,8 +14,12 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @param       {('solid')[]}                           [lnfs=['solid']]         The lnf(s) you want to generate
  * @param       {'solid'}                [defaultLnf='theme.ui.form.defaultLnf']           The default style you want
- * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
+ * @scope       vr              Vertical rhythm css
+ * @scope       tf              Text format css
  *
  * @snippet         @s.checkbox.classes
  *
@@ -39,14 +43,6 @@ class SSugarcssPluginUiCheckboxClassesInterface extends __SInterface {
                 values: ['solid'],
                 default: __STheme.current.get('ui.form.defaultLnf'),
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'tf', 'vr'],
-                default: ['bare', 'lnf', 'tf', 'vr'],
-            },
         };
     }
 }
@@ -54,7 +50,6 @@ class SSugarcssPluginUiCheckboxClassesInterface extends __SInterface {
 export interface ISSugarcssPluginUiCheckboxClassesParams {
     lnfs: 'solid'[];
     defaultLnf: 'solid';
-    scope: ('bare' | 'lnf' | 'tf' | 'vr')[];
 }
 
 export { SSugarcssPluginUiCheckboxClassesInterface as interface };
@@ -73,7 +68,6 @@ export default function ({
     const finalParams: ISSugarcssPluginUiCheckboxClassesParams = {
         lnfs: ['solid'],
         defaultLnf: 'solid',
-        scope: [],
         ...params,
     };
 
@@ -198,9 +192,9 @@ export default function ({
     `,
     );
 
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(
-            () => `/**
+    vars.code(`@s.scope 'bare' {`);
+    vars.comment(
+        () => `/**
             * @name           s-checkbox
             * @namespace          sugar.style.ui.checkbox
             * @type           CssClass
@@ -216,18 +210,21 @@ export default function ({
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(
-            `
+    ).code(
+        `
             .s-checkbox {
-                @s.ui.checkbox($scope: bare);
+                @s.scope.only 'bare' {
+                    @s.ui.checkbox;
+                }
             }
             `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
+    vars.code(`@s.scope 'lnf' {`);
     finalParams.lnfs.forEach((lnf) => {
         let cls = `s-checkbox`;
         if (lnf !== finalParams.defaultLnf) {
@@ -259,8 +256,8 @@ export default function ({
      `,
         ).code(
             `
-        .${cls}:not(.s-bare) {
-            @s.ui.checkbox($lnf: ${lnf}, $scope: lnf);
+        .${cls} {
+            @s.ui.checkbox($lnf: ${lnf});
         }
         `,
             {
@@ -268,10 +265,11 @@ export default function ({
             },
         );
     });
+    vars.code('}');
 
-    if (finalParams.scope.indexOf('tf') !== -1) {
-        vars.comment(
-            () => `/**
+    vars.code(`@s.scope 'tf' {`);
+    vars.comment(
+        () => `/**
             * @name           s-format:text
             * @namespace          sugar.style.ui.checkbox
             * @type           CssClass
@@ -289,23 +287,24 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(
-            `
+    ).code(
+        `
             @s.format.text {
                 input[type="checkbox"] {
-                    @s.ui.checkbox($scope: '${finalParams.scope.join(',')}');
+                    @s.ui.checkbox;
                 } 
             }
         `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.comment(
-            () => `/**
+    vars.code(`@s.scope 'vr' {`);
+
+    vars.comment(
+        () => `/**
             * @name           s-rhythm:vertical
             * @namespace          sugar.style.ui.checkbox
             * @type           CssClass
@@ -325,8 +324,8 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(
-            `
+    ).code(
+        `
             @s.rhythm.vertical {
                 input[type="checkbox"], .s-checkbox {
                     ${__STheme.current.jsObjectToCssProperties(
@@ -335,11 +334,11 @@ export default function ({
                 } 
             }
         `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
     return vars;
 }

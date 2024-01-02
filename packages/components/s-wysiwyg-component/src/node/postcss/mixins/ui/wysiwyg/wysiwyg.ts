@@ -2,22 +2,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class postcssUiWysiwygInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
-        };
+        return {};
     }
 }
 
-export interface IPostcssUiWysiwygParams {
-    scope: ('bare' | 'lnf')[];
-}
+export interface IPostcssUiWysiwygParams {}
 
 export { postcssUiWysiwygInterface as interface };
 
@@ -30,6 +19,9 @@ export { postcssUiWysiwygInterface as interface };
  * @private
  *
  * Apply the wysiwyg style to any s-wysiwyg element
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.wysiwyg($1);
  *
@@ -54,22 +46,16 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiWysiwygParams = {
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars: string[] = [];
 
     // bare
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
-
-    `);
-    }
 
     // lnf
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
+    vars.push(`@s.scope 'lnf' {`);
+    vars.push(`
             @s.ui.input();
 
             .ce-inline-toolbar {
@@ -122,7 +108,7 @@ export default function ({
             }
 
         `);
-    }
+    vars.push('}');
 
     return vars;
 }

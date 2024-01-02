@@ -2,22 +2,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class postcssUiSpacesSelectorInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
-        };
+        return {};
     }
 }
 
-export interface IPostcssUiSpacesSelectorParams {
-    scope: ('bare' | 'lnf')[];
-}
+export interface IPostcssUiSpacesSelectorParams {}
 
 export { postcssUiSpacesSelectorInterface as interface };
 
@@ -29,6 +18,9 @@ export { postcssUiSpacesSelectorInterface as interface };
  * @status        beta
  *
  * Apply the clipbord copy style to any s-spacesSelector element
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.spacesSelector($1);
  *
@@ -53,21 +45,16 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiSpacesSelectorParams = {
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars: string[] = [];
 
     // bare
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
-    `);
-    }
 
     // lnf
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`            
+    vars.push(`@s.scope 'lnf' {`);
+    vars.push(`            
 
             .s-spaces-selector_inner {
                 border: 1px solid s.color(main, border);
@@ -151,7 +138,7 @@ export default function ({
                 }
             }
         `);
-    }
+    vars.push('}');
 
     return vars;
 }

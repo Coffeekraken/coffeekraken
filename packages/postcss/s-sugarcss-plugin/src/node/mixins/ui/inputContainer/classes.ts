@@ -14,8 +14,10 @@ import __faker from 'faker';
  *
  * @param       {('group'|'addon')[]}                           [lnfs=['group','addon']]         The style(s) you want to generate
  * @param       {'group'|'addon'}                [defaultLnf='group']           The default style you want
- * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.inputContainer.classes
  *
@@ -37,14 +39,6 @@ class SSugarcssPluginUiFormClassesInterface extends __SInterface {
                 type: 'String',
                 default: 'group',
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
         };
     }
 }
@@ -52,7 +46,6 @@ class SSugarcssPluginUiFormClassesInterface extends __SInterface {
 export interface ISSugarcssPluginUiFormClassesParams {
     lnfs: ('group' | 'addon')[];
     defaultLnf: 'group';
-    scope: ('bare' | 'lnf')[];
 }
 
 export { SSugarcssPluginUiFormClassesInterface as interface };
@@ -71,7 +64,6 @@ export default function ({
     const finalParams: ISSugarcssPluginUiFormClassesParams = {
         lnfs: ['group', 'addon'],
         defaultLnf: 'group',
-        scope: [],
         ...params,
     };
 
@@ -183,9 +175,9 @@ export default function ({
     `,
     );
 
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(
-            () => `/**
+    vars.code(`@s.scope 'bare' {`);
+    vars.comment(
+        () => `/**
         * @name           s-input-container:group
         * @namespace          sugar.style.ui.inputContainer
         * @type           CssClass
@@ -202,28 +194,15 @@ export default function ({
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `,
-        ).code(`
+    ).code(`
         .s-input-container-group {
-            @s.ui.inputContainer($lnf: group, $scope: bare);
+            @s.scope.only 'bare' {
+                @s.ui.inputContainer($lnf: group);
+            }
         }
         `);
-    }
-    if (finalParams.scope.includes('lnf')) {
-        vars.code(
-            `
-        .s-input-container-group:not(.s-bare) {
-            @s.ui.inputContainer($lnf: group, $scope: lnf);
-        }
-        `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
-
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(
-            () => `/**
+    vars.comment(
+        () => `/**
         * @name           s-input-container:addon
         * @namespace          sugar.style.ui.inputContainer
         * @type           CssClass
@@ -245,29 +224,46 @@ export default function ({
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `,
-        ).code(
-            `
+    ).code(
+        `
         .s-input-container-addon {
-            @s.ui.inputContainer($lnf: addon, $scope: bare);
+            @s.scope.only 'bare' {
+                @s.ui.inputContainer($lnf: addon);
+            }
         }
         `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
-    if (finalParams.scope.includes('lnf')) {
-        vars.code(
-            `
-        .s-input-container-addon:not(.s-bare) {
-            @s.ui.inputContainer($lnf: addon, $scope: lnf);
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
+
+    vars.code(`@s.scope 'lnf' {`);
+    vars.code(
+        `
+        .s-input-container-group {
+            @s.scope.only 'lnf' {
+                @s.ui.inputContainer($lnf: group);
+            }
         }
         `,
-            {
-                type: 'CssClass',
-            },
-        );
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code(
+        `
+    .s-input-container-addon {
+        @s.scope.only 'lnf' {
+            @s.ui.inputContainer($lnf: addon);
+        }
     }
+    `,
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
     return vars;
 }

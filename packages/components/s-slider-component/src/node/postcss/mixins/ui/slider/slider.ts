@@ -2,22 +2,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class postcssUiSliderInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'behavior'],
-                default: ['bare', 'lnf', 'behavior'],
-            },
-        };
+        return {};
     }
 }
 
-export interface IPostcssUiSliderParams {
-    scope: ('bare' | 'lnf' | 'behavior')[];
-}
+export interface IPostcssUiSliderParams {}
 
 export { postcssUiSliderInterface as interface };
 
@@ -29,6 +18,10 @@ export { postcssUiSliderInterface as interface };
  * @status        beta
  *
  * Apply the slider style to any s-slider element
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
+ * @scope       behavior        Behavior css
  *
  * @snippet         @s.ui.slider($1);
  *
@@ -53,32 +46,18 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiSliderParams = {
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars: string[] = [];
 
     // bare
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
-
-    `);
-    }
 
     // behavior
-    if (finalParams.scope.indexOf('behavior') !== -1) {
-        vars.push(`
-        `);
-    }
-
-    // &[behavior='default'] > .s-slider_root > .s-slider_slides-wrapper > .s-slider_slides {
-    //     @s.transition();
-    // }
 
     // lnf
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
+    vars.push(`@s.scope 'lnf' {`);
+    vars.push(`
 
             --s-slider-space: calc(s.margin(30) + 1em);
 
@@ -130,7 +109,7 @@ export default function ({
             }
 
         `);
-    }
+    vars.push('}');
 
     return vars;
 }

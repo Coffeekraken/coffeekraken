@@ -2,22 +2,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class postcssUiSpacesSelectorClassesInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
-        };
+        return {};
     }
 }
 
-export interface IPostcssUiSpacesSelectorClassesParams {
-    scope: ('bare' | 'lnf')[];
-}
+export interface IPostcssUiSpacesSelectorClassesParams {}
 
 export { postcssUiSpacesSelectorClassesInterface as interface };
 
@@ -29,6 +18,9 @@ export { postcssUiSpacesSelectorClassesInterface as interface };
  * @status              beta
  *
  * This mixin represent a spaces selector (margin, padding)
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet      @s.ui.spacesSelector.classes($1);
  *
@@ -51,25 +43,14 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiSpacesSelectorClassesParams = {
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars = new CssVars();
 
-    // if (finalParams.scope.includes('bare')) {
-    //     vars.code(
-    //         `
-    // `,
-    //         {
-    //             type: 'CssClass',
-    //         },
-    //     );
-    // }
-
-    if (finalParams.scope.includes('lnf')) {
-        vars.comment(
-            `/**
+    vars.code(`@s.scope 'lnf' {`);
+    vars.comment(
+        `/**
             * @name           .s-spaces-selector[lnf="default"]
             * @namespace          sugar.style.ui.clipboardCopy
             * @type           CssClass
@@ -82,15 +63,17 @@ export default function ({
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
-        ).code(
-            `.s-spaces-selector[lnf="default"]:not(.s-bare) {
-                @s.ui.spacesSelector($scope: lnf);
-            }`,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+    ).code(
+        `.s-spaces-selector[lnf="default"] {
+            @s.scope.only 'lnf' {
+                @s.ui.spacesSelector;
+            }
+        }`,
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
     return vars;
 }

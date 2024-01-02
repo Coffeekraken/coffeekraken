@@ -9,21 +9,12 @@ class postcssUiDatetimePickerInterface extends __SInterface {
                 values: ['solid'],
                 default: __STheme.current.get('ui.datetimePicker.defaultLnf'),
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
         };
     }
 }
 
 export interface IPostcssUiDatetimePickerParams {
     lnf: 'solid';
-    scope: ('bare' | 'lnf')[];
 }
 
 export { postcssUiDatetimePickerInterface as interface };
@@ -36,6 +27,9 @@ export { postcssUiDatetimePickerInterface as interface };
  * @status        beta
  *
  * Apply the datetime picker lnf to any s-datetime-picker element
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.datetimePicker($1);
  *
@@ -61,15 +55,14 @@ export default function ({
 }) {
     const finalParams: IPostcssUiDatetimePickerParams = {
         lnf: __STheme.current.get('ui.datetimePicker.defaultLnf'),
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars: string[] = [];
 
     // bare
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
+    vars.push(`@s.scope 'bare' {`);
+    vars.push(`
 
             @s.media <=mobile {
                 position: unset;
@@ -135,17 +128,15 @@ export default function ({
 
 
     `);
-    }
+    vars.push('}');
 
     // lnf
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
-        `);
+    vars.push(`@s.scope 'lnf' {`);
 
-        switch (finalParams.lnf) {
-            case 'solid':
-            default:
-                vars.push(`
+    switch (finalParams.lnf) {
+        case 'solid':
+        default:
+            vars.push(`
 
                     color: s.color(text);
 
@@ -310,9 +301,10 @@ export default function ({
                     }
 
         `);
-                break;
-        }
+            break;
     }
+
+    vars.push('}');
 
     return vars;
 }

@@ -13,8 +13,10 @@ import __STheme from '@coffeekraken/s-theme';
  * Apply the list style to any element
  *
  * @param       {('dl'|'ul'|'ol'|'icon')[]}                           [lnf='ui.list.defaultLnf']         The style you want to generate
- * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet     @s.ui.list
  *
@@ -35,21 +37,12 @@ class SSugarcssPluginUiListInterface extends __SInterface {
                 values: ['dl', 'ul', 'ol', 'icon'],
                 default: __STheme.current.get('ui.list.defaultLnf'),
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
         };
     }
 }
 
 export interface ISSugarcssPluginUiListParams {
     lnf: 'dl' | 'ul' | 'ol' | 'icon';
-    scope: string[];
 }
 
 export { SSugarcssPluginUiListInterface as interface };
@@ -65,7 +58,6 @@ export default function ({
 }) {
     const finalParams: ISSugarcssPluginUiListParams = {
         lnf: 'dl',
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
@@ -76,8 +68,8 @@ export default function ({
         bulletSelector = '& > i:first-child';
     }
 
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
+    vars.push(`@s.scope 'bare' {`);
+    vars.push(`
         position: relative;
         font-size: s.font.size(30);
 
@@ -91,10 +83,10 @@ export default function ({
             line-height: 1.8;
         }
         `);
-    }
+    vars.push('}');
 
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
+    vars.push(`@s.scope 'lnf' {`);
+    vars.push(`
             & > * {
                 color: s.color(main, text, --alpha 0.7);
 
@@ -122,9 +114,9 @@ export default function ({
 
         `);
 
-        switch (finalParams.lnf) {
-            case 'ol':
-                vars.push(`
+    switch (finalParams.lnf) {
+        case 'ol':
+            vars.push(`
                     & > * {
                         counter-increment: s-ol-list;
 
@@ -135,9 +127,9 @@ export default function ({
                         }
                     }
                     `);
-                break;
-            case 'icon':
-                vars.push(`
+            break;
+        case 'icon':
+            vars.push(`
                     & > * {
                         padding-inline-start: 1.5em;
                         &:before {
@@ -151,9 +143,9 @@ export default function ({
                     }
 
                 `);
-                break;
-            case 'ul':
-                vars.push(`
+            break;
+        case 'ul':
+            vars.push(`
                     & > * {
                         ${bulletSelector} {
                             content: "${__STheme.current.get(
@@ -164,15 +156,15 @@ export default function ({
                         }
                     }
                 `);
-                break;
-            case 'dl':
-                vars.push(`
+            break;
+        case 'dl':
+            vars.push(`
                     & > * {
                     }
                     `);
-                break;
-        }
+            break;
     }
+    vars.push('}');
 
     return vars;
 }

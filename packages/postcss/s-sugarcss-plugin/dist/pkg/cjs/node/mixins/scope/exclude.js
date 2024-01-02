@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
-class SSugarcssPluginScopeExcludeMixinInterface extends s_interface_1.default {
+class SSugarcssPluginScopEexcludeMixinInterface extends s_interface_1.default {
     static get _definition() {
         return {
             scope: {
@@ -13,13 +13,13 @@ class SSugarcssPluginScopeExcludeMixinInterface extends s_interface_1.default {
                     type: 'String[]',
                     splitChars: [',', ' '],
                 },
-                description: "Specify the scope(s) you don't want to generate for the enclosed mixins calls",
+                description: "Specify the scope(s) you don't want to generate for the enclosed css",
                 required: true,
             },
         };
     }
 }
-exports.interface = SSugarcssPluginScopeExcludeMixinInterface;
+exports.interface = SSugarcssPluginScopEexcludeMixinInterface;
 /**
  * @name           exclude
  * @as              @s.scope
@@ -28,7 +28,7 @@ exports.interface = SSugarcssPluginScopeExcludeMixinInterface;
  * @platform      postcss
  * @status        beta
  *
- * This mixin allows you to set the "scope(s)" you dont't want to all the called mixins that have a "$scope" parameter like `@s.ui.button`, `@s.ui.avatar`, etc...
+ * This mixin allows you to set the "scope(s)" you don't want to all the enclosed css
  *
  * @return      {Css}         The generated css
  *
@@ -46,23 +46,10 @@ exports.interface = SSugarcssPluginScopeExcludeMixinInterface;
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function default_1({ params, atRule, registerPostProcessor, replaceWith, }) {
+function default_1({ params, atRule, registerPostProcessor, replaceWith, sharedData, }) {
+    var _a;
     const finalParams = Object.assign({ scope: [] }, (params !== null && params !== void 0 ? params : {}));
-    registerPostProcessor((root) => {
-        root.walkAtRules(/sugar\.scope/, (at) => {
-            at.replaceWith(at.nodes);
-        });
-    });
-    atRule.walkAtRules((n) => {
-        // console.log('d', n.name);
-        if (n.type !== 'atrule' || !n.name.startsWith('sugar.')) {
-            return;
-        }
-        // save the unwanted scope(s) inside the atRule.
-        // this will be handled by the SSugarcssPlugin main file
-        // to compute the final "scope" param to pass
-        n._scopeExclude = finalParams.scope;
-    });
+    atRule._scopeExclude = (_a = atRule._scopeExclude) !== null && _a !== void 0 ? _a : finalParams.scope;
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRCxNQUFNLHlDQUEwQyxTQUFRLHFCQUFZO0lBQ2hFLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFO29CQUNGLElBQUksRUFBRSxVQUFVO29CQUNoQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDO2lCQUN6QjtnQkFDRCxXQUFXLEVBQ1AsK0VBQStFO2dCQUNuRixRQUFRLEVBQUUsSUFBSTthQUNqQjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFDcUQsOERBQVM7QUFNL0Q7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F5Qkc7QUFDSCxtQkFBeUIsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixxQkFBcUIsRUFDckIsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLEdBQUcsZ0JBQ2hCLEtBQUssRUFBRSxFQUFFLElBQ04sQ0FBQyxNQUFNLGFBQU4sTUFBTSxjQUFOLE1BQU0sR0FBSSxFQUFFLENBQUMsQ0FDcEIsQ0FBQztJQUVGLHFCQUFxQixDQUFDLENBQUMsSUFBSSxFQUFFLEVBQUU7UUFDM0IsSUFBSSxDQUFDLFdBQVcsQ0FBQyxjQUFjLEVBQUUsQ0FBQyxFQUFFLEVBQUUsRUFBRTtZQUNwQyxFQUFFLENBQUMsV0FBVyxDQUFDLEVBQUUsQ0FBQyxLQUFLLENBQUMsQ0FBQztRQUM3QixDQUFDLENBQUMsQ0FBQztJQUNQLENBQUMsQ0FBQyxDQUFDO0lBRUgsTUFBTSxDQUFDLFdBQVcsQ0FBQyxDQUFDLENBQUMsRUFBRSxFQUFFO1FBQ3JCLDRCQUE0QjtRQUM1QixJQUFJLENBQUMsQ0FBQyxJQUFJLEtBQUssUUFBUSxJQUFJLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsUUFBUSxDQUFDLEVBQUU7WUFDckQsT0FBTztTQUNWO1FBQ0QsZ0RBQWdEO1FBQ2hELHdEQUF3RDtRQUN4RCw2Q0FBNkM7UUFDN0MsQ0FBQyxDQUFDLGFBQWEsR0FBRyxXQUFXLENBQUMsS0FBSyxDQUFDO0lBQ3hDLENBQUMsQ0FBQyxDQUFDO0FBQ1AsQ0FBQztBQWhDRCw0QkFnQ0MifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRCxNQUFNLHlDQUEwQyxTQUFRLHFCQUFZO0lBQ2hFLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFO29CQUNGLElBQUksRUFBRSxVQUFVO29CQUNoQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDO2lCQUN6QjtnQkFDRCxXQUFXLEVBQ1Asc0VBQXNFO2dCQUMxRSxRQUFRLEVBQUUsSUFBSTthQUNqQjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFDcUQsOERBQVM7QUFNL0Q7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F5Qkc7QUFDSCxtQkFBeUIsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixxQkFBcUIsRUFDckIsV0FBVyxFQUNYLFVBQVUsR0FPYjs7SUFDRyxNQUFNLFdBQVcsR0FBRyxnQkFDaEIsS0FBSyxFQUFFLEVBQUUsSUFDTixDQUFDLE1BQU0sYUFBTixNQUFNLGNBQU4sTUFBTSxHQUFJLEVBQUUsQ0FBQyxDQUNwQixDQUFDO0lBRUYsTUFBTSxDQUFDLGFBQWEsR0FBRyxNQUFBLE1BQU0sQ0FBQyxhQUFhLG1DQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUM7QUFDckUsQ0FBQztBQW5CRCw0QkFtQkMifQ==

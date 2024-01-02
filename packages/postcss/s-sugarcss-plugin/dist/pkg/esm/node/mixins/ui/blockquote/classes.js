@@ -11,8 +11,10 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Generate the blockquote classes
  *
- * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.blockquote.classes
  *
@@ -24,16 +26,7 @@ import __STheme from '@coffeekraken/s-theme';
  */
 class SSugarcssPluginUiBlockquoteClassesInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'vr', 'tf'],
-                default: ['bare', 'lnf', 'vr', 'tf'],
-            },
-        };
+        return {};
     }
 }
 export { SSugarcssPluginUiBlockquoteClassesInterface as interface };
@@ -124,108 +117,42 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
-    `);
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(() => `/**
-        * @name           s-blockquote
-        * @namespace          sugar.style.ui.blockquote
-        * @type           CssClass
-        * 
-        * This class represent a <span class="s-tc:accent">bare</span> blockquote
-        * 
-        * @example        html
-        * <blockquote class="s-blockquote">
-        *   <p>Hello world</p>
-        * </blockquote>
-        * 
-        * @since      2.0.0
-        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-      */
-     `).code(`
-        .s-blockquote {
-            @s.ui.blockquote($scope: bare);
+    `).code(`
+            @s.scope 'bare' {
+                .s-blockquote {
+                    @s.ui.blockquote;
+                }
+            }
+    `, {
+        type: 'CssClass',
+    });
+    vars.code(`
+        @s.scope 'lnf' {
+            .s-blockquote {
+                @s.scope.only 'lnf' {
+                    @s.ui.blockquote;
+                }
+            }
         }`, { type: 'CssClass' });
-    }
-    vars.comment(() => `/**
-    * @name           s-blockquote
-    * @namespace          sugar.style.ui.blockquote
-    * @type           CssClass
-    * 
-    * This class represent a blockquote
-    * 
-    * @example        html
-    * <blockquote class="s-blockquote">
-    *   <p>Hello world</p>
-    * </blockquote>
-    * 
-    * @since      2.0.0
-    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-*/
-`).code(`
-    .s-blockquote:not(.s-bare) {
-        @s.ui.blockquote($scope: lnf);
-    } `, { type: 'CssClass' });
-    if (finalParams.scope.indexOf('tf') !== -1) {
-        vars.comment(() => `/**
-            * @name           s-format:text bloquote
-            * @namespace          sugar.style.ui.blockquote
-            * @type           CssClass
-            * 
-            * This class represent a simple blockquote tag in the s-format:text scope
-            * 
-            * @example        html
-            * <div class="s-format:text">
-            *   <blockquote>
-            *       <p>Hello world</p>
-            *   </blockquote>
-            * </div>
-            * 
-            * @since      2.0.0
-            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */
-       `).code(`
-            @s.format.text {
-                blockquote {
-                    @s.color(accent);
-                    @s.ui.blockquote($scope: '${finalParams.scope.join(',')}');
-                } 
+    vars.code(`
+            @s.scope 'tf' {
+                @s.format.text {
+                    blockquote {
+                        @s.color(accent);
+                        @s.ui.blockquote;
+                    } 
+                }
             }
         `, { type: 'CssClass' });
-    }
-    if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.comment(() => `/**
-            * @name           s-rhythm:vertical
-            * @namespace          sugar.style.ui.blockquote
-            * @type           CssClass
-            * 
-            * This class represent some blockquotes in the s-rhythm:vertical scope
-            * 
-            * @feature      Vertical rhythm
-            * 
-            * @example        html
-            * <div class="s-rhythm:vertical">
-            *   <blockquote class="s-blockquote">
-            *       <p>Hello world</p>
-            *   </blockquote>
-            *   <blockquote class="s-blockquote">
-            *       <p>Hello world</p>
-            *   </blockquote>
-            *   <blockquote class="s-blockquote">
-            *       <p>Hello world</p>
-            *   </blockquote>
-            * </div>
-            * 
-            * @since      2.0.0
-            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */
-       `).code(`
-            @s.rhythm.vertical {
-                blockquote, .s-blockquote {
-                    ${__STheme.current.jsObjectToCssProperties(__STheme.current.get('ui.default.rhythmVertical'))}
-                } 
+    vars.code(`
+            @s.scope 'vr' {
+                @s.rhythm.vertical {
+                    blockquote, .s-blockquote {
+                        ${__STheme.current.jsObjectToCssProperties(__STheme.current.get('ui.default.rhythmVertical'))}
+                    } 
+                }
             }
         `, { type: 'CssClass' });
-    }
     return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FxQkc7QUFFSCxNQUFNLDJDQUE0QyxTQUFRLFlBQVk7SUFDbEUsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUU7b0JBQ0YsSUFBSSxFQUFFLGVBQWU7b0JBQ3JCLFVBQVUsRUFBRSxDQUFDLEdBQUcsRUFBRSxHQUFHLENBQUM7aUJBQ3pCO2dCQUNELE1BQU0sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLEVBQUUsSUFBSSxFQUFFLElBQUksQ0FBQztnQkFDbkMsT0FBTyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxJQUFJLEVBQUUsSUFBSSxDQUFDO2FBQ3ZDO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQU1ELE9BQU8sRUFBRSwyQ0FBMkMsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUVwRSxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sT0FBTyxFQUNQLFdBQVcsR0FNZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixLQUFLLEVBQUUsRUFBRSxJQUNOLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQUcsSUFBSSxPQUFPLEVBQUUsQ0FBQztJQUUzQixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7S0FvRlQsQ0FDQSxDQUFDO0lBRUYsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxNQUFNLENBQUMsRUFBRTtRQUNwQyxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7TUFlWixDQUNHLENBQUMsSUFBSSxDQUNGOzs7VUFHRixFQUNFLEVBQUUsSUFBSSxFQUFFLFVBQVUsRUFBRSxDQUN2QixDQUFDO0tBQ0w7SUFFRCxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Q0FlYixDQUNJLENBQUMsSUFBSSxDQUNGOzs7T0FHRCxFQUNDLEVBQUUsSUFBSSxFQUFFLFVBQVUsRUFBRSxDQUN2QixDQUFDO0lBRUYsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUN4QyxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7OztRQWlCVixDQUNDLENBQUMsSUFBSSxDQUNGOzs7O2dEQUlvQyxXQUFXLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUM7OztTQUdsRSxFQUNHLEVBQUUsSUFBSSxFQUFFLFVBQVUsRUFBRSxDQUN2QixDQUFDO0tBQ0w7SUFFRCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQ3hDLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7UUF5QlYsQ0FDQyxDQUFDLElBQUksQ0FDRjs7O3NCQUdVLFFBQVEsQ0FBQyxPQUFPLENBQUMsdUJBQXVCLENBQ3RDLFFBQVEsQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDLDJCQUEyQixDQUFDLENBQ3BEOzs7U0FHWixFQUNHLEVBQUUsSUFBSSxFQUFFLFVBQVUsRUFBRSxDQUN2QixDQUFDO0tBQ0w7SUFFRCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUVILE1BQU0sMkNBQTRDLFNBQVEsWUFBWTtJQUNsRSxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPLEVBQUUsQ0FBQztJQUNkLENBQUM7Q0FDSjtBQUlELE9BQU8sRUFBRSwyQ0FBMkMsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUVwRSxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sT0FBTyxFQUNQLFdBQVcsR0FNZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixLQUFLLEVBQUUsRUFBRSxJQUNOLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQUcsSUFBSSxPQUFPLEVBQUUsQ0FBQztJQUUzQixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7S0FvRlQsQ0FDQSxDQUFDLElBQUksQ0FDRjs7Ozs7O0tBTUgsRUFDRztRQUNJLElBQUksRUFBRSxVQUFVO0tBQ25CLENBQ0osQ0FBQztJQUVGLElBQUksQ0FBQyxJQUFJLENBQ0w7Ozs7Ozs7VUFPRSxFQUNGLEVBQUUsSUFBSSxFQUFFLFVBQVUsRUFBRSxDQUN2QixDQUFDO0lBRUYsSUFBSSxDQUFDLElBQUksQ0FDTDs7Ozs7Ozs7O1NBU0MsRUFDRCxFQUFFLElBQUksRUFBRSxVQUFVLEVBQUUsQ0FDdkIsQ0FBQztJQUVGLElBQUksQ0FBQyxJQUFJLENBQ0w7Ozs7MEJBSWtCLFFBQVEsQ0FBQyxPQUFPLENBQUMsdUJBQXVCLENBQ3RDLFFBQVEsQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDLDJCQUEyQixDQUFDLENBQ3BEOzs7O1NBSWhCLEVBQ0QsRUFBRSxJQUFJLEVBQUUsVUFBVSxFQUFFLENBQ3ZCLENBQUM7SUFFRixPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDIn0=

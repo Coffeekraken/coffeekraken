@@ -2,22 +2,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class postcssUiHotkeysListClassesInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
-        };
+        return {};
     }
 }
 
-export interface IPostcssUiHotkeysListClassesParams {
-    scope: ('bare' | 'lnf')[];
-}
+export interface IPostcssUiHotkeysListClassesParams {}
 
 export { postcssUiHotkeysListClassesInterface as interface };
 
@@ -29,6 +18,9 @@ export { postcssUiHotkeysListClassesInterface as interface };
  * @status              beta
  *
  * This mixin represent the hotkeys list
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet      @s.ui.hotkeysList.classes($1);
  *
@@ -51,28 +43,29 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiHotkeysListClassesParams = {
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars = new CssVars();
 
-    if (finalParams.scope.includes('bare')) {
-        vars.code(
-            `
+    vars.code(`@s.scope 'bare' {`);
+    vars.code(
+        `
         .s-hotkeys-list {
-            @s.ui.hotkeysList($scope: bare);
+            @s.scope.only 'bare' {
+                @s.ui.hotkeysList;
+            }
         }
     `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.includes('lnf')) {
-        vars.comment(
-            `/**
+    vars.code(`@s.scope 'lnf' {`);
+    vars.comment(
+        `/**
             * @name          .s-hotkeys-list[lnf="default"]
             * @namespace          sugar.style.ui.hotkeysList
             * @type           CssClass
@@ -85,16 +78,18 @@ export default function ({
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
-        ).code(
-            `
-            .s-hotkeys-list[lnf="default"]:not(.s-bare) {
-                @s.ui.hotkeysList($scope: lnf);
+    ).code(
+        `
+            .s-hotkeys-list[lnf="default"] {
+                @s.scope.only 'lnf' {
+                    @s.ui.hotkeysList;
+                }
             }`,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
     return vars;
 }

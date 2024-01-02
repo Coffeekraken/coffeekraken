@@ -12,8 +12,10 @@ import __faker from 'faker';
  *
  * Generate the tabs classes
  *
- * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet     @s.ui.tabs.classes
  *
@@ -26,22 +28,11 @@ import __faker from 'faker';
 
 class SSugarcssPluginUiListClassesInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
-        };
+        return {};
     }
 }
 
-export interface ISSugarcssPluginUiListClassesParams {
-    scope: ('bare' | 'lnf')[];
-}
+export interface ISSugarcssPluginUiListClassesParams {}
 
 export { SSugarcssPluginUiListClassesInterface as interface };
 
@@ -57,7 +48,6 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: ISSugarcssPluginUiListClassesParams = {
-        scope: [],
         ...params,
     };
 
@@ -158,9 +148,9 @@ export default function ({
     `,
     );
 
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(
-            () => `
+    vars.code(`@s.scope 'bare' {`);
+    vars.comment(
+        () => `
             /**
               * @name           s-tabs
               * @namespace          sugar.style.ui.tabs
@@ -175,19 +165,21 @@ export default function ({
               * </div>
             */
            `,
-        ).code(
-            `
+    ).code(
+        `
           .s-tabs {
-            @s.ui.tabs($scope: bare);
+            @s.scope.only 'bare' {
+              @s.ui.tabs;
+            }
           }
           `,
-            { type: 'CssClass' },
-        );
-    }
+        { type: 'CssClass' },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.includes('lnf')) {
-        vars.comment(
-            () => `/**
+    vars.code(`@s.scope 'lnf' {`);
+    vars.comment(
+        () => `/**
               * @name           s-tabs
               * @namespace          sugar.style.ui.tabs
               * @type           CssClass
@@ -201,15 +193,19 @@ export default function ({
               * </div>
             */
            `,
-        ).code(
-            `
-          .s-tabs:not(.s-bare) {
-            @s.ui.tabs($scope: lnf);
+    ).code(
+        `
+          .s-tabs {
+            @s.scope.only 'lnf' {
+              @s.ui.tabs;
+            }
           }
         `,
-            { type: 'CssClass' },
-        );
-    }
+        { type: 'CssClass' },
+    );
+    vars.code('}');
+
+    vars.code(`@s.scope 'bare' {`);
 
     vars.comment(
         () => `/**
@@ -229,7 +225,11 @@ export default function ({
     ).code(
         `
     .s-tabs-grow {
-      @s.ui.tabs($grow: true, $scope: grow);
+        display: flex;
+              
+        & > * {
+          flex-grow: 1;
+        }
     }
   `,
         { type: 'CssClass' },
@@ -253,7 +253,7 @@ export default function ({
     ).code(
         `
     .s-tabs-fill {
-      @s.ui.tabs($fill: true, $scope: fill);
+      background: s.color(current, surface);
     }
   `,
         { type: 'CssClass' },
@@ -277,11 +277,32 @@ export default function ({
     ).code(
         `
     .s-tabs-vertical {
-      @s.ui.tabs($direction: vertical, $scope: 'direction');
+        display: block;
+
+        & > * {
+          display: block;
+          text-align: inherit;
+        }
+
+        & > *:first-child,
+        & > template + * {
+          border-top-left-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius)) !important;
+          border-bottom-left-radius: 0 !important;
+          border-top-right-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius)) !important;
+          border-bottom-right-radius: 0 !important;
+        }
+        & > *:last-child {
+          border-top-left-radius: 0 !important;
+          border-bottom-left-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius)) !important;
+          border-top-right-radius: 0 !important;
+          border-bottom-right-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius)) !important;
+        }
     }
   `,
         { type: 'CssClass' },
     );
+
+    vars.code('}');
 
     return vars;
 }

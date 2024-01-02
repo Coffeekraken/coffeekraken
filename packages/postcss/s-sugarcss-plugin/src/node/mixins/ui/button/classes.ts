@@ -14,8 +14,12 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @param       {('solid'|'outline'|'text'|'loading')[]}                           [lnfs=['solid','outline','text','loading']]         The style(s) you want to generate
  * @param       {'solid'|'outline'|'text'|'loading'}                [defaultLnf='theme.ui.button.defaultLnf']           The default style you want
- * @param       {('bare'|'lnf'|'vr'|'tf)[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
+ * @scope       vr              Vertical rhythm css
+ * @scope       tf              Text format css
  *
  * @snippet         @s.ui.button.classes
  *
@@ -40,14 +44,6 @@ class SSugarcssPluginUiButtonClassesInterface extends __SInterface {
                 default:
                     __STheme.current.get('ui.button.defaultLnf') ?? 'solid',
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'vr', 'tf'],
-                default: ['bare', 'lnf', 'vr', 'tf'],
-            },
         };
     }
 }
@@ -55,7 +51,6 @@ class SSugarcssPluginUiButtonClassesInterface extends __SInterface {
 export interface ISSugarcssPluginUiButtonClassesParams {
     lnfs: ('solid' | 'outline' | 'text' | 'loading')[];
     defaultLnf: 'solid' | 'outline' | 'text' | 'loading';
-    scope: ('bare' | 'lnf' | 'bare' | 'vr' | 'tf')[];
 }
 
 export { SSugarcssPluginUiButtonClassesInterface as interface };
@@ -76,7 +71,6 @@ export default function ({
     const finalParams: ISSugarcssPluginUiButtonClassesParams = {
         lnfs: ['solid', 'outline', 'text', 'loading'],
         defaultLnf: 'solid',
-        scope: ['bare', 'lnf', 'vr', 'tf'],
         ...params,
     };
 
@@ -168,100 +162,86 @@ export default function ({
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
-    );
-
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(
-            () => `/**
-            * @name           s-btn
-            * @namespace          sugar.style.ui.button
-            * @type           CssClass
-            * 
-            * This class represent a(n) "<s-color="accent">bare</s-color>" button
-            * 
-            * @example        html
-            * <a class="s-btn">I'm a cool button</a>
-            * 
-            * @since    2.0.0
-            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */
-       `,
-        ).code(
-            `
-        .s-btn {
-            @s.ui.button($scope: bare);
-        }`,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
-
-    if (finalParams.scope.includes('lnf')) {
-        finalParams.lnfs.forEach((lnf) => {
-            let cls = `s-btn`;
-            if (lnf !== finalParams.defaultLnf) {
-                cls += `-${lnf}`;
-            }
-
-            vars.comment(
-                () => `/**
-            * @name           ${cls}
-            * @namespace          sugar.style.ui.button
-            * @type           CssClass
-            * 
-            * This class represent a(n) "<s-color="accent">${lnf}</s-color>" button
-            * 
-            * @example        html
-            * <a class="${cls
-                .replace(/\./gm, ' ')
-                .trim()}">I'm a cool button</a>
-            * 
-            * @since    2.0.0
-            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */
-       `,
-            ).code(
-                `
-        .${cls}:not(.s-bare) {
-            @s.ui.button($lnf: ${lnf}, $scope: lnf);
-        }`,
-                {
-                    type: 'CssClass',
-                },
-            );
-        });
-    }
-
-    vars.comment(
-        () => `/**
-        * @name           s-btn-block
-        * @namespace          sugar.style.ui.button
-        * @type           CssClass
-        * 
-        * This class represent a(n) "<s-color="accent">block</s-color>" button
-        * 
-        * @example        html
-        * <a class="s-btn-block">I'm a cool block button</a>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-      */`,
     ).code(
         `
-      .s-btn-block {
-        display: block !important;
-        width: 100%;
-      }
+        @s.scope 'bare' {
+            .s-btn {
+                @s.scope.only 'bare' {
+                    @s.ui.button;
+                }
+            }
+        }
     `,
         {
             type: 'CssClass',
         },
     );
 
-    if (finalParams.scope.indexOf('tf') !== -1) {
+    vars.code(`@s.scope 'bare' {`);
+    vars.comment(
+        () => `/**
+            * @name           s-btn-block
+            * @namespace          sugar.style.ui.button
+            * @type           CssClass
+            * 
+            * This class represent a(n) "<s-color="accent">block</s-color>" button
+            * 
+            * @example        html
+            * <a class="s-btn-block">I'm a cool block button</a>
+            * 
+            * @since    2.0.0
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+        */`,
+    ).code(
+        `
+        .s-btn-block {
+            display: block !important;
+            width: 100%;
+        }
+        `,
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code(`}`);
+
+    vars.code(`@s.scope 'lnf' {`);
+    finalParams.lnfs.forEach((lnf) => {
+        let cls = `s-btn`;
+        if (lnf !== finalParams.defaultLnf) {
+            cls += `-${lnf}`;
+        }
+
         vars.comment(
             () => `/**
+        * @name           ${cls}
+        * @namespace          sugar.style.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<s-color="accent">${lnf}</s-color>" button
+        * 
+        * @example        html
+        * <a class="${cls.replace(/\./gm, ' ').trim()}">I'm a cool button</a>
+        * 
+        * @since    2.0.0
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+    */
+    `,
+        ).code(
+            `
+                .${cls} {
+                    @s.ui.button($lnf: ${lnf});
+                }`,
+            {
+                type: 'CssClass',
+            },
+        );
+    });
+    vars.code('}');
+
+    vars.code(`@s.scope 'tf' {`);
+    vars.comment(
+        () => `/**
             * @name           s-format:text button
             * @namespace          sugar.style.ui.button
             * @type           CssClass
@@ -279,23 +259,23 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(
-            `
+    ).code(
+        `
             @s.format.text {
                 button {
-                    @s.ui.button($scope: '${finalParams.scope.join(',')}');
+                    @s.ui.button;
                 } 
             }
         `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.comment(
-            () => `/**
+    vars.code(`@s.scope 'vr' {`);
+    vars.comment(
+        () => `/**
             * @name           s-rhythm:vertical
             * @namespace          sugar.style.ui.button
             * @type           CssClass
@@ -321,21 +301,21 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(
-            `
-            @s.rhythm.vertical {
-                button, .s-btn {
-                    ${__STheme.current.jsObjectToCssProperties(
-                        __STheme.current.get('ui.button.rhythmVertical'),
-                    )}
-                } 
-            }
+    ).code(
+        `
+                @s.rhythm.vertical {
+                    button, .s-btn {
+                        ${__STheme.current.jsObjectToCssProperties(
+                            __STheme.current.get('ui.button.rhythmVertical'),
+                        )}
+                    } 
+                }
         `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
     return vars;
 }

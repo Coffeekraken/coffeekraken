@@ -2,22 +2,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class postcssUiSpecsEditorInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
-        };
+        return {};
     }
 }
 
-export interface IPostcssUiSpecsEditorParams {
-    scope: ('bare' | 'lnf')[];
-}
+export interface IPostcssUiSpecsEditorParams {}
 
 export { postcssUiSpecsEditorInterface as interface };
 
@@ -30,6 +19,10 @@ export { postcssUiSpecsEditorInterface as interface };
  * @private
  *
  * Apply the slider style to any s-slider element
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
+ * @scope       behavior        Behavior css
  *
  * @snippet         @s.ui.specsEditor($1);
  *
@@ -54,23 +47,16 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiSpecsEditorParams = {
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars: string[] = [];
 
     // bare
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
-    
-
-    `);
-    }
 
     // lnf
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
+    vars.push(`@s.scope 'lnf' {`);
+    vars.push(`
 
         .s-specs-editor_child {
             border-left: s.margin(10) solid s.color(complementary, --alpha 0.5);
@@ -727,7 +713,7 @@ export default function ({
 
 
         `);
-    }
+    vars.push('}');
 
     return vars;
 }

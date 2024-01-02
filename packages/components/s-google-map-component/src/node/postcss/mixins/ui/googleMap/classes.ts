@@ -3,22 +3,11 @@ import __STheme from '@coffeekraken/s-theme';
 
 class postcssUiGoogleMapClassesInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'vr'],
-                default: ['bare', 'lnf', 'vr'],
-            },
-        };
+        return {};
     }
 }
 
-export interface IPostcssUiGoogleMapClassesParams {
-    scope: ('bare' | 'lnf' | 'vr')[];
-}
+export interface IPostcssUiGoogleMapClassesParams {}
 
 export { postcssUiGoogleMapClassesInterface as interface };
 
@@ -52,28 +41,30 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiGoogleMapClassesParams = {
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars = new CssVars();
 
-    if (finalParams.scope.includes('bare')) {
-        vars.code(
-            `
+    vars.code(`@s.scope 'bare' {`);
+
+    vars.code(
+        `
         .s-google-map {
-            @s.ui.googleMap($scope: bare);
+            @@s.scope.only 'bare' {
+                @s.ui.googleMap;
+            }
         }
     `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.includes('lnf')) {
-        vars.comment(
-            `/**
+    vars.code(`@s.scope 'lnf' {`);
+    vars.comment(
+        `/**
             * @name          .s-google-map[lnf="default"]
             * @namespace          sugar.style.ui.googleMap
             * @type           CssClass
@@ -86,20 +77,22 @@ export default function ({
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
-        ).code(
-            `
-            .s-google-map[lnf="default"]:not(.s-bare) {
-                @s.ui.googleMap($scope: lnf);
+    ).code(
+        `
+            .s-google-map[lnf="default"] {
+                @s.scope.only 'lnf' {
+                    @s.ui.googleMap;
+                }
             }`,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
-    if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.comment(
-            `/**
+    vars.code(`@s.scope 'vr' {`);
+    vars.comment(
+        `/**
             * @name           s-rhythm:vertical
             * @namespace          sugar.style.ui.googleMap
             * @type           CssClass
@@ -116,20 +109,20 @@ export default function ({
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
-        ).code(
-            `@s.rhythm.vertical {
-                .s-google-map {
-                    ${__STheme.current.jsObjectToCssProperties(
-                        __STheme.current.get('ui.googleMap.rhythmVertical'),
-                    )}
-                } 
-            }
+    ).code(
+        `@s.rhythm.vertical {
+            .s-google-map {
+                ${__STheme.current.jsObjectToCssProperties(
+                    __STheme.current.get('ui.googleMap.rhythmVertical'),
+                )}
+            } 
+        }
         `,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
+    vars.code('}');
 
     return vars;
 }

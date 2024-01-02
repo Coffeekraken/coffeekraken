@@ -11,8 +11,10 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * Apply the table style to any element
  *
- * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet         @s.ui.table
  *
@@ -27,22 +29,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class SSugarcssPluginUiTableInterface extends __SInterface {
     static get _definition() {
-        return {
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
-        };
+        return {};
     }
 }
 
-export interface ISSugarcssPluginUiTableParams {
-    scope: ('bare' | 'lnf')[];
-}
+export interface ISSugarcssPluginUiTableParams {}
 
 export { SSugarcssPluginUiTableInterface as interface };
 
@@ -56,14 +47,13 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: ISSugarcssPluginUiTableParams = {
-        scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars: string[] = [];
 
-    if (finalParams.scope.includes('bare')) {
-        vars.push(`
+    vars.push(`@s.scope 'bare' {`);
+    vars.push(`
     width: 100%;
     font-size: s.scalable(1rem);
     table-layout: fixed;
@@ -87,10 +77,10 @@ export default function ({
     }
 
   `);
-    }
+    vars.push('}');
 
-    if (finalParams.scope.includes('lnf')) {
-        vars.push(`
+    vars.push(`@s.scope 'lnf' {`);
+    vars.push(`
             @s.depth(ui.table.depth);
             position: relative;
             box-shadow: 0 0 0 s.border.width(ui.table.borderWidth) s.color(current, border);
@@ -108,7 +98,7 @@ export default function ({
             
             }
         `);
-    }
+    vars.push('}');
 
     return vars;
 }

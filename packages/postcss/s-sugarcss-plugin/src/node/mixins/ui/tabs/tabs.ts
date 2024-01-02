@@ -15,8 +15,10 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {Boolean}           [grow=false]                  Specify if you want your tabs to grow and take all the available place or not
  * @param       {'vertical'|'horizontal'}       [direction='horizontal']                Specify if you want your tabs to be vertical or horizontal
  * @param       {Boolean}           [outline=true]                      Specify if you want your tabs to have an outline on focus or not
- * @param       {('bare'|'lnf'|'shape')[]}      [scope=['bare','lnf','shape']]                      The scope(s) you want to generate
  * @return      {String}            The generated css
+ *
+ * @scope       bare            Structural css
+ * @scope       lnf             Look and feel css
  *
  * @snippet     @s.ui.tabs
  *
@@ -56,15 +58,6 @@ class SSugarcssPluginUiTabInterface extends __SInterface {
                     'Specify if you want your tabs to have an outline on focus',
                 default: __STheme.current.get('ui.tabs.outline'),
             },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                description: 'Specify the scope(s) you want to generate',
-                values: ['bare', 'lnf', 'grow', 'fill', 'direction'],
-                default: ['bare', 'lnf', 'grow', 'fill', 'direction'],
-            },
         };
     }
 }
@@ -74,7 +67,6 @@ export interface ISSugarcssPluginUiTabParams {
     fill: boolean;
     direction: 'horizontal' | 'vertical';
     outline: boolean;
-    scope: ('bare' | 'lnf' | 'grow' | 'fill' | 'direction')[];
 }
 
 export { SSugarcssPluginUiTabInterface as interface };
@@ -93,7 +85,6 @@ export default function ({
         fill: false,
         direction: 'horizontal',
         outline: true,
-        scope: ['bare', 'lnf', 'grow', 'fill', 'direction'],
         ...params,
     };
 
@@ -107,8 +98,9 @@ export default function ({
       `);
     }
 
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
+    vars.push(`@s.scope 'bare' {`);
+
+    vars.push(`
         font-size: s.scalable(1rem);
         display: inline-flex;
         align-items: center;
@@ -118,38 +110,28 @@ export default function ({
           display: none;
         }
     `);
+
+    if (finalParams.grow) {
+        vars.push(`
+          display: flex;
+                
+          & > * {
+            flex-grow: 1;
+          }
+        `);
     }
 
-    if (finalParams.grow && finalParams.scope.indexOf('grow') !== -1) {
+    vars.push('}');
+
+    vars.push(`@s.scope 'lnf' {`);
+
+    if (finalParams.fill) {
         vars.push(`
-      ${
-          finalParams.grow && finalParams.scope.indexOf('grow') !== -1
-              ? `
-              display: flex;
-              
-              & > * {
-                flex-grow: 1;
-              }
-      `
-              : ''
-      }
-    `);
+        background: s.color(current, surface);
+      `);
     }
 
-    if (finalParams.fill && finalParams.scope.indexOf('fill') !== -1) {
-        vars.push(`
-      ${
-          finalParams.fill && finalParams.scope.indexOf('fill') !== -1
-              ? `
-              background: s.color(current, surface);
-      `
-              : ''
-      }
-    `);
-    }
-
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
+    vars.push(`
           user-select: none;
 
           & > * {
@@ -161,10 +143,8 @@ export default function ({
             display: block;      
           }
       `);
-    }
 
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
+    vars.push(`
           & > * {
             @s.state.active {
               background-color: s.color(current);
@@ -183,7 +163,7 @@ export default function ({
           }
         `);
 
-        vars.push(`
+    vars.push(`
 
                 border-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius));
 
@@ -226,12 +206,12 @@ export default function ({
                   border-bottom-right-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius)) !important;
                 }
               `);
-    }
 
-    if (
-        finalParams.direction === 'vertical' &&
-        finalParams.scope.indexOf('direction') !== -1
-    ) {
+    vars.push('}');
+
+    vars.push(`@s.scope 'bare' {`);
+
+    if (finalParams.direction === 'vertical') {
         vars.push(`
           display: block;
 
@@ -241,24 +221,24 @@ export default function ({
           }
         `);
 
-        if (finalParams.direction === 'vertical') {
-            vars.push(`
-                  & > *:first-child,
-                  & > template + * {
-                    border-top-left-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius)) !important;
-                    border-bottom-left-radius: 0 !important;
-                    border-top-right-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius)) !important;
-                    border-bottom-right-radius: 0 !important;
-                  }
-                  & > *:last-child {
-                    border-top-left-radius: 0 !important;
-                    border-bottom-left-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius)) !important;
-                    border-top-right-radius: 0 !important;
-                    border-bottom-right-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius)) !important;
-                  }
-                `);
-        }
+        vars.push(`
+            & > *:first-child,
+            & > template + * {
+              border-top-left-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius)) !important;
+              border-bottom-left-radius: 0 !important;
+              border-top-right-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius)) !important;
+              border-bottom-right-radius: 0 !important;
+            }
+            & > *:last-child {
+              border-top-left-radius: 0 !important;
+              border-bottom-left-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius)) !important;
+              border-top-right-radius: 0 !important;
+              border-bottom-right-radius: var(--s-shape, s.border.radius(ui.tabs.borderRadius)) !important;
+            }
+        `);
     }
+
+    vars.push('}');
 
     return vars;
 }

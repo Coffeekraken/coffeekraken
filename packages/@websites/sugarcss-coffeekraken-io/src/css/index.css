@@ -13,6 +13,12 @@ body {
     @s.shape pill;
 }
 
+body {
+    @s.theme light {
+        background: s.color(main, --lighten 45);
+    }
+}
+
 body:not(#homepage) {
     .s-container:not(._nav .s-container, .s-panel .s-container) {
         margin: 0 0 0 s.margin(80) !important;

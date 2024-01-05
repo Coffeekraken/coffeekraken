@@ -1,4 +1,4 @@
-<section class="section section-features">
+{{-- <section class="section section-features">
 
     <div class="s-container">
         <div class="_cards">
@@ -37,4 +37,4 @@
         </div>
     </div>
 
-</section>
+</section> --}}

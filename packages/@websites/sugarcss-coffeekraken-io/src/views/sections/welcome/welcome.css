@@ -36,13 +36,17 @@
 }
 
 #homepage-welcome {
-    text-align: left;
+    text-align: center;
     position: relative;
     z-index: 10;
-    min-height: 1000px;
+    min-height: clamp(1000px, 100vh, 100vh);
 
     .s-logo-coffeekraken-picto {
         width: 100px;
+    }
+
+    @s.theme light {
+        color: s.color(main);
     }
 
     @s.media mobile {
@@ -54,18 +58,24 @@
         width: 100%;
     }
 
-    ._title  {
-        display: flex;
+    ._title {
+        display: inline-flex;
         gap: s.margin(30);
         align-items: end;
         margin-block-end: s.margin(40);
     }
 
+    ._ctas {
+        display: inline-flex;
+        gap: s.margin(30);
+    }
+
+    ._footer {
+        display: inline-block;
+    }
+
     .s-logo {
         height: 90px;
-        position: relative;
-        top: -10px;
-        margin-inline-start: -26px;
 
         [fill='black'] {
             fill: s.color(accent);
@@ -74,8 +84,8 @@
 
         @s.theme light {
             [fill='white'] {
-                fill: s.color(main, text);
-                stroke: s.color(main, text);
+                fill: s.color(main);
+                stroke: s.color(main);
             }
         }
 
@@ -94,145 +104,85 @@
         }
     }
 
+    ._install {
+    }
+    ._code {
+        display: inline-block;
+        background: s.color(main, background, --darken 1);
+        padding: s.padding(30) s.padding(40);
+        user-select: all;
+        @s.font.family (code);
+        @s.border.radius;
+    }
+
     ._illustration {
         position: absolute;
         top: 50%;
         left: 50%;
-        width: calc(900px);
-        aspect-ratio: 4/3;
-        transform: translateY(-50%) scale(1);
-        user-select: none;
-        pointer-events: none;
-        @s.transition;
+        transform: translate(-50%, -50%);
+        z-index: -1;
 
-        @s.media mobile {
-            display: none;
-        }
-
-        ._cup-bkg {
-            &.-light {
-            }
-            &.-dark {
-                display: none;
-            }
-            @s.theme dark {
-                &.-light {
-                    display: none;
-                }
-                &.-dark {
-                    display: inherit;
-                }
-            }
-        }
-
-        ._round {
-            width: 1em;
-            height: 1em;
-            border-radius: 0.5em;
-            background: s.color(current);
+        ._smoke {
             position: absolute;
-            /* mix-blend-mode: overlay; */
+            top: 40px;
+            left: 60px;
+            width: 200px;
+            transform: translate(0, -100%);
+            opacity: 0.15;
 
-            i {
-                font-size: 0.5em;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                opacity: 0.4;
-                color: s.color(current, --darken 40);
-                transform-origin: 0 0;
-                animation: welcome-round-icon 10s ease-in-out infinite;
+            @s.theme light {
+                filter: invert(100%);
+                opacity: 0.08;
             }
         }
 
-        ._round-1 {
-            @s.color (complementary);
-            @s.font.size (100);
-            top: 60%;
-            left: 34%;
+        svg {
+            position: relative;
+            height: 600px;
+            opacity: 0;
 
-            i {
-                animation-delay: 1.3s;
-            }
-        }
-
-        ._round-2 {
-            @s.color (complementary);
-            @s.font.size (60);
-            top: 65%;
-            left: 70%;
-        }
-
-        ._round-3 {
-            @s.color (accent);
-            @s.font.size (60);
-            top: 75%;
-            left: 47%;
-        }
-
-        ._round-4 {
-            @s.color (accent);
-            @s.font.size (80);
-            top: 43%;
-            left: 57%;
-
-            i {
-                animation-delay: 2s;
-            }
-        }
-
-        ._round-5 {
-            @s.color (accent);
-            @s.font.size (60);
-            top: 23%;
-            left: 47%;
-
-            i {
-                animation-delay: 2.5s;
-            }
-        }
-
-        ._round-6 {
-            @s.color (complementary);
-            @s.font.size (40);
-            top: 13%;
-            left: 57%;
-        }
-
-        ._cup {
-            position: absolute;
-            bottom: 50px;
-            left: 50%;
-            transform: translate(-50%, 0);
-
-            &.-light {
-            }
-            &.-dark {
-                display: none;
-            }
-            @s.theme dark {
-                &.-light {
-                    display: none;
+            &._main {
+                [fill] {
+                    fill: s.color(main, background);
                 }
-                &.-dark {
-                    display: inherit;
+                [stroke] {
+                    stroke: rgba(255, 255, 255, 1);
                 }
             }
         }
-        ._cup-smoke {
-            position: absolute;
-            width: 500px;
-            bottom: 250px;
-            left: calc(50% + 50px);
-            transform: translate(-50%, 0);
-            opacity: 0.2;
-            filter: invert(1);
 
-            @s.theme dark {
-                opacity: 0.3;
-                filter: none;
+        ._shadow {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            filter: blur(100px);
+            opacity: 0.3;
+
+            @s.theme light {
+                opacity: 0;
             }
+        }
+        ._shadow-1 {
+            top: 100px;
+            left: 0;
+            background: s.color(main);
+        }
+        ._shadow-2 {
+            top: 100px;
+            right: -100px;
+            background: s.color(complementary);
+            filter: blur(150px);
+        }
+        ._shadow-3 {
+            bottom: 200px;
+            right: 0;
+            background: s.color(main);
+        }
+        ._shadow-4 {
+            bottom: 200px;
+            left: 0;
+            background: s.color(accent);
+            filter: blur(150px);
         }
     }
 }

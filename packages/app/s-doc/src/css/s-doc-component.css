@@ -120,6 +120,10 @@ body:has(.s-doc-fullscreen) {
 
     &-fullscreen {
         background: s.color(main, background);
+
+        @s.theme light {
+            background: s.color(main, --lighten 45);
+        }
     }
 
     &_explorer {

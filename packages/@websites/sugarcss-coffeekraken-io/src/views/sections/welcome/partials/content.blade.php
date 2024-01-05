@@ -7,11 +7,15 @@
     </h1>
 </div>
 
-<h2 class="s-typo:h2:bold s-mbe:50 @mobile s-typo:h3">
+<h2 class="s-typo:h1:bold s-mbe:50 @mobile s-typo:h3">
     The frontend <span class="s-tc:complementary">CSS</span> <span class="s-tc:accent">toolkit</span><br />that make our days better...
 </h2>
 
-<div class="ctas">
+<div class="_install s-mbe:50">
+    <code class="_code">npm i @coffeekraken/sugarcss -D</code>
+</div>
+
+<div class="_ctas">
     <a class="s-btn s-color:accent" href="#get-started" title="Coffeekraken get started!">
         <i class="s-icon:fire"></i>
         Get started!
@@ -24,7 +28,9 @@
     </a>
 </div>
 
-<p class="s-typo:p s-mbs:50 @dwarf hide">
+<div></div>
+
+<p class="_footer s-typo:p s-mbs:50">
     Version: <span class="s-tc:{{ str_contains($frontspec->package->version, 'alpha') ? 'error' : 'accent' }}">{{ $frontspec->package->version }}</span> - License <a class="s-tc:accent"
         href="https://opensource.org/licenses/MIT" title="Fully open source" target="_blank">{{ $frontspec->package->license }}</a>
     <br />Fully open source

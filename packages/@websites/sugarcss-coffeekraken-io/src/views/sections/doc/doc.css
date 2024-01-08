@@ -1,0 +1,92 @@
+.section#doc {
+    display: block;
+    min-height: 0;
+}
+
+.doc {
+    @s.layout ('1 2 2 2');
+
+    &_categories {
+        ._category {
+            position: relative;
+            cursor: pointer;
+
+            ._expandable {
+                display: grid;
+                grid-template-rows: 0fr;
+                @s.transition fast;
+
+                > ._expandable-inner {
+                    overflow: hidden;
+                }
+            }
+
+            &.active ._expandable {
+                grid-template-rows: 1fr;
+            }
+
+            > ._category-link {
+                display: block;
+                padding: s.padding(30) s.padding(40) !important;
+                @s.transition fast;
+                @s.shape;
+
+                > i {
+                    margin-inline-end: s.margin(10);
+                    position: relative;
+                    top: -2px;
+                    @s.transition;
+                }
+            }
+
+            &.active > ._category-link > span {
+                font-weight: bold;
+            }
+
+            &:hover > ._category-link {
+                background: s.color(main, surface, --alpha 0.3);
+            }
+            &:active > ._category-link,
+            &.active > ._category-link {
+                background: s.color(main, surface, --alpha 0.5);
+
+                > i {
+                    color: s.color(complementary, --lighten 20);
+                }
+            }
+        }
+
+        ._item {
+            > a {
+                display: block;
+
+                padding: calc(s.padding(30) * 0.6) s.padding(30)
+                    calc(s.padding(30) * 0.6) s.padding(50);
+
+                > span {
+                    /* font-size: 0.9em; */
+                    opacity: 0.8;
+                    @s.transition fast;
+                }
+            }
+
+            &:hover > a > span {
+                color: s.color(accent);
+            }
+
+            & > a[actual] > span,
+            &.active > a > span {
+                color: s.color(accent);
+                font-weight: bold;
+                opacity: 1;
+            }
+        }
+    }
+
+    /* &_items {
+        display: none;
+    }
+    &_category.active &_items {
+        display: block;
+    } */
+}

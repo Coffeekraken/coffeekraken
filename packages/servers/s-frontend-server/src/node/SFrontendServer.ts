@@ -715,7 +715,7 @@ export default class SFrontendServer extends __SClass {
                 }
 
                 slugs.forEach((slug) => {
-                    console.verbose?.(
+                    console.log?.(
                         `<yellow>[route]</yellow> <cyan>${slug}</cyan> route registered <green>successfully</green> from ${
                             pageFile
                                 ? `<magenta>${pageFile.relPath}</magenta>`

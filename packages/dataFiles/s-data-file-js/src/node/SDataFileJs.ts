@@ -42,22 +42,24 @@ export default class SDataHandlerJs {
      * This static method allows you to actually load a data file
      *
      * @param       {String}      filePath      The file path to take care
+     * @param       {Any}       data            Some data you want to pass to the data file when it exports a function
      * @return      {SPromise}                  An SPromise instance that will be resolved with the resulting object
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static load(filePath) {
+    static load(filePath, data?) {
         return new Promise(async (resolve) => {
             // import the newly created file
-            let data = {};
+            let finalData = {};
             if (filePath.match(/\.json$/)) {
-                data = __readJsonSync(filePath);
+                finalData = __readJsonSync(filePath);
             } else {
-                data = (await import(`${filePath}?${__uniqid()}`)).default;
+                finalData = (await import(`${filePath}?${__uniqid()}`)).default;
             }
-            if (typeof data === 'function') data = await data();
-            resolve(data);
+            if (typeof finalData === 'function')
+                finalData = await finalData(data);
+            resolve(finalData);
         });
     }
 }

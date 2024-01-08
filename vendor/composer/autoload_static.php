@@ -7,6 +7,7 @@ namespace Composer\Autoload;
 class ComposerStaticInite4981e0c5fa1c07042490dd42f971364
 {
     public static $files = array (
+        '913619c86babbb902e7ffc6850548285' => __DIR__ . '/..' . '/kherge/file-manager/src/KHerGe/File/functions.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -27,10 +28,20 @@ class ComposerStaticInite4981e0c5fa1c07042490dd42f971364
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
+            'Seld\\JsonLint\\' => 14,
         ),
         'P' => 
         array (
             'PhpParser\\' => 10,
+        ),
+        'K' => 
+        array (
+            'KHerGe\\JSON\\' => 12,
+            'KHerGe\\File\\' => 12,
+        ),
+        'J' => 
+        array (
+            'JsonSchema\\' => 11,
         ),
         'D' => 
         array (
@@ -56,9 +67,25 @@ class ComposerStaticInite4981e0c5fa1c07042490dd42f971364
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
+        'Seld\\JsonLint\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/seld/jsonlint/src/Seld/JsonLint',
+        ),
         'PhpParser\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
+        ),
+        'KHerGe\\JSON\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kherge/json/src/KHerGe/JSON',
+        ),
+        'KHerGe\\File\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kherge/file-manager/src/KHerGe/File',
+        ),
+        'JsonSchema\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema',
         ),
         'Doctrine\\Instantiator\\' => 
         array (

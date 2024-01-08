@@ -51,7 +51,7 @@ export default class SDataFilePhp {
      */
     static load(filePath) {
         return new Promise(async (resolve) => {
-            const data = await __execPhp(
+            const finalData = await __execPhp(
                 __path.resolve(
                     __packageRootDir(__dirname()),
                     'src/php/data.php',
@@ -61,7 +61,7 @@ export default class SDataFilePhp {
                 },
                 {},
             );
-            resolve(JSON.parse(data));
+            resolve(JSON.parse(finalData));
         });
     }
 }

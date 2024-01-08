@@ -421,6 +421,7 @@ export default class SActivateFeature extends __SFeature {
         }
 
         return this.unactivate({
+            preventSave: true,
             force: true,
         });
     }
@@ -468,15 +469,11 @@ export default class SActivateFeature extends __SFeature {
                 });
             }
 
-            // prevent save
-            // if (finalParams.preventSave) {
-            //     // @ts-ignore
-            //     this.state.preventSave();
-            // }
-
             // add the "active" attribute to the component
-            // @ts-ignore
+            finalParams.preventSave && this.state.preventSave();
             this.state.active = true;
+
+            // props
             this.props.active = true;
 
             // loop on targets to activate them
@@ -540,7 +537,11 @@ export default class SActivateFeature extends __SFeature {
         if (!finalParams.force && !this.isActive()) return;
 
         const unActivateFn = () => {
+            // state
+            finalParams.preventSave && this.state.preventSave();
             this.state.active = false;
+
+            // props
             this.props.active = false;
 
             // loop on targets to unactivate them

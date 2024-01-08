@@ -38,24 +38,25 @@ class SDataHandlerJs {
      * This static method allows you to actually load a data file
      *
      * @param       {String}      filePath      The file path to take care
+     * @param       {Any}       data            Some data you want to pass to the data file when it exports a function
      * @return      {SPromise}                  An SPromise instance that will be resolved with the resulting object
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static load(filePath) {
+    static load(filePath, data) {
         return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
             // import the newly created file
-            let data = {};
+            let finalData = {};
             if (filePath.match(/\.json$/)) {
-                data = (0, fs_1.__readJsonSync)(filePath);
+                finalData = (0, fs_1.__readJsonSync)(filePath);
             }
             else {
-                data = (yield import(`${filePath}?${(0, string_1.__uniqid)()}`)).default;
+                finalData = (yield import(`${filePath}?${(0, string_1.__uniqid)()}`)).default;
             }
-            if (typeof data === 'function')
-                data = yield data();
-            resolve(data);
+            if (typeof finalData === 'function')
+                finalData = yield finalData(data);
+            resolve(finalData);
         }));
     }
 }
@@ -72,4 +73,4 @@ exports.default = SDataHandlerJs;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 SDataHandlerJs.extensions = ['js', 'json'];
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7OztBQUVkLCtDQUF3RDtBQUN4RCx1REFBc0Q7QUFFdEQ7Ozs7Ozs7Ozs7Ozs7Ozs7R0FnQkc7QUFDSCxNQUFxQixjQUFjO0lBYy9COzs7Ozs7Ozs7Ozs7T0FZRztJQUNILE1BQU0sQ0FBQyxJQUFJLENBQUMsUUFBUTtRQUNoQixPQUFPLElBQUksT0FBTyxDQUFDLENBQU8sT0FBTyxFQUFFLEVBQUU7WUFDakMsZ0NBQWdDO1lBQ2hDLElBQUksSUFBSSxHQUFHLEVBQUUsQ0FBQztZQUNkLElBQUksUUFBUSxDQUFDLEtBQUssQ0FBQyxTQUFTLENBQUMsRUFBRTtnQkFDM0IsSUFBSSxHQUFHLElBQUEsbUJBQWMsRUFBQyxRQUFRLENBQUMsQ0FBQzthQUNuQztpQkFBTTtnQkFDSCxJQUFJLEdBQUcsQ0FBQyxNQUFNLE1BQU0sQ0FBQyxHQUFHLFFBQVEsSUFBSSxJQUFBLGlCQUFRLEdBQUUsRUFBRSxDQUFDLENBQUMsQ0FBQyxPQUFPLENBQUM7YUFDOUQ7WUFDRCxJQUFJLE9BQU8sSUFBSSxLQUFLLFVBQVU7Z0JBQUUsSUFBSSxHQUFHLE1BQU0sSUFBSSxFQUFFLENBQUM7WUFDcEQsT0FBTyxDQUFDLElBQUksQ0FBQyxDQUFDO1FBQ2xCLENBQUMsQ0FBQSxDQUFDLENBQUM7SUFDUCxDQUFDOztBQXZDTCxpQ0F3Q0M7QUF2Q0c7Ozs7Ozs7Ozs7R0FVRztBQUNJLHlCQUFVLEdBQUcsQ0FBQyxJQUFJLEVBQUUsTUFBTSxDQUFDLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7OztBQUVkLCtDQUF3RDtBQUN4RCx1REFBc0Q7QUFFdEQ7Ozs7Ozs7Ozs7Ozs7Ozs7R0FnQkc7QUFDSCxNQUFxQixjQUFjO0lBYy9COzs7Ozs7Ozs7Ozs7O09BYUc7SUFDSCxNQUFNLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRSxJQUFLO1FBQ3ZCLE9BQU8sSUFBSSxPQUFPLENBQUMsQ0FBTyxPQUFPLEVBQUUsRUFBRTtZQUNqQyxnQ0FBZ0M7WUFDaEMsSUFBSSxTQUFTLEdBQUcsRUFBRSxDQUFDO1lBQ25CLElBQUksUUFBUSxDQUFDLEtBQUssQ0FBQyxTQUFTLENBQUMsRUFBRTtnQkFDM0IsU0FBUyxHQUFHLElBQUEsbUJBQWMsRUFBQyxRQUFRLENBQUMsQ0FBQzthQUN4QztpQkFBTTtnQkFDSCxTQUFTLEdBQUcsQ0FBQyxNQUFNLE1BQU0sQ0FBQyxHQUFHLFFBQVEsSUFBSSxJQUFBLGlCQUFRLEdBQUUsRUFBRSxDQUFDLENBQUMsQ0FBQyxPQUFPLENBQUM7YUFDbkU7WUFDRCxJQUFJLE9BQU8sU0FBUyxLQUFLLFVBQVU7Z0JBQy9CLFNBQVMsR0FBRyxNQUFNLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUN0QyxPQUFPLENBQUMsU0FBUyxDQUFDLENBQUM7UUFDdkIsQ0FBQyxDQUFBLENBQUMsQ0FBQztJQUNQLENBQUM7O0FBekNMLGlDQTBDQztBQXpDRzs7Ozs7Ozs7OztHQVVHO0FBQ0kseUJBQVUsR0FBRyxDQUFDLElBQUksRUFBRSxNQUFNLENBQUMsQ0FBQyJ9

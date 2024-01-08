@@ -11,7 +11,8 @@
     },
     "require": {
         "eftec/bladeone": "^4.8",
-        "twig/twig": "^3.0"
+        "twig/twig": "^3.0",
+        "kherge/json": "^3"
     },
     "version": "2.0.0-alpha.30",
     "homepage": "https://coffeekraken.io"

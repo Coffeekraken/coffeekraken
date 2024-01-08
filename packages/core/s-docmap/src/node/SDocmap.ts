@@ -1,4 +1,8 @@
 import __SClass from '@coffeekraken/s-class';
+import type {
+    ISDocblockBlock,
+    ISDocblockSettings,
+} from '@coffeekraken/s-docblock';
 import __SDocblock from '@coffeekraken/s-docblock';
 import __SFile from '@coffeekraken/s-file';
 import __SGlob from '@coffeekraken/s-glob';
@@ -116,6 +120,9 @@ export interface ISDocmapEntry {
     status?: string;
     package?: any;
     menu?: any;
+    parseDocblocksFromSourceFile?(
+        settings?: ISDocblockSettings,
+    ): Promise<ISDocblockBlock[]>;
 }
 export interface ISDocmapEntries {
     [key: string]: ISDocmapEntry;
@@ -480,6 +487,22 @@ class SDocmap extends __SClass implements ISDocmap {
                     }),
                 );
             });
+
+            // add the "parseDocblocksFromSourceFile" to each elements
+            for (let [id, docmapObj] of Object.entries(finalDocmapJson.map)) {
+                if (docmapObj.path) {
+                    docmapObj.parseDocblocksFromSourceFile = async (
+                        settings?: ISDocblockSettings,
+                    ) => {
+                        const docblock = new __SDocblock(
+                            docmapObj.path,
+                            settings,
+                        );
+                        await docblock.parse();
+                        return docblock.toObject();
+                    };
+                }
+            }
 
             // return the final docmap
             resolve(finalDocmapJson);

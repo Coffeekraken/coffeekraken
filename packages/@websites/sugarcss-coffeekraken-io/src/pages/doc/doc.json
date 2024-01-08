@@ -1,0 +1,16 @@
+{
+    "type": "page",
+    "uid": "doc",
+    "name": "doc",
+    "scope": "repo",
+    "slugs": [
+        "/doc",
+        "/doc/:id"
+    ],
+    "nodes": [
+        {
+            "type": "node",
+            "uid": "doc"
+        }
+    ]
+}

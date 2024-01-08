@@ -3,7 +3,7 @@
     "uid": "index",
     "name": "index",
     "scope": "repo",
-    "slug": [
+    "slugs": [
         "/"
     ],
     "nodes": [

@@ -1,5 +1,7 @@
 <?php
 
+use KHerGe\JSON\JSON;
+
 /**
  * @name            SViewRenderer
  * @namespace       php
@@ -131,6 +133,8 @@ class SViewRenderer
             case 'js':
                 $output = [];
                 $tmpFilePath = dirname($filePath) . '/execFromPhp.js';
+                $outFile = dirname($tmpFilePath) . '/tmpOut.json';
+                $cwd = dirname($filePath);
                 $relPath = str_replace(
                     $this->settings->rootDir . '/',
                     '',
@@ -141,33 +145,33 @@ class SViewRenderer
                     'const sharedData = ' .
                     json_encode($this->settings->sharedData) .
                     ';',
-                    'function _exec() {',
+                    '(async function _exec() {',
                     '   let data;',
                     '   if (typeof __fnOrData === "function") {',
-                    '       data = __fnOrData(sharedData);',
+                    '       data = await __fnOrData(sharedData);',
                     '   } else {',
                     '       data = __fnOrData;',
                     '   }',
                     '   console.log(JSON.stringify(data));',
                     '   process.exit(0);',
-                    '}',
-                    '_exec();',
+                    '})()'
                 ];
 
                 file_put_contents($tmpFilePath, implode(PHP_EOL, $nodeFile));
-                $data = exec(
-                    'node --experimental-json-modules --trace-warnings --trace-uncaught --no-warnings --es-module-specifier-resolution node ' .
-                        $tmpFilePath,
-                    $output,
-                    $result
+                shell_exec(
+                    'cd ' . $cwd . ' && node --experimental-json-modules --trace-warnings --trace-uncaught --no-warnings --es-module-specifier-resolution node ./execFromPhp.js > ' .$outFile
                 );
-
                 unlink($tmpFilePath);
-                $data = json_decode(implode('', $output), true);
-
+                
+                $jsonStr = file_get_contents($outFile);
+                unlink($outFile);
+                $jsonStr = trim(str_replace('♥', '', $jsonStr));
+                
+                $jsonInstance = new JSON();
+                $data = $jsonInstance->decode($jsonStr);
+                
                 if (isset($data->filePath)) {
-                    print_r($data);
-                    $data = json_decode(file_get_contents($data->filePath));
+                    $data = $jsonInstance->decode(file_get_contents($data->filePath));
                 }
 
                 break;

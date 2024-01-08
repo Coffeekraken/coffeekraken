@@ -8,7 +8,10 @@
  * @platform          node
  * @status        beta
  *
- * Sort an object properties the same way as the Array.sort do it
+ * Sort an object properties the same way as the Array.sort do it.
+ * The "a" and "b" argument passed to your sort function will have these properties:
+ * - key: The key of the object
+ * - value: The actual value of the object property
  *
  * @param                 {Object}                  object                The object to sort
  * @param                 {Function}                [sort=null]                  The sort function to use. If not specified, will sort the items by key alphabetically
@@ -20,6 +23,7 @@
  *
  * @snippet         __sort($1, $2)
  * __sort($1, (a, b) => {
+ *      // a.key - a.value | b.key - b.value
  *      $2
  * })
  *

@@ -1,16 +1,9 @@
 import __SClass from '@coffeekraken/s-class';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
-import { __debounce } from '@coffeekraken/sugar/function';
-import { __isNode } from '@coffeekraken/sugar/is';
-import {
-    __deepAssign,
-    __deepMerge,
-    __deepProxy,
-} from '@coffeekraken/sugar/object';
+import { __isNode, __isPlainObject } from '@coffeekraken/sugar/is';
+import { __deepAssign, __deepMerge } from '@coffeekraken/sugar/object';
 import __SStoreLsAdapter from '../js/adapters/SStoreLsAdapter.js';
 import __SStoreFsAdapter from '../node/adapters/SStoreFsAdapter.js';
-
-import { __isPlainObject } from '@coffeekraken/sugar/is';
 
 /**
  * @name                SStore
@@ -47,6 +40,9 @@ import { __isPlainObject } from '@coffeekraken/sugar/is';
  *      sub: {
  *          title: 'world'
  *      }
+ * }, {
+ *      id: 'myCoolStore',
+ *      save: true
  * });
  * myStore.$set('*', (actionObj) => {
  *     // do something when your props are updating
@@ -78,7 +74,6 @@ export interface ISStoreSettings {
     id: string;
     save: boolean;
     adapter: ISStoreAdapter;
-    watchDeep: boolean;
     excludeFromSave: String[];
 }
 
@@ -89,17 +84,7 @@ export interface ISStoreAdapter {
 }
 
 export default class SStore extends __SClass {
-    /**
-     * @name        data
-     * @type        Proxy
-     * @private
-     *
-     * Store the Proxied data object
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    data: any;
+    _data = {};
 
     isStore = true;
 
@@ -117,6 +102,8 @@ export default class SStore extends __SClass {
      */
     _eventEmitter: __SEventEmitter;
 
+    active = false;
+
     /**
      * @name            constructor
      * @type            Function
@@ -130,7 +117,6 @@ export default class SStore extends __SClass {
         super(
             __deepMerge(
                 {
-                    watchDeep: true,
                     save: false,
                     excludeFromSave: [],
                 },
@@ -155,52 +141,11 @@ export default class SStore extends __SClass {
             }
         }
 
-        Object.assign(this, object);
+        // keep o reference to the class instance
+        const _this = this;
 
-        // let saveTimeout;
-        const proxy = __deepProxy(
-            this,
-            (actionObj) => {
-                switch (actionObj.action) {
-                    case 'set':
-                        if (__isPlainObject(actionObj.value)) {
-                            this._enrichObj(actionObj.value);
-                        }
-                        this._eventEmitter.emit(
-                            `set.${actionObj.path}`,
-                            actionObj,
-                        );
-                        break;
-                    case 'delete':
-                        this._eventEmitter.emit(
-                            `delete.${actionObj.path}`,
-                            actionObj,
-                        );
-                        break;
-                }
-                // save if needed
-                if (this.settings.save) {
-                    clearTimeout(saveTimeout);
-                    saveTimeout = setTimeout(() => {
-                        // create a plain object copy
-                        const stateToSave = data.toJson();
-
-                        // filter the excludes properties
-                        this.settings.excludeFromSave.forEach((prop) => {
-                            delete stateToSave[prop];
-                        });
-
-                        this.settings.adapter.save(stateToSave);
-                    });
-                }
-            },
-            {
-                deep: this.settings.watchDeep,
-            },
-        );
-
-        // instanciate the event emitter
-        this._eventEmitter = new __SEventEmitter();
+        // prepare data object that will be proxied
+        this._data = object ?? {};
 
         // restoring state if wanted
         if (this.settings.save) {
@@ -208,25 +153,100 @@ export default class SStore extends __SClass {
             if (this.settings.adapter.async) {
                 (async () => {
                     const restoredState = await this.settings.adapter.load();
-                    __deepAssign(this, restoredState);
+                    __deepAssign(this._data, restoredState);
                 })();
             } else {
                 const restoredState = this.settings.adapter.load();
-                __deepAssign(this, restoredState);
+                __deepAssign(this._data, restoredState);
             }
         }
 
-        // for (let [prop, value] of Object.entries(this)) {
-        //     console.log('PROP', prop);
-        //     if (proxy[prop] === undefined) {
-        //         if (typeof this[prop] === 'function') {
-        //             proxy[prop] = this[prop].bind(this);
-        //         } else {
-        //             proxy[prop] = this[prop];
-        //         }
-        //     }
-        // }
+        let saveTimeout,
+            preventSaveTimeout,
+            preventSave = false;
+        function proxify(obj) {
+            if (obj.length === undefined) {
+                Object.defineProperty(obj, 'length', {
+                    enumerable: false,
+                    get() {
+                        return Object.keys(obj).length;
+                    },
+                });
+            }
+            if (!obj.toJson) {
+                Object.defineProperty(obj, 'toJson', {
+                    value: () => {
+                        return JSON.parse(JSON.stringify(obj));
+                    },
+                });
+            }
+            if (!obj.preventSave) {
+                Object.defineProperty(obj, 'preventSave', {
+                    value: () => {
+                        preventSave = true;
+                        clearTimeout(preventSaveTimeout);
+                        preventSaveTimeout = setTimeout(() => {
+                            preventSave = false;
+                        });
+                    },
+                });
+            }
 
+            return new Proxy(obj, {
+                get(target, prop) {
+                    if (__isPlainObject(target[prop])) {
+                        target[prop] = proxify(target[prop]);
+                    }
+                    return target[prop];
+                },
+                set(target, prop, value) {
+                    if (prop === '$set' || prop === '$delete') {
+                        target[prop] = value;
+                        return true;
+                    }
+
+                    if (__isPlainObject(value)) {
+                        value = proxify(value);
+                    }
+
+                    target[prop] = value;
+
+                    if (_this.settings.save && !preventSave) {
+                        clearTimeout(saveTimeout);
+                        saveTimeout = setTimeout(() => {
+                            // create a plain object copy
+                            const stateToSave = target.toJson();
+                            delete stateToSave.$set;
+                            delete stateToSave.$delete;
+                            delete stateToSave.toJson;
+                            delete stateToSave.preventSave;
+                            delete stateToSave.length;
+
+                            // filter the excludes properties
+                            _this.settings.excludeFromSave.forEach((prop) => {
+                                delete stateToSave[prop];
+                            });
+
+                            _this.settings.adapter.save(stateToSave);
+                        });
+                    }
+
+                    return true;
+                },
+            });
+        }
+
+        // create the proxy of the data
+        const proxy = proxify(this._data);
+
+        // add base method on proxy
+        proxy.$set = this.$set.bind(this);
+        proxy.$delete = this.$delete.bind(this);
+
+        // instanciate the event emitter
+        this._eventEmitter = new __SEventEmitter();
+
+        // "mount" method support
         if (this.mount) {
             proxy.mount = this.mount.bind(this);
             setTimeout(() => {
@@ -234,26 +254,8 @@ export default class SStore extends __SClass {
             });
         }
 
+        // return the proxy instead of the class instance itself
         return proxy;
-    }
-
-    _enrichObj(obj: any): void {
-        if (obj.length === undefined) {
-            Object.defineProperty(obj, 'length', {
-                enumerable: false,
-                get() {
-                    return Object.keys(obj).length;
-                },
-            });
-        }
-        if (obj.toJson === undefined) {
-            Object.defineProperty(obj, 'toJson', {
-                enumerable: false,
-                get() {
-                    return () => JSON.parse(JSON.stringify(obj));
-                },
-            });
-        }
     }
 
     $set(

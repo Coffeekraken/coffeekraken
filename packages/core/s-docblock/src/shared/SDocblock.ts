@@ -65,7 +65,7 @@ export interface ISDocblock {
     // new (source: string, settings?: ISDocblockSettings);
     _source: string;
     blocks: ISDocblockBlock[];
-    toObject(): any;
+    toObject(): ISDocblockBlock[];
 }
 
 // @ts-ignore

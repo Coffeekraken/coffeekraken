@@ -9,7 +9,7 @@ class SSugarcssPluginBorderRadiusClassesMixinInterface extends __SInterface {
 export { SSugarcssPluginBorderRadiusClassesMixinInterface as interface };
 /**
  * @name          classes
- * @as          @s.border.classes
+ * @as              @s.border.classes
  * @namespace     node.mixin.border
  * @type          PostcssMixin
  * @platform      postcss

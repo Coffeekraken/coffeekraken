@@ -5,6 +5,7 @@
 
 .doc {
     @s.layout ('1 2 2 2');
+    user-select: none;
 
     &_categories {
         ._category {
@@ -28,6 +29,7 @@
             > ._category-link {
                 display: block;
                 padding: s.padding(30) s.padding(40) !important;
+                pointer-events: none;
                 @s.transition fast;
                 @s.shape;
 

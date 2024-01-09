@@ -114,6 +114,9 @@ export default async function (sharedData) {
     };
 
     return {
+        view: {
+            clsStyle: true,
+        },
         req: sharedData.req,
         docblocks,
         currentDocmapItem,
